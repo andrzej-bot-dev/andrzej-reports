@@ -316,6 +316,8 @@ function connectPort() {
     port = null;
     setTimeout(connectPort, 500); // wakes the service worker and restores state
   });
+  // Auto-focus input when panel connects
+  setTimeout(() => $("input").focus(), 100);
 }
 
 // ---------------------------------------------------------------- interactions
@@ -340,6 +342,18 @@ $("input").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
 $("input").addEventListener("input", autoGrow);
+// Escape clears the input when it has text, or blurs it when empty
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (!$("history-pane").classList.contains("hidden")) {
+      $("history-pane").classList.add("hidden");
+      return;
+    }
+    const input = $("input");
+    if (input.value) { input.value = ""; autoGrow(); input.focus(); }
+    else input.blur();
+  }
+});
 $("btn-stop").addEventListener("click", () => send({ t: "stop" }));
 $("btn-new").addEventListener("click", () => send({ t: "new-chat" }));
 $("btn-settings").addEventListener("click", () => chrome.runtime.openOptionsPage());

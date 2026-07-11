@@ -70,6 +70,39 @@ export function renderMarkdown(text) {
       out.push(`<blockquote>${inline(line.replace(/^\s*&gt;\s?/, ""))}</blockquote>`);
       continue;
     }
+    // Markdown table support
+    if (/^\s*\|.*\|\s*$/.test(line)) {
+      flushPara(); flushList();
+      // Check if next line is a separator row
+      const nextLine = lines[lines.indexOf(raw) + 1];
+      if (nextLine && /^\s*\|?[\s:-]+\|/.test(nextLine)) {
+        // Parse table header
+        const headers = line.split("|").map((c) => c.trim()).filter(Boolean);
+        let tableHtml = "<table><thead><tr>";
+        for (const h of headers) tableHtml += `<th>${inline(h)}</th>`;
+        tableHtml += "</tr></thead><tbody>";
+        // Skip separator line and parse body
+        lines[lines.indexOf(raw) + 1] = ""; // consume separator
+        out.push(tableHtml);
+        continue;
+      }
+      // Table body row
+      if (out.length && out[out.length - 1].includes("<tbody>")) {
+        const cells = line.split("|").map((c) => c.trim()).filter(Boolean);
+        let rowHtml = "<tr>";
+        for (const c of cells) rowHtml += `<td>${inline(c)}</td>`;
+        rowHtml += "</tr>";
+        // Append to last table
+        const lastIdx = out.length - 1;
+        out[lastIdx] = out[lastIdx].replace("</tbody>", rowHtml + "</tbody></table>");
+        continue;
+      }
+      // Close table if we see a non-table line after rows
+    }
+    // Close any open table
+    if (out.length && out[out.length - 1].includes("<tbody>") && !out[out.length - 1].endsWith("</table>")) {
+      out[out.length - 1] += "</tbody></table>";
+    }
     if (/^\s*(---+|\*\*\*+)\s*$/.test(line)) { flushPara(); flushList(); out.push("<hr>"); continue; }
 
     if (line.trim() === "") { flushPara(); flushList(); continue; }

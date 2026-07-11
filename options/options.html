@@ -114,7 +114,7 @@
       <div class="hint">Tried automatically when the local address doesn't respond. Publicly always <code>wss://</code> (Cloudflare tunnel / reverse proxy / Tailscale) — instructions in README, "Remote access" section.</div>
 
       <label for="gw-token">Gateway token</label>
-      <input type="password" id="gw-token" placeholder="token from OpenClaw config">
+      <input type="password" id="gw-token" placeholder="token from OpenClaw config" autocomplete="off">
       <div class="hint">On the Raspberry Pi: <code>openclaw config get gateway.auth.token</code> (or the value from <code>~/.openclaw/openclaw.json</code>).</div>
 
       <p style="margin:14px 0 0"><button id="btn-test" class="ghost" type="button">Test connection</button></p>

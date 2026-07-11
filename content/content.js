@@ -62,8 +62,21 @@
 
   function resolveTarget({ ref, selector }) {
     if (ref) {
-      const el = refToEl.get(ref);
+      // Try our local refToEl map first
+      let el = refToEl.get(ref);
       if (el && el.isConnected) return el;
+      // Try accessibility tree's ref map (ref_N format)
+      if (window.__ocxElementMap && ref.startsWith('ref_')) {
+        const weakRef = window.__ocxElementMap[ref];
+        if (weakRef) {
+          el = weakRef.deref();
+          if (el && el.isConnected) {
+            refToEl.set(ref, el);
+            elToRef.set(el, ref);
+            return el;
+          }
+        }
+      }
       return null;
     }
     if (selector) {
@@ -132,18 +145,61 @@
     return desc;
   }
 
-  // ---------- snapshot ----------
-  function snapshot({ maxChars = 24000, viewportOnly = false } = {}) {
+  // ---------- snapshot (Claude-style accessibility tree) ----------
+  function snapshot({ maxChars = 50000, viewportOnly = true, filter = 'interactive', refId = null } = {}) {
     snapshotGen++;
-    refToEl = new Map(); // old refs to disconnected elements are dropped; WeakMap keeps stable ids
+    refToEl = new Map(); // old refs cleared
+
+    // Use __generateAccessibilityTree if available (injected by accessibility-tree.js)
+    if (typeof window.__generateAccessibilityTree === 'function') {
+      try {
+        const result = window.__generateAccessibilityTree(
+          viewportOnly ? filter : 'all',
+          15,           // maxDepth
+          maxChars,     // maxChars
+          refId         // refId (for focused tree on specific element)
+        );
+        if (result.error) {
+          return { ok: false, error: result.error };
+        }
+
+        // Build refToEl map from the accessibility tree's refs so actions resolve
+        // The accessibility tree uses ref_N format, we need to map these to actual elements
+        // The __ocxElementMap in the accessibility tree's world has WeakRefs
+        // Since content.js runs in the same isolated world, it can access them
+        if (window.__ocxElementMap) {
+          for (const [refId, weakRef] of Object.entries(window.__ocxElementMap)) {
+            const el = weakRef.deref();
+            if (el && el.isConnected) {
+              refToEl.set(refId, el);
+              elToRef.set(el, refId);
+            }
+          }
+        }
+
+        const header = [
+          `URL: ${location.href}`,
+          `TITLE: ${clean(document.title, 200)}`,
+        ];
+        const scrollPct = document.documentElement.scrollHeight <= innerHeight ? 100 :
+          Math.round((scrollY + innerHeight) / document.documentElement.scrollHeight * 100);
+        header.push(`VIEWPORT: scrolled to ${scrollPct}% (scrollY=${Math.round(scrollY)}, pageHeight=${document.documentElement.scrollHeight})`);
+        header.push('');
+
+        const fullSnapshot = header.join('\n') + result.pageContent;
+        return { ok: true, snapshot: fullSnapshot, gen: snapshotGen };
+      } catch (e) {
+        // Fall through to legacy snapshot
+        console.warn('[OCX] Accessibility tree failed, falling back to legacy:', e.message);
+      }
+    }
+
+    // ---------- legacy snapshot (fallback) ----------
     const lines = [];
     const push = (s) => lines.push(s);
 
     push(`URL: ${location.href}`);
     push(`TITLE: ${clean(document.title, 200)}`);
-    const scrollPct = document.documentElement.scrollHeight <= innerHeight ? 100 :
-      Math.round((scrollY + innerHeight) / document.documentElement.scrollHeight * 100);
-    push(`VIEWPORT: scrolled to ${scrollPct}% of page height (scrollY=${Math.round(scrollY)}, pageHeight=${document.documentElement.scrollHeight})`);
     push("");
     push("ELEMENTS (ref | element | state):");
 
@@ -163,7 +219,6 @@
         continue;
       }
 
-      // skip containers with tabindex but no real interactivity
       if (!el.matches(INTERACTIVE_SEL)) continue;
       if (tag === "div" || tag === "span") {
         const role = el.getAttribute("role");
@@ -474,8 +529,15 @@
     return { ok: false, error: `Timed out waiting for (${selector || text}) in ${timeoutMs}ms.` };
   }
 
-  // ---------- edge glow (agent working) ----------
+  // ---------- edge glow / visual indicators (agent working) ----------
   function workingIndicator({ on }) {
+    // Send to visual-indicator.js which manages full Claude-style indicators
+    if (on) {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'SHOW_INDICATORS' }).catch(() => {});
+    } else {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'HIDE_INDICATORS' }).catch(() => {});
+    }
+    // Also keep the legacy glow as a fallback
     let glow = document.getElementById("__ocx_glow");
     if (on && !glow) {
       glow = document.createElement("div");
@@ -538,6 +600,26 @@
     wait_for: doWaitFor,
     eval_js: evalJs,
     hover: doHover,
+    show_indicators: () => {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'SHOW_INDICATORS' }).catch(() => {});
+      return workingIndicator({ on: true });
+    },
+    hide_indicators: () => {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'HIDE_INDICATORS' }).catch(() => {});
+      return workingIndicator({ on: false });
+    },
+    update_cursor: ({ x, y }) => {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'UPDATE_CURSOR', x, y }).catch(() => {});
+      return { ok: true };
+    },
+    show_pill: () => {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'SHOW_PILL' }).catch(() => {});
+      return { ok: true };
+    },
+    hide_pill: () => {
+      chrome.runtime.sendMessage({ __ocx: true, cmd: 'HIDE_PILL' }).catch(() => {});
+      return { ok: true };
+    },
     highlight: ({ ref, selector, label }) => {
       const el = resolveTarget({ ref, selector });
       if (!el) return { ok: false, error: "Element not found." };

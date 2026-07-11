@@ -73,19 +73,24 @@ function addMsg(role, text) {
 function addChipEl(label, why, status = "…") {
   const chip = document.createElement("div");
   chip.className = "action-chip";
+  // Top row: label + status (horizontal)
+  const top = document.createElement("div");
+  top.className = "label";
   const lab = document.createElement("span");
   lab.textContent = label;
-  chip.appendChild(lab);
-  if (why) {
-    const w = document.createElement("span");
-    w.className = "why";
-    w.textContent = "— " + why;
-    chip.appendChild(w);
-  }
+  top.appendChild(lab);
   const st = document.createElement("span");
   st.className = "status";
   st.textContent = status;
-  chip.appendChild(st);
+  top.appendChild(st);
+  chip.appendChild(top);
+  // Why text below
+  if (why) {
+    const w = document.createElement("span");
+    w.className = "why";
+    w.textContent = why;
+    chip.appendChild(w);
+  }
   chatEl.appendChild(chip);
   scrollDown();
   return {

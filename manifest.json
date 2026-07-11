@@ -23,7 +23,8 @@
     "scripting",
     "activeTab",
     "contextMenus",
-    "alarms"
+    "alarms",
+    "debugger"
   ],
   "host_permissions": [
     "<all_urls>"

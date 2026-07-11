@@ -435,6 +435,33 @@
     return { ok: true };
   }
 
+  // ---------- eval_js ----------
+  function evalJs({ code }) {
+    if (!code) return { ok: false, error: "No code provided." };
+    try {
+      const result = new Function(code)();
+      return { ok: true, result: result ?? null };
+    } catch (e) {
+      return { ok: false, error: String(e?.message || e) };
+    }
+  }
+
+  // ---------- hover ----------
+  async function doHover({ ref, selector }) {
+    const el = resolveTarget({ ref, selector });
+    if (!el) return { ok: false, error: `Element not found (${ref || selector}). Take a new snapshot.` };
+    el.scrollIntoView({ block: "center", behavior: "instant" });
+    await new Promise(r => setTimeout(r, 80));
+    const rect = el.getBoundingClientRect();
+    const x = rect.left + rect.width / 2, y = rect.top + rect.height / 2;
+    el.dispatchEvent(new PointerEvent("pointerenter", { bubbles: false, clientX: x, clientY: y, pointerId: 1, isPrimary: true, pointerType: "mouse" }));
+    el.dispatchEvent(new PointerEvent("pointermove", { bubbles: true, clientX: x, clientY: y, pointerId: 1, isPrimary: true, pointerType: "mouse" }));
+    el.dispatchEvent(new MouseEvent("mouseover", { bubbles: true, clientX: x, clientY: y }));
+    el.dispatchEvent(new MouseEvent("mousemove", { bubbles: true, clientX: x, clientY: y }));
+    flashHighlight(el, "hover");
+    return { ok: true, hovered: describeEl(el) };
+  }
+
   // ---------- router ----------
   const HANDLERS = {
     ping: () => ({ ok: true, pong: true }),
@@ -449,6 +476,8 @@
     scroll: doScroll,
     find: doFind,
     wait_for: doWaitFor,
+    eval_js: evalJs,
+    hover: doHover,
     highlight: ({ ref, selector, label }) => {
       const el = resolveTarget({ ref, selector });
       if (!el) return { ok: false, error: "Element not found." };

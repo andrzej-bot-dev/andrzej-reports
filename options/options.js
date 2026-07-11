@@ -25,11 +25,15 @@ function fillModelSelect(pid, models, selected) {
   const sel = $(`pmodel-${pid}`);
   const cur = selected != null ? selected : sel.value;
   sel.innerHTML = "";
-  const def = document.createElement("option");
-  def.value = ""; def.textContent = "— provider default —";
-  sel.appendChild(def);
   const ids = [...new Set(models.map((m) => (typeof m === "string" ? m : m.id)).filter(Boolean))];
   if (cur && !ids.includes(cur)) ids.unshift(cur);
+  if (!ids.length) {
+    const o = document.createElement("option");
+    o.value = ""; o.textContent = "enter API key to load models"; o.disabled = true;
+    sel.appendChild(o);
+    sel.disabled = true;
+    return;
+  }
   for (const id of ids) {
     const o = document.createElement("option");
     o.value = id; o.textContent = id;
@@ -59,14 +63,14 @@ function buildProviderRows(keys, models, urls) {
       </div>
       <div class="prov-model">
         <div class="prov-line">
-          <select id="pmodel-${p.id}" title="Model for this provider"></select>
-          <button type="button" class="ghost prov-test" data-id="${p.id}">Fetch models</button>
+          <select id="pmodel-${p.id}" title="Model for this provider" disabled></select>
+          <button type="button" class="ghost prov-test" data-id="${p.id}">Refresh models</button>
         </div>
         <div class="prov-result" id="pres-${p.id}"></div>
       </div>`;
     wrap.appendChild(row);
     $(`key-${p.id}`).value = keys[p.id] || "";
-    fillModelSelect(p.id, p.models, models[p.id] || "");
+    fillModelSelect(p.id, [], models[p.id] || "");
 
     // Auto-fetch models when API key is entered (on blur, with debounce)
     const keyInput = $(`key-${p.id}`);
@@ -147,9 +151,9 @@ async function init() {
   $("a-debug").checked = s.debug;
 
   buildProviderRows(s.providerKeys || {}, s.providerModels || {}, s.providerBaseUrls || {});
-  // Auto-fetch models on init for providers that have a key but no models loaded yet
+  // Auto-fetch models on init for providers that have a key
   for (const p of PROVIDER_PRESETS) {
-    if (s.providerKeys?.[p.id] && !(s.providerModels?.[p.id])) {
+    if (s.providerKeys?.[p.id]) {
       fetchModels(p.id);
     }
   }

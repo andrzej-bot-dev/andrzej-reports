@@ -180,9 +180,18 @@ async function buildCatalog() {
   }
   for (const p of PROVIDER_PRESETS) {
     if (!s.providerKeys?.[p.id]) continue;
-    let models = p.models.map((id) => ({ id, label: id }));
+    let models = [];
     if (s.backendMode === "direct" && s.directProvider === p.id && direct) {
-      try { const live = await direct.listModels(); if (live.length) models = live.map((m) => ({ id: m.id, label: m.name || m.id })); } catch { /* preset fallback */ }
+      try { const live = await direct.listModels(); if (live.length) models = live.map((m) => ({ id: m.id, label: m.name || m.id })); } catch { /* empty */ }
+    }
+    // Also try to fetch models even if direct backend isn't active yet
+    if (!models.length) {
+      try {
+        const tmp = new DirectBackend({ getSettings: () => s });
+        tmp.setSelection(p.id, "");
+        const live = await tmp.listModels();
+        if (live.length) models = live.map((m) => ({ id: m.id, label: m.name || m.id }));
+      } catch { /* empty */ }
     }
     groupsOut.push({ key: `direct:${p.id}`, label: p.label, models });
   }

@@ -232,6 +232,21 @@
     if (!el) return { ok: false, error: `Element not found (${ref || selector}). Take a new snapshot.` };
     el.scrollIntoView({ block: "center", inline: "center", behavior: "instant" });
     await new Promise(r => setTimeout(r, 120));
+
+    // Prevent target="_blank" from stealing focus — temporarily remove it
+    // so the link opens in the same tab (or we handle it via background onCreated)
+    const wasTargetBlank = el.tagName === 'A' && (el.target === '_blank' || el.getAttribute('target') === '_blank');
+    const savedTarget = el.target;
+    if (wasTargetBlank) {
+      el.target = '_self';
+    }
+    // Also prevent window.open() calls from stealing focus
+    const origOpen = window.open;
+    window.open = function(url, name, features) {
+      // Replace _blank with _self to keep focus
+      if (name === '_blank' || !name) name = '_self';
+      return origOpen.call(window, url, name, features);
+    };
     const rect = el.getBoundingClientRect();
     const x = rect.left + rect.width / 2, y = rect.top + rect.height / 2;
     flashHighlight(el, "click");
@@ -252,8 +267,16 @@
       firePointer(target, "click", x, y);
       if (dblclick) firePointer(target, "dblclick", x, y);
     } catch (e) {
+      // Restore originals even on error
+      if (wasTargetBlank) el.target = savedTarget;
+      window.open = origOpen;
       return { ok: false, error: `Click failed: ${e.message}` };
     }
+
+    // Restore originals after click
+    if (wasTargetBlank) el.target = savedTarget;
+    window.open = origOpen;
+
     return { ok: true, clicked: describeEl(el) };
   }
 

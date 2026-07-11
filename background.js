@@ -259,22 +259,26 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
 
 // ---------------------------------------------------------------- panel opening
 //
-// BUG BEING FIXED HERE: chrome.sidePanel.open() must be called within a user
-// gesture. Any heavy await BEFORE open() (chrome.tabs.group, storage,
-// creating controller…) "consumes" the gesture and the panel doesn't show — only
-// the tab grouping remains. So we call open() immediately (only a quick setOptions),
-// and do grouping/controller/backend AFTER the panel is open. A panel opened by a
-// fresh click doesn't know its group yet (URL ?tab=…) and will ask the SW via
-// a "bind-tab" message — see sidepanel/panel.js.
+// FIX: chrome.sidePanel.open() must be called synchronously within a user gesture.
+// Any await/then BEFORE open() (even setOptions().then()) can break the gesture
+// context in MV3 service workers. We call setOptions() and open() back-to-back
+// synchronously — both API calls are synchronous (the returned promises are just
+// for error handling). Heavy work (tab grouping, controller creation, backend
+// connection) happens AFTER open(), in bindTab(). The panel, opened by a fresh
+// click, doesn't know its group yet (URL ?tab=…) and asks the SW via a
+// "bind-tab" message — see sidepanel/panel.js.
 
-/** Opens the panel within a gesture — minimum awaits before open(). */
+/** Opens the panel synchronously within a gesture — no awaits or .then() before open(). */
 function openPanelForGesture(tab) {
   if (!tab?.id) return;
   const g = (tab.groupId != null && tab.groupId !== -1) ? tab.groupId : null;
   const path = g != null ? `sidepanel/panel.html?group=${g}` : `sidepanel/panel.html?tab=${tab.id}`;
-  chrome.sidePanel.setOptions({ tabId: tab.id, path, enabled: true })
-    .then(() => chrome.sidePanel.open({ tabId: tab.id }))
-    .catch(async () => { try { await chrome.sidePanel.open({ windowId: tab.windowId }); } catch { /* tough */ } });
+  // Synchronous calls — both fire within the user gesture stack frame
+  chrome.sidePanel.setOptions({ tabId: tab.id, path, enabled: true });
+  chrome.sidePanel.open({ tabId: tab.id }).catch(() => {
+    // Fallback: try window-level open if tab-level fails
+    chrome.sidePanel.open({ windowId: tab.windowId }).catch(() => {});
+  });
 }
 
 /** Heavy part: group + controller + backend. No open() (already opened by gesture). */

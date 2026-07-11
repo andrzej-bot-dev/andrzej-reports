@@ -54,7 +54,7 @@ function buildProviderRows(keys, models, urls) {
         <span class="pfmt">${p.format === "anthropic" ? "Anthropic-compatible" : "OpenAI-compatible"}</span>
       </div>
       <div class="prov-line">
-        <input type="password" id="key-${p.id}" placeholder="API key (${p.keyHint})">
+        <input type="password" id="key-${p.id}" placeholder="API key (${p.keyHint})" autocomplete="off">
         <a href="${p.keysUrl}" target="_blank" rel="noopener" class="prov-key">get a key ↗</a>
       </div>
       <div class="prov-model">
@@ -67,6 +67,24 @@ function buildProviderRows(keys, models, urls) {
     wrap.appendChild(row);
     $(`key-${p.id}`).value = keys[p.id] || "";
     fillModelSelect(p.id, p.models, models[p.id] || "");
+
+    // Auto-fetch models when API key is entered (on blur, with debounce)
+    const keyInput = $(`key-${p.id}`);
+    keyInput.addEventListener("blur", () => {
+      const val = keyInput.value.trim();
+      if (val && val.length > 5) {
+        fetchModels(p.id);
+      }
+    });
+    // Also auto-fetch on paste (common flow: paste key from clipboard)
+    keyInput.addEventListener("paste", () => {
+      setTimeout(() => {
+        const val = keyInput.value.trim();
+        if (val && val.length > 5) {
+          fetchModels(p.id);
+        }
+      }, 100);
+    });
 
     const urlRow = document.createElement("div");
     urlRow.innerHTML = `<label>${p.label}</label><input type="text" id="url-${p.id}" placeholder="${p.baseUrl}">`;
@@ -129,6 +147,13 @@ async function init() {
   $("a-debug").checked = s.debug;
 
   buildProviderRows(s.providerKeys || {}, s.providerModels || {}, s.providerBaseUrls || {});
+  // Auto-fetch models on init for providers that have a key but no models loaded yet
+  for (const p of PROVIDER_PRESETS) {
+    if (s.providerKeys?.[p.id] && !(s.providerModels?.[p.id])) {
+      fetchModels(p.id);
+    }
+  }
+
   document.querySelectorAll(".prov-test").forEach((b) =>
     b.addEventListener("click", () => fetchModels(b.dataset.id)));
 }

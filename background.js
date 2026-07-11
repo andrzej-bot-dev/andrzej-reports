@@ -403,34 +403,6 @@ chrome.tabs.onCreated.addListener((tab) => {
   }
 });
 
-// Track user's active tab across all windows. When agent operations activate
-// a group tab, we detect it and restore focus to the user's tab.
-let _userActiveTabId = null;
-let _userActiveWindowId = null;
-
-chrome.tabs.onActivated.addListener(async (activeInfo) => {
-  try {
-    const tab = await chrome.tabs.get(activeInfo.tabId);
-    // If this is NOT an agent group tab, track it as the user's active tab
-    if (!tab.groupId || tab.groupId === -1 || !controllers.has(tab.groupId)) {
-      _userActiveTabId = tab.id;
-      _userActiveWindowId = tab.windowId;
-      return;
-    }
-    // If agent is working in this group and user didn't intend to switch,
-    // restore focus to the user's tab
-    const ctl = controllers.get(tab.groupId);
-    if (ctl?.agent?.running && _userActiveTabId && _userActiveTabId !== tab.id) {
-      try {
-        await chrome.tabs.update(_userActiveTabId, { active: true });
-        if (_userActiveWindowId) {
-          await chrome.windows.update(_userActiveWindowId, { focused: true }).catch(() => {});
-        }
-      } catch { /* tab closed */ }
-    }
-  } catch { /* tab gone */ }
-});
-
 chrome.runtime.onConnect.addListener(async (port) => {
   const m = /^panel-(\d+)$/.exec(port.name || "");
   if (!m) return;

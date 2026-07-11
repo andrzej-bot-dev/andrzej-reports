@@ -225,6 +225,10 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 // ---------------------------------------------------------------- start / install
 
 chrome.runtime.onInstalled.addListener(() => {
+  // Make the side panel open automatically when clicking the toolbar icon.
+  // This is the reliable way — chrome.sidePanel.open() called from
+  // action.onClicked often loses the user-gesture context in MV3 SW.
+  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
   groups.rebuild();
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({ id: "ask-selection", title: "Ask Andrzej about selection", contexts: ["selection"] });
@@ -232,7 +236,10 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({ id: "summarize-page", title: "Summarize this page", contexts: ["page"] });
   });
 });
-chrome.runtime.onStartup.addListener(() => groups.rebuild());
+chrome.runtime.onStartup.addListener(() => {
+  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
+  groups.rebuild();
+});
 
 // live settings (changes from options: keys, gateway addresses, etc.)
 chrome.storage.onChanged.addListener(async (changes, area) => {
@@ -290,16 +297,22 @@ async function bindTab(tab) {
   return groupId;
 }
 
+// NOTE: action.onClicked does NOT fire when openPanelOnActionClick is true.
+// The panel opens itself; tab grouping is handled by the panel on load
+// (it queries the active tab and sends "bind-tab" to the SW).
+// We keep bindTab for use from keyboard shortcut and context menu.
+
 chrome.action.onClicked.addListener((tab) => {
+  // Fallback: if openPanelOnActionClick somehow isn't set, still try to open
   openPanelForGesture(tab);
   bindTab(tab);
 });
 
-// Chrome ≥116 passes the active tab to onCommand — we use it to avoid
-// doing an await tabs.query BEFORE open() (which would consume the keyboard shortcut gesture).
+// Keyboard shortcut: commands.onCommand provides a user-gesture context,
+// so chrome.sidePanel.open() works here.
 chrome.commands.onCommand.addListener((command, tab) => {
   if (command !== "open-panel" || !tab?.id) return;
-  openPanelForGesture(tab);
+  chrome.sidePanel.open({ tabId: tab.id }).catch(() => {});
   bindTab(tab);
 });
 

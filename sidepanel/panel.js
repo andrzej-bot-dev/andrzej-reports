@@ -414,17 +414,30 @@ $("btn-history-close").addEventListener("click", () => $("history-pane").classLi
 // we then ask the service worker, which creates/finds the group for this tab.
 async function resolveGroupAndConnect() {
   if (!Number.isFinite(groupId)) {
-    const tabId = Number(new URLSearchParams(location.search).get("tab"));
+    const params = new URLSearchParams(location.search);
+    const tabId = Number(params.get("tab"));
     if (Number.isFinite(tabId)) {
-      for (let attempt = 0; attempt < 3 && !Number.isFinite(groupId); attempt++) {
-        try {
-          const res = await chrome.runtime.sendMessage({ t: "bind-tab", tabId });
-          if (res && Number.isFinite(res.groupId)) { groupId = res.groupId; break; }
-        } catch { /* SW might still be waking up — retry */ }
-        await new Promise((r) => setTimeout(r, 250));
-      }
+      // Opened with explicit ?tab=<id>
+      await tryBindTab(tabId);
+    } else {
+      // No URL params — opened via icon click with openPanelOnActionClick.
+      // Query the active tab in this window.
+      try {
+        const [active] = await chrome.tabs.query({ active: true, currentWindow: true });
+        if (active) await tryBindTab(active.id);
+      } catch { /* query failed */ }
     }
   }
   connectPort();
+}
+
+async function tryBindTab(tabId) {
+  for (let attempt = 0; attempt < 3 && !Number.isFinite(groupId); attempt++) {
+    try {
+      const res = await chrome.runtime.sendMessage({ t: "bind-tab", tabId });
+      if (res && Number.isFinite(res.groupId)) { groupId = res.groupId; break; }
+    } catch { /* SW might still be waking up — retry */ }
+    await new Promise((r) => setTimeout(r, 250));
+  }
 }
 resolveGroupAndConnect();

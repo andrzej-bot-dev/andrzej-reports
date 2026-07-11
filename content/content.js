@@ -343,14 +343,41 @@
     return { ok: true, selected: clean(opt.textContent, 60) };
   }
 
-  async function doScroll({ ref, selector, to, dy }) {
+  async function doScroll({ ref, selector, to, dy, maxSteps = 40, stepDelayMs = 400 }) {
     if (ref || selector) {
       const el = resolveTarget({ ref, selector });
       if (!el) return { ok: false, error: "Element not found for scrolling." };
       el.scrollIntoView({ block: "center", behavior: "instant" });
-    } else if (to === "top") scrollTo({ top: 0 });
-    else if (to === "bottom") scrollTo({ top: document.documentElement.scrollHeight });
-    else scrollBy({ top: dy ?? innerHeight * 0.8 });
+      await new Promise(r => setTimeout(r, 250));
+      return pageInfo();
+    }
+    if (to === "top") {
+      scrollTo({ top: 0 });
+      await new Promise(r => setTimeout(r, 250));
+      return pageInfo();
+    }
+    if (to === "bottom") {
+      // Progressive scroll: step down a viewport at a time so lazy-loaded /
+      // virtualized content (e.g. a cart that fills in as you approach the end)
+      // gets rendered. Keep going while the page grows; stop once the height is
+      // stable at the bottom, or after maxSteps (guards against infinite feeds).
+      let steps = 0, stableRounds = 0, lastHeight = -1;
+      const pageHeight = () => document.documentElement.scrollHeight;
+      const atBottom = () => scrollY + innerHeight >= pageHeight() - 2;
+      while (steps < maxSteps) {
+        if (atBottom() && pageHeight() === lastHeight) {
+          if (++stableRounds >= 2) break; // no growth for two rounds → really done
+        } else {
+          stableRounds = 0;
+        }
+        lastHeight = pageHeight();
+        scrollBy({ top: innerHeight * 0.9 });
+        steps++;
+        await new Promise(r => setTimeout(r, stepDelayMs));
+      }
+      return { ...pageInfo(), scrolledSteps: steps, reachedBottom: atBottom() };
+    }
+    scrollBy({ top: dy ?? innerHeight * 0.8 });
     await new Promise(r => setTimeout(r, 250));
     return pageInfo();
   }

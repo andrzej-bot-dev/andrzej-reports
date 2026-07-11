@@ -171,6 +171,12 @@ async function applySelection(sel) {
 async function buildCatalog() {
   await settingsReady;
   const s = settings;
+
+  // Ensure direct backend is initialized so listModels() works
+  if (s.backendMode === "direct" && !direct) {
+    try { direct = buildDirect(); direct.setSelection(s.directProvider, s.directModel); } catch { /* no key */ }
+  }
+
   const groupsOut = [];
 
   if (s.gatewayUrl || s.gatewayUrlRemote) {
@@ -224,11 +230,17 @@ function maybeIdleDisconnect() {
 chrome.alarms.create("oc-tick", { periodInMinutes: 0.5 });
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name !== "oc-tick") return;
-  if (settings.backendMode !== "openclaw") return;
   const anyBusy = [...controllers.values()].some((c) => c.isBusy());
   const anyPorts = [...controllers.values()].some((c) => c.ports.size > 0);
-  if ((anyBusy || anyPorts) && (!gateway || !gateway.connected)) ensureBackend().catch(() => {});
-  else if (gateway?.connected) { gateway.ping(); maybeIdleDisconnect(); }
+  if (settings.backendMode === "openclaw") {
+    if ((anyBusy || anyPorts) && (!gateway || !gateway.connected)) ensureBackend().catch(() => {});
+    else if (gateway?.connected) { gateway.ping(); maybeIdleDisconnect(); }
+  }
+  // Push catalog to all panels with open ports — ensures models appear
+  // even if they weren't ready on first connect
+  if (anyPorts && !anyBusy) {
+    for (const ctl of controllers.values()) if (ctl.ports.size) ctl.pushCatalog();
+  }
 });
 
 // ---------------------------------------------------------------- start / install
@@ -303,8 +315,10 @@ function openPanelForGesture(tab) {
 async function bindTab(tab) {
   if (!tab?.id) return;
   const groupId = await groups.ensureGroupForTab(tab);
-  await ensureController(groupId);
-  ensureBackend().catch(() => {});
+  const ctl = await ensureController(groupId);
+  await ensureBackend().catch(() => {});
+  // Now that backend is ready, push the model catalog to all panels
+  ctl?.pushCatalog();
   return groupId;
 }
 

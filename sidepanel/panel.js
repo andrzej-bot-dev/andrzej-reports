@@ -11,6 +11,7 @@ const chatEl = $("chat");
 let groupId = Number(new URLSearchParams(location.search).get("group"));
 let port = null;
 let currentModel = "";
+let modelSelected = false;           // true when a valid model is chosen
 let pendingBubble = null;          // streaming response bubble
 const chips = new Map();           // id -> chip handle (browser actions)
 const srvChips = new Map();        // itemId -> chip handle (server tools)
@@ -214,11 +215,14 @@ function setSite({ allowed, origin }) {
 function setCatalog({ groups, active }) {
   const sel = $("model-select");
   sel.innerHTML = "";
-  if (!groups?.length || groups.every(g => !g.models.length)) {
+  const hasModels = groups?.some(g => g.models.length > 0);
+  if (!hasModels) {
     const o = document.createElement("option");
     o.value = ""; o.textContent = "Choose model…"; o.disabled = true; o.selected = true;
     sel.appendChild(o);
-    sel.disabled = false; // keep enabled so user can interact
+    sel.disabled = false;
+    modelSelected = false;
+    updateSendState();
     return;
   }
   sel.disabled = false;
@@ -247,6 +251,20 @@ function setCatalog({ groups, active }) {
     const fallback = [...sel.options].find((o) => o.value.startsWith(active.group + "::"));
     if (fallback) fallback.selected = true;
   }
+  // Check if a real model (not empty) is selected
+  const selVal = sel.value.split("::")[1] || "";
+  modelSelected = !!selVal;
+  updateSendState();
+}
+
+function updateSendState() {
+  const btn = $("btn-send");
+  const input = $("input");
+  const disabled = !modelSelected;
+  btn.disabled = disabled;
+  btn.style.opacity = disabled ? "0.4" : "";
+  btn.style.cursor = disabled ? "not-allowed" : "";
+  input.placeholder = disabled ? "Select a model first…" : "Message…";
 }
 
 function renderHistory(items) {
@@ -356,6 +374,7 @@ function autoGrow() {
 }
 
 function sendMessage() {
+  if (!modelSelected) return;
   const input = $("input");
   const text = input.value.trim();
   if (!text) return;
@@ -390,7 +409,10 @@ $("model-select").addEventListener("change", (e) => {
   const v = e.target.value || "";
   const i = v.indexOf("::");
   if (i < 0) return;
-  send({ t: "select-backend", group: v.slice(0, i), model: v.slice(i + 2) });
+  const model = v.slice(i + 2);
+  modelSelected = !!model;
+  updateSendState();
+  send({ t: "select-backend", group: v.slice(0, i), model });
 });
 $("site-allow").addEventListener("change", (e) => send({ t: "site-toggle", allowed: e.target.checked }));
 $("btn-history").addEventListener("click", () => {

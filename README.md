@@ -295,7 +295,8 @@ Planner (main session, strong model):
   (recursion depth capped, default 2 levels).
 - **Batch approval**: one approval for the whole fan-out plan; workers inherit
   autopilot for non-sensitive actions; sensitive actions still gate individually.
-- **Worker tabs stay open** after completion so you can review what each found.
+- **Worker tabs are closed** after completion — the compressed report is returned
+  to the planner, so tabs don't clutter the browser.
 - Requires a **direct provider API key** for workers (they use DirectBackend, not
   the OpenClaw gateway). Configure in ⚙ Settings → Models & keys.
 - Settings: max parallel workers, max tasks, worker timeout, max depth — all in

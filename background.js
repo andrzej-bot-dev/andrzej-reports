@@ -27,6 +27,15 @@ let settingsReady = loadSettings().then(async (s) => {
     if (!(Number(s.maxSteps) > 50)) patch.maxSteps = 200;
     try { await saveSettings(patch); settings = { ...settings, ...patch }; } catch { /* storage unavailable */ }
   }
+  // Second migration: the agent loop is now smarter (per-action self-verification,
+  // final verification passes, progress/checkpoint steps), so each task consumes
+  // more iterations. Raise the cap to 400 so legitimate long tasks aren't cut short.
+  if (!s._maxStepsBumpedV3) {
+    const patch = { _maxStepsBumpedV3: true };
+    const cur = Number(s.maxSteps);
+    if (!cur || cur <= 200) patch.maxSteps = 400;
+    try { await saveSettings(patch); settings = { ...settings, ...patch }; } catch { /* storage unavailable */ }
+  }
 });
 const getSettings = () => settings;
 

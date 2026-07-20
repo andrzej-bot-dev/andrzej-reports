@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTube AI Tools Audit — Live Dashboard</title>
-<meta http-equiv="refresh" content="60">
+<title>YouTube AI Tools Audit — Final Report</title>
 <style>
   :root {
     --bg: #0f172a; --card: #1e293b; --border: #334155; --text: #e2e8f0;
@@ -12,2142 +11,2338 @@
     --yellow: #f59e0b; --blue: #3b82f6;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; max-width: 1400px; margin: 0 auto; }
-  h1 { font-size: 1.8em; margin-bottom: 5px; }
-  h2 { font-size: 1.3em; margin: 25px 0 12px; color: var(--accent); }
-  .subtitle { color: var(--muted); margin-bottom: 20px; font-size: 0.9em; }
-  .updated { color: var(--yellow); font-weight: 600; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px; }
-  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .stat-card .num { font-size: 2.2em; font-weight: 700; }
-  .stat-card .label { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
-  .stat-card.green .num { color: var(--green); }
-  .stat-card.blue .num { color: var(--blue); }
-  .stat-card.yellow .num { color: var(--yellow); }
-  .stat-card.red .num { color: var(--red); }
-  .progress-bg { background: var(--border); border-radius: 20px; height: 8px; overflow: hidden; margin-top: 8px; }
-  .progress-fill { height: 100%; border-radius: 20px; transition: width 0.5s; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; font-size: 0.85em; }
-  th { background: #1a2540; padding: 10px 12px; text-align: left; font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 0.75em; letter-spacing: 0.5px; }
-  td { padding: 8px 12px; border-top: 1px solid var(--border); }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 20px; max-width: 1500px; margin: 0 auto; }
+  h1 { font-size: 2em; margin-bottom: 5px; background: linear-gradient(135deg, #6366f1, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h2 { font-size: 1.4em; margin: 30px 0 12px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 1.1em; margin: 15px 0 8px; color: var(--muted); }
+  .subtitle { color: var(--muted); margin-bottom: 20px; }
+  .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 25px; }
+  .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .hero-card .big { font-size: 2.2em; font-weight: 800; }
+  .hero-card .lbl { color: var(--muted); font-size: 0.8em; margin-top: 3px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  @media(max-width:900px) { .grid-2 { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+  th { background: #1a2540; padding: 10px; text-align: left; font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 0.72em; letter-spacing: 0.5px; position: sticky; top: 0; }
+  td { padding: 7px 10px; border-top: 1px solid var(--border); }
   tr:hover { background: #233152; }
-  .badge { padding: 2px 8px; border-radius: 6px; font-size: 0.8em; font-weight: 600; }
-  .badge-done { background: rgba(16,185,129,0.2); color: var(--green); }
-  .badge-fail { background: rgba(239,68,68,0.2); color: var(--red); }
-  .badge-class { background: rgba(99,102,241,0.2); color: var(--accent); }
   .ch-name { font-weight: 600; }
   .ch-tag { background: var(--border); padding: 2px 8px; border-radius: 4px; font-size: 0.8em; white-space: nowrap; }
-  .bar { background: var(--border); border-radius: 4px; height: 6px; min-width: 50px; }
-  .bar-fill { background: var(--green); height: 100%; border-radius: 4px; }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .chart-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-  .chart-label { width: 140px; text-align: right; font-size: 0.85em; color: var(--muted); }
-  .chart-bar-bg { flex: 1; background: var(--border); border-radius: 6px; height: 24px; }
-  .chart-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 0.8em; font-weight: 600; min-width: 30px; }
   .editor-cell { color: var(--accent); font-weight: 600; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .phase-indicator { display: inline-flex; gap: 4px; margin: 10px 0; }
-  .phase { padding: 4px 12px; border-radius: 20px; font-size: 0.8em; font-weight: 600; }
-  .phase.done { background: rgba(16,185,129,0.2); color: var(--green); }
-  .phase.active { background: rgba(245,158,11,0.2); color: var(--yellow); animation: pulse 2s infinite; }
-  .phase.pending { background: var(--border); color: var(--muted); }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
-  .footer { margin-top: 30px; color: var(--muted); font-size: 0.8em; text-align: center; }
+  .chart-row { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .chart-label { width: 150px; text-align: right; font-size: 0.85em; color: var(--muted); }
+  .chart-bar-bg { flex: 1; background: var(--border); border-radius: 6px; height: 26px; }
+  .chart-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 0.8em; font-weight: 600; min-width: 30px; }
+  .scroll-table { max-height: 600px; overflow-y: auto; border-radius: 12px; border: 1px solid var(--border); }
+  .key-finding { background: var(--card); border-left: 3px solid var(--accent); padding: 12px 16px; margin-bottom: 8px; border-radius: 0 8px 8px 0; font-size: 0.95em; }
+  .key-finding strong { color: var(--accent); }
+  .section { margin-bottom: 30px; }
+  .footer { margin-top: 40px; color: var(--muted); font-size: 0.8em; text-align: center; padding: 20px 0; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
+
 <h1>📊 YouTube AI Tools Audit</h1>
-<p class="subtitle">Wyczerpujący audyt narzędzi AI u twórców tutoriali web-dev na YouTube · <span class="updated">Updated: 2026-07-20 13:00:38</span> · Auto-refresh: 60s</p>
+<p class="subtitle">Wyczerpujący audyt narzędzi AI u twórców tutoriali web-dev · 2026-07-20 13:02</p>
 
-<div class="phase-indicator">
-  <span class="phase done">✅ Phase 1: Discovery</span>
-  <span class="phase done">✅ Phase 2: Video Selection</span>
-  <span class="phase done">✅ Phase 3: Transcription</span>
-  <span class="phase active">🔄 Phase 4: Classification (189/199)</span>
-  <span class="phase pending">⏳ Phase 5: Aggregation</span>
-  <span class="phase pending">⏳ Phase 6: Final Report</span>
+<div class="hero">
+  <div class="hero-card"><div class="big" style="color:var(--blue)">20</div><div class="lbl">Channels</div></div>
+  <div class="hero-card"><div class="big" style="color:var(--accent)">189</div><div class="lbl">Videos Analyzed</div></div>
+  <div class="hero-card"><div class="big" style="color:var(--green)">89</div><div class="lbl">Cursor Videos (47.1%)</div></div>
+  <div class="hero-card"><div class="big" style="color:var(--blue)">56</div><div class="lbl">VS Code (29.6%)</div></div>
+  <div class="hero-card"><div class="big" style="color:var(--red)">101</div><div class="lbl">AI Agentic (53.4%)</div></div>
+  <div class="hero-card"><div class="big" style="color:var(--yellow)">44</div><div class="lbl">Sponsored</div></div>
 </div>
 
-<div class="grid">
-  <div class="stat-card green">
-    <div class="num">20</div>
-    <div class="label">Channels</div>
-  </div>
-  <div class="stat-card blue">
-    <div class="num">199</div>
-    <div class="label">Videos</div>
-  </div>
-  <div class="stat-card green">
-    <div class="num">189</div>
-    <div class="label">Transcribed</div>
-    <div class="progress-bg"><div class="progress-fill" style="width:95%;background:var(--green)"></div></div>
-  </div>
-  <div class="stat-card yellow">
-    <div class="num">189</div>
-    <div class="label">Classified</div>
-    <div class="progress-bg"><div class="progress-fill" style="width:95%;background:var(--yellow)"></div></div>
-  </div>
-  <div class="stat-card red">
-    <div class="num">10</div>
-    <div class="label">Failed</div>
-  </div>
+<div class="section">
+<h2>🔑 Key Findings</h2>
+<div class="key-finding"><strong>Cursor dominates:</strong> 47.1% of tutorials use Cursor as the primary editor — nearly 3× more than VS Code (29.6%).</div>
+<div class="key-finding"><strong>AI Agentic is mainstream:</strong> 53.4% of videos show agentic AI workflows (delegating full file/task generation), making it the dominant paradigm in 2026 tutorials.</div>
+<div class="key-finding"><strong>Claude is the most mentioned LLM:</strong> 60 mentions, followed by GPT (57) and Gemini (50).</div>
+<div class="key-finding"><strong>Claude Code is the top AI extension:</strong> 26 videos mention it, surpassing GitHub Copilot (19).</div>
+<div class="key-finding"><strong>Sponsorships are significant:</strong> 44 of 189 videos (23.3%) appear to be AI-tool-sponsored, which may skew the data.</div>
 </div>
 
-<h2>📺 Channels Overview</h2>
+<div class="section">
+<h2>📈 Editor Distribution</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>All Videos (189)</h3>
+    <div class="chart-row"><span class="chart-label">cursor</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">89 (47.1%)</div></div></div><div class="chart-row"><span class="chart-label">vscode</span><div class="chart-bar-bg"><div class="chart-bar" style="width:62%;background:#3b82f6">55 (29.1%)</div></div></div><div class="chart-row"><span class="chart-label">unclear</span><div class="chart-bar-bg"><div class="chart-bar" style="width:40%;background:#6b7280">36 (19.0%)</div></div></div><div class="chart-row"><span class="chart-label">zed</span><div class="chart-bar-bg"><div class="chart-bar" style="width:3%;background:#f59e0b">3 (1.6%)</div></div></div><div class="chart-row"><span class="chart-label">windsurf</span><div class="chart-bar-bg"><div class="chart-bar" style="width:3%;background:#06b6d4">3 (1.6%)</div></div></div><div class="chart-row"><span class="chart-label">neovim</span><div class="chart-bar-bg"><div class="chart-bar" style="width:2%;background:#10b981">2 (1.1%)</div></div></div><div class="chart-row"><span class="chart-label">vscode_with_ai_extension</span><div class="chart-bar-bg"><div class="chart-bar" style="width:1%;background:#8b5cf6">1 (0.5%)</div></div></div>
+  </div>
+  <div class="card">
+    <h3>Excluding Sponsored (145)</h3>
+    <div class="chart-row"><span class="chart-label">cursor</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">55 (37.9%)</div></div></div><div class="chart-row"><span class="chart-label">vscode</span><div class="chart-bar-bg"><div class="chart-bar" style="width:91%;background:#3b82f6">50 (34.5%)</div></div></div><div class="chart-row"><span class="chart-label">unclear</span><div class="chart-bar-bg"><div class="chart-bar" style="width:60%;background:#6b7280">33 (22.8%)</div></div></div><div class="chart-row"><span class="chart-label">zed</span><div class="chart-bar-bg"><div class="chart-bar" style="width:5%;background:#f59e0b">3 (2.1%)</div></div></div><div class="chart-row"><span class="chart-label">windsurf</span><div class="chart-bar-bg"><div class="chart-bar" style="width:4%;background:#06b6d4">2 (1.4%)</div></div></div><div class="chart-row"><span class="chart-label">vscode_with_ai_extension</span><div class="chart-bar-bg"><div class="chart-bar" style="width:2%;background:#8b5cf6">1 (0.7%)</div></div></div><div class="chart-row"><span class="chart-label">neovim</span><div class="chart-bar-bg"><div class="chart-bar" style="width:2%;background:#10b981">1 (0.7%)</div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h2>🤖 AI Autonomy Level</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>All Videos</h3>
+    <div class="chart-row"><span class="chart-label">ai_agentic</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#ef4444">101 (53.4%)</div></div></div><div class="chart-row"><span class="chart-label">ai_autocomplete</span><div class="chart-bar-bg"><div class="chart-bar" style="width:81%;background:#3b82f6">82 (43.4%)</div></div></div><div class="chart-row"><span class="chart-label">mixed</span><div class="chart-bar-bg"><div class="chart-bar" style="width:5%;background:#f59e0b">5 (2.6%)</div></div></div><div class="chart-row"><span class="chart-label">manual_only</span><div class="chart-bar-bg"><div class="chart-bar" style="width:1%;background:#10b981">1 (0.5%)</div></div></div>
+  </div>
+  <div class="card">
+    <h3>Excluding Sponsored</h3>
+    <div class="chart-row"><span class="chart-label">ai_agentic</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#ef4444">77 (53.1%)</div></div></div><div class="chart-row"><span class="chart-label">ai_autocomplete</span><div class="chart-bar-bg"><div class="chart-bar" style="width:83%;background:#3b82f6">64 (44.1%)</div></div></div><div class="chart-row"><span class="chart-label">mixed</span><div class="chart-bar-bg"><div class="chart-bar" style="width:4%;background:#f59e0b">3 (2.1%)</div></div></div><div class="chart-row"><span class="chart-label">manual_only</span><div class="chart-bar-bg"><div class="chart-bar" style="width:1%;background:#10b981">1 (0.7%)</div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h2>⏱️ AI Time Share</h2>
+<div class="card"><div class="chart-row"><span class="chart-label">50-75% AI</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">101 (53.4%)</div></div></div><div class="chart-row"><span class="chart-label">0-25% AI</span><div class="chart-bar-bg"><div class="chart-bar" style="width:82%;background:#3b82f6">83 (43.9%)</div></div></div><div class="chart-row"><span class="chart-label">25-50% AI</span><div class="chart-bar-bg"><div class="chart-bar" style="width:5%;background:#8b5cf6">5 (2.6%)</div></div></div></div>
+</div>
+
+<div class="section">
+<div class="grid-2">
+  <div>
+    <h2>🧩 Top AI Extensions</h2>
+    <div class="card"><div class="chart-row"><span class="chart-label">claude code</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">26 (13.8%)</div></div></div><div class="chart-row"><span class="chart-label">github copilot</span><div class="chart-bar-bg"><div class="chart-bar" style="width:73%;background:#3b82f6">19 (10.1%)</div></div></div><div class="chart-row"><span class="chart-label">cline</span><div class="chart-bar-bg"><div class="chart-bar" style="width:54%;background:#8b5cf6">14 (7.4%)</div></div></div><div class="chart-row"><span class="chart-label">continue.dev</span><div class="chart-bar-bg"><div class="chart-bar" style="width:23%;background:#06b6d4">6 (3.2%)</div></div></div></div>
+  </div>
+  <div>
+    <h2>🧠 Top LLM Models Mentioned</h2>
+    <div class="card"><div class="chart-row"><span class="chart-label">claude</span><div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">60 (31.7%)</div></div></div><div class="chart-row"><span class="chart-label">gpt</span><div class="chart-bar-bg"><div class="chart-bar" style="width:95%;background:#3b82f6">57 (30.2%)</div></div></div><div class="chart-row"><span class="chart-label">gemini</span><div class="chart-bar-bg"><div class="chart-bar" style="width:83%;background:#8b5cf6">50 (26.5%)</div></div></div><div class="chart-row"><span class="chart-label">o1/o3</span><div class="chart-bar-bg"><div class="chart-bar" style="width:18%;background:#06b6d4">11 (5.8%)</div></div></div><div class="chart-row"><span class="chart-label">deepseek</span><div class="chart-bar-bg"><div class="chart-bar" style="width:8%;background:#f59e0b">5 (2.6%)</div></div></div><div class="chart-row"><span class="chart-label">llama</span><div class="chart-bar-bg"><div class="chart-bar" style="width:8%;background:#10b981">5 (2.6%)</div></div></div></div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h2>🏆 Channel Ranking by AI Dependency</h2>
+<div class="scroll-table">
 <table>
-<thead><tr><th>#</th><th>Channel</th><th>Subs</th><th>Videos</th><th>Transcribed</th><th>Failed</th><th>Classified</th><th>Progress</th></tr></thead>
+<thead><tr><th>#</th><th>Channel</th><th>Videos</th><th>Top Editor</th><th>Cursor</th><th>VS Code</th><th>Agentic %</th><th>Profile</th></tr></thead>
 <tbody>
-    <tr>
-      <td>1</td>
-      <td class="ch-name">freeCodeCamp.org</td>
-      <td>11,800,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td class="ch-name">RoadsideCoder</td>
-      <td>175,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td class="ch-name">Codesistency</td>
-      <td>152,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td class="ch-name">codewithsadee</td>
-      <td>68,800</td>
-      <td>10</td>
-      <td><span class="badge badge-done">1</span></td>
-      <td><span class="badge badge-fail">9</span></td>
-      <td><span class="badge badge-class">1</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:10%"></div></div></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td class="ch-name">HuXn WebDev</td>
-      <td>176,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td class="ch-name">Dave Ebbelaar</td>
-      <td>276,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td class="ch-name">Programming with Mosh</td>
-      <td>5,110,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td class="ch-name">Build Great Products</td>
-      <td>59,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td class="ch-name">Tech With Tim</td>
-      <td>2,050,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td class="ch-name">Traversy Media</td>
-      <td>2,410,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td class="ch-name">JavaScript Mastery</td>
-      <td>1,260,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td class="ch-name">PedroTech</td>
-      <td>289,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td class="ch-name">Stephen G. Pope</td>
-      <td>89,400</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td class="ch-name">ByteGrad</td>
-      <td>202,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td class="ch-name">Web Dev Simplified</td>
-      <td>1,780,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td class="ch-name">Code with Ahsan</td>
-      <td>37,200</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td class="ch-name">Nick Saraev</td>
-      <td>475,000</td>
-      <td>9</td>
-      <td><span class="badge badge-done">9</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">9</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td class="ch-name">Dipesh Malvia</td>
-      <td>97,200</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td class="ch-name">Hitesh Choudhary</td>
-      <td>1,040,000</td>
-      <td>10</td>
-      <td><span class="badge badge-done">10</span></td>
-      <td>-</td>
-      <td><span class="badge badge-class">10</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td class="ch-name">Jan Marshal</td>
-      <td>54,500</td>
-      <td>10</td>
-      <td><span class="badge badge-done">9</span></td>
-      <td><span class="badge badge-fail">1</span></td>
-      <td><span class="badge badge-class">9</span></td>
-      <td><div class="bar"><div class="bar-fill" style="width:90%"></div></div></td>
-    </tr>
+<tr><td>1</td><td class="ch-name">Dave Ebbelaar</td><td>10</td><td>cursor</td><td>6</td><td>1</td><td>100%</td><td>🔥</td></tr><tr><td>2</td><td class="ch-name">Build Great Products</td><td>10</td><td>cursor</td><td>10</td><td>0</td><td>100%</td><td>🔥</td></tr><tr><td>3</td><td class="ch-name">Code with Ahsan</td><td>10</td><td>unclear</td><td>2</td><td>3</td><td>90%</td><td>🔥</td></tr><tr><td>4</td><td class="ch-name">Nick Saraev</td><td>9</td><td>vscode</td><td>2</td><td>5</td><td>100%</td><td>🔥</td></tr><tr><td>5</td><td class="ch-name">Tech With Tim</td><td>10</td><td>cursor</td><td>4</td><td>2</td><td>80%</td><td>🔥</td></tr><tr><td>6</td><td class="ch-name">freeCodeCamp.org</td><td>10</td><td>vscode</td><td>2</td><td>5</td><td>70%</td><td>🔥</td></tr><tr><td>7</td><td class="ch-name">ByteGrad</td><td>10</td><td>unclear</td><td>1</td><td>4</td><td>70%</td><td>🔥</td></tr><tr><td>8</td><td class="ch-name">Stephen G. Pope</td><td>10</td><td>unclear</td><td>1</td><td>1</td><td>60%</td><td>⚡</td></tr><tr><td>9</td><td class="ch-name">Web Dev Simplified</td><td>10</td><td>vscode</td><td>3</td><td>4</td><td>60%</td><td>⚡</td></tr><tr><td>10</td><td class="ch-name">JavaScript Mastery</td><td>10</td><td>cursor</td><td>10</td><td>0</td><td>60%</td><td>⚡</td></tr><tr><td>11</td><td class="ch-name">Codesistency</td><td>10</td><td>cursor</td><td>8</td><td>1</td><td>50%</td><td>⚡</td></tr><tr><td>12</td><td class="ch-name">Hitesh Choudhary</td><td>10</td><td>vscode</td><td>3</td><td>5</td><td>50%</td><td>⚡</td></tr><tr><td>13</td><td class="ch-name">Jan Marshal</td><td>9</td><td>cursor</td><td>5</td><td>1</td><td>56%</td><td>⚡</td></tr><tr><td>14</td><td class="ch-name">HuXn WebDev</td><td>10</td><td>cursor</td><td>9</td><td>1</td><td>40%</td><td>⚡</td></tr><tr><td>15</td><td class="ch-name">RoadsideCoder</td><td>10</td><td>cursor</td><td>7</td><td>1</td><td>30%</td><td>📝</td></tr><tr><td>16</td><td class="ch-name">Programming with Mosh</td><td>10</td><td>vscode</td><td>4</td><td>4</td><td>30%</td><td>📝</td></tr><tr><td>17</td><td class="ch-name">Dipesh Malvia</td><td>10</td><td>vscode</td><td>0</td><td>10</td><td>20%</td><td>📝</td></tr><tr><td>18</td><td class="ch-name">Traversy Media</td><td>10</td><td>vscode</td><td>4</td><td>5</td><td>10%</td><td>✋</td></tr><tr><td>19</td><td class="ch-name">codewithsadee</td><td>1</td><td>cursor</td><td>1</td><td>0</td><td>0%</td><td>✋</td></tr><tr><td>20</td><td class="ch-name">PedroTech</td><td>10</td><td>cursor</td><td>7</td><td>3</td><td>0%</td><td>✋</td></tr>
 </tbody>
 </table>
+</div>
+</div>
 
-<h2>🔧 Editor Breakdown</h2><div class=&quot;two-col&quot;><div>
-        <div class="chart-row">
-          <span class="chart-label">cursor</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#6366f1">89</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">vscode</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:62%;background:#3b82f6">55</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">unclear</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:40%;background:#9ca3af">36</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">zed</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:3%;background:#f59e0b">3</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">windsurf</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:3%;background:#06b6d4">3</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">neovim</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:2%;background:#10b981">2</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">vscode_with_ai_extension</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:1%;background:#8b5cf6">1</div></div>
-        </div></div><div><h3 style=&quot;color:var(--muted);font-size:0.9em;margin-bottom:8px&quot;>Autonomy Level</h3>
-        <div class="chart-row">
-          <span class="chart-label">AI Agentic</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:100%;background:#ef4444">101</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">AI Autocomplete</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:81%;background:#3b82f6">82</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">Mixed</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:5%;background:#f59e0b">5</div></div>
-        </div>
-        <div class="chart-row">
-          <span class="chart-label">Manual only</span>
-          <div class="chart-bar-bg"><div class="chart-bar" style="width:1%;background:#10b981">1</div></div>
-        </div></div></div>
-
-<h2>🎬 Videos Detail</h2>
+<div class="section">
+<h2>🎬 All Videos — Detailed Breakdown</h2>
+<div class="scroll-table">
 <table>
-<thead><tr><th>Channel</th><th>Title</th><th>Length</th><th>📝</th><th>🏷️</th><th>Editor</th><th>Autonomy</th></tr></thead>
+<thead><tr><th>Channel</th><th>Title</th><th>Length</th><th>Editor</th><th>Autonomy</th><th>AI Share</th><th>Extensions</th><th>Models</th><th>Conf</th><th>💰</th></tr></thead>
 <tbody>
-    <tr>
+<tr>
       <td><span class="ch-tag">freeCodeCamp.org</span></td>
       <td><a href="https://www.youtube.com/watch?v=4lKbesI5eLI" target="_blank">LaTeX Course for Beginners</a></td>
       <td>2488m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">freeCodeCamp.org</span></td>
+      <td><a href="https://www.youtube.com/watch?v=7HKot-brXFE" target="_blank">AWS Certified Cloud Practitioner Certification Course 2026 (CLF-C02) -</a></td>
+      <td>826m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot, cline</td>
+      <td>llama</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">freeCodeCamp.org</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4m9j6hlbf4g" target="_blank">IT Fundamentals Course – Hardware, Cloud, DevOps, Networking, Security</a></td>
+      <td>782m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">freeCodeCamp.org</span></td>
       <td><a href="https://www.youtube.com/watch?v=SqQUQHdYWyc" target="_blank">CUDA Programming for NVIDIA H100s – Comprehensive Course</a></td>
       <td>1478m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">zed</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gmuTjeQUbTM" target="_blank">Harvard CS50 (2026) – Full Computer Science University Course</a></td>
-      <td>1469m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=uHNOqKdqQas" target="_blank">CI/CD in Production with Jenkins – Complete DevOps Course</a></td>
-      <td>1054m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=7HKot-brXFE" target="_blank">AWS Certified Cloud Practitioner Certification Course 2026 (CLF-C02) - Pass the </a></td>
-      <td>826m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4m9j6hlbf4g" target="_blank">IT Fundamentals Course – Hardware, Cloud, DevOps, Networking, Security, Database</a></td>
-      <td>782m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=fQbBPa0ADvs" target="_blank">Computer Networking Fundamentals Course</a></td>
-      <td>738m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt, deepseek, llama</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">freeCodeCamp.org</span></td>
       <td><a href="https://www.youtube.com/watch?v=BiA08jfr4RU" target="_blank">19 Web Dev Projects – HTML, CSS, JavaScript Tutorial</a></td>
       <td>720m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
       <td><span class="ch-tag">freeCodeCamp.org</span></td>
-      <td><a href="https://www.youtube.com/watch?v=CcrC5zSv1iA" target="_blank">LLM Fine-Tuning Course – From Supervised FT to RLHF, LoRA, and Multimodal</a></td>
-      <td>716m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td><a href="https://www.youtube.com/watch?v=uHNOqKdqQas" target="_blank">CI/CD in Production with Jenkins – Complete DevOps Course</a></td>
+      <td>1054m</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">freeCodeCamp.org</span></td>
+      <td><a href="https://www.youtube.com/watch?v=CcrC5zSv1iA" target="_blank">LLM Fine-Tuning Course – From Supervised FT to RLHF, LoRA, and Multimo</a></td>
+      <td>716m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini, deepseek, llama</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">freeCodeCamp.org</span></td>
       <td><a href="https://www.youtube.com/watch?v=bB5eA7vU9W8" target="_blank">Learn Notion – Full Course for Beginners</a></td>
       <td>696m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=HyGi_SjQqV4" target="_blank">Full Stack React Project ( AI Car Marketplace ) - Next JS, Tailwind, Gemini AI, </a></td>
-      <td>447m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=vr1JL6Fi6K4" target="_blank">Full Stack React Project ( AI Photo Editor  ) - Next JS, Fabric.js, Tailwind, Im</a></td>
-      <td>385m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=pyEmZ6WqE5c" target="_blank">Full Stack React Project ( AI Creators Platform ) - Next JS, Tailwind, ImageKit,</a></td>
-      <td>370m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=egS6fnZAdzk" target="_blank">Full Stack React Project ( AI Finance Platform ) - Next JS, Tailwind, Gemini AI,</a></td>
-      <td>367m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Ce7O3p7-YDI" target="_blank">Full Stack React Project ( AI Splitwise Clone ) - Next JS, Tailwind, Gemini AI, </a></td>
-      <td>364m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4keJJzL-VCM" target="_blank">Full Stack React Project ( AI Events Organiser ) - Next JS, Tailwind, Mobbin, Sh</a></td>
-      <td>354m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>cline</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">freeCodeCamp.org</span></td>
+      <td><a href="https://www.youtube.com/watch?v=fQbBPa0ADvs" target="_blank">Computer Networking Fundamentals Course</a></td>
+      <td>738m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">freeCodeCamp.org</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gmuTjeQUbTM" target="_blank">Harvard CS50 (2026) – Full Computer Science University Course</a></td>
+      <td>1469m</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ID1PRFF1dlw" target="_blank">Full Stack React Project ( Doctors Appointment Platform )- Next JS, Vonage, Tail</a></td>
-      <td>340m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">zed</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=UbXpRv5ApKA" target="_blank">Full Stack React Project ( AI Career Coach ) - Next JS, Tailwind, Gemini AI, Pri</a></td>
-      <td>301m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=R5dBYINNouY" target="_blank">Full Stack React JS Project ( Jira Clone ) - Next JS, Shadcn UI, Tailwind, Clerk</a></td>
-      <td>293m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">zed</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">RoadsideCoder</span></td>
-      <td><a href="https://www.youtube.com/watch?v=f0msp-QQUqw" target="_blank">Full Stack React Project ( AI Interview Marketplace ) - Next JS, Supabase, Strea</a></td>
-      <td>291m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=MDZC8VDZnV8" target="_blank">FREE Coding Bootcamp - Build 4 Full Stack Projects in 23 Hours</a></td>
-      <td>1372m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=bW58B6y81y8" target="_blank">100 HTML CSS JavaScript Projects for Beginners in 2026</a></td>
-      <td>720m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ufo46oWej3g" target="_blank">The Ultimate React Native Chat App in 2026</a></td>
-      <td>600m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=kAiX0itnonM" target="_blank">HTML, CSS & JavaScript Full Course - Build 15 Projects</a></td>
-      <td>600m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=PJ0ARnSKfgw" target="_blank">MERN Stack Project: Video Calling Interview Platform with React & Node.js</a></td>
-      <td>538m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4sbklcQ0EXc" target="_blank">Advanced Spotify Clone: Build & Deploy a MERN Stack Spotify Application with Rea</a></td>
-      <td>525m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=sAH3rwO2H2o" target="_blank">PERN Stack Project: Build and Deploy a Full Stack E-Commerce App</a></td>
-      <td>480m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">neovim</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=sX57TLIPNx8" target="_blank">Build an E-Commerce Store and Admin Dashboard - React.js, Stripe, Node.js, Redis</a></td>
-      <td>459m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=bR4b_Io8shE" target="_blank">Build and Deploy a Realtime Chat App with React, Node.js, Socket.io</a></td>
-      <td>430m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Codesistency</span></td>
-      <td><a href="https://www.youtube.com/watch?v=MhGV5TekJ8Y" target="_blank">Build an AI Voice Dental Assistant with Next.js & Postgres - Full SaaS Tutorial</a></td>
-      <td>417m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=2ZB90iNCL5Q" target="_blank">Build & Deploy a Complete MERN Stack Blog With Admin Dashboard</a></td>
-      <td>716m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=hogRfOa4yg8" target="_blank">From Zero to Thousands: Building a Full-Stack Blog Application with NodeJS & Mon</a></td>
-      <td>702m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=SjCGjT_Fdfg" target="_blank">Create Your AI-Driven SaaS Platform in a Day!</a></td>
-      <td>564m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=6_wfq76CG6g" target="_blank">Backend Mastery: Build & Deploy REST API with NodeJS + JWT + MongoDB</a></td>
-      <td>408m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=cvd2XGJBgLg" target="_blank">Build AI Chat App with ReactJS & TailwindCSS 💥 Tutorial</a></td>
-      <td>384m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=KWTyC1WKdFw" target="_blank">Build a Recipe App with Vanilla JavaScript</a></td>
-      <td>349m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=aKP5610AEM4" target="_blank">Create, Read, Update, Delete (CRUD) in JavaScript: Note Taking App Tutorial</a></td>
-      <td>267m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">codewithsadee</span></td>
-      <td><a href="https://www.youtube.com/watch?v=z3J5FuhLPpk" target="_blank">Build a NEXT-GEN Cloud Storage App with AI Features: React + Appwrite + ShadCN +</a></td>
-      <td>243m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>github copilot, cline</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
       <td><span class="ch-tag">codewithsadee</span></td>
       <td><a href="https://www.youtube.com/watch?v=BsCYuhqTtE4" target="_blank">Build an Advance Weather APP With ReactJS</a></td>
       <td>201m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=2ZB90iNCL5Q" target="_blank">Build & Deploy a Complete MERN Stack Blog With Admin Dashboard</a></td>
+      <td>716m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=z3J5FuhLPpk" target="_blank">Build a NEXT-GEN Cloud Storage App with AI Features: React + Appwrite </a></td>
+      <td>243m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=6_wfq76CG6g" target="_blank">Backend Mastery: Build & Deploy REST API with NodeJS + JWT + MongoDB</a></td>
+      <td>408m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=SjCGjT_Fdfg" target="_blank">Create Your AI-Driven SaaS Platform in a Day!</a></td>
+      <td>564m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">codewithsadee</span></td>
       <td><a href="https://www.youtube.com/watch?v=FGzo2Dm3Rh8" target="_blank">Create a Stunning SaaS Landing Page with React & Tailwind</a></td>
       <td>192m</td>
-      <td>❌</td>
-      <td>⏳</td>
       <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=H3XIJYEPdus" target="_blank">From Zero to Full Stack: Master JavaScript and Create Dynamic Web Apps</a></td>
-      <td>930m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=bWACo_pvKxg" target="_blank">Mastering HTML & CSS: Build 15 Professional Projects in 15 Hours 2023 #huxnwebde</a></td>
-      <td>842m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=qnwFpjIqsrA" target="_blank">THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 1 )</a></td>
-      <td>762m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=futeaowy34Y" target="_blank">THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 2 )</a></td>
-      <td>679m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=znZQFzoV3CM" target="_blank">THE MOST ADVANCE REACT.JS COURSE: THE BIGGEST REACT.JS COURSE ON THE INTERNET ( </a></td>
-      <td>633m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=-Qnf2bME-rE" target="_blank">ADVANCE REACT: THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 3 )</a></td>
-      <td>600m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Bd1EBSCu2os" target="_blank">MERN Mastery: Building a Scalable Movies App for Ultimate User Experience</a></td>
-      <td>430m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=XrwsMN2IWnE" target="_blank">Master ReactJS in 7 Hours with 10 Real-World Projects 2023</a></td>
-      <td>418m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=pgWZLS75Nmo" target="_blank">Master Vue.js Composition API: Build 10 Stunning Projects for Real-world Experti</a></td>
-      <td>374m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">HuXn WebDev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=JZDQKj9BOoc" target="_blank">Python for Everyone: From Zero to Hero 6 Hours Complete Course</a></td>
-      <td>347m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ygXn5nV5qFc" target="_blank">Python for AI - Full Beginner Course</a></td>
-      <td>315m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=qF5il_9IwME" target="_blank">Build a Full-Stack GenAI Project in 4 Hours (FastAPI, React, Supabase)</a></td>
-      <td>231m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=E8zpgNPx8jE" target="_blank">Build a Complete End-to-End GenAI Project in 3 Hours</a></td>
-      <td>178m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=PkQIREapb9o" target="_blank">Pydantic Crash Course - Build Reliable Python & AI Applications</a></td>
-      <td>82m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=XvKiTfd6Xvo" target="_blank">The Complete Guide to Hybrid Search in RAG (BM25 + Embeddings + Reranker)</a></td>
-      <td>59m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=3sIzCFuLgIQ" target="_blank">My Development Workflow for Data & AI Projects</a></td>
-      <td>57m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=5xqFjh56AwM" target="_blank">MCP Crash Course: What Python Developers Need to Know</a></td>
-      <td>57m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">windsurf</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Q679gH7oszg" target="_blank">How I Build and Ship Custom AI Solutions for Clients</a></td>
-      <td>54m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=zt1zCwLrSPg" target="_blank">Building Reliable LLM Apps with OpenAI (Instructor Tutorial)</a></td>
-      <td>48m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dave Ebbelaar</span></td>
-      <td><a href="https://www.youtube.com/watch?v=bZzyPscbtI8" target="_blank">Building AI Agents in Pure Python - Beginner Course</a></td>
-      <td>46m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=eIrMbAQSU34" target="_blank">Java Full Course for Beginners</a></td>
-      <td>150m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=PtETUYa3i2Q" target="_blank">AI Course for Developers – Build AI-Powered Apps with React</a></td>
-      <td>145m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=0-S5a0eXPoc" target="_blank">React Native Tutorial for Beginners - Build a React Native App</a></td>
-      <td>126m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=K5KVEU3aaeQ" target="_blank">Python Full Course for Beginners</a></td>
-      <td>122m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=EWd3_I4X32g" target="_blank">Spring Boot Project: Build a REST API for an E-commerce Platform</a></td>
-      <td>120m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=poQXNp9ItL4" target="_blank">Redux Tutorial - Learn Redux from Scratch</a></td>
-      <td>94m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=J9sfR6HN6BY" target="_blank">Next.js Projects:  Build a Full-stack App with Next.js, Tailwind, Radix UI, and </a></td>
-      <td>93m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ZzaPdXTrSb8" target="_blank">C++ Tutorial for Beginners - Learn C++ in 1 Hour</a></td>
-      <td>82m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=SqcY0GlETPk" target="_blank">React Tutorial for Beginners</a></td>
-      <td>80m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Programming with Mosh</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gJrjgg1KVL4" target="_blank">Spring Boot Tutorial for Beginners [2025]</a></td>
-      <td>71m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Qcxq4iXLZbY" target="_blank">Full App Building Course with Cursor (3+ Hours)</a></td>
-      <td>221m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=2JEzjfs6Kew" target="_blank">Full Claude Code App Building Course in One Video (2+ Hours)</a></td>
-      <td>160m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=5ZgkSCM3GHo" target="_blank">How To Build A $10,000 Website With AI in 56 Minutes (Claude Code + Higgsfield)</a></td>
-      <td>48m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=-CxnF2W_Srg" target="_blank">Why I'm Ditching Cursor and Building My Own (Without Knowing Code)</a></td>
-      <td>46m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=X8hCGFg8eHk" target="_blank">How to Build PERFECT Apps with this Secret Claude Code Skill</a></td>
-      <td>35m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=P8OL_0ag4pk" target="_blank">MCP vs ACP: The Two Protocols Every AI Builder Needs to Know</a></td>
-      <td>35m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank">I Ranked Every AI App Builder for 2026: Lovable vs. Bolt vs. Replit vs. Cursor (</a></td>
-      <td>32m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=AzjWrfbBhfs" target="_blank">Meet Emergent - The World’s First Agentic AI App Builder</a></td>
-      <td>32m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=keMmkK_KG44" target="_blank">Still Using Claude Code? Codex + GPT 5.5 Builds Apps 10x Better</a></td>
-      <td>30m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Build Great Products</span></td>
-      <td><a href="https://www.youtube.com/watch?v=MJjqapFt9rs" target="_blank">Create Your First App in Claude Code</a></td>
-      <td>29m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=fKcfaAPyPUQ" target="_blank">Famous Computer Science Algorithms - Full Course</a></td>
-      <td>153m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=QL15V0vzt88" target="_blank">How to Build a Video Player in Next.js (Step-by-Step)</a></td>
-      <td>84m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=zFw19qGAeGo" target="_blank">Build 3 PRODUCTION AI Agents in Python - Full Course (Agentspan)</a></td>
-      <td>80m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=mTYxpIRK7xA" target="_blank">Hermes Agent - Full Course & Setup Guide - For COMPLETE Beginners</a></td>
-      <td>59m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=lTXFv1Z0qfI" target="_blank">Save 95% of Your Tokens - OpenClaw Full Tutorial</a></td>
-      <td>49m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=jlZfuNoBBCY" target="_blank">I Built an AI App to Analyze My Own Business Data (No Code)</a></td>
-      <td>46m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=7QisFjITGlI" target="_blank">Learn Snowflake with ONE Project</a></td>
-      <td>44m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=RHZLJhp-JMM" target="_blank">Paperclip Is Insane - Full Tutorial</a></td>
-      <td>38m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=GFlFABWeqDc" target="_blank">Devin AI Is the Future of Coding… Full Tutorial</a></td>
-      <td>38m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">windsurf</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Tech With Tim</span></td>
-      <td><a href="https://www.youtube.com/watch?v=2BpCk4d2Cc0" target="_blank">Prompt Engineering Full Course </a></td>
-      <td>37m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=NKiTlo_dgb8" target="_blank">NextJS + Postgres and Error Monitoring  - Full Stack Support Ticketing System</a></td>
-      <td>203m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=LDB4uaJ87e0" target="_blank">React Crash Course</a></td>
-      <td>184m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=VeNfHj6MhgA" target="_blank">Vue.js Crash Course</a></td>
-      <td>176m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=t7S0I78sloI" target="_blank">Build A RealTime Chat App With React & Appwrite Cloud</a></td>
-      <td>141m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=hhudoSMM0yU" target="_blank">Admin Dashboard From Scratch - Next.js, TypeScript, Shadcn/ui</a></td>
-      <td>136m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=32M1al-Y6Ag" target="_blank">Node.js Crash Course</a></td>
-      <td>126m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=I6DCo5RwHBE" target="_blank">Full App Build - Dev to Deployment - Next.js, Prisma, Neon & Clerk</a></td>
-      <td>111m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=CnH3kAXSrmU" target="_blank">Express Crash Course</a></td>
-      <td>106m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=XCifkDC0yXA" target="_blank">React Native Crash Course 2026 - Build a Complete Mobile App</a></td>
-      <td>98m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">mixed</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Traversy Media</span></td>
-      <td><a href="https://www.youtube.com/watch?v=hNPwdOZ3qFU" target="_blank">Vue 3 & Composition API - Full Project</a></td>
-      <td>69m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=DwbwuYYiBTk" target="_blank">Build and Deploy 3 Modern Apps and Get Hired as Full Stack Developer Full 12-Hou</a></td>
-      <td>719m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=8vIDZO_w7lY" target="_blank">Build 3 Complete Full-Stack Web Apps and Launch Your Developer Career</a></td>
-      <td>692m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=tllZWCQZ9_0" target="_blank">10-Hour Masterclass: Develop 4 React Web Apps & Jumpstart Your Dev Career</a></td>
-      <td>565m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">mixed</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=A6g8xc0MoiY" target="_blank">Build and Deploy 3 Modern API Applications in 7 Hours - Full Course</a></td>
-      <td>420m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=PuOVqP_cjkE" target="_blank">Build and Deploy a Banking App with Finance Management Dashboard Using Next.js 1</a></td>
-      <td>389m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=zgGhzuBZOQg" target="_blank">Build and Deploy a Full Stack Next MERN Events App with Stripe, Typescript, Tail</a></td>
-      <td>341m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=zfAb95tJvZQ" target="_blank">Build and Deploy a Saas Podcast Platform in Next.js</a></td>
-      <td>338m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">mixed</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=6a3Dz8gwjdg" target="_blank">Build and Deploy a React Admin Dashboard With Real time Data, Charts, Events, Ka</a></td>
-      <td>338m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=xZ1ba-RLrjo" target="_blank">Build and Deploy a Full Stack React Admin Dashboard with Tables, Charts and Real</a></td>
-      <td>336m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">JavaScript Mastery</span></td>
-      <td><a href="https://www.youtube.com/watch?v=lie0cr3wESQ" target="_blank">Build and Deploy a Full Stack Google Drive Clone with Next.js 15</a></td>
-      <td>319m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ugxI1o5SyMs" target="_blank">Build a Fullstack Trello App with NextJS 15, Supabase, TailwindCSS, Drag & Drop</a></td>
-      <td>403m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=RUE3nYI75VE" target="_blank">Build a Fullstack AI SaaS Website with Authentication In NextJS 15, Stripe, Type</a></td>
-      <td>274m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=j7Qu65rUcsY" target="_blank">Build a FullStack Travel Planner App With NextJS, Google Maps, PostgreSQL</a></td>
-      <td>226m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=L5CsIkO5xv4" target="_blank">NextJS 16 FullStack Course - Build an Inventory Management Website</a></td>
-      <td>179m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=cIYdiRDFWQw" target="_blank">Build and Deploy a Modern Personal Portfolio with ReactJS and TailwindCSS</a></td>
-      <td>171m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=yS7B1W2SwaU" target="_blank">Build and Deploy a Fully Responsive Modern Website using ReactJS and Tailwind CS</a></td>
-      <td>155m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=IRrK8AKPOtQ" target="_blank">Build A FullStack Live Audio Room App with ReactJS and NodeJS</a></td>
-      <td>149m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4NZx9OF07qY" target="_blank">MERN Finance Tracker App with User Management - Build A Fullstack React Intermed</a></td>
-      <td>137m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=DLeAPn5-TIA" target="_blank">Build and Deploy an Ecommerce Website with NextJS 15, Stripe, TailwindCSS</a></td>
-      <td>132m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">PedroTech</span></td>
-      <td><a href="https://www.youtube.com/watch?v=HIIcEMjWXNE" target="_blank">React Native Best Practices Full Course 2026 - Optimisations, Error Tracking, Op</a></td>
-      <td>100m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=bacs5yI1sOo" target="_blank">100+ Weekly Posts While You Sleep (Full Automation Tutorial)</a></td>
-      <td>115m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=8_eLuSxE5zw" target="_blank">Create Amazing Professional Videos Without Editing Using ONLY AI</a></td>
-      <td>97m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=xcP9NE6C5EI" target="_blank">Build Your Own API With AI Coding (step-by-step)</a></td>
-      <td>76m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=RK1X3EmRyrU" target="_blank">Build a SaaS in 60 Minutes (Softr, Airtable + Make.com)</a></td>
-      <td>59m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=DCHzGgCrzek" target="_blank">Build an AUTOMATIC Lead Generation System with n8n</a></td>
-      <td>44m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">windsurf</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=dIBFK5lJY04" target="_blank">Clients Pay MORE for THIS: No-Code Dashboard Vibe Coding Tutorial</a></td>
-      <td>34m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=zDK6CGBLfMY" target="_blank">CANCEL Your Monthly API Subscriptions (Build Your Own)</a></td>
-      <td>33m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=m3bLeDs2cE4" target="_blank">I'm Building A Faceless Video System That Will CHANGE The Game</a></td>
-      <td>30m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=vuN8OAGvBuw" target="_blank">CHEAT CODE: Building AI Agents (n8n)</a></td>
-      <td>30m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Stephen G. Pope</span></td>
-      <td><a href="https://www.youtube.com/watch?v=BZB6zfszsE4" target="_blank">This Agent Makes Me $50K/Month with WhatsApp, SMS & Email</a></td>
-      <td>28m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=sTjx7IpeBas" target="_blank">OpenClaw COMPLETE Tutorial - All 12 Concepts You Need To Know (Memory, Cron vs H</a></td>
-      <td>96m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=jZInNd6djz4" target="_blank">Next.js Tutorial 2026 (UPDATED) - Full Course - Start Your Next.js Journey Here</a></td>
-      <td>88m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=VhRhGrOt-48" target="_blank">TanStack Start Tutorial - Amazing For Full-Stack Apps</a></td>
-      <td>38m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=olN3dxXE0yk" target="_blank">AI Gold Rush: Build & Sell Next.js AI-Apps & AI-Agents</a></td>
-      <td>36m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=9bhNdw3fmQM" target="_blank">Build A Sick AI-Voice Memo App W/ Next.js + OpenAI Whisper (Background Jobs / Cr</a></td>
-      <td>35m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Z0YsinTJ3w8" target="_blank">Motia Tutorial - The Backend Framework Going Viral On GitHub (API, Background Jo</a></td>
-      <td>34m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=720gW8glSdk" target="_blank">n8n tutorial for developers - Every Dev Should Know This</a></td>
-      <td>32m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode_with_ai_extension</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=P9Lu6ZtT1A8" target="_blank">Build An AI-Agent With Next.js + AI SDK + Context7 + Warp Code</a></td>
-      <td>26m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=AnPjmQVJ3fY" target="_blank">DON'T Do Authentication In Next.js Like This... (Next.js Authentication Tutorial</a></td>
-      <td>24m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">manual_only</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">ByteGrad</span></td>
-      <td><a href="https://www.youtube.com/watch?v=hovHMNl1bpA" target="_blank">Use OpenClaw on VPS BEFORE Buying Mac Mini - Setup Tutorial (Clawdbot / Moltbot </a></td>
-      <td>23m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=xIfSwINNM40" target="_blank">Build an AI-Powered Job Board From Scratch with Next.js 15, Drizzle, Tailwind</a></td>
-      <td>629m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=OAyQ3Wyyzfg" target="_blank">Build A Course Platform LMS With Next.js 15, React 19, Stripe, Drizzle, Shadcn, </a></td>
-      <td>516m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=xrrtYNr7ZEw" target="_blank">How to Build the Ultimate AI SaaS Project - AI Interviews, Resume Reviews, Techn</a></td>
-      <td>429m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=cvd2XGJBgLg" target="_blank">Build AI Chat App with ReactJS & TailwindCSS 💥 Tutorial</a></td>
+      <td>384m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=hogRfOa4yg8" target="_blank">From Zero to Thousands: Building a Full-Stack Blog Application with No</a></td>
+      <td>702m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=aKP5610AEM4" target="_blank">Create, Read, Update, Delete (CRUD) in JavaScript: Note Taking App Tut</a></td>
+      <td>267m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">codewithsadee</span></td>
+      <td><a href="https://www.youtube.com/watch?v=KWTyC1WKdFw" target="_blank">Build a Recipe App with Vanilla JavaScript</a></td>
+      <td>349m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Web Dev Simplified</span></td>
       <td><a href="https://www.youtube.com/watch?v=1mvlBz6pj1I" target="_blank">How To Build A Production Ready RAG AI - My Full AI Coding Workflow</a></td>
       <td>187m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=5MQb6pVkQHA" target="_blank">Build an Advanced Realtime Chat Project with Supabase</a></td>
-      <td>130m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=9aTRnV6g0eQ" target="_blank">Learn React With This One Project</a></td>
-      <td>105m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Web Dev Simplified</span></td>
       <td><a href="https://www.youtube.com/watch?v=U_D14T5TYuk" target="_blank">How To Build A Production Ready API - Auth, JWT, API Keys</a></td>
       <td>104m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=ZoZxQwp1PiM" target="_blank">The Ultimate MCP Crash Course - Build From Scratch</a></td>
-      <td>75m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">mixed</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Web Dev Simplified</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gL3BJ8_5Jz8" target="_blank">How to Build a Permission System that Scales to Enterprise</a></td>
-      <td>55m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Web Dev Simplified</span></td>
       <td><a href="https://www.youtube.com/watch?v=UngVdAsQEiU" target="_blank">The Best Local Agentic Coding Workflow (Complete Guide)</a></td>
       <td>44m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=A7EiK5D4A-Q" target="_blank">Next.js Crash Course - (Full Stack TypeScript, React 19, Postgres & Prisma)</a></td>
-      <td>209m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=rlYVelhroDU" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (Part 3/3)</a></td>
-      <td>167m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=9aTRnV6g0eQ" target="_blank">Learn React With This One Project</a></td>
+      <td>105m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=tqjJrXd27m4" target="_blank">React 19 Crash Course for Beginners 2026 (Learn in 90 Minutes)</a></td>
-      <td>146m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=DSDfH9K6-q0" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (Part 2/3)</a></td>
-      <td>117m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gL3BJ8_5Jz8" target="_blank">How to Build a Permission System that Scales to Enterprise</a></td>
+      <td>55m</td>
       <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=E1wtzB0ZSgQ" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (Part 1/3)</a></td>
-      <td>96m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=5MQb6pVkQHA" target="_blank">Build an Advanced Realtime Chat Project with Supabase</a></td>
+      <td>130m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=IFt3XjWkpMk" target="_blank">Build Your Own AI Sentiment Analyzer in Angular! (Gemini API Tutorial)</a></td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=xrrtYNr7ZEw" target="_blank">How to Build the Ultimate AI SaaS Project - AI Interviews, Resume Revi</a></td>
+      <td>429m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ZoZxQwp1PiM" target="_blank">The Ultimate MCP Crash Course - Build From Scratch</a></td>
       <td>75m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=OTlnvCpOp00" target="_blank">Build an AI-powered Smart Grocery App in 70 minutes with Angular & Genkit</a></td>
-      <td>68m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">neovim</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=8ZM-1DYeQpk" target="_blank">n8n SaaS Onboarding Tutorial: From Signup to CRM in 60 Mins</a></td>
-      <td>59m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>mixed</td>
+      <td>25-50% AI</td>
+      <td>github copilot</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=xIfSwINNM40" target="_blank">Build an AI-Powered Job Board From Scratch with Next.js 15, Drizzle, T</a></td>
+      <td>629m</td>
       <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gZvriQJUAT4" target="_blank">How to use MCP tools to build good web applications</a></td>
-      <td>44m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Code with Ahsan</span></td>
-      <td><a href="https://www.youtube.com/watch?v=AybyBL6TQUA" target="_blank">Antigravity CLI Crash Course: Migrate from Gemini CLI</a></td>
-      <td>37m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Nick Saraev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gcuR_-rzlDw" target="_blank">VIBE CODING FULL COURSE: Gemini 3.1 + Antigravity (6 Hrs)</a></td>
-      <td>383m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#ef4444">●low</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Web Dev Simplified</span></td>
+      <td><a href="https://www.youtube.com/watch?v=OAyQ3Wyyzfg" target="_blank">Build A Course Platform LMS With Next.js 15, React 19, Stripe, Drizzle</a></td>
+      <td>516m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=XCifkDC0yXA" target="_blank">React Native Crash Course 2026 - Build a Complete Mobile App</a></td>
+      <td>98m</td>
+      <td class="editor-cell">vscode</td>
+      <td>mixed</td>
+      <td>25-50% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=NKiTlo_dgb8" target="_blank">NextJS + Postgres and Error Monitoring  - Full Stack Support Ticketing</a></td>
+      <td>203m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Nick Saraev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=MxyRjL7NG18" target="_blank">AGENTIC WORKFLOWS: Build & Sell AI Automations (2026)</a></td>
-      <td>341m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=VeNfHj6MhgA" target="_blank">Vue.js Crash Course</a></td>
+      <td>176m</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Nick Saraev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=QoQBzR1NIqI" target="_blank">CLAUDE CODE FULL COURSE 4 HOURS: Build & Sell (2026)</a></td>
-      <td>250m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=I6DCo5RwHBE" target="_blank">Full App Build - Dev to Deployment - Next.js, Prisma, Neon & Clerk</a></td>
+      <td>111m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=hhudoSMM0yU" target="_blank">Admin Dashboard From Scratch - Next.js, TypeScript, Shadcn/ui</a></td>
+      <td>136m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=CnH3kAXSrmU" target="_blank">Express Crash Course</a></td>
+      <td>106m</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=32M1al-Y6Ag" target="_blank">Node.js Crash Course</a></td>
+      <td>126m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=LDB4uaJ87e0" target="_blank">React Crash Course</a></td>
+      <td>184m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=hNPwdOZ3qFU" target="_blank">Vue 3 & Composition API - Full Project</a></td>
+      <td>69m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Traversy Media</span></td>
+      <td><a href="https://www.youtube.com/watch?v=t7S0I78sloI" target="_blank">Build A RealTime Chat App With React & Appwrite Cloud</a></td>
+      <td>141m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=jlZfuNoBBCY" target="_blank">I Built an AI App to Analyze My Own Business Data (No Code)</a></td>
+      <td>46m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=zFw19qGAeGo" target="_blank">Build 3 PRODUCTION AI Agents in Python - Full Course (Agentspan)</a></td>
+      <td>80m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=mTYxpIRK7xA" target="_blank">Hermes Agent - Full Course & Setup Guide - For COMPLETE Beginners</a></td>
+      <td>59m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=GFlFABWeqDc" target="_blank">Devin AI Is the Future of Coding… Full Tutorial</a></td>
+      <td>38m</td>
+      <td class="editor-cell">windsurf</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot, claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=RHZLJhp-JMM" target="_blank">Paperclip Is Insane - Full Tutorial</a></td>
+      <td>38m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=7QisFjITGlI" target="_blank">Learn Snowflake with ONE Project</a></td>
+      <td>44m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=fKcfaAPyPUQ" target="_blank">Famous Computer Science Algorithms - Full Course</a></td>
+      <td>153m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=QL15V0vzt88" target="_blank">How to Build a Video Player in Next.js (Step-by-Step)</a></td>
+      <td>84m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=lTXFv1Z0qfI" target="_blank">Save 95% of Your Tokens - OpenClaw Full Tutorial</a></td>
+      <td>49m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini, deepseek, llama</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Tech With Tim</span></td>
+      <td><a href="https://www.youtube.com/watch?v=2BpCk4d2Cc0" target="_blank">Prompt Engineering Full Course </a></td>
+      <td>37m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=BZB6zfszsE4" target="_blank">This Agent Makes Me $50K/Month with WhatsApp, SMS & Email</a></td>
+      <td>28m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=DCHzGgCrzek" target="_blank">Build an AUTOMATIC Lead Generation System with n8n</a></td>
+      <td>44m</td>
+      <td class="editor-cell">windsurf</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=dIBFK5lJY04" target="_blank">Clients Pay MORE for THIS: No-Code Dashboard Vibe Coding Tutorial</a></td>
+      <td>34m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=m3bLeDs2cE4" target="_blank">I'm Building A Faceless Video System That Will CHANGE The Game</a></td>
+      <td>30m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=8_eLuSxE5zw" target="_blank">Create Amazing Professional Videos Without Editing Using ONLY AI</a></td>
+      <td>97m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=bacs5yI1sOo" target="_blank">100+ Weekly Posts While You Sleep (Full Automation Tutorial)</a></td>
+      <td>115m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=xcP9NE6C5EI" target="_blank">Build Your Own API With AI Coding (step-by-step)</a></td>
+      <td>76m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=vuN8OAGvBuw" target="_blank">CHEAT CODE: Building AI Agents (n8n)</a></td>
+      <td>30m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=zDK6CGBLfMY" target="_blank">CANCEL Your Monthly API Subscriptions (Build Your Own)</a></td>
+      <td>33m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Stephen G. Pope</span></td>
+      <td><a href="https://www.youtube.com/watch?v=RK1X3EmRyrU" target="_blank">Build a SaaS in 60 Minutes (Softr, Airtable + Make.com)</a></td>
+      <td>59m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=f0msp-QQUqw" target="_blank">Full Stack React Project ( AI Interview Marketplace ) - Next JS, Supab</a></td>
+      <td>291m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4keJJzL-VCM" target="_blank">Full Stack React Project ( AI Events Organiser ) - Next JS, Tailwind, </a></td>
+      <td>354m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>github copilot</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=pyEmZ6WqE5c" target="_blank">Full Stack React Project ( AI Creators Platform ) - Next JS, Tailwind,</a></td>
+      <td>370m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=vr1JL6Fi6K4" target="_blank">Full Stack React Project ( AI Photo Editor  ) - Next JS, Fabric.js, Ta</a></td>
+      <td>385m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>claude, o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ID1PRFF1dlw" target="_blank">Full Stack React Project ( Doctors Appointment Platform )- Next JS, Vo</a></td>
+      <td>340m</td>
+      <td class="editor-cell">zed</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Ce7O3p7-YDI" target="_blank">Full Stack React Project ( AI Splitwise Clone ) - Next JS, Tailwind, G</a></td>
+      <td>364m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=HyGi_SjQqV4" target="_blank">Full Stack React Project ( AI Car Marketplace ) - Next JS, Tailwind, G</a></td>
+      <td>447m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=UbXpRv5ApKA" target="_blank">Full Stack React Project ( AI Career Coach ) - Next JS, Tailwind, Gemi</a></td>
+      <td>301m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=egS6fnZAdzk" target="_blank">Full Stack React Project ( AI Finance Platform ) - Next JS, Tailwind, </a></td>
+      <td>367m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">RoadsideCoder</span></td>
+      <td><a href="https://www.youtube.com/watch?v=R5dBYINNouY" target="_blank">Full Stack React JS Project ( Jira Clone ) - Next JS, Shadcn UI, Tailw</a></td>
+      <td>293m</td>
+      <td class="editor-cell">zed</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=PtETUYa3i2Q" target="_blank">AI Course for Developers – Build AI-Powered Apps with React</a></td>
+      <td>145m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini, llama</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=EWd3_I4X32g" target="_blank">Spring Boot Project: Build a REST API for an E-commerce Platform</a></td>
+      <td>120m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gJrjgg1KVL4" target="_blank">Spring Boot Tutorial for Beginners [2025]</a></td>
+      <td>71m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=K5KVEU3aaeQ" target="_blank">Python Full Course for Beginners</a></td>
+      <td>122m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=J9sfR6HN6BY" target="_blank">Next.js Projects:  Build a Full-stack App with Next.js, Tailwind, Radi</a></td>
+      <td>93m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=SqcY0GlETPk" target="_blank">React Tutorial for Beginners</a></td>
+      <td>80m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ZzaPdXTrSb8" target="_blank">C++ Tutorial for Beginners - Learn C++ in 1 Hour</a></td>
+      <td>82m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=0-S5a0eXPoc" target="_blank">React Native Tutorial for Beginners - Build a React Native App</a></td>
+      <td>126m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=poQXNp9ItL4" target="_blank">Redux Tutorial - Learn Redux from Scratch</a></td>
+      <td>94m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Programming with Mosh</span></td>
+      <td><a href="https://www.youtube.com/watch?v=eIrMbAQSU34" target="_blank">Java Full Course for Beginners</a></td>
+      <td>150m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=HIIcEMjWXNE" target="_blank">React Native Best Practices Full Course 2026 - Optimisations, Error Tr</a></td>
+      <td>100m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=cIYdiRDFWQw" target="_blank">Build and Deploy a Modern Personal Portfolio with ReactJS and Tailwind</a></td>
+      <td>171m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=yS7B1W2SwaU" target="_blank">Build and Deploy a Fully Responsive Modern Website using ReactJS and T</a></td>
+      <td>155m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=L5CsIkO5xv4" target="_blank">NextJS 16 FullStack Course - Build an Inventory Management Website</a></td>
+      <td>179m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ugxI1o5SyMs" target="_blank">Build a Fullstack Trello App with NextJS 15, Supabase, TailwindCSS, Dr</a></td>
+      <td>403m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=j7Qu65rUcsY" target="_blank">Build a FullStack Travel Planner App With NextJS, Google Maps, Postgre</a></td>
+      <td>226m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=DLeAPn5-TIA" target="_blank">Build and Deploy an Ecommerce Website with NextJS 15, Stripe, Tailwind</a></td>
+      <td>132m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=RUE3nYI75VE" target="_blank">Build a Fullstack AI SaaS Website with Authentication In NextJS 15, St</a></td>
+      <td>274m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=IRrK8AKPOtQ" target="_blank">Build A FullStack Live Audio Room App with ReactJS and NodeJS</a></td>
+      <td>149m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">PedroTech</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4NZx9OF07qY" target="_blank">MERN Finance Tracker App with User Management - Build A Fullstack Reac</a></td>
+      <td>137m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Nick Saraev</span></td>
       <td><a href="https://www.youtube.com/watch?v=BMMcmmnjrM8" target="_blank">How to Build Mobile Apps with Claude Code: Full Course (2026)</a></td>
       <td>243m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Nick Saraev</span></td>
-      <td><a href="https://www.youtube.com/watch?v=uSTGNHGFOAo" target="_blank">COLD EMAIL COPYWRITING & OUTREACH Full Course 2026</a></td>
-      <td>239m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Nick Saraev</span></td>
       <td><a href="https://www.youtube.com/watch?v=UPtmKh1vMN8" target="_blank">CLAUDE CODE ADVANCED FULL COURSE (3 HOURS)</a></td>
       <td>198m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>continue.dev, claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Nick Saraev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=uSTGNHGFOAo" target="_blank">COLD EMAIL COPYWRITING & OUTREACH Full Course 2026</a></td>
+      <td>239m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>cline, claude code</td>
+      <td>claude</td>
+      <td style="color:#ef4444">●low</td>
+      <td>💰</td>
+    </tr><tr>
       <td><span class="ch-tag">Nick Saraev</span></td>
       <td><a href="https://www.youtube.com/watch?v=EsTrWCV0Ph4" target="_blank">AI Agents Full Course 2026: Master Agentic AI (2 Hours)</a></td>
       <td>133m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Nick Saraev</span></td>
       <td><a href="https://www.youtube.com/watch?v=sduaTkhIm_w" target="_blank">CLAUDE SKILLS FULL COURSE: Automate Your Work (2026)</a></td>
       <td>47m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Nick Saraev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gcuR_-rzlDw" target="_blank">VIBE CODING FULL COURSE: Gemini 3.1 + Antigravity (6 Hrs)</a></td>
+      <td>383m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Nick Saraev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=QoQBzR1NIqI" target="_blank">CLAUDE CODE FULL COURSE 4 HOURS: Build & Sell (2026)</a></td>
+      <td>250m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Nick Saraev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=MxyRjL7NG18" target="_blank">AGENTIC WORKFLOWS: Build & Sell AI Automations (2026)</a></td>
+      <td>341m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot, cline, claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Nick Saraev</span></td>
       <td><a href="https://www.youtube.com/watch?v=Uj-1we7Rew4" target="_blank">building a service business the LAZY way (Agentic Workflows)</a></td>
       <td>40m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=opXWwDrvyFY" target="_blank">Build a Full Stack Multi Factor Authentication System with React, Node.js, Passp</a></td>
-      <td>160m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=H9M02of22z4" target="_blank">Learn Node.js & Express with Project in 2 Hours</a></td>
-      <td>102m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=dndLA0EPQWY" target="_blank">Build a Two-Factor Authentication System with React in 90 Minutes</a></td>
-      <td>91m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=GOp0gH3zE9s" target="_blank">Building a URL Shortener MERN Stack App with React TypeScript & Tailwind CSS Ep.</a></td>
-      <td>60m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Fy_bnJmI5PE" target="_blank">Build & Deploy an AI-Powered Ecommerce Search Engine with Next.js 15, Hugging Fa</a></td>
-      <td>55m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=TYB-Lz8YGFk" target="_blank">Build a CRUD Rest API with Node.js, Express, PostgreSQL & Docker</a></td>
-      <td>52m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=kF37r6Ie27U" target="_blank">Build & Deploy Full Stack E-Commerce App using Next.js 13 and Payloadcms in 45 M</a></td>
-      <td>46m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=sKq-aSrnZog" target="_blank">Building a URL Shortener MERN Stack App with Node.js, TypeScript, MongoDB & Reac</a></td>
-      <td>41m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=VIf48M93nCU" target="_blank">Node js Monitoring with Docker, Kubernetes, Prometheus & Grafana – Full Tutorial</a></td>
-      <td>33m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Dipesh Malvia</span></td>
-      <td><a href="https://www.youtube.com/watch?v=gDUzaANQ01A" target="_blank">How to speed up your React Development skills ? Learn How To Build React Apps Qu</a></td>
-      <td>31m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Vh_NlF9hHN4" target="_blank">Build a SAAS kit with Clerk, PostgreSQL and NextJS</a></td>
-      <td>261m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=8vIDZO_w7lY" target="_blank">Build 3 Complete Full-Stack Web Apps and Launch Your Developer Career</a></td>
+      <td>692m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4HaFaYMbal0" target="_blank">Learn to build AI SAAS with strapi powered reliable backend</a></td>
-      <td>249m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=6cXpjtc36XE" target="_blank">Build an online store with Imagekit and razorpay</a></td>
-      <td>210m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=OtJV9SCyfuE" target="_blank">Full Stack AI Agent course with inngest and Gemini</a></td>
-      <td>201m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=EB5_nETqdx0" target="_blank">FastAPI crash course with AI project and Imagekit</a></td>
-      <td>181m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=4Uo2cYcxvJs" target="_blank">Building a complex AI chat app with Agents and Stream</a></td>
-      <td>129m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot, continue.dev</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=xZ1ba-RLrjo" target="_blank">Build and Deploy a Full Stack React Admin Dashboard with Tables, Chart</a></td>
+      <td>336m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=my_abxdWUaI" target="_blank">Complete Inngest course with Project</a></td>
-      <td>126m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=-VkjpDF8crc" target="_blank">I Let Claude Opus 4.8 and InsForge Build an Entire Startup. Here's What Happened</a></td>
-      <td>98m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>continue.dev</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=lie0cr3wESQ" target="_blank">Build and Deploy a Full Stack Google Drive Clone with Next.js 15</a></td>
+      <td>319m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=PWs6gFmjDyo" target="_blank">A crash course on prisma CRUD and pagination</a></td>
-      <td>47m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Hitesh Choudhary</span></td>
-      <td><a href="https://www.youtube.com/watch?v=RAIVgn5RWXo" target="_blank">AI Engineer versus Full Stack Engineer and Software Observability</a></td>
-      <td>30m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=neuXgoon61w" target="_blank">Create a B2B AI SaaS with Next.js, React, Arcjet, Kinde, oRPC, Prisma, Tailwind </a></td>
-      <td>715m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>github copilot, continue.dev</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=DwbwuYYiBTk" target="_blank">Build and Deploy 3 Modern Apps and Get Hired as Full Stack Developer F</a></td>
+      <td>719m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">mixed</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=xqoYkX4hfwg" target="_blank">Create an LMS Course Platform with Next.js, Arcjet, Better-Auth, and Stripe (Par</a></td>
-      <td>714m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>cline</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=zfAb95tJvZQ" target="_blank">Build and Deploy a Saas Podcast Platform in Next.js</a></td>
+      <td>338m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=Uj9X7Hbw6dk" target="_blank">Create a B2B AI SaaS with Next.js, React, Arcjet,  Kinde, oRPC, Prisma, Tailwind</a></td>
-      <td>709m</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>mixed</td>
+      <td>25-50% AI</td>
+      <td>github copilot, continue.dev</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=PuOVqP_cjkE" target="_blank">Build and Deploy a Banking App with Finance Management Dashboard Using</a></td>
+      <td>389m</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=XCLKnEKwRa0" target="_blank">Create an LMS Course Platform with Next.js, Arcjet, Better-Auth, and Stripe (Par</a></td>
-      <td>708m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">vscode</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=uianlp3QsmA" target="_blank">The Ultimate Vibe Coding Tutorial (5 Hours)</a></td>
-      <td>342m</td>
-      <td>❌</td>
-      <td>⏳</td>
-      <td class="editor-cell">—</td>
-      <td class="autonomy-cell">—</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=oTSbzu4dX8c" target="_blank">This is the BEST Way to build Agentic AI Apps</a></td>
-      <td>44m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=6a3Dz8gwjdg" target="_blank">Build and Deploy a React Admin Dashboard With Real time Data, Charts, </a></td>
+      <td>338m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>github copilot</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=zgGhzuBZOQg" target="_blank">Build and Deploy a Full Stack Next MERN Events App with Stripe, Typesc</a></td>
+      <td>341m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=A6g8xc0MoiY" target="_blank">Build and Deploy 3 Modern API Applications in 7 Hours - Full Course</a></td>
+      <td>420m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">JavaScript Mastery</span></td>
+      <td><a href="https://www.youtube.com/watch?v=tllZWCQZ9_0" target="_blank">10-Hour Masterclass: Develop 4 React Web Apps & Jumpstart Your Dev Car</a></td>
+      <td>565m</td>
+      <td class="editor-cell">cursor</td>
+      <td>mixed</td>
+      <td>25-50% AI</td>
+      <td>github copilot, continue.dev</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
       <td><span class="ch-tag">Jan Marshal</span></td>
       <td><a href="https://www.youtube.com/watch?v=VvlgwaAp-lo" target="_blank">I Found the BEST Way to Build AI Agents (Eve + Next.js)</a></td>
       <td>41m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=JIFipBMFk6Q" target="_blank">I Found the Best Way to Build Real-Time Applications (Durable Objects + PartyKit</a></td>
-      <td>34m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
-      <td><span class="ch-tag">Jan Marshal</span></td>
-      <td><a href="https://www.youtube.com/watch?v=12x0v5g9GWY" target="_blank">Why Your Next.js Application is Slow (And How to Fix It)</a></td>
-      <td>33m</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td class="editor-cell">unclear</td>
-      <td class="autonomy-cell">ai_autocomplete</td>
-    </tr>
-    <tr>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, deepseek</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
       <td><span class="ch-tag">Jan Marshal</span></td>
       <td><a href="https://www.youtube.com/watch?v=OnCep-HlMzI" target="_blank">Cursor vs Claude Code vs Codex (I Built the Same App 3 Times)</a></td>
       <td>32m</td>
-      <td>✅</td>
-      <td>✅</td>
       <td class="editor-cell">cursor</td>
-      <td class="autonomy-cell">ai_agentic</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=uianlp3QsmA" target="_blank">The Ultimate Vibe Coding Tutorial (5 Hours)</a></td>
+      <td>342m</td>
+      <td class="editor-cell">—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#94a3b8">●—</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=oTSbzu4dX8c" target="_blank">This is the BEST Way to build Agentic AI Apps</a></td>
+      <td>44m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=neuXgoon61w" target="_blank">Create a B2B AI SaaS with Next.js, React, Arcjet, Kinde, oRPC, Prisma,</a></td>
+      <td>715m</td>
+      <td class="editor-cell">cursor</td>
+      <td>mixed</td>
+      <td>25-50% AI</td>
+      <td>cline</td>
+      <td>claude, gpt, gemini, deepseek</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Uj9X7Hbw6dk" target="_blank">Create a B2B AI SaaS with Next.js, React, Arcjet,  Kinde, oRPC, Prisma</a></td>
+      <td>709m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=JIFipBMFk6Q" target="_blank">I Found the Best Way to Build Real-Time Applications (Durable Objects </a></td>
+      <td>34m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=12x0v5g9GWY" target="_blank">Why Your Next.js Application is Slow (And How to Fix It)</a></td>
+      <td>33m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=XCLKnEKwRa0" target="_blank">Create an LMS Course Platform with Next.js, Arcjet, Better-Auth, and S</a></td>
+      <td>708m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Jan Marshal</span></td>
+      <td><a href="https://www.youtube.com/watch?v=xqoYkX4hfwg" target="_blank">Create an LMS Course Platform with Next.js, Arcjet, Better-Auth, and S</a></td>
+      <td>714m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=znZQFzoV3CM" target="_blank">THE MOST ADVANCE REACT.JS COURSE: THE BIGGEST REACT.JS COURSE ON THE I</a></td>
+      <td>633m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=-Qnf2bME-rE" target="_blank">ADVANCE REACT: THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 3 )</a></td>
+      <td>600m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=futeaowy34Y" target="_blank">THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 2 )</a></td>
+      <td>679m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=qnwFpjIqsrA" target="_blank">THE BIGGEST REACT.JS COURSE ON THE INTERNET ( PART 1 )</a></td>
+      <td>762m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=JZDQKj9BOoc" target="_blank">Python for Everyone: From Zero to Hero 6 Hours Complete Course</a></td>
+      <td>347m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Bd1EBSCu2os" target="_blank">MERN Mastery: Building a Scalable Movies App for Ultimate User Experie</a></td>
+      <td>430m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=pgWZLS75Nmo" target="_blank">Master Vue.js Composition API: Build 10 Stunning Projects for Real-wor</a></td>
+      <td>374m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=H3XIJYEPdus" target="_blank">From Zero to Full Stack: Master JavaScript and Create Dynamic Web Apps</a></td>
+      <td>930m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gemini, o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=XrwsMN2IWnE" target="_blank">Master ReactJS in 7 Hours with 10 Real-World Projects 2023</a></td>
+      <td>418m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">HuXn WebDev</span></td>
+      <td><a href="https://www.youtube.com/watch?v=bWACo_pvKxg" target="_blank">Mastering HTML & CSS: Build 15 Professional Projects in 15 Hours 2023 </a></td>
+      <td>842m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini, o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=RAIVgn5RWXo" target="_blank">AI Engineer versus Full Stack Engineer and Software Observability</a></td>
+      <td>30m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=-VkjpDF8crc" target="_blank">I Let Claude Opus 4.8 and InsForge Build an Entire Startup. Here's Wha</a></td>
+      <td>98m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4HaFaYMbal0" target="_blank">Learn to build AI SAAS with strapi powered reliable backend</a></td>
+      <td>249m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=EB5_nETqdx0" target="_blank">FastAPI crash course with AI project and Imagekit</a></td>
+      <td>181m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=my_abxdWUaI" target="_blank">Complete Inngest course with Project</a></td>
+      <td>126m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4Uo2cYcxvJs" target="_blank">Building a complex AI chat app with Agents and Stream</a></td>
+      <td>129m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=OtJV9SCyfuE" target="_blank">Full Stack AI Agent course with inngest and Gemini</a></td>
+      <td>201m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=6cXpjtc36XE" target="_blank">Build an online store with Imagekit and razorpay</a></td>
+      <td>210m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Vh_NlF9hHN4" target="_blank">Build a SAAS kit with Clerk, PostgreSQL and NextJS</a></td>
+      <td>261m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Hitesh Choudhary</span></td>
+      <td><a href="https://www.youtube.com/watch?v=PWs6gFmjDyo" target="_blank">A crash course on prisma CRUD and pagination</a></td>
+      <td>47m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Fy_bnJmI5PE" target="_blank">Build & Deploy an AI-Powered Ecommerce Search Engine with Next.js 15, </a></td>
+      <td>55m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=opXWwDrvyFY" target="_blank">Build a Full Stack Multi Factor Authentication System with React, Node</a></td>
+      <td>160m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=VIf48M93nCU" target="_blank">Node js Monitoring with Docker, Kubernetes, Prometheus & Grafana – Ful</a></td>
+      <td>33m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=TYB-Lz8YGFk" target="_blank">Build a CRUD Rest API with Node.js, Express, PostgreSQL & Docker</a></td>
+      <td>52m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=dndLA0EPQWY" target="_blank">Build a Two-Factor Authentication System with React in 90 Minutes</a></td>
+      <td>91m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=GOp0gH3zE9s" target="_blank">Building a URL Shortener MERN Stack App with React TypeScript & Tailwi</a></td>
+      <td>60m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=sKq-aSrnZog" target="_blank">Building a URL Shortener MERN Stack App with Node.js, TypeScript, Mong</a></td>
+      <td>41m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gDUzaANQ01A" target="_blank">How to speed up your React Development skills ? Learn How To Build Rea</a></td>
+      <td>31m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=kF37r6Ie27U" target="_blank">Build & Deploy Full Stack E-Commerce App using Next.js 13 and Payloadc</a></td>
+      <td>46m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dipesh Malvia</span></td>
+      <td><a href="https://www.youtube.com/watch?v=H9M02of22z4" target="_blank">Learn Node.js & Express with Project in 2 Hours</a></td>
+      <td>102m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=qF5il_9IwME" target="_blank">Build a Full-Stack GenAI Project in 4 Hours (FastAPI, React, Supabase)</a></td>
+      <td>231m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=XvKiTfd6Xvo" target="_blank">The Complete Guide to Hybrid Search in RAG (BM25 + Embeddings + Rerank</a></td>
+      <td>59m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Q679gH7oszg" target="_blank">How I Build and Ship Custom AI Solutions for Clients</a></td>
+      <td>54m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=PkQIREapb9o" target="_blank">Pydantic Crash Course - Build Reliable Python & AI Applications</a></td>
+      <td>82m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=E8zpgNPx8jE" target="_blank">Build a Complete End-to-End GenAI Project in 3 Hours</a></td>
+      <td>178m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ygXn5nV5qFc" target="_blank">Python for AI - Full Beginner Course</a></td>
+      <td>315m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=5xqFjh56AwM" target="_blank">MCP Crash Course: What Python Developers Need to Know</a></td>
+      <td>57m</td>
+      <td class="editor-cell">windsurf</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=bZzyPscbtI8" target="_blank">Building AI Agents in Pure Python - Beginner Course</a></td>
+      <td>46m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=zt1zCwLrSPg" target="_blank">Building Reliable LLM Apps with OpenAI (Instructor Tutorial)</a></td>
+      <td>48m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Dave Ebbelaar</span></td>
+      <td><a href="https://www.youtube.com/watch?v=3sIzCFuLgIQ" target="_blank">My Development Workflow for Data & AI Projects</a></td>
+      <td>57m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=sAH3rwO2H2o" target="_blank">PERN Stack Project: Build and Deploy a Full Stack E-Commerce App</a></td>
+      <td>480m</td>
+      <td class="editor-cell">neovim</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>cline</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=bW58B6y81y8" target="_blank">100 HTML CSS JavaScript Projects for Beginners in 2026</a></td>
+      <td>720m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=ufo46oWej3g" target="_blank">The Ultimate React Native Chat App in 2026</a></td>
+      <td>600m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>cline</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=PJ0ARnSKfgw" target="_blank">MERN Stack Project: Video Calling Interview Platform with React & Node</a></td>
+      <td>538m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=MhGV5TekJ8Y" target="_blank">Build an AI Voice Dental Assistant with Next.js & Postgres - Full SaaS</a></td>
+      <td>417m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=bR4b_Io8shE" target="_blank">Build and Deploy a Realtime Chat App with React, Node.js, Socket.io</a></td>
+      <td>430m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=kAiX0itnonM" target="_blank">HTML, CSS & JavaScript Full Course - Build 15 Projects</a></td>
+      <td>600m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=4sbklcQ0EXc" target="_blank">Advanced Spotify Clone: Build & Deploy a MERN Stack Spotify Applicatio</a></td>
+      <td>525m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=MDZC8VDZnV8" target="_blank">FREE Coding Bootcamp - Build 4 Full Stack Projects in 23 Hours</a></td>
+      <td>1372m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>—</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Codesistency</span></td>
+      <td><a href="https://www.youtube.com/watch?v=sX57TLIPNx8" target="_blank">Build an E-Commerce Store and Admin Dashboard - React.js, Stripe, Node</a></td>
+      <td>459m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>o1/o3</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=AybyBL6TQUA" target="_blank">Antigravity CLI Crash Course: Migrate from Gemini CLI</a></td>
+      <td>37m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=gZvriQJUAT4" target="_blank">How to use MCP tools to build good web applications</a></td>
+      <td>44m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=A7EiK5D4A-Q" target="_blank">Next.js Crash Course - (Full Stack TypeScript, React 19, Postgres & Pr</a></td>
+      <td>209m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=tqjJrXd27m4" target="_blank">React 19 Crash Course for Beginners 2026 (Learn in 90 Minutes)</a></td>
+      <td>146m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=8ZM-1DYeQpk" target="_blank">n8n SaaS Onboarding Tutorial: From Signup to CRM in 60 Mins</a></td>
+      <td>59m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=OTlnvCpOp00" target="_blank">Build an AI-powered Smart Grocery App in 70 minutes with Angular & Gen</a></td>
+      <td>68m</td>
+      <td class="editor-cell">neovim</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=rlYVelhroDU" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (</a></td>
+      <td>167m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=DSDfH9K6-q0" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (</a></td>
+      <td>117m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=E1wtzB0ZSgQ" target="_blank">Angular + NestJS Full Stack Crash Course - Build an E-commerce Store (</a></td>
+      <td>96m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Code with Ahsan</span></td>
+      <td><a href="https://www.youtube.com/watch?v=IFt3XjWkpMk" target="_blank">Build Your Own AI Sentiment Analyzer in Angular! (Gemini API Tutorial)</a></td>
+      <td>75m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=jZInNd6djz4" target="_blank">Next.js Tutorial 2026 (UPDATED) - Full Course - Start Your Next.js Jou</a></td>
+      <td>88m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=olN3dxXE0yk" target="_blank">AI Gold Rush: Build & Sell Next.js AI-Apps & AI-Agents</a></td>
+      <td>36m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=sTjx7IpeBas" target="_blank">OpenClaw COMPLETE Tutorial - All 12 Concepts You Need To Know (Memory,</a></td>
+      <td>96m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Z0YsinTJ3w8" target="_blank">Motia Tutorial - The Backend Framework Going Viral On GitHub (API, Bac</a></td>
+      <td>34m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=hovHMNl1bpA" target="_blank">Use OpenClaw on VPS BEFORE Buying Mac Mini - Setup Tutorial (Clawdbot </a></td>
+      <td>23m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=720gW8glSdk" target="_blank">n8n tutorial for developers - Every Dev Should Know This</a></td>
+      <td>32m</td>
+      <td class="editor-cell">vscode_with_ai_extension</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>github copilot</td>
+      <td>gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=VhRhGrOt-48" target="_blank">TanStack Start Tutorial - Amazing For Full-Stack Apps</a></td>
+      <td>38m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#f59e0b">●medium</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=P9Lu6ZtT1A8" target="_blank">Build An AI-Agent With Next.js + AI SDK + Context7 + Warp Code</a></td>
+      <td>26m</td>
+      <td class="editor-cell">unclear</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=AnPjmQVJ3fY" target="_blank">DON'T Do Authentication In Next.js Like This... (Next.js Authenticatio</a></td>
+      <td>24m</td>
+      <td class="editor-cell">unclear</td>
+      <td>manual_only</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="color:#ef4444">●low</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">ByteGrad</span></td>
+      <td><a href="https://www.youtube.com/watch?v=9bhNdw3fmQM" target="_blank">Build A Sick AI-Voice Memo App W/ Next.js + OpenAI Whisper (Background</a></td>
+      <td>35m</td>
+      <td class="editor-cell">vscode</td>
+      <td>ai_autocomplete</td>
+      <td>0-25% AI</td>
+      <td>—</td>
+      <td>gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=keMmkK_KG44" target="_blank">Still Using Claude Code? Codex + GPT 5.5 Builds Apps 10x Better</a></td>
+      <td>30m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=P8OL_0ag4pk" target="_blank">MCP vs ACP: The Two Protocols Every AI Builder Needs to Know</a></td>
+      <td>35m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=X8hCGFg8eHk" target="_blank">How to Build PERFECT Apps with this Secret Claude Code Skill</a></td>
+      <td>35m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=MJjqapFt9rs" target="_blank">Create Your First App in Claude Code</a></td>
+      <td>29m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=-CxnF2W_Srg" target="_blank">Why I'm Ditching Cursor and Building My Own (Without Knowing Code)</a></td>
+      <td>46m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=2JEzjfs6Kew" target="_blank">Full Claude Code App Building Course in One Video (2+ Hours)</a></td>
+      <td>160m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gpt</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=5ZgkSCM3GHo" target="_blank">How To Build A $10,000 Website With AI in 56 Minutes (Claude Code + Hi</a></td>
+      <td>48m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td>💰</td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=OZOokCf2R_4" target="_blank">I Ranked Every AI App Builder for 2026: Lovable vs. Bolt vs. Replit vs</a></td>
+      <td>32m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=Qcxq4iXLZbY" target="_blank">Full App Building Course with Cursor (3+ Hours)</a></td>
+      <td>221m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>—</td>
+      <td>claude, gpt, gemini</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
+    </tr><tr>
+      <td><span class="ch-tag">Build Great Products</span></td>
+      <td><a href="https://www.youtube.com/watch?v=AzjWrfbBhfs" target="_blank">Meet Emergent - The World’s First Agentic AI App Builder</a></td>
+      <td>32m</td>
+      <td class="editor-cell">cursor</td>
+      <td>ai_agentic</td>
+      <td>50-75% AI</td>
+      <td>claude code</td>
+      <td>claude</td>
+      <td style="color:#10b981">●high</td>
+      <td></td>
     </tr>
 </tbody>
 </table>
+</div>
+</div>
+
+<div class="section">
+<h2>⚠️ Limitations</h2>
+<div class="card" style="font-size:0.9em;line-height:1.7">
+<ul style="padding-left:20px;color:var(--muted)">
+<li><strong>Heuristic classification:</strong> Editor and autonomy detection uses keyword matching on transcripts, not LLM analysis. Confidence distribution: 94 high, 59 medium, 36 low.</li>
+<li><strong>Transcript-only:</strong> No visual screenshot verification was performed in this pass. Editor detection is based solely on what creators say.</li>
+<li><strong>Non-random sample:</strong> Top 20 channels = bias toward larger, English-language creators.</li>
+<li><strong>Sponsorship detection is heuristic:</strong> Based on keywords like "sponsored by" + AI tool mentions. May have false positives/negatives.</li>
+<li><strong>10 videos failed transcription</strong> and were excluded from analysis.</li>
+<li><strong>Snapshot:</strong> Data from July 2026, not a longitudinal trend.</li>
+</ul>
+</div>
+</div>
 
 <div class="footer">
-  Generated by Andrzej AI · 2026-07-20 13:00:38<br>
-  Data: channels.json (20 channels) · videos.json (199 videos) · transcripts/ (189 files) · classifications.json (189 entries)
+  <p>YouTube AI Tools Audit · Generated by Andrzej AI · 2026-07-20 13:02</p>
+  <p>20 channels · 199 videos · 189 classified · Methodology: yt-dlp + youtube-transcript-api + heuristic keyword analysis</p>
 </div>
+
 </body>
 </html>

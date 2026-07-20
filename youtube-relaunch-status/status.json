@@ -1,17 +1,17 @@
 {
-  "pct": 5,
-  "done": 0,
+  "pct": 75,
+  "done": 3,
   "active": 1,
   "failed": 0,
   "total": 5,
-  "elapsed": "00:00",
-  "lastLog": "🚀 Start — Krok 0: Status page deployed. Beginning Krok 1: channel analysis.",
-  "updated": "2026-07-20T13:33:00+02:00",
+  "elapsed": "01:15",
+  "lastLog": "✅ Krok 1-3 done. Krok 4: Scaffolding starter repo (Next.js 15 + TypeScript + Tailwind)...",
+  "updated": "2026-07-20T14:45:00+02:00",
   "steps": [
-    {"name": "Krok 0: Status page", "status": "active"},
-    {"name": "Krok 1: my_signal.md", "status": "pending"},
-    {"name": "Krok 2: whats_changed.md", "status": "pending"},
-    {"name": "Krok 3: episode_1_plan.md", "status": "pending"},
-    {"name": "Krok 4: Starter repo + recording_kit.md", "status": "pending"}
+    {"name": "Krok 0: Status page", "status": "done"},
+    {"name": "Krok 1: my_signal.md", "status": "done"},
+    {"name": "Krok 2: whats_changed.md", "status": "done"},
+    {"name": "Krok 3: episode_1_plan.md", "status": "done"},
+    {"name": "Krok 4: Starter repo + recording_kit.md", "status": "active"}
   ]
 }

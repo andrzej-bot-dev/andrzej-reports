@@ -1,0 +1,17 @@
+{
+  "pct": 5,
+  "done": 0,
+  "active": 1,
+  "failed": 0,
+  "total": 5,
+  "elapsed": "00:00",
+  "lastLog": "🚀 Start — Krok 0: Status page deployed. Beginning Krok 1: channel analysis.",
+  "updated": "2026-07-20T13:33:00+02:00",
+  "steps": [
+    {"name": "Krok 0: Status page", "status": "active"},
+    {"name": "Krok 1: my_signal.md", "status": "pending"},
+    {"name": "Krok 2: whats_changed.md", "status": "pending"},
+    {"name": "Krok 3: episode_1_plan.md", "status": "pending"},
+    {"name": "Krok 4: Starter repo + recording_kit.md", "status": "pending"}
+  ]
+}

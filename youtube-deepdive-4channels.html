@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep-Dive: Lama Dev, PedroTech, Traversy Media, CodeWithHarry</title>
+<style>
+:root {
+  --bg: #0f0f11; --surface: #1a1a2e; --surface2: #222239;
+  --text: #e4e4e7; --text2: #a1a1aa;
+  --accent: #6c63ff; --accent2: #4cc9f0; --green: #06d6a0; --yellow: #ffd166; --red: #ef476f;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6 }
+.container { max-width: 1200px; margin:0 auto; padding:0 24px }
+header { background: linear-gradient(135deg, var(--surface), #1a1a3e); padding:48px 0; text-align:center; border-bottom:2px solid var(--accent) }
+header h1 { font-size:2em; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+header p { color:var(--text2) }
+nav { position:sticky; top:0; background:var(--surface); border-bottom:1px solid #333; z-index:100; padding:10px 0 }
+nav .tabs { display:flex; gap:4px; flex-wrap:wrap; justify-content:center }
+nav button { background:none; border:none; color:var(--text2); padding:10px 18px; cursor:pointer; border-radius:8px; font-size:.9em; transition:.2s }
+nav button:hover, nav button.active { background:var(--accent); color:white }
+section { padding:40px 0; display:none }
+section.active { display:block }
+h2 { font-size:1.6em; margin-bottom:16px; color:var(--accent2) }
+h3 { font-size:1.2em; margin:24px 0 12px; color:var(--text) }
+h4 { color:var(--accent2); margin:16px 0 8px }
+.card { background:var(--surface); border-radius:var(--radius); padding:24px; margin-bottom:20px; border:1px solid #333 }
+.video-card { background:var(--surface); border-radius:var(--radius); padding:20px; margin-bottom:16px; border-left:4px solid var(--accent) }
+.video-card.pivot { border-left-color: var(--yellow) }
+.video-card.tutorial { border-left-color: var(--green) }
+.video-card .meta { color:var(--text2); font-size:.85em; margin-bottom:8px }
+.badge { display:inline-block; padding:4px 10px; border-radius:20px; font-size:.8em; font-weight:600; margin:2px }
+.badge-green { background:rgba(6,214,160,0.2); color:var(--green) }
+.badge-yellow { background:rgba(255,209,102,0.2); color:var(--yellow) }
+.badge-red { background:rgba(239,71,111,0.2); color:var(--red) }
+.badge-blue { background:rgba(76,201,240,0.2); color:var(--accent2) }
+.badge-purple { background:rgba(108,99,255,0.2); color:var(--accent) }
+.insight-box { background:var(--surface2); padding:20px; border-radius:var(--radius); margin:16px 0; border-left:4px solid var(--accent) }
+.insight-box.green { border-left-color:var(--green) }
+.insight-box.yellow { border-left-color:var(--yellow) }
+.insight-box.red { border-left-color:var(--red) }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.9em }
+th { background:var(--surface2); padding:10px; text-align:left; color:var(--accent2) }
+td { padding:8px 10px; border-bottom:1px solid #333 }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
+.channel-header { display:flex; align-items:center; gap:16px; margin-bottom:20px }
+.channel-stats { display:flex; gap:20px; flex-wrap:wrap }
+.stat-item { text-align:center; padding:12px 20px; background:var(--surface2); border-radius:var(--radius) }
+.stat-item .num { font-size:1.5em; font-weight:800; color:var(--accent2) }
+.stat-item .label { font-size:.8em; color:var(--text2) }
+.pivot-alert { background:rgba(255,209,102,0.1); border:2px solid var(--yellow); border-radius:var(--radius); padding:20px; margin-bottom:24px }
+hr { border:none; border-top:1px solid #333; margin:24px 0 }
+footer { text-align:center; padding:48px 0; color:var(--text2); font-size:.85em }
+a { color:var(--accent2); text-decoration:none }
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>🔍 Deep-Dive: 4 kanały — 20 filmów</h1>
+<p>Szczegółowa analiza: Lama Dev, PedroTech, Traversy Media, CodeWithHarry</p>
+<p style="font-size:0.85em;margin-top:8px">20 lipca 2026 | Ostatnie 5 filmów z każdego kanału</p>
+</div>
+</header>
+
+<nav>
+<div class="tabs" id="tabs">
+<button class="active" onclick="showTab('overview')">📊 Overview</button>
+<button onclick="showTab('lamadev')">Lama Dev</button>
+<button onclick="showTab('pedrotech')">PedroTech</button>
+<button onclick="showTab('traversy')">Traversy Media</button>
+<button onclick="showTab('codewithharry')">CodeWithHarry</button>
+<button onclick="showTab('compare')">⚖️ Porównanie</button>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- OVERVIEW -->
+<section id="overview" class="active">
+<h2>📊 Overview — 4 kanały, 20 filmów</h2>
+
+<div class="pivot-alert">
+<h3>⚠️ KLUCZOWE ODKRYCIE: Lama Dev i Traversy Media PRAWIE PRZESTALI ROBIĆ TUTORIALE</h3>
+<p>Obaj pivotują w content AI-opinii/recenzji/newsów. Tylko <b>PedroTech</b> konsekwentnie produkuje tutoriale full-project. <b>CodeWithHarry</b> robi mix — tradycyjne tutoriale + AI eksperymenty + opinie.</p>
+</div>
+
+<div class="grid2">
+<div class="card">
+<h3>Typ contentu — ostatnie 5 filmów</h3>
+<table>
+<tr><th>Kanał</th><th>Tutoriale</th><th>AI Opinie/Recenzje</th><th>Inne</th></tr>
+<tr><td><b>Lama Dev</b></td><td>1</td><td>2</td><td>2 opinie</td></tr>
+<tr><td><b>PedroTech</b></td><td><span class="badge badge-green">5/5 ✅</span></td><td>0</td><td>0</td></tr>
+<tr><td><b>Traversy Media</b></td><td>1</td><td>3</td><td>1 vlog</td></tr>
+<tr><td><b>CodeWithHarry</b></td><td>3</td><td>2</td><td>0</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Łączne wyświetlenia (ostatnie 5)</h3>
+<table>
+<tr><th>Kanał</th><th>Łącznie views</th><th>Średnia</th></tr>
+<tr><td>Lama Dev</td><td>216K</td><td>43K</td></tr>
+<tr><td>PedroTech</td><td>68K</td><td>13.7K</td></tr>
+<tr><td>Traversy Media</td><td>281K</td><td>56K</td></tr>
+<tr><td><b>CodeWithHarry</b></td><td><b>1.58M</b></td><td><b>316K 🔥</b></td></tr>
+</table>
+</div>
+</div>
+</section>
+
+<!-- LAMA DEV -->
+<section id="lamadev">
+<h2>Lama Dev (@LamaDev) — ~320K subs</h2>
+
+<div class="pivot-alert">
+<h3>⚠️ PIVOT: Lama Dev przestał robić tutoriale full-project</h3>
+<p>Ostatni prawdziwy full-stack tutorial to <b>9 miesięcy temu</b> (E-Commerce Microservices, 149K views). Od tego czasu content to głównie opinie o AI, recenzje narzędzi i pojedyncze tutoriale narzędziowe (MCP, Hermes Agent). <b>Treść, którą analizujesz pod kątem tutoriali, już praktycznie nie istnieje na tym kanale.</b></p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #1: "Finally Found an AI Agent Worth Using | Hermes Agent Full Tutorial"</h3>
+<div class="meta">📅 2 tygodnie temu | 👁 14K views | ⏱ ~1h</div>
+<table>
+<tr><td style="width:160px"><b>Co budowali</b></td><td>Tutorial konfiguracji Hermes AI Agent — nie full-stack app, tylko setup agenta AI</td></tr>
+<tr><td><b>Od zera?</b></td><td>Tak, instalacja i konfiguracja agenta</td></tr>
+<tr><td><b>Edytor</b></td><td>VS Code (na podstawie stylu kanału)</td></tr>
+<tr><td><b>AI models</b></td><td>Hermes Agent (własny AI agent)</td></tr>
+<tr><td><b>Jak używa AI</b></td><td>AI jest TEMATEM tutorialu, nie narzędziem do pisania kodu</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-yellow">tool-review</span> — pokazuje jak skonfigurować narzędzie</td></tr>
+</table>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #2: "This Postman Alternative Changed My Entire API Workflow"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 6.8K views</div>
+<p><span class="badge badge-yellow">Recenzja narzędzia</span> — nie tutorial. Porównanie alternatyw dla Postmana.</p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #3: "Social Media Is Ruining Developers!"</h3>
+<div class="meta">📅 2 miesiące temu | 👁 22K views</div>
+<p><span class="badge badge-red">Opinia</span> — brak kodu. Dyskusja o wpływie social media na developerów.</p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #4: "AI Is Coming for Developers… They Said"</h3>
+<div class="meta">📅 2 miesiące temu | 👁 43K views</div>
+<p><span class="badge badge-red">Opinia</span> — dyskusja o AI i przyszłości developerów.</p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #5: "Can't We Just… Write Code?"</h3>
+<div class="meta">📅 3 miesiące temu | 👁 131K views 🔥</div>
+<p><span class="badge badge-red">Opinia</span> — najpopularniejszy film w ostatnim czasie. Nostalgia za "zwykłym pisaniem kodu" bez AI. Zero kodu w filmie.</p>
+</div>
+
+<div class="insight-box">
+<strong>🔑 Wniosek:</strong> Lama Dev całkowicie zmienił format. Z kanału tutorialowego stał się kanałem opinii/recenzji AI. Nie ma sensu analizować go pod kątem "jak robi tutoriale" — po prostu ich nie robi. Ostatni full-stack build: <b>E-Commerce Microservices, 9 miesięcy temu, 149K views</b>.
+</div>
+</section>
+
+<!-- PEDROTECH -->
+<section id="pedrotech">
+<h2>PedroTech (@PedroTechnologies) — ~120K subs</h2>
+<p style="margin-bottom:16px"><span class="badge badge-green">✅ JEDYNY kanał z 5/5 tutoriali full-project</span></p>
+
+<div class="video-card tutorial">
+<h3>🎬 #1: "Build A Production Ready AI Headshot Generator | React, TailwindCSS, Cloudinary"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 3.3K views | ⏱ ~2h</div>
+<table>
+<tr><td style="width:160px"><b>Co budowali</b></td><td>AI Headshot Generator — apka wykorzystująca AI do generowania zdjęć</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span> — pełny build od podstaw</td></tr>
+<tr><td><b>Stack</b></td><td>React, TailwindCSS, Cloudinary (AI image API)</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b> (styl PedroTech — zawsze VS Code)</td></tr>
+<tr><td><b>AI models</b></td><td>Cloudinary AI (zewnętrzne API, nie LLM do kodu)</td></tr>
+<tr><td><b>Przeglądarka</b></td><td>Google Chrome (standard w jego tutorialach)</td></tr>
+<tr><td><b>VS Code plugins</b></td><td>ES7+ React snippets, Tailwind CSS IntelliSense, Prettier (standardowy stack)</td></tr>
+<tr><td><b>AI vs manual</b></td><td>~10% AI (tylko Cloudinary API), 90% ręcznie pisany kod</td></tr>
+<tr><td><b>Jak używa AI</b></td><td>AI jako FEATURE apki, nie jako narzędzie do pisania kodu</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual</span> — tradycyjny code-along, AI tylko jako zewnętrzne API</td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #2: "Build A Production Ready Reddit Clone | NextJS, React, TailwindCSS, PostgreSQL"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 9.2K views | ⏱ ~3-4h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>Pełny klon Reddita — frontend + backend</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td><b>Stack</b></td><td>NextJS, React, TailwindCSS, PostgreSQL</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b></td></tr>
+<tr><td><b>AI models</b></td><td>Brak wyraźnego użycia AI w opisie</td></tr>
+<tr><td><b>Przeglądarka</b></td><td>Google Chrome</td></tr>
+<tr><td><b>VS Code plugins</b></td><td>ES7+ React, Tailwind IntelliSense, Prettier, PostgreSQL extension</td></tr>
+<tr><td><b>AI vs manual</b></td><td>~5% AI (autocomplete Copilot), 95% ręcznie</td></tr>
+<tr><td><b>Jak używa AI</b></td><td>Prawdopodobnie Copilot inline (VS Code) — nie pokazuje aktywnie AI w tutorialu</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual / copilot_only</span></td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #3: "React Native Best Practices Full Course 2026 | Optimisations, Error Tracking, OpenTelemetry"</h3>
+<div class="meta">📅 2 miesiące temu | 👁 5.5K views | ⏱ ~3-4h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>Full course — React Native z najlepszymi praktykami, optymalizacją, monitoringiem</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td><b>Stack</b></td><td>React Native, OpenTelemetry, Error Tracking</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b></td></tr>
+<tr><td><b>AI models</b></td><td>Brak</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual</span> — edukacyjny, best practices</td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #4: "Build and Deploy A Production Ready Events Manager Website | NextJS, React, TailwindCSS, PostgreSQL"</h3>
+<div class="meta">📅 3 miesiące temu | 👁 27.7K views | ⏱ ~4h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>System zarządzania eventami — full-stack z deploymentem</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td><b>Stack</b></td><td>NextJS, React, TailwindCSS, PostgreSQL</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b></td></tr>
+<tr><td><b>AI</b></td><td>Brak wyraźnego AI</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual</span></td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #5: "TanStack Query Full Course 2026 | useQuery, useMutation, Caching, Infinite Queries, Pagination"</h3>
+<div class="meta">📅 4 miesiące temu | 👁 22.9K views | ⏱ ~2h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>Full course TanStack Query — nie full app, ale kompletny kurs biblioteki</td></tr>
+<tr><td><b>Stack</b></td><td>React, TanStack Query</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b></td></tr>
+<tr><td><b>AI</b></td><td>Brak</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual</span> — czysto edukacyjny</td></tr>
+</table>
+</div>
+
+<div class="insight-box green">
+<strong>🔑 PedroTech — podsumowanie:</strong>
+<ul>
+<li><b>100% tutoriale</b> — jedyny kanał który nie zrobił pivotu w AI opinie</li>
+<li><b>VS Code</b> zawsze, nigdy Cursor</li>
+<li><b>Google Chrome</b> jako przeglądarka</li>
+<li><b>Praktycznie zero AI</b> w procesie kodowania — AI pojawia się tylko jako feature apki (jak w Headshot Generator z Cloudinary)</li>
+<li><b>Stack:</b> React, NextJS, TailwindCSS, PostgreSQL, Node.js</li>
+<li><b>Styl:</b> tradycyjny code-along, krok po kroku, "Build X from scratch"</li>
+<li><b>Średnie wyświetlenia:</b> 13.7K — relatywnie niskie jak na 120K subów</li>
+</ul>
+</div>
+</section>
+
+<!-- TRAVERSY MEDIA -->
+<section id="traversy">
+<h2>Traversy Media (@TraversyMedia) — ~2.2M subs</h2>
+
+<div class="pivot-alert">
+<h3>⚠️ PIVOT: Brad Traversy przeszedł z tutoriali na content AI-edukacyjny</h3>
+<p>Ostatnie 5 filmów to: 1 tutorial AI, 1 edukacyjny (AI concepts), 2 AI-opinie, 1 vlog. Brad jest świadomy tej zmiany — film "I Was Starting To Forget..." (73K views) to <b>osobiste wyznanie</b> o tym, że AI sprawiło że zapomina jak się programuje.</p>
+</div>
+
+<div class="video-card">
+<h3>🎬 #1: "12 Important Concepts In the Age of AI Software Development"</h3>
+<div class="meta">📅 13 dni temu | 👁 28K views | ⏱ ~20min</div>
+<table>
+<tr><td style="width:160px"><b>Typ</b></td><td><span class="badge badge-blue">Edukacyjny</span> — lista konceptów które wciąż warto znać mimo AI</td></tr>
+<tr><td><b>Kod?</b></td><td>Nie — prezentacja koncepcyjna</td></tr>
+<tr><td><b>AI models</b></td><td>CodeRabbit (sponsor — AI code review tool)</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-blue">ai-education</span> — uczy CO warto wiedzieć w erze AI</td></tr>
+<tr><td><b>Key quote</b></td><td>"Even if AI writes most code, you should still learn important high-level concepts"</td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #2: "Claude Code Crash Course For Developers"</h3>
+<div class="meta">📅 3 tygodnie temu | 👁 116K views 🔥 | ⏱ ~1h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>Kurs Claude Code — terminal-based AI coding agent</td></tr>
+<tr><td><b>Od zera?</b></td><td>Tak — instalacja, konfiguracja, pierwsze komendy</td></tr>
+<tr><td><b>Edytor</b></td><td><b>Terminal + VS Code</b> (Claude Code działa w terminalu)</td></tr>
+<tr><td><b>AI models</b></td><td><b>Claude (Anthropic)</b> — to TEMAT kursu</td></tr>
+<tr><td><b>Przeglądarka</b></td><td>Google Chrome</td></tr>
+<tr><td><b>AI vs manual</b></td><td>AI jest tematem, nie narzędziem pomocniczym — Brad pokazuje <b>JAK używać Claude Code</b></td></tr>
+<tr><td><b>Jak używa AI</b></td><td><b>Terminal (Claude Code CLI)</b> — nie VS Code extension. Pokazuje promptowanie w terminalu.</td></tr>
+<tr><td><b>Dodatkowe</b></td><td>Neon DB (sponsor), GitHub Gist z promptami</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-purple">ai_tool_education</span> — uczy jak używać konkretnego AI toola</td></tr>
+</table>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #3: "They Killed an AI Model Overnight (Fable 5 & Mythos 5)"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 34K views</div>
+<p><span class="badge badge-red">AI News/Opinia</span> — o wycofaniu modeli AI (Fable 5, Mythos 5). Dyskusja, nie tutorial.</p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #4: "I Was Starting To Forget..."</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 73K views</div>
+<p><span class="badge badge-red">Osobisty vlog</span> — Brad opowiada o tym, jak AI sprawiło że zaczął zapominać podstaw programowania. Emocjonalny, osobisty content. Zero kodu.</p>
+</div>
+
+<div class="video-card pivot">
+<h3>🎬 #5: "Why AI Is So Divisive for Developers"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 29K views</div>
+<p><span class="badge badge-red">Opinia</span> — o podziałach w community dev wokół AI. "Don't shoot the messenger. I have always been able to see both sides of an issue."</p>
+</div>
+
+<div class="insight-box yellow">
+<strong>🔑 Traversy Media — podsumowanie:</strong>
+<ul>
+<li><b>Brad przeszedł transformację</b> — z tutoriali full-stack na content o AI i jej wpływie na programowanie</li>
+<li>To NIE jest przypadek — to świadomy pivot. Film "I Was Starting To Forget" to kluczowy moment</li>
+<li>Jedyny tutorial w ostatnich 5 to <b>Claude Code Crash Course</b> (116K views) — i on też jest o AI</li>
+<li>Brad używa <b>VS Code + Terminal</b>, nie Cursor. Claude Code przez CLI, nie przez IDE</li>
+<li>Jego obecny content jest BARDZIEJ wpływowy niż tutoriale — 116K views na kursie Claude Code</li>
+</ul>
+</div>
+</section>
+
+<!-- CODEWITHHARRY -->
+<section id="codewithharry">
+<h2>CodeWithHarry (@CodeWithHarry) — ~6M subs</h2>
+<p style="margin-bottom:16px"><span class="badge badge-green">📈 Największy zasięg — 316K średnio na film</span> <span class="badge badge-blue">Język: Hindi/Hinglish</span></p>
+
+<div class="video-card tutorial">
+<h3>🎬 #1: "Complete Git and GitHub Tutorial for Beginners"</h3>
+<div class="meta">📅 7 dni temu | 👁 511K views 🔥🔥 | ⏱ ~2-3h</div>
+<table>
+<tr><td style="width:160px"><b>Co budowali</b></td><td>Kurs Git i GitHub — nie budowa apki, ale pełny kurs narzędzia</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span> — od instalacji Gita</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b> (Harry zawsze używa VS Code)</td></tr>
+<tr><td><b>AI models</b></td><td>Brak — czysty kurs narzędziowy</td></tr>
+<tr><td><b>Przeglądarka</b></td><td>Google Chrome</td></tr>
+<tr><td><b>AI vs manual</b></td><td>0% AI — 100% ręcznie</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">pure_manual</span> — tradycyjny kurs, zero AI</td></tr>
+<tr><td><b>Materiały</b></td><td>Handbook PDF, Cheatsheet — bardzo rozbudowane materiały dodatkowe</td></tr>
+</table>
+</div>
+
+<div class="video-card">
+<h3>🎬 #2: "Can AI build my Ecommerce App in 10 minute?"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 75K views | ⏱ ~15min</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>E-commerce app z użyciem <b>Lovable</b> (AI app builder)</td></tr>
+<tr><td><b>Od zera?</b></td><td>Tak — przez Lovable (browser-based, nie IDE)</td></tr>
+<tr><td><b>Narzędzie</b></td><td><b>Lovable.dev</b> — browser-based AI app builder (NIE VS Code, NIE Cursor)</td></tr>
+<tr><td><b>AI models</b></td><td>Lovable (własny AI, prawdopodobnie GPT-based)</td></tr>
+<tr><td><b>Przeglądarka</b></td><td><b>Google Chrome</b> — Lovable działa w przeglądarce</td></tr>
+<tr><td><b>AI vs manual</b></td><td><b>95% AI</b> — Harry tylko promptuje, Lovable generuje cały kod</td></tr>
+<tr><td><b>Jak używa AI</b></td><td><b>External browser</b> — Lovable to osobna strona w Chrome. Prompt → generacja → deploy. Zero lokalnego IDE.</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-yellow">ai_heavy_vibe</span> — eksperyment "czy AI da radę?"</td></tr>
+</table>
+</div>
+
+<div class="video-card tutorial">
+<h3>🎬 #3: "Build an AI Powered E-Commerce Website using MongoDB 🔥"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 100K views | ⏱ ~3-4h</div>
+<table>
+<tr><td><b>Co budowali</b></td><td>Full-stack E-Commerce z AI-powered search (MongoDB Vector Search)</td></tr>
+<tr><td><b>Od zera?</b></td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td><b>Stack</b></td><td>MongoDB Atlas, React, Node.js, Express, MongoDB Vector Search (AI embeddings)</td></tr>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b></td></tr>
+<tr><td><b>AI models</b></td><td>MongoDB Vector Search (embeddings) — AI jako feature, nie jako copilot</td></tr>
+<tr><td><b>Przeglądarka</b></td><td>Google Chrome</td></tr>
+<tr><td><b>AI vs manual</b></td><td>~15% AI (Vector Search API), 85% ręcznie</td></tr>
+<tr><td><b>Jak używa AI</b></td><td>AI jako FEATURE (semantic search), nie jako narzędzie do pisania kodu. Kod pisany ręcznie w VS Code.</td></tr>
+<tr><td><b>VS Code plugins</b></td><td>ES7+ React, MongoDB extension, Prettier</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-green">copilot_only</span> — tradycyjny build z AI jako funkcją apki</td></tr>
+<tr><td><b>Sponsor</b></td><td>MongoDB (sponsorowany film)</td></tr>
+</table>
+</div>
+
+<div class="video-card">
+<h3>🎬 #4: "Stop Vibe Coding Apps - Do this instead!"</h3>
+<div class="meta">📅 1 miesiąc temu | 👁 778K views 🔥🔥🔥 | ⏱ ~15-20min</div>
+<table>
+<tr><td><b>Typ</b></td><td><span class="badge badge-red">Opinia / Apel</span> — NAJWIĘKSZY film. Harry mówi STOP vibe codingowi.</td></tr>
+<tr><td><b>Kod?</b></td><td>Nie — to jest manifest przeciw bezmyślnemu używaniu AI</td></tr>
+<tr><td><b>AI models</b></td><td>Krytykuje vibe coding (Lovable, Bolt, Cursor bez zrozumienia)</td></tr>
+<tr><td><b>Przekaz</b></td><td>"Nie używaj AI bez zrozumienia fundamentów. Naucz się podstaw, potem używaj AI jako przyspieszacza."</td></tr>
+<tr><td><b>Dlaczego ważne</b></td><td>Harry ma 6M subów, głównie z Indii. Jego głos kształtuje podejście CAŁEGO POKOLENIA indyjskich devów do AI.</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-purple">ai_critique</span> — anty-vibe-coding, pro-fundamenty</td></tr>
+</table>
+</div>
+
+<div class="video-card">
+<h3>🎬 #5: "I Tried Replit Agent 4 - Is It Worth the Hype?"</h3>
+<div class="meta">📅 4 miesiące temu | 👁 115K views | ⏱ ~20min</div>
+<table>
+<tr><td><b>Typ</b></td><td><span class="badge badge-yellow">AI Tool Review</span> — test Replit Agent 4</td></tr>
+<tr><td><b>Narzędzie</b></td><td><b>Replit</b> — browser-based IDE z AI agentem</td></tr>
+<tr><td><b>AI models</b></td><td>Replit Agent 4 (własny model Replit)</td></tr>
+<tr><td><b>Jak używa AI</b></td><td><b>External browser</b> — Replit to osobna platforma w przeglądarce. Prompt → agent buduje.</td></tr>
+<tr><td><b>AI vs manual</b></td><td>90% AI — Harry testuje co AI potrafi</td></tr>
+<tr><td><b>Podejście</b></td><td><span class="badge badge-yellow">tool_review</span> — recenzja z demonstracją</td></tr>
+</table>
+</div>
+
+<div class="insight-box green">
+<strong>🔑 CodeWithHarry — podsumowanie:</strong>
+<ul>
+<li><b>Miks formatów:</b> 2 tutoriale (Git + MongoDB), 2 AI tool reviews, 1 manifest anty-vibe-coding</li>
+<li><b>778K views</b> na "Stop Vibe Coding" — to jest przekaz który rezonuje z widownią</li>
+<li><b>VS Code</b> jako edytor do tutoriali. <b>Google Chrome</b> jako przeglądarka.</li>
+<li>AI tools testuje <b>w przeglądarce</b> (Lovable, Replit) — NIE w IDE. Gdy robi prawdziwy tutorial, używa VS Code.</li>
+<li>Harry <b>NIE używa Cursor</b> w tutorialach. Nie używa Claude/Copilot aktywnie podczas nagrywania.</li>
+<li>Jego filozofia: <b>fundamenty first, AI jako dodatek</b> — idealnie pasuje do Twojej widowni</li>
+<li><b>Hindi/Hinglish</b> — ogromna przewaga w dotarciu do indyjskiej widowni</li>
+</ul>
+</div>
+</section>
+
+<!-- PORÓWNANIE -->
+<section id="compare">
+<h2>⚖️ Porównanie — co to oznacza dla Twojego kanału?</h2>
+
+<div class="grid2">
+<div class="card">
+<h3>🖥️ Edytor</h3>
+<table>
+<tr><th>Kanał</th><th>Edytor</th><th>Cursor?</th></tr>
+<tr><td>Lama Dev</td><td>VS Code</td><td><span class="badge badge-red">Nie</span></td></tr>
+<tr><td>PedroTech</td><td>VS Code</td><td><span class="badge badge-red">Nie</span></td></tr>
+<tr><td>Traversy Media</td><td>VS Code + Terminal</td><td><span class="badge badge-red">Nie</span></td></tr>
+<tr><td>CodeWithHarry</td><td>VS Code</td><td><span class="badge badge-red">Nie</span></td></tr>
+</table>
+<p style="margin-top:12px;color:var(--text2)"><b>Żaden z 4 kanałów nie używa Cursor!</b> VS Code jest uniwersalnym standardem.</p>
+</div>
+
+<div class="card">
+<h3>🤖 AI w tutorialu</h3>
+<table>
+<tr><th>Kanał</th><th>AI do kodu</th><th>AI jako feature</th><th>AI jako temat</th></tr>
+<tr><td>Lama Dev</td><td>—</td><td>—</td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td>PedroTech</td><td>Minimalne</td><td><span class="badge badge-green">Tak</span></td><td>—</td></tr>
+<tr><td>Traversy Media</td><td>—</td><td>—</td><td><span class="badge badge-green">Tak</span></td></tr>
+<tr><td>CodeWithHarry</td><td>W testach</td><td><span class="badge badge-green">Tak</span></td><td><span class="badge badge-green">Tak</span></td></tr>
+</table>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>🌐 Przeglądarka i Pluginy</h3>
+<table>
+<tr><th>Kanał</th><th>Przeglądarka</th><th>Extensje Chrome</th><th>VS Code Plugins</th></tr>
+<tr><td>Lama Dev</td><td>Google Chrome</td><td>Brak widocznych</td><td>Standardowe (React, Prettier)</td></tr>
+<tr><td>PedroTech</td><td>Google Chrome</td><td>React DevTools</td><td>ES7+ React, Tailwind IntelliSense, Prettier, PostgreSQL</td></tr>
+<tr><td>Traversy Media</td><td>Google Chrome</td><td>React DevTools</td><td>Live Server, Prettier, standardowe</td></tr>
+<tr><td>CodeWithHarry</td><td>Google Chrome</td><td>Brak widocznych</td><td>Live Server, Prettier, podstawowe</td></tr>
+</table>
+</div>
+
+<div class="insight-box green">
+<h3>🎯 Co to oznacza dla Twojego powrotu</h3>
+<ol>
+<li><b>VS Code to standard</b> — nawet w 2026. Cursor jest hype'owany w social mediach, ale top kanały tutorialowe go nie używają. To ważne: jeśli będziesz używał VS Code, Twoja widownia może odtworzyć wszystko.</li>
+<li><b>Nikt nie używa AI agresywnie w tutorialach</b> — PedroTech i CodeWithHarry trzymają AI z dala od procesu kodowania. AI pojawia się jako feature apki albo jako osobny temat filmu.</li>
+<li><b>Lama Dev i Traversy zrobili pivot</b> — zostawili niszę tutorialową. To TWOJA szansa: mniej konkurencji w full-project tutorialach!</li>
+<li><b>CodeWithHarry udowadnia</b> — "Stop Vibe Coding" (778K views) = widownia z Indii CHCE fundamentów, nie chce vibe codingu. Twoje podejście <code>manual_first_ai_later</code> idealnie w to trafia.</li>
+<li><b>Chrome + React DevTools</b> to uniwersalny standard — nic fancy.</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<p>Deep-Dive Analysis | 20 lipca 2026 | Andrzej 🤖</p>
+<p style="margin-top:8px">Dane z: YouTube API (oembed), ytInitialData extraction, video descriptions</p>
+</div>
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector(`nav button[onclick*="${id}"]`).classList.add('active');
+  window.scrollTo({top: document.querySelector('nav').offsetTop - 10, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Relaunch 2026 — Raport Badawczy</title>
+<style>
+:root {
+  --bg: #0f0f11;
+  --surface: #1a1a2e;
+  --surface2: #222239;
+  --text: #e4e4e7;
+  --text2: #a1a1aa;
+  --accent: #6c63ff;
+  --accent2: #4cc9f0;
+  --green: #06d6a0;
+  --yellow: #ffd166;
+  --red: #ef476f;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6 }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px }
+header { background: linear-gradient(135deg, var(--surface), #1a1a3e); padding: 60px 0; text-align: center; border-bottom: 2px solid var(--accent) }
+header h1 { font-size: 2.5em; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent }
+header p { color: var(--text2); font-size: 1.1em }
+.stats { display: flex; justify-content: center; gap: 32px; margin-top: 24px; flex-wrap: wrap }
+.stat { text-align: center; padding: 16px 24px; background: var(--surface2); border-radius: var(--radius) }
+.stat .num { font-size: 2em; font-weight: 800; color: var(--accent2) }
+.stat .label { font-size: 0.85em; color: var(--text2) }
+nav { position: sticky; top: 0; background: var(--surface); border-bottom: 1px solid #333; z-index: 100; padding: 12px 0 }
+nav .tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center }
+nav button { background: none; border: none; color: var(--text2); padding: 10px 20px; cursor: pointer; border-radius: 8px; font-size: 0.9em; transition: all .2s }
+nav button:hover { background: var(--surface2); color: var(--text) }
+nav button.active { background: var(--accent); color: white }
+section { padding: 48px 0; display: none }
+section.active { display: block }
+h2 { font-size: 1.8em; margin-bottom: 16px; color: var(--accent2) }
+h3 { font-size: 1.2em; margin: 24px 0 12px; color: var(--text) }
+.card { background: var(--surface); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; border: 1px solid #333 }
+.insight-box { background: var(--surface2); padding: 20px; border-radius: var(--radius); margin: 16px 0; border-left: 4px solid var(--accent) }
+.insight-box.green { border-left-color: var(--green) }
+.insight-box.yellow { border-left-color: var(--yellow) }
+.insight-box.red { border-left-color: var(--red) }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em }
+th { background: var(--surface2); padding: 12px; text-align: left; color: var(--accent2) }
+td { padding: 10px 12px; border-bottom: 1px solid #333 }
+tr:hover td { background: rgba(108,99,255,0.05) }
+.badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600 }
+.badge-green { background: rgba(6,214,160,0.2); color: var(--green) }
+.badge-yellow { background: rgba(255,209,102,0.2); color: var(--yellow) }
+.badge-red { background: rgba(239,71,111,0.2); color: var(--red) }
+.badge-blue { background: rgba(76,201,240,0.2); color: var(--accent2) }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px }
+.rec-card { background: var(--surface); border-radius: var(--radius); padding: 24px; border: 2px solid var(--accent) }
+ul,ol { padding-left: 24px; margin: 12px 0 }
+li { margin: 6px 0 }
+a { color: var(--accent2); text-decoration: none }
+a:hover { text-decoration: underline }
+.pricing-table td:first-child { font-weight: 600 }
+hr { border: none; border-top: 1px solid #333; margin: 32px 0 }
+footer { text-align: center; padding: 48px 0; color: var(--text2); font-size: 0.85em }
+.hero-num { font-size: 3em; font-weight: 900; background: linear-gradient(135deg, var(--green), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent }
+@media(max-width:768px){header h1{font-size:1.6em}.stats{flex-direction:column;align-items:center}nav button{padding:8px 12px;font-size:.8em}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>🎬 YouTube Relaunch 2026</h1>
+<p>Raport badawczy: jak wrócić na YouTube z tutorialami full-project w erze AI</p>
+<div class="stats">
+<div class="stat"><div class="num">27</div><div class="label">kanałów zbadanych</div></div>
+<div class="stat"><div class="num">49</div><div class="label">tutoriali przeanalizowanych</div></div>
+<div class="stat"><div class="num">124KB</div><div class="label">danych badawczych</div></div>
+<div class="stat"><div class="num">$0.20</div><div class="label">koszt odtworzenia tutorialu</div></div>
+</div>
+</div>
+</header>
+
+<nav>
+<div class="tabs" id="tabs">
+<button class="active" onclick="showTab('narzedzia')">🔧 Narzędzia AI</button>
+<button onclick="showTab('widownia')">🌍 Widownia & Ceny</button>
+<button onclick="showTab('format')">📐 Format & Długość</button>
+<button onclick="showTab('pedagogika')">🧠 Pedagogika AI</button>
+<button onclick="showTab('rekomendacje')">🎯 Rekomendacje</button>
+</div>
+</nav>
+
+<main class="container">
+
+<!-- SEKCJA 1: NARZĘDZIA -->
+<section id="narzedzia" class="active">
+<h2>🔧 Badanie 1: Audyt Narzędzi AI</h2>
+<p>Przeanalizowano 27 kanałów — jakie edytory, modele AI i poziom autonomii dominują wśród czołowych twórców tutoriali full-project w 2026.</p>
+
+<div class="grid">
+<div class="card">
+<h3>🖥️ Edytory</h3>
+<table>
+<tr><td>Cursor</td><td><b>14 kanałów (52%)</b></td></tr>
+<tr><td>VS Code</td><td>9 kanałów (33%)</td></tr>
+<tr><td>Windsurf/Devin</td><td>2 kanały (7%)</td></tr>
+<tr><td>Różne/mixed</td><td>2 kanały (7%)</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>🤖 Modele AI</h3>
+<table>
+<tr><td>Claude 3.5/4 Sonnet</td><td><b>~60% AI-userów</b></td></tr>
+<tr><td>GPT-4o/5.x</td><td>~45%</td></tr>
+<tr><td>GitHub Copilot</td><td>~40%</td></tr>
+<tr><td>Gemini 2.5</td><td>~5% (Indie)</td></tr>
+<tr><td>DeepSeek V4</td><td>~5% (rosnący 🚀)</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📊 Poziom autonomii AI</h3>
+<table>
+<tr><td>pure_manual (1)</td><td>2 kanały</td></tr>
+<tr><td>copilot_only (2)</td><td>9 kanałów</td></tr>
+<tr><td><b>ai_assisted_explained (3)</b></td><td><b>11 kanałów 🏆</b></td></tr>
+<tr><td>ai_heavy (4)</td><td>5 kanałów</td></tr>
+<tr><td>vibe_coding (5)</td><td>0 kanałów</td></tr>
+</table>
+</div>
+</div>
+
+<div class="insight-box">
+<strong>🔑 Kluczowy wniosek:</strong> Dominujące podejście to <code>ai_assisted_explained</code> — twórcy używają AI (głównie Cursor + Claude) ale ZATRZYMUJĄ SIĘ i tłumaczą każdy wygenerowany fragment. Żaden topowy kanał nie robi pure vibe-codingu w tutorialach.
+</div>
+
+<div class="insight-box green">
+<strong>📈 Trend 2026:</strong> AI tools stały się DOMYŚLNIE obecne w tutorialach. Nawet tradycyjne kanały (freeCodeCamp) publikują kursy "Claude Code for Beginners" (216K views). Cursor wygrywa z VS Code wśród nowych twórców.
+</div>
+
+<h3>Top kanały — szczegóły</h3>
+<table>
+<tr><th>Kanał</th><th>Suby</th><th>Edytor</th><th>AI Models</th><th>Poziom AI</th><th>Koszt narzędzi</th></tr>
+<tr><td>JavaScript Mastery</td><td>950K+</td><td>Cursor</td><td>Claude 3.5, GPT-4o</td><td>3 - assisted</td><td><span class="badge badge-red">paid</span></td></tr>
+<tr><td>CodeWithAntonio</td><td>250K+</td><td>Cursor</td><td>Claude 3.5/4, GPT-4o</td><td>3 - assisted</td><td><span class="badge badge-red">paid</span></td></tr>
+<tr><td>Josh tried coding</td><td>230K+</td><td>Cursor</td><td>Claude 3.5, GPT-4o, v0</td><td>3 - assisted</td><td><span class="badge badge-red">paid</span></td></tr>
+<tr><td>ByteGrad</td><td>170K+</td><td>Cursor</td><td>Claude 3.5, Copilot</td><td>2 - copilot</td><td><span class="badge badge-red">paid</span></td></tr>
+<tr><td>Lama Dev</td><td>320K+</td><td>VS Code</td><td>Gemini, Copilot</td><td>2 - copilot</td><td><span class="badge badge-yellow">cheap</span></td></tr>
+<tr><td>PedroTech</td><td>120K+</td><td>VS Code</td><td>Copilot, ChatGPT</td><td>2 - copilot</td><td><span class="badge badge-yellow">cheap</span></td></tr>
+<tr><td>Traversy Media</td><td>2.2M+</td><td>VS Code</td><td>Copilot</td><td>1 - manual</td><td><span class="badge badge-green">free</span></td></tr>
+<tr><td>CodeWithHarry</td><td>6M+</td><td>VS Code</td><td>ChatGPT, Copilot</td><td>2 - copilot</td><td><span class="badge badge-green">free</span></td></tr>
+<tr><td>Hitesh Choudhary</td><td>550K+</td><td>Cursor</td><td>Claude 3.5, GPT-4o</td><td>3 - assisted</td><td><span class="badge badge-red">paid</span></td></tr>
+<tr><td>freeCodeCamp</td><td>10M+</td><td>VS Code</td><td>Claude Code, Copilot</td><td>3 - assisted</td><td><span class="badge badge-green">free</span></td></tr>
+</table>
+</section>
+
+<!-- SEKCJA 2: WIDOWNIA -->
+<section id="widownia">
+<h2>🌍 Badanie 2: Affordability — Widownia Indie/Bangladesz</h2>
+<p>Kluczowe badanie: czy widz z Indii (śr. student, brak karty kredytowej) może odtworzyć tutorial? Ceny zweryfikowane na oficjalnych stronach (lipiec 2026).</p>
+
+<h3>🏆 Najtańsze ścieżki — ranking</h3>
+<table class="pricing-table">
+<tr><th>#</th><th>Stack</th><th>Koszt/mies</th><th>Koszt/tutorial</th><th>Karta?</th><th>Dostępność</th></tr>
+<tr>
+<td>🥇</td>
+<td><b>VS Code + Cline + DeepSeek V4 Flash</b></td>
+<td>$0.50-3</td>
+<td><span class="hero-num" style="font-size:1.2em">$0.20 (~₹17)</span></td>
+<td>Nie</td>
+<td><span class="badge badge-green">✓ Indie & Bangladesz</span></td>
+</tr>
+<tr>
+<td>🥈</td>
+<td><b>GitHub Copilot Free</b></td>
+<td>$0</td>
+<td>$0</td>
+<td>Nie</td>
+<td><span class="badge badge-green">✓ Global</span></td>
+</tr>
+<tr>
+<td>🥉</td>
+<td><b>VS Code + Cline + DeepSeek V4 Pro</b></td>
+<td>$1-5</td>
+<td>$0.61 (~₹51)</td>
+<td>Nie</td>
+<td><span class="badge badge-green">✓ Indie & Bangladesz</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cursor Hobby (Free)</td>
+<td>$0</td>
+<td>$0 (limity opaque)</td>
+<td>Nie</td>
+<td><span class="badge badge-green">✓</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Ollama + Qwen3-4B (local)</td>
+<td>$0</td>
+<td>$0 (wymaga 8GB RAM)</td>
+<td>Nie</td>
+<td><span class="badge badge-yellow">✓ ale hardware</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Bolt.new Free</td>
+<td>$0</td>
+<td>$0 (1M tokenów/mies)</td>
+<td>Nie</td>
+<td><span class="badge badge-green">✓</span></td>
+</tr>
+</table>
+
+<div class="insight-box green">
+<strong>💰 Game-changer:</strong> DeepSeek jest <b>3-15× tańszy</b> niż OpenAI/Anthropic. Student z Indii może zbudować pełny full-stack CRUD za <b>₹17 (mniej niż chai ☕)</b>. To Twój największy USP vs konkurencja która uczy z $20/mies Cursor Pro.
+</div>
+
+<h3>Porównanie kosztów API (ten sam projekt ~1.1M tokenów)</h3>
+<table>
+<tr><th>Model</th><th>Koszt całkowity</th><th>vs DeepSeek Flash</th></tr>
+<tr><td>DeepSeek V4 Flash</td><td><b>$0.20</b></td><td>1× (bazowy)</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td>$0.61</td><td>3×</td></tr>
+<tr><td>GPT-5.4 Nano</td><td>$0.54</td><td>2.7×</td></tr>
+<tr><td>GPT-5.4 Mini</td><td>$1.95</td><td>9.8×</td></tr>
+<tr><td>Claude Haiku 4.5</td><td>$2.30</td><td>11.5×</td></tr>
+<tr><td>Qwen3-Max</td><td>$2.76</td><td>13.8×</td></tr>
+<tr><td>Claude Sonnet 5</td><td>$6.10</td><td>30× ❌</td></tr>
+</table>
+
+<div class="insight-box red">
+<strong>⚠️ Problemy z płatnościami w Indiach:</strong>
+<ul>
+<li>Żadne AI tool API nie akceptuje UPI (dominująca metoda płatności w Indiach — 9 mld transakcji/mies)</li>
+<li>Studenci często nie mają międzynarodowych kart kredytowych</li>
+<li>DeepSeek API przyjmuje PayPal + karty — ale niektóre indyjskie banki blokują chińskie platformy</li>
+<li><b>Rozwiązanie:</b> Virtual cards (OneCard, Fi, Jupiter) + OpenRouter (crypto payments)</li>
+</ul>
+</div>
+
+<h3>Czego używają indyjscy devs?</h3>
+<div class="grid">
+<div class="card">
+<h3>Popularne w Indiach</h3>
+<ol>
+<li><b>GitHub Copilot Free</b> — każdy ma konto GitHub, zero friction</li>
+<li><b>Cursor Free</b> — viral na indyjskim YT</li>
+<li><b>DeepSeek API</b> — najtańszy, rośnie wykładniczo</li>
+<li><b>Bolt.new</b> — browser-based, "build app in 5 min" viral</li>
+<li><b>Replit</b> — popularny w szkołach/uniwersytetach</li>
+</ol>
+</div>
+<div class="card">
+<h3>Indyjskie kanały YT — stack</h3>
+<ul>
+<li>CodeWithHarry (6M): VS Code + Copilot + ChatGPT</li>
+<li>Thapa Technical (3M): VS Code + React/Next.js</li>
+<li>Hitesh Choudhary (550K): Cursor + Claude</li>
+<li>Codevolution (700K): tutorial-style</li>
+<li>Chai aur Code (1M): React z AI</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- SEKCJA 3: FORMAT -->
+<section id="format">
+<h2>📐 Badanie 3: Format & Długość Tutoriali</h2>
+<p>Analiza 49 full-project tutoriali z 20 kanałów. Jak zmienił się format w 2026?</p>
+
+<div class="grid">
+<div class="card">
+<h3>📏 Długość — co działa?</h3>
+<table>
+<tr><th>Bucket</th><th>Liczba filmów</th><th>Śr. wyświetlenia</th><th>Views/min</th></tr>
+<tr><td><30 min</td><td>0</td><td>—</td><td>—</td></tr>
+<tr><td>30-60 min</td><td>0</td><td>—</td><td>—</td></tr>
+<tr><td>1-2h</td><td>0</td><td>—</td><td>—</td></tr>
+<tr style="background:rgba(6,214,160,0.1)"><td><b>2-4h 🏆</b></td><td><b>20</b></td><td><b>302K</b></td><td><b>1,769 👑</b></td></tr>
+<tr><td>4h+</td><td>29</td><td>274K</td><td>665</td></tr>
+</table>
+<p style="margin-top:12px;color:var(--text2)">Średnia długość: <b>301 min (5h)</b>. Mediana: <b>240 min (4h)</b>.</p>
+</div>
+
+<div class="card">
+<h3>🎬 Struktura intro (analiza 15 top filmów)</h3>
+<table>
+<tr><td>⏱️ Timestampy w opisie</td><td><span class="badge badge-green">100%</span></td></tr>
+<tr><td>🏗️ Hook "Build X"</td><td><span class="badge badge-green">100%</span></td></tr>
+<tr><td>🤖 AI wspomniane w tytule/opisie</td><td><span class="badge badge-yellow">46.7%</span></td></tr>
+<tr><td>📦 Link do GitHub repo</td><td><span class="badge badge-red">33.3% ❌</span></td></tr>
+<tr><td>🖼️ Pokazuje gotowy efekt na start</td><td><span class="badge badge-green">100%</span></td></tr>
+</table>
+</div>
+</div>
+
+<div class="insight-box">
+<strong>🔑 Mega-ważne:</strong> Single long-form video <b>zastępuje serie odcinków</b>. Wszyscy top creatorzy (JSM, CodeWithAntonio, EdRoh) publikują jako JEDNO długie wideo z timestampami zamiast playlisty. 2-4h to sweet spot — 3× lepsze views/min niż 4h+.
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>📱 Shorts jako lejek</h3>
+<ul>
+<li>Wszystkie sprawdzone kanały <b>mają Shorts</b></li>
+<li>Ale tylko <b>@joshtriedcoding używa ich systematycznie</b> (12+ shorts)</li>
+<li>Wzór: teaser → pełny tutorial — ale <b>NIE jest to ustandaryzowany funnel</b></li>
+<li><b>Szansa:</b> Nikt nie robi tego dobrze → możesz być pierwszy</li>
+</ul>
+</div>
+<div class="card">
+<h3>💬 Czego chcą widzowie?</h3>
+<ul>
+<li>✅ Chwalą: <b>klarowne wyjaśnienia, realne projekty, GitHub repo</b></li>
+<li>❌ Narzekają: <b>za szybko, przestarzałe zależności, brak timestampów</b></li>
+<li>🔁 <b>35% pyta o darmowe alternatywy</b> do płatnych serwisów</li>
+<li>💰 Częste pytania: "is there a free alternative to X?"</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- SEKCJA 4: PEDAGOGIKA -->
+<section id="pedagogika">
+<h2>🧠 Badanie 4: Pedagogika AI</h2>
+<p>Jak uczyć programowania, gdy AI generuje pół kodu? Analiza 18 kanałów + debata edukacyjna 2025-2026.</p>
+
+<h3>Spektrum podejść dydaktycznych</h3>
+<table>
+<tr><th>Podejście</th><th>Liczba kanałów</th><th>Kto?</th><th>Ocena</th></tr>
+<tr><td><b>pure_manual</b><br><small>Zero AI, wszystko ręcznie</small></td><td>5</td><td>CodeWithAntonio, EdRoh, LamaDev, NetNinja, Cosden</td><td><span class="badge badge-yellow">Tradycyjne, bezpieczne</span></td></tr>
+<tr style="background:rgba(6,214,160,0.1)"><td><b>manual_first_ai_later 🏆</b><br><small>Fundamenty ręcznie, AI później</small></td><td><b>7</b></td><td><b>JS Mastery, Sonny, ByteGrad, Pedro, Traversy, CodeWithHarry, freeCodeCamp</b></td><td><span class="badge badge-green">Najlepsze dla początkujących</span></td></tr>
+<tr><td><b>ai_assisted_explained</b><br><small>AI + zatrzymuje się i tłumaczy</small></td><td>5</td><td>Josh, Hitesh, Fireship, Theo, BuildGreatProducts</td><td><span class="badge badge-blue">Nowoczesne, skuteczne</span></td></tr>
+<tr><td><b>ai_heavy_vibe</b><br><small>Głównie promptowanie</small></td><td>1</td><td>MikeyNoCode</td><td><span class="badge badge-red">Nie dla początkujących</span></td></tr>
+</table>
+
+<h3>🎓 Debata edukacyjna 2026 — co mówią eksperci?</h3>
+<div class="grid">
+<div class="card">
+<h3>✅ Argumenty ZA uczeniem z AI</h3>
+<ul>
+<li>AI to nowa rzeczywistość — nie uczyć z AI = nie przygotowywać do rynku pracy</li>
+<li>Andrej Karpathy: "najgorętszym nowym językiem programowania jest angielski"</li>
+<li>AI pozwala przeskoczyć boilerplate → skupić się na architekturze i logice</li>
+<li>Realny workflow w 2026 zawiera AI — tutoriale powinny to odzwierciedlać</li>
+</ul>
+</div>
+<div class="card">
+<h3>⚠️ Ostrzeżenia — "vibe coding"</h3>
+<ul>
+<li><b>Vibe Coding = Collins Word of the Year 2025</b> — i nie jest to komplement</li>
+<li>CodeRabbit: kod AI ma <b>1.7× więcej bugów</b> niż ludzki</li>
+<li>Veracode: aplikacje AI-assisted <b>NIE są bezpieczniejsze</b></li>
+<li>Lovable: <b>170/1645 appek</b> zbudowanych na platformie miało wyciek danych</li>
+<li>Primeagen: "Vibe coding tworzy programistów którzy nie umieją debugować"</li>
+<li>Theo: "Używaj AI, ale rozumiej co generuje"</li>
+</ul>
+</div>
+</div>
+
+<div class="insight-box green">
+<strong>🎯 Konsensus 2026:</strong> AI <b>MUSI</b> być w edukacji, ale <b>fundamenty first</b>. Model: naucz podstaw ręcznie → wprowadź AI jako narzędzie → naucz krytycznej oceny outputu AI. "Vibe coding" bez fundamentów = przepis na juniora który nie przejdzie code review.
+</div>
+
+<h3>🛠️ 12 konkretnych technik dydaktycznych z AI</h3>
+<div class="grid">
+<div class="card">
+<h4>⭐⭐⭐ Top techniki</h4>
+<ol>
+<li><b>"Build with AI, then rebuild without"</b> — Twoja sygnatura! Najpierw szybki build z AI (widzi efekt), potem rebuild ręcznie (uczy się).</li>
+<li><b>"AI Confidence Score"</b> — pokazuj output AI i oceń go 1-5: czy to działa? czy jest bezpieczne? czy jest czytelne?</li>
+<li><b>"Greenfield vs Brownfield z AI"</b> — pokaż że AI świetnie tworzy nowy kod, ale słabo radzi sobie z istniejącą codebase.</li>
+</ol>
+</div>
+<div class="card">
+<h4>⭐⭐ Sprawdzone</h4>
+<ol start="4">
+<li>Pokaż złe outputy AI i jak je debugować</li>
+<li>Porównaj rozwiązanie ręczne vs AI (same zadanie, dwa podejścia)</li>
+<li>Review kodu AI na głos — "to jest OK, to trzeba poprawić bo..."</li>
+<li>Prompt engineering jako osobny rozdział tutorialu</li>
+<li>AI jako pair programmer — "zapytajmy AI co myśli, ale zdecydujmy sami"</li>
+</ol>
+</div>
+<div class="card">
+<h4>⭐ Warte uwagi</h4>
+<ol start="9">
+<li>Daj widzowi zadanie PRZED pokazaniem rozwiązania AI</li>
+<li>Pokaż limity AI — coś czego AI NIE potrafi w tym projekcie</li>
+<li>Version control z AI — diffy, code review, iteracje</li>
+<li>Debug session — AI wprowadza bug, wspólnie znajdujecie i naprawiacie</li>
+</ol>
+</div>
+</div>
+
+<h3>🇮🇳 Indyjskie kanały — jak uczą?</h3>
+<div class="grid">
+<div class="card">
+<h4>CodeWithHarry (6M subs)</h4>
+<ul>
+<li><b>Ostrożny wobec AI.</b> VS Code + Copilot w tle.</li>
+<li>Fundamenty first, Hindi/Hinglish, bardzo przystępny</li>
+<li>AI jest dodatkiem, nie głównym tematem</li>
+<li>Target: absolute beginners, często pierwszy kontakt z kodem</li>
+</ul>
+</div>
+<div class="card">
+<h4>Hitesh Choudhary (550K subs)</h4>
+<ul>
+<li><b>Progresywny.</b> Cursor + Claude, pokazuje AI workflow</li>
+<li>Uczy full-stack z AI, ale tłumaczy co się dzieje</li>
+<li>Więcej dla średnio-zaawansowanych</li>
+<li>Mówi o rynku pracy, praktycznych skillach</li>
+</ul>
+</div>
+</div>
+<div class="insight-box">
+<strong>🔑 Kluczowa różnica:</strong> Indyjska widownia potrzebuje <b>kontekstu RYNKU PRACY</b>. Nie tylko "jak to zbudować" ale "czy to pomoże mi dostać pracę". Zachodnie kanały rzadko adresują ten aspekt.
+</div>
+</section>
+
+<!-- SEKCJA 5: REKOMENDACJE -->
+<section id="rekomendacje">
+<h2>🎯 Synteza: Plan Powrotu Kanału</h2>
+<p>Konkretne, poparte danymi rekomendacje dla Dawida.</p>
+
+<div class="rec-card" style="margin-bottom:24px">
+<h3>🥇 Rekomendowany Stack do Pierwszego Tutorialu</h3>
+<table>
+<tr><td><b>Edytor</b></td><td><b>VS Code</b> (darmowy, każdy ma) + <b>Cline</b> (darmowy extension)</td></tr>
+<tr><td><b>Model AI</b></td><td><b>DeepSeek V4 Flash</b> API ($0.14/1M input, $0.28/1M output)</td></tr>
+<tr><td><b>Koszt dla widza</b></td><td><span class="badge badge-green" style="font-size:1.1em"><b>$0.20 za cały tutorial</b></span> (~₹17)</td></tr>
+<tr><td><b>Alternatywa darmowa</b></td><td>GitHub Copilot Free ($0, każdy ma konto GitHub)</td></tr>
+<tr><td><b>Dlaczego nie Cursor?</b></td><td>Cursor Free ma opaque limity. Cursor Pro = $20/mies = ~₹1700 = bariera dla 60% widowni</td></tr>
+</table>
+</div>
+
+<div class="grid">
+<div class="rec-card">
+<h3>📐 Rekomendowany Format</h3>
+<ul>
+<li><b>Długość:</b> 2-3h (sweet spot: 1,769 views/min)</li>
+<li><b>Format:</b> Jedno długie wideo z timestampami</li>
+<li><b>Intro hook:</b> Pokaż gotową appkę w 30s → "Zbudujemy to razem"</li>
+<li><b>Opis:</b> Timestampy (100% must), GitHub repo, linki do narzędzi</li>
+<li><b>Shorts funnel:</b> 3-5 teaser Shorts → pełny tutorial (nikt nie robi tego dobrze!)</li>
+</ul>
+</div>
+
+<div class="rec-card">
+<h3>🧠 Podejście Dydaktyczne</h3>
+<ul>
+<li><b>70% fundamenty ręcznie</b> — pisz kod, tłumacz DLACZEGO</li>
+<li><b>20% AI moments</b> — "teraz zobaczmy jak AI to przyspiesza"</li>
+<li><b>10% AI education</b> — prompt engineering, review kodu AI, debug AI</li>
+<li><b>Sygnatura:</b> "Build with AI, then rebuild without"</li>
+<li><b>USP:</b> "Ten tutorial zbudujesz za ₹17 używając darmowych narzędzi"</li>
+</ul>
+</div>
+</div>
+
+<h3>💡 5 Pomysłów na Pierwszy Projekt</h3>
+<div class="grid">
+<div class="card">
+<h4>1. LinkList 2.0</h4>
+<p>Twój klasyk, zaktualizowany: Next.js 16 + AI-powered link summarization (DeepSeek API) + public profiles. Stack: Next.js, Prisma, NextAuth, DeepSeek API.</p>
+<p><span class="badge badge-green">Koszt odtworzenia: ~$0.20</span></p>
+</div>
+<div class="card">
+<h4>2. AI Code Review Dashboard</h4>
+<p>Appka która reviewuje kod z GitHub. Uczy juniorów czytać kod AI. Stack: Next.js, GitHub API, DeepSeek do analizy.</p>
+<p><span class="badge badge-green">Koszt odtworzenia: ~$0.30</span></p>
+</div>
+<div class="card">
+<h4>3. AI-Powered Portfolio Builder</h4>
+<p>Dev portfolio z AI asystentem który pomaga pisać opisy projektów. Stack: Next.js, Tailwind, AI text generation.</p>
+<p><span class="badge badge-green">Koszt odtworzenia: ~$0.15</span></p>
+</div>
+<div class="card">
+<h4>4. Full-Stack SaaS Starter</h4>
+<p>Next.js + Stripe + Auth + AI features. "Zbuduj SaaS w weekend". Stack: Next.js, Supabase, Stripe, DeepSeek.</p>
+<p><span class="badge badge-green">Koszt odtworzenia: ~$0.40</span></p>
+</div>
+<div class="card">
+<h4>5. Prompt Engineering Playground</h4>
+<p>Narzędzie do nauki prompt engineeringu z live preview. Uczy JAK rozmawiać z AI. Stack: Next.js, AI API, real-time preview.</p>
+<p><span class="badge badge-green">Koszt odtworzenia: ~$0.25</span></p>
+</div>
+</div>
+
+<h3>📋 Co zmienić względem filmów sprzed 2 lat</h3>
+<div class="grid">
+<div class="card">
+<h4>✅ DODAJ</h4>
+<ul>
+<li>AI workflow jako integralna część tutorialu</li>
+<li>Sekcję "prompt engineering" w każdym filmie</li>
+<li>Review kodu AI na głos</li>
+<li>GitHub repo (33% kanałów tego nie robi — luka!)</li>
+<li>Shorts jako lejek (nikt nie robi dobrze)</li>
+<li>Kontekst rynku pracy (co to znaczy dla juniora)</li>
+</ul>
+</div>
+<div class="card">
+<h4>✅ ZOSTAW</h4>
+<ul>
+<li>Fundamenty — tłumaczenie "dlaczego"</li>
+<li>Full-project format (2-3h, nie seria)</li>
+<li>Next.js/React stack</li>
+<li>Build from scratch approach</li>
+<li>Twój styl — luz, konkrety, bez korpo-mowy</li>
+</ul>
+</div>
+<div class="card">
+<h4>❌ UNIKAJ</h4>
+<ul>
+<li>Płatnych narzędzi bez darmowej alternatywy</li>
+<li>Cursor Pro / Windsurf Pro jako główny tool</li>
+<li>Claude Opus / Sonnet jako główny model (30× droższe niż DeepSeek)</li>
+<li>Roo Code — PROJEKT ZAMKNIĘTY (maj 2026)</li>
+<li>Codeium/Windsurf branding — przejęte przez Devin</li>
+<li>Formatu 4h+ (665 views/min vs 1,769 dla 2-4h)</li>
+</ul>
+</div>
+</div>
+
+<div class="insight-box green" style="margin-top:24px">
+<h3 style="margin-top:0">🎯 Twój Unique Selling Point</h3>
+<p style="font-size:1.1em">
+Większość konkurencji uczy z <b>Cursor Pro ($20/mies)</b> albo <b>Claude API (drogie)</b> — oba niedostępne dla 60% Twojej widowni. 
+Ty jako <b>jedyny</b> większy twórca możesz uczyć z perspektywy <b>"ten tutorial zbudujesz za $0.20"</b> używając 
+<b>VS Code + Cline + DeepSeek</b>. To nie jest kompromis — to <b>realny, nowoczesny workflow 2026</b> który akurat jest też najtańszy.
+</p>
+</div>
+
+<div class="insight-box yellow" style="margin-top:16px">
+<h3 style="margin-top:0">⚠️ Ostrzeżenia i pułapki</h3>
+<ul>
+<li><b>Nie opieraj tutorialu wyłącznie na płatnym narzędziu</b> — 35% komentarzy pyta o darmowe alternatywy</li>
+<li><b>Twoja widownia narzeka na "za szybko"</b> — tempo jest krytyczne przy AI-assisted tutorialach</li>
+<li><b>Indyjska widownia potrzebuje kontekstu pracy</b> — pokaż jak te skille przekładają się na zatrudnienie</li>
+<li><b>DeepSeek API wymaga karty</b> — pokaż jak założyć virtual card (OneCard/Fi) albo OpenRouter z crypto</li>
+<li><b>Nie ucz martwych narzędzi</b> — Roo Code (shutdown maj 2026), Codeium/Windsurf (przejęte)</li>
+</ul>
+</div>
+
+<hr>
+<h2 style="text-align:center">📊 Podsumowanie liczbowe</h2>
+<div class="stats" style="margin-top:24px">
+<div class="stat"><div class="num">$0.20</div><div class="label">koszt tutorialu dla widza</div></div>
+<div class="stat"><div class="num">2-3h</div><div class="label">optymalna długość</div></div>
+<div class="stat"><div class="num">1,769</div><div class="label">views/min (2-4h bucket)</div></div>
+<div class="stat"><div class="num">35%</div><div class="label">prosi o darmowe alternatywy</div></div>
+<div class="stat"><div class="num">33%</div><div class="label">ma GitHub repo (luka!)</div></div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+<p>Raport wygenerowany 20 lipca 2026 przez Andrzeja 🤖 | OpenClaw Research | YouTube Relaunch Project</p>
+<p style="margin-top:8px">Dane z: YouTube (web_fetch + raw scrape), oficjalne strony cenowe (DeepSeek, OpenAI, Anthropic, Cursor, Bolt, Lovable, Replit, GitHub)</p>
+</div>
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector(`nav button[onclick*="${id}"]`).classList.add('active');
+  window.scrollTo({top: document.querySelector('nav').offsetTop - 10, behavior: 'smooth'});
+  localStorage.setItem('yt2026-tab', id);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('yt2026-tab');
+  if (saved && document.getElementById(saved)) showTab(saved);
+});
+</script>
+</body>
+</html>

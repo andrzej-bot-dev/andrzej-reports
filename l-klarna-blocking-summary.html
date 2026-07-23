@@ -175,12 +175,12 @@ a:hover { text-decoration: underline; }
 
   <div class="hero-stats">
     <div class="hero-stat red">
-      <span class="n">1–3%</span>
-      <span class="l">Revised block rate (DNS-level only)</span>
+      <span class="n">~0.2–1%</span>
+      <span class="l">Revised block rate (confirmed DNS blocking is narrower than initially thought)</span>
     </div>
     <div class="hero-stat yellow">
-      <span class="n">19,603</span>
-      <span class="l">AppsFlyer entries in HaGeZi Ultimate (verified)</span>
+      <span class="n">0</span>
+      <span class="l">Blocklists containing customlinks.appsflyer.com (the actual CNAME target)</span>
     </div>
     <div class="hero-stat green">
       <span class="n">0</span>
@@ -221,8 +221,8 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 
-  <div class="callout danger">
-    <strong>Root cause:</strong> AppsFlyer (a mobile attribution/tracking platform, classified as a data broker) is one of the most aggressively blocked domains on the internet. Any DNS blocker with <strong>CNAME uncloaking</strong> follows the chain from <code>l.klarna.com</code> to <code>appsflyer.com</code> and blocks it.
+  <div class="callout info">
+    <strong>Root cause:</strong> AppsFlyer (a mobile attribution/tracking platform, classified as a data broker) is one of the most aggressively blocked domains on the internet. However — and this is critical — the <strong>specific subdomain</strong> in the CNAME chain (<code>customlinks.appsflyer.com</code>) appears in <strong>zero</strong> public blocklists. It is NOT in HaGeZi (any tier), NOT in StevenBlack, NOT in AdGuard's DNS filter. The blocking that the Klarna engineer reports experiencing appears to come from server-side CNAME-cloaking detection in specific DNS services (NextDNS with configured profiles, AdGuard DNS) rather than from any public blocklist entry. This makes the actual blocking much narrower than initial analysis suggested.
   </div>
 </section>
 
@@ -349,60 +349,71 @@ a:hover { text-decoration: underline; }
 <section>
   <h2>🎯 Revised Block Rate Estimate</h2>
 
-  <p>After adversarial review (cross-checked against Claude's independent analysis), the estimate was revised downward from the initial 2.6–10% to a more defensible range:</p>
+  <p>After extensive verification — including independent reproduction by a second AI analyst who challenged the initial findings — the estimate has been revised significantly downward. The key discovery was that <code>customlinks.appsflyer.com</code> (the actual CNAME target) is <strong>not in any public blocklist</strong>, and the default public DoH endpoints of both NextDNS and AdGuard DNS <strong>resolve it without blocking</strong>.</p>
+
+  <div class="callout warning">
+    <strong>What we could NOT independently verify:</strong> The Klarna engineer reports that NextDNS (with Ads & Trackers) and AdGuard DNS block <code>l.klarna.com</code>. Our DoH tests against the default public endpoints of both services show <code>customlinks.appsflyer.com</code> <strong>resolving normally</strong>. This may mean: (a) NextDNS requires a specific configuration ID to apply blocklists, (b) AdGuard DNS has server-side CNAME-cloaking rules not present in their public filter.txt, or (c) the blocking is intermittent or app-context-specific. The Klarna engineer is a credible primary source, but we could not reproduce the block from outside.
+  </div>
 
   <table>
     <tr><th>Scenario</th><th>Est. Users</th><th>% of 119M</th></tr>
-    <tr><td><strong>Conservative</strong> (NextDNS + AdGuard DNS confirmed only)</td><td>~1.2M</td><td>~1.0%</td></tr>
-    <tr><td><strong>Central</strong> (+ AdGuard Home + ControlD + some RethinkDNS)</td><td><strong>~1.5–3.5M</strong></td><td><strong>~1.3–3.0%</strong></td></tr>
-    <tr><td><strong>Upper bound</strong> (+ corporate DNS + all edge cases)</td><td>~5M</td><td>~4.2%</td></tr>
+    <tr><td><strong>Confirmed blocking</strong> (only what Klarna engineer verified)</td><td>Unknown — depends on NextDNS/AdGuard config-specific blocking</td><td>~0.2–1%</td></tr>
+    <tr><td><strong>If NextDNS configured profiles block it</strong> (1–3M NextDNS users)</td><td>~0.2–0.4M</td><td>~0.2–0.3%</td></tr>
+    <tr><td><strong>If AdGuard DNS server-side blocking is real</strong> ( unverifiable from outside)</td><td>+ 0.5–2M</td><td>+ 0.4–1.7%</td></tr>
   </table>
 
-  <h3>Why the estimate dropped from initial 2.6%/10%</h3>
+  <h3>Why the estimate dropped from 2.6%/10% → 0.2–1%</h3>
   <ol>
-    <li><strong>Pi-hole doesn't block it.</strong> 2–5M Pi-hole installations were originally counted as affected. They're not — Pi-hole doesn't follow CNAME chains, and <code>l.klarna.com</code> isn't on any list directly. <span style="color: var(--red);">Removes ~2–5M users from the estimate.</span></li>
-    <li><strong>Browser extensions don't block it.</strong> uBlock Origin, EasyPrivacy, and Firefox Disconnect all have <strong>zero</strong> appsflyer entries. The "10% including browser" figure was wrong. <span style="color: var(--red);">Removes ~5–8M users.</span></li>
-    <li><strong>Brave Aggressive is not default.</strong> CNAME uncloaking in Brave requires opt-in to Aggressive mode. Most Brave users are on Standard. <span style="color: var(--red);">Removes most Brave users.</span></li>
-    <li><strong>HaGeZi Normal (most common level) has zero appsflyer entries.</strong> Only Pro/Pro++/Ultimate levels include them. Many HaGeZi users are on Normal. <span style="color: var(--red);">Reduces HaGeZi impact.</span></li>
+    <li><strong>customlinks.appsflyer.com is in ZERO public blocklists.</strong> Not in HaGeZi (any tier), not in StevenBlack, not in AdGuard DNS filter.txt. The 19,603 appsflyer entries are all <code>appsflyersdk.com</code> SDK analytics subdomains — a completely different AppsFlyer subsystem.</li>
+    <li><strong>Pi-hole doesn't block it</strong> — no CNAME following, and l.klarna.com isn't on any list.</li>
+    <li><strong>Browser extensions don't block it</strong> — EasyPrivacy, uBlock Origin, Firefox Disconnect have zero appsflyer entries.</li>
+    <li><strong>Brave Aggressive is opt-in</strong> — and even then, top-level navigation CNAME uncloaking behavior is uncertain.</li>
+    <li><strong>Default public DoH endpoints resolve it</strong> — NextDNS (dns1.nextdns.io) and AdGuard DNS (dns.adguard-dns.com) both return valid IPs for customlinks.appsflyer.com.</li>
+    <li><strong>HaGeZi Normal (most popular tier) has zero appsflyer entries.</strong> Only 64 appsflyer.com subdomains in Ultimate (all SDK/analytics, not OneLink).</li>
   </ol>
 
-  <div class="callout success">
-    <strong>What still holds:</strong> NextDNS (confirmed by Klarna engineer) and AdGuard DNS (confirmed by Klarna engineer in issue #2089) both actively block <code>l.klarna.com</code> today. These are not estimates — they're verified facts. Combined, these services represent millions of users in Klarna's core markets.
+  <div class="callout info">
+    <strong>What is NOT in dispute:</strong> The Klarna engineer reports real user-facing breakage. Three GitHub issues were filed. AdGuard already has a precedent exception for PayMaya (<code>paymaya.customlinks.appsflyer.com</code>). The problem exists — but its blast radius is narrower than both the original report (2.6–10%) claimed, because the blocking mechanism is service-specific server-side CNAME detection, not list-based blocking.
   </div>
 </section>
 
 <!-- ADVERSARIAL REVIEW -->
 <section>
-  <h2>⚔️ Adversarial Review — Claude's Critique vs Reality</h2>
-  <p>An independent analysis by Claude (Anthropic) challenged several claims. Here's an honest scorecard:</p>
+  <h2>⚔️ Independent Review — Scorecard</h2>
+  <p>An independent analysis challenged several claims in the original report. After honest verification, here's the scorecard:</p>
 
   <div class="correction">
-    <h3>Claim: "19,603 looks fabricated" <span class="verdict wrong">WRONG</span></h3>
-    <p>Verified live: <code>curl -sL ".../ultimate.txt" | grep -ci appsflyer</code> → <strong>19,603</strong>. Breakdown: 64 <code>appsflyer.com</code> subdomains + 19,539 <code>appsflyersdk.com</code> subdomains. The number is real, reproducible, and not fabricated. Anyone can verify in 5 seconds.</p>
+    <h3>Claim: "19,603 looks fabricated" <span class="verdict wrong">WRONG (number is real)</span></h3>
+    <p>Verified live: <code>curl -sL ".../ultimate.txt" | grep -ci appsflyer</code> → <strong>19,603</strong>. The number is real and reproducible. <em>However</em>, the independent reviewer correctly noted that these are almost entirely <code>appsflyersdk.com</code> per-app SDK endpoints — a different AppsFlyer subsystem than the OneLink/customlinks infrastructure that l.klarna.com uses. <strong>Real number, but category error when cited as evidence for l.klarna.com blocking.</strong></p>
   </div>
 
   <div class="correction">
-    <h3>Claim: "HaGeZi allowlist protects most users" <span class="verdict wrong">WRONG</span></h3>
-    <p><code>l.klarna.com</code> is NOT in any HaGeZi compiled output (multi.txt, pro.txt, normal.txt, ultimate.txt) — confirmed by <code>grep</code> returning exit code 1. The allowlist concern was about the <em>referral</em> sub-list, which was a side issue. The actual blocking path is <strong>StevenBlack → NextDNS</strong> and <strong>AdGuard DNS filter CNAME-cloaking detection</strong>, not HaGeZi.</p>
+    <h3>Claim: "customlinks.appsflyer.com is NOT in any blocklist" <span class="verdict right">CORRECT</span></h3>
+    <p>Independently verified: <code>customlinks.appsflyer.com</code> appears in <strong>zero</strong> public blocklists — not HaGeZi (any tier), not StevenBlack, not AdGuard DNS filter.txt, not EasyPrivacy. The original report's implication that the 19,603 entries prove blocking exposure for l.klarna.com was misleading.</p>
+  </div>
+
+  <div class="correction">
+    <h3>Claim: "Default public DoH endpoints resolve it" <span class="verdict right">CORRECT</span></h3>
+    <p>Both <code>dns1.nextdns.io</code> (NextDNS default) and <code>dns.adguard-dns.com</code> (AdGuard DNS default) resolve <code>customlinks.appsflyer.com</code> without blocking. The blocking reported by the Klarna engineer appears to be config-specific (NextDNS requires a configuration profile) or server-side (AdGuard CNAME-cloaking rules not in public filter.txt).</p>
   </div>
 
   <div class="correction">
     <h3>Claim: "Brave CNAME uncloaking is not default" <span class="verdict right">CORRECT</span></h3>
-    <p>Brave's wiki confirms: CNAME uncloaking is only in <strong>Aggressive</strong> mode, which is opt-in. Standard mode (default) does not uncloak. The original report's "10% including browser-level" was overstated. This has been corrected.</p>
+    <p>Brave's wiki confirms: CNAME uncloaking is only in Aggressive mode (opt-in). Standard mode is default. The original report's browser-level estimate was overstated.</p>
   </div>
 
   <div class="correction">
-    <h3>Claim: "Pi-hole users mostly unaffected" <span class="verdict right">CORRECT</span></h3>
-    <p>Pi-hole does not follow CNAME chains by default. Since <code>l.klarna.com</code> is not on any blocklist directly, Pi-hole resolves it fine. Only Pi-hole setups forwarding to NextDNS/AdGuard DNS upstream would be affected. This has been corrected.</p>
+    <h3>Claim: "AdGuard 91M users is self-reported marketing" <span class="verdict right">FAIR POINT</span></h3>
+    <p>AdGuard's user numbers are self-reported and unaudited. Using them as a load-bearing input for precise estimates is methodologically weak. The revised estimate treats them as directional, not precise.</p>
   </div>
 
   <div class="correction">
-    <h3>Claim: "Claude's 0.2% estimate" <span class="verdict wrong">UNDERSTATED</span></h3>
-    <p>Claude estimated 0.1–0.2% (~120–240K users). This is likely too low. AdGuard DNS alone has 15–30M users (confirmed by AdGuard's own website showing 91M+ users across all products). Even if only 10% of AdGuard DNS users are in Klarna markets and have appsflyer blocked via CNAME detection, that's 150K–300K from AdGuard alone — already exceeding Claude's upper bound. Adding NextDNS (confirmed blocking) pushes it higher.</p>
+    <h3>What remains undisputed</h3>
+    <p>The Klarna engineer's three GitHub issues are real primary sources. The breakage they describe is real. The AdGuard precedent for PayMaya (<code>paymaya.customlinks.appsflyer.com</code> in exceptions.txt) is verified. The problem exists — the question is purely about blast radius, which is narrower than initially estimated.</p>
   </div>
 
   <div class="callout info">
-    <strong>Bottom line:</strong> Both analyses have merit. The truth is between them — likely <strong>1–3%</strong> of Klarna users affected. The original report leaned too heavily on Pi-hole/browser numbers that don't hold up; Claude's estimate undercounts the confirmed NextDNS + AdGuard DNS blocking.
+    <strong>Revised bottom line:</strong> The blocking is real but narrow. It affects users of specific DNS services with server-side CNAME-cloaking detection (NextDNS configured profiles, possibly AdGuard DNS server-side). The original estimate of 2.6–10% was too high. A more honest range is <strong>0.2–1%</strong>, acknowledging uncertainty about how many NextDNS/AdGuard configurations actually trigger the block.
   </div>
 </section>
 

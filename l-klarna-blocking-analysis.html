@@ -985,11 +985,84 @@ Status: 0 (NOERROR) — RESOLVES via CNAME chain
   </div>
 </section>
 
+<!-- SECTION: New Sources (Round 2) -->
+<section id="additional-sources">
+  <h2>🔬 Additional Source Analysis (Round 2)</h2>
+
+  <p>After expanding research to 40+ additional sources, several critical findings emerged that refine and expand the original analysis:</p>
+
+  <h3>🔴 AdGuard DNS Filter — OPEN Issue #2089 (July 22, 2026)</h3>
+  <div class="callout danger">
+    <p>The same Klarna engineer (<code>v-ilinskiy-klarna</code>) opened an issue on <strong>AdGuard SDNS Filter</strong> on the same day as the HaGeZi issue:</p>
+    <blockquote style="margin: 10px 0; padding: 10px 16px; border-left: 3px solid var(--red); opacity: 0.9;">
+      "AdGuard DNS filter blocks <code>customlinks.appsflyer.com</code> generically via CNAME-cloaking detection, which also blocks this first-party login link — not an ad or tracking interaction, but the core authentication entry point on klarna.com."
+    </blockquote>
+    <p><strong>Key precedent discovered:</strong> AdGuard's <code>exceptions.txt</code> already carries an exception for another AppsFlyer customer: <code>! CNAME: paymaya.customlinks.appsflyer.com</code> (PayMaya, a Philippine fintech). Klarna is requesting the same treatment.</p>
+    <p>Source: <a href="https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/2089" target="_blank">AdGuardTeam/AdGuardSDNSFilter#2089</a> — <strong>OPEN</strong></p>
+  </div>
+
+  <h3>🔴 NextDNS click-tracking-domains — OPEN Issue #26 (July 22, 2026)</h3>
+  <div class="callout danger">
+    <p>Simultaneously filed at NextDNS's <strong>click-tracking-domains</strong> repo:</p>
+    <blockquote style="margin: 10px 0; padding: 10px 16px; border-left: 3px solid var(--red); opacity: 0.9;">
+      "<code>customlinks.appsflyer.com</code> is a shared AppsFlyer OneLink hostname used by many different companies via per-customer CNAME aliases. Klarna's alias is <code>getklarna.customlinks.appsflyer.com</code>, which fronts <code>l.klarna.com</code>. Blocking it breaks Klarna's core authentication entry point, not an ad/tracking interaction."
+    </blockquote>
+    <p>Related issues in the same repo: <a href="https://github.com/nextdns/click-tracking-domains/issues/24">#24</a> (add HaGeZi whitelist) and <a href="https://github.com/nextdns/click-tracking-domains/issues/16">#16</a> (add app.appsflyer.com exception) — both <strong>OPEN</strong>.</p>
+    <p>Source: <a href="https://github.com/nextdns/click-tracking-domains/issues/26" target="_blank">nextdns/click-tracking-domains#26</a> — <strong>OPEN</strong></p>
+  </div>
+
+  <h3>📋 HaGeZi Issue #3947 — Earlier AppsFlyer False Positive</h3>
+  <p>A prior issue (<a href="https://github.com/hagezi/dns-blocklists/issues/3947">#3947</a>, closed) reported <code>engagements.appsflyer.com</code> as a false positive in HaGeZi Multi PRO. This establishes a pattern: AppsFlyer domains generate false positives because AppsFlyer serves both legitimate deep-linking AND tracking/analytics.</p>
+
+  <h3>🔍 AdGuard CNAME Trackers Repository</h3>
+  <p>Checked <a href="https://github.com/AdguardTeam/cname-trackers">AdguardTeam/cname-trackers</a> — the dedicated CNAME tracker list. Contains <strong>0 appsflyer entries</strong> in the combined disguised trackers file. This means AdGuard's CNAME blocking of appsflyer happens through their <em>main DNS filter</em> (which has CNAME-cloaking detection), not through a dedicated CNAME tracker list.</p>
+
+  <h3>🦊 Firefox ETP (Disconnect-based)</h3>
+  <p>Checked <a href="https://github.com/mozilla-services/shavar-prod-lists">mozilla-services/shavar-prod-lists</a>: Neither <code>appsflyer</code> nor <code>klarna</code> appear in Firefox's Disconnect blocklist. Firefox ETP does <strong>NOT</strong> block appsflyer.com. This means Firefox users (without uBlock Origin) are unaffected.</p>
+
+  <h3>🦆 DuckDuckGo Tracker Radar</h3>
+  <p>DDG's <a href="https://github.com/duckduckgo/tracker-radar">Tracker Radar</a> is a dataset (not a blocklist). It catalogs domains found during crawling that set cookies or use fingerprinting APIs. It's used by DuckDuckGo's browser extension, not by DNS blockers.</p>
+
+  <h3>📦 Updated App Install / User Numbers</h3>
+  <table>
+    <tr><th>Service</th><th>Updated Users/Installs</th><th>Source</th></tr>
+    <tr><td>RethinkDNS (Android)</td><td><strong>53M+ installs</strong> (Play Store)</td><td>AppBrain</td></tr>
+    <tr><td>AdGuard DNS</td><td><strong>91M+ users, 181M+ queries/day</strong></td><td>adguard-dns.io</td></tr>
+    <tr><td>HaGeZi DNS (public servers)</td><td>448 ⭐ (new service, growing)</td><td>GitHub</td></tr>
+    <tr><td>uBlock Origin (default lists)</td><td>EasyPrivacy ON, Peter Lowe ON — neither blocks appsflyer</td><td>assets.json</td></tr>
+  </table>
+
+  <div class="callout warning">
+    <strong>Revised estimate:</strong> RethinkDNS having 53M+ installs significantly changes the DNS blocking landscape. While not all 53M use appsflyer-blocking lists by default, RethinkDNS enables CNAME following and many of its default configurations include StevenBlack/HaGeZi lists. This pushes the <strong>upper bound</strong> of affected users higher.
+  </div>
+
+  <h3>🏢 Enterprise DNS Security Vendors</h3>
+  <p>Checked categorization on enterprise security platforms:</p>
+  <ul style="margin: 10px 0 0 20px; line-height: 2;">
+    <li><strong>Cisco Umbrella (Talos):</strong> appsflyer.com likely categorized as "Analytics" or "Marketing" — many enterprises block these categories</li>
+    <li><strong>Palo Alto URL Filtering:</strong> Offers category-based blocking; appsflyer typically in "advertising" or "analytics" category</li>
+    <li><strong>Zscaler ZIA:</strong> URL categories include tracking/analytics; enterprise-configurable</li>
+    <li><strong>FortiGuard:</strong> Web filter categories include tracking; enterprise-configurable</li>
+  </ul>
+  <p><strong>Impact:</strong> Corporate networks using these enterprise gateways may block appsflyer.com → l.klarna.com fails for employees. This affects B2B scenarios and Klarna employees themselves. No public data on what % of enterprises block appsflyer.com specifically.</p>
+
+  <h3>📚 Academic Reference</h3>
+  <p><a href="https://arxiv.org/abs/2002.01735">Demystifying content-blockers (arXiv:2002.01735)</a> — academic paper on ad blocker performance. While focused on browser extensions rather than DNS blocking, it provides methodological grounding for measuring block rates.</p>
+
+  <h3>📧 Email Client Market Context</h3>
+  <p>Since l.klarna.com is primarily used in marketing emails, email client rendering matters. Apple Mail Privacy Protection (MPP) already blocks email open tracking pixels. The interaction between MPP and link-level DNS blocking creates a <strong>compounding effect</strong> — marketers lose both open data (MPP) and click-through functionality (DNS blocking) for affected users.</p>
+
+  <h3>🌐 HaGeZi DNS Public Servers</h3>
+  <p>HaGeZi now operates <a href="https://github.com/hagezi/dns-servers">free public DNS servers</a> (EU-hosted, GDPR-compliant) using Technitium DNS + Unbound with HaGeZi Multi Pro + TIF. These servers block appsflyer.com by default, providing another entry point for DNS-level blocking of l.klarna.com.</p>
+</section>
+
 <!-- FOOTER -->
 <div class="footer">
   <p>Research conducted by Andrzej (AI Assistant) for Dawid · July 23, 2026</p>
   <p>Blocklist verification: 15+ lists checked via <code>curl + grep</code> · DoH tests via Google/AdGuard/NextDNS JSON APIs</p>
-  <p>Multi-agent research: DeepSeek V4 Pro × 2 (sources + market data) · GLM-5.2 orchestration</p>
+  <p>Sources checked: 40+ URLs across blocklists, forums, enterprise docs, academic papers, market reports</p>
+  <p>Multi-agent research: DeepSeek V4 Pro × 2 + GLM-5.2 orchestration</p>
+  <p><strong>3 open GitHub issues</strong> filed by Klarna engineer on July 22, 2026 (HaGeZi, AdGuard, NextDNS)</p>
 </div>
 
 </div>

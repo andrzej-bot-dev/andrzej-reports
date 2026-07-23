@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRE: regnställ herr</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --card: #1a1d27;
+  --card-hover: #222636;
+  --border: #2d3142;
+  --text: #e4e6eb;
+  --text-dim: #8b8fa3;
+  --accent: #4f9eff;
+  --green: #3ddc84;
+  --red: #ff5252;
+  --yellow: #ffb74d;
+  --purple: #b388ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 16px;
+}
+.container { max-width: 700px; margin: 0 auto; }
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.header h1 { font-size: 1.4rem; margin-bottom: 4px; }
+.header .subtitle { color: var(--text-dim); font-size: 0.9rem; }
+.progress-ring {
+  width: 80px;
+  height: 80px;
+  margin: 12px auto;
+  position: relative;
+}
+.progress-ring svg { transform: rotate(-90deg); }
+.progress-ring circle {
+  fill: none;
+  stroke-width: 6;
+}
+.progress-ring .bg-ring { stroke: var(--border); }
+.progress-ring .progress-ring__circle {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+}
+.progress-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.phase-item, .domain-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.phase-item:last-child, .domain-item:last-child { border-bottom: none; }
+.phase-icon, .domain-icon { font-size: 1rem; width: 24px; text-align: center; }
+.phase-name, .domain-name { flex: 1; font-weight: 500; }
+.phase-state { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; background: var(--border); }
+.phase-state.done, .domain-products strong { color: var(--green); }
+.phase-state.active { color: var(--yellow); }
+.phase-state.failed, .domain-error { color: var(--red); }
+.domain-products { color: var(--text-dim); font-size: 0.8rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag {
+  background: var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+.tag-blue { background: rgba(79, 158, 255, 0.2); color: var(--accent); }
+.best-banner {
+  background: linear-gradient(135deg, #1a1d27, #1e2a1e);
+  border-color: var(--green);
+  text-align: center;
+}
+.best-banner .price { font-size: 2rem; font-weight: bold; color: var(--green); }
+.best-banner .product { color: var(--text-dim); font-size: 0.85rem; margin-top: 4px; }
+.stats { display: flex; gap: 8px; }
+.stat { flex: 1; text-align: center; }
+.stat-value { font-size: 1.5rem; font-weight: bold; }
+.stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; }
+.domain-done { opacity: 0.85; }
+.domain-active { background: var(--card-hover); }
+.domain-failed { opacity: 0.6; }
+.refresh-note { text-align: center; color: var(--text-dim); font-size: 0.75rem; margin-top: 12px; }
+@media (max-width: 480px) {
+  .header h1 { font-size: 1.1rem; }
+  .container { padding: 0; }
+  .card { padding: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🔍 regnställ herr</h1>
+    <div class="subtitle">regnställ herr</div>
+    <div class="progress-ring">
+      <svg width="80" height="80">
+        <circle class="bg-ring" cx="40" cy="40" r="34"></circle>
+        <circle class="progress-ring__circle" cx="40" cy="40" r="34"
+          stroke-dasharray="213.6"
+          stroke-dashoffset="181.56"></circle>
+      </svg>
+      <div class="progress-text">15%</div>
+    </div>
+  </div>
+
+  
+  <div class="card best-banner">
+    <div class="card-title">🔥 Best Price Found</div>
+    <div class="price">150 kr</div>
+    <div class="product">blocket.se</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Stats</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Products</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1/12</div>
+        <div class="stat-label">Domains</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">150</div>
+        <div class="stat-label">Best (kr)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Phases</div>
+    
+      <div class="phase-item">
+        <span class="phase-icon phase-done">✅</span>
+        <span class="phase-name">director</span>
+        <span class="phase-state done">done</span>
+      </div>
+      <div class="phase-item">
+        <span class="phase-icon phase-active">🔍</span>
+        <span class="phase-name">domainSearch</span>
+        <span class="phase-state active">in_progress</span>
+      </div>
+      <div class="phase-item">
+        <span class="phase-icon phase-pending">⏳</span>
+        <span class="phase-name">compiling</span>
+        <span class="phase-state pending">pending</span>
+      </div>
+      <div class="phase-item">
+        <span class="phase-icon phase-pending">⏳</span>
+        <span class="phase-name">qa</span>
+        <span class="phase-state pending">pending</span>
+      </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌐 Domain Agents</div>
+    
+      <div class="domain-item domain-done">
+        <span class="domain-icon">✅</span>
+        <span class="domain-name">blocket.se</span>
+        <span class="domain-products">3 products · best: <strong>150 kr</strong></span>
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">fb_marketplace</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">tradera.com</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">amazon.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">prisjakt.nu</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">jula.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">biltema.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">clasohlson.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">lager157.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">rusta.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">fyndiq.se</span>
+        
+        
+      </div>
+      <div class="domain-item domain-pending">
+        <span class="domain-icon">⏳</span>
+        <span class="domain-name">cdon.se</span>
+        
+        
+      </div>
+  </div>
+
+  
+  <div class="card"><div class="card-title">🔎 Search Phrases</div><div class="tags"><span class="tag tag-blue">regnställ herr</span></div></div>
+
+  <div class="refresh-note">Auto-refresh: 15s · Updated: 10:10:08</div>
+</div>
+<script>
+setTimeout(() => location.reload(), 15000);
+</script>
+</body>
+</html>

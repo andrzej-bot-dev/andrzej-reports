@@ -1,0 +1,191 @@
+{
+  "researchId": "20260723-regnstall-herr",
+  "query": "regnställ herr",
+  "productType": "regnställ herr",
+  "description": "",
+  "phases": {
+    "director": {
+      "state": "done",
+      "startedAt": null,
+      "completedAt": "2026-07-23T08:09:23.943Z"
+    },
+    "domainSearch": {
+      "state": "in_progress",
+      "startedAt": "2026-07-23T08:09:23.944Z",
+      "completedAt": null
+    },
+    "compiling": {
+      "state": "pending",
+      "startedAt": null,
+      "completedAt": null
+    },
+    "qa": {
+      "state": "pending",
+      "startedAt": null,
+      "completedAt": null
+    }
+  },
+  "domains": [
+    {
+      "name": "blocket.se",
+      "type": "marketplace",
+      "state": "done",
+      "productsFound": 3,
+      "bestPrice": 150,
+      "startedAt": null,
+      "completedAt": "2026-07-23T08:10:08.649Z",
+      "error": null,
+      "agentId": null,
+      "bestProduct": {
+        "title": "Regnställ herr XL",
+        "price": 150,
+        "currency": "SEK",
+        "condition": "used",
+        "location": "Stockholm",
+        "url": "https://blocket.se/test1"
+      },
+      "updatedAt": "2026-07-23T08:10:08.650Z"
+    },
+    {
+      "name": "fb_marketplace",
+      "type": "marketplace",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "tradera.com",
+      "type": "auction",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "amazon.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "prisjakt.nu",
+      "type": "aggregator",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "jula.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "biltema.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "clasohlson.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "lager157.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "rusta.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "fyndiq.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    },
+    {
+      "name": "cdon.se",
+      "type": "shop",
+      "state": "pending",
+      "productsFound": 0,
+      "bestPrice": null,
+      "startedAt": null,
+      "completedAt": null,
+      "error": null,
+      "agentId": null
+    }
+  ],
+  "totalProducts": 3,
+  "bestPrice": 150,
+  "bestProduct": {
+    "domain": "blocket.se",
+    "price": 150,
+    "product": {
+      "title": "Regnställ herr XL",
+      "price": 150,
+      "currency": "SEK",
+      "condition": "used",
+      "location": "Stockholm",
+      "url": "https://blocket.se/test1"
+    }
+  },
+  "searchPhrases": [
+    "regnställ herr"
+  ],
+  "synonyms": [],
+  "createdAt": "2026-07-23T08:09:23.944Z",
+  "updatedAt": "2026-07-23T08:10:08.650Z"
+}

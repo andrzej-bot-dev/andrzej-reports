@@ -354,8 +354,8 @@ html { scroll-behavior: smooth; }
     <span class="label">appsflyer.com entries in HaGeZi Ultimate (SDK analytics, NOT OneLink)</span>
   </div>
   <div class="stat-card green">
-    <span class="number">0</span>
-    <span class="label">Blocklists that list l.klarna.com directly</span>
+    <span class="number">YES</span>
+    <span class="label">l.klarna.com was directly in HaGeZi blocklist-referral source (removed July 22)</span>
   </div>
 </div>
 
@@ -382,7 +382,7 @@ html { scroll-behavior: smooth; }
   <h2>📋 Executive Summary</h2>
 
   <div class="callout danger">
-    <strong>TL;DR:</strong> <code>l.klarna.com</code> is NOT directly listed on any public blocklist. However, it is a CNAME alias for <code>getklarna.customlinks.appsflyer.com</code> (AppsFlyer). Since AppsFlyer is one of the most aggressively blocked tracking domains on the internet (19,000+ entries in HaGeZi alone), any DNS blocker with CNAME uncloaking will block <code>l.klarna.com</code> as collateral damage.
+    <strong>TL;DR (corrected after multi-round verification):</strong> <code>l.klarna.com</code> <strong>IS directly listed</strong> in HaGeZi's raw source file <code>blocklist-referral-native.txt</code> (confirmed via git history). It was simultaneously on the allowlist, so compiled output excluded it — but downstream consumers (notably NextDNS's "Ads & Blocklist") that fork the raw source without the allowlist block it <strong>by name</strong>, not via CNAME chasing. Separately, AdGuard DNS has server-side CNAME-cloaking detection for <code>customlinks.appsflyer.com</code> (listed in NextDNS's <code>click-tracking-domains</code> repo). The often-cited 19,603 AppsFlyer entries are a <strong>category error</strong> — they're all <code>appsflyersdk.com</code> SDK subdomains, completely unrelated to the OneLink/customlinks infrastructure Klarna uses.
   </div>
 
   <h3>Key Numbers</h3>
@@ -396,8 +396,8 @@ html { scroll-behavior: smooth; }
     <tr><td>Global ad blocker penetration</td><td><strong>29.5%</strong> of internet users</td><td>GWI Q2 2025</td></tr>
     <tr><td>DNS-level blocker users (global)</td><td><strong>20–40 million</strong></td><td>Estimated (multi-source)</td></tr>
     <tr><td>AppsFlyer SDK apps</td><td><strong>100,000+</strong></td><td>AppsFlyer</td></tr>
-    <tr><td>Blocklists containing appsflyer.com</td><td><strong>7 of 8 major lists</strong></td><td>This research (curl + grep)</td></tr>
-    <tr><td>Blocklists containing l.klarna.com directly</td><td><strong>0</strong></td><td>This research (GitHub search, grep)</td></tr>
+    <tr><td>Blocklists containing l.klarna.com directly</td><td><strong>1 source file (HaGeZi referral, removed Jul 22)</strong></td><td>Git history (commit 8e9f5726)</td></tr>
+    <tr><td>Blocklists containing customlinks.appsflyer.com</td><td><strong>0 in compiled output; 1 in NextDNS click-tracking repo</strong></td><td>This research (curl + grep)</td></tr>
     <tr><td>Est. Klarna users affected by DNS blocking</td><td><strong>~3.1 million (2.6%)</strong></td><td>This model</td></tr>
     <tr><td>Est. users affected (all methods)</td><td><strong>~12 million (~10%)</strong></td><td>This model</td></tr>
   </table>

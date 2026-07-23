@@ -221,8 +221,8 @@ a:hover { text-decoration: underline; }
     </div>
   </div>
 
-  <div class="callout info">
-    <strong>Root cause:</strong> AppsFlyer (a mobile attribution/tracking platform, classified as a data broker) is one of the most aggressively blocked domains on the internet. However — and this is critical — the <strong>specific subdomain</strong> in the CNAME chain (<code>customlinks.appsflyer.com</code>) appears in <strong>zero</strong> public blocklists. It is NOT in HaGeZi (any tier), NOT in StevenBlack, NOT in AdGuard's DNS filter. The blocking that the Klarna engineer reports experiencing appears to come from server-side CNAME-cloaking detection in specific DNS services (NextDNS with configured profiles, AdGuard DNS) rather than from any public blocklist entry. This makes the actual blocking much narrower than initial analysis suggested.
+  <div class="callout danger">
+    <strong>Root cause (corrected after multi-round verification):</strong> The blocking of <code>l.klarna.com</code> happens through two confirmed mechanisms: <strong>(1)</strong> <code>l.klarna.com</code> was <em>directly listed</em> in HaGeZi's <code>blocklist-referral-native.txt</code> source file (confirmed via git history at commit <code>8e9f5726</code>, before removal on July 22). Downstream forks like NextDNS's "Ads & Blocklist" that ingest the raw source without the companion allowlist block it by name — not via CNAME chasing. <strong>(2)</strong> AdGuard's DNS filter has server-side CNAME-cloaking detection that matches <code>customlinks.appsflyer.com</code> (listed in NextDNS's <code>click-tracking-domains</code> as "CNAME of click.snapshat.com"). Note: <code>customlinks.appsflyer.com</code> appears in <strong>zero</strong> standard public blocklists (not HaGeZi compiled, not StevenBlack, not EasyPrivacy). The 19,603 AppsFlyer entries in HaGeZi are all <code>appsflyersdk.com</code> SDK analytics subdomains — a different AppsFlyer subsystem entirely.
   </div>
 </section>
 

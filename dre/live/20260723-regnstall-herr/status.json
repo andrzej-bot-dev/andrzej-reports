@@ -15,9 +15,9 @@
       "completedAt": null
     },
     "compiling": {
-      "state": "pending",
-      "startedAt": null,
-      "completedAt": null
+      "state": "done",
+      "startedAt": "2026-07-23T08:10:19.670Z",
+      "completedAt": "2026-07-23T08:10:59.965Z"
     },
     "qa": {
       "state": "pending",
@@ -187,5 +187,5 @@
   ],
   "synonyms": [],
   "createdAt": "2026-07-23T08:09:23.944Z",
-  "updatedAt": "2026-07-23T08:10:08.650Z"
+  "updatedAt": "2026-07-23T08:10:59.965Z"
 }

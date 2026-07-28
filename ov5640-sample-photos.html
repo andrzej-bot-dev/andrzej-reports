@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OV5640 Camera Module – Przykładowe Zdjęcia i Wideo (ESP32)</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-card: #161b22;
+    --bg-card-hover: #1c2333;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --danger: #f85149;
+    --warning: #d2991d;
+    --radius: 12px;
+    --gap: 1.5rem;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f35 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(88,166,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+  }
+  header .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: rgba(88,166,255,0.12);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0.2rem;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Specs Section */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .spec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .spec-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .spec-card .spec-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .spec-card .spec-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+  .spec-card .spec-label { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title .icon { font-size: 1.4rem; }
+
+  /* Gallery Grid */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--gap);
+    margin-bottom: 2.5rem;
+  }
+  .gallery-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .gallery-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  .gallery-item .img-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #0d1117;
+  }
+  .gallery-item .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .gallery-item:hover .img-wrapper img { transform: scale(1.05); }
+  .gallery-item .source-tag {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag-yt { background: #ff0000aa; color: #fff; }
+  .tag-gh { background: #2ea043aa; color: #fff; }
+  .tag-spec { background: #6e40c9aa; color: #fff; }
+
+  .gallery-item .info {
+    padding: 1rem 1.1rem;
+  }
+  .gallery-item .info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .gallery-item .info .desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.65rem;
+    line-height: 1.45;
+  }
+  .gallery-item .info .meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .gallery-item .info .meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .gallery-item .info .link {
+    display: inline-block;
+    margin-top: 0.65rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .gallery-item .info .link:hover { text-decoration: underline; }
+
+  /* Comparison Section */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 700px) { .comparison { grid-template-columns: 1fr; } }
+  .compare-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .compare-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  .compare-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    font-size: 0.9rem;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row .label { color: var(--text-muted); }
+  .compare-row .val { color: #fff; font-weight: 500; }
+  .val.best { color: var(--accent2); font-weight: 700; }
+
+  /* Issues Section */
+  .issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap);
+    margin-bottom: 2.5rem;
+  }
+  .issue-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .issue-card.danger { border-left-color: var(--danger); }
+  .issue-card.info { border-left-color: var(--accent); }
+  .issue-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .issue-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .issue-card .issue-link {
+    display: inline-block;
+    margin-top: 0.65rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .issue-card .issue-link:hover { text-decoration: underline; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  .lightbox .lb-caption {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    max-width: 600px;
+    text-align: center;
+  }
+  .lightbox .lb-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .lightbox .lb-close:hover { opacity: 1; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📷 OV5640 Camera Module</h1>
+  <p class="subtitle">
+    Przykładowe zdjęcia i ujęcia z matrycy OmniVision OV5640 podłączonej do ESP32 / ESP32-S3.<br>
+    <span class="badge">5 MP</span><span class="badge">2592×1944 UXGA</span><span class="badge">Autofokus (AF)</span><span class="badge">ESP32</span><span class="badge">esp32-camera</span>
+  </p>
+</header>
+
+<div class="container">
+
+  <!-- Specs -->
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="spec-icon">🔬</div>
+      <div class="spec-value">OmniVision OV5640</div>
+      <div class="spec-label">Sensor CMOS 1/4″</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">📐</div>
+      <div class="spec-value">5 MP</div>
+      <div class="spec-label">2592 × 1944 (UXGA/QXGA)</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🔲</div>
+      <div class="spec-value">1.4 µm × 1.4 µm</div>
+      <div class="spec-label">Rozmiar piksela</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">⚡</div>
+      <div class="spec-value">15 / 30 fps</div>
+      <div class="spec-label">Full res / 720p</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🔌</div>
+      <div class="spec-value">DVP (8-bit)</div>
+      <div class="spec-label">Interfejs równoległy</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-icon">🎯</div>
+      <div class="spec-value">Autofokus</div>
+      <div class="spec-label">Wersja AF (sprzętowy)</div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div class="section-title"><span class="icon">🖼️</span> Galeria zdjęć i zrzutów (12 obrazów)</div>
+  <div class="gallery" id="gallery"></div>
+
+  <!-- Comparison -->
+  <div class="section-title"><span class="icon">⚖️</span> OV5640 vs OV2640 – Porównanie</div>
+  <div class="comparison">
+    <div class="compare-card" style="border-top: 3px solid var(--accent2);">
+      <h3>🟢 OV5640</h3>
+      <div class="compare-row"><span class="label">Rozdzielczość</span><span class="val best">5 MP (2592×1944)</span></div>
+      <div class="compare-row"><span class="label">Rozmiar piksela</span><span class="val">1.4 µm</span></div>
+      <div class="compare-row"><span class="label">Max FPS (UXGA)</span><span class="val">15 fps</span></div>
+      <div class="compare-row"><span class="label">Autofokus</span><span class="val best">✅ Tak (wersja AF)</span></div>
+      <div class="compare-row"><span class="label">Kompresja JPEG</span><span class="val">Wbudowana</span></div>
+      <div class="compare-row"><span class="label">Jakość obrazu</span><span class="val best">⭐⭐⭐⭐⭐</span></div>
+      <div class="compare-row"><span class="label">Temperatura pracy</span><span class="val" style="color:var(--warning)">~55–65°C</span></div>
+      <div class="compare-row"><span class="label">Cena (moduł)</span><span class="val">~80–120 SEK</span></div>
+    </div>
+    <div class="compare-card" style="border-top: 3px solid var(--text-muted);">
+      <h3>⚪ OV2640</h3>
+      <div class="compare-row"><span class="label">Rozdzielczość</span><span class="val">2 MP (1600×1200)</span></div>
+      <div class="compare-row"><span class="label">Rozmiar piksela</span><span class="val">2.2 µm</span></div>
+      <div class="compare-row"><span class="label">Max FPS (UXGA)</span><span class="val best">12 fps (na ESP32)</span></div>
+      <div class="compare-row"><span class="label">Autofokus</span><span class="val">❌ Fixed focus</span></div>
+      <div class="compare-row"><span class="label">Kompresja JPEG</span><span class="val">Wbudowana</span></div>
+      <div class="compare-row"><span class="label">Jakość obrazu</span><span class="val">⭐⭐⭐</span></div>
+      <div class="compare-row"><span class="label">Temperatura pracy</span><span class="val" style="color:var(--accent2)">~40–50°C</span></div>
+      <div class="compare-row"><span class="label">Cena (moduł)</span><span class="val">~30–50 SEK</span></div>
+    </div>
+  </div>
+
+  <!-- Known Issues -->
+  <div class="section-title"><span class="icon">⚠️</span> Znane problemy</div>
+  <div class="issues-grid">
+    <div class="issue-card danger">
+      <h3>🔥 Przegrzewanie (55–65°C)</h3>
+      <p>OV5640 pobiera więcej prądu niż OV2640 (ok. 300–350 mA przy full-res). Przy dłuższej pracy temperatura modułu sięga 55–65°C, co może powodować artefakty i niestabilność. ESP32-CAM nie ma radiatora – zaleca się pasywne chłodzenie lub obniżenie rozdzielczości.</p>
+      <a class="issue-link" href="https://www.youtube.com/watch?v=yzWiicnv-f8" target="_blank">→ Test temperatury (YouTube) ↗</a>
+    </div>
+    <div class="issue-card danger">
+      <h3>📶 Pionowe linie / szum (Vertical Lines)</h3>
+      <p>Na niektórych płytkach (szczególnie ESP-EYE) OV5640 generuje pionowe linie i szum w obrazie JPEG. Problem nie znika przy zmianie XCLK (5/10/15/20 MHz). Prawdopodobnie wynika z zakłóceń na liniach DVP lub problemów z zasilaniem.</p>
+      <a class="issue-link" href="https://github.com/espressif/esp32-camera/issues/172" target="_blank">→ GitHub Issue #172 ↗</a>
+    </div>
+    <div class="issue-card info">
+      <h3>🐌 Niski FPS na pełnej rozdzielczości</h3>
+      <p>Mimo że sensor wspiera 15 fps przy UXGA, na ESP32 realny framerate spada do 4–6 fps z powodu ograniczeń przepustowości ESP32. OV2640 osiąga lepsze FPS (12 fps UXGA) przez prostszy format transmisji. Przy 720p OV5640 osiąga ~25 fps.</p>
+      <a class="issue-link" href="https://github.com/espressif/esp32-camera/issues/201" target="_blank">→ GitHub Issue #201 ↗</a>
+    </div>
+    <div class="issue-card warning">
+      <h3>🟢 Zielono-niebieski odcień (Tint)</h3>
+      <p>Po restarcie niektóre egzemplarze OV5640 pokazują zdjęcia z zielonym lub niebieskim odcieniem. Problem występuje losowo, może być związany z inicjalizacją balansu bieli (AWB) w sterowniku esp32-camera.</p>
+      <a class="issue-link" href="https://github.com/espressif/esp32-camera/issues/314" target="_blank">→ GitHub Issue #314 ↗</a>
+    </div>
+    <div class="issue-card">
+      <h3>⏱️ Timeout przy przechwytywaniu klatki</h3>
+      <p>Błąd „esp_camera_fb_get(): Failed to get the frame on time!" – częsty przy wyższych rozdzielczościach (UXGA, QXGA) gdy ESP32 nie nadąża z odbiorem danych z sensora. Rozwiązaniem jest zmniejszenie rozdzielczości lub zwiększenie bufora.</p>
+      <a class="issue-link" href="https://github.com/espressif/esp32-camera/issues/155" target="_blank">→ GitHub Issue #155 ↗</a>
+    </div>
+  </div>
+
+  <!-- Sources -->
+  <div class="section-title"><span class="icon">🔗</span> Źródła i materiały</div>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1rem; margin-bottom:2rem;">
+    <div class="compare-card">
+      <h3 style="margin-bottom:0.75rem;">▶️ Filmy YouTube</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://www.youtube.com/watch?v=o_JP0_WzP0w" target="_blank" style="color:var(--accent)">ESP32-Cam Camera Comparisons</a><br>
+        <span style="font-size:0.75rem;">Basement Electronics – porównanie OV5640 vs OV2640</span>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://www.youtube.com/watch?v=BCvOBMQSliY" target="_blank" style="color:var(--accent)">OV5640 for ESP32 Camera</a><br>
+        <span style="font-size:0.75rem;">Porównanie OV5640 z OV2640 na ESP32</span>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://www.youtube.com/watch?v=yzWiicnv-f8" target="_blank" style="color:var(--accent)">OV5640 Temperature Test</a><br>
+        <span style="font-size:0.75rem;">Test przegrzewania OV5640 na ESP32</span>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">
+        <a href="https://www.youtube.com/watch?v=orMlwm0K8bg" target="_blank" style="color:var(--accent)">Adafruit OV5640 Breakout Test</a><br>
+        <span style="font-size:0.75rem;">Test płytki Adafruit z OV5640</span>
+      </p>
+    </div>
+    <div class="compare-card">
+      <h3 style="margin-bottom:0.75rem;">🐙 GitHub Issues (esp32-camera)</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://github.com/espressif/esp32-camera/issues/172" target="_blank" style="color:var(--accent)">#172 – Vertical lines noise w OV5640</a><br>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://github.com/espressif/esp32-camera/issues/201" target="_blank" style="color:var(--accent)">#201 – Framerates OV5640</a><br>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://github.com/espressif/esp32-camera/issues/314" target="_blank" style="color:var(--accent)">#314 – Green/blue tint po restarcie</a><br>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://github.com/espressif/esp32-camera/issues/155" target="_blank" style="color:var(--accent)">#155 – Camera capture failed</a><br>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">
+        <a href="https://github.com/jomjol/AI-on-the-edge-device/issues/2162" target="_blank" style="color:var(--accent)">AI-on-the-edge #2162 – OV5640 support</a><br>
+      </p>
+    </div>
+    <div class="compare-card">
+      <h3 style="margin-bottom:0.75rem;">🌐 Społeczność</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://www.reddit.com/r/esp32/comments/r7fs6l/" target="_blank" style="color:var(--accent)">Reddit r/esp32 – OV5640 na AI-Thinker</a><br>
+        <span style="font-size:0.75rem;">Test OV5640 na ESP32-CAM (XBriefer)</span>
+      </p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">
+        <a href="https://www.reddit.com/r/esp32/comments/1pg818g/" target="_blank" style="color:var(--accent)">Reddit r/esp32 – ESP32S3 CAM + OV5640</a><br>
+        <span style="font-size:0.75rem;">Nowy ESP32-S3 z OV5640</span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
+  <p class="lb-caption" id="lb-caption"></p>
+</div>
+
+<footer>
+  Wygenerowano 2026-07-28 · <a href="https://github.com/andrzej-bot-dev/andrzej-reports">andrzej-bot-dev/andrzej-reports</a> · 
+  Hostowane na GitHub Pages · Obrazy z GitHub Issues (user-images.githubusercontent.com) oraz miniatur YouTube (img.youtube.com)
+</footer>
+
+<script>
+const images = [
+  {
+    src: "https://img.youtube.com/vi/o_JP0_WzP0w/maxresdefault.jpg",
+    thumb: "https://img.youtube.com/vi/o_JP0_WzP0w/maxresdefault.jpg",
+    title: "Porównanie OV5640 vs OV2640 na ESP32-CAM",
+    desc: "Kadr z filmu Basement Electronics – porównanie jakości obrazu między OV5640 (5MP) i OV2640 (2MP) na tej samej płytce ESP32-CAM. Widać różnicę w szczegółowości i odwzorowaniu kolorów.",
+    resolution: "1920×1080 (kadr z wideo)",
+    source: "YouTube",
+    sourceUrl: "https://www.youtube.com/watch?v=o_JP0_WzP0w",
+    tag: "yt"
+  },
+  {
+    src: "https://img.youtube.com/vi/BCvOBMQSliY/maxresdefault.jpg",
+    thumb: "https://img.youtube.com/vi/BCvOBMQSliY/maxresdefault.jpg",
+    title: "OV5640 for ESP32 Camera (Compared to OV2640)",
+    desc: "Bezpośrednie porównanie OV5640 z OV2640 na ESP32. Film pokazuje różnice w rozdzielczości, kadrowaniu i jakości JPEG między dwoma najpopularniejszymi sensorami dla ESP32.",
+    resolution: "1920×1080 (kadr z wideo)",
+    source: "YouTube",
+    sourceUrl: "https://www.youtube.com/watch?v=BCvOBMQSliY",
+    tag: "yt"
+  },
+  {
+    src: "https://img.youtube.com/vi/yzWiicnv-f8/maxresdefault.jpg",
+    thumb: "https://img.youtube.com/vi/yzWiicnv-f8/maxresdefault.jpg",
+    title: "OV5640 Temperature Test – Przegrzewanie na ESP32",
+    desc: "Test termiczny OV5640 pokazujący nagrzewanie się sensora do 55–65°C podczas ciągłej pracy. Kamera termowizyjna pokazuje hotspot na module kamery.",
+    resolution: "1920×1080 (kadr z wideo)",
+    source: "YouTube",
+    sourceUrl: "https://www.youtube.com/watch?v=yzWiicnv-f8",
+    tag: "yt"
+  },
+  {
+    src: "https://img.youtube.com/vi/orMlwm0K8bg/maxresdefault.jpg",
+    thumb: "https://img.youtube.com/vi/orMlwm0K8bg/maxresdefault.jpg",
+    title: "Adafruit OV5640 Camera Breakout – Test",
+    desc: "Test płytki developerskiej Adafruit z OV5640. Pokazuje jak podłączyć sensor przez interfejs DVP i uzyskać obraz 5MP na mikrokontrolerze.",
+    resolution: "1920×1080 (kadr z wideo)",
+    source: "YouTube",
+    sourceUrl: "https://www.youtube.com/watch?v=orMlwm0K8bg",
+    tag: "yt"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/14814230/91269461-bfb4ae00-e7a9-11ea-9bc6-40962a302385.jpg",
+    thumb: "https://user-images.githubusercontent.com/14814230/91269461-bfb4ae00-e7a9-11ea-9bc6-40962a302385.jpg",
+    title: "OV5640 – Pionowe linie i szum (ESP-EYE)",
+    desc: "Przykład problemu z pionowymi liniami (vertical lines noise) na OV5640 podłączonym do ESP-EYE. Szum widoczny szczególnie przy QSXGA. Problem nie ustępuje przy zmianie częstotliwości XCLK.",
+    resolution: "QSXGA (2592×1944)",
+    source: "GitHub Issue #172",
+    sourceUrl: "https://github.com/espressif/esp32-camera/issues/172",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/36938190/98458682-8e187580-2150-11eb-93ff-f10f078497ba.png",
+    thumb: "https://user-images.githubusercontent.com/36938190/98458682-8e187580-2150-11eb-93ff-f10f078497ba.png",
+    title: "OV5640 – Wykres FPS (Benchmark)",
+    desc: "Tabela porównawcza framerate'ów OV5640 na ESP32 z esp32-camera v1.05rc1. UXGA spada do 4 fps (z 15 fps teoretycznie), 720p osiąga 25 fps. Pokazuje ograniczenia przepustowości ESP32.",
+    resolution: "Wykres PNG",
+    source: "GitHub Issue #201",
+    sourceUrl: "https://github.com/espressif/esp32-camera/issues/201",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/60116875/131925079-cbe0530f-5a56-4d50-9b82-fcb6f2563dd7.jpeg",
+    thumb: "https://user-images.githubusercontent.com/60116875/131925079-cbe0530f-5a56-4d50-9b82-fcb6f2563dd7.jpeg",
+    title: "OV5640 – Zielony odcień po restarcie (1/2)",
+    desc: "Zdjęcie z OV5640 pokazujące zielony/niebieski odcień (tint) pojawiający się losowo po restarcie. Problem z inicjalizacją balansu bieli (AWB) w sterowniku esp32-camera.",
+    resolution: "JPEG z OV5640",
+    source: "GitHub Issue #314",
+    sourceUrl: "https://github.com/espressif/esp32-camera/issues/314",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/60116875/131925097-bc3a950b-e462-47a1-907a-0fc3a30f70be.jpeg",
+    thumb: "https://user-images.githubusercontent.com/60116875/131925097-bc3a950b-e462-47a1-907a-0fc3a30f70be.jpeg",
+    title: "OV5640 – Zielony odcień po restarcie (2/2)",
+    desc: "Drugi przykład zielonego odcienia na OV5640. Po ponownym restarcie obraz wraca do normy. Pokazuje losowość problemu związanego z inicjalizacją AWB.",
+    resolution: "JPEG z OV5640",
+    source: "GitHub Issue #314",
+    sourceUrl: "https://github.com/espressif/esp32-camera/issues/314",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/58544726/85516810-d2372d80-b628-11ea-8033-45786bbc8d78.png",
+    thumb: "https://user-images.githubusercontent.com/58544726/85516810-d2372d80-b628-11ea-8033-45786bbc8d78.png",
+    title: "OV5640 – Błąd przechwytywania klatki",
+    desc: "Zrzut ekranu z logiem błędu „esp_camera_fb_get(): Failed to get the frame on time!\" przy używaniu OV5640 na wyższych rozdzielczościach. ESP32 nie nadąża z odbiorem danych z sensora.",
+    resolution: "Zrzut ekranu (PNG)",
+    source: "GitHub Issue #155",
+    sourceUrl: "https://github.com/espressif/esp32-camera/issues/155",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/6279380/224524187-2179b485-887e-4f59-824a-6c79e6605ba7.png",
+    thumb: "https://user-images.githubusercontent.com/6279380/224524187-2179b485-887e-4f59-824a-6c79e6605ba7.png",
+    title: "OV5640 na AI-on-the-edge – Test 1",
+    desc: "Zdjęcie z projektu AI-on-the-edge-device używającego OV5640 do odczytu liczników (wodomierzy/gazomierzy). Pokazuje rzeczywiste zastosowanie OV5640 w projekcie IoT.",
+    resolution: "JPEG z OV5640",
+    source: "GitHub: jomjol/AI-on-the-edge-device #2162",
+    sourceUrl: "https://github.com/jomjol/AI-on-the-edge-device/issues/2162",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/6279380/224524194-7476a0a6-a1f1-4185-8911-3f58058e87de.png",
+    thumb: "https://user-images.githubusercontent.com/6279380/224524194-7476a0a6-a1f1-4185-8911-3f58058e87de.png",
+    title: "OV5640 na AI-on-the-edge – Test 2",
+    desc: "Drugie ujęcie z OV5640 w projekcie AI-on-the-edge – odczyt licznika z bliska. Widać szczegółowość obrazu 5MP i działanie autofokusu przy fotografowaniu wyświetlacza LCD licznika.",
+    resolution: "JPEG z OV5640",
+    source: "GitHub: jomjol/AI-on-the-edge-device #2162",
+    sourceUrl: "https://github.com/jomjol/AI-on-the-edge-device/issues/2162",
+    tag: "gh"
+  },
+  {
+    src: "https://user-images.githubusercontent.com/6279380/224524198-2c058fde-04ba-41f1-a005-a800895d932e.png",
+    thumb: "https://user-images.githubusercontent.com/6279380/224524198-2c058fde-04ba-41f1-a005-a800895d932e.png",
+    title: "OV5640 na AI-on-the-edge – Widok ogólny",
+    desc: "Szerokie ujęcie z OV5640 pokazujące jakość obrazu w warunkach domowego oświetlenia. Dobre odwzorowanie kolorów i szczegółowość typowa dla sensora 5MP.",
+    resolution: "JPEG z OV5640",
+    source: "GitHub: jomjol/AI-on-the-edge-device #2162",
+    sourceUrl: "https://github.com/jomjol/AI-on-the-edge-device/issues/2162",
+    tag: "gh"
+  }
+];
+
+const gallery = document.getElementById('gallery');
+images.forEach((img, i) => {
+  const tagClass = img.tag === 'yt' ? 'tag-yt' : img.tag === 'gh' ? 'tag-gh' : 'tag-spec';
+  const tagLabel = img.tag === 'yt' ? 'YouTube' : img.tag === 'gh' ? 'GitHub' : 'Info';
+  const item = document.createElement('div');
+  item.className = 'gallery-item';
+  item.onclick = () => openLightbox(img.src, img.title);
+  item.innerHTML = `
+    <div class="img-wrapper">
+      <img src="${img.thumb}" alt="${img.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:0.85rem\\'>🖼️ Obraz niedostępny</div>'">
+      <span class="source-tag ${tagClass}">${tagLabel}</span>
+    </div>
+    <div class="info">
+      <h3>${img.title}</h3>
+      <p class="desc">${img.desc}</p>
+      <div class="meta">
+        <span>📐 ${img.resolution}</span>
+        <span>🔗 ${img.source}</span>
+      </div>
+      <a class="link" href="${img.sourceUrl}" target="_blank" onclick="event.stopPropagation()">→ Oryginalne źródło ↗</a>
+    </div>
+  `;
+  gallery.appendChild(item);
+});
+
+function openLightbox(src, caption) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-caption').textContent = caption;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>

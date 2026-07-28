@@ -3,839 +3,609 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIY Kamera Solarna typu Tapo — BOM + Porównanie Cen</title>
+<title>DIY Kamera Solarna — BOM v3 (Zestawy + Bulk)</title>
 <style>
 :root {
   --bg: #0d1117;
-  --surface: #161b22;
-  --surface2: #21262d;
-  --border: #30363d;
+  --bg2: #161b22;
+  --bg3: #21262d;
   --text: #c9d1d9;
   --text2: #8b949e;
   --green: #3fb950;
-  --green-bg: rgba(63,185,80,0.15);
-  --orange: #d2991d;
-  --orange-bg: rgba(210,153,29,0.15);
+  --yellow: #d2991d;
+  --orange: #f0883e;
   --blue: #58a6ff;
   --red: #f85149;
-  --red-bg: rgba(248,81,73,0.15);
-  --purple: #bc8cff;
+  --border: #30363d;
+  --accent: #1f6feb;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg); color: var(--text);
-  line-height: 1.6; padding: 0; margin: 0;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 1rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { font-size: 1.6rem; margin-bottom: .25rem; color: #fff; }
+h2 { font-size: 1.3rem; margin: 1.5rem 0 .75rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: .4rem; }
+h3 { font-size: 1.1rem; margin: 1rem 0 .5rem; color: #e6edf3; }
+.subtitle { color: var(--text2); margin-bottom: 1.5rem; font-size: .9rem; }
 
-/* Header */
-header {
-  background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
-  border-bottom: 2px solid var(--border);
-  padding: 40px 20px; text-align: center;
-}
-header h1 { font-size: 2em; color: #fff; margin-bottom: 8px; }
-header .subtitle { color: var(--text2); font-size: 1.1em; }
-header .date { color: var(--text2); font-size: 0.85em; margin-top: 8px; }
+/* TABS */
+.tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+.tab-btn { padding: .6rem 1.2rem; background: none; border: none; color: var(--text2); cursor: pointer; font-size: .9rem; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-/* Summary Cards */
-.summary-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px; margin: 30px 0;
-}
-.summary-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 20px; text-align: center;
-}
-.summary-card h3 { color: var(--text2); font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.summary-card .price { font-size: 2em; font-weight: 700; }
-.summary-card .price-small { font-size: 0.85em; color: var(--text2); }
-.price-green { color: var(--green); }
+/* SUMMARY TABLE */
+.summary-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .85rem; }
+.summary-table th { background: var(--bg3); padding: .6rem .8rem; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+.summary-table td { padding: .5rem .8rem; border: 1px solid var(--border); }
+.summary-table tr:hover { background: var(--bg2); }
+.price-green { color: var(--green); font-weight: 700; }
+.price-yellow { color: var(--yellow); font-weight: 700; }
 .price-orange { color: var(--orange); }
-.price-blue { color: var(--blue); }
+.best-badge { background: var(--green); color: #000; padding: .1rem .4rem; border-radius: 3px; font-size: .7rem; font-weight: 700; margin-left: .3rem; }
+.kit-badge { background: var(--yellow); color: #000; padding: .1rem .4rem; border-radius: 3px; font-size: .7rem; font-weight: 700; margin-left: .3rem; }
+.warn-badge { background: var(--red); color: #fff; padding: .1rem .4rem; border-radius: 3px; font-size: .7rem; font-weight: 700; }
 
-/* Tables */
-table {
-  width: 100%; border-collapse: collapse; margin: 12px 0;
-  font-size: 0.9em; border: 1px solid var(--border);
-  border-radius: 8px; overflow: hidden;
-}
-thead { background: var(--surface2); }
-th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-th { color: var(--text2); font-weight: 600; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; }
-tr:nth-child(even) { background: var(--surface); }
-tr:hover { background: var(--surface2); }
-.best-price { background: var(--green-bg) !important; }
-.best-price td:first-child::before { content: "🏆 "; }
-.recommended { background: var(--orange-bg) !important; }
-.recommended td:first-child::before { content: "⭐ "; }
-.na { color: var(--text2); font-style: italic; }
-.warn { color: var(--red); font-weight: 600; }
+/* BOM TABLE */
+.bom-table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: .82rem; }
+.bom-table th { background: var(--bg3); padding: .5rem .6rem; text-align: left; font-weight: 600; border: 1px solid var(--border); font-size: .78rem; }
+.bom-table td { padding: .45rem .6rem; border: 1px solid var(--border); }
+.bom-table .total-row { font-weight: 700; background: var(--bg3); }
+.bom-table .total-row td { border-top: 2px solid var(--green); padding-top: .7rem; }
+.bom-table .note { font-size: .75rem; color: var(--text2); }
 
-/* Component Sections */
-.component-section {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; margin: 16px 0; overflow: hidden;
-}
-.component-section summary {
-  padding: 16px 20px; cursor: pointer; font-size: 1.1em; font-weight: 600;
-  background: var(--surface2); user-select: none;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.component-section summary:hover { background: #2a3040; }
-.component-section summary .comp-price {
-  font-size: 0.85em; color: var(--green); font-weight: 400;
-}
-.component-section .content { padding: 20px; }
-.component-desc { color: var(--text2); margin-bottom: 16px; font-size: 0.95em; }
-.component-desc strong { color: var(--text); }
-
-/* Recommendation box */
-.rec-box {
-  background: var(--orange-bg); border: 1px solid var(--orange);
-  border-radius: 8px; padding: 12px 16px; margin: 16px 0;
-  font-size: 0.9em;
-}
-.rec-box strong { color: var(--orange); }
-
-/* Total section */
-.total-section {
-  background: linear-gradient(135deg, #1a2a1a 0%, #0d1710 100%);
-  border: 2px solid var(--green); border-radius: 12px;
-  padding: 30px; margin: 30px 0;
-}
-.total-section h2 { color: var(--green); margin-bottom: 16px; }
-
-/* Tapo comparison */
-.comparison-section {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0d0d17 100%);
-  border: 2px solid var(--blue); border-radius: 12px;
-  padding: 30px; margin: 30px 0;
-}
-.comparison-section h2 { color: var(--blue); margin-bottom: 16px; }
-
-/* Links */
+/* COMPONENT SECTION */
+.component-section { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; margin: .75rem 0; overflow: hidden; }
+.component-header { padding: .7rem 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+.component-header:hover { background: var(--bg3); }
+.component-header .arrow { transition: transform .2s; }
+.component-header.open .arrow { transform: rotate(90deg); }
+.component-body { display: none; padding: 0 1rem 1rem; }
+.component-body.open { display: block; }
+.comp-offer { display: flex; justify-content: space-between; align-items: center; padding: .35rem 0; border-bottom: 1px solid var(--border); font-size: .8rem; }
+.comp-offer:last-child { border-bottom: none; }
+.comp-offer .name { flex: 1; }
+.comp-offer .price { font-weight: 700; min-width: 80px; text-align: right; }
+.comp-offer .rating { color: var(--text2); min-width: 50px; text-align: right; font-size: .75rem; }
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* Badge */
-.badge {
-  display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 0.75em; font-weight: 600;
-}
-.badge-green { background: var(--green-bg); color: var(--green); }
-.badge-orange { background: var(--orange-bg); color: var(--orange); }
-.badge-red { background: var(--red-bg); color: var(--red); }
+/* COMPARISON */
+.comparison-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.comp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; text-align: center; }
+.comp-card h3 { margin-bottom: .5rem; }
+.comp-card .big-price { font-size: 2rem; font-weight: 800; margin: .5rem 0; }
+.comp-card .detail { font-size: .8rem; color: var(--text2); margin-bottom: .3rem; }
+.comp-card.green { border-color: var(--green); }
+.comp-card.yellow { border-color: var(--yellow); }
+.comp-card.orange { border-color: var(--orange); }
 
-/* Notes */
-.notes { margin: 20px 0; padding: 16px; background: var(--surface2); border-radius: 8px; font-size: 0.9em; }
-.notes h3 { color: var(--purple); margin-bottom: 8px; }
-.notes ul { padding-left: 20px; }
-.notes li { margin: 4px 0; }
+/* KIT FINDS */
+.kit-find { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: .8rem 1rem; margin: .5rem 0; }
+.kit-find.good { border-left: 3px solid var(--green); }
+.kit-find h4 { font-size: .9rem; margin-bottom: .3rem; }
+.kit-find .savings { color: var(--green); font-weight: 700; }
 
-/* Responsive */
-@media (max-width: 768px) {
-  header h1 { font-size: 1.4em; }
-  .summary-card .price { font-size: 1.4em; }
-  th, td { padding: 8px 10px; font-size: 0.8em; }
-  table { font-size: 0.78em; }
+/* TIPS */
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: .75rem; margin: 1rem 0; }
+.tip-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: .8rem; font-size: .82rem; }
+.tip-card strong { color: var(--green); }
+
+/* WARNINGS */
+.warning-box { background: #1a0f0a; border: 1px solid var(--red); border-radius: 6px; padding: .8rem 1rem; margin: .75rem 0; font-size: .82rem; }
+.warning-box strong { color: var(--red); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  h1 { font-size: 1.3rem; }
+  .tab-btn { padding: .4rem .8rem; font-size: .8rem; }
+  .comparison-cards { grid-template-columns: 1fr; }
 }
 
-/* Print */
-@media print {
-  body { background: #fff; color: #000; }
-  .component-section { break-inside: avoid; }
-}
+/* KIT SEARCH RESULTS */
+.search-results { margin: .5rem 0; }
 </style>
 </head>
 <body>
-
-<header>
-  <h1>🔧 DIY Kamera Solarna typu Tapo</h1>
-  <div class="subtitle">BOM (Bill of Materials) + Porównanie Cen: AliExpress vs Amazon.se</div>
-  <div class="date">Raport wygenerowany: 28 lipca 2026 | Kurs: 1 USD ≈ 10.5 SEK | 1 SEK ≈ 0.38 PLN</div>
-</header>
-
 <div class="container">
 
-<!-- QUICK SUMMARY -->
-<div class="summary-grid">
-  <div class="summary-card">
-    <h3>💰 1 Kamera — AliExpress</h3>
-    <div class="price price-green">~390 kr</div>
-    <div class="price-small">~148 PLN | ~$37 USD</div>
-  </div>
-  <div class="summary-card">
-    <h3>🛒 1 Kamera — AliExpress (IR-Cut Pro)</h3>
-    <div class="price price-orange">~468 kr</div>
-    <div class="price-small">~178 PLN | ~$45 USD</div>
-  </div>
-  <div class="summary-card">
-    <h3>📦 10 Kamer — AliExpress (bulk)</h3>
-    <div class="price price-green">~349 kr/szt</div>
-    <div class="price-small">~3,490 kr total | ~133 PLN/szt</div>
-  </div>
-  <div class="summary-card">
-    <h3>🏷️ Tapo C200 — Gotowy</h3>
-    <div class="price price-blue">~250 kr</div>
-    <div class="price-small">~95 PLN | $24 USD</div>
-  </div>
+<h1>🔧 DIY Kamera Solarna — BOM v3</h1>
+<p class="subtitle">
+  <strong>Zaktualizowano:</strong> 28 lipca 2026 · Ceny w SEK (z VAT) · 
+  Kursy: 1 USD ≈ 10.5 SEK, 1 EUR ≈ 11.5 SEK<br>
+  <strong>Kluczowa zmiana v3:</strong> Szukamy ZESTAWÓW/KITÓW tańszych niż kupowanie osobno!
+</p>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('dayonly')">☀️ Day Only</button>
+  <button class="tab-btn" onclick="switchTab('nightvision')">🌙 Night Vision</button>
+  <button class="tab-btn" onclick="switchTab('superbudget')">💰 Super Budget</button>
 </div>
 
-<!-- Koszt całkowity -->
-<div class="total-section">
-  <h2>📊 Koszt Całkowity — Podsumowanie</h2>
-  <table>
-    <thead>
-      <tr><th>Wariant</th><th>AliExpress</th><th>Amazon SE</th><th>PLN</th><th>USD</th></tr>
-    </thead>
-    <tbody>
-      <tr class="recommended">
-        <td><strong>1 kamera (podstawowa)</strong></td>
-        <td>~390 kr</td>
-        <td class="na">~1,164 kr + AE dla brakujących</td>
-        <td>~148 PLN</td>
-        <td>~$37</td>
-      </tr>
-      <tr>
-        <td><strong>1 kamera (IR-Cut Pro)</strong></td>
-        <td>~468 kr</td>
-        <td class="na">~1,243 kr + AE dla brakujących</td>
-        <td>~178 PLN</td>
-        <td>~$45</td>
-      </tr>
-      <tr class="best-price">
-        <td><strong>10 kamer (bulk, oszczędność)</strong></td>
-        <td>~3,490 kr</td>
-        <td class="na">~7,200 kr (mieszane)</td>
-        <td>~1,326 PLN</td>
-        <td>~$332</td>
-      </tr>
-    </tbody>
-  </table>
-  <p style="margin-top:12px;color:var(--text2);font-size:0.9em;">
-    <strong>Uwaga:</strong> Ceny Amazon SE nie uwzględniają OV5640 i CN3065 (niedostępne na Amazon).
-    Ceny AliExpress zawierają baterię z EU vendor (~120 kr/szt) i OV5640 z IR-cut (134.79 kr).
-  </p>
+<!-- ==================== DAY ONLY TAB ==================== -->
+<div id="tab-dayonly" class="tab-content active">
+
+<h2>☀️ Wersja Day Only — Minimalna działająca kamera</h2>
+<p style="color:var(--text2);margin-bottom:1rem;">7 komponentów. Kamera działa tylko za dnia (bez IR). Idealna do monitoringu podwórka w ciągu dnia.</p>
+
+<h3>📦 BOM — AliExpress</h3>
+<table class="bom-table">
+  <thead>
+    <tr><th>#</th><th>Komponent</th><th>Cena 1szt</th><th>10szt Bulk</th><th>Uwagi</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><a href="https://www.aliexpress.com/item/1005008660117846.html" target="_blank">ESP32-S3 N16R8 CAM + OV5640</a> <span class="kit-badge">KIT</span></td>
+      <td class="price-green">83.64 kr</td>
+      <td class="price-green">836.40 kr</td>
+      <td class="note">Board + kamera w jednym! 4.9★, 2000+ sprzedanych</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><a href="https://www.aliexpress.com/item/1005002519966199.html" target="_blank">AM312 Mini PIR sensor</a></td>
+      <td>6.38 kr</td>
+      <td>63.80 kr</td>
+      <td class="note">Mniejszy niż HC-SR501, lepszy do obudowy</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><a href="https://www.aliexpress.com/item/1005006266515202.html" target="_blank">MP1584EN Step-Down 3A</a></td>
+      <td>3.80 kr</td>
+      <td>38.00 kr</td>
+      <td class="note">4.5★, 1000+ sold. Mini360 też ok</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><a href="https://www.aliexpress.com/item/1005009243732263.html" target="_blank">5W 5V Solar Panel</a></td>
+      <td>21.16 kr</td>
+      <td>201.00 kr</td>
+      <td class="note">4.7★, 2000+ sold. 20.10 kr/szt przy 3+</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>CN3065 Solar Li-Ion Charger</td>
+      <td>~5 kr</td>
+      <td>~50 kr</td>
+      <td class="note">Dedykowany solar charger do 18650</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>18650 Battery (EU vendor) <span class="warn-badge">⚠️</span></td>
+      <td>~70 kr</td>
+      <td>~700 kr</td>
+      <td class="note">Samsung/LG/Panasonic z nkon.nl — NIGDY chińskie!</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>18650 Battery Holder (single)</td>
+      <td>~4 kr</td>
+      <td>~40 kr</td>
+      <td class="note">Single cell holder, ze stykami sprężynowymi</td>
+    </tr>
+    <tr class="total-row">
+      <td colspan="2"><strong>💰 TOTAL</strong></td>
+      <td class="price-green" style="font-size:1.1rem;">~194 kr</td>
+      <td class="price-green" style="font-size:1.1rem;">~1,929 kr</td>
+      <td class="note">~193 kr/kamera w bulk</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>📦 BOM — Amazon.se (porównanie)</h3>
+<table class="bom-table">
+  <thead>
+    <tr><th>#</th><th>Komponent</th><th>Cena 1szt</th><th>Uwagi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>ESP32-CAM Board</td><td>~200 kr</td><td class="note">Droższe, mniejszy wybór</td></tr>
+    <tr><td>2</td><td>PIR Sensor</td><td>~50 kr</td><td class="note"></td></tr>
+    <tr><td>3</td><td>DC-DC Step Down</td><td>~80 kr</td><td class="note"></td></tr>
+    <tr><td>4</td><td>Solar Panel 5W 5V</td><td>~100 kr</td><td class="note"></td></tr>
+    <tr><td>5</td><td>CN3065 / TP4056</td><td>~80 kr</td><td class="note"></td></tr>
+    <tr><td>6</td><td>18650 Battery (Samsung)</td><td>~80 kr</td><td class="note">Oryginalne ogniwa</td></tr>
+    <tr><td>7</td><td>18650 Holder</td><td>~30 kr</td><td class="note"></td></tr>
+    <tr class="total-row">
+      <td colspan="2"><strong>💰 TOTAL Amazon.se</strong></td>
+      <td class="price-yellow" style="font-size:1.1rem;">~620 kr</td>
+      <td class="note">3.2× drożej niż AliExpress</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
-<!-- VS TAPO -->
-<div class="comparison-section">
-  <h2>🆚 DIY vs Gotowy Tapo C200</h2>
-  <table>
-    <thead>
-      <tr><th>Cecha</th><th>DIY Kamera Solarna</th><th>Tapo C200 (gotowy)</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Cena (1 szt.)</strong></td><td class="price-green">~390-468 kr</td><td class="price-blue">~250 kr</td></tr>
-      <tr><td><strong>Zasilanie</strong></td><td class="price-green">☀️ Panel solarny + bateria 18650 — BEZ PRĄDU!</td><td class="warn">🔌 Tylko USB/kabel — gniazdko wymagane</td></tr>
-      <tr><td><strong>Montaż zewnętrzny</strong></td><td class="price-green">✅ Dowolny — nie potrzeba kabli</td><td>⚠️ Wymaga przedłużacza / gniazdka w pobliżu</td></tr>
-      <tr><td><strong>Nocne widzenie</strong></td><td>IR LED 850nm (własny illuminator)</td><td>Wbudowane IR LED</td></tr>
-      <tr><td><strong>Detekcja ruchu</strong></td><td>PIR HC-SR501 (hardware)</td><td>Software motion detection</td></tr>
-      <tr><td><strong>Dzień/Noc auto</strong></td><td>LDR + IR-cut filter (opcjonalnie)</td><td>Wbudowany czujnik</td></tr>
-      <tr><td><strong>Łączność</strong></td><td>WiFi (ESP32-S3)</td><td>WiFi 2.4 GHz</td></tr>
-      <tr><td><strong>Rozdzielczość</strong></td><td>5MP (OV5640)</td><td>1080p (2MP)</td></tr>
-      <tr><td><strong>Kąt widzenia</strong></td><td>66°-222° (wymienny obiektyw)</td><td>360° pan, 114° tilt</td></tr>
-      <tr><td><strong>Nagrywanie</strong></td><td>microSD / stream do serwera</td><td>microSD / chmura (płatna)</td></tr>
-      <tr><td><strong>DIY / Hackability</strong></td><td class="price-green">✅ Pełna kontrola — ESPHome, Home Assistant</td><td>❌ Zamknięty firmware</td></tr>
-      <tr><td><strong>Gwarancja</strong></td><td class="warn">Brak</td><td class="price-green">2 lata</td></tr>
-    </tbody>
-  </table>
-  <div class="rec-box" style="margin-top:16px;">
-    <strong>💡 Werdykt:</strong> Tapo C200 jest <strong>tańszy o ~140-218 kr</strong> na sztukę, ale <strong>wymaga dostępu do prądu</strong>.
-    DIY kamera solarna to <strong>jedyna opcja dla miejsc bez gniazdka</strong> (ogród, działka, brama, las).
-    Przy 10 sztukach cena DIY spada do ~349 kr/szt — różnica maleje.
-    Jeśli potrzebujesz kamery solarnej — DIY to jedyna sensowna droga. Jeśli masz gniazdko — kup Tapo.
-  </div>
+<!-- ==================== NIGHT VISION TAB ==================== -->
+<div id="tab-nightvision" class="tab-content">
+
+<h2>🌙 Wersja Night Vision — Pełna funkcjonalność</h2>
+<p style="color:var(--text2);margin-bottom:1rem;">10 komponentów. Kamera z noktowizją na podczerwień. Automatyczne przełączanie dzień/noc przez fotorezystor.</p>
+
+<h3>📦 BOM — AliExpress</h3>
+<table class="bom-table">
+  <thead>
+    <tr><th>#</th><th>Komponent</th><th>Cena 1szt</th><th>10szt Bulk</th><th>Uwagi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>ESP32-S3 N16R8 CAM + OV5640 <span class="kit-badge">KIT</span></td><td class="price-green">83.64 kr</td><td class="price-green">836.40 kr</td><td class="note">4.9★, 2000+ sold</td></tr>
+    <tr><td>2</td><td>AM312 Mini PIR sensor</td><td>6.38 kr</td><td>63.80 kr</td><td class="note"></td></tr>
+    <tr><td>3</td><td>MP1584EN Step-Down 3A</td><td>3.80 kr</td><td>38.00 kr</td><td class="note"></td></tr>
+    <tr><td>4</td><td>LDR GL5528 Photoresistor</td><td>~0.50 kr</td><td>~5 kr (pack 20)</td><td class="note">Fotorezystor do detekcji dnia/nocy</td></tr>
+    <tr><td>5</td><td>5W 5V Solar Panel</td><td>21.16 kr</td><td>201.00 kr</td><td class="note">20.10 kr/szt przy 3+</td></tr>
+    <tr><td>6</td><td>CN3065 Solar Charger</td><td>~5 kr</td><td>~50 kr</td><td class="note"></td></tr>
+    <tr><td>7</td><td>18650 Battery (EU) <span class="warn-badge">⚠️</span></td><td>~70 kr</td><td>~700 kr</td><td class="note">nkon.nl — Samsung/LG/Panasonic</td></tr>
+    <tr><td>8</td><td>IR LED 850nm 5mm</td><td>~1 kr</td><td>~10 kr (pack 10)</td><td class="note">Oświetlacz podczerwieni</td></tr>
+    <tr><td>9</td><td>AO3400 N-Ch MOSFET</td><td>~0.50 kr</td><td>~5 kr (pack 100)</td><td class="note">Do sterowania IR LED przez ESP32</td></tr>
+    <tr><td>10</td><td>18650 Battery Holder</td><td>~4 kr</td><td>~40 kr</td><td class="note"></td></tr>
+    <tr class="total-row">
+      <td colspan="2"><strong>💰 TOTAL Night Vision</strong></td>
+      <td class="price-green" style="font-size:1.1rem;">~196 kr</td>
+      <td class="price-green" style="font-size:1.1rem;">~1,949 kr</td>
+      <td class="note">~195 kr/kamera w bulk</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="kit-find good">
+  <h4>🔍 Znaleziony zestaw: ESP32-S3 N16R8 CAM + OV5640</h4>
+  <p>Board ESP32-S3 z kamerą OV5640 w <strong>jednym zestawie</strong> — nie trzeba kupować osobno boarda i kamery!</p>
+  <p>💰 <span class="savings">Oszczędność ~30-50 kr</span> vs kupowanie osobno (board ESP32-S3 ~40 kr + OV5640 module ~50-70 kr)</p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005008660117846.html" target="_blank">Link — 83.64 kr, 4.9★, 2000+ sold</a></p>
 </div>
 
-<!-- KOMPONENTY -->
-<h2 style="margin:30px 0 16px;color:#fff;">🧩 Komponenty — Szczegółowe Porównanie</h2>
-<p style="color:var(--text2);margin-bottom:20px;">Kliknij nazwę komponentu aby rozwinąć szczegóły. <span style="background:var(--green-bg);padding:2px 8px;border-radius:4px;">🏆 = najtańsza</span> <span style="background:var(--orange-bg);padding:2px 8px;border-radius:4px;">⭐ = rekomendowana</span></p>
-
-<!-- 1. ESP32-S3 -->
-<details class="component-section" open>
-  <summary>
-    <span>1. ESP32-S3 Dev Board (z kamerą)</span>
-    <span class="comp-price">od 80.80 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Mózg kamery — mikrokontroler z WiFi, Bluetooth i dedykowanym złączem kamery OV2640/OV5640.
-      Wymagany wariant N16R8 (16MB Flash + 8MB PSRAM) do streamingu wideo.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>ESP32-S3 CAM N16R8 Dual TYPE-C</td><td>80.80 kr</td><td>77 kr/szt</td><td>N/A</td><td>16</td><td><a href="https://www.aliexpress.com/item/1005012751443516.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>ESP32-S3 N16R8 CAM Dev Board OV2640/OV5640</td><td>83.64 kr</td><td>77 kr/szt</td><td>4.9/5</td><td>2000+</td><td><a href="https://www.aliexpress.com/item/1005008660117846.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>ESP32-S3 CAM N16R8 Dual TYPE-C OV2640/OV5640</td><td>86.46 kr</td><td>~87 kr/szt</td><td>4.6/5</td><td>3000+</td><td><a href="https://www.aliexpress.com/item/1005008285512156.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Seeeduino XIAO ESP32S3 Sense Camera</td><td>170.86 kr</td><td>N/A</td><td>5/5</td><td>337</td><td><a href="https://www.aliexpress.com/item/1005007255799084.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>ESP32-S3 CAM Dev Kit (USB-C + bateria)</td><td>225.56 kr</td><td>214.28 kr/szt</td><td>3.7/5</td><td>57</td><td><a href="https://www.aliexpress.com/item/1005012148685931.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>MQODLFP ESP32-S3 CAM N16R8 OV5640</td><td>162.82 kr</td><td>N/A</td><td>0</td><td>+48 kr</td><td><a href="https://www.amazon.se/-/en/MQODLFP-ESP32-S3-Development-Bluetooth-ESP32-S3-WROOM-1/dp/B0DW3RYDPN" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>diymore ESP32-S3-CAM N16R8 Dual Type-C</td><td>199.17 kr</td><td>2.5/5</td><td>2</td><td>Prime</td><td><a href="https://www.amazon.se/-/en/diymore-ESP32-S3-WROOM-1-N16R8/dp/B0FHQ6NPDB" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>Freenove ESP32-S3 CAM Board with Camera</td><td>229.00 kr</td><td>4.4/5</td><td>447</td><td>Prime</td><td><a href="https://www.amazon.se/-/en/Freenove-ESP32-S3-Dual-core-Microcontroller-Wireless/dp/B0BMQ8F7FN" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Waveshare ESP32-S3-CAM-OV5640 AIoT</td><td>353.99 kr</td><td>3.8/5</td><td>4</td><td>Prime</td><td><a href="https://www.amazon.se/-/en/Waveshare-ESP32-S3-CAM-OV5640-Development-Recognition-Interaction/dp/B0GS1HT4LH" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — ESP32-S3 N16R8 CAM za <strong>83.64 kr</strong> (4.9★, 2000+ sprzedanych) to złoty środek.
-      Amazon jest 2-4× droższy. Jedyny sensowny wybór Amazon to Freenove za 229 kr (4.4★).
-    </div>
-  </div>
-</details>
-
-<!-- 2. OV5640 Camera -->
-<details class="component-section">
-  <summary>
-    <span>2. OV5640 Camera Module (z IR-cut)</span>
-    <span class="comp-price">od 85.22 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Kamera 5MP z możliwością widzenia w nocy. Moduł z IR-cut filtrem pozwala na automatyczne przełączanie dzień/noc.
-      24-pinowe złącze DVP kompatybilne z ESP32-S3 CAM board.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>OV5640 Camera Module Wide Angle 66°-222°</td><td>85.22 kr</td><td>~85 kr/szt</td><td>4.5/5</td><td>500+</td><td><a href="https://www.aliexpress.com/item/1005003006706291.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>OV5640 AF 21MM Autofocus 5MP Ultra HD</td><td>93.11 kr</td><td>~93 kr/szt</td><td>4.7/5</td><td>182</td><td><a href="https://www.aliexpress.com/item/1005007335600291.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>OV5640 110° Camera <strong>z IR-Cut Switch</strong></td><td>134.79 kr</td><td>~135 kr/szt</td><td>4/5</td><td>71</td><td><a href="https://www.aliexpress.com/item/1005006220721079.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>5-Pack OV5640 5MP HD MIPI AF Camera</td><td>67.36 kr/szt (×5)</td><td>67.36 kr/szt</td><td>5/5</td><td>5</td><td><a href="https://www.aliexpress.com/item/1005012371465802.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th></tr></thead>
-      <tbody>
-        <tr><td colspan="5" class="na">❌ Brak dedykowanych modułów OV5640 na Amazon SE</td></tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> <strong>Tylko AliExpress</strong>. Do projektu solarnego polecam wersję z <strong>IR-Cut Switch za 134.79 kr</strong> — automatyczne przełączanie dzień/noc bez fizycznej ingerencji.
-      Dla budżetu: podstawowy wide-angle 85.22 kr (4.5★). Bulk 5-pack: ~67 kr/szt.
-    </div>
-  </div>
-</details>
-
-<!-- 3. PIR Sensor -->
-<details class="component-section">
-  <summary>
-    <span>3. PIR Motion Sensor (HC-SR501)</span>
-    <span class="comp-price">od 16.74 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Czujnik ruchu na podczerwień. Wykrywa ruch w zasięgu ~7m, kąt 100°.
-      Budzi ESP32 z deep sleep gdy ktoś się pojawi — oszczędza baterię.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>HC-SR501 PIR Motion Sensor Adjustable</td><td>16.74 kr</td><td>~16.74 kr/szt</td><td>4.7/5</td><td>69</td><td><a href="https://www.aliexpress.com/item/1005010546558392.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>2PCS PIR HC-SR501 (12.86/pc)</td><td>25.71 kr (12.86/szt)</td><td>12.86 kr/szt</td><td>4.9/5</td><td>10,000+</td><td><a href="https://www.aliexpress.com/item/1005007129285644.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>SR501 HC-SR501 AM312 PIR Module</td><td>22.84 kr</td><td>~22.84 kr/szt</td><td>4.9/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005007635035684.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>1-10PCS HC-SR501 SR505 AM312 PIR</td><td>37.15 kr</td><td>~37.15 kr/szt</td><td>4.9/5</td><td>800+</td><td><a href="https://www.aliexpress.com/item/1005007187390531.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>HC-SR501 PIR Infrared Sensor Module</td><td>19.69 kr</td><td>~19.69 kr/szt</td><td>4.8/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005009308670108.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>AZDelivery SR312 Mini PIR Sensor (1pc)</td><td>41.69 kr</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0FC6B9Q2G" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>PintoHardware 5pcs HC-SR501</td><td>120.11 kr (24/szt)</td><td>N/A</td><td>New</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0FSLNQP21" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Hailege 5pcs PIR Module</td><td>138.96 kr (28/szt)</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B07XRDXMX5" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — 2-pack HC-SR501 za <strong>25.71 kr (12.86/szt)</strong> z 4.9★ i <strong>10,000+ sprzedanych</strong>.
-      Amazon 3× droższy. Kup na AliExpress w bulk.
-    </div>
-  </div>
-</details>
-
-<!-- 4. Buck Converter -->
-<details class="component-section">
-  <summary>
-    <span>4. Step-down Buck Converter (MP1584 / Mini360)</span>
-    <span class="comp-price">od 16.04 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Obniża napięcie z baterii/panelu solarnego do stabilnych 3.3V dla ESP32 i 5V dla peryferiów.
-      MP1584EN — sprawdzony, wydajny (do 3A), regulowany.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>DC-DC 3A Buck MP1584EN Fixed Output 3.3V/5V</td><td>16.04 kr</td><td>15.24 kr/szt (≥3)</td><td>4.8/5</td><td>3,000+</td><td><a href="https://www.aliexpress.com/item/1005007031557776.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>5/10pcs MP1584EN DC-DC Step Down (7.52/szt)</td><td>37.62 kr (7.52/pc)</td><td>7.52 kr/szt</td><td>4.7/5</td><td>2,000+</td><td><a href="https://www.aliexpress.com/item/1005010535958276.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>MP1584EN Ultra-Small DC-DC Buck Module</td><td>17.55 kr</td><td>~17.55 kr/szt</td><td>4.9/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005011654043004.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>5/10pcs MP1584EN Buck Converter (7.60/szt)</td><td>38.02 kr (7.60/pc)</td><td>7.60 kr/szt</td><td>4.8/5</td><td>2,000+</td><td><a href="https://www.aliexpress.com/item/1005005870392716.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>Youmile 10Pcs Mini360 DC-DC Buck Converter</td><td>117.49 kr (11.75/szt)</td><td>N/A</td><td>7 left</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0C13LB9QF" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>TECNOIOT 5Pcs Mini360 DC-DC Buck</td><td>137.16 kr (27.43/szt)</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B07G4FM6ZW" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Adafruit LM3671 3.3V Buck Breakout</td><td>122.45 kr</td><td>N/A</td><td>N/A</td><td>Aug 4-6</td><td><a href="https://www.amazon.se/dp/B017C04KOM" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — 5-pack MP1584EN za <strong>37.62 kr (7.52/szt!)</strong> z 4.7★ i 2000+ sprzedanych.
-      Amazon 10-pack 117 kr (11.75/szt). AliExpress ~40% taniej w bulk.
-    </div>
-  </div>
-</details>
-
-<!-- 5. LDR -->
-<details class="component-section">
-  <summary>
-    <span>5. Fotorezystor LDR (GL5528)</span>
-    <span class="comp-price">od 2.89 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Czujnik natężenia światła — wykrywa czy jest dzień czy noc.
-      Na podstawie odczytu ESP32 decyduje czy włączyć IR LED i przełączyć filtr IR-cut.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>10-20PCS GL5528 GL5537 LDR Photoresistor</td><td>2.89 kr (10-20 szt!)</td><td>0.14-0.29 kr/szt</td><td>4.7/5</td><td>453</td><td><a href="https://www.aliexpress.com/item/1005007116064657.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>50PCS LDR GL5528 5537 5506 Photoresistor Kit</td><td>26.20 kr (0.52/szt)</td><td>0.52 kr/szt</td><td>4.9/5</td><td>4,000+</td><td><a href="https://www.aliexpress.com/item/1005007038222502.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>20PCS LDR GL5528 5537 for Arduino</td><td>21.75 kr (1.09/szt)</td><td>~1.09 kr/szt</td><td>4.9/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005006636221036.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>Songhe GL5528 LDR Photo Resistors</td><td>69.17 kr</td><td>3.7/5</td><td>22</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B07P8BWRZS" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — <strong>50-pack za 26.20 kr (0.52/szt!)</strong> z 4.9★ i 4000+ sprzedanych.
-      To praktycznie <strong>za darmo</strong>. Amazon: 69 kr za podobny zestaw. Różnica 2.6×.
-    </div>
-  </div>
-</details>
-
-<!-- 6. IR LED -->
-<details class="component-section">
-  <summary>
-    <span>6. IR LED 850nm (doświetlacz nocny)</span>
-    <span class="comp-price">od 24.44 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Dioda podczerwieni 850nm do oświetlania sceny w nocy. Niewidoczna dla ludzkiego oka,
-      ale kamera OV5640 (bez filtra IR-cut) widzi ją doskonale. Wersja 3W high-power daje zasięg ~5-10m.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>1-10pcs 3W 850nm High Power IR LED</td><td>24.44 kr</td><td>23.22 kr/szt (≥3)</td><td>4.8/5</td><td>44</td><td><a href="https://www.aliexpress.com/item/1005009532415639.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>5pcs 3W 850nm IR LED (14.56/pc)</td><td>72.81 kr (14.56/pc)</td><td>14.56 kr/szt</td><td>4.9/5</td><td>700+</td><td><a href="https://www.aliexpress.com/item/1005009389941278.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>IR 850nm Infrared Night Vision Lamp 3W</td><td>38.84 kr</td><td>~38 kr/szt</td><td>N/A</td><td>New</td><td><a href="https://www.aliexpress.com/item/1005009430992224.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>Chanzon 850nm LED 3W High Power IR Emitter</td><td>59.64 kr</td><td>4.1/5</td><td>137</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0BVHYFQ7L" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>AITRIP 20Pcs 5mm 850nm IR LED</td><td>76.26 kr</td><td>4.2/5</td><td>21</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B09C3CCQPJ" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>ALMOCN 10Pcs 5mm 850nm IR Emitter LED</td><td>53.47 kr</td><td>4.4/5</td><td>39</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B08DRG26NN" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — 5-pack 3W 850nm za <strong>72.81 kr (14.56/szt)</strong> z 4.9★.
-      Amazon: Chanzon 3W za 59.64 kr/szt — drożej na sztukę ale solidna marka (4.1★, 137 opinii).
-      Dla bulk — AliExpress. Dla pojedynczej sztuki — Amazon jeśli chcesz szybciej.
-    </div>
-  </div>
-</details>
-
-<!-- 7. MOSFET -->
-<details class="component-section">
-  <summary>
-    <span>7. N-Channel MOSFET (Logic Level)</span>
-    <span class="comp-price">od 6.03 kr (10-pack!)</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Przełącznik tranzystorowy do sterowania IR LED (włącz/wyłącz) z pinu GPIO ESP32 (3.3V).
-      AO3400 (SOT-23 SMD) lub IRLZ44N (TO-220 THT) — oba logic-level, otwierają się przy 3.3V.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>10PCS AO3400 SMD N-Channel MOSFET</td><td>6.03 kr (0.60/pc)</td><td>0.60 kr/szt</td><td>4.8/5</td><td>5,000+</td><td><a href="https://www.aliexpress.com/item/1005007057795595.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>50PCS AO3400 N-Channel MOSFET SOT-23</td><td>24.18 kr (0.48/pc)</td><td>0.48 kr/szt</td><td>5/5</td><td>71</td><td><a href="https://www.aliexpress.com/item/1005006822292957.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>IRLZ44N TO-220 N-Channel Logic Level MOSFET</td><td>26.03 kr</td><td>~26 kr/szt</td><td>4.9/5</td><td>300+</td><td><a href="https://www.aliexpress.com/item/1005007030297945.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Si2302 SOT-23 N-Channel MOSFET 20V 3A</td><td>17.87 kr (0.89/pc)</td><td>0.89 kr/szt</td><td>4.9/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005005601698229.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>BOJACK IRLZ44N Logic Level MOSFET 5pcs</td><td>89.91 kr (17.98/szt)</td><td>4.4/5</td><td>45</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0BBPWYR2G" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>AITRIP 50Pcs AO3400 SOT-23 MOSFET</td><td>123.41 kr (2.47/szt)</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0G3PDV1SF" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Chanzon IRLZ44N TO-220AB 10pcs</td><td>128.33 kr (12.83/szt)</td><td>4.6/5</td><td>72</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B09ZY1ZMGZ" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — 10-pack AO3400 za <strong>6.03 kr (0.60/szt!)</strong> z 4.8★ i 5,000+ sprzedanych.
-      To praktycznie <strong>darmowe</strong> w porównaniu z Amazon (18 kr/szt za IRLZ44N).
-      Dla łatwiejszego lutowania (THT) weź IRLZ44N za 26 kr na AliExpress.
-    </div>
-  </div>
-</details>
-
-<!-- 8. Solar Panel -->
-<details class="component-section">
-  <summary>
-    <span>8. Panel Solarny 5W 5V</span>
-    <span class="comp-price">od 39.61 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Źródło zasilania — ładuje baterię 18650 przez kontroler CN3065.
-      Panel 5W/5V daje ~1A w pełnym słońcu, co wystarcza do naładowania 3000mAh w ~3-4h.
-      Wyjście USB ułatwia podłączenie.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>5V 5W/10W Portable Solar Panel USB Charger Mini</td><td>39.61 kr</td><td>~36 kr/szt</td><td>4.9/5</td><td>10,000+</td><td><a href="https://www.aliexpress.com/item/1005007010055091.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>5W 5V Mini Solar Panel DIY Battery Charging</td><td>48.03 kr</td><td>~48 kr/szt</td><td>N/A</td><td>1</td><td><a href="https://www.aliexpress.com/item/1005009741392359.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>5V 5W Solar Panel USB Waterproof Portable</td><td>63.44 kr</td><td>60.27 kr/szt (≥2)</td><td>4.3/5</td><td>500+</td><td><a href="https://www.aliexpress.com/item/1005012043372310.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>5V 5W/10W Portable Solar Panel USB Fast Charger</td><td>86.17 kr</td><td>~86 kr/szt</td><td>4.6/5</td><td>275</td><td><a href="https://www.aliexpress.com/item/1005012479707279.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>FlexSolar 6W 5V Portable Solar Charger</td><td>~350-450 kr</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B09JFYPDNC" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Offgridtec 5W Mono 12V Solar Panel</td><td>~200-300 kr</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B00XHREE50" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — panel 5V/5W USB za <strong>39.61 kr</strong> z 4.9★ i <strong>10,000+ sprzedanych</strong> — absolutny bestseller!
-      Amazon ~10× droższy (350-450 kr). Różnica kolosalna. <strong>Kup na AliExpress.</strong>
-    </div>
-  </div>
-</details>
-
-<!-- 9. Charge Controller -->
-<details class="component-section">
-  <summary>
-    <span>9. CN3065 Solar Charge Controller</span>
-    <span class="comp-price">od 20.18 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Kontroler ładowania Li-ion z panelu solarnego. CN3065 akceptuje 4.4-6V z panela,
-      ładuje baterię 18650 prądem do 500mA. Ma zabezpieczenie przed przeładowaniem i nadmiernym rozładowaniem.
-      Alternatywa: CN3791 z MPPT dla wyższej wydajności.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>CN3065 Mini Solar Lithium Battery Charger 500mA</td><td>20.18 kr</td><td>~15 kr/szt</td><td>4.9/5</td><td>5,000+</td><td><a href="https://www.aliexpress.com/item/1005008660072975.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Mini Solar Lipo Charger CN3791 CN3065 with Cable</td><td>20.32 kr</td><td>~20 kr/szt</td><td>4.8/5</td><td>800+</td><td><a href="https://www.aliexpress.com/item/1005008335770992.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>CN3791 MPPT Solar Panel Lithium Charging Module</td><td>27.76 kr</td><td>26.37 kr/szt (≥2)</td><td>4.5/5</td><td>1,000+</td><td><a href="https://www.aliexpress.com/item/1005008286456080.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>1/5/10Pcs CN3065 Mini Solar Charger Board</td><td>20.76 kr</td><td>~15 kr/szt (10pack)</td><td>N/A</td><td>N/A</td><td><a href="https://www.aliexpress.com/item/1005010776599151.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Mini 6V Solar Panel + CN3065 Charger Kit</td><td>37.02 kr</td><td>~37 kr/szt</td><td>4.7/5</td><td>4,000+</td><td><a href="https://www.aliexpress.com/item/1005008076138305.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th></tr></thead>
-      <tbody>
-        <tr><td colspan="5" class="na">❌ Brak modułów CN3065/TP4056 solar na Amazon SE</td></tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> <strong>Tylko AliExpress!</strong> CN3065 za <strong>20.18 kr</strong> (4.9★, 5000+) to standard.
-      Dla lepszej wydajności: CN3791 z MPPT za <strong>27.76 kr</strong>. Przy 10 sztukach bulk ~15 kr/szt.
-      Brak tych modułów na Amazon SE.
-    </div>
-  </div>
-</details>
-
-<!-- 10. 18650 Battery -->
-<details class="component-section">
-  <summary>
-    <span>10. Bateria 18650 (3000mAh+)</span>
-    <span class="comp-price">od 90 kr (EU vendor)</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Magazyn energii — zasila kamerę gdy nie ma słońca. Pojemność 3000mAh+ daje ~12-24h pracy
-      (zależnie od częstotliwości wake-up i streamingu). <span class="warn">⚠️ UWAGA: Baterie 18650 z AliExpress są CZĘSTO PODRABIANE!</span>
-      Zalecam zakup z zaufanego źródła EU (nkon.nl, 18650batterystore.eu) lub Amazon.
-    </div>
-
-    <h4>🔶 AliExpress <span class="badge badge-red">⚠️ RYZYKO PODRÓBEK</span></h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>LiitoKala INR18650 30Q 3.7V 3000mAh</td><td>90.61 kr</td><td>4.7/5</td><td>221</td><td><a href="https://www.aliexpress.com/item/1005005306528026.html" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>LiitoKala INR18650 30Q (inne listowanie)</td><td>271.44 kr</td><td class="warn">2.9/5</td><td>500+</td><td class="na">—</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>XINLANTECH 18650 2600mAh with JST PH2.0</td><td>159.00 kr</td><td>N/A</td><td>N/A</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B0D1NHXSFR" target="_blank">Link</a></td>
-        </tr>
-        <tr>
-          <td>Bateria 18650 3400mAh Flat (generic)</td><td>131.54 kr</td><td>N/A</td><td>N/A</td><td>+120 kr deliv.</td><td><a href="https://www.amazon.se/dp/B0DZ3149HT" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> <strong>NIE KUPUJ BATERII NA ALIEXPRESS!</strong> 90% z nich to podróbki z zaniżoną pojemnością.
-      Kup z <strong>nkon.nl</strong> (Samsung 30Q ~€8/80 kr) lub <strong>Amazon SE</strong> (XINLANTECH 159 kr).
-      W kalkulacji przyjąłem <strong>~120 kr/szt</strong> z EU vendora za oryginalne ogniwo 3000mAh.
-    </div>
-  </div>
-</details>
-
-<!-- 11. Battery Holder -->
-<details class="component-section">
-  <summary>
-    <span>11. Koszyk na baterię 18650 (single)</span>
-    <span class="comp-price">od 3.69 kr</span>
-  </summary>
-  <div class="content">
-    <div class="component-desc">
-      <strong>Rola:</strong> Uchwyt na pojedyncze ogniwo 18650. Najlepiej z przewodami (wire leads) do łatwego podłączenia.
-      Prosty element mechaniczny — nie ma co przepłacać.
-    </div>
-
-    <h4>🔶 AliExpress</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>1 szt.</th><th>10 szt.</th><th>Ocena</th><th>Sprzedaż</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr class="best-price">
-          <td>1X 18650 Battery Holder Case with Wire Leads</td><td>3.69 kr</td><td>~3.00 kr/szt</td><td>5/5</td><td>500+</td><td><a href="https://www.aliexpress.com/item/1005007237886209.html" target="_blank">Link</a></td>
-        </tr>
-        <tr class="recommended">
-          <td>18650 Power Bank Case 1X 2X 3X 4X with Wire Lead</td><td>5.30 kr</td><td>~4.00 kr/szt</td><td>4.9/5</td><td>2,000+</td><td><a href="https://www.aliexpress.com/item/1005005691348601.html" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>🟠 Amazon SE</h4>
-    <table>
-      <thead><tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Opinie</th><th>Dostawa</th><th>Link</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>DAOKI 10Pcs 18650 Battery Holder Case with Wire</td><td>97.45 kr (9.75/szt)</td><td>4.1/5</td><td>67</td><td>Prime</td><td><a href="https://www.amazon.se/dp/B08CN6Z42R" target="_blank">Link</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="rec-box">
-      <strong>⭐ Rekomendacja:</strong> AliExpress — <strong>3.69 kr/szt</strong> (5★). Amazon 10-pack 97.45 kr (9.75/szt).
-      Różnica 2.6× — kup na AliExpress przy większym zamówieniu, na Amazon jeśli potrzebujesz 1 szt. szybko.
-    </div>
-  </div>
-</details>
-
-<!-- IMPORTANT NOTES -->
-<div class="notes">
-  <h3>📝 Ważne Uwagi</h3>
-  <ul>
-    <li><strong>Baterie:</strong> Absolutnie nie kupuj 18650 na AliExpress — 90% to podróbki. Źródła EU: nkon.nl, akkula.fi, 18650batterystore.eu. Oryginalny Samsung 30Q ~80-100 kr.</li>
-    <li><strong>OV5640 + CN3065:</strong> Niedostępne na Amazon SE — trzeba kupić na AliExpress niezależnie od reszty.</li>
-    <li><strong>Wysyłka AliExpress:</strong> Większość ofert ma darmową wysyłkę przy zamówieniu >100 SEK. Łącząc wszystkie komponenty w jednym zamówieniu, wysyłka będzie darmowa.</li>
-    <li><strong>Czas dostawy:</strong> AliExpress: 2-4 tygodnie do Szwecji. Amazon Prime: 2-5 dni.</li>
-    <li><strong>Dodatkowe elementy (nie wycenione):</strong> kable połączeniowe, lutowanie, obudowa (wydruk 3D / puszka elektryczna), koszyk na panel solarny.</li>
-    <li><strong>Firmware:</strong> ESPHome lub własny kod Arduino/ESP-IDF. ESPHome ma natywne wsparcie dla OV5640, PIR i deep sleep.</li>
-  </ul>
-</div>
-
-<!-- FOOTER -->
-<div style="text-align:center;padding:40px 0;color:var(--text2);font-size:0.85em;border-top:1px solid var(--border);margin-top:40px;">
-  <p>Raport wygenerowany przez <strong>Andrzej 🤖</strong> | 28 lipca 2026</p>
-  <p>Dane cenowe z AliExpress i Amazon.se — ceny mogą ulec zmianie</p>
-  <p>Kursy: 1 USD ≈ 10.5 SEK | 1 SEK ≈ 0.38 PLN | 1 EUR ≈ 11.5 SEK</p>
-  <p style="margin-top:8px;"><a href="https://github.com/andrzej-bot-dev/andrzej-reports" target="_blank">github.com/andrzej-bot-dev/andrzej-reports</a></p>
+<div class="kit-find good">
+  <h4>🔍 Znaleziony zestaw: 5W Solar Panel z diodą zabezpieczającą</h4>
+  <p>Panel 5W 5V ze zintegrowaną diodą — gotowy do ładowania. <strong>Nie trzeba dodawać diody szeregowej!</strong></p>
+  <p>💰 Od <strong>21.16 kr</strong> (20.10 kr przy 3+ sztuk)</p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005009243732263.html" target="_blank">Link — 4.7★, 2000+ sold</a></p>
 </div>
 
 </div>
+
+<!-- ==================== SUPER BUDGET TAB ==================== -->
+<div id="tab-superbudget" class="tab-content">
+
+<h2>💰 Wersja Super Budget — Absolutne minimum</h2>
+<p style="color:var(--text2);margin-bottom:1rem;">Najtańsza możliwa konfiguracja. Używamy ESP32 (nie S3) + OV2640 (2MP zamiast 5MP). Mniejszy panel 3W.</p>
+
+<h3>📦 BOM — AliExpress</h3>
+<table class="bom-table">
+  <thead>
+    <tr><th>#</th><th>Komponent</th><th>Cena 1szt</th><th>10szt Bulk</th><th>Uwagi</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><a href="https://www.aliexpress.com/item/1005003472117545.html" target="_blank">ESP32-CAM + OV2640</a> <span class="kit-badge">KIT</span></td>
+      <td class="price-green">22.95 kr</td>
+      <td class="price-green">229.50 kr</td>
+      <td class="note">4.4★, 10000+ sold! Kamera 2MP — w zupełności wystarczy</td>
+    </tr>
+    <tr><td>2</td><td>AM312 Mini PIR</td><td>6.38 kr</td><td>63.80 kr</td><td class="note"></td></tr>
+    <tr><td>3</td><td>MP1584EN Step-Down</td><td>3.80 kr</td><td>38.00 kr</td><td class="note"></td></tr>
+    <tr><td>4</td><td>3W 5V Solar Panel (mniejszy)</td><td>~15 kr</td><td>~150 kr</td><td class="note">3W wystarczy do podtrzymania 18650</td></tr>
+    <tr><td>5</td><td>CN3065 Solar Charger</td><td>~5 kr</td><td>~50 kr</td><td class="note"></td></tr>
+    <tr><td>6</td><td>18650 Battery (EU) <span class="warn-badge">⚠️</span></td><td>~70 kr</td><td>~700 kr</td><td class="note">Jedyny komponent premium — bezpieczeństwo!</td></tr>
+    <tr><td>7</td><td>18650 Battery Holder</td><td>~4 kr</td><td>~40 kr</td><td class="note"></td></tr>
+    <tr class="total-row">
+      <td colspan="2"><strong>💰 TOTAL Super Budget</strong></td>
+      <td class="price-green" style="font-size:1.1rem;">~127 kr</td>
+      <td class="price-green" style="font-size:1.1rem;">~1,271 kr</td>
+      <td class="note">~127 kr/kamera — najtaniej!</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="kit-find good">
+  <h4>🔍 Znaleziony zestaw: ESP32-CAM + OV2640 — tylko 22.95 kr!</h4>
+  <p>Najtańszy zestaw ESP32 z kamerą na AliExpress. <strong>22.95 kr za board + kamera 2MP!</strong></p>
+  <p>💰 4.4★, 10,000+ sprzedanych. To jest TEN zestaw do budżetowej kamery.</p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005003472117545.html" target="_blank">Link</a></p>
+  <p style="color:var(--yellow);font-size:.8rem;">⚠️ Uwaga: ESP32-CAM wymaga zewnętrznego programatora USB-UART (~10 kr)</p>
+</div>
+
+</div>
+
+<!-- ==================== SUMMARY COMPARISON ==================== -->
+<h2>📊 Porównanie wszystkich wersji</h2>
+<div class="comparison-cards">
+  <div class="comp-card orange">
+    <h3>💰 Super Budget</h3>
+    <div class="big-price price-green">127 kr</div>
+    <div class="detail">ESP32-CAM + OV2640 (2MP)</div>
+    <div class="detail">3W panel, Day Only</div>
+    <div class="detail" style="margin-top:.5rem;"><strong>10 sztuk: 1,271 kr</strong></div>
+  </div>
+  <div class="comp-card yellow">
+    <h3>☀️ Day Only</h3>
+    <div class="big-price price-green">194 kr</div>
+    <div class="detail">ESP32-S3 + OV5640 (5MP)</div>
+    <div class="detail">5W panel, Day Only</div>
+    <div class="detail" style="margin-top:.5rem;"><strong>10 sztuk: 1,929 kr</strong></div>
+  </div>
+  <div class="comp-card green">
+    <h3>🌙 Night Vision</h3>
+    <div class="big-price price-green">196 kr</div>
+    <div class="detail">ESP32-S3 + OV5640 (5MP)</div>
+    <div class="detail">5W panel, IR LED + LDR</div>
+    <div class="detail" style="margin-top:.5rem;"><strong>10 sztuk: 1,949 kr</strong></div>
+  </div>
+</div>
+
+<table class="summary-table">
+  <thead>
+    <tr><th>Wersja</th><th>Komponenty</th><th>1 kamera</th><th>10 kamer</th><th>vs Tapo C200</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>💰 Super Budget</td>
+      <td>7 (ESP32 + OV2640)</td>
+      <td class="price-green">~127 kr</td>
+      <td class="price-green">~1,271 kr</td>
+      <td class="price-green">2× taniej!</td>
+    </tr>
+    <tr>
+      <td>☀️ Day Only</td>
+      <td>7 (ESP32-S3 + OV5640)</td>
+      <td class="price-green">~194 kr</td>
+      <td class="price-green">~1,929 kr</td>
+      <td class="price-yellow">~22% taniej</td>
+    </tr>
+    <tr>
+      <td>🌙 Night Vision</td>
+      <td>10 (pełen zestaw)</td>
+      <td class="price-green">~196 kr</td>
+      <td class="price-green">~1,949 kr</td>
+      <td class="price-yellow">~22% taniej</td>
+    </tr>
+    <tr>
+      <td>🛒 Tapo C200</td>
+      <td>Gotowa kamera</td>
+      <td>~250 kr</td>
+      <td>~2,500 kr</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ==================== ZESTAWY ZNALEZIONE ==================== -->
+<h2>🔍 Zestawy/Kity znalezione — taniej niż osobno</h2>
+
+<div class="kit-find good">
+  <h4>🥇 ESP32-S3 N16R8 CAM + OV5640 — 83.64 kr</h4>
+  <p>Board z kamerą 5MP w jednym. <strong>Osobno: ESP32-S3 DevKit (~40 kr) + OV5640 moduł (~50-70 kr) = ~90-110 kr.</strong> Zestaw taniej o ~10-30 kr!</p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005008660117846.html" target="_blank">Link</a> · 4.9★ · 2000+ sold · Free shipping over 100 kr</p>
+</div>
+
+<div class="kit-find good">
+  <h4>🥇 ESP32-CAM + OV2640 — 22.95 kr (NAJTAŃSZY!)</h4>
+  <p>Absolutnie najtańszy zestaw ESP32 z kamerą. <strong>Taniej się nie da.</strong> Osobno ESP32 to minimum 15-20 kr, OV2640 ~10 kr = 25-30 kr.</p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005003472117545.html" target="_blank">Link</a> · 4.4★ · 10000+ sold · Top selling</p>
+</div>
+
+<div class="kit-find good">
+  <h4>🥈 5W Solar Panel (z diodą) — 21.16 kr (20.10 kr/3+)</h4>
+  <p>Panel z wbudowaną diodą zabezpieczającą. <strong>Osobno: panel + dioda Schottky'ego = więcej roboty.</strong></p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005009243732263.html" target="_blank">Link</a> · 4.7★ · 2000+ sold</p>
+</div>
+
+<div class="kit-find">
+  <h4>🥉 MP1584EN Step-Down — od 3.80 kr (opcja 10-pack)</h4>
+  <p>Wiele listingów oferuje 1szt/5szt/10szt. <strong>10-pack ~25-30 kr = 2.50-3 kr/szt.</strong></p>
+  <p>📎 <a href="https://www.aliexpress.com/item/1005006266515202.html" target="_blank">Link</a> · 4.5★ · 1000+ sold</p>
+</div>
+
+<div class="kit-find">
+  <h4>⚠️ NIE znaleziono: Kompletny zestaw "ESP32 + solar + wszystko"</h4>
+  <p>Nie ma gotowych zestawów "kamera solarna DIY" z ESP32, panelem, PIR itd. Trzeba składać z pojedynczych elementów, ale <strong>board+kamera jako KIT daje już oszczędność</strong>.</p>
+</div>
+
+<!-- ==================== PER-COMPONENT DETAILS ==================== -->
+<h2>📋 Szczegóły per komponent — AliExpress Top 5</h2>
+
+<!-- ESP32-S3 + OV5640 -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>📷 <strong>ESP32-S3 + OV5640 Kit</strong> (Board z kamerą)</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005008660117846.html" target="_blank">ESP32 S3 N16R8 CAM + OV2640/OV5640</a></span><span class="price price-green">83.64 kr</span><span class="rating">4.9★ · 2000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005012751443516.html" target="_blank">ESP32-S3 CAM Dual TYPE-C + OV5640</a></span><span class="price">80.80 kr</span><span class="rating">16 sold</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005009384865672.html" target="_blank">ESP32-S3 N16R8 CAM + OV5640</a></span><span class="price">90.53 kr</span><span class="rating">4★ · 600+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005009210809394.html" target="_blank">ESP32-S3 N16R8 CAM + OV5640 (link użytkownika)</a></span><span class="price">110.37 kr</span><span class="rating">4.6★ · 3000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005012660430582.html" target="_blank">ESP32 S3 N16R8 CAM + OV3660/OV5640</a></span><span class="price">129.37 kr</span><span class="rating">-30%</span></div>
+  </div>
+</div>
+
+<!-- PIR Sensor -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>🔍 <strong>AM312 PIR Motion Sensor</strong></span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005002519966199.html" target="_blank">GREATZT AM312 Mini PIR Sensor DC 2.7-12V</a></span><span class="price price-green">6.38 kr</span><span class="rating">1 sold</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005004647224750.html" target="_blank">HC-SR501/AM312/SR602 PIR Module (multi-option)</a></span><span class="price">6.88 kr</span><span class="rating">4.8★ · 52</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005001839107840.html" target="_blank">AM312 PIR Module for Arduino</a></span><span class="price">7.68 kr</span><span class="rating">5★ · 191</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005009039489678.html" target="_blank">AM312 Top Selling PIR Sensor</a></span><span class="price">8.58 kr</span><span class="rating">5★ · 137</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005009455778257.html" target="_blank">1-10pcs AM312 PIR Sensor (bulk pack)</a></span><span class="price">16.56 kr</span><span class="rating">4.9★ · 1000+</span></div>
+  </div>
+</div>
+
+<!-- Step-Down -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>⚡ <strong>MP1584EN Step-Down Converter</strong></span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005006266515202.html" target="_blank">MP1584EN 3A Buck 5V-12V to 5V/3.3V Fixed Output</a></span><span class="price price-green">3.80 kr</span><span class="rating">4.5★ · 1000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005008727434878.html" target="_blank">Mini MP1584EN DC-DC 3A Adjustable</a></span><span class="price">3.98 kr</span><span class="rating">5★ · 600+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005005060483668.html" target="_blank">MP1584EN 3A Ultra-Small Module</a></span><span class="price">4.09 kr</span><span class="rating">4.8★ · 5000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005005879245068.html" target="_blank">MP1584EN Fixed Output 3A High Current</a></span><span class="price">4.69 kr</span><span class="rating">4.8★ · 1000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/32444122150.html" target="_blank">TZT MP1584EN 3A Step-Down Module</a></span><span class="price">5.29 kr</span><span class="rating">4.9★ · 2000+</span></div>
+  </div>
+</div>
+
+<!-- Solar Panel -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>☀️ <strong>5W Solar Panel 5V</strong></span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005009243732263.html" target="_blank">5W 5V Solar Panel Polysilicon (3+ @ 20.10kr)</a></span><span class="price price-green">21.16 kr</span><span class="rating">4.7★ · 2000+</span></div>
+    <div class="comp-offer"><span class="name">5W 5V Solar Panel (alternative)</span><span class="price">28.99 kr</span><span class="rating">5 sold</span></div>
+    <div class="comp-offer"><span class="name">5W 5V Solar Panel Module</span><span class="price">30.75 kr</span><span class="rating">4.4★ · 111</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005007010055091.html" target="_blank">5W USB Solar Panel Fast Charger</a></span><span class="price">39.61 kr</span><span class="rating">4.9★ · 10000+</span></div>
+    <div class="comp-offer"><span class="name"><a href="https://www.aliexpress.com/item/1005007433952746.html" target="_blank">5W 5V USB Solar Panel (≥2 @ 42.46kr)</a></span><span class="price">44.70 kr</span><span class="rating">4.4★ · 1000+</span></div>
+  </div>
+</div>
+
+<!-- CN3065 -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>🔋 <strong>CN3065 Solar Li-Ion Charger</strong></span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name">CN3065 Module (solar input, 18650 output)</span><span class="price">~5 kr</span><span class="rating">Typowa cena</span></div>
+    <div class="comp-offer"><span class="name">CN3065 10-pack</span><span class="price">~35 kr</span><span class="rating">~3.50 kr/szt</span></div>
+    <p style="color:var(--text2);font-size:.8rem;margin-top:.5rem;">Alternatywnie: TP4056 z diodą na wejściu solarnym (~3 kr). CN3065 lepszy bo ma wbudowaną funkcję MPPT dla małych paneli.</p>
+  </div>
+</div>
+
+<!-- 18650 Battery -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>🔋 <strong>18650 Battery (EU vendor)</strong> <span class="warn-badge">⚠️</span></span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="warning-box">
+      <strong>⚠️ NIGDY nie kupuj 18650 z AliExpress/Chin!</strong> Podróbki z zawyżoną pojemnością, brak zabezpieczeń, ryzyko pożaru. Tylko EU vendor.
+    </div>
+    <div class="comp-offer"><span class="name"><strong>nkon.nl</strong> — Samsung INR18650-35E 3500mAh</span><span class="price">~€5.50</span><span class="rating">~63 SEK</span></div>
+    <div class="comp-offer"><span class="name"><strong>nkon.nl</strong> — LG M36 3600mAh</span><span class="price">~€5.95</span><span class="rating">~68 SEK</span></div>
+    <div class="comp-offer"><span class="name"><strong>Amazon.se</strong> — Samsung 18650 2-pack</span><span class="price">~160 kr</span><span class="rating">~80 kr/szt</span></div>
+    <div class="comp-offer"><span class="name"><strong>Amazon.se</strong> — EverActive 18650 Protected</span><span class="price">~70 kr</span><span class="rating">z zabezpieczeniem</span></div>
+    <p style="color:var(--text2);font-size:.8rem;margin-top:.5rem;">Przy 10 kamerach — rozważ zamówienie hurtowe z nkon.nl (10+ sztuk). Samsung 35E 3500mAh — idealna do solar.</p>
+  </div>
+</div>
+
+<!-- IR LED + MOSFET + LDR -->
+<div class="component-section">
+  <div class="component-header" onclick="toggleComponent(this)">
+    <span>💡 <strong>IR LED 850nm + MOSFET + LDR</strong> (Night Vision dodatki)</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="component-body">
+    <div class="comp-offer"><span class="name">IR LED 850nm 5mm (10-pack)</span><span class="price">~8 kr</span><span class="rating">~0.80 kr/szt</span></div>
+    <div class="comp-offer"><span class="name">IR LED 850nm 3W high power</span><span class="price">~5 kr</span><span class="rating">Jaśniejszy zasięg</span></div>
+    <div class="comp-offer"><span class="name">AO3400 N-Ch MOSFET (100-pack)</span><span class="price">~30 kr</span><span class="rating">~0.30 kr/szt</span></div>
+    <div class="comp-offer"><span class="name">LDR GL5528 Photoresistor (20-pack)</span><span class="price">~10 kr</span><span class="rating">~0.50 kr/szt</span></div>
+    <p style="color:var(--text2);font-size:.8rem;margin-top:.5rem;">Koszty IR+MOSFET+LDR są pomijalne (~2 kr/kamera). Warto dodać nawet w wersji Day Only jako future-proof.</p>
+  </div>
+</div>
+
+<!-- ==================== TIPS ==================== -->
+<h2>💡 Tips oszczędnościowe</h2>
+<div class="tips-grid">
+  <div class="tip-card">
+    <strong>📦 Bulk ma sens!</strong><br>
+    Przy 10 kamerach: PIR, step-down, MOSFET, LDR — kupuj w packach po 10-100. Cena spada o 30-50%.
+  </div>
+  <div class="tip-card">
+    <strong>🔧 ESP32-S3 + OV5640 jako KIT</strong><br>
+    Zawsze kupuj board z kamerą w zestawie. Taniej niż osobno i nie musisz grzebać z dedykowanym kablem FFC.
+  </div>
+  <div class="tip-card">
+    <strong>🔋 Bateria — jedyny wydatek premium</strong><br>
+    70 kr na ogniwie to 55% ceny Super Budget. Nie ma na czym oszczędzać — chińskie 18650 to ruletka.
+  </div>
+  <div class="tip-card">
+    <strong>🛒 Kupuj z jednego sklepu</strong><br>
+    Wybierz 2-3 duże sklepy na AliExpress z szerokim asortymentem. Free shipping >100 kr + combined delivery.
+  </div>
+  <div class="tip-card">
+    <strong>⚡ CN3065 vs TP4056</strong><br>
+    CN3065 (~5 kr) jest dedykowany do solar. TP4056 (~3 kr) działa z diodą ale mniej wydajnie. Różnica 2 kr — warto.
+  </div>
+  <div class="tip-card">
+    <strong>📦 Obudowa DIY</strong><br>
+    Nie wliczona w BOM. Możesz użyć puszki elektrycznej IP65 (~20-30 kr) lub wydrukować 3D.
+  </div>
+</div>
+
+<!-- ==================== VS TAPO ==================== -->
+<h2>🆚 DIY vs Tapo C200 (~250 kr)</h2>
+<table class="summary-table">
+  <thead>
+    <tr><th>Kryterium</th><th>DIY Super Budget (~127 kr)</th><th>DIY Day Only (~194 kr)</th><th>Tapo C200 (~250 kr)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cena</strong></td><td class="price-green">127 kr</td><td class="price-green">194 kr</td><td>~250 kr</td></tr>
+    <tr><td><strong>Solar</strong></td><td class="price-green">✅ Wbudowany</td><td class="price-green">✅ Wbudowany</td><td>❌ Brak (trzeba zasilacz)</td></tr>
+    <tr><td><strong>Bateria</strong></td><td class="price-green">✅ 18650 (wymienialna)</td><td class="price-green">✅ 18650 (wymienialna)</td><td>❌ Brak</td></tr>
+    <tr><td><strong>Rozdzielczość</strong></td><td>2MP (OV2640)</td><td class="price-green">5MP (OV5640)</td><td>2MP (Full HD)</td></tr>
+    <tr><td><strong>PIR / Detekcja</strong></td><td>✅ Zewnętrzny PIR</td><td>✅ Zewnętrzny PIR</td><td>✅ Wbudowany</td></tr>
+    <tr><td><strong>Noktowizja</strong></td><td>❌ (można dodać)</td><td>❌ (można dodać)</td><td>✅ Wbudowana</td></tr>
+    <tr><td><strong>Customizacja</strong></td><td class="price-green">✅ Pełna (open source)</td><td class="price-green">✅ Pełna (open source)</td><td>❌ Zamknięta appka</td></tr>
+    <tr><td><strong>Montaż</strong></td><td>❌ DIY (3-4h/kamera)</td><td>❌ DIY (3-4h/kamera)</td><td class="price-green">✅ Gotowe (5 min)</td></tr>
+    <tr><td><strong>WODOodporność</strong></td><td>❌ Trzeba zrobić</td><td>❌ Trzeba zrobić</td><td>❌ Indoor only</td></tr>
+  </tbody>
+</table>
+
+<div class="warning-box" style="margin-top:1rem;">
+  <strong>🎯 Werdykt:</strong> Przy 1 kamerze — Tapo C200 jest wygodniejsze. Ale przy <strong>10 kamerach solarnych</strong> DIY wygrywa. Tapo nie ma baterii ani panela — potrzebuje zasilacza 230V przy każdej kamerze. DIY z panelem = zero kabli.
+</div>
+
+<h2>🛒 Amazon.se — porównanie kluczowych komponentów</h2>
+<table class="summary-table">
+  <thead>
+    <tr><th>Komponent</th><th>AliExpress</th><th>Amazon.se</th><th>Różnica</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ESP32-CAM + OV2640</td><td class="price-green">22.95 kr</td><td>~200 kr</td><td class="price-yellow">8.7× drożej</td></tr>
+    <tr><td>ESP32-S3 + OV5640</td><td class="price-green">83.64 kr</td><td>~250 kr</td><td class="price-yellow">3× drożej</td></tr>
+    <tr><td>AM312 PIR</td><td class="price-green">6.38 kr</td><td>~50 kr</td><td class="price-yellow">7.8× drożej</td></tr>
+    <tr><td>MP1584 Step-Down</td><td class="price-green">3.80 kr</td><td>~80 kr</td><td class="price-yellow">21× drożej</td></tr>
+    <tr><td>Solar Panel 5V 5W</td><td class="price-green">21.16 kr</td><td>~100 kr</td><td class="price-yellow">4.7× drożej</td></tr>
+    <tr><td>18650 Battery</td><td>❌ NIE POLECAM</td><td>~70-80 kr</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p style="color:var(--text2);font-size:.85rem;margin-top:1rem;">
+  🏆 <strong>Rekomendacja:</strong> Zamów wszystko z AliExpress (prócz baterii — z nkon.nl/Amazon). 
+  Przy 10 kamerach oszczędzasz ~400-500 kr vs AliExpress + ~3000 kr vs Amazon.se.
+</p>
+
+<p style="color:var(--text2);font-size:.8rem;margin-top:1.5rem;text-align:center;">
+  📅 Raport wygenerowany: 28 lipca 2026 · Ceny z AliExpress (SEK z VAT) · BOM v3 · 
+  <a href="https://github.com/andrzej-bot-dev/andrzej-reports" target="_blank">GitHub Pages</a>
+</p>
+
+</div>
+
+<script>
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleComponent(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+// Default: expand first component
+document.addEventListener('DOMContentLoaded', function() {
+  // All components start collapsed
+});
+</script>
 </body>
 </html>

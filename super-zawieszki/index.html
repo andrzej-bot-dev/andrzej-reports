@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍓 Super Zawieszki — Aleksandra & Dawid 13.08.2026</title>
+<style>
+  :root {
+    --cream: #F9F7EA;
+    --burgundy: #7C1F33;
+    --burgundy-light: #A03550;
+    --strawberry: #D9435E;
+    --leaf: #6B8E5A;
+    --bg: #faf8f0;
+    --card: #ffffff;
+    --border: #e8e4d8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'EB Garamond', serif;
+    background: var(--bg);
+    color: #333;
+    line-height: 1.6;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--cream) 0%, #f3eedd 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 3px solid var(--burgundy);
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    color: var(--burgundy);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .hero .subtitle {
+    font-size: 1.2em;
+    color: var(--leaf);
+    font-style: italic;
+  }
+  .hero .date {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: var(--burgundy-light);
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  .preview-section {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .preview-section img.sheet {
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .tag-preview {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+  }
+  .tag-preview img {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .tag-preview .tag {
+    max-width: 350px;
+    width: 100%;
+  }
+  .tag-preview .tag-zoom {
+    max-width: 350px;
+    width: 100%;
+  }
+  .downloads {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+  }
+  .downloads h2 {
+    color: var(--burgundy);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cream);
+    padding-bottom: 10px;
+  }
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  .download-card {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--burgundy);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+  .download-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(124,31,51,0.15);
+    border-color: var(--burgundy);
+  }
+  .download-card .icon {
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+  .download-card .name {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .download-card .desc {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 4px;
+  }
+  .specs {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+  }
+  .specs h2 {
+    color: var(--burgundy);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cream);
+    padding-bottom: 10px;
+  }
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .spec-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-table td:first-child {
+    font-weight: bold;
+    color: var(--burgundy);
+    width: 40%;
+  }
+  .spec-table .ok { color: #2d8a3e; font-weight: bold; }
+  .qa-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+  }
+  .qa-section h2 {
+    color: var(--burgundy);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--cream);
+    padding-bottom: 10px;
+  }
+  .qa-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .qa-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+  }
+  .qa-badge.pass { background: #d4edda; color: #155724; }
+  .qa-badge.fail { background: #f8d7da; color: #721c24; }
+  .message-template {
+    background: var(--cream);
+    border-left: 4px solid var(--burgundy);
+    padding: 20px 25px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-family: monospace;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+  }
+  .order-calc {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .order-calc table {
+    margin: 10px auto;
+    border-collapse: collapse;
+  }
+  .order-calc th, .order-calc td {
+    padding: 6px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .order-calc th {
+    color: var(--burgundy);
+  }
+  .warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .warning h3 {
+    color: #856404;
+    margin-bottom: 10px;
+  }
+  .strawberry-icon {
+    display: inline-block;
+    transform: rotate(-15deg);
+  }
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #aaa;
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🍓 Super Zawieszki</h1>
+  <p class="subtitle">Aleksandra <span class="strawberry-icon">&</span> Dawid</p>
+  <p class="date">13.08.2026</p>
+</div>
+
+<div class="container">
+
+  <!-- Preview -->
+  <div class="preview-section">
+    <h2 style="color: var(--burgundy); margin-bottom: 20px;">📄 Podgląd arkusza A4</h2>
+    <img src="assets/podglad_300dpi.png" alt="Arkusz A4 z 12 zawieszkami" class="sheet">
+    <p style="color: #888; margin-top: 8px; font-size: 0.9em;">12 zawieszek 62×62 mm w siatce 3×4, marginesy 6/15.5 mm</p>
+  </div>
+
+  <!-- Tag detail -->
+  <div class="tag-preview">
+    <div>
+      <h3 style="color: var(--burgundy); margin-bottom: 10px; text-align: center;">Pojedyncza zawieszka</h3>
+      <img src="assets/tag_render.png" alt="Pojedyncza zawieszka" class="tag">
+    </div>
+    <div>
+      <h3 style="color: var(--burgundy); margin-bottom: 10px; text-align: center;">Detail (2×)</h3>
+      <img src="assets/tag_render_2x.png" alt="Zbliżka zawieszki" class="tag-zoom">
+    </div>
+  </div>
+
+  <!-- Downloads -->
+  <div class="downloads">
+    <h2>📥 Pliki do pobrania</h2>
+    <div class="download-grid">
+      <a href="assets/zawieszki_A4_RGB.pdf" class="download-card">
+        <div class="icon">🖨️</div>
+        <div class="name">zawieszki_A4_RGB.pdf</div>
+        <div class="desc">A4 · 12 szt · RGB · ~1.4 MB</div>
+      </a>
+      <a href="assets/zawieszki_A4_CMYK.pdf" class="download-card">
+        <div class="icon">🎨</div>
+        <div class="name">zawieszki_A4_CMYK.pdf</div>
+        <div class="desc">A4 · 12 szt · CMYK · ~1.5 MB</div>
+      </a>
+      <a href="assets/zawieszka_1szt.pdf" class="download-card">
+        <div class="icon">📐</div>
+        <div class="name">zawieszka_1szt.pdf</div>
+        <div class="desc">62×62 mm · pojedyncza · do impozycji SRA3</div>
+      </a>
+      <a href="assets/tag_render.png" class="download-card">
+        <div class="icon">🖼️</div>
+        <div class="name">tag_render.png</div>
+        <div class="desc">Render 300 dpi pojedynczej zawieszki</div>
+      </a>
+      <a href="assets/alpha_check.png" class="download-card">
+        <div class="icon">✂️</div>
+        <div class="name">alpha_check.png</div>
+        <div class="desc">Weryfikacja przezroczystości (maska alfa)</div>
+      </a>
+      <a href="assets/berry.png" class="download-card">
+        <div class="icon">🍓</div>
+        <div class="name">berry.png</div>
+        <div class="desc">Wycięta truskawka dekoracyjna</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="specs">
+    <h2>📐 Specyfikacja techniczna</h2>
+    <table class="spec-table">
+      <tr><td>Wymiary zawieszki</td><td>62 × 62 mm (kwadratowa)</td></tr>
+      <tr><td>Sztuk na A4</td><td>12 (3 × 4 siatka)</td></tr>
+      <tr><td>Odstępy</td><td>6.0 mm (X i Y)</td></tr>
+      <tr><td>Marginesy</td><td>6.0 mm boki · 15.5 mm góra/dół</td></tr>
+      <tr><td>Rozdzielczość grafiki</td><td>419 dpi (1024 px / 62 mm) <span class="ok">✅ ≥300</span></td></tr>
+      <tr><td>Spady</td><td>Brak (projekt nie dochodzi do krawędzi)</td></tr>
+      <tr><td>Papier sugerowany</td><td>Karton 300 g/m² matowy</td></tr>
+      <tr><td>Druk</td><td>4/0 (jednostronny, kolor)</td></tr>
+      <tr><td>Kolor tekstu</td><td>CMYK 25/100/70/25 · #7C1F33 (burgund)</td></tr>
+      <tr><td>Wielkość tekstu głównego</td><td>~14 pt (EB Garamond)</td></tr>
+      <tr><td>Imiona (script)</td><td>Great Vibes, większe o ~40%</td></tr>
+    </table>
+  </div>
+
+  <!-- Fonts -->
+  <div class="specs">
+    <h2>🔤 Czcionki</h2>
+    <table class="spec-table">
+      <tr><td>EB Garamond Regular</td><td>Tekst główny + data · osadzona <span class="ok">✅</span></td></tr>
+      <tr><td>Great Vibes Regular</td><td>Imiona (script) · osadzona <span class="ok">✅</span></td></tr>
+      <tr><td>Polskie znaki</td><td>ą ć ę ł ń ó ś ź ż — wszystkie obecne <span class="ok">✅</span></td></tr>
+      <tr><td>Wielokropki</td><td>U+2026 (…) — pojedynczy znak <span class="ok">✅</span></td></tr>
+    </table>
+  </div>
+
+  <!-- QA -->
+  <div class="qa-section">
+    <h2>✅ Kontrola wizualna (QA)</h2>
+    <p style="color: #888; margin-bottom: 15px;">Ostatnia iteracja oceniona przez Qwen3 VL Plus (vision model)</p>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Tekst nie nachodzi na ramkę ząbkowaną</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Tekst nie nachodzi na bukiet truskawek</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Blok główny wyśrodkowany pionowo</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Odstępy równe, dwa wyraźne akapity</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Mała truskawka przy "Smacznego" naturalna</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Imiona w piśmie odręcznym, większe</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Kolor tekstu burgund</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Polskie znaki + wielokropki poprawne</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> 12 zawieszek wykrytych w poprawnej siatce (hard test)</div>
+    <div class="qa-item"><span class="qa-badge pass">PASS</span> Fonty osadzone · obrazy ≥300 dpi · A4 595×841pt</div>
+  </div>
+
+  <!-- Order calc -->
+  <div class="specs">
+    <h2>🧮 Ile arkuszy zamówić?</h2>
+    <p>Wzór: <code>ceil(N / 12) + 2</code> (2 arkusze zapasowe)</p>
+    <div class="order-calc">
+      <table>
+        <tr><th>Gości</th><th>Arkuszy A4</th></tr>
+        <tr><td>30</td><td>5</td></tr>
+        <tr><td>50</td><td>7</td></tr>
+        <tr><td>60</td><td>7</td></tr>
+        <tr><td>80</td><td>9</td></tr>
+        <tr><td>100</td><td>11</td></tr>
+        <tr><td>120</td><td>12</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Message template -->
+  <div class="specs">
+    <h2>📧 Gotowa wiadomość do drukarni</h2>
+    <div class="message-template">Hej!
+
+Potrzebuję wydrukować zawieszki na słoiki (weselne). Pliki:
+
+• Format: A4 (210×297 mm), pionowo
+• Zawieszki: 12 sztuk na arkuszu, każda 62×62 mm z ząbkowaną krawędzią
+• Papier: karton 300 g/m², matowy
+• Druk: 4/0 (jednostronny, kolor)
+• Spady: BRAK (projekt nie dochodzi do krawędzi)
+• W załączniku: zawieszki_A4_RGB.pdf
+
+Pytanie: czy robicie wycinanie po konturze (ząbkowana krawędź)?
+Jeśli tak — mam też plik z jedną zawieszką 62×62mm
+do impozycji na większym arkuszu SRA3.
+
+Nakład: [X] arkuszy A4.
+
+Dzięki!</div>
+  </div>
+
+  <!-- Warning -->
+  <div class="warning">
+    <h3>⚠️ Zanim zamówisz nakład!</h3>
+    <ol style="padding-left: 20px; margin-top: 10px;">
+      <li>Wydrukuj <code>zawieszki_A4_RGB.pdf</code> na domowej drukarce — <strong>skala 100%</strong> (nie "fit to page")</li>
+      <li>Wytnij jedną zawieszkę i przyłóż do słoika</li>
+      <li>Przeczytaj tekst na papierze — literówka widać dopiero na wydruku</li>
+      <li>Dopiero potem zamawiaj nakład</li>
+    </ol>
+  </div>
+
+</div>
+
+<footer>
+  <p>🍓 Wygenerowano 2026-07-29 przez Andrzeja (OpenClaw)</p>
+  <p>Source: <a href="https://github.com/andrzej-bot-dev/andrzej-reports/tree/main/super-zawieszki">GitHub</a></p>
+</footer>
+
+</body>
+</html>

@@ -34,6 +34,16 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
 }
+.badge {
+    display: inline-block;
+    background: #90A074;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    margin-left: 8px;
+    vertical-align: middle;
+}
 .download-btn {
     display: inline-block;
     background: #5E2129;
@@ -41,14 +51,20 @@ h1 {
     padding: 14px 36px;
     border-radius: 8px;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1.05em;
     transition: all 0.3s;
-    margin: 10px;
+    margin: 8px;
 }
 .download-btn:hover {
     background: #7a2d38;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.download-btn.secondary {
+    background: #90A074;
+}
+.download-btn.secondary:hover {
+    background: #7a8b5f;
 }
 .info {
     color: #666;
@@ -56,25 +72,27 @@ h1 {
     margin-top: 20px;
     text-align: center;
     max-width: 500px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 </style>
 </head>
 <body>
 <h1>🍓 Zawieszki weselne</h1>
 <p class="subtitle">Aleksandra &amp; Dawid · 13.08.2026</p>
-<img src="zawieszki-weselne.png" alt="Zawieszka weselna" class="tag-preview">
+<img src="zawieszki-weselne-wektor.png" alt="Zawieszka weselna" class="tag-preview">
 <div>
-    <a href="zawieszki-weselne.pdf" download class="download-btn">📄 Pobierz PDF (A4, 9 szt.)</a>
-    <a href="zawieszki-weselne.png" download class="download-btn">🖼️ Pobierz PNG</a>
+    <a href="zawieszki-weselne-A4.pdf" download class="download-btn">📄 PDF A4 wektorowy (9 szt.)</a>
+    <a href="zawieszki-weselne-wektor.pdf" download class="download-btn secondary">📄 PDF pojedynczy</a>
+</div>
+<div style="margin-top: 10px;">
+    <a href="zawieszki-weselne.svg" download class="download-btn secondary" style="font-size: 0.9em; padding: 10px 24px;">📐 SVG (źródło)</a>
+    <a href="zawieszki-weselne-wektor.png" download class="download-btn secondary" style="font-size: 0.9em; padding: 10px 24px;">🖼️ PNG 300dpi</a>
 </div>
 <p class="info">
-    <strong>Specyfikacja druku:</strong><br>
-    Format tagu: 50×70 mm (+ 3 mm bleed)<br>
-    A4: 3×3 = 9 sztuk na stronę<br>
-    Rozdzielczość: 300 DPI<br>
-    Tło: kremowe (#FDFBF5) · Tekst: burgund (#5E2129)<br>
-    Fonty: Cormorant Garamond + Great Vibes
+    <strong>PDF w pełni wektorowy</strong> — zoom bez utraty jakości ✨<br>
+    <br>
+    <strong>Specyfikacja:</strong> 50×70 mm (+ 3 mm bleed) · 300 DPI · A4: 3×3 = 9 szt.<br>
+    Fonty: Cormorant Garamond + Great Vibes · Tło: krem #FDFBF5 · Tekst: burgund #5E2129
 </p>
 </body>
 </html>

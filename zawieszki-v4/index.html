@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zawieszki ślubne v4 — Final 🍓</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, serif; background: linear-gradient(135deg, #faf6f0 0%, #f0e6d8 100%); color: #4a3728; min-height: 100vh; padding: 2rem; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 2rem; text-align: center; margin-bottom: 0.3rem; color: #8b1538; }
+.subtitle { text-align: center; font-style: italic; color: #a07060; margin-bottom: 2rem; }
+.card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+.card h2 { color: #8b1538; margin-bottom: 1rem; }
+.preview-img { width: 100%; max-width: 500px; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.12); }
+.download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.download-item { background: #faf6f0; border-radius: 8px; padding: 1rem; text-align: center; }
+.download-item:hover { background: #f5ebe0; }
+.download-item a { text-decoration: none; color: #8b1538; font-weight: bold; display: block; margin-bottom: 0.3rem; }
+.download-item .desc { font-size: 0.85rem; color: #888; }
+.spec p { margin: 0.3rem 0; }
+.footer { text-align: center; margin-top: 2rem; color: #c4a882; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🍓 Zawieszki ślubne v4 — Final</h1>
+  <p class="subtitle">"Miłość JEST słodka" — 10 iteracji Qwen VL · Aleksandra &amp; Dawid · 13.08.2026</p>
+
+  <div class="card">
+    <h2>Podgląd</h2>
+    <img src="zawieszka-v4-preview.png" alt="Podgląd zawieszki" class="preview-img">
+  </div>
+
+  <div class="card">
+    <h2>Pobierz</h2>
+    <div class="download-grid">
+      <div class="download-item">
+        <a href="zawieszka-v4-gotowa.pdf" download>📄 Pojedyncza (PDF)</a>
+        <div class="desc">70×70mm + spad + crop marks</div>
+      </div>
+      <div class="download-item">
+        <a href="zawieszka-v4-arkusz-a4.pdf" download>📋 Arkusz A4 (12 szt)</a>
+        <div class="desc">3×4 zawieszki na A4</div>
+      </div>
+      <div class="download-item">
+        <a href="zawieszka-v4.png" download>🖼️ Pełna jakość PNG</a>
+        <div class="desc">300 DPI, gotowa do druku</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card spec">
+    <h2>Co poprawiono (10 iteracji Qwen VL)</h2>
+    <p>• Teksty powiększone o ~50% vs v3</p>
+    <p>• Kolory dopasowane: brązowy główny, różowy akcent</p>
+    <p>• Odstępy między liniami zwiększone</p>
+    <p>• Hierarchia: Miłość (duży) → JEST (mały) → słodka (średni)</p>
+    <p>• Kremowy obrys dla czytelności na tle</p>
+    <p>• Render PIL (anty-aliasing)</p>
+    <p>• 10 iteracji porównania Qwen3-VL-Flash</p>
+  </div>
+
+  <p class="footer">Aleksandra &amp; Dawid 💍 · 13 sierpnia 2026</p>
+</div>
+</body>
+</html>

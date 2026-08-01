@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zawieszki ślubne v5 — Final 🍓</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:linear-gradient(135deg,#faf6f0 0%,#f0e6d8 100%);color:#4a3728;min-height:100vh;padding:2rem}
+.container{max-width:900px;margin:0 auto}
+h1{font-size:2rem;text-align:center;margin-bottom:.3rem;color:#8b1538}
+.subtitle{text-align:center;font-style:italic;color:#a07060;margin-bottom:2rem}
+.card{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:1.5rem}
+.card h2{color:#8b1538;margin-bottom:1rem}
+.preview-img{width:100%;max-width:500px;display:block;margin:0 auto;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem}
+.dl-item{background:#faf6f0;border-radius:8px;padding:1rem;text-align:center}
+.dl-item:hover{background:#f5ebe0}
+.dl-item a{text-decoration:none;color:#8b1538;font-weight:bold;display:block;margin-bottom:.3rem}
+.dl-item .desc{font-size:.85rem;color:#888}
+.spec p{margin:.3rem 0}
+.footer{text-align:center;margin-top:2rem;color:#c4a882;font-style:italic}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🍓 Zawieszki ślubne v5</h1>
+  <p class="subtitle">"Miłość JEST słodka" — 5 iteracji Qwen VL + Gemini · Aleksandra &amp; Dawid · 13.08.2026</p>
+  <div class="card">
+    <h2>Podgląd</h2>
+    <img src="zawieszka-v5-preview.png" alt="Podgląd" class="preview-img">
+  </div>
+  <div class="card">
+    <h2>Pobierz</h2>
+    <div class="dl">
+      <div class="dl-item"><a href="zawieszka-v5-gotowa.pdf" download>📄 Pojedyncza (PDF)</a><div class="desc">70×70mm + spad + crop marks</div></div>
+      <div class="dl-item"><a href="zawieszka-v5-arkusz-a4.pdf" download>📋 Arkusz A4 (12 szt)</a><div class="desc">3×4 na A4</div></div>
+      <div class="dl-item"><a href="zawieszka-v5.png" download>🖼️ PNG 300 DPI</a><div class="desc">Pełna jakość</div></div>
+    </div>
+  </div>
+  <div class="card spec">
+    <h2>Proces (5 iteracji Qwen3-VL-Plus + Gemini-3-Flash)</h2>
+    <p><strong>Rozmiary tekstu (% wysokości tagu):</strong></p>
+    <p>• Miłość: 13% (GreatVibes, ciemna oliwka #3D3D2E)</p>
+    <p>• JEST: 4.5% (Playfair, spaced caps)</p>
+    <p>• słodka: 11.5% (GreatVibes, miedź #B48C70)</p>
+    <p>• Dziękujemy: 3.5% (Playfair Italic)</p>
+    <p>• Names: 7.5% (GreatVibes)</p>
+    <p>• Date: 4% (Playfair + hearts)</p>
+    <p><strong>Narzędzia:</strong> PIL render, find_font_size() dla precyzyjnych wysokości</p>
+  </div>
+  <p class="footer">Aleksandra &amp; Dawid 💍 · 13 sierpnia 2026</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BatteryCheckPro — Raport: Ładowarki i Kable USB w Polsce</title>
+<style>
+:root {
+    --bg: #0d1117;
+    --bg-card: #161b22;
+    --bg-hover: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,0.1);
+    --yellow: #d29922;
+    --yellow-bg: rgba(210,153,34,0.1);
+    --red: #f85149;
+    --red-bg: rgba(248,81,73,0.1);
+    --orange: #ff6600;
+    --orange-bg: rgba(255,102,0,0.1);
+    --accent: #58a6ff;
+    --accent-bg: rgba(88,166,255,0.1);
+    --purple: #bc8cff;
+    --radius: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:0 20px; }
+
+/* Hero */
+.hero { background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding:60px 0 40px; border-bottom:3px solid var(--accent); }
+.hero h1 { font-size:2.5em; background:linear-gradient(90deg, #58a6ff, #bc8cff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:10px; }
+.hero .subtitle { color:var(--text-dim); font-size:1.1em; max-width:700px; }
+.hero .meta { color:var(--text-dim); font-size:0.85em; margin-top:15px; }
+
+/* Stats bar */
+.stats-bar { display:flex; gap:20px; flex-wrap:wrap; padding:25px 0; }
+.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:15px 20px; flex:1; min-width:140px; text-align:center; }
+.stat-card .number { font-size:2em; font-weight:700; color:var(--accent); }
+.stat-card .label { color:var(--text-dim); font-size:0.85em; }
+.stat-card.good .number { color:var(--green); }
+.stat-card.bad .number { color:var(--red); }
+
+/* Sections */
+section { padding:30px 0; }
+h2 { font-size:1.8em; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid var(--border); }
+h3 { font-size:1.3em; margin:25px 0 15px; color:var(--accent); }
+
+/* Top picks cards */
+.picks-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:15px; margin-bottom:30px; }
+.pick-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; transition:transform 0.15s,box-shadow 0.15s; }
+.pick-card:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,0.3); }
+.pick-card.good { border-left:3px solid var(--green); }
+.pick-card.warn { border-left:3px solid var(--yellow); }
+.pick-card.bad { border-left:3px solid var(--red); }
+.pick-card .name { font-weight:700; font-size:1.1em; margin-bottom:5px; }
+.pick-card .store { display:inline-block; background:var(--accent-bg); color:var(--accent); padding:2px 8px; border-radius:4px; font-size:0.8em; margin-bottom:10px; }
+.pick-card .stats { display:grid; grid-template-columns:1fr 1fr; gap:5px 15px; font-size:0.9em; }
+.pick-card .stats .val { font-weight:600; }
+.pick-card .verdict { font-weight:700; margin-top:10px; }
+.pick-card .notes { color:var(--text-dim); font-size:0.85em; margin-top:8px; }
+
+/* Tables */
+.table-wrap { overflow-x:auto; margin-bottom:30px; }
+table { width:100%; border-collapse:collapse; font-size:0.9em; }
+th { background:var(--bg-card); padding:10px 12px; text-align:left; border-bottom:2px solid var(--border); position:sticky; top:0; white-space:nowrap; cursor:pointer; user-select:none; }
+th:hover { color:var(--accent); }
+td { padding:8px 12px; border-bottom:1px solid var(--border); }
+tr:hover { background:var(--bg-hover); }
+tr.good { background:var(--green-bg); }
+tr.good:hover { background:rgba(63,185,80,0.15); }
+tr.warn { background:var(--yellow-bg); }
+tr.warn:hover { background:rgba(210,153,34,0.15); }
+tr.bad { background:var(--red-bg); }
+tr.bad:hover { background:rgba(248,81,73,0.15); }
+tr.trash { background:var(--orange-bg); }
+tr.trash:hover { background:rgba(255,102,0,0.15); }
+.store { font-weight:600; }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.verdict { font-weight:700; white-space:nowrap; }
+.notes { color:var(--text-dim); max-width:300px; font-size:0.85em; }
+.protocols { font-size:0.8em; color:var(--text-dim); }
+
+/* Insights */
+.insights { display:grid; grid-template-columns:repeat(auto-fill, minmax(350px, 1fr)); gap:15px; }
+.insight-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; border-left:3px solid var(--accent); }
+.insight-card .icon { font-size:1.5em; margin-bottom:8px; }
+.insight-card p { color:var(--text-dim); font-size:0.95em; }
+
+/* Blacklist */
+.blacklist { display:grid; grid-template-columns:repeat(auto-fill, minmax(350px, 1fr)); gap:15px; }
+.bl-card { background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:var(--radius); padding:20px; }
+.bl-card .name { font-weight:700; font-size:1.05em; color:var(--red); }
+.bl-card .reason { color:var(--text-dim); font-size:0.9em; margin-top:8px; }
+
+/* Filter buttons */
+.filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px; }
+.filter-btn { background:var(--bg-card); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:20px; cursor:pointer; font-size:0.85em; transition:all 0.2s; }
+.filter-btn:hover,.filter-btn.active { background:var(--accent-bg); border-color:var(--accent); color:var(--accent); }
+
+/* Footer */
+footer { text-align:center; padding:40px 0; color:var(--text-dim); font-size:0.85em; border-top:1px solid var(--border); margin-top:30px; }
+footer a { color:var(--accent); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* Summary box */
+.summary-box { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:25px; margin:20px 0; }
+.summary-box ul { list-style:none; }
+.summary-box li { padding:5px 0; }
+.summary-box li::before { content:'▸ '; color:var(--accent); }
+
+@media (max-width:768px) {
+    .hero h1 { font-size:1.8em; }
+    .stats-bar { gap:10px; }
+    .stat-card { padding:10px; }
+    .stat-card .number { font-size:1.5em; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <h1>⚡ BatteryCheckPro — Raport Ładowarek i Kabli USB</h1>
+        <p class="subtitle">Kompleksowa analiza 160 testów ładowarek i kabli USB dostępnych w polskich sklepach stacjonarnych — Action, Biedronka, Rossmann, IKEA, Leroy Merlin, Sellgross, Kaufland i Pepco.</p>
+        <p class="meta">📅 Sierpień 2026 • 🎥 Źródło: <a href="https://youtube.com/@Smooth-BatteryCheckPro" style="color:var(--accent)">@Smooth-BatteryCheckPro</a> na YouTube • 📊 160 testów przeanalizowanych</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-card">
+            <div class="number">160</div>
+            <div class="label">Przetestowanych produktów</div>
+        </div>
+        <div class="stat-card good">
+            <div class="number">88</div>
+            <div class="label">POLECAM ✅</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">33</div>
+            <div class="label">Średnie ⚠️</div>
+        </div>
+        <div class="stat-card bad">
+            <div class="number">27</div>
+            <div class="label">Unikaj ❌💀</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">43</div>
+            <div class="label">Dostępne lokalnie w PL</div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: Chargers -->
+    <section>
+        <h2>🔌 Sekcja 1: Ładowarki USB</h2>
+        <p style="color:var(--text-dim);margin-bottom:20px">Wszystkie testowane ładowarki — od marketowych kostek za 20 zł po premium 100W+. Sortowane wg sklepu i werdyktu.</p>
+        
+        <div class="filters" id="charger-filters">
+            <button class="filter-btn active" onclick="filterTable('charger-table','all',this)">Wszystkie (84)</button>
+            <button class="filter-btn" onclick="filterTable('charger-table','POLECAM',this)">✅ POLECAM</button>
+            <button class="filter-btn" onclick="filterTable('charger-table','ŚREDNIE',this)">⚠️ Średnie</button>
+            <button class="filter-btn" onclick="filterTable('charger-table','NIE POLECAM',this)">❌ Nie polecam</button>
+            <button class="filter-btn" onclick="filterTable('charger-table','SZROT',this)">💀 Szrot</button>
+            <button class="filter-btn" onclick="filterTable('charger-table','local',this)">🏪 Tylko lokalne</button>
+        </div>
+
+        <div class="table-wrap">
+        <table id="charger-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable('charger-table',0)">Produkt</th>
+                    <th onclick="sortTable('charger-table',1)">Sklep</th>
+                    <th class="num" onclick="sortTable('charger-table',2,true)">Cena</th>
+                    <th class="num" onclick="sortTable('charger-table',3,true)">Moc dekl.</th>
+                    <th class="num" onclick="sortTable('charger-table',4,true)">Moc realna</th>
+                    <th class="num" onclick="sortTable('charger-table',5,true)">Temp.</th>
+                    <th>Protokoły</th>
+                    <th>Werdykt</th>
+                    <th>Uwagi</th>
+                </tr>
+            </thead>
+            <tbody>
+<tr class="good">
+        <td>Action Reload 100W</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">100W</td>
+        <td class="num">72°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2x USB-C. Test 2 portów równolegle: 70W + 32W = ~100W. Temp 58°C (10 min), 72°C (20 min). 'Świetna ładowarka', zaskakująco dobry wynik</td>
+    </tr><tr class="good">
+        <td>Reload 65W</td>
+        <td class="store">Action</td>
+        <td class="num">34 zł</td>
+        <td class="num">65W</td>
+        <td class="num">76W</td>
+        <td class="num">68°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Najtańsze 65W w Polsce. Z jednego portu wyciągnęła 76W. Przy dwóch urządzeniach max 60W. Problem: trzeba najpierw wpiąć słabsze urządzenie, inaczej re</td>
+    </tr><tr class="good">
+        <td>Sitecom 30W</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">30W</td>
+        <td class="num">33W</td>
+        <td class="num">54°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Z Action. Deklarowane 30W osiąga w praktyce 33W. Temperatura 54°C po 10 min pełnego obciążenia - zauważalnie ciepła ale w normie. W sumie solidna łado</td>
+    </tr><tr class="good">
+        <td>Sitecom GaN3 65W</td>
+        <td class="store">Action</td>
+        <td class="num">40 zł</td>
+        <td class="num">65W</td>
+        <td class="num">75W</td>
+        <td class="num">—</td>
+        <td class="protocols">QC3, QC5, FCP, PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Jeden USB-C i jeden USB-A. Realnie 75.5W - duży zapas mocy. Poprzedni model był już testowany, nowy Gun3 wygląda podobnie ale działa lepiej. Świetna c</td>
+    </tr><tr class="good">
+        <td>Sologic 20W</td>
+        <td class="store">Action</td>
+        <td class="num">30 zł</td>
+        <td class="num">20W</td>
+        <td class="num">22.5W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD3.0, QC, Huawei SCP, Samsung AFC, Apple 2.5A</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Dwa porty USB-C i USB-A. Realnie 22.5W - ponad 10% więcej niż deklaracja. Bogate protokoły jak na 30 zł. Mała obudowa + duża moc = wysoka temperatura </td>
+    </tr><tr class="warn">
+        <td>Grundig 20W</td>
+        <td class="store">Action</td>
+        <td class="num">20 zł</td>
+        <td class="num">20W</td>
+        <td class="num">35W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">PD, DCP</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Jeden USB-C. W testach nawet 35W (ponad deklarację), ale przy 20W robi się gorąco - ponad 58°C po 10 min. Tylko 2 protokoły. Za 20 zł okej, ale bez wi</td>
+    </tr><tr class="warn">
+        <td>Re-load GaN 100W</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">100W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Test 1: na kablu zestawowym spadki napięcia do 18V - niestabilna. Test 2: na kablu serwisowym pełne 100W bez problemu. Ładowarka daje radę, ale kabel </td>
+    </tr><tr class="bad">
+        <td>Action Reload 45W GaN3</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">45W</td>
+        <td class="num">51W</td>
+        <td class="num">76°C</td>
+        <td class="protocols">QC 3, QC 4+, FCP, SCP, AFC, PD 3.2</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Single port max 51W. Przy 45W: 65°C po 10 min. Przy 30W+12W(A): >76°C i CAŁKOWITE WYŁĄCZENIE. Tętnienia 99mV. Niebezpieczna termicznie</td>
+    </tr><tr class="bad">
+        <td>Sologic 60W 8-port</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">60W</td>
+        <td class="num">34W</td>
+        <td class="num">67°C</td>
+        <td class="protocols">PD, QC</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">8 portów. Najmocniejszy port tylko 34W, przy 4 urządzeniach łącznie ~50W. 67°C po 10 min. Deklarowane 60W nie osiągnięte. Mieszane uczucia - 100W wers</td>
+    </tr><tr class="trash">
+        <td>Sitecom 140W GaN</td>
+        <td class="store">Action</td>
+        <td class="num">80 zł</td>
+        <td class="num">140W</td>
+        <td class="num">150W</td>
+        <td class="num">80°C</td>
+        <td class="protocols">QC5, AFC, PD3.1</td>
+        <td class="verdict">💀 SZROT</td>
+        <td class="notes">Kandydat na szrot miesiąca. Sprzęt pomiarowy zgasł przy 150W. Po 10 minutach ponad 80°C - absolutny rekord temperatury. Niebezpiecznie gorąca.</td>
+    </tr><tr class="">
+        <td>Reload 100W</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">QC3, QC5, PD 3.0, PPS, Apple 2.4</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Wstępny test protokołów. Obsługuje QC3, QC5, PD 3.0, PPS, Apple 2.4A na obu portach USB-C. Pełny test obciążenia zapowiedziany na kolejny dzień.</td>
+    </tr><tr class="good">
+        <td>No-name 65W GaN (AliExpress)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">61 zł</td>
+        <td class="num">65W</td>
+        <td class="num">75W</td>
+        <td class="num">50°C</td>
+        <td class="protocols">PD 3.0, QC 4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realny zapas mocy - deklaracja 65W, test 75W. 50°C po 10 min - dobry wynik dla GaN. Budżetowe opakowanie ale dobra jakość wykonania. Pozytywne zaskocz</td>
+    </tr><tr class="good">
+        <td>Slim GaN 65W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">71.5W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Bardzo płaska, składana wtyczka - mieści się w kieszeni marynarki. Single port: 71.5W. Dwa porty: 45W + 20W. Wspiera PD. Niedoceniany gadżet z AliExpr</td>
+    </tr><tr class="good">
+        <td>Toocki 240W GaN 6-port</td>
+        <td class="store">AliExpress</td>
+        <td class="num">250 zł</td>
+        <td class="num">240W</td>
+        <td class="num">245W</td>
+        <td class="num">59°C</td>
+        <td class="protocols">QC 5.0, PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">6 portów (4x C, 2x A). Najmocniejszy port: 146W. Dwa porty: 245W realnej mocy - potężny wynik. Zakres napięć do 28V. Tylko 59°C przy pełnym obciążeniu</td>
+    </tr><tr class="good">
+        <td>Vention 30W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">40 zł</td>
+        <td class="num">30W</td>
+        <td class="num">37W</td>
+        <td class="num">51°C</td>
+        <td class="protocols">PD 3.0, QC 4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie 37W przy deklaracji 30W. Deklaruje nawet do 65W i QC4+. 51°C po 10 min, stabilna. Świetny stosunek jakości do ceny</td>
+    </tr><tr class="warn">
+        <td>Asometech GaN 120W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">120 zł</td>
+        <td class="num">120W</td>
+        <td class="num">109W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">PD, QC</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">8 portów. Single port max 109W, dwa urządzenia 117W. Nie osiąga deklarowanych 120W. 58°C+ przy 100W. USB-A1 ma największy minus (ucięte)</td>
+    </tr><tr class="warn">
+        <td>Bullet 20W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">—</td>
+        <td class="num">20W</td>
+        <td class="num">25W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Deklaracja 20W, realnie 25W+. 57°C po 10 min - wyraźnie się nagrzewa. Działa poprawnie ale raczej jako dodatkowy sprzęt, nie główny.</td>
+    </tr><tr class="trash">
+        <td>No-name 120W (fake)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">—</td>
+        <td class="num">120W</td>
+        <td class="num">11W</td>
+        <td class="num">61°C</td>
+        <td class="protocols">DCP</td>
+        <td class="verdict">💀 SZROT</td>
+        <td class="notes">Deklaracja 120W, realnie 11W na każdym porcie. Opis mówi QC3.0 ale obsługuje tylko DCP. 61°C po 10 min. Jedna z najbardziej bezczelnych ładowarek test</td>
+    </tr><tr class="good">
+        <td>Anker 250W GaN</td>
+        <td class="store">Amazon</td>
+        <td class="num">541 zł</td>
+        <td class="num">250W</td>
+        <td class="num">146W</td>
+        <td class="num">56°C</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">6 portów (4 USB-C, 2 USB-A). Single port: 146W (dekl. 140W). Dwa porty: 240W łącznie. Temp 48°C jeden port, 56°C dwa porty. Kabel w zestawie. Luksusow</td>
+    </tr><tr class="warn">
+        <td>Sanicat 180W</td>
+        <td class="store">Amazon</td>
+        <td class="num">—</td>
+        <td class="num">180W</td>
+        <td class="num">65W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">180W to suma wszystkich portów, nie moc jednego. Na jednym porcie ~65W. 52°C po 10 min. Działa stabilnie ale marketing mylny. Liczba 180W na opakowani</td>
+    </tr><tr class="bad">
+        <td>Motorola 68W</td>
+        <td class="store">Amazon</td>
+        <td class="num">—</td>
+        <td class="num">68W</td>
+        <td class="num">72W</td>
+        <td class="num">66°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Osiąga 72W chwilowo, ale po 9 minutach przy 66°C wyłącza się. Po ponownym uruchomieniu wyłącza się po 30 sekundach. Brak stabilności pomimo sensownych</td>
+    </tr><tr class="warn">
+        <td>Hykker 20W</td>
+        <td class="store">Biedronka</td>
+        <td class="num">20 zł</td>
+        <td class="num">20W</td>
+        <td class="num">23W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">QC4, DCP, PD</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Realnie 22.5W, pobór z gniazdka 24W przy obciążeniu 20W. Jeden port USB-C. 57°C po 10 min. Za 20 zł trudno oczekiwać cudów</td>
+    </tr><tr class="bad">
+        <td>Hakker 35W</td>
+        <td class="store">Biedronka</td>
+        <td class="num">50 zł</td>
+        <td class="num">35W</td>
+        <td class="num">40W</td>
+        <td class="num">70°C</td>
+        <td class="protocols">PD3, QC3+, QC4+, FCP, SCP, AFC, SvOC, VOOC, MTK, DCP, Apple 2.4A</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Zintegrowany kabel USB-C + port USB-C. Prawie 40W realnie, ale 70°C po 10 min przy 35W to za dużo. Tytuł: 'lepiej nie kupuj'</td>
+    </tr><tr class="good">
+        <td>IKEA SJÖSS 20W</td>
+        <td class="store">IKEA</td>
+        <td class="num">—</td>
+        <td class="num">20W</td>
+        <td class="num">23W</td>
+        <td class="num">48°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie ponad 23W z deklarowanych 20W. Temperatura 48°C po 10 min pełnego obciążenia. Ciekawa ładowarka podręczna do plecaka, sprawdza się do codzienn</td>
+    </tr><tr class="good">
+        <td>IKEA SJÖSS 45W</td>
+        <td class="store">IKEA</td>
+        <td class="num">—</td>
+        <td class="num">45W</td>
+        <td class="num">50W</td>
+        <td class="num">59°C</td>
+        <td class="protocols">PD 3.0, QC2, QC3, QC4</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Jeden port: ~50W (powyżej deklaracji 45W). Dwa porty: po 22W. Temp 59°C (jeden port), 56°C (dwa porty). PD 3.0, QC2/3/4. Całkiem niezła ładowarka z IK</td>
+    </tr><tr class="good">
+        <td>IKEA Småbatteri 5W (z kablem 2m)</td>
+        <td class="store">IKEA</td>
+        <td class="num">20 zł</td>
+        <td class="num">5W</td>
+        <td class="num">5.5W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Prosta ładowarka USB-A z 2m kablem. Temp ładowarki ~52°C, kabel 30°C, wtyczka 31°C. Rezystancja kabla 275 mΩ - akceptowalne dla 2m. Bardzo prosty zasi</td>
+    </tr><tr class="bad">
+        <td>IKEA SMÅHAGEL 17W</td>
+        <td class="store">IKEA</td>
+        <td class="num">—</td>
+        <td class="num">17W</td>
+        <td class="num">12W</td>
+        <td class="num">42°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Deklaracja 17W, realnie 11.78W. Na pudełku też '3 x 12W' co myli. Brak protokołów szybkiego ładowania. 42°C. Marketing 17W wygląda lepiej na opakowani</td>
+    </tr><tr class="bad">
+        <td>IKEA SMÅHAGEL 5W</td>
+        <td class="store">IKEA</td>
+        <td class="num">—</td>
+        <td class="num">5W</td>
+        <td class="num">5W</td>
+        <td class="num">51°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Realnie ~5W zgodnie z deklaracją. Ale 51°C przy zaledwie 5W — 'grzałka'. Nadaje się tylko do niewymagających urządzeń</td>
+    </tr><tr class="good">
+        <td>Kaufland Switch 35W</td>
+        <td class="store">Kaufland</td>
+        <td class="num">45 zł</td>
+        <td class="num">35W</td>
+        <td class="num">30W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD 3.0, QC4+, SCP</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Na pudełku obiecuje 20W na porcie USB-C, a w teście stabilne 30W (o połowę więcej). Szeroka lista protokołów. Test pozytywnie zaskoczył recenzenta.</td>
+    </tr><tr class="bad">
+        <td>Lexman 17W</td>
+        <td class="store">Leroy Merlin</td>
+        <td class="num">28 zł</td>
+        <td class="num">17W</td>
+        <td class="num">16W</td>
+        <td class="num">59°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Jedyna ładowarka USB w Leroy Merlin. 2x USB-A, 1x USB-C. 27,50 zł. Deklaracja 3.4A/5V (17W), realnie 16W. Bardzo gorąca (59°C) przy zaledwie 17W. Słab</td>
+    </tr><tr class="good">
+        <td>iBOX 65W</td>
+        <td class="store">Morele</td>
+        <td class="num">66 zł</td>
+        <td class="num">65W</td>
+        <td class="num">72W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">QC3, QC4+, PD3, FCP, SCP, AFC, SFCP, DCP, Apple 2.4A</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Dwa porty USB-C i jeden USB-A. Szerokie protokoły, zapas mocy ponad deklarację. Ciepło ale bez dramatu. Bardzo dobra opłacalność ~66 zł.</td>
+    </tr><tr class="good">
+        <td>iBOX C38 30W</td>
+        <td class="store">Morele</td>
+        <td class="num">29 zł</td>
+        <td class="num">30W</td>
+        <td class="num">34W</td>
+        <td class="num">61°C</td>
+        <td class="protocols">PD3.0, QC3, QC4+, FCP, AFC, DCP, Apple 2.4A</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Jeden USB-C. Realnie prawie 34W. Szerokie protokoły. Temp 61°C po 10 min - ciepło ale w normie. Bardzo dobra opłacalność za 29 zł.</td>
+    </tr><tr class="good">
+        <td>Baseus 30W GaN</td>
+        <td class="store">Rossmann</td>
+        <td class="num">60 zł</td>
+        <td class="num">30W</td>
+        <td class="num">35W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">PD, QC4+, QC3, AFC, FCP, Apple 2.4</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Z Rossmanna za ~60 zł. Prawie 35W z deklarowanych 30W. USB-C + USB-A. Temp 51-57°C. Bogate protokoły: PD, QC4+, QC3, AFC, FCP, Apple 2.4A. Mocna mała </td>
+    </tr><tr class="bad">
+        <td>Rossmann 20W</td>
+        <td class="store">Rossmann</td>
+        <td class="num">35 zł</td>
+        <td class="num">20W</td>
+        <td class="num">26W</td>
+        <td class="num">77°C</td>
+        <td class="protocols">QC, PD</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Realnie prawie 25.5W — pozytywne zaskoczenie mocą. Ale 67°C po 10 min, 77°C po 20 min — bardzo gorąca jak na 20W. Cena 34.99 zł</td>
+    </tr><tr class="good">
+        <td>Cube 65W</td>
+        <td class="store">Sellgross</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">68W</td>
+        <td class="num">—</td>
+        <td class="protocols">QC 3, QC 5, FCP, SCP, AFC, MTK, DCP, PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2x USB-C + 1x USB-A. Realnie ~68W, lekko powyżej deklaracji. 65W na USB-C, 36W na USB-A. Bogate protokoły. Marketowa ale dobra</td>
+    </tr><tr class="good">
+        <td>Hama 45W</td>
+        <td class="store">Sellgross</td>
+        <td class="num">—</td>
+        <td class="num">45W</td>
+        <td class="num">58W</td>
+        <td class="num">48°C</td>
+        <td class="protocols">QC 3.0, QC 4+, FCP, AFC, PD 3.0, DCP, Apple 2.4A</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">1x USB-C + 1x USB-A. Deklaracja 45W, realnie 58.4W - powyżej specyfikacji. Bardzo chłodna: 47.8°C przy 45W obciążeniu. Szerokie wsparcie protokołów.</td>
+    </tr><tr class="warn">
+        <td>Gembird 12W</td>
+        <td class="store">Sellgross</td>
+        <td class="num">16 zł</td>
+        <td class="num">12W</td>
+        <td class="num">13W</td>
+        <td class="num">63°C</td>
+        <td class="protocols">DCP, Apple 2.4</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Prosta ładowarka USB-A za ~16 zł. 12W deklarowane, realnie 12.6W. Bardzo gorąca - prawie 63°C przy zaledwie 12W. Tylko podstawowe protokoły (DCP, Appl</td>
+    </tr><tr class="warn">
+        <td>Hama 30W</td>
+        <td class="store">Sellgross</td>
+        <td class="num">73 zł</td>
+        <td class="num">30W</td>
+        <td class="num">34W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">PD, QC2, QC3, QC4, PPS, FCP, SCP, AFC, Apple 2.4, DCP</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Dobra wydajność (prawie 34W z 30W deklarowanych, 33W PPS). Praca bezbłędna, ale cena 73 zł za ~30W jest wysoka. Zintegrowany kabel.</td>
+    </tr><tr class="good">
+        <td>AOHI 280W (AOC C022)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">280W</td>
+        <td class="num">240W</td>
+        <td class="num">50°C</td>
+        <td class="protocols">PD 3.1, EPR 240W, PPS, QC 5</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">4 porty USB-C. C1: PD3.1 EPR 240W/PPS/QC5. C2-C4: 140W/PPS/QC5/UFCs/AVS. 240W łącznie na 4 portach, tylko 50°C po 10 min</td>
+    </tr><tr class="good">
+        <td>Adapter podróżny 65W</td>
+        <td class="store">None</td>
+        <td class="num">140 zł</td>
+        <td class="num">65W</td>
+        <td class="num">67.5W</td>
+        <td class="num">54°C</td>
+        <td class="protocols">PD3.0, QC4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Jeden port USB-C. Realnie 67.5W - minimalnie ponad specyfikację. Temp 54°C po 10 min. Bardzo solidny wynik jak na adapter podróżny ~140 zł.</td>
+    </tr><tr class="good">
+        <td>Anker 100W (A121B)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">111W</td>
+        <td class="num">53°C</td>
+        <td class="protocols">QC3.0, PD3.0</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie 111W. Temp 53°C po 15 min pełnego obciążenia. Wyświetlacz pokazujący moc i temperaturę na każdym porcie. Obsługa m.in. Xiaomi. Genialna konstr</td>
+    </tr><tr class="good">
+        <td>Anker 140W</td>
+        <td class="store">None</td>
+        <td class="num">258 zł</td>
+        <td class="num">140W</td>
+        <td class="num">145W</td>
+        <td class="num">61°C</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Single port: 145W. 3x USB-C jednocześnie: 138W. 61°C po 10 min - aktywne chłodzenie się włączyło. 258 zł za ładowarkę - droga ale potężna.</td>
+    </tr><tr class="good">
+        <td>Anker 67W (seria 335)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">67W</td>
+        <td class="num">75W</td>
+        <td class="num">49°C</td>
+        <td class="protocols">PD, QC, SFC</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie ponad 75W, temp tylko 49°C po 10 min. 'Tak powinny działać produkty premium' — wzorowa termika</td>
+    </tr><tr class="good">
+        <td>Anker 70W (B121A)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">70W</td>
+        <td class="num">75W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">PD, QC</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie 75W - więcej niż deklaracja. Temperatura 52°C po 10 min - bardzo dobry wynik. Obsługuje wszystkie główne protokoły. Bardzo udana konstrukcja p</td>
+    </tr><tr class="good">
+        <td>Anker Nano II 65W</td>
+        <td class="store">None</td>
+        <td class="num">146 zł</td>
+        <td class="num">65W</td>
+        <td class="num">75W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">PD3.0, QC3, QC5</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Kompaktowa ładowarka GaN. Realnie 75W - znacznie powyżej deklaracji. Temp 58°C po 10 min - zauważalna ale bezpieczna. Wszechstronna obsługa protokołów</td>
+    </tr><tr class="good">
+        <td>Apple 18W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">18W</td>
+        <td class="num">20W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie ponad 20W. Stabilne parametry przy pełnym obciążeniu. Dobra temperatura jak na ten typ. Uczciwa ładowarka klasy premium, typowa jakość Apple.</td>
+    </tr><tr class="good">
+        <td>Baseus 35W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">35W</td>
+        <td class="num">37W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Wyświetlacz pokazuje 46W (niedokładny pomiar wbudowany). Realnie ~37W. Stabilna i przyjemna ładowarka. 52°C po 10 min pełnego obciążenia.</td>
+    </tr><tr class="good">
+        <td>CamVI 35W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">35W</td>
+        <td class="num">46W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">PD 3.0, QC 4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Szokujący wynik: 46W przy deklaracji 35W. Szeroki zakres pracy 36-20V. 58°C po 10 min. 'Szczęka z podłogi'</td>
+    </tr><tr class="good">
+        <td>CamVI 65W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">80W</td>
+        <td class="num">68°C</td>
+        <td class="protocols">PD3.0, QC4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Producent kamer monitoringu zrobił genialną ładowarkę. 65W to dla niej rozgrzewka - wykręciła stabilne 80W. Absolutny ewenement w klasie cenowej. Temp</td>
+    </tr><tr class="good">
+        <td>CamVi 20W GaN</td>
+        <td class="store">None</td>
+        <td class="num">70 zł</td>
+        <td class="num">20W</td>
+        <td class="num">25W</td>
+        <td class="num">53°C</td>
+        <td class="protocols">PD, QC 4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2 porty, obudowa wielkości pudełka od zapałek. Deklaracja 20W, realnie stabilne 25W. 53°C po 10 min. Wsparcie do 12V. Deal roku za 70 zł.</td>
+    </tr><tr class="good">
+        <td>Forcell 25W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">25W</td>
+        <td class="num">30W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Deklaracja 25W, realnie ~30W. Stabilna praca, wysoka jakość wykonania. Bardzo rozsądna cena. Sensowna opcja w swojej klasie cenowej.</td>
+    </tr><tr class="good">
+        <td>Forcell 30W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">30W</td>
+        <td class="num">35W</td>
+        <td class="num">—</td>
+        <td class="protocols">QC 4.0</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie ponad 35W przy deklaracji 30W. Rzadko producent zaniża statystyki. Solidny wynik w tej cenie. 'Test zaliczony'</td>
+    </tr><tr class="good">
+        <td>Forcell 33W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">33W</td>
+        <td class="num">35W</td>
+        <td class="num">—</td>
+        <td class="protocols">QC4</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Z kablem USB-C w zestawie. Realnie 35W — zaniżona specyfikacja. Bardzo dobry wybór w tej cenie</td>
+    </tr><tr class="good">
+        <td>Forcell 45W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">45W</td>
+        <td class="num">45W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Pierwszy raz od dawna producent nie myli się w specyfikacji. Deklaruje 45W i realnie daje 45W. Test zaliczony.</td>
+    </tr><tr class="good">
+        <td>Forcell 70W (zintegrowany kabel)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">70W</td>
+        <td class="num">75W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Zintegrowany kabel USB-C. Realnie ponad 75W, stabilna praca. Zintegrowany kabel nie ogranicza mocy</td>
+    </tr><tr class="good">
+        <td>Hama GaN 65W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">85W</td>
+        <td class="num">53°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie ponad 85W przy deklarowanych 65W! Temp 53°C po 10 min na pełnym obciążeniu. Bardzo solidne wykonanie. Nie spodziewany tak dobrego wyniku</td>
+    </tr><tr class="good">
+        <td>Motorola 33W</td>
+        <td class="store">None</td>
+        <td class="num">69 zł</td>
+        <td class="num">33W</td>
+        <td class="num">37W</td>
+        <td class="num">56°C</td>
+        <td class="protocols">DCP, QC 3.0</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie 36.5W, więcej niż deklaracja. 56°C po 10 min. Stabilna praca, brak zastrzeżeń w tej cenie</td>
+    </tr><tr class="good">
+        <td>Samsung 25W</td>
+        <td class="store">None</td>
+        <td class="num">87 zł</td>
+        <td class="num">25W</td>
+        <td class="num">26.5W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Realnie 26.5W, spadki napięcia minimalne (~5%). Temp 58°C po 10 min. Technicznie bardzo dobre wykonanie, cena ~87 zł uzasadniona.</td>
+    </tr><tr class="good">
+        <td>Tessan 30W</td>
+        <td class="store">None</td>
+        <td class="num">75 zł</td>
+        <td class="num">30W</td>
+        <td class="num">35W</td>
+        <td class="num">56°C</td>
+        <td class="protocols">PD 3.0, QC 4+</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Deklaracja 30W, realnie 35W. Napięcie 3.6-12V. Ładowarka podróżna - gniazdo 220V pass-through + USB. 56°C po 10 min. Idealny kompan podróży za 75 zł.</td>
+    </tr><tr class="good">
+        <td>UGREEN GaN X512 20W</td>
+        <td class="store">None</td>
+        <td class="num">30 zł</td>
+        <td class="num">20W</td>
+        <td class="num">23W</td>
+        <td class="num">50°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Technologia GaN. Deklaracja 20W, realnie 23.4W - powyżej specyfikacji. ~50°C po 10 min. Wiele protokołów szybkiego ładowania. Dobra cena 30 zł.</td>
+    </tr><tr class="good">
+        <td>UGREEN Nexode Pro 65W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">73W</td>
+        <td class="num">50°C</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Bardzo dobra ładowarka premium. Przekracza deklarację 65W (osiąga prawie 73W przy 20V/3.75A). Niska temperatura ~50°C po 10 min. Wysoka jakość wykonan</td>
+    </tr><tr class="good">
+        <td>Unitek 100W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">106W</td>
+        <td class="num">54°C</td>
+        <td class="protocols">UFCS, QC 5.0, PD 3.2</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">3x USB-C + 1x USB-A, ekran pokazujący moc per port. 106.4W na jednym porcie. Przy dwóch portach (70+30W) stabilna. 53.8°C single, 55°C dual. NTC reduk</td>
+    </tr><tr class="good">
+        <td>Xiaomi 67W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">67W</td>
+        <td class="num">69W</td>
+        <td class="num">61°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Zasłużyła na medal. Deklaruje 67W, realnie 68.66W - więcej niż na pudełku. Wynik na kablu oryginalnym i serwisowym. 61°C przy pełnym obciążeniu, 59°C </td>
+    </tr><tr class="good">
+        <td>iBOX 10W</td>
+        <td class="store">None</td>
+        <td class="num">20 zł</td>
+        <td class="num">10W</td>
+        <td class="num">11W</td>
+        <td class="num">48°C</td>
+        <td class="protocols">DCP, Apple 2.4A</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Prosta ładowarka z silikonowym kablem USB-A do micro USB w zestawie. Stabilna praca, niska temperatura. Wystarczy do kamerki IP, starszego telefonu lu</td>
+    </tr><tr class="good">
+        <td>iBOX 33W</td>
+        <td class="store">None</td>
+        <td class="num">30 zł</td>
+        <td class="num">33W</td>
+        <td class="num">39W</td>
+        <td class="num">58°C</td>
+        <td class="protocols">PD 3, QC 2, QC 3, QC 4</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">GaN, USB-C + USB-A, kabel w zestawie. Realnie 38.7W. Pobór z sieci 37W przy 33W wyjścia. 58°C po 10 min. Za 30 zł — warto</td>
+    </tr><tr class="warn">
+        <td>Anker 30W (wymiana)</td>
+        <td class="store">None</td>
+        <td class="num">99 zł</td>
+        <td class="num">30W</td>
+        <td class="num">36W</td>
+        <td class="num">65°C</td>
+        <td class="protocols">PD, QC</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Ładowarka po wymianie przez producenta (poprzednia się przegrzewała). Realnie 36.4W. Temp prawie 65°C - lepiej niż wcześniej ale nadal gorąca. Malutka</td>
+    </tr><tr class="warn">
+        <td>Baseus 20W</td>
+        <td class="store">None</td>
+        <td class="num">32 zł</td>
+        <td class="num">20W</td>
+        <td class="num">23W</td>
+        <td class="num">57°C</td>
+        <td class="protocols">QC 3.0, PD 3.0</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Realnie ~23W (powyżej deklaracji 20W). Temperatura prawie 57°C - norma ale warto mieć na uwadze. QC 3.0 (5/9/12V) i PD 3.0. ~32 zł. Kompromis między m</td>
+    </tr><tr class="warn">
+        <td>Baseus 24W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">24W</td>
+        <td class="num">26W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Max ~26W ale niestabilne, stabilnie przy 24W. 52°C po 10 min. Pytanie czy warto dopłacać gdy tańsze dają podobne wyniki</td>
+    </tr><tr class="warn">
+        <td>Forcell 100W GaN</td>
+        <td class="store">None</td>
+        <td class="num">200 zł</td>
+        <td class="num">100W</td>
+        <td class="num">98W</td>
+        <td class="num">52°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Osiąga ~98W (blisko deklaracji 100W). Spadek napięcia: 19.3V zamiast 20V. Temperatura 52°C po 10 min. Cena ~200 zł. Mieszane uczucia - niewiele urządz</td>
+    </tr><tr class="warn">
+        <td>GreenCell 30W</td>
+        <td class="store">None</td>
+        <td class="num">50 zł</td>
+        <td class="num">30W</td>
+        <td class="num">29W</td>
+        <td class="num">45°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Deklarowane 30W to suma portów (18+12W), nie pojedynczy port. Mylący marketing. Sama ładowarka działa poprawnie, temperatura prawie 45°C.</td>
+    </tr><tr class="warn">
+        <td>Xiaomi 90W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">90W</td>
+        <td class="num">85W</td>
+        <td class="num">—</td>
+        <td class="protocols">QC3.0, DCP, PD3.0</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">90W tylko dla telefonów Xiaomi. Bez Xiaomi: USB-C 67W, USB-A 15W, łącznie 85W. Trzeba dokładnie czytać deklarację. Protokoły QC3.0, DCP, PD3.0. Temper</td>
+    </tr><tr class="warn">
+        <td>xLine 25W GaN</td>
+        <td class="store">None</td>
+        <td class="num">80 zł</td>
+        <td class="num">25W</td>
+        <td class="num">29W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD 3.0, QC 4+</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Deklaracja 25W, realnie stabilne 29W. Napięcie 3.5-12V. Protokoły PD 3.0 i QC 4+. Problem z temperaturą mimo GaN - po 10 min obudowa mocno się nagrzew</td>
+    </tr><tr class="bad">
+        <td>Anker 30W (A2147)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">30W</td>
+        <td class="num">34W</td>
+        <td class="num">84°C</td>
+        <td class="protocols">PD 3.0, QC 4.0</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Temp 74°C po 10 min, 84°C po 20 min — test przerwany. Marka premium z katastrofalną termiką. Protokoły działają wzorowo</td>
+    </tr><tr class="bad">
+        <td>Apple 10W (legacy)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">10W</td>
+        <td class="num">11W</td>
+        <td class="num">64°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Stara ładowarka Apple 10W. Realnie 10.76W. 64°C - bardzo gorąca jak na taką moc. Brak protokołów szybkiego ładowania. Przestarzała konstrukcja. Nadaje</td>
+    </tr><tr class="bad">
+        <td>Apple 5W (stara)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">5W</td>
+        <td class="num">5.4W</td>
+        <td class="num">61°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Realnie 5.4W. Temperatura 61°C po 10 min przy tak niskiej mocy - bardzo wysoka. Polecana tylko do bardzo lekkich zastosowań.</td>
+    </tr><tr class="bad">
+        <td>Motorola 68W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">67W</td>
+        <td class="num">73W</td>
+        <td class="num">60°C</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Realnie ponad 73W, ale po ~11 min ładowarka się WYŁĄCZA. Oddana na gwarancję. 60°C po 10 min. Niestabilna — 'testuję, wyłącza się'</td>
+    </tr><tr class="bad">
+        <td>Sendem PD 45W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">45W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Brak stabilności przy obciążeniu. 45W tylko na opakowaniu. Nie trzyma specyfikacji. Do szybkiego ładowania nie polecana.</td>
+    </tr><tr class="bad">
+        <td>Xiaomi 90W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">90W</td>
+        <td class="num">69W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Deklaracja 90W nie do osiągnięcia. Maksymalnie 69.2W w teście. Spadki napięcia i stabilności. Wysoka deklaracja nieadekwatna do rzeczywistej wydajnośc</td>
+    </tr><tr class="">
+        <td>None</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Film edukacyjny - tłumaczy czym jest technologia GaN (azotek galu vs krzem). Mniejsze rozmiary, wyższa wydajność, szybsze ładowanie, niższa temperatur</td>
+    </tr><tr class="">
+        <td>None</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Film informacyjny - producenci laptopów nie dołączają ładowarek (przepisy UE). Tłumaczy błędy przy wyborze zasilacza samodziennie. Brak testu konkretn</td>
+    </tr><tr class="">
+        <td>AOHI 280W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">280W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Ładowarka biurkowa 6 portów (4x USB-C, 2x USB-A), łącznie 280W. Rolls-Royce ładowarek. Zapowiedź pełnego testu, ulepszone stanowisko pomiarowe.</td>
+    </tr><tr class="">
+        <td>BlueStar 20W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">20W</td>
+        <td class="num">24W</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Realnie 24W — więcej niż deklaracja. Brak danych o temperaturze. Ugreen zamówiony jako kolejny</td>
+    </tr><tr class="">
+        <td>iBOX C4233W 33W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">33W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="protocols">—</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Test skupia się na tętnieniach napięcia (voltage ripple) dla profili PD 5-20V. Wyniki ucięte w transkrypcji. Moc i temp nie podane w tym fragmencie</td>
+    </tr><tr class="">
+        <td>iPhone charging test (Anker charger + 100W cable)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">40W</td>
+        <td class="num">—</td>
+        <td class="protocols">PD</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Test informacyjny: iPhone bierze realnie 35-40W niezależnie od mocy ładowarki. Kabel i standard telefonu też mają znaczenie, nie tylko ładowarka. Mocn</td>
+    </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Cables -->
+    <section>
+        <h2>🔗 Sekcja 2: Kable USB</h2>
+        <p style="color:var(--text-dim);margin-bottom:20px">Kable USB-C, USB-A na USB-C, Lightning — pomiary rezystancji, temperatury pod obciążeniem i prędkości transferu danych.</p>
+        
+        <div class="filters" id="cable-filters">
+            <button class="filter-btn active" onclick="filterTable('cable-table','all',this)">Wszystkie (73)</button>
+            <button class="filter-btn" onclick="filterTable('cable-table','POLECAM',this)">✅ POLECAM</button>
+            <button class="filter-btn" onclick="filterTable('cable-table','ŚREDNIE',this)">⚠️ Średnie</button>
+            <button class="filter-btn" onclick="filterTable('cable-table','NIE POLECAM',this)">❌ Nie polecam</button>
+            <button class="filter-btn" onclick="filterTable('cable-table','SZROT',this)">💀 Szrot</button>
+            <button class="filter-btn" onclick="filterTable('cable-table','local',this)">🏪 Tylko lokalne</button>
+        </div>
+
+        <div class="table-wrap">
+        <table id="cable-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable('cable-table',0)">Produkt</th>
+                    <th onclick="sortTable('cable-table',1)">Sklep</th>
+                    <th class="num" onclick="sortTable('cable-table',2,true)">Cena</th>
+                    <th class="num" onclick="sortTable('cable-table',3,true)">Moc dekl.</th>
+                    <th class="num" onclick="sortTable('cable-table',4,true)">Rezystancja</th>
+                    <th class="num" onclick="sortTable('cable-table',5,true)">Długość</th>
+                    <th class="num" onclick="sortTable('cable-table',6,true)">Temp.</th>
+                    <th onclick="sortTable('cable-table',7)">Transfer danych</th>
+                    <th>Werdykt</th>
+                    <th>Uwagi</th>
+                </tr>
+            </thead>
+            <tbody>
+<tr class="good">
+        <td>Action Reload 100W (kabel z zestawu)</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">189 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">48°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">E-marker 5A/20V. 189 mΩ na 1.5m — normalny wynik. Stabilny brak resetów PD. Temp 40.7°C kabel, 47.5°C wtyczka. 'Jestem pod wrażeniem'</td>
+    </tr><tr class="good">
+        <td>Kabel 240W 2m z Action</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">240W</td>
+        <td class="num">295 mΩ</td>
+        <td class="num">2.0m</td>
+        <td class="num">48°C</td>
+        <td>USB 2.0</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Kabel 2m z Action, testowany przy 140W (deklaracja 240W). E-marker: PD 3.1 240W, USB 2.0. Rezystancja 295 mΩ jak na 2m przecięta. Stabilny, brak reset</td>
+    </tr><tr class="warn">
+        <td>Reload magnetyczny USB-C (1.5m)</td>
+        <td class="store">Action</td>
+        <td class="num">21.95 zł</td>
+        <td class="num">100W</td>
+        <td class="num">273 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">51°C</td>
+        <td>None</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel z magnetycznym składaniem. Test 100W stabilny. Rezystancja 273 mΩ - wysoka, podobna do innych kabli USB-C z Action. Temp 39°C kabel, 51°C wtyczk</td>
+    </tr><tr class="warn">
+        <td>Sologic 60W 3m</td>
+        <td class="store">Action</td>
+        <td class="num">—</td>
+        <td class="num">60W</td>
+        <td class="num">340 mΩ</td>
+        <td class="num">3.0m</td>
+        <td class="num">48°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel 3m z Action. Test 60W z resetami PD. Rezystancja 340 mΩ - czuć długość kabla. Temp 37.5°C kabel, 48°C wtyczka. Tylko 480Mbps, brak E-markera. Ta</td>
+    </tr><tr class="bad">
+        <td>Philips 60W 1.5m</td>
+        <td class="store">Action</td>
+        <td class="num">15 zł</td>
+        <td class="num">60W</td>
+        <td class="num">367 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">40°C</td>
+        <td>None</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Kabel z Action za 15 zł. Rezystancja 367 mΩ - technologiczna przepadść (dobre kable poniżej 150 mΩ). Brak E-markera. Wtyczka prawie 40°C. Wrażenie jak</td>
+    </tr><tr class="trash">
+        <td>Co Logic USB-A to Lightning</td>
+        <td class="store">Action</td>
+        <td class="num">7 zł</td>
+        <td class="num">—</td>
+        <td class="num">3717 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td>None</td>
+        <td class="verdict">💀 SZROT</td>
+        <td class="notes">USB-A to Lightning za 6.99 zł. Rezystancja 3717 mΩ - rekordowo zły wynik. Opisany jako zgodny z AirPods/iPhone/iPad. Drgania wartości potwierdzone dru</td>
+    </tr><tr class="good">
+        <td>Cabletime 240W PD 3.1</td>
+        <td class="store">AliExpress</td>
+        <td class="num">23 zł</td>
+        <td class="num">240W</td>
+        <td class="num">13 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">47°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy przewód, metalowe wtyki. E-marker potwierdza 50V/5A. Rezystancja 13 mΩ - wyjątkowo dobry wynik. Temperatura 46.5°C na wtyczce przy 100W.</td>
+    </tr><tr class="good">
+        <td>Elbow 240W Thunderbolt 5</td>
+        <td class="store">AliExpress</td>
+        <td class="num">40 zł</td>
+        <td class="num">240W</td>
+        <td class="num">228 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">40°C</td>
+        <td>USB4 80Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">E-marker wypełniony po brzegi. Deklarowane 240W i 80Gbps widoczne w systemie. Wszystko na zielono. Rezystancja 228 mΩ zauważalna ale akceptowalna. 40°</td>
+    </tr><tr class="good">
+        <td>Essager 240W 2m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">21 zł</td>
+        <td class="num">240W</td>
+        <td class="num">223 mΩ</td>
+        <td class="num">2.0m</td>
+        <td class="num">49°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Kabel 2m z oplotem i wyświetlaczem we wtyczce za 21 zł. Test 100W stabilny. Rezystancja 223 mΩ - w porządku jak na kabel z wyświetlaczem. Temp 45.5°C </td>
+    </tr><tr class="good">
+        <td>Hagibis 240W TBT5 0.25m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">21 zł</td>
+        <td class="num">240W</td>
+        <td class="num">131 mΩ</td>
+        <td class="num">0.25m</td>
+        <td class="num">48°C</td>
+        <td>Thunderbolt 5</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Krótki 25cm kabel płaski silikonowy. Deklaracja TBT5/240W. Test 100W stabilny. Rezystancja 131 mΩ przy tej długości sensowna. Wtyczka 48°C, kabel 41°C</td>
+    </tr><tr class="good">
+        <td>Hagibis 60W 4m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">67 zł</td>
+        <td class="num">60W</td>
+        <td class="num">369 mΩ</td>
+        <td class="num">4.0m</td>
+        <td class="num">35°C</td>
+        <td>USB4 20Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">4m kabel USB-C z E-markerem (USB4 10/20Gbps). Stabilny przy 60W, rezystancja 369 mΩ jak na 4m całkiem niezła. Dobra opcja za 67 zł.</td>
+    </tr><tr class="good">
+        <td>Hagibis USB-C 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">20 zł</td>
+        <td class="num">240W</td>
+        <td class="num">—</td>
+        <td class="num">0.15m</td>
+        <td class="num">38°C</td>
+        <td>Thunderbolt 5 80Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">15 cm, metalowe wtyczki, plecionka. E-marker 240W/TB5 80Gbps. Test 100W stabilnie. Temp 38°C wtyczka, 33°C kabel. Rezystancja ucięta w transkrypcji</td>
+    </tr><tr class="good">
+        <td>Lavender 240W 2m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">24 zł</td>
+        <td class="num">240W</td>
+        <td class="num">266 mΩ</td>
+        <td class="num">2.0m</td>
+        <td class="num">—</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy kabel 2m, metalowe wtyczki. E-marker potwierdza 240W/480Mbps. Test 100W stabilny (20V/5A). Rezystancja 266 mΩ. Bardzo przyjemny silikon w d</td>
+    </tr><tr class="good">
+        <td>No-name Thunderbolt 4 (AliExpress)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">31 zł</td>
+        <td class="num">240W</td>
+        <td class="num">212 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">40°C</td>
+        <td>Thunderbolt 4 40Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Metalowe końcówki, porządny oplot. Test 100W (20V 5A) stabilnie. Rezystancja 212 mΩ - godna segmentu premium. Temp 40°C po 10 min. E-marker: 240W i 40</td>
+    </tr><tr class="good">
+        <td>No-name Thunderbolt 5 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">24 zł</td>
+        <td class="num">240W</td>
+        <td class="num">135 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">44°C</td>
+        <td>USB4 80Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Kabel Thunderbolt 5 za 24 zł. Test 140W (28V/5A) stabilnie. Rezystancja 135 mΩ - bardzo dobry wynik. 44°C po 10 min. Pełne wsparcie 240W i 80Gbps. Wsz</td>
+    </tr><tr class="good">
+        <td>Noame 240W TBT4 0.15m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">14 zł</td>
+        <td class="num">240W</td>
+        <td class="num">125 mΩ</td>
+        <td class="num">0.15m</td>
+        <td class="num">43°C</td>
+        <td>Thunderbolt 4 40Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">15cm kabel silikonowy płaski za 14 zł. Deklaracja TBT4/240W. Test 100W bez problemu. Rezystancja 125 mΩ akceptowalna. Temp 41°C kabel, 43°C wtyczka. E</td>
+    </tr><tr class="good">
+        <td>Pine64 USB-C 60W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">23 zł</td>
+        <td class="num">60W</td>
+        <td class="num">223 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">35°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy kabel odporny do 350°C. Rezystancja 223 mΩ, brak e-markera (60W max). Temp 33°C kabel, 35°C wtyczka. Do telefonu średnio, do lutownicy/wars</td>
+    </tr><tr class="good">
+        <td>Toocki 240W USB 2.0</td>
+        <td class="store">AliExpress</td>
+        <td class="num">13 zł</td>
+        <td class="num">240W</td>
+        <td class="num">173 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">40°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Za 13 zł bardzo solidny. E-marker obecny, PD 3.1 działa. Rezystancja 173 mΩ - średnia półka. Temp 35°C kabel, 40°C wtyczka. Tylko USB 2.0 do danych. D</td>
+    </tr><tr class="good">
+        <td>Toocki 240W USB-C</td>
+        <td class="store">AliExpress</td>
+        <td class="num">16 zł</td>
+        <td class="num">240W</td>
+        <td class="num">202 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">38°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2m, pełny E-marker 240W. Test przy 140W — rezystancja 202 mΩ, temp tylko 38°C na wtyczce. Wykonaniem bije Baseusa za 16 zł</td>
+    </tr><tr class="good">
+        <td>Toocki 240W z RGB</td>
+        <td class="store">AliExpress</td>
+        <td class="num">15 zł</td>
+        <td class="num">240W</td>
+        <td class="num">163 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">41°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test 100W (20V 5A) stabilnie. Rezystancja 163 mΩ - dobry wynik. Temp 36°C kabel, 41°C wtyczka. E-marker: PD3.1, 240W. Diody RGB na wtyczkach. Ładowani</td>
+    </tr><tr class="good">
+        <td>Ugourd Thunderbolt 4 (15cm)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">16 zł</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">0.15m</td>
+        <td class="num">—</td>
+        <td>Thunderbolt 4 40Gbps (test: 17Gbit/s zapis, 21.7Gbit/s odczyt)</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Krótki kabel 15cm opisany jako Thunderbolt 4. Test na MacBook Pro z kieszeni AIS: 2237 MB/s zapis, 2850 MB/s odczyt. Bardzo dobre wyniki jak na cenę ~</td>
+    </tr><tr class="good">
+        <td>Vention 100W USB 3.2 (1m)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">41 zł</td>
+        <td class="num">100W</td>
+        <td class="num">—</td>
+        <td class="num">1.0m</td>
+        <td class="num">—</td>
+        <td>USB 3.2 10Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Pełne 100W (20V 5A). E-marker potwierdza PD3.0 i 10 Gbit/s (USB 3.2). Cena 41 zł - tania jak na te parametry. Rzetelna miedź, nie tylko ładny sznur.</td>
+    </tr><tr class="good">
+        <td>Vention 240W (1m)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">17 zł</td>
+        <td class="num">240W</td>
+        <td class="num">166 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">50°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test 140W (28V 5A) stabilnie. E-marker potwierdza 240W. Rezystancja 166 mΩ - nieźle jak na metr. Temp wtyczki 50°C przy tej mocy - norma. Tylko USB 2.</td>
+    </tr><tr class="good">
+        <td>Vention USB-C 10Gbps 2m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">48 zł</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">2m</td>
+        <td class="num">—</td>
+        <td>USB 3.2 10Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test na MacBook Pro z kieszenią OWC. Deklaracja 10Gbps, realnie 11.3 Gbit/s zapis (1485.7 MB/s), 13.4 Gbit/s odczyt (1750.8 MB/s) - powyżej specyfikac</td>
+    </tr><tr class="good">
+        <td>Vention USB4 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">32 zł</td>
+        <td class="num">240W</td>
+        <td class="num">233 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">53°C</td>
+        <td>USB4 40Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Marker potwierdza pełną specyfikację: 240W, USB4, PD 3.1, 40Gbps. Test 100W stabilne. Rezystancja 233 mΩ. Wtyczka 53°C po 10 min - dużo ale bezpieczne</td>
+    </tr><tr class="warn">
+        <td>AOHI 240W silikonowy USB-C</td>
+        <td class="store">AliExpress</td>
+        <td class="num">58 zł</td>
+        <td class="num">240W</td>
+        <td class="num">184 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">44°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Silikonowy, metalowe wtyczki. E-marker 240W ale tylko USB 2.0. 184 mΩ na 1m to sporo. Temp stabilna 42°/44°C. Drogi jak na USB 2.0</td>
+    </tr><tr class="warn">
+        <td>AOHI TBT5 USB-C 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">200 zł</td>
+        <td class="num">240W</td>
+        <td class="num">217 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">48°C</td>
+        <td>Thunderbolt 5 80Gbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Silikonowy, metalowe końcówki, TB5/USB4 240W/80Gbps. 217 mΩ — najsłabszy punkt za ~200 zł. Temp 35°/48°C, stabilnie. Premium wykonanie ale oporna</td>
+    </tr><tr class="warn">
+        <td>Kabel silikonowy 240W z AliExpress</td>
+        <td class="store">AliExpress</td>
+        <td class="num">25 zł</td>
+        <td class="num">240W</td>
+        <td class="num">272 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">41°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Silikonowy kabel 1.5m, aluminiowe wtyczki. E-marker poprawny (240W/480Mbps). Rezystancja kabla 272 mΩ, ale z dodatkowym statywem 770 mΩ. Dobre tempera</td>
+    </tr><tr class="warn">
+        <td>Magnetyczny adapter USB-C 100W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">187 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">63°C</td>
+        <td>USB 3.0 5Gbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Magnetyczny adapter USB-C/USB-C z AliExpress. Magnes mocny (przyciąga z 3.5cm). Sam kabel 130 mΩ, z adapterem 187 mΩ. Po 10 min przy 100W adapter ma 6</td>
+    </tr><tr class="warn">
+        <td>No-name 140W USB4 (yellow silicone)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">43 zł</td>
+        <td class="num">140W</td>
+        <td class="num">269 mΩ</td>
+        <td class="num">1.8m</td>
+        <td class="num">39°C</td>
+        <td>USB4</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Żółty silikonowy skręcony kabel, metalowe wtyki. Deklaracja 140W ale marker raportuje 240W i USB4. Rezystancja 269 mΩ - przeciętna. Temp 38°C kabel, 3</td>
+    </tr><tr class="warn">
+        <td>Vention 100W USB-A to USB-C</td>
+        <td class="store">AliExpress</td>
+        <td class="num">34 zł</td>
+        <td class="num">100W</td>
+        <td class="num">167 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">57°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">USB-A do USB-C z wyświetlaczem mocy we wtyczce. Oplot, metalowe końcówki. Rezystancja 167 mΩ. Temp 39°C kabel, 57°C wtyczka. Potwierdza 100W i PD 3.0,</td>
+    </tr><tr class="bad">
+        <td>Essager USB-C adapter 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">—</td>
+        <td class="num">240W</td>
+        <td class="num">145 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">58°C</td>
+        <td>40Gbps (deklarowane)</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Aluminiowy adapter USB-C na C. Rezystancja kabla 130 mΩ, z adapterem 145 mΩ - minimalny wzrost. Ale żyła D+ nie łączy - problem z danymi. Temp 58°C pr</td>
+    </tr><tr class="bad">
+        <td>Gianac 240W 1.2m</td>
+        <td class="store">AliExpress</td>
+        <td class="num">55 zł</td>
+        <td class="num">240W</td>
+        <td class="num">381 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">65°C</td>
+        <td>Thunderbolt 4 40Gbps</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Kabel pleciony 1.2m z wbudowanym wyświetlaczem. E-marker: TBT4 240W/40Gbps. Test przy 100W: wtyczka parzy przy 65°C. Rezystancja 381 mΩ. Końcówki wyra</td>
+    </tr><tr class="bad">
+        <td>Hagibis 240W (1.2m)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">26 zł</td>
+        <td class="num">240W</td>
+        <td class="num">227 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">43°C</td>
+        <td>None</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Rezystancja 227 mΩ przy teście 100W - potężny opór. Tandetne plastikowe zatyczki. Oplot wygląda na wytrzymały ale parametry słabe.</td>
+    </tr><tr class="bad">
+        <td>Kabel Thunderbolt 240W z AliExpress</td>
+        <td class="store">AliExpress</td>
+        <td class="num">48 zł</td>
+        <td class="num">240W</td>
+        <td class="num">157 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">41°C</td>
+        <td>Thunderbolt 80Gbps (deklarowane 120Gbps)</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Deklaracja TBT 120Gbps/240W za 48 zł. Moc 100W bez problemu, rezystancja 157 mΩ dobre, temperatury 36-41°C OK. Ale E-marker raportuje tylko 80Gbps zam</td>
+    </tr><tr class="bad">
+        <td>Toocki 100W USB-C</td>
+        <td class="store">AliExpress</td>
+        <td class="num">5 zł</td>
+        <td class="num">100W</td>
+        <td class="num">161 mΩ</td>
+        <td class="num">0.5m</td>
+        <td class="num">42°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Brak chipu E-marker — nigdy nie przekroczy 60W mimo napisu 100W na pudełku. 161 mΩ na 0.5m to bardzo słaby wynik. Oszustwo deklaracji</td>
+    </tr><tr class="bad">
+        <td>Train Shape 240W (fake)</td>
+        <td class="store">AliExpress</td>
+        <td class="num">17 zł</td>
+        <td class="num">240W</td>
+        <td class="num">316 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">52°C</td>
+        <td>None</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Plecionka, metalowe końcówki, wskaźnik mocy. Deklaracja 240W ale brak e-markera = 240W niemożliwe. Rezystancja 316 mΩ - wysoka. Temp 52°C na wtyczce. </td>
+    </tr><tr class="">
+        <td>Toocki 240W</td>
+        <td class="store">AliExpress</td>
+        <td class="num">42 zł</td>
+        <td class="num">240W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td>USB 4.0</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Tech anomalia - Toocki deklaruje USB 3.2, ale pomiary wskazują na USB 4.0. Metalowe wtyki, gruby oplot, sztywny. Kabel lepszy niż deklarowany. Transkr</td>
+    </tr><tr class="good">
+        <td>Forcell Flexible 100W</td>
+        <td class="store">Allegro</td>
+        <td class="num">33 zł</td>
+        <td class="num">100W</td>
+        <td class="num">190 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">44°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Oplot, testowany przy 100W. E-marker potwierdza 100W i USB 2.0. Rezystancja 190 mΩ. Temp 44°C wtyczka, 38°C kabel. Solidny kabel do ładowania, nie do </td>
+    </tr><tr class="warn">
+        <td>Sendem 4in1 65W</td>
+        <td class="store">Allegro</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">503 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">—</td>
+        <td>None</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel 4w1 (USB-A/USB-C ↔ USB-C/Lightning), metalowe wtyczki, oplot. Deklarowane 65W nie osiągalne stabilnie (rozłączał się), przy 63W stabilny. Rezyst</td>
+    </tr><tr class="good">
+        <td>Baseus 100W (1m)</td>
+        <td class="store">Amazon</td>
+        <td class="num">20 zł</td>
+        <td class="num">100W</td>
+        <td class="num">157 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">47°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">100W (20V 5A) bez spadków. Rezystancja 157 mΩ. Temp 40°C kabel, 47°C wtyczka. E-marker 20V 5A obecny. Stabilność PD bardzo dobra. Dane tylko USB 2.0. </td>
+    </tr><tr class="warn">
+        <td>Anker 240W USB 2.0</td>
+        <td class="store">Amazon</td>
+        <td class="num">—</td>
+        <td class="num">240W</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">240W ładowanie ale tylko USB 2.0 dane. Uczciwie zadeklarowane przez Ankera. Test na MacBook Pro: 419 Mbit/s zapis, 297 Mbit/s odczyt. Dobry do ładowan</td>
+    </tr><tr class="warn">
+        <td>Anker seria 6 240W USB-C</td>
+        <td class="store">Amazon</td>
+        <td class="num">—</td>
+        <td class="num">240W</td>
+        <td class="num">156 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">46°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">E-marker 50V/5A (240W). 156 mΩ na 1m — średnio dla A-Brand. Temp 37°/46°C. Solidny ale drogi i tylko USB 2.0 — Cumberland gap</td>
+    </tr><tr class="bad">
+        <td>Ugreen USB-microUSB 18W</td>
+        <td class="store">Amazon</td>
+        <td class="num">45 zł</td>
+        <td class="num">18W</td>
+        <td class="num">474 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">41°C</td>
+        <td>None</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">474 mΩ przy 18W — jeden z najgorszych wyników. Oplot, aluminiowe końcówki — wygląda solidnie, ale elektrycznie słaby. USB do micro USB</td>
+    </tr><tr class="good">
+        <td>IKEA SITTBRUNN 60W</td>
+        <td class="store">IKEA</td>
+        <td class="num">7 zł</td>
+        <td class="num">60W</td>
+        <td class="num">226 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">42°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy kabel USB-C/USB-C 1m. Stabilne 60W, brak E-markera (max 60W). Niska cena 7 zł, dobra opłacalność.</td>
+    </tr><tr class="good">
+        <td>IKEA Sittbrunn USB-A to USB-C (1m)</td>
+        <td class="store">IKEA</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">223 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">35°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy przewód przyjemny w dotyku. Rezystancja 223 mΩ - norma. Wtyczka 35°C, kabel 34°C przy 24W. Brak E-markera normalny dla USB-A na C.</td>
+    </tr><tr class="warn">
+        <td>IKEA LILLHOVD 60W 1.5m</td>
+        <td class="store">IKEA</td>
+        <td class="num">19 zł</td>
+        <td class="num">60W</td>
+        <td class="num">297 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">42°C</td>
+        <td>USB 2.0</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel USB-C 1.5m w oplocie. Brak E-markera (max 60W, USB 2.0). Rezystancja 297 mΩ dość wysoka. Wtyczka 42°C, kabel 32°C. Tani ale są tańsze alternatyw</td>
+    </tr><tr class="warn">
+        <td>IKEA LILLHOVD 60W 1m</td>
+        <td class="store">IKEA</td>
+        <td class="num">20 zł</td>
+        <td class="num">60W</td>
+        <td class="num">250 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">52°C</td>
+        <td>None</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel 1m z IKEA za 20 zł. Rezystancja 250 mΩ - straty wyraźne. Wtyczka aż 52°C przy 60W. Stabilność dobra, brak resetów PD. Dane słabe. Kompromisowa o</td>
+    </tr><tr class="trash">
+        <td>Greentech USB-A/USB-C</td>
+        <td class="store">Leroy Merlin</td>
+        <td class="num">12 zł</td>
+        <td class="num">—</td>
+        <td class="num">768 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">—</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">💀 SZROT</td>
+        <td class="notes">Śrot miesiąca. Kabel ze słomy pszenicznej i polimerów roślinnych. Rezystancja 768 mΩ fatalna. Maksymalnie 13W zamiast teoretycznych 15W. Poważne probl</td>
+    </tr><tr class="good">
+        <td>iBOX IKUTC-100 100W USB-C</td>
+        <td class="store">MediaExpert</td>
+        <td class="num">17 zł</td>
+        <td class="num">100W</td>
+        <td class="num">142 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">—</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2m, 90° wtyczka, plecionka, metalowe końcówki. 142 mΩ na 2m — bardzo nisko. E-marker 100W. Dane tylko USB 2.0. Świetny do ładowania</td>
+    </tr><tr class="good">
+        <td>iBOX USB-A/USB-C</td>
+        <td class="store">MediaExpert</td>
+        <td class="num">6 zł</td>
+        <td class="num">—</td>
+        <td class="num">242 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">42°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Czerwony silikonowy kabel USB-A/USB-C 1m za 5,99 zł. Test 15W stabilny, 42°C na wtyczce. Brak E-markera (USB-A do C). Świetny stosunek ceny do jakości</td>
+    </tr><tr class="good">
+        <td>TC-31G2 100W USB-C</td>
+        <td class="store">Morele</td>
+        <td class="num">15 zł</td>
+        <td class="num">100W</td>
+        <td class="num">246 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">48°C</td>
+        <td>USB 3.2 10Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">1m, plecionka, metalowe wtyczki. E-marker potwierdza 100W i 10Gbps. 246 mΩ sensowne jak na tani metrowy kabel. Temp 48°C na wtyczce</td>
+    </tr><tr class="good">
+        <td>iBOX USB-A to USB-C 3A (1.5m)</td>
+        <td class="store">Morele</td>
+        <td class="num">7.56 zł</td>
+        <td class="num">—</td>
+        <td class="num">234 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">35°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Metalowe wtyczki, przyjemny silikon. Rezystancja 234 mΩ vs deklaracja 56 mΩ na pudełku. Test 15W stabilny, 35°C po 10 min. Świetny stosunek jakości do</td>
+    </tr><tr class="good">
+        <td>iBOX USB-C 60W (1m)</td>
+        <td class="store">Morele</td>
+        <td class="num">30 zł</td>
+        <td class="num">60W</td>
+        <td class="num">191 mΩ</td>
+        <td class="num">1.0m</td>
+        <td class="num">41°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Silikonowy kabel USB-C. Test przy 60W stabilny. Rezystancja 191 mΩ - do ładowania w porządku, bez zapasu na większe moce. Temp 41°C na wtyczce po 10 m</td>
+    </tr><tr class="good">
+        <td>iBox 60W 2m</td>
+        <td class="store">Morele</td>
+        <td class="num">10 zł</td>
+        <td class="num">60W</td>
+        <td class="num">257 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">42°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Plecionka, metalowe wtyczki. Brak e-markera (60W max bez niego). Rezystancja 257 mΩ. Temp 41.5°C wtyczka, 36°C kabel. Ciekawe parametry za tę cenę.</td>
+    </tr><tr class="warn">
+        <td>Pepco USB-C (no-name)</td>
+        <td class="store">Pepco</td>
+        <td class="num">7 zł</td>
+        <td class="num">12W</td>
+        <td class="num">380 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">41°C</td>
+        <td>USB 2.0</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Deklaracja 12W. Test 5V/2.4A. Rezystancja 380 mΩ - każdy amper boli. Temp 41°C wtyczka, 39°C kabel. Brak e-markera. Nie zły, nie dobry - 'działa ale..</td>
+    </tr><tr class="bad">
+        <td>Smart Choice USB-A to USB-C (1.5m)</td>
+        <td class="store">Pepco</td>
+        <td class="num">7 zł</td>
+        <td class="num">12W</td>
+        <td class="num">345 mΩ</td>
+        <td class="num">1.5m</td>
+        <td class="num">43°C</td>
+        <td>None</td>
+        <td class="verdict">❌ NIE POLECAM</td>
+        <td class="notes">Rezystancja 345 mΩ - absolutny rekord kategorii antyprzewodnik. 43°C przy zaledwie 12W. Typowa marketowa zapychajka półek. Strach podłączyć pod Power </td>
+    </tr><tr class="warn">
+        <td>Baseus USB-C 2m 100W</td>
+        <td class="store">Rossmann</td>
+        <td class="num">29 zł</td>
+        <td class="num">100W</td>
+        <td class="num">305 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">47°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">100W wchodzi bez problemu ale rezystancja 305 mΩ to słaby punkt. Temp 43°C kabel, 47°C wtyczka. E-marker jest, ale dane tylko 480Mbps. Za tę kasę możn</td>
+    </tr><tr class="good">
+        <td>EXO USB-C 60W 1.2m</td>
+        <td class="store">Sellgross</td>
+        <td class="num">26 zł</td>
+        <td class="num">60W</td>
+        <td class="num">231 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">40°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Plecionka, metalowe końcówki. Utrzymał 60W bez rozłączeń. Brak e-markera (max 60W). Rezystancja 231 mΩ. Temp 31°C kabel, 40°C wtyczka. Działa poprawni</td>
+    </tr><tr class="good">
+        <td>Anker 240W (1.8m)</td>
+        <td class="store">None</td>
+        <td class="num">99 zł</td>
+        <td class="num">240W</td>
+        <td class="num">186 mΩ</td>
+        <td class="num">1.8m</td>
+        <td class="num">52°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test 100W stabilnie bez resetów PD. Rezystancja 186 mΩ - dobry wynik dla 1.8m. Temp 35.2°C kabel, 51.7°C wtyczka. E-marker: 50V 5A (240W). Bardzo elas</td>
+    </tr><tr class="good">
+        <td>Anker Powerline III (0.9m)</td>
+        <td class="store">None</td>
+        <td class="num">15 zł</td>
+        <td class="num">60W</td>
+        <td class="num">130 mΩ</td>
+        <td class="num">0.9m</td>
+        <td class="num">40°C</td>
+        <td>None</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test na pełne 60W (20V 3A) stabilny. Rezystancja 130 mΩ - przeciętny wynik. Temp 38°C kabel, 40°C wtyczka. Brak E-markera ale przy tej mocy działa sta</td>
+    </tr><tr class="good">
+        <td>Baseus 100W USB-C (stary model)</td>
+        <td class="store">None</td>
+        <td class="num">20 zł</td>
+        <td class="num">100W</td>
+        <td class="num">22 mΩ</td>
+        <td class="num">2m</td>
+        <td class="num">41°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Stary model znacznie lepszy niż nowy (22 mΩ vs 305 mΩ). Plecionka, aluminiowe końcówki. Temp 35°/41°C na wtyczce. 100W/480Mbps</td>
+    </tr><tr class="good">
+        <td>Forcell Flat Design 100W USB-C</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">100W</td>
+        <td class="num">190 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">40°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Płaska konstrukcja, oplot, metalowe wtyczki. E-marker 100W/480Mbps. 190 mΩ sensowne. Temp 37°C kabel, 40°C wtyczka. Długość ~1.2m (transkrypcja niejas</td>
+    </tr><tr class="good">
+        <td>Forcell Metal BrainE 100W USB-C</td>
+        <td class="store">None</td>
+        <td class="num">40 zł</td>
+        <td class="num">100W</td>
+        <td class="num">168 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">39°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">1m, metalowe wtyczki. E-marker 100W/480Mbps. 168 mΩ normalne. Temp niskie: 37°C kabel, 39°C wtyczka. Ciekawy za ~40 zł</td>
+    </tr><tr class="good">
+        <td>GoojoDoq 4w1 65W</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">65W</td>
+        <td class="num">238 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">36°C</td>
+        <td>USB 2.0</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Kabel 4w1 (USB-A/USB-C ↔ USB-C/Lightning) 1.2m. Rezystancja 238 mΩ - miłe zaskoczenie (podobne kable miały >1500 mΩ). Test 65W stabilny. E-marker obec</td>
+    </tr><tr class="good">
+        <td>Hagibis 240W z miernikiem</td>
+        <td class="store">None</td>
+        <td class="num">47 zł</td>
+        <td class="num">240W</td>
+        <td class="num">162 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">52°C</td>
+        <td>USB 2.0 480Mbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Test 140W (20V 5A) stabilnie. E-marker: PD3.1, 240W. Rezystancja 162 mΩ - świetny wynik z wbudowanym miernikiem. Temp wtyczki z wyświetlaczem 52°C, ka</td>
+    </tr><tr class="good">
+        <td>Hagibis USB4 240W</td>
+        <td class="store">None</td>
+        <td class="num">37 zł</td>
+        <td class="num">240W</td>
+        <td class="num">87 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">38°C</td>
+        <td>USB4 80Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Najlepsza rezystancja jaką recenzent kiedykolwiek zmierzył: 87 mΩ. USB4 v2, plecionka. Temp 32°C kabel, 38°C wtyczka. Pełne 240W i 80Gbps. Wszystko na</td>
+    </tr><tr class="good">
+        <td>Kabel Thunderbolt 4 240W (no-name)</td>
+        <td class="store">None</td>
+        <td class="num">17 zł</td>
+        <td class="num">240W</td>
+        <td class="num">119 mΩ</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td>USB4 40Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">Pełny E-marker, 240W, TB4/USB4 40Gbps. Rezystancja 119 mΩ przy 100W/5A — genialny wynik. W oplocie. Temperatura ucięta w transkrypcji</td>
+    </tr><tr class="good">
+        <td>Varta USB-C 100W</td>
+        <td class="store">None</td>
+        <td class="num">49.9 zł</td>
+        <td class="num">100W</td>
+        <td class="num">—</td>
+        <td class="num">2m</td>
+        <td class="num">—</td>
+        <td>USB 3.2 10Gbps</td>
+        <td class="verdict">✅ POLECAM</td>
+        <td class="notes">2m, oplot, metalowe końcówki. E-marker potwierdza 100W i USB 3.2 10Gbps. Wszystko zgodnie ze specyfikacją. Cena ~49.90 (transkrypcja: 499,90 — prawdop</td>
+    </tr><tr class="warn">
+        <td>Forcell 66W USB-A/USB-C</td>
+        <td class="store">None</td>
+        <td class="num">30 zł</td>
+        <td class="num">66W</td>
+        <td class="num">254 mΩ</td>
+        <td class="num">1.2m</td>
+        <td class="num">37°C</td>
+        <td>None</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Kabel pleciony USB-A/USB-C 1.2m za 30 zł. Deklaracja 66W to marketing - test tylko przy 30W (limit USB-A). Stabilny, 37°C, rezystancja 254 mΩ. 66W pra</td>
+    </tr><tr class="warn">
+        <td>Vention USB-C → microUSB 60W</td>
+        <td class="store">None</td>
+        <td class="num">21 zł</td>
+        <td class="num">60W</td>
+        <td class="num">373 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">40°C</td>
+        <td>None</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Silikonowy, USB-C → microUSB. 373 mΩ bardzo wysokie, ale do starszych urządzeń (intercom, lampki, powerbanki) akceptowalne. Brak E-markera. Temp OK</td>
+    </tr><tr class="warn">
+        <td>Vention USB4 240W 1m</td>
+        <td class="store">None</td>
+        <td class="num">40 zł</td>
+        <td class="num">240W</td>
+        <td class="num">257 mΩ</td>
+        <td class="num">1m</td>
+        <td class="num">56°C</td>
+        <td>USB4 40Gbps</td>
+        <td class="verdict">⚠️ ŚREDNIE</td>
+        <td class="notes">Pierwszy USB4 od Vention. 240W, PD 3.1, 40Gbps na papier. Marker potwierdza USB4 gen 3. Test 140W stabilnie bez resetów. Ale rezystancja 257 mΩ - reko</td>
+    </tr><tr class="">
+        <td>Kabel informacyjny (różne prędkości danych)</td>
+        <td class="store">None</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td>None</td>
+        <td class="verdict">❓ None</td>
+        <td class="notes">Film informacyjny o ważności prędkości kabla do transferu danych. MacBook Pro kopiował 3TB danych przez zwykły kabel (480 Mbps) - szacowane 3 dni. Pok</td>
+    </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Top Picks by Store -->
+    <section>
+        <h2>🏆 Sekcja 3: Top Picks Lokalnie — Co kupić w polskich sklepach</h2>
+        <p style="color:var(--text-dim);margin-bottom:20px">Ranking najlepszych ładowarek i kabli dostępnych stacjonarnie w Polsce. Tylko produkty z werdyktem POLECAM.</p>
+<h3>🏪 Action (7 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">Kabel 240W 2m z Action</div>
+                <div class="store">Action · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 295 mΩ | 2.0m | do 240W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Kabel 2m z Action, testowany przy 140W (deklaracja 240W). E-marker: PD 3.1 240W, USB 2.0. Rezystancja 295 mΩ jak na 2m p</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Sitecom 30W</div>
+                <div class="store">Action · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 30W → Realnie: 33W | 54°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Z Action. Deklarowane 30W osiąga w praktyce 33W. Temperatura 54°C po 10 min pełnego obciążenia - zauważalnie ciepła ale </div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Reload 65W</div>
+                <div class="store">Action · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 65W → Realnie: 76W | 68°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Najtańsze 65W w Polsce. Z jednego portu wyciągnęła 76W. Przy dwóch urządzeniach max 60W. Problem: trzeba najpierw wpiąć </div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Action Reload 100W (kabel z zestawu)</div>
+                <div class="store">Action · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 189 mΩ | 1.5m | do 100W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">E-marker 5A/20V. 189 mΩ na 1.5m — normalny wynik. Stabilny brak resetów PD. Temp 40.7°C kabel, 47.5°C wtyczka. 'Jestem p</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Action Reload 100W</div>
+                <div class="store">Action · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 100W → Realnie: 100W | 72°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">2x USB-C. Test 2 portów równolegle: 70W + 32W = ~100W. Temp 58°C (10 min), 72°C (20 min). 'Świetna ładowarka', zaskakują</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Sitecom GaN3 65W</div>
+                <div class="store">Action · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 65W → Realnie: 75W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Jeden USB-C i jeden USB-A. Realnie 75.5W - duży zapas mocy. Poprzedni model był już testowany, nowy Gun3 wygląda podobni</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Sologic 20W</div>
+                <div class="store">Action · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 20W → Realnie: 22.5W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Dwa porty USB-C i USB-A. Realnie 22.5W - ponad 10% więcej niż deklaracja. Bogate protokoły jak na 30 zł. Mała obudowa + </div>
+            </div>
+</div>
+<h3>🏪 Rossmann (1 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">Baseus 30W GaN</div>
+                <div class="store">Rossmann · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 30W → Realnie: 35W | 57°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Z Rossmanna za ~60 zł. Prawie 35W z deklarowanych 30W. USB-C + USB-A. Temp 51-57°C. Bogate protokoły: PD, QC4+, QC3, AFC</div>
+            </div>
+</div>
+<h3>🏪 IKEA (5 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">IKEA SITTBRUNN 60W</div>
+                <div class="store">IKEA · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 226 mΩ | 1.0m | do 60W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Silikonowy kabel USB-C/USB-C 1m. Stabilne 60W, brak E-markera (max 60W). Niska cena 7 zł, dobra opłacalność.</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">IKEA SJÖSS 45W</div>
+                <div class="store">IKEA · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 45W → Realnie: 50W | 59°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Jeden port: ~50W (powyżej deklaracji 45W). Dwa porty: po 22W. Temp 59°C (jeden port), 56°C (dwa porty). PD 3.0, QC2/3/4.</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">IKEA SJÖSS 20W</div>
+                <div class="store">IKEA · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 20W → Realnie: 23W | 48°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Realnie ponad 23W z deklarowanych 20W. Temperatura 48°C po 10 min pełnego obciążenia. Ciekawa ładowarka podręczna do ple</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">IKEA Sittbrunn USB-A to USB-C (1m)</div>
+                <div class="store">IKEA · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 223 mΩ | 1.0m</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Silikonowy przewód przyjemny w dotyku. Rezystancja 223 mΩ - norma. Wtyczka 35°C, kabel 34°C przy 24W. Brak E-markera nor</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">IKEA Småbatteri 5W (z kablem 2m)</div>
+                <div class="store">IKEA · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 5W → Realnie: 5.5W | 52°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Prosta ładowarka USB-A z 2m kablem. Temp ładowarki ~52°C, kabel 30°C, wtyczka 31°C. Rezystancja kabla 275 mΩ - akceptowa</div>
+            </div>
+</div>
+<h3>🏪 Sellgross (3 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">Hama 45W</div>
+                <div class="store">Sellgross · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 45W → Realnie: 58W | 48°C</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">1x USB-C + 1x USB-A. Deklaracja 45W, realnie 58.4W - powyżej specyfikacji. Bardzo chłodna: 47.8°C przy 45W obciążeniu. S</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">EXO USB-C 60W 1.2m</div>
+                <div class="store">Sellgross · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 231 mΩ | 1.2m | do 60W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Plecionka, metalowe końcówki. Utrzymał 60W bez rozłączeń. Brak e-markera (max 60W). Rezystancja 231 mΩ. Temp 31°C kabel,</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">Cube 65W</div>
+                <div class="store">Sellgross · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 65W → Realnie: 68W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">2x USB-C + 1x USB-A. Realnie ~68W, lekko powyżej deklaracji. 65W na USB-C, 36W na USB-A. Bogate protokoły. Marketowa ale</div>
+            </div>
+</div>
+<h3>🏪 Kaufland (1 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">Kaufland Switch 35W</div>
+                <div class="store">Kaufland · charger</div>
+                <div class="stats"><div class="val">Deklarowane: 35W → Realnie: 30W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Na pudełku obiecuje 20W na porcie USB-C, a w teście stabilne 30W (o połowę więcej). Szeroka lista protokołów. Test pozyt</div>
+            </div>
+</div>
+<h3>🏪 MediaExpert (2 polecanych)</h3>
+<div class="picks-grid">
+<div class="pick-card good">
+                <div class="name">iBOX USB-A/USB-C</div>
+                <div class="store">MediaExpert · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 242 mΩ | 1.0m</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">Czerwony silikonowy kabel USB-A/USB-C 1m za 5,99 zł. Test 15W stabilny, 42°C na wtyczce. Brak E-markera (USB-A do C). Św</div>
+            </div>
+<div class="pick-card good">
+                <div class="name">iBOX IKUTC-100 100W USB-C</div>
+                <div class="store">MediaExpert · cable</div>
+                <div class="stats"><div class="val">Rezystancja: 142 mΩ | 2m | do 100W</div></div>
+                <div class="verdict">✅ POLECAM</div>
+                <div class="notes">2m, 90° wtyczka, plecionka, metalowe końcówki. 142 mΩ na 2m — bardzo nisko. E-marker 100W. Dane tylko USB 2.0. Świetny d</div>
+            </div>
+</div>
+
+    </section>
+
+    <!-- SECTION 4: Blacklist -->
+    <section>
+        <h2>🛑 Sekcja 4: Czego UNIKAĆ</h2>
+        <p style="color:var(--text-dim);margin-bottom:20px">Czarna lista — produkty z werdyktem NIE POLECAM lub SZROT dostępne w polskich sklepach. Nie ryzykuj.</p>
+        <div class="blacklist">
+<div class="bl-card">
+        <div class="name">💀 Co Logic USB-A to Lightning</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Action · cable · 7zł</div>
+        <div class="reason">USB-A to Lightning za 6.99 zł. Rezystancja 3717 mΩ - rekordowo zły wynik. Opisany jako zgodny z AirPods/iPhone/iPad. Drgania wartości potwierdzone drugim kablem. Szrot Miesiąca.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">💀 Sitecom 140W GaN</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Action · charger · 80zł</div>
+        <div class="reason">Kandydat na szrot miesiąca. Sprzęt pomiarowy zgasł przy 150W. Po 10 minutach ponad 80°C - absolutny rekord temperatury. Niebezpiecznie gorąca.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">💀 Greentech USB-A/USB-C</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Leroy Merlin · cable · 12zł</div>
+        <div class="reason">Śrot miesiąca. Kabel ze słomy pszenicznej i polimerów roślinnych. Rezystancja 768 mΩ fatalna. Maksymalnie 13W zamiast teoretycznych 15W. Poważne problemy z jakością.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Philips 60W 1.5m</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Action · cable · 15zł</div>
+        <div class="reason">Kabel z Action za 15 zł. Rezystancja 367 mΩ - technologiczna przepadść (dobre kable poniżej 150 mΩ). Brak E-markera. Wtyczka prawie 40°C. Wrażenie jakby miał się rozpaść. Niskie zaufanie do jakości.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Sologic 60W 8-port</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Action · charger · —</div>
+        <div class="reason">8 portów. Najmocniejszy port tylko 34W, przy 4 urządzeniach łącznie ~50W. 67°C po 10 min. Deklarowane 60W nie osiągnięte. Mieszane uczucia - 100W wersja z Action była lepsza.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Action Reload 45W GaN3</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Action · charger · —</div>
+        <div class="reason">Single port max 51W. Przy 45W: 65°C po 10 min. Przy 30W+12W(A): >76°C i CAŁKOWITE WYŁĄCZENIE. Tętnienia 99mV. Niebezpieczna termicznie</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Hakker 35W</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Biedronka · charger · 50zł</div>
+        <div class="reason">Zintegrowany kabel USB-C + port USB-C. Prawie 40W realnie, ale 70°C po 10 min przy 35W to za dużo. Tytuł: 'lepiej nie kupuj'</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ IKEA SMÅHAGEL 17W</div>
+        <div style="color:var(--text-dim);font-size:0.85em">IKEA · charger · —</div>
+        <div class="reason">Deklaracja 17W, realnie 11.78W. Na pudełku też '3 x 12W' co myli. Brak protokołów szybkiego ładowania. 42°C. Marketing 17W wygląda lepiej na opakowaniu niż w rzeczywistości.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ IKEA SMÅHAGEL 5W</div>
+        <div style="color:var(--text-dim);font-size:0.85em">IKEA · charger · —</div>
+        <div class="reason">Realnie ~5W zgodnie z deklaracją. Ale 51°C przy zaledwie 5W — 'grzałka'. Nadaje się tylko do niewymagających urządzeń</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Lexman 17W</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Leroy Merlin · charger · 28zł</div>
+        <div class="reason">Jedyna ładowarka USB w Leroy Merlin. 2x USB-A, 1x USB-C. 27,50 zł. Deklaracja 3.4A/5V (17W), realnie 16W. Bardzo gorąca (59°C) przy zaledwie 17W. Słabe protokoły.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Smart Choice USB-A to USB-C (1.5m)</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Pepco · cable · 7zł</div>
+        <div class="reason">Rezystancja 345 mΩ - absolutny rekord kategorii antyprzewodnik. 43°C przy zaledwie 12W. Typowa marketowa zapychajka półek. Strach podłączyć pod Power Delivery.</div>
+    </div>
+<div class="bl-card">
+        <div class="name">❌ Rossmann 20W</div>
+        <div style="color:var(--text-dim);font-size:0.85em">Rossmann · charger · 35zł</div>
+        <div class="reason">Realnie prawie 25.5W — pozytywne zaskoczenie mocą. Ale 67°C po 10 min, 77°C po 20 min — bardzo gorąca jak na 20W. Cena 34.99 zł</div>
+    </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: Insights -->
+    <section>
+        <h2>🧠 Sekcja 5: Wnioski i Lekcje</h2>
+        <div class="insights">
+<div class="insight-card"><div class="icon">💡</div><p>Dobre kable USB-C mają rezystancję poniżej 200 mΩ. Najlepsze schodzą nawet do 22 mΩ (Baseus 100W stary model).</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>Najgorszy kabel (bez SZROT) to Co Logic USB-A to Lightning z rezystancją 3717 mΩ. Dla porównania — dobry kabel to <200 mΩ.</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>Najgorętsza ładowarka: Anker 30W (A2147) — 84°C. Powyżej 65°C to już ryzyko degradacji i wyłączeń termicznych.</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>38 ładowarek daje WIĘCEJ mocy niż deklaruje producent — to dobra praktyka (bufor bezpieczeństwa).</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>3 kabli deklaruje >60W bez E-markera — to niemożliwe technicznie przy USB-C. Potencjalne oszustwo.</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>Kable IKEA (szczególnie SITTBRUNN) to często ukryte perełki — 2/4 testowanych modeli z rekomendacją, od 7 zł.</p></div>
+<div class="insight-card"><div class="icon">💡</div><p>Action: 7 produktów POLECAM, 5 do unikania. Nie wszystko z Action to dobry wybór — trzeba wiedzieć co brać.</p></div>
+
+        </div>
+        
+        <div class="summary-box" style="margin-top:25px">
+            <h3 style="margin-top:0">📋 Podsumowanie — Zasady bezpiecznych zakupów</h3>
+            <ul>
+                <li><strong>Kable USB-C:</strong> rezystancja poniżej 200 mΩ to dobry kabel. Poniżej 150 mΩ — świetny. Powyżej 300 mΩ — unikaj.</li>
+                <li><strong>E-marker:</strong> kable deklarujące >60W bez E-markera to techniczne kłamstwo. USB-C wymaga chipa identyfikacyjnego powyżej 3A.</li>
+                <li><strong>Ładowarki >65°C:</strong> to już granica bezpieczeństwa. Powyżej 75°C ryzykujesz wyłączeniem termicznym lub degradacją.</li>
+                <li><strong>IKEA SITTBRUNN 7 zł:</strong> najlepszy stosunek ceny do jakości. Kabel do 60W, 226 mΩ — za 7 zł to absolutny nr 1.</li>
+                <li><strong>Action:</strong> Reload 65W (34 zł) i Sitecom GaN3 65W (40 zł) to świetne ładowarki. Unikaj Sitecom 140W i Sologic 60W.</li>
+                <li><strong>Biedronka:</strong> Hakker 35W daje realnie ~40W, ale 70°C to za dużo — odradzam.</li>
+                <li><strong>Rossmann:</strong> Baseus 30W GaN za 60 zł to POLECAM. Marketowa Rossmann 20W — unikaj (77°C).</li>
+                <li><strong>Kable z Pepco (7 zł):</strong> 345 mΩ przy 12W — tylko do ekstremalnie awaryjnego ładowania.</li>
+                <li><strong>Zasada ogólna:</strong> Tanie nie znaczy złe (IKEA SITTBRUNN 7 zł). Drogie nie znaczy dobre (Anker 30W A2147 — 84°C).</li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Raport wygenerowany na podstawie testów kanału <a href="https://youtube.com/@Smooth-BatteryCheckPro">@Smooth-BatteryCheckPro</a> na YouTube</p>
+    <p>🤖 Wygenerowane przez Andrzeja (OpenClaw AI) · Sierpień 2026</p>
+</footer>
+
+<script>
+function filterTable(tableId, filter, btn) {
+    // Update active button
+    const container = btn.parentElement;
+    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const table = document.getElementById(tableId);
+    const rows = table.querySelectorAll('tbody tr');
+    
+    rows.forEach(row => {
+        const verdictCell = row.querySelector('.verdict');
+        const storeCell = row.querySelector('.store');
+        if (!verdictCell) { row.style.display = ''; return; }
+        
+        const verdict = verdictCell.textContent.trim();
+        const store = storeCell ? storeCell.textContent.trim() : '';
+        const localStores = ['Action','Biedronka','Rossmann','IKEA','Leroy Merlin','Sellgross','Kaufland','Pepco','MediaExpert'];
+        
+        let show = true;
+        if (filter === 'all') show = true;
+        else if (filter === 'local') show = localStores.includes(store);
+        else show = verdict.includes(filter);
+        
+        row.style.display = show ? '' : 'none';
+    });
+}
+
+function sortTable(tableId, colIdx, numeric) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    
+    rows.sort((a, b) => {
+        let aVal = a.cells[colIdx]?.textContent.trim() || '';
+        let bVal = b.cells[colIdx]?.textContent.trim() || '';
+        
+        if (numeric) {
+            aVal = parseFloat(aVal) || 0;
+            bVal = parseFloat(bVal) || 0;
+            return aVal - bVal;
+        }
+        return aVal.localeCompare(bVal, 'pl');
+    });
+    
+    rows.forEach(row => tbody.appendChild(row));
+}
+</script>
+
+</body>
+</html>

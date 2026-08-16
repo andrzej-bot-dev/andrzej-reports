@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Śledztwo: pad Pi5 — 9 sierpnia 2026</title>
+<style>
+:root{--bg:#0f1117;--card:#171a23;--border:#2a2e3a;--text:#d7dae2;--muted:#8b90a0;--accent:#4f9cf9;--green:#4cc38a;--red:#f4645f;--orange:#f4a259;--yellow:#f4d35e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.6;padding:24px;max-width:980px;margin:0 auto}
+h1{font-size:1.7em;margin-bottom:4px;color:#fff}
+h2{font-size:1.25em;margin:36px 0 12px;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:6px}
+h3{font-size:1.05em;margin:18px 0 8px;color:#fff}
+p{margin:8px 0}
+.muted{color:var(--muted);font-size:.92em}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:12px 0}
+.verdict{border-left:4px solid var(--orange)}
+.kill{border-left:4px solid var(--red)}
+.ok{border-left:4px solid var(--green)}
+code{background:#22262f;padding:2px 6px;border-radius:4px;font-size:.88em;color:#ffd479;font-family:'SF Mono',Consolas,monospace}
+pre{background:#12141b;border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;font-size:.82em;line-height:1.5;margin:10px 0;color:#a9b6c9}
+pre .ts{color:#7aa2f7}pre .warn{color:var(--yellow)}pre .fatal{color:var(--red)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#1c2029;color:#fff}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.8em;font-weight:600;margin-left:8px}
+.b-main{background:#3d2f14;color:var(--yellow)}
+.b-out{background:#3a1f1f;color:var(--red)}
+.b-ok{background:#16342a;color:var(--green)}
+ul{margin:6px 0 6px 22px}
+li{margin:4px 0}
+.tl{list-style:none;margin-left:0}
+.tl li{padding-left:24px;position:relative}
+.tl li:before{content:'';position:absolute;left:6px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tl li.red:before{background:var(--red)}
+.tl li.green:before{background:var(--green)}
+.tl li.orange:before{background:var(--orange)}
+.footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:.85em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1>🔍 Śledztwo: dlaczego Pi5 zniknęło z sieci na 7 dni</h1>
+<p class="muted">Raspberry Pi 5 · OpenClaw host · raport z-autopsji &nbsp;|&nbsp; 16 sierpnia 2026</p>
+
+<div class="card verdict">
+<strong>Werdykt (pewność ~70%):</strong> Hard lockup kernela/SoC bez czynnego watchdog — najpewniej wyzwolony glitchem zasilania/przepięciem ok. <strong>05:38, 9 sierpnia</strong>. System zawisł w miejscu i już nigdy nie napisał ani jednej linijki do journala. Pi miało prąd cały czas (dioda, wentylator, HDMI), więc nie było restartu — a bez restartu, bez RTC i bez watchdog, zawieszony system nie miał jak wstać. Kamery Tapo wstały same, bo mają własny firmware-owy auto-recovery. Pi nie — i to była cała różnica.
+</div>
+
+<h2>1 · Oś czasu</h2>
+<ul class="tl">
+<li><strong>25.07 20:17</strong> — boot poprzedniej sesji (system działał stabilnie od 25 lipca)</li>
+<li><strong>25.07 → 08.08</strong> — normalna praca. Szum tła: heap-OOM workerów node ~1×/dzień, kontener <code>admin-panel</code> (LibreChat) w pętli restartów co 60 s — <strong>20 572 restarty</strong> w 15 dni</li>
+<li><strong>09.08 05:30:01</strong> — cron odpala sync Discord archive, heartbeat gatewaya OK</li>
+<li><strong>09.08 05:35:54</strong> — gateway: <code>memory pressure: level=warning rssBytes=2024062976</code> (2,0 GB — znany, stabilny stan, nie trend)</li>
+<li><strong>09.08 05:38:18</strong> — ostatni wpis gatewaya (<code>memory-lancedb: injecting 3 memories</code>)</li>
+<li class="red"><strong>09.08 05:38:36</strong> — <strong>OSTATNI WPIS SYSTEMU W OGÓLE</strong> — rutynowy <code>dockerd: restarting container … restartCount=20572</code>. Nagle, w pół zdania, bez żadnego błędu</li>
+<li class="red"><strong>09.08 → 16.08</strong> — cisza w journalu. Zero wpisów, zero rebootów (journal persistent na NVMe zapisałby cokolwiek)</li>
+<li class="orange"><strong>09–11.08</strong> — w tym oknie wg relacji właściciela kamery Tapo wróciły do życia same</li>
+<li class="green"><strong>16.08 ~21:28</strong> — ręczny power-cycle; boot obecnego systemu. Journald: <code>system.journal corrupted or uncleanly shut down</code></li>
+</ul>
+
+<div class="card">
+<strong>Ciekawostka z zegara:</strong> po odcięciu zasilania <code>who -b</code> pokazał „boot 2026-08-09 05:17". Pi5 nie ma RTC — zegar przy starcie wziął timestamp najnowszego pliku na NVMe (ostatnia aktywność zapisowa). Sama ta data jest niezależnym potwierdzeniem momentu padu.
+</div>
+
+<h2>2 · Hipoteza główna: hard lock bez watchdog</h2>
+<p><span class="badge b-main">GŁÓWNA · ~70%</span> Zawieszenie sprzętowe/kernelowe poniżej zdolności logowania, wyzwolone zdarzeniem zewnętrznym (najpewniej impuls zasilania), bez drogi odzyskania.</p>
+
+<h3>Dowody (logi + czasy)</h3>
+<pre>
+<span class="ts">Aug 09 05:30:41</span> node[3046694]: [health-monitor] [whatsapp:default] restarting (reason: stopped)   ← normalne
+<span class="ts">Aug 09 05:35:54</span> node[3046694]: [diagnostics/memory] memory pressure: level=warning rss=2024MB   ← znany stan
+<span class="ts">Aug 09 05:38:18</span> node[3046694]: [plugins] memory-lancedb: injecting 3 memories                 ← ostatni wpis gatewaya
+<span class="ts">Aug 09 05:38:36</span> dockerd[2894]: "restarting container … restartCount=20572"                    ← OSTATNI WPIS SYSTEMU
+――― cisza: brak shutdown, brak panic na serial, brak OOM-killera, brak I/O error, brak thermal, brak undervoltage ―――
+<span class="ts">Aug 16 21:28</span>  systemd-journald: File system.journal <span class="fatal">corrupted or uncleanly shut down</span>, renaming and replacing
+</pre>
+
+<ul>
+<li><strong>Journal urywa się w trakcie w pełni normalnej pracy</strong> — klasyczny fingerprint zawieszenia poniżej poziomu kernela (skutek: journald nigdy nie dostaje flushed sync → corruption)</li>
+<li><strong>Brak jakiegokolwiek śladu shutdown/reboot</strong> przez następny tydzień — gdyby kernel kiedykolwiek odzyskał kontrolę (np. watchdog, panic+restart), na NVMe byłby ślad bootu</li>
+<li><strong>Współczesny pad 2 kamer Tapo + Pi</strong> wskazuje na wspólną przyczynę infrastrukturalną (przepięcie/skok napięcia w mieszkaniu), nie software</li>
+<li><strong>Kernel miał watchdog, ale wyłączony:</strong> <code>bcm2835-wdt</code> załadowany, ale w systemd <code>RuntimeWatchdogSec=off</code> — nikt nie karmił licznika. Jednorazowy hang = wieczne zawieszenie</li>
+</ul>
+
+<h3>Dlaczego kamery wstały, a Pi nie</h3>
+<div class="card ok">
+Tapo mają firmware z auto-reconnect/watchdog i rebootują się po utracie łączności z chmurą/AP (stąd „wróciły po ~2 dobach" — typowe dla Tapo po długiej przerwie). Raspberry Pi z domyślną konfiguracją <strong>nie ma żadnego mechanizmu samoodzyskiwania</strong>: kernel hang → nikt nie reanimuje. Różnica nie leżała w przyczynie padu, tylko w <strong>drodze odzyskania</strong>.
+</div>
+
+<h3>Rozwiązanie obu sprzeczności</h3>
+<table>
+<tr><th>Obserwacja</th><th>Wyjaśnienie</th></tr>
+<tr><td>ETH: pomarańczowa stała + zielona migająca, ale router: 0 urządzeń</td><td>Pomarańczowa = link warstwy 1 utrzymywany autonomicznie przez PHY <strong>niezależnie od stanu IP-stack</strong>. Migająca zielona = broadcast/traffic z segmentu. Martwy kernel = brak DHCP = brak obecności w L3. To reguła, nie anomalia.</td></tr>
+<tr><td>HDMI czarny, ale podświetlony; mysz USB bez reakcji</td><td>Tryb graficzny i podświetlenie ustawia firmware VideoCore, który żyje własnym życiem niezależnie od ARM/Linuxa. Dlatego „sygnał aktywny" ≠ „system żyje". Goły czarny ekran bez kursora = zgodne z martwym ARM core.</td></tr>
+</table>
+
+<h2>3 · Hipotezy odrzucone (aktywnie szukałem ich potwierdzenia)</h2>
+
+<div class="card kill">
+<strong>❌ OOM / wyczerpanie pamięci</strong> — w całym boocie 25.07–09.08 <strong>zero</strong> wpisów kernelowego OOM-killera. Wyszukane „OOM" to wyłącznie heap-OOM pojedynczych workerów node (ostatni 08.08 08:40 — <strong>pół dnia przed padem</strong>). Swap: 0 used. Gateway 2,0 GB RSS = znany stan trwały, nie trend. OOM zostawia ślad w kernelu — jego brak wyklucza.
+</div>
+
+<div class="card kill">
+<strong>❌ Pad NVMe/PCIe</strong> — AER włączony, zero błędów w całym boocie (tylko „enabled" przy starcie). Zero I/O errors, zero resetów kontrolera. EXT4 zamontował się po padzie czysto (tylko journal recovery — skutek braku sync, nie przyczyna).
+</div>
+
+<div class="card kill">
+<strong>❌ Termika / undervoltage</strong> — <code>throttled=0x0</code> (zero flag historycznych), zero komunikatów „Undervoltage detected", zero „Frequency capped" w całym boocie. Teraz: 63 °C. Wentylator pracujący „głośniej chwilami" = normalna praca zmienna pod obciążeniem docker+node.
+</div>
+
+<div class="card kill">
+<strong>❌ Aktualizacja software</strong> — apt history puste 6–9.08, brak katalogu unattended-upgrades, bootloader EEPROM bez zmian od maja 2026 (aktualny).
+</div>
+
+<div class="card kill">
+<strong>❌ Utrata zasilania samego Pi</strong> — sprzeczna z obserwacjami po tygodniu: zielona dioda zasilania, wentylator kręci, aktywny HDMI. Gdyby zasilanie wróciło po przerwie, Pi by się przebootowało i zostawiło ślad w journalu — nie zostawiło.
+</div>
+
+<h2>4 · Czego nie ustalono (i dlaczego)</h2>
+<ul>
+<li><strong>Fizyczny trigger lockupu</strong> (brownout vs glitch SoC/PCIe vs kernel panic bez serial console) — nie do rozstrzygnięcia post hoc z logów; <code>quiet splash</code> + brak UART = panic nie miał jak trafić na HDMI. Rozstrzygnie dopiero UART przy kolejnym zdarzeniu.</li>
+<li><strong>Stan sieci w 2 doby po padzie</strong> — logi routera i kamer poza zasięgiem. Do weryfikacji ręcznej: historia zdarzeń w apce Tapo + log DHCP/uptime routera.</li>
+<li><strong>Rozróżnienie panic vs czysty hang</strong> — oba zostawiają identyczny ślad (nic). Watchdog załatwia oba.</li>
+</ul>
+
+<h2>5 · Naprawy (wg realnego wpływu)</h2>
+<table>
+<tr><th>#</th><th>Naprawa</th><th>Komenda</th><th>Status</th></tr>
+<tr><td>1</td><td><strong>Sprzętowy watchdog</strong> — dokładnie ten scenariusz: hang → auto-reboot po 10 s</td><td><code>RuntimeWatchdogSec=10s</code> w /etc/systemd/system.conf + <code>systemctl daemon-reexec</code></td><td class="ok">✅ zrobione</td></tr>
+<tr><td>2</td><td><strong>Auto-reboot po kernel panic</strong></td><td><code>panic=10</code> w /boot/firmware/cmdline.txt + <code>kernel.panic=10</code> w sysctl.d</td><td class="ok">✅ zrobione</td></tr>
+<tr><td>3</td><td><strong>Stop pętli admin-panel</strong> (20 572 restarty / 15 dni — ciągłe męczenie CPU/IO)</td><td><code>docker update --restart=no admin-panel</code></td><td class="ok">✅ zrobione</td></tr>
+<tr><td>4</td><td><strong>Swap 200 MB → 2 GB</strong> — bufer na ciśnienie pamięci</td><td><code>CONF_SWAPSIZE=2048</code> w /etc/dphys-swapfile</td><td class="ok">✅ zrobione</td></tr>
+<tr><td>5</td><td>Zdalny powrót (już jest): Tailscale + <code>tailscale ssh</code> z telefonu</td><td>—</td><td class="ok">✅ jest</td></tr>
+<tr><td>6</td><td>Zalecane: USB-UART na GPIO14/15 (~30 kr) — następny panic zobaczysz na żywo</td><td>—</td><td>⏳ opcjonalne</td></tr>
+<tr><td>7</td><td>Zalecane: smart plug z historią przerw (np. Tapo P100) — zdalny power-cycle + dowody na przepięcia</td><td>—</td><td>⏳ opcjonalne</td></tr>
+</table>
+
+<h3>Procedura odzyskania zdalnego — następnym razem</h3>
+<ol>
+<li><strong>Najpierw:</strong> <code>tailscale ping raspberrypi</code> z telefonu — odróżnia „sieć martwa" od „Pi martwe"</li>
+<li>Jeśli ping przechodzi: <code>tailscale ssh dawid@raspberrypi</code> (działa nawet bez sshd) → <code>sudo reboot</code></li>
+<li>Jeśli nie odpowiada po watchdogu (10 s + boot ~40 s): dopiero wtedy interwencja fizyczna/prądowa</li>
+<li>Z UART podpiętym: <code>screen /dev/ttyUSB0 115200</code> z laptopa → pełny trace panic na żywo</li>
+</ol>
+
+<div class="footer">
+Źródła: journalctl boot -1 (25.07–09.08, pełny zapis na NVMe) · kernel ring buffer b0 · vcgencmd (throttle/temp/volt) · apt history · rpi-eeprom · docker inspect · crontab. Zweryfikowano 16.08.2026 po 21:28.<br>
+Raport wygenerowany przez Andrzeja (OpenClaw) · repo: andrzej-bot-dev/andrzej-reports
+</div>
+
+</body>
+</html>

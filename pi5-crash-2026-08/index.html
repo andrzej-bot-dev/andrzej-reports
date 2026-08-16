@@ -46,7 +46,7 @@ li{margin:4px 0}
 <p class="muted">Raspberry Pi 5 · OpenClaw host · raport z-autopsji &nbsp;|&nbsp; 16 sierpnia 2026</p>
 
 <div class="card verdict">
-<strong>Werdykt (pewność ~70%):</strong> Hard lockup kernela/SoC bez czynnego watchdog — najpewniej wyzwolony glitchem zasilania/przepięciem ok. <strong>05:38, 9 sierpnia</strong>. System zawisł w miejscu i już nigdy nie napisał ani jednej linijki do journala. Pi miało prąd cały czas (dioda, wentylator, HDMI), więc nie było restartu — a bez restartu, bez RTC i bez watchdog, zawieszony system nie miał jak wstać. Kamery Tapo wstały same, bo mają własny firmware-owy auto-recovery. Pi nie — i to była cała różnica.
+<strong>Werdykt v1.1:</strong> <strong>Hang — pewność >95%.</strong> Hard lockup kernela/SoC ok. <strong>05:38, 9 sierpnia</strong>; system zawisł w miejscu i już nigdy nie napisał ani jednej linijki do journala. <strong>Trigger nierozstrzygnięty</strong> (kandydaci: impuls zasilania, kernel bug pod obciążeniem I/O — rozstrzygnie UART przy kolejnym zdarzeniu). Pi miało prąd cały czas (dioda, wentylator, HDMI), więc restartu nie było — a bez restartu, bez baterii RTC i bez watchdog, zawieszony system nie miał jak wstać. Kamery Tapo wstały same, bo mają własny firmware-owy auto-recovery. Pi nie — i to była cała różnica.
 </div>
 
 <h2>1 · Oś czasu</h2>
@@ -63,11 +63,23 @@ li{margin:4px 0}
 </ul>
 
 <div class="card">
-<strong>Ciekawostka z zegara:</strong> po odcięciu zasilania <code>who -b</code> pokazał „boot 2026-08-09 05:17". Pi5 nie ma RTC — zegar przy starcie wziął timestamp najnowszego pliku na NVMe (ostatnia aktywność zapisowa). Sama ta data jest niezależnym potwierdzeniem momentu padu.
+<strong>Ciekawostka z zegara:</strong> po odcięciu zasilania <code>who -b</code> pokazał „boot 2026-08-09 05:17". Pi5 ma RTC, ale <strong>bez baterii</strong> — zegar przy starcie odtwarza <strong>fake-hwclock</strong>, zapisywany co godzinę o :17 (cron.hourly; potwierdzone: /etc/fake-hwclock.data mtime 22:17 dziś). 05:17 = ostatni zapis przed padem; pad między 05:17 a 05:38. Fingerprint: <em>wszystkie</em> historyczne booty w <code>last</code> kończą się na „:17".
 </div>
 
 <h2>2 · Hipoteza główna: hard lock bez watchdog</h2>
-<p><span class="badge b-main">GŁÓWNA · ~70%</span> Zawieszenie sprzętowe/kernelowe poniżej zdolności logowania, wyzwolone zdarzeniem zewnętrznym (najpewniej impuls zasilania), bez drogi odzyskania.</p>
+<p><span class="badge b-main">GŁÓWNA · hang >95%, trigger otwarty</span> Hard lockup kernela/SoC poniżej zdolności logowania. Hang jest pewny (journal urywa się w pół zdania, tydzień ciszy na persistent journalu NVMe, „corrupted or uncleanly shut down" przy starcie). Wyzwoliciel (impuls zasilania vs kernel bug pod obciążeniem I/O) — nierozstrzygnięty bez UART.</p>
+
+<div class="card" style="border-left:4px solid var(--yellow)">
+<strong>📝 Errata v1.1 (po peer review):</strong>
+<ul style="margin:6px 0 0 18px">
+<li><strong>who -b „05:17"</strong> — mechanizm opisany błędnie: to <strong>fake-hwclock</strong>, zapis co godzinę o :17 przez cron.hourly (<code>/etc/crontab: 17 * * * *</code>). Dowód: <em>wszystkie</em> booty w <code>last</code> mają „:17". Ostatni zapis 05:17 → pad między 05:17 a 05:38. Wniosek niezmieniony, mocniejszy.</li>
+<li><strong>„Pi5 nie ma RTC" — nieprawda.</strong> Pi5 ma RTC i złącze baterii (J5); bez ogniwka nie trzyma czasu. Bateria CR2032 ~50 kr → na liście zakupów.</li>
+<li><strong>throttled=0x0 nie jest dowodem</strong> — flagi kasują się przy odcięciu zasilania, sprawdzane po power-cycle dotyczyły tylko bieżącego bootu. Odrzucenie undervoltage broni się wyłącznie brakiem „Undervoltage detected" w journalu b-1 (ten grep był wykonany).</li>
+<li><strong>Wątpliwość „livelock pamięciowy" sprawdzona i obalona</strong> — grep całego b-1: <code>hung task|blocked for more|soft lockup|hard lockup|Kernel panic|Out of memory:</code> → <strong>0 trafień</strong>; kadenca wpisów dockerd (co 60 s) idealnie równa do ostatniej sekundy. Thrashing zostawia ślady — ich brak + nagłe urwanie = nadal hang.</li>
+<li><strong>Korelacja z Tapo</strong> — to obserwacja z rozdzielczością godzin, nie log. Router/łącze tłumaczy kamery prościej niż przepięcie; hang Pi jest od niej niezależny (journal na lokalnym NVMe milczałby niezależnie od sieci). Logi routera/Tapo poza zasięgiem — do weryfikacji właściciela.</li>
+<li><strong>Naprawa rozszerzona</strong> — swap 2 GB <em>plus</em> <code>earlyoom</code> (-m 5, kill przy ≤5% mem), żeby większy swap nie wydłużał rzężenia przy próbie livelocku.</li>
+</ul>
+</div>
 
 <h3>Dowody (logi + czasy)</h3>
 <pre>
@@ -109,11 +121,15 @@ Tapo mają firmware z auto-reconnect/watchdog i rebootują się po utracie łąc
 </div>
 
 <div class="card kill">
-<strong>❌ Termika / undervoltage</strong> — <code>throttled=0x0</code> (zero flag historycznych), zero komunikatów „Undervoltage detected", zero „Frequency capped" w całym boocie. Teraz: 63 °C. Wentylator pracujący „głośniej chwilami" = normalna praca zmienna pod obciążeniem docker+node.
+<strong>❌ Termika / undervoltage</strong> — w journalu b-1 <strong>zero</strong> komunikatów „Undervoltage detected" i „Frequency capped" przez 15 dni (grep kernelowy). Uwaga (errata): <code>throttled=0x0</code> sprawdzony po power-cycle dotyczy tylko bieżącego bootu (flagi resetują się przy odcięciu zasilania) — nie jest dowodem dla 9.08; dowodem jest wyłącznie czysty journal. Teraz: 63 °C. Wentylator „głośniej chwilami" = normalna praca zmienna pod obciążeniem docker+node.
 </div>
 
 <div class="card kill">
 <strong>❌ Aktualizacja software</strong> — apt history puste 6–9.08, brak katalogu unattended-upgrades, bootloader EEPROM bez zmian od maja 2026 (aktualny).
+</div>
+
+<div class="card kill">
+<strong>❌ Livelock / thrashing pamięci (zweryfikowane po peer review)</strong> — precyzyjny grep całego b-1: <code>hung task | blocked for more | soft lockup | hard lockup | Kernel panic | Out of memory:</code> → <strong>0 trafień</strong> (kernel i userspace). Kadenca logów dockerd (co 60 s) i heartbeats gatewaya równa do ostatniej sekundy — thrashing zostawia ślady spowolnień i stalli, ich brak wyklucza. Kontener w pętli restartów (20 572×) pozostaje czynnikiem ryzyka długoterminowego — pętla zatrzymana, earlyoom dołożony.
 </div>
 
 <div class="card kill">
@@ -133,9 +149,11 @@ Tapo mają firmware z auto-reconnect/watchdog i rebootują się po utracie łąc
 <tr><td>1</td><td><strong>Sprzętowy watchdog</strong> — dokładnie ten scenariusz: hang → auto-reboot po 10 s</td><td><code>RuntimeWatchdogSec=10s</code> w /etc/systemd/system.conf + <code>systemctl daemon-reexec</code></td><td class="ok">✅ zrobione</td></tr>
 <tr><td>2</td><td><strong>Auto-reboot po kernel panic</strong></td><td><code>panic=10</code> w /boot/firmware/cmdline.txt + <code>kernel.panic=10</code> w sysctl.d</td><td class="ok">✅ zrobione</td></tr>
 <tr><td>3</td><td><strong>Stop pętli admin-panel</strong> (20 572 restarty / 15 dni — ciągłe męczenie CPU/IO)</td><td><code>docker update --restart=no admin-panel</code></td><td class="ok">✅ zrobione</td></tr>
-<tr><td>4</td><td><strong>Swap 200 MB → 2 GB</strong> — bufer na ciśnienie pamięci</td><td><code>CONF_SWAPSIZE=2048</code> w /etc/dphys-swapfile</td><td class="ok">✅ zrobione</td></tr>
+<tr><td>4</td><td><strong>Swap 200 MB → 2 GB + earlyoom</strong> — bufor na ciśnienie pamięci; earlyoom (-m 5, SIGKILL ≤5% mem, avoid: mongod/dockerd/sshd/tailscaled) zapobiega rzężaniu zamiast umierania</td><td><code>CONF_SWAPSIZE=2048</code> + <code>apt install earlyoom</code></td><td class="ok">✅ zrobione</td></tr>
 <tr><td>5</td><td>Zdalny powrót (już jest): Tailscale + <code>tailscale ssh</code> z telefonu</td><td>—</td><td class="ok">✅ jest</td></tr>
-<tr><td>6</td><td>Zalecane: USB-UART na GPIO14/15 (~30 kr) — następny panic zobaczysz na żywo</td><td>—</td><td>⏳ opcjonalne</td></tr>
+<tr><td>5b</td><td><strong>Test panic-reboot na żywo</strong> (sysrq-c) — niesprawdzony watchdog jest wart zero</td><td><code>echo c &gt; /proc/sysrq-trigger</code></td><td class="ok">✅ wykonany 16.08 (patrz sekcja niżej)</td></tr>
+<tr><td>5c</td><td><strong>Baseline NVMe</strong>: unsafe_shutdowns = 43 (lifetime). Przy następnym zdarzeniu delta powie, czy padło zasilanie</td><td><code>nvme smart-log /dev/nvme0n1</code></td><td class="ok">✅ zanotowane</td></tr>
+<tr><td>6</td><td>Bateria RTC CR2032 (~50 kr) — przy następnym padzie prawdziwy timestamp zamiast rekonstrukcji</td><td>—</td><td>⏳ zakup</td></tr>
 <tr><td>7</td><td>Zalecane: smart plug z historią przerw (np. Tapo P100) — zdalny power-cycle + dowody na przepięcia</td><td>—</td><td>⏳ opcjonalne</td></tr>
 </table>
 
@@ -148,7 +166,7 @@ Tapo mają firmware z auto-reconnect/watchdog i rebootują się po utracie łąc
 </ol>
 
 <div class="footer">
-Źródła: journalctl boot -1 (25.07–09.08, pełny zapis na NVMe) · kernel ring buffer b0 · vcgencmd (throttle/temp/volt) · apt history · rpi-eeprom · docker inspect · crontab. Zweryfikowano 16.08.2026 po 21:28.<br>
+Źródła: journalctl boot -1 (25.07–09.08, pełny zapis na NVMe) · kernel ring buffer b0 · vcgencmd (throttle/temp/volt) · apt history · rpi-eeprom · docker inspect · crontab. Zweryfikowano 16.08.2026 po 21:28 · v1.1 errata po peer review 22:30.<br>
 Raport wygenerowany przez Andrzeja (OpenClaw) · repo: andrzej-bot-dev/andrzej-reports
 </div>
 

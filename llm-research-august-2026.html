@@ -143,6 +143,22 @@ Off-peak: cała reszta doby — w tym całe popołudnie, wieczór i noc.<br>
 </tbody>
 </table>
 
+<h3>🖥️ Case Study: Sprzęt Dawida (sierpień 2026)</h3>
+<table>
+<thead><tr><th></th><th>MacBook Pro M1 Pro 32GB</th><th>PC: i7-4790K + GTX 1070 8GB + 16GB DDR3</th></tr></thead>
+<tbody>
+<tr><td><strong>Max sensowny model</strong></td><td class="best">Qwen3.8-27B Q4 (MLX, ~15GB)</td><td>Qwen3-8B / 3.5-9B Q4 (~5GB, całość w VRAM)</td></tr>
+<tr><td><strong>27B?</strong></td><td class="best">✅ TAK — mieści się w 32GB unified</td><td class="bad">❌ 16.5GB &gt; 8GB VRAM; hybrid = 3-5 tok/s</td></tr>
+<tr><td><strong>Prędkość outputu</strong></td><td>~6–9 tok/s (200 GB/s bandwidth)</td><td>~20–30 tok/s (256 GB/s, DP4A)</td></tr>
+<tr><td><strong>Pobór pod inference</strong></td><td>~35W (cały laptop)</td><td>~220W (GPU 140W + 4790K 50W + reszta)</td></tr>
+<tr><td><strong>Koszt prądu / 1M outputu</strong></td><td class="best">~2.4 SEK</td><td>~4.9 SEK</td></tr>
+<tr><td><strong>Rola w setupie</strong></td><td>Nocne batche 27B = flagowa jakość za grosze</td><td>Lokalny helper 8-9B + Whisper/OCR/embeddingi</td></tr>
+</tbody>
+</table>
+<div class="card info-card">
+<strong>Ciekawostka:</strong> M1 Pro przy 2 SEK/kWh wychodzi <strong>taniej na token</strong> niż GTX 1070 (2.4 vs 4.9 SEK/1M) i przy tym odpala model 3× większy. Wolniej (6-9 vs 25 tok/s), ale jakość &gt; szybkość dla batchy. Stary PC (12 lat, DDR3, brak tensor core'ów) nie uciągnie 27B — jego rola to małe modele i narzędzia.
+</div>
+
 <h3>📦 Ekosystem kwantyzacji — co nowego</h3>
 <ul>
 <li><strong>NVFP4</strong> — format NVIDII zoptymalizowany pod RTX 50xx (Blackwell). Qwen3.6-35B-A3B-NVFP4 = 12,3M pobrań, top trend. Na 50-serii MoE 35B śmiga full speed w ~20GB.</li>

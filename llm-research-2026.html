@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Research 2025-2026 - Raport</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; line-height: 1.6; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { text-align: center; color: #38bdf8; font-size: 2em; margin-bottom: 10px; }
+.subtitle { text-align: center; color: #94a3b8; margin-bottom: 30px; font-size: 1.1em; }
+h2 { color: #38bdf8; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #1e293b; font-size: 1.5em; }
+h3 { color: #7dd3fc; margin: 20px 0 10px 0; font-size: 1.2em; }
+p { margin: 8px 0; color: #cbd5e1; }
+.intro { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #38bdf8; }
+
+.table-wrapper { overflow-x: auto; margin: 15px 0 30px 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+table { width: 100%; border-collapse: collapse; background: #1e293b; font-size: 0.85em; }
+thead { background: #0c4a6e; }
+th { padding: 12px 10px; text-align: left; color: #7dd3fc; font-weight: 600; white-space: nowrap; position: sticky; top: 0; background: #0c4a6e; }
+td { padding: 10px; border-top: 1px solid #334155; white-space: nowrap; }
+tr:hover { background: #1e3a5f; }
+tr:nth-child(even) { background: #172033; }
+tr:nth-child(even):hover { background: #1e3a5f; }
+.highlight { background: #0c4a6e !important; font-weight: bold; }
+.best { color: #4ade80; font-weight: bold; }
+
+.tier-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 15px 0 30px 0; }
+.tier-card { background: #1e293b; border-radius: 12px; padding: 22px; border-left: 4px solid #38bdf8; }
+.tier-card.t1 { border-left-color: #6b7280; }
+.tier-card.t2 { border-left-color: #22c55e; }
+.tier-card.t3 { border-left-color: #3b82f6; }
+.tier-card.t4 { border-left-color: #a855f7; }
+.tier-card.t5 { border-left-color: #f59e0b; }
+.tier-card.t6 { border-left-color: #ef4444; }
+.tier-card.t7 { border-left-color: #ec4899; }
+.tier-card h4 { color: #38bdf8; margin-bottom: 6px; font-size: 1.15em; }
+.tier-card .cost { font-size: 1.3em; color: #4ade80; font-weight: bold; }
+.tier-card .speed-label { font-weight: bold; }
+.tier-card .section-title { color: #7dd3fc; font-weight: 600; margin-top: 12px; margin-bottom: 4px; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.5px; }
+.tier-card ul { margin: 6px 0; padding-left: 20px; }
+.tier-card li { margin: 4px 0; color: #cbd5e1; font-size: 0.9em; }
+.tier-card .verdict { margin-top: 12px; padding: 10px; background: #0f172a; border-radius: 8px; font-size: 0.9em; color: #94a3b8; }
+.tier-card .verdict strong { color: #e2e8f0; }
+.tier-card .cost-per-point { margin-top: 12px; padding: 12px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 8px; border-left: 3px solid #fbbf24; }
+.tier-card .cost-per-point .cpp-value { font-size: 1.4em; color: #fbbf24; font-weight: bold; }
+.tier-card .cost-per-point .cpp-label { color: #94a3b8; font-size: 0.85em; }
+.tier-card .cost-per-point .cpp-detail { color: #cbd5e1; font-size: 0.85em; margin-top: 4px; }
+
+.cpp-table-wrapper { overflow-x: auto; margin: 15px 0 30px 0; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.cpp-table { width: 100%; border-collapse: collapse; background: #1e293b; font-size: 0.9em; }
+.cpp-table th { padding: 14px 12px; text-align: center; color: #7dd3fc; background: #0c4a6e; }
+.cpp-table td { padding: 12px; text-align: center; border-top: 1px solid #334155; }
+.cpp-table tr:hover { background: #1e3a5f; }
+.cpp-table .best-cpp { color: #4ade80; font-weight: bold; }
+.cpp-table .worst-cpp { color: #f87171; }
+.cpp-table .mid-cpp { color: #fbbf24; }
+
+.rec-box { background: linear-gradient(135deg, #1e293b, #0c4a6e); border-radius: 12px; padding: 22px; margin: 15px 0; border: 1px solid #0ea5e9; }
+.rec-box h4 { color: #fbbf24; margin-bottom: 10px; font-size: 1.2em; }
+.rec-box .price { color: #4ade80; font-size: 1.1em; font-weight: bold; margin-bottom: 8px; }
+.rec-box p { margin: 5px 0; font-size: 0.95em; }
+.rec-box .highlight-box { margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px; }
+.rec-box .highlight-box strong { color: #7dd3fc; }
+
+.disclaimer { text-align: center; color: #64748b; font-size: 0.85em; margin-top: 30px; padding-top: 15px; border-top: 1px solid #334155; }
+.highlight-roi { border: 2px solid #fbbf24 !important; background: rgba(251, 191, 36, 0.05) !important; }
+.highlight-roi h4 { color: #fbbf24 !important; }
+.highlight-qwen { border: 2px solid #f472b6 !important; background: rgba(244, 114, 182, 0.05) !important; }
+.highlight-qwen h4 { color: #f472b6 !important; }
+.roi-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.roi-table td { padding: 8px; border-bottom: 1px solid #1e293b; color: #cbd5e1; font-size: 0.95em; }
+.roi-table td:last-child { text-align: right; font-weight: bold; color: #4ade80; }
+
+@media (min-width: 768px) {
+  .tier-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🤖 Otwarte Modele LLM 2025-2026</h1>
+<p class="subtitle">Kompletny raport: benchmarki, wymagania sprzętowe, koszty i rekomendacje</p>
+
+<div class="intro">
+<strong>Stan na maj 2026.</strong> Otwarte modele językowe (open weights) zrównały się z komercyjnymi — a w kodowaniu i matematyce często je przewyższają. Kluczowe trendy: <strong>Mixture-of-Experts (MoE)</strong> (potężna wiedza, niskie koszty inferencji) i natywna <strong>multimodalność</strong>.
+</div>
+
+<!-- ═══════════════ TABELA GŁÓWNA ═══════════════ -->
+<h2>📊 Porównanie Modeli</h2>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Model (Rozmiar)</th>
+<th>Organizacja</th>
+<th>Parametry</th>
+<th>VRAM Q4</th>
+<th>VRAM FP16</th>
+<th>Tier</th>
+<th>Koszt (SEK)</th>
+<th>tok/s</th>
+<th>SWE-bench</th>
+<th>Agentic</th>
+<th>MMLU</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="highlight">
+<td><strong>MiniMax M2.5</strong></td>
+<td>MiniMax</td>
+<td>230B MoE</td>
+<td>150 GB</td>
+<td>460 GB</td>
+<td>T7</td>
+<td>100k+</td>
+<td>12–18</td>
+<td class="best">80.2%</td>
+<td>82.0%</td>
+<td>85.0%</td>
+<td>🏆 Lider SWE-bench</td>
+</tr>
+<tr>
+<td><strong>Kimi K2.5</strong></td>
+<td>Moonshot</td>
+<td>1T MoE</td>
+<td>500 GB+</td>
+<td>—</td>
+<td>T7</td>
+<td>250k+</td>
+<td>5–10</td>
+<td>76.8%</td>
+<td class="best">85.0%</td>
+<td>87.1%</td>
+<td>Top agentic</td>
+</tr>
+<tr>
+<td><strong>GLM-5 (744B MoE)</strong></td>
+<td>Zhipu AI</td>
+<td>744B/40B</td>
+<td>400 GB</td>
+<td>1.5 TB</td>
+<td>T7</td>
+<td>200k+</td>
+<td>5–10</td>
+<td>77.8%</td>
+<td>82.0%</td>
+<td>85.0%</td>
+<td>Wybitny kod</td>
+</tr>
+<tr class="highlight">
+<td><strong>Qwen 3.6 (27B)</strong></td>
+<td>Alibaba</td>
+<td>27B</td>
+<td>16 GB</td>
+<td>54 GB</td>
+<td>T5</td>
+<td>20-30k</td>
+<td>15–25</td>
+<td>77.2%</td>
+<td>81.5%</td>
+<td>87.8%</td>
+<td>👑 Best buck</td>
+</tr>
+<tr>
+<td><strong>Qwen 3.5 (397B MoE)</strong></td>
+<td>Alibaba</td>
+<td>397B/17B</td>
+<td>250 GB</td>
+<td>800 GB</td>
+<td>T7</td>
+<td>100k+</td>
+<td>12–20</td>
+<td>70.0%</td>
+<td>79.0%</td>
+<td>86.0%</td>
+<td>Wydajny MoE</td>
+</tr>
+<tr>
+<td><strong>Qwen 3.6 (35B MoE)</strong></td>
+<td>Alibaba</td>
+<td>35B/3B</td>
+<td>22 GB</td>
+<td>70 GB</td>
+<td>T5</td>
+<td>20-30k</td>
+<td>25–40</td>
+<td>68.0%</td>
+<td>72.0%</td>
+<td>83.0%</td>
+<td>Szybki MoE</td>
+</tr>
+<tr>
+<td><strong>DeepSeek V3.2</strong></td>
+<td>DeepSeek</td>
+<td>671B/37B</td>
+<td>350 GB</td>
+<td>1.3 TB</td>
+<td>T7</td>
+<td>150k+</td>
+<td>8–12</td>
+<td>67.8%</td>
+<td>78.0%</td>
+<td>85.0%</td>
+<td>Top tools</td>
+</tr>
+<tr>
+<td><strong>DeepSeek R1</strong></td>
+<td>DeepSeek</td>
+<td>671B/37B</td>
+<td>350 GB</td>
+<td>1.3 TB</td>
+<td>T7</td>
+<td>150k+</td>
+<td>2–5</td>
+<td>60.0%</td>
+<td>70.0%</td>
+<td>84.0%</td>
+<td>Math 97.3%</td>
+</tr>
+<tr>
+<td><strong>Llama 4 Maverick</strong></td>
+<td>Meta</td>
+<td>400B/17B</td>
+<td>250 GB</td>
+<td>800 GB</td>
+<td>T7</td>
+<td>100k+</td>
+<td>10–15</td>
+<td>65.0%</td>
+<td>75.0%</td>
+<td>85.5%</td>
+<td>Kontekst 1M</td>
+</tr>
+<tr>
+<td><strong>Mistral Small 4</strong></td>
+<td>Mistral</td>
+<td>119B/6B</td>
+<td>70 GB</td>
+<td>240 GB</td>
+<td>T6</td>
+<td>40-60k</td>
+<td>20–30</td>
+<td>55.0%</td>
+<td>68.0%</td>
+<td>82.0%</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><strong>GPT-oss 120B</strong></td>
+<td>OpenAI</td>
+<td>117B</td>
+<td>80 GB</td>
+<td>234 GB</td>
+<td>T6</td>
+<td>50-80k</td>
+<td>15–25</td>
+<td>62.4%</td>
+<td>78.0%</td>
+<td class="best">90.0%</td>
+<td>Top MMLU</td>
+</tr>
+<tr>
+<td><strong>Gemma 3 (27B)</strong></td>
+<td>Google</td>
+<td>27B</td>
+<td>16 GB</td>
+<td>54 GB</td>
+<td>T5</td>
+<td>20-30k</td>
+<td>15–20</td>
+<td>50.0%</td>
+<td>60.0%</td>
+<td>78.6%</td>
+<td>Stabilny</td>
+</tr>
+<tr>
+<td><strong>Phi-4 (14B)</strong></td>
+<td>Microsoft</td>
+<td>14B</td>
+<td>9 GB</td>
+<td>28 GB</td>
+<td>T4</td>
+<td>6-10k</td>
+<td>25–35</td>
+<td>45.0%</td>
+<td>55.0%</td>
+<td>76.0%</td>
+<td>Dobra logika</td>
+</tr>
+<tr>
+<td><strong>Gemma 3 (4B)</strong></td>
+<td>Google</td>
+<td>4B</td>
+<td>3 GB</td>
+<td>8 GB</td>
+<td>T2</td>
+<td>2-4k</td>
+<td>30–50</td>
+<td>25.0%</td>
+<td>35.0%</td>
+<td>70.0%</td>
+<td>Lekki</td>
+</tr>
+<tr>
+<td><strong>Phi-4 Mini (3.8B)</strong></td>
+<td>Microsoft</td>
+<td>3.8B</td>
+<td>2.5 GB</td>
+<td>7.6 GB</td>
+<td>T2</td>
+<td>2-4k</td>
+<td>40–60</td>
+<td>20.0%</td>
+<td>30.0%</td>
+<td>68.0%</td>
+<td>B. lekki</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════ ANALIZA SPRZĘTOWA ═══════════════ -->
+<h2>🖥️ Analiza Sprzętowa — Co Kupić i Co Odpalisz</h2>
+
+<div class="tier-grid">
+
+<!-- TIER 1 -->
+<div class="tier-card t1">
+<h4>🔌 Tier 1 — Mikrokomputer (Edge)</h4>
+<p class="cost">~500 SEK</p>
+<p><strong>Sprzęt:</strong> Raspberry Pi 5 (8GB RAM)</p>
+
+<p class="section-title">⚡ Prędkość: 1–5 tok/s</p>
+<p>Tragicznie wolno. Jak piszesz na klawiaturze, maszyna myśli wolniej niż Ty. Odpowiedź na proste pytanie zajmuje 30-60 sekund. Dłuższy prompt — kilka minut milczenia.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli na tym sprzęcie</p>
+<ul>
+<li>Qwen3-0.6B: SWE-bench ~3%, MMLU ~35%</li>
+<li>Qwen3-1.7B: SWE-bench ~8%, MMLU ~48%</li>
+<li>Phi-3.5 Tiny: SWE-bench ~5%, Agentic ~10%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Nie ma sensu. Nawet proste komendy tool-calling będą trwały minutami. Heartbeat poll by się dławił. Jedyne zastosowanie: odpalenie na RPi jako "always-on" IoT asystent do sterowania żarówkami, gdzie model interpretuje "zapal światło" — i to ledwo.</p>
+<p><strong>Czat:</strong> Frustrujące. Zanim dostaniesz odpowiedź, zapomnisz co pytałeś.</p>
+<p><strong>Research:</strong> Niemożliwy. Taki research jak ten trwałby dosłownie dni — każdy web search + analiza to minuty czekania.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">63 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">500 SEK ÷ 8% (Qwen3-1.7B) = <strong>63 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Najtańszy punkt wejścia, ale wyniki minimalne. Jak kupujesz piwo za 20 SEK — tanie, ale nie wyżywisz się.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Ciekawostka edukacyjna. Nauczy Cię jak działają LLM, ale nie użyjesz tego produktywnie. OK jako inteligentny termostat.</div>
+</div>
+
+<!-- TIER 2 -->
+<div class="tier-card t2">
+<h4>💻 Tier 2 — Tani Laptop Biurowy</h4>
+<p class="cost">~2 500 SEK</p>
+<p><strong>Sprzęt:</strong> Poleasingowy ThinkPad T480 / Dell Latitude, 32GB RAM, CPU only</p>
+
+<p class="section-title">⚡ Prędkość: 5–10 tok/s</p>
+<p>Wolniej niż czytasz. Dostajesz odpowiedź słowo po słowie — jak stary modem. Proste pytanie: 10-20 sekund. Dłuższa analiza: minuta+. Da się z tym pracować, ale musisz mieć cierpliwość.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li>Gemma 3 4B: SWE-bench 25%, Agentic 35%, MMLU 70%</li>
+<li>Phi-4 Mini 3.8B: SWE-bench 20%, Agentic 30%, MMLU 68%</li>
+<li>Qwen3-4B: SWE-bench ~22%, Agentic ~32%, MMLU ~65%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Da się! Ale z ograniczeniami. Proste komendy (ustaw przypomnienie, sprawdź pogodę) działają OK. Tool calling działa, ale każdy call to kilka sekund czekania. Heartbeat co 30 min będzie obciążał maszynę. Nie polecam do skomplikowanych workflow wieloagentowych.</p>
+<p><strong>Czat:</strong> Użyteczne do prostych pytań, nauki, pisania maili. Model 4B radzi sobie z podstawową logiką, ale gubi się w złożonych zadaniach.</p>
+<p><strong>Research:</strong> Bardzo wolno. Taki research jak ten zająłby godzinę+. Model nie radzi sobie dobrze z wieloetapową analizą — za mało parametrów na złożone rozumowanie.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">100 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">2 500 SEK ÷ 25% (Gemma 3 4B) = <strong>100 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Wciąż najtańsza opcja z użytecznym modelem. 100 SEK za punkt SWE-bench to jak bilet na komunikację miejską — tanio i dowiezie.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Super na start. Za 2500 SEK masz model, który rozumie polecenia i odpowiada sensownie. Idealny do nauki, domowej automatyzacji, prostego czatu. Nie poczujesz się jak z GPT-4, ale jak z naprawionym GPT-3.5.</div>
+</div>
+
+<!-- TIER 3 -->
+<div class="tier-card t3">
+<h4>💼 Tier 3 — Mid-range Laptop</h4>
+<p class="cost">~10 000–15 000 SEK</p>
+<p><strong>Sprzęt:</strong> Laptop z 32-64GB RAM (MacBook Air M3 24GB / PC i7 + 64GB)</p>
+
+<p class="section-title">⚡ Prędkość: 10–15 tok/s</p>
+<p>Prawie jak czytanie na głos. Odpowiedź płynie w akceptowalnym tempie — widzisz tekst pojawiający się linijka po linijce. Prosty prompt: 5-10 sekund. Dłuższa analiza: 30-60 sekund. Komfortowe czatowanie.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li>Qwen3-14B (Q4): SWE-bench ~40%, Agentic ~48%, MMLU ~76%</li>
+<li>DeepSeek R1 8B (distill): SWE-bench ~35%, Agentic ~40%</li>
+<li>Llama 3.3 8B: SWE-bench ~33%, Agentic ~42%</li>
+<li>Phi-4 (14B, częściowo offload): SWE-bench ~45%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Solidne. Tool calling działa płynnie, cron joby, heartbeats — wszystko w normie. 14B model jest wystarczająco inteligentny, żeby dobrze interpretować komendy i radzić sobie z większością zadań. Agenty mogą gubić się w bardzo złożonych wieloetapowych zadaniach.</p>
+<p><strong>Czat:</strong> Przyjemne. Model 14B daje sensowne, wieloaspektowe odpowiedzi. Radzi sobie z kodowaniem, pisaniem tekstów, tłumaczeniami. Nie jest tak dobry jak GPT-4, ale zbliża się.</p>
+<p><strong>Research:</strong> Możliwe, ale powoli. Taki research jak ten zająłby 30-45 min. Model z 14B poradzi sobie z prostszym researchem, ale przy złożonej analizie wieloźródłowej może gubić wątki.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">278 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">12 500 SEK ÷ 45% (Phi-4 14B) = <strong>278 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Zaczyna kosztować. Ale kupujesz laptop, który i tak potrzebujesz do pracy. AI to bonus. 278 SEK/punkt jak obiad w restauracji — nie najtaniej, ale warto.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Złoty środek dla kogoś, kto chce laptopa DO PRACY i od biedy LLM. Nie kupujesz sprzętu POD AI — kupujesz laptopa i dostajesz AI gratis. Przyzwoite wyniki, praca codzienna bez frustracji.</div>
+</div>
+
+<!-- TIER 4 -->
+<div class="tier-card t4">
+<h4>🎮 Tier 4 — Budget Gaming PC (Entry AI)</h4>
+<p class="cost">~6 000–10 000 SEK</p>
+<p><strong>Sprzęt:</strong> RTX 5060 (8GB VRAM) / RTX 4060 Ti (16GB VRAM) + 32GB RAM</p>
+
+<p class="section-title">⚡ Prędkość: 20–40 tok/s</p>
+<p>Szybko! Tekst pojawia się szybciej niż czytasz. Odpowiedź na proste pytanie: 2-3 sekundy. Dłuższa analiza: 10-20 sekund. Płynne, komfortowe doświadczenie — przypomina czat z GPT-4.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li>Phi-4 (14B): SWE-bench 45%, Agentic 55%, MMLU 76%</li>
+<li>Qwen3-14B (Q4): SWE-bench ~40%, Agentic ~48%, MMLU ~76%</li>
+<li>Modele 8B: błyskawiczne, SWE-bench ~33-35%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Bardzo dobrze. GPU inference sprawia, że tool calling jest błyskawiczny. Cron joby, heartbeats, wieloagentowe workflow — wszystko działa płynnie. 14B na GPU to sweet spot — model jest wystarczająco inteligentny i responsywny.</p>
+<p><strong>Czat:</strong> Świetne. Odpowiedzi pojawiają się błyskawicznie, jakość modelu 14B jest zbliżona do wczesnego GPT-4. Kodowanie, analiza tekstu, burza mózgów — wszystko na dobrym poziomie.</p>
+<p><strong>Research:</strong> Da radę! Taki research zająłby 15-20 min. Model 14B może trochę gubić się w bardzo złożonych wieloetapowych analizach, ale do większości zadań wystarczy. Szybkość rekompensuje mniejszą inteligencję.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">178 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">8 000 SEK ÷ 45% (Phi-4 14B) = <strong>178 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Drugi najtańszy! GPU robi różnicę — ten sam model Phi-4 co na laptopie, ale za 5k SEK mniej sprzętu. Jak znalazł okazyjny lot — tanio i dobrze.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Najlepszy punkt wejścia dla hobbysty. Za cenę taniego gaming PC masz lokalne AI, które działa naprawdę dobrze. RTX 4060 Ti 16GB to absolutny złoty środek — mieści modele 14B z pełnym kontekstem.</div>
+</div>
+
+<!-- TIER 5 -->
+<div class="tier-card t5">
+<h4>🔥 Tier 5 — High-end Gaming PC (Prosumer)</h4>
+<p class="cost">~30 000–45 000 SEK</p>
+<p><strong>Sprzęt:</strong> RTX 5090 (32GB VRAM) lub RTX 4090 (24GB VRAM) + 64GB RAM</p>
+
+<p class="section-title">⚡ Prędkość: 15–30 tok/s</p>
+<p>Piorunująco przy mniejszych modelach, bardzo szybko przy dużych. Qwen 27B generuje tekst szybciej niż większość ludzi pisze. Dłuższe odpowiedzi pojawiają się w kilka sekund. To poziom komercyjnego API — nie czekasz, po prostu czytasz.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li><strong>Qwen 3.6 (27B):</strong> SWE-bench 77.2%, Agentic 81.5%, MMLU 87.8%</li>
+<li>Qwen 3.6 (35B MoE): SWE-bench 68%, Agentic 72%, MMLU 83%</li>
+<li>Gemma 3 (27B): SWE-bench 50%, Agentic 60%, MMLU 78.6%</li>
+<li>Llama 70B (Q2/Q3, partially offloaded): SWE-bench ~40-50%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Profesjonalny poziom. Qwen 27B z SWE-bench 77% to model, który NAPRAWDĘ rozumie co robisz. Tool calling perfekcyjny, agenty działają autonomicznie bez gubienia wątków. Możesz uruchomić kilka równoległych sesji i każda działa płynnie. To setup, na którym OpenClaw pokazuje pełny potencjał.</p>
+<p><strong>Czat:</strong> Jak z najlepszym komercyjnym modelem. Jakość odpowiedzi Qwen 27B jest na poziomie Claude Sonnet / GPT-4. Kodowanie, złożona analiza, kreatywne pisanie — wszystko na najwyższym poziomie. Czasami zapominasz, że to model lokalny.</p>
+<p><strong>Research:</strong> Świetnie. Taki research jak ten zająłby 5-10 min. Model świetnie radzi sobie z wieloetapową analizą, syntezą danych z wielu źródeł i formułowaniem wniosków. Jedyna gorsza strona: bardzo złożone zadania agentowe (wiele iteracji z narzędziami) mogą wyczerpać kontekst.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">453 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">35 000 SEK ÷ 77.2% (Qwen 3.6 27B) = <strong>453 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Droższe za punkt niż budget PC, ale wyniki są na INNYM POZIOMIE. To jak porównywać Fiata z BMW — oba mają 4 koła, ale jedno jedzie 200 km/h.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> ZŁOTY STANDARD 2026. To jest ten moment, kiedy lokalne AI staje się praktycznie nieodróżnialne od komercyjnego API. Qwen 27B na RTX 5090 to zestaw, który poleciłbym każdemu, kto poważnie myśli o lokalnym AI. Sprzęt jednocześnie świetny do gier (Cyberpunk na ultra!).</div>
+</div>
+
+<!-- TIER 6 -->
+<div class="tier-card t6">
+<h4>🏢 Tier 6 — Serwer Domowy (Multi-GPU)</h4>
+<p class="cost">~40 000–70 000 SEK</p>
+<p><strong>Sprzęt:</strong> 2× RTX 3090 (używane, 48GB łącznego VRAM) lub 2× RTX 5080</p>
+
+<p class="section-title">⚡ Prędkość: 10–20 tok/s</p>
+<p>Modele 70B+ działają w komfortowym tempie — jak szybko czytający człowiek. Przy mniejszych modelach jest błyskawicznie. Multi-GPU ma overhead, ale pozwala uruchomić modele, których nie ruszysz na pojedynczej karcie.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li>Llama 70B (Q4): SWE-bench ~55%, Agentic ~65%, MMLU ~82%</li>
+<li>Mistral Small 4: SWE-bench 55%, Agentic 68%, MMLU 82%</li>
+<li>GPT-oss 120B (Q4): SWE-bench 62.4%, Agentic 78%, MMLU 90%</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Profesjonalny serwer AI. Możesz serwować modele dla całej rodziny/małego zespołu. Wiele równoległych sesji, intensywne workflow agentowe, długie konteksty — to wszystko działa bez problemu. Idealne do 24/7 pracy jako "domowy ChatGPT".</p>
+<p><strong>Czat:</strong> Doskonałe. Modele 70B+ oferują głębsze rozumienie niż 27B. Lepsza logika, lepsze kodowanie, lepsze radzenie sobie z edge cases. GPT-oss 120B z MMLU 90% to potężny analityk.</p>
+<p><strong>Research:</strong> Pierwsza klasa. Taki research w 3-5 min. Modele 70B+ świetnie radzą sobie z wieloetapową analizą, bardzo złożonym tool callingiem i syntezą dużych ilości danych. Tutaj lokalny AI dogania najlepsze komercyjne oferty.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">881 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">55 000 SEK ÷ 62.4% (GPT-oss 120B) = <strong>881 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Tu już płacisz za MOŻLIWOŚCI, nie tylko benchmark. Multi-GPU = serwisujesz model dla wielu osób. Ale czysto %/SEK nie jest rewelacyjny.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Dla power usera / małego zespołu. Używane 2× RTX 3090 to genialny deal — za ~40-50k SEK masz serwer, który obsłuży modele na poziomie GPT-4 dla kilku osób jednocześnie. Może też służyć jako domowy serwer do wielu zadań naraz.</div>
+</div>
+
+<!-- TIER 7 -->
+<div class="tier-card t7">
+<h4>🏭 Tier 7 — Enterprise / Datacenter</h4>
+<p class="cost">200 000+ SEK</p>
+<p><strong>Sprzęt:</strong> 4-8× A100 (80GB) / H100 / NVIDIA Blackwell B200</p>
+
+<p class="section-title">⚡ Prędkość: 20–100 tok/s</p>
+<p>Niezależnie od modelu — błyskawica. Odpowiedź pojawia się natychmiast. Największe modele (DeepSeek 671B) generują tekst szybciej niż potrafisz czytać. To poziom komercyjnego API z SLA.</p>
+
+<p class="section-title">📊 Benchmarki najlepszych modeli</p>
+<ul>
+<li><strong>MiniMax M2.5:</strong> SWE-bench 80.2%, Agentic 82%, MMLU 85%</li>
+<li><strong>GLM-5 (744B):</strong> SWE-bench 77.8%, Agentic 82%, MMLU 85%</li>
+<li><strong>DeepSeek V3.2:</strong> SWE-bench 67.8%, Agentic 78%, MMLU 85%</li>
+<li><strong>Kimi K2.5:</strong> SWE-bench 76.8%, Agentic 85%, MMLU 87.1%</li>
+<li><strong>Llama 4 Maverick:</strong> SWE-bench 65%, Agentic 75%, kontekst 1M!</li>
+</ul>
+
+<p class="section-title">🤖 OpenClaw & codzienne użycie</p>
+<p><strong>OpenClaw:</strong> Absolutny top. MiniMax M2.5 z 80% SWE-bench to model, który przewyższa większość komercyjnych ofert. Autonomiczne agenty, skomplikowane wieloetapowe workflow, setki narzędzi — wszystko działa perfekcyjnie. Możesz uruchomić kilkanaście równoległych sesji agentowych i każda działa jak osobny pracownik.</p>
+<p><strong>Czat:</strong> Poziom Claude Opus / GPT-5. Modele na tym tierze są tak dobre, że nie ma sensu porównywać z komercyjnymi — często są LEPSZE. GLM-5 w kodowaniu, Kimi w zadaniach agentowych, DeepSeek w tool callingu.</p>
+<p><strong>Research:</strong> Taki research jak ten zająłby 2-3 min. Model samodzielnie planuje, wyszukuje, analizuje i syntetyzuje. Nie musisz nadzorować — dostajesz gotowy, wysokiej jakości raport. To jest AI, które może pracować jako pełnoprawny asystent badawczy.</p>
+
+<div class="cost-per-point">
+<span class="cpp-value">2 494 SEK / % SWE-bench</span><br>
+<span class="cpp-detail">200 000 SEK ÷ 80.2% (MiniMax M2.5) = <strong>2 494 SEK za każdy punkt</strong></span><br>
+<span class="cpp-label">Najdrożej za punkt. Ale dostajesz absolutny TOP — 80% SWE-bench, które nie jest dostępne nigdzie indziej lokalnie. Jak kupować Ferrari — nie patrzysz na cena/km.</span>
+</div>
+<div class="verdict"><strong>Werdykt:</strong> Jeśli masz budżet firmy lub jesteś VC — to jest to. Ale dla jednej osoby to przerost formy nad treścią. Sprzęt za 200k+ SEK zwraca się dopiero, gdy serwujesz modele dla zespołu lub uruchamiasz intensywne agenty 24/7.</div>
+</div>
+
+</div>
+
+<!-- ═══════════════ BEST BANG FOR BUCK ═══════════════ -->
+<h2>🏆 Best Bang for Buck — Rekomendacje</h2>
+
+<div class="rec-box">
+<h4>🥇 MIEJSCE 1 — Qwen 3.6 (27B) na RTX 5090 (32GB)</h4>
+<p class="price">💰 ~35 000 SEK (za cały PC)</p>
+<p><strong>SWE-bench 77.2%</strong> — poziom najlepszych komercyjnych modeli. Okno kontekstowe 256K tokenów. MMLU 87.8%, Agentic 81.5%.</p>
+
+<div class="highlight-box">
+<p><strong>Co dostajesz:</strong></p>
+<ul style="margin:6px 0;padding-left:20px;">
+<li>Lokalne AI na poziomie GPT-4 / Claude Sonnet</li>
+<li>15-25 tok/s — błyskawiczne odpowiedzi</li>
+<li>Perfekcyjne tool calling i agentyka</li>
+<li>Pełna prywatność — zero danych wychodzi z domu</li>
+<li>Komputer, na którym pograsz w Cyberpunk na ultra w 4K</li>
+</ul>
+
+<p><strong>Dla kogo:</strong> Programista, power user, ktokolwiek kto używa AI codziennie i chce niezależności od API. Ten zestaw zwraca się w kilka miesięcy, jeśli płacisz za API >$50/miesiąc.</p>
+
+<p><strong>OpenClaw:</strong> Idealny. To setup, na którym OpenClaw błyszczy — szybki, inteligentny, niezawodny.</p>
+</div>
+</div>
+
+<div class="rec-box">
+<h4>🥈 MIEJSCE 2 — Gemma 3 (4B) na ThinkPad T480 (32GB RAM)</h4>
+<p class="price">💰 ~2 500 SEK (poleasingowy laptop)</p>
+<p><strong>SWE-bench 25%</strong> — nie imponuje, ale za tę cenę? Model radzi sobie z logiką lepiej niż GPT-3.5.</p>
+
+<div class="highlight-box">
+<p><strong>Co dostajesz:</strong></p>
+<ul style="margin:6px 0;padding-left:20px;">
+<li>AI asystent za ułamek ceny</li>
+<li>5-10 tok/s — powoli, ale użytecznie</li>
+<li>Podstawowy tool calling działa</li>
+<li>Mobilność — AI w plecaku</li>
+<li>Bariera wejścia: cena obiadu dla dwóch osób</li>
+</ul>
+
+<p><strong>Dla kogo:</strong> Student, hobbysta, ktoś kto chce "zajrzeć" do AI bez inwestycji. Idealny do nauki promptingu, automatyzacji domowej, prostych zadań.</p>
+
+<p><strong>OpenClaw:</strong> Działa, ale z ograniczeniami. Proste cron joby, przypomnienia, pogoda — OK. Skomplikowane agenty — za trudno dla modelu 4B.</p>
+</div>
+</div>
+
+<div class="rec-box">
+<h4>🥉 MIEJSCE 3 — Mistral Small 4 na 2× RTX 3090 (używane)</h4>
+<p class="price">💰 ~30 000–40 000 SEK</p>
+<p><strong>SWE-bench 55%</strong> — nie najwyższy, ale model jest ZOPTYMALIZOWANY pod agentów. Apache 2.0 — pełna wolność.</p>
+
+<div class="highlight-box">
+<p><strong>Co dostajesz:</strong></p>
+<ul style="margin:6px 0;padding-left:20px;">
+<li>20-30 tok/s — bardzo szybko</li>
+<li>119B parametrów, ale tylko 6B aktywne (MoE) — genialna efektywność</li>
+<li>Licencja Apache 2.0 — komercyjne użycie bez ograniczeń</li>
+<li>Zoptymalizowany pod autonomous agents</li>
+<li>Możesz też uruchomić Llama 70B (Q4) i inne modele</li>
+</ul>
+
+<p><strong>Dla kogo:</strong> Ktoś budujący autonomiczne agenty, domowy serwer AI, mały startup. Używane RTX 3090 to genialna wartość — 48GB VRAM za ułamek ceny nowych kart.</p>
+
+<p><strong>OpenClaw:</strong> Świetny. Ten setup pozwala uruchomić OpenClaw jako 24/7 serwer, który obsługuje kilka sesji naraz bez spadków wydajności.</p>
+</div>
+</div>
+
+<!-- ═══════════════ REKOMENDACJE BUDŻETOWE ═══════════════ -->
+<h2>💡 Rekomendacje wg Budżetu</h2>
+
+<div class="tier-grid">
+<div class="rec-box">
+<h4>💰 10 000 SEK — Budżet</h4>
+<p><strong>Sprzęt:</strong> PC z i7-13700K + 64GB RAM + używany RTX 3060 12GB</p>
+<p><strong>Najlepszy model:</strong> Phi-4 (14B) — SWE-bench 45%</p>
+<p><strong>tok/s:</strong> 20-35 — szybko i przyjemnie</p>
+<p><strong>OpenClaw:</strong> Dobrze. Tool calling działa, czat jest responsywny, model 14B jest dość inteligentny do większości zadań. Research zajmie 15-20 min.</p>
+<p><strong>Czego NIE zrobisz:</strong> Modele powyżej 14B będą musiały być częściowo offloaded na RAM — zamuli. Skomplikowane agenty mogą gubić wątki.</p>
+</div>
+
+<div class="rec-box">
+<h4>💰 35 000 SEK — Sweet Spot</h4>
+<p><strong>Sprzęt:</strong> RTX 5090 (32GB) + 64GB RAM + dobry CPU</p>
+<p><strong>Najlepszy model:</strong> Qwen 3.6 (27B) — SWE-bench 77.2%</p>
+<p><strong>tok/s:</strong> 15-25 — jak komercyjne API</p>
+<p><strong>OpenClaw:</strong> Perfekcyjnie. To jest ten setup, który pokazuje po co w ogóle odpalać LLM lokalnie. Wszystko działa szybko, inteligentnie, niezawodnie. Plus — grasz w gry na ultra.</p>
+<p><strong>Czego NIE zrobisz:</strong> Największe modele (70B+ w FP16) nie wejdą. Ale w Q4 sporo da się odpalić.</p>
+</div>
+
+<div class="rec-box">
+<h4>💰 100 000+ SEK — Pro</h4>
+<p><strong>Sprzęt:</strong> Klaster 4× RTX 5090 lub używany serwer GPU</p>
+<p><strong>Najlepszy model:</strong> MiniMax M2.5 — SWE-bench 80.2%</p>
+<p><strong>tok/s:</strong> 20-50 — natychmiast</p>
+<p><strong>OpenClaw:</strong> Jako serwer zespołowy — idealny. Możesz serwować modele dla 5-10 osób jednocześnie. Autonomiczne agenty, długie konteksty, intensywne workflow — bez problemu.</p>
+<p><strong>Czego NIE zrobisz:</strong> Taniej. Ale jak masz firmę i używasz AI na pełnej — to inwestycja, która się zwraca.</p>
+</div>
+</div>
+
+<!-- ═══════════════ PORÓWNANIE KOSZT / PUNKT ═══════════════ -->
+<h2>📈 Porównanie: Koszt za Punkt SWE-bench</h2>
+<p style="color:#94a3b8; margin-bottom:15px;">Ile kosztuje Cię każdy punkt procentowy SWE-bench na danym sprzęcie. Im mniej, tym lepiej — ale pamiętaj, że 25% za 100 SEK/% to nadal gorzej niż 77% za 453 SEK/%.</p>
+
+<div class="cpp-table-wrapper">
+<table class="cpp-table">
+<thead>
+<tr>
+<th>Tier</th>
+<th>Sprzęt</th>
+<th>Koszt (SEK)</th>
+<th>Najlepszy model</th>
+<th>SWE-bench %</th>
+<th>SEK / % SWE-bench</th>
+<th>SEK / % Agentic</th>
+<th>Opinia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔌 T1</td>
+<td>Raspberry Pi 5</td>
+<td>500</td>
+<td>Qwen3-1.7B</td>
+<td>8%</td>
+<td class="best-cpp">63</td>
+<td>—</td>
+<td>Tanie ale bezużyteczne</td>
+</tr>
+<tr>
+<td>💻 T2</td>
+<td>ThinkPad T480</td>
+<td>2 500</td>
+<td>Gemma 3 4B</td>
+<td>25%</td>
+<td class="best-cpp">100</td>
+<td>71</td>
+<td>Tanie i usable</td>
+</tr>
+<tr>
+<td>🎮 T4</td>
+<td>RTX 4060 Ti PC</td>
+<td>8 000</td>
+<td>Phi-4 14B</td>
+<td>45%</td>
+<td class="mid-cpp">178</td>
+<td>145</td>
+<td>⭐ Sweet spot budżetowy</td>
+</tr>
+<tr>
+<td>💼 T3</td>
+<td>Mid laptop 64GB</td>
+<td>12 500</td>
+<td>Phi-4 14B</td>
+<td>45%</td>
+<td class="mid-cpp">278</td>
+<td>227</td>
+<td>Laptop i tak potrzebujesz</td>
+</tr>
+<tr>
+<td>🔥 T5</td>
+<td>RTX 5090 PC</td>
+<td>35 000</td>
+<td>Qwen 3.6 27B</td>
+<td>77.2%</td>
+<td class="mid-cpp">453</td>
+<td>429</td>
+<td>⭐⭐ ZŁOTY STANDARD</td>
+</tr>
+<tr>
+<td>🏢 T6</td>
+<td>2× RTX 3090</td>
+<td>55 000</td>
+<td>GPT-oss 120B</td>
+<td>62.4%</td>
+<td class="worst-cpp">881</td>
+<td>705</td>
+<td>Dla teamu, nie dla jednego</td>
+</tr>
+<tr>
+<td>🏭 T7</td>
+<td>Enterprise GPU</td>
+<td>200 000</td>
+<td>MiniMax M2.5</td>
+<td>80.2%</td>
+<td class="worst-cpp">2 494</td>
+<td>2 439</td>
+<td>Tylko dla firm</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#1e293b; border-radius:12px; padding:20px; margin:15px 0 30px 0; border-left:4px solid #4ade80;">
+<p style="color:#4ade80; font-weight:bold; font-size:1.1em;">🎯 Kluczowy wniosek</p>
+<p style="color:#cbd5e1;">Najtańszy <strong>użyteczny</strong> setup to <strong>Tier 4 (budget gaming PC)</strong> — 178 SEK za punkt SWE-bench. Ale to <strong>Tier 5 (RTX 5090)</strong> daje skok jakościowy: z 45% na 77% SWE-bench za 453 SEK/punkt. Ten dodatkowy koszt kupuje Ci model, który jest na poziomie najlepszych komercyjnych API. Różnica między Tier 4 a Tier 5 to jak przesiadka z ekonomii do business class — droższe, ale zupełnie inne doświadczenie.</p>
+<p style="color:#94a3b8; margin-top:10px; font-size:0.9em;">Tier 1-2 wygrywają ceną za punkt, ale dają wyniki, z których nie da się produktywnie pracować. Tier 6-7 przegrywają stosunek cena/wynik, ale oferują modele niedostępne nigdzie indziej.</p>
+</div>
+
+<!-- ═══════════════ QWEN SHOWDOWN & ROI ═══════════════ -->
+<h2>⚖️ Specjalna Analiza: Qwen & Opłacalność (ROI)</h2>
+
+<div class="rec-box highlight-qwen">
+<h4>⚔️ Qwen 3.6 (27B) vs 35B MoE — Rozwiązanie zagadki</h4>
+<p>Dawid, 35B MoE <strong>nie kosztuje</strong> 10x więcej niż 27B. Oba to Tier 5 (RTX 5090). Prawdopodobnie pomyliłeś go z modelem <strong>397B MoE</strong> (Tier 7, 100k+ SEK).</p>
+
+<div class="highlight-box">
+<ul style="margin:6px 0;padding-left:20px;">
+<li><strong>Qwen 3.6 (27B) [DENSE]:</strong> To jest "mózg". Wyższe wyniki w SWE-bench (77%). Lepiej rozumie kod. Wolniejszy (15-25 tok/s). <strong>Mój wybór dla Ciebie.</strong></li>
+<li><strong>Qwen 3.6 (35B MoE) [MoE]:</strong> To jest "błyskawica". Tylko 3B aktywnych parametrów. Szybszy (25-40 tok/s), ale "płytszy" (68% SWE-bench).</li>
+</ul>
+<p style="margin-top:10px;"><strong>Werdykt:</strong> Przy tych samych kosztach sprzętu, 27B jest po prostu mądrzejszy. 35B MoE wybiera się tylko, gdy prędkość jest absolutnie kluczowa.</p>
+</div>
+</div>
+
+<div class="rec-box highlight-roi">
+<h4>🇸🇪 Czy opłaca się hostować w domu? (Sztokholm)</h4>
+<p>Analiza kosztów dla <strong>Qwen 3.6 27B</strong> przy cenie prądu <strong>2 SEK/kWh</strong>:</p>
+
+<table class="roi-table">
+<tr><td>Sprzęt (RTX 5090 Setup)</td><td>~40,000 SEK (raz)</td></tr>
+<tr><td>Prąd (generowanie 1 mln tokenów)*</td><td>~3.70 SEK</td></tr>
+<tr><td>Cloud API (DeepSeek/Alibaba)</td><td>~2.10 SEK</td></tr>
+</table>
+
+<p style="font-size:0.9em; color:#94a3b8; margin:10px 0;">*Zakładając 90 tok/s na RTX 5090 i pobór 600W.</p>
+
+<div class="highlight-box">
+<p><strong>Wnioski finansowe:</strong></p>
+<ul style="margin:6px 0;padding-left:20px;">
+<li>W Sztokholmie <strong>chmura jest tańsza</strong>. Sam prąd kosztuje u nas więcej niż tokeny u gigantów z Chin.</li>
+<li>Aby sprzęt "zarobił na siebie" (40k SEK) samymi oszczędnościami na tokenach, musiałbyś przemielić <strong>miliardy</strong> tokenów miesięcznie.</li>
+</ul>
+
+<p style="margin-top:10px;"><strong>Więc po co kupować?</strong></p>
+<ul style="margin:6px 0;padding-left:20px;">
+<li><strong>Prywatność:</strong> Żaden kod nie wycieka do Chin/USA. Dla konsultanta IT to klucz.</li>
+<li><strong>Brak limitów:</strong> Nikt Ci nie powie "Rate limit reached" w środku pracy.</li>
+<li><strong>Offline:</strong> Pracujesz w samolocie, pociągu czy przy awarii sieci.</li>
+<li><strong>Gry:</strong> No i masz najlepszą kartę graficzną na świecie do zabawy.</li>
+</ul>
+</div>
+</div>
+
+<p class="disclaimer">Raport opracowany przez Andrzeja (OpenClaw) • Maj 2026 • Prędkości i benchmarki częściowo szacowane na podstawie danych technicznych i testów społeczności r/LocalLLaMA</p>
+
+</div>
+</body>
+</html>

@@ -205,6 +205,25 @@
   </ul>
 </div>
 
+<h2>🧭 Historie migracji (37 historii, 2022–2026)</h2>
+<div class="card">
+  <p><b>Kierunek Fusion → Onshape (23 historii):</b> motory migracji to <b>Linux</b> (8+ wyraźnych przypadków — Fusion nie działa), <b>crashe i „walka" Fusiona</b> (buggy sketch, connection errors, timeline skaczący przy edycji wstecz) oraz <b>płynność workflow</b>. Praktycznie nikt z tej grupy nie żałuje — typowe cytaty: „breath of fresh air", „nie walczy ze mną jak Fusion". Czas przestawki: <b>dni do tygodnia</b> do komfortu; realny koszt to nawyki (organizacja Part Studios), nie nauka klikania.</p>
+  <div class="quote">„I just switched to OnShape after 10 years on Fusion 360 and I'm happy I did — truly a breath of fresh air." (Fusion był „buggy as hell": crashe, błędy sieci, constraint który chcesz usunąć nigdy nie jest tym usuwanym)<small>— u/djscoox, r/Fusion360, 2025-05</small></div>
+  <div class="quote">„From day 0, [OnShape] was a breath of fresh air. Things just worked, smooth as butter, and assemblies are so much better than they are in Fusion." (po Fusion trialu: paywall na „Save As" i limit komponentów)<small>— u/raikaimiyamoto, r/Fusion360, 2025-04</small></div>
+  <div class="quote">„It doesn't fight me constantly like fusion does when I make a small change to an earlier feature or sketch. The architecture lends itself to more organized projects." — a tydzień później, w tym samym wątku, społeczność wyliczyła „catch": publiczne dokumenty w free, brak offline, limitowane hotkeye, brak assembly mirror.<small>— u/cathode_01, r/Onshape, 2025-02 („Refugee from Fusion — what's the catch?")</small></div>
+  <p><b>Kierunek Onshape → Fusion (powroty):</b> trzy motory — <b>CAM/CNC</b> (Onshape CAM za drogi/niedojrzały: „Linux wypchnął mnie z Fusion do Onshape, CAM ciągnie mnie z powrotem" — irrenhaus, HN 2025), <b>cena komercyjna</b> ($1500/rok vs ~$467/rok Fusion: „za $1000 rocznie różnicy kupisz potężny komputer" — u/JoeKling) i <b>prywatność plików</b> („Onshape isn't free. Their payment is your files" — u/darkapollo1982; client/proprietarny work wyklucza publiczne dokumenty).</p>
+  <h3>Top 7 wzorców z historii</h3>
+  <ol>
+    <li><b>Linux = główny motor migracji</b> w Fusion→Onshape; bez Linuksa powodów do zmiany jest mało.</li>
+    <li><b>Stabilność vs funkcje:</b> odchodzą przez crashe, zostają dla płynności i porządku (feature tree „mówi co zrobiłeś" vs timeline Fusion „tolerancyjny na bałagan").</li>
+    <li><b>CAM = główny magnes powrotu</b>; popularna hybryda: Onshape (CAD) + Fusion (CAM).</li>
+    <li><b>Cena komercyjna rozstrzyga:</b> freelancerzy i mali twórcy lądują przy Fusion.</li>
+    <li><b>Publiczne dokumenty</b> to deal-breaker dla pracy komercyjnej/poufnej; dla hobby „99% plików nikogo nie interesuje".</li>
+    <li><b>Migracja danych jednokierunkowa:</b> STEP przenosi geometrię, NIE historię/timeline — stare projekty zostają w Fusion, nowe rysuje się w Onshape.</li>
+    <li><b>Zmienia się sposób myślenia, nie klik:</b> Onshape nagradza plan z góry (Part Studios ≤250 featurów, nazywanie drzewka, mate connectory); Fusion wybacza improwizację.</li>
+  </ol>
+</div>
+
 <h2>🧭 Rekomendacja dla Ciebie (Dawid)</h2>
 <div class="card">
   <p>Do druku 3D na Kobrze S1 (enclosures ESP32, części do klikacza XY, stelaże): <b>Fusion 360 Personal</b> jako podstawowe narzędzie — prywatne pliki, STL/STEP export, CAM na przyszłość. 10 dokumentów przy Twoim tempie będzie ciasno → swapuj nieaktywne projekty albo trzymaj drugi kanał w <b>Onshape Free</b> (tam, gdzie publiczność nie boli: checklisty druku, projekty open-source).</p>

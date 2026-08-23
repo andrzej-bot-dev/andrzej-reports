@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blind Replication #3 — Hungarian E-Vignette EPC Fine (2026-08-23)</title>
+<style>
+:root{--bg:#0f1419;--card:#161d27;--line:#232d3b;--txt:#c9d4e0;--dim:#8296ab;--acc:#5b9dff;--ok:#3ecf8e;--warn:#ffb454;--bad:#ff6b6b;--hl:#1c2534}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font:16px/1.65 Georgia,'Times New Roman',serif;padding:32px 16px}
+.wrap{max-width:960px;margin:0 auto}
+header{border:1px solid var(--line);border-radius:12px;padding:28px 30px;margin-bottom:26px;background:linear-gradient(135deg,#141b26,#11161e)}
+h1{font-size:26px;color:#e8eef6;margin-bottom:10px}
+.meta{color:var(--dim);font-size:14px;font-family:system-ui,sans-serif}
+h2{font-size:21px;color:#e8eef6;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:17px;color:#d7e1ee;margin:20px 0 8px}
+p{margin:10px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:14px 0}
+.verdict{background:linear-gradient(135deg,#12202e,#141b26);border:1px solid #2a4a6e;border-left:5px solid var(--ok);border-radius:10px;padding:20px 24px;margin:18px 0}
+.verdict.warn{border-left-color:var(--warn)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;font-family:system-ui,sans-serif}
+th{background:var(--hl);color:#dce6f2;text-align:left;padding:9px 11px;border:1px solid var(--line)}
+td{padding:9px 11px;border:1px solid var(--line);vertical-align:top}
+.ok{color:var(--ok);font-weight:600}.no{color:var(--bad);font-weight:600}.md{color:var(--warn);font-weight:600}
+code,.mono{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;background:var(--hl);padding:1px 6px;border-radius:4px}
+ul{margin:10px 0 10px 22px}li{margin:6px 0}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.agree{color:var(--ok)}.diff{color:var(--warn)}
+.small{font-size:13px;color:var(--dim)}
+.tag{display:inline-block;font-family:system-ui,sans-serif;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:20px;margin-right:6px;vertical-align:1px}
+.t-agree{background:#0e2a1d;color:var(--ok);border:1px solid #1d4a35}
+.t-new{background:#2a230e;color:var(--warn);border:1px solid #4a3d1d}
+.t-diff{background:#2a0e0e;color:var(--bad);border:1px solid #4a1d1d}
+</style>
+</head>
+<body><div class="wrap">
+
+<header>
+<h1>🧪 Blind Replication #3 — Hungarian e-Vignette / EPC plc Fine</h1>
+<div class="meta">Independent agent: <b>ox-alpha (OpenRouter)</b> · isolated context, sources chosen autonomously · 16 sources, 4 languages (EN/SV/DE/HU) · 2026-08-23<br>
+Compare with: <a href="hungary-vignette-epc-fine-2026.html">Report #1 (Andrzej + Qwen scrapers)</a> · <a href="hungary-vignette-epc-crosscheck-oxalpha.html">Report #2 (cross-check, same model, my sources)</a></div>
+</header>
+
+<div class="verdict">
+<b>TL;DR —</b> The blind agent, given <i>only the letter facts</i> and left to find everything himself, converged on the same core facts as Report #1: EPC plc is a legitimate collector for Magyar Közút, the amount is genuine (official 2026 tariff + ~72% EPC admin fee), and <b>nobody anywhere has documented a court or Kronofogden enforcement outcome</b> from ignoring these letters. He sharpened the legal analysis (civil claim → EPO path, not the criminal-penalties Framework Decision) and added a German Supreme Court data point proving the route <i>can</i> be used. But his bottom-line recommendation is the opposite-leaning one: <b>pay as cheap insurance</b>. The facts agree; the risk appetite differs. Decision stays with you.
+</div>
+
+<h2>1. Where the reports agree <span class="small">(blind convergence = strong signal)</span></h2>
+<div class="card"><ul>
+<li><span class="tag t-agree">AGREE</span> <b>EPC plc is real and mandated.</b> Companies House 03515275, London W1G 0PD (explains the London postmark), agent for <b>Magyar Közút Nonprofit Zrt. – Útdíj Üzletág</b>, access to EU vehicle registers. Not a scam letter.</li>
+<li><span class="tag t-agree">AGREE</span> <b>The amount is correct, not inflated.</b> Official 2026 Hungarian tariff (ADAC, eff. 1 Jan 2026): <b>27,790 HUF</b> within 60 days / <b>95,730 HUF</b> after. At ECB FX 0.03049 SEK/HUF → 847 SEK base + ~612 SEK EPC admin fee ≈ <b>1,458.95 SEK ✓</b>; late tier ≈ 2,919 + fees ≈ <b>3,618.58 SEK ✓</b>. The ~72% fee/base ratio matches an independent UK case (£60.69 + £45.50).</li>
+<li><span class="tag t-agree">AGREE</span> <b>Zero documented enforcement.</b> Blind search across MSE, Pistonheads, Flashback (negative result there too), Reddit-adjacent forums, press: <b>no case of an EPC foreign-vignette demand ever reaching a court, Kronofogden, or a betalningsanmärkning against a consumer.</b> Report #1 found the same across 19 Reddit threads + SE forums, 2011–2026, 9 countries.</li>
+<li><span class="tag t-agree">AGREE</span> <b>Escalation pattern.</b> Ignoring → more EPC letters → occasionally a second collector (Trace Debt Recovery, ~12 months later in the strongest documented case) → then visible silence.</li>
+<li><span class="tag t-agree">AGREE</span> <b>The only letter that matters is from Kronofogden.</b> Both reports independently conclude: if a <span class="mono">betalningsföreläggande</span>/EPO ever arrives — sign &amp; return the <span class="mono">mottagningsbevis</span>, then <b>invänd within the förklaringstid</b>. Silence = automatic loss. Kronofogden confirms it is the competent "court" in Sweden for foreign EU claims.</li>
+</ul></div>
+
+<h2>2. What the blind agent found that Report #1 missed</h2>
+<div class="card"><ul>
+<li><span class="tag t-new">NEW</span> <b>BGH XII ZR 7/22 (German Supreme Court, 29.09.2022):</b> enforcement of Hungarian toll surcharges before German civil courts is <i>fundamentally permissible</i> (via ADAC). Proof the machinery can be switched on — litigated by the Hungarian authority itself, not EPC. Changes "path never used anywhere" to "path used once, at test-case scale, in Germany".</li>
+<li><span class="tag t-new">NEW</span> <b>Civil, not criminal → the real legal path is the EPO.</b> Hungarian toll surcharges are <i>zivilrechtliche Forderungen</i> (civil claims) under Hungarian law. Therefore the EU Framework Decision 2005/214/JHA on criminal financial penalties likely <b>does not apply at all</b> — the realistic route is a European Payment Order (Reg. 1896/2006) with Kronofogden as competent court. This is sharper than Report #1's framing (which weighted the FD path at 1–3%).</li>
+<li><span class="tag t-new">NEW</span> <b>Full amount reconciliation to the öre</b> (see table above) incl. the 72% admin-fee ratio cross-check from an unrelated UK case.</li>
+<li><span class="tag t-new">NEW</span> <b>Trace Debt Recovery escalation at ~12 months</b> (MSE thread 6553695) — the longest-documented consequence timeline for ignoring.</li>
+<li><span class="tag t-new">NEW</span> <b>Correction escape hatches (ADAC):</b> wrong-plate correction within 60 days (≤3 characters off, 1,470 HUF fee); wrong-category purchases get a reduced "difference fee" of 15,530 HUF instead of the full surcharge; counterfoil + registration doc must go to EPC within 60 days of first demand.</li>
+</ul></div>
+
+<h2>3. Where they genuinely differ</h2>
+<table>
+<tr><th>Question</th><th>Report #1 (Andrzej)</th><th>Blind Report #3 (ox-alpha)</th></tr>
+<tr><td><b>Bottom line</b></td><td class="md">Ignore-and-file is defensible if no return to HU planned; expect 2–4 letters, keep everything for the Kronofogden scenario</td><td class="md"><b>Pay before early Oct 2026</b> unless provably vignette'd — "cheap insurance" against a state creditor that has litigated once (BGH)</td></tr>
+<tr><td>Enforcement probability framing</td><td>"zero observed cases in a decade of collective anecdotes across nine countries"</td><td>"&lt;5% over 3–5 yrs (subjective)"; EPO "&lt;2–3%" — non-zero because the route is proven usable</td></tr>
+<tr><td>FD 2005/214/JHA role</td><td>Exists as a paper path (1–3%)</td><td>Likely <b>inapplicable</b> (claim is civil) — replaced by EPO route</td></tr>
+<tr><td>Weight on the German BGH case</td><td>Not surfaced</td><td>Treated as the single strongest "they can if they want to" data point</td></tr>
+</table>
+<p class="small">Note: these are risk-appetite differences on identical facts, not factual conflicts. Both agree the expected cost of ignoring is small; they price the tail differently.</p>
+
+<h2>4. Consolidated risk map <span class="small">(merged from both reports)</span></h2>
+<table>
+<tr><th>Scenario if ignored</th><th>Likelihood</th><th>Consequence</th></tr>
+<tr><td>More EPC reminder letters (London)</td><td class="ok">≈ certain</td><td>Junk mail, rising stated amounts</td></tr>
+<tr><td>Second collector (Trace etc.) after ~12 mo</td><td class="md">~20–40%</td><td>More letters; still no enforceable title in Sweden</td></tr>
+<tr><td>Hungarian court action → EU-wide civil title</td><td class="no">&lt;5% over 3–5 yrs</td><td>Proven possible (BGH 2022, Germany); economics still argue against for ~1,500 SEK</td></tr>
+<tr><td>European Payment Order via Kronofogden</td><td class="no">&lt;2–3%</td><td>Enforceable order + betalningsanmärkning risk — but fully defensible if you invända in time</td></tr>
+<tr><td>Vehicle/border trouble in Hungary</td><td class="md">Unknown, low</td><td>EPC claims checks/clamping; zero verified cases; only relevant if you return</td></tr>
+</table>
+
+<h2>5. The one red line (identical in all three reports)</h2>
+<div class="verdict warn">
+🚨 <b>If a letter from Kronofogden ever arrives:</b> (1) immediately sign &amp; return the <span class="mono">mottagningsbevis</span> — receipt ≠ accepting the debt; (2) note your <span class="mono">förklaringstid</span> (starts when you confirm receipt); (3) <b>invänd (object) within that window</b> — silence means you automatically lose; (4) if the claim is right and you just want out, pay the applicant directly and notify Kronofogden in writing. Never ignore a föreläggande.
+</div>
+
+<h2>6. Decision guide (updated)</h2>
+<table>
+<tr><th>Your situation</th><th>Recommendation (all reports)</th></tr>
+<tr><td>Vignette was actually bought (any proof / counterfoil)</td><td>Dispute with receipt — high cancellation rate, ≈ 0–10 € (ugyfel@nemzetiutdij.hu + EPC)</td></tr>
+<tr><td>Wrong plate/category at purchase</td><td>Correct within 60 days (1,470 HUF) or claim reduced difference fee (15,530 HUF)</td></tr>
+<tr><td>Genuine miss, might drive in HU again</td><td><b>Pay discounted amount</b> (both reports lean pay here); deadline ≈ <b>2026-10-05</b></td></tr>
+<tr><td>Genuine miss, no return planned, tail-risk averse</td><td><b>Pay</b> — 1,459 SEK closes it forever (Report #3's lean)</td></tr>
+<tr><td>Genuine miss, no return planned, principle matters</td><td><b>Ignore-and-file</b> — expected outcome is letters then silence (Report #1's lean); archive everything for the &lt;3% Kronofogden tail</td></tr>
+</table>
+
+<h2>7. Method note</h2>
+<p>Report #3 is a <b>true blind replication</b>: the agent received only the letter facts, was barred from reading any workspace material, and chose its own queries, sources and languages (EN/SV/DE/HU). 16 sources incl. 4+ official (Kronofogden ×2, EUR-Lex ×2, Companies House, ADAC/ÖAMTC). Convergence with Report #1 on every checkable fact raises confidence in both. Divergence is confined to the recommendation layer, where it reflects risk appetite rather than evidence. Raw outputs: <span class="mono">memory/research/hungary-vignette-epc/independent-oxalpha/</span> (notes.md = per-source distillation, report.md = full EN report).</p>
+
+<p class="small" style="margin-top:26px">Sources (blind set): ADAC · ÖAMTC · Kronofogden.se ×2 · EUR-Lex (FD 2005/214, Reg 1896/2006) · Companies House · epcplc.com ×3 · MoneySavingExpert ×2 · Pistonheads · hungary-vignette.eu · Flashback (negative) · Frankfurter FX API.</p>
+
+</div></body></html>

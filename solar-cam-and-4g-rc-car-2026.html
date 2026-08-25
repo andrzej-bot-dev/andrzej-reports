@@ -60,6 +60,7 @@
     <li><a href="#p1">Projekt 1 — Solarna kamera ESP32 (OV5640 + 18650 + detekcja ruchu)</a></li>
     <li><a href="#p2">Projekt 2 — Auto RC przez 4G (video+audio dwukierunkowe, 20 km/h)</a></li>
     <li><a href="#common">Części wspólne dla obu projektów</a></li>
+    <li><a href="#cross">Cross-check 4 modeli (Gemini, GPT, DeepSeek, Qwen)</a></li>
     <li><a href="#next">Następny krok: ceny w sklepach</a></li>
   </ol>
 </div>
@@ -190,8 +191,72 @@
   </tbody>
 </table>
 
+<!-- ===================== CROSS-CHECK ===================== -->
+<h2 id="cross">4️⃣ Cross-check 4 modeli (Gemini 3.7 Flash · GPT-5.5 · DeepSeek Pro · Qwen Max)</h2>
+<div class="card">
+<p>Puściłem oba projekty do recenzji przez 4 niezależne modele (identyczny brief, niezależnie od siebie). Wynik: <strong>architektura jest solidna</strong>, ale modele wyłapały <strong>4 realne błędy w moich pierwotnych rekomendacjach</strong>, które poniżej poprawiam.</p>
+</div>
+
+<h3>Konsensus 4/4 (wszystkie modele zgodne)</h3>
+<table>
+  <thead><tr><th>Temat</th><th>Wspólny werdykt</th><th>Akceptuję?</th></tr></thead>
+  <tbody>
+    <tr><td>Zima / ładowanie Li-ion</td><td>Li-ion <span class="bad">nie ładuje się poniżej 0°C</span> (lit na anodzie → degradacja/pożar). W Sztokholmie to różnica między „działa latami" a „padnie pierwszą zimę".</td><td><span class="pill y">TAK</span></td></tr>
+    <tr><td>Pi Zero 2W za słabe</td><td>512 MB RAM + WebRTC + audio + modem = OOM/drop klatek. <strong>Pi 4 2GB minimum.</strong></td><td><span class="pill y">TAK</span></td></tr>
+    <tr><td>Failsafe (hardware)</td><td>Auto-stop silników przy utracie sygnału &gt;0.5–2 s — musi być. Przy 20 km/h auto pokonuje 11 m „na ślepo" przy zaniku LTE.</td><td><span class="pill y">TAK</span></td></tr>
+    <tr><td>Aspekty prawne (SE)</td><td>Pojazd RC na drodze publicznej = <span class="bad">nielegalne w Szwecji</span> (tylko teren prywatny). Kamera na przestrzeń publiczną = <em>kameraövervakningslagen</em> (zezwolenie na monitoring).</td><td><span class="pill y">TAK</span></td></tr>
+    <tr><td>Pakiet danych 4G</td><td>720p WebRTC ≈ 1–2 GB/h → 10–20 GB/mies. Zwykła SIM telefoniczna się wyczerpie. Potrzebna SIM IoT/data + zewnętrzna antena LTE.</td><td><span class="pill y">TAK</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Błędy wyłapane w MOICH rekomendacjach (korekta)</h3>
+<table>
+  <thead><tr><th>Mój oryginał</th><th>Problem (kto wyłapał)</th><th>Korekta</th></tr></thead>
+  <tbody>
+    <tr><td><code>TPS62740</code> (300 mA)</td><td><strong>Za słaby</strong> — ESP32-S3 + WiFi + kamera w piku ciągnie 450–500 mA → brownout/reset. (Gemini)</td><td><strong><code>TPS62840</code></strong> (750 mA, Iq 60 nA) albo LDO <code>HT7833</code>/<code>ME6211</code> (600 mA).</td></tr>
+    <tr><td>Silnik brushless <code>2212</code> + ESC lotniczy</td><td><strong>Zły typ silnika</strong> — 2212 to silnik dronowy (outrunner, wysokie KV): cogging przy starcie, brak momentu na niskich obrotach, <span class="bad">brak biegu wstecznego i hamulca</span>. (Gemini + Qwen + ChatGPT)</td><td><strong>Szczotkowy 540/550 12 V + car ESC (Hobbywing Quicrun 1060, 60 A)</strong> — ma reverse + hamulec + BEC 5V/3A. Albo sensored brushless + sensored ESC.</td></tr>
+    <tr><td>OV5640 z autofocus</td><td><strong>Za wolny start</strong> — AF szuka ostrości 1.5–3 s, więc szybki ruch przepadnie z kadru. (Gemini + ChatGPT)</td><td><strong>OV5640/OV2640 fixed-focus</strong> (gotowy ~300 ms) — albo zostać przy AF ale akceptować opóźnienie.</td></tr>
+    <tr><td>MG996R do skrętu</td><td>Często podrabiany, luzy, głośny. (Gemini + ChatGPT)</td><td><strong>DS3218 20 kg</strong> (wodoodporny, łożyskowany, metal) — precyzyjniejszy, nie gubi zębów na krawężniku.</td></tr>
+  </tbody>
+</table>
+
+<h3>Rozbieżności (modele się nie zgadzają — wybór należy do Ciebie)</h3>
+<table>
+  <thead><tr><th>Temat</th><th>Opcja A</th><th>Opcja B</th></tr></thead>
+  <tbody>
+    <tr><td>Modem 4G</td><td><strong>SIM7600G-H</strong> (ChatGPT) — popularniejszy, lepiej udokumentowany, GPS w module</td><td><strong>A7670E</strong> (DeepSeek) — tańszy, mniejszy pobór, LTE Cat-1 wystarczy na 720p</td></tr>
+    <tr><td>Mózg auta</td><td><strong>Pi 4 2GB</strong> (Gemini/DeepSeek/ChatGPT)</td><td><strong>Orange Pi 5</strong> (Qwen) — NPU 6 TOPS do object detection (YOLO), H265</td></tr>
+    <tr><td>Sterowanie</td><td><strong>Ackermann + serwo DS3218</strong> (Gemini/ChatGPT)</td><td><strong>Tank steering</strong> (2× silnik, Qwen) — prostsze, bez serwa, lepsza trakcja</td></tr>
+    <tr><td>Kamera P1</td><td><strong>OV5640 5 MP</strong> (ja) — lepsze zdjęcia</td><td><strong>OV2640 2 MP</strong> (Qwen) — zero podróbek, do klipów wideo wystarczy (stream i tak ≤ SVGA)</td></tr>
+    <tr><td>Bateria P1</td><td><strong>LiFePO4</strong> (DeepSeek/Gemini/Qwen) — ładuje do −20°C, 2000+ cykli, ognioodporny</td><td><strong>Li-ion + NTC odcinający ładowanie &lt;0°C</strong> (ChatGPT) — tańszy, prostszy</td></tr>
+  </tbody>
+</table>
+
+<h3>Dodatkowe funkcje zaproponowane przez modele (czego nie miałem)</h3>
+<div class="card">
+<ul>
+  <li><strong>Fuel gauge</strong> (MAX17043) — zdalny podgląd stanu baterii.</li>
+  <li><strong>IR LEDs + filtr IR-cut</strong> — tryb nocny (proponuje większość modeli).</li>
+  <li><strong>Zewnętrzny watchdog</strong> (TPL5010) — reset ESP32 jeśli się zawiesi (software watchdog nie zawsze łapie).</li>
+  <li><strong>RTC DS3231</strong> — scheduled wake / timelapse.</li>
+  <li><strong>Supercap 10 F</strong> równolegle z baterią — absorbuje szpilki prądowe kamery.</li>
+  <li><strong>GPS (Ublox NEO-M8N)</strong> — lokalizacja zgubionego auta + geofencing.</li>
+  <li><strong>IMU MPU6050</strong> — detekcja wywrotki, auto-level.</li>
+  <li><strong>Ultrasonic HC-SR04 ×4</strong> — obstacle avoidance.</li>
+  <li><strong>Object detection</strong> (ESP-DL na ESP32-S3 / YOLO na Orange Pi NPU) — filtruj fałszywe triggery (ptaki, zwierzęta), nagrywaj tylko ludzi/auta.</li>
+  <li><strong>WS2812B LED</strong> — reflektory + tylne światła + kierunkowskazy.</li>
+  <li><strong>Membrana Gore-Tex vent</strong> — odpowietrzenie obudowy IP65 (kondensacja zabija szybciej niż deszcz).</li>
+  <li><strong>Echo cancellation (AEC)</strong> — INMP441 + głośnik w jednej obudowie = sprzężenie (howling); WebRTC ma AEC w sofcie + fizyczna separacja mic/głośnik.</li>
+  <li><strong>EMI</strong> — ESC brushless generuje zakłócenia (4G/GPS) → koraliki ferrytowe + ekranowane kable + separacja fizyczna.</li>
+</ul>
+</div>
+
+<div class="note">
+<strong>Werdykt cross-checku:</strong> koncepcja obu projektów <strong>słuszna i wykonalna</strong>. Cztery twarde korekty do wdrożenia: (1) TPS62840 zamiast TPS62740, (2) silnik samochodowy 540/550 + car ESC zamiast lotniczego 2212, (3) Pi 4 zamiast Zero 2W, (4) fixed-focus kamera + rozważenie LiFePO4 na zimę. Reszta (modem, Orange Pi, tank steering) to wybory smakowe, nie błędy.
+</div>
+
 <!-- ===================== NEXT ===================== -->
-<h2 id="next">4️⃣ Następny krok — ceny w sklepach</h2>
+<h2 id="next">5️⃣ Następny krok — ceny w sklepach</h2>
 <div class="card">
 <p>To jest <strong>krok 1 z 2</strong> — pełne listy części + uzasadnienia. <strong>Krok 2</strong> (na Twoje „go") to sprawdzenie tych części w sklepach EU (Botland, Electrokit, TME, AZ-Delivery, BerryBase, Amazon.se) i rozpisanie:</p>
 <pre style="background:var(--panel2);padding:14px;border-radius:8px;overflow-x:auto;">
@@ -202,7 +267,7 @@ Sklep 2:   Projekt A: X SEK   |   Projekt B: Y SEK  (np. brakuje modemu → resz
 </div>
 
 <div class="note">
-<strong>TL;DR wyborów:</strong> (1) ESP32-S3 z PSRAM + OV5640 (uważaj na podróbki GC0308) + AM312 PIR + CN3791 MPPT + regulator niskoprądowy TPS62740 — bo zwykły buck zje akumulator w standby. (2) Raspberry Pi + modem 4G SIM7600 + Tailscale (bo CGNAT!) + WebRTC + brushless/ESC + MG996R — bo SG90 i L298N są za słabe, a ESP32 za mały na stream.
+<strong>TL;DR po cross-checku:</strong> (1) ESP32-S3 z PSRAM + OV5640 fixed-focus (uważaj na podróbki GC0308) + AM312 PIR + CN3791 MPPT + regulator <strong>TPS62840</strong> (nie TPS62740 — za słaby) + MOSFET. Na zimę rozważ LiFePO4. (2) <strong>Pi 4 2GB</strong> (nie Zero 2W) + modem 4G (SIM7600G-H lub A7670E) + Tailscale (bo CGNAT!) + WebRTC + <strong>silnik 540/550 + car ESC</strong> (nie lotniczy 2212) + serwo DS3218 (nie MG996R) + hardware failsafe. Jazda tylko po terenie prywatnym (prawo SE).
 </div>
 
 </div>

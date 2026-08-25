@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Camera + 4G RC Car — pełny BOM i analiza wyborów</title>
+<style>
+  :root{ --bg:#0f1115; --panel:#1a1d24; --panel2:#22262f; --text:#e8eaed; --muted:#9aa0a6; --accent:#4da3ff; --green:#34c759; --red:#ff5f56; --amber:#ffb340; --border:#2c313a; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .wrap{ max-width:980px; margin:0 auto; padding:32px 20px 80px; }
+  h1{ font-size:2rem; margin:0 0 8px; line-height:1.25; }
+  h2{ font-size:1.45rem; margin:40px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border); }
+  h3{ font-size:1.15rem; margin:24px 0 8px; color:var(--accent); }
+  .sub{ color:var(--muted); margin-bottom:28px; }
+  .tag{ display:inline-block; padding:3px 10px; border-radius:20px; font-size:.78rem; font-weight:600; margin-right:6px; }
+  .tag.p1{ background:#1c3a2a; color:#6fe39a; }
+  .tag.p2{ background:#1c2f3a; color:#6fd0e3; }
+  .tag.warn{ background:#3a2a1c; color:#ffb340; }
+  .card{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin:16px 0; }
+  table{ width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem; }
+  th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th{ background:var(--panel2); color:var(--muted); font-weight:600; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+  tr:hover td{ background:#1f232b; }
+  .good{ color:var(--green); font-weight:600; }
+  .bad{ color:var(--red); font-weight:600; }
+  .meh{ color:var(--amber); font-weight:600; }
+  .pill{ display:inline-block; padding:2px 9px; border-radius:14px; font-size:.75rem; font-weight:700; }
+  .pill.y{ background:#14301e; color:#6fe39a; }
+  .pill.n{ background:#301414; color:#ff8a80; }
+  .pill.w{ background:#302414; color:#ffc46b; }
+  ul,ol{ padding-left:22px; }
+  li{ margin:5px 0; }
+  .note{ background:#1c2a1c; border-left:3px solid var(--green); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  .warnbox{ background:#2a241c; border-left:3px solid var(--amber); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  .errbox{ background:#2a1c1c; border-left:3px solid var(--red); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  code{ background:var(--panel2); padding:2px 6px; border-radius:4px; font-size:.85em; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:720px){ .grid{ grid-template-columns:1fr; } }
+  .big{ font-size:1.6rem; font-weight:700; }
+  .divider{ height:1px; background:var(--border); margin:34px 0; }
+  .toc{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 22px; }
+  .toc a{ color:var(--accent); text-decoration:none; }
+  .toc a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🔧 Dwa projekty DIY — pełny BOM i analiza wyborów</h1>
+<div class="sub">
+  <span class="tag p1">Projekt 1: Solarna kamera</span>
+  <span class="tag p2">Projekt 2: Auto RC przez 4G</span><br>
+  Przygotowane dla Dawida · 2026-08-25 · krok 1 z 2 (lista części + uzasadnienia; ceny w sklepach = krok 2)
+</div>
+
+<div class="toc">
+  <strong>Spis treści</strong>
+  <ol>
+    <li><a href="#p1">Projekt 1 — Solarna kamera ESP32 (OV5640 + 18650 + detekcja ruchu)</a></li>
+    <li><a href="#p2">Projekt 2 — Auto RC przez 4G (video+audio dwukierunkowe, 20 km/h)</a></li>
+    <li><a href="#common">Części wspólne dla obu projektów</a></li>
+    <li><a href="#next">Następny krok: ceny w sklepach</a></li>
+  </ol>
+</div>
+
+<div class="note">
+  <strong>Jak czytać ten raport:</strong> dla każdego komponentu podaję <em>wybór</em>, <em>dlaczego ten</em>, i <em>co bym odrzucił</em>. Pułapki (pobór prądu w spoczynku, podróbki, CGNAT) są oznaczone. Na końcu — co warto dokupić, żeby było lepiej/fajniej.
+</div>
+
+<!-- ===================== PROJEKT 1 ===================== -->
+<h2 id="p1">1️⃣ Projekt 1 — Solarna kamera ESP32</h2>
+<div class="card">
+<p><strong>Cel:</strong> zewnętrzna kamera zasilana panelem słonecznym + akumulatorem 18650, która <em>nie nagrywa ciągle</em>, tylko budzi się z głębokiego uśpienia gdy wykryje ruch, nagrywa klip i wraca spać. Ma działać latami bez ładowania ręcznego.</p>
+</div>
+
+<h3>Architektura / jak to działa</h3>
+<div class="card">
+<ol>
+  <li><strong>Spoczynek (~99% czasu):</strong> ESP32 w <code>deep sleep</code>, kamera odcięta od zasilania przez MOSFET. Czuwają tylko: PIR + akumulator + regulator. Pobór ~50–100 µA.</li>
+  <li><strong>Wykrycie ruchu:</strong> PIR (AM312) generuje impuls → budzi ESP32 przez pin RTC GPIO.</li>
+  <li><strong>Nagrywanie:</strong> ESP32 włącza kamerę (MOSFET), robi klip ~10–30 s (JPEG/MJPEG na kartę microSD lub wysyła przez WiFi), potem z powrotem w deep sleep.</li>
+  <li><strong>Zasilanie:</strong> panel 6 V ładuje 18650 przez kontroler MPPT; akumulator trzyma noc/zachmurzenie.</li>
+</ol>
+</div>
+
+<h3>Pełna lista części</h3>
+<table>
+  <thead><tr><th>Komponent</th><th>Wybór</th><th>Uwagi / pułapki</th></tr></thead>
+  <tbody>
+    <tr><td>Mikrokontroler</td><td><strong>ESP32-S3 z PSRAM (8 MB)</strong></td><td>OV5640 = 5 MP JPEG, klatka to ~500 KB+ — <span class="bad">wymaga PSRAM</span>. Klasyczny ESP32-WROOM (bez PSRAM) nie utrzyma 5 MP bufora. FREENOVE ESP32-S3-WROOM CAM albo ESP32-S3-EYE.</td></tr>
+    <tr><td>Kamera</td><td><strong>OV5640 (5 MP, AF)</strong></td><td><span class="bad">UWAGA na podróbki GC0308</span> (sprzedawane jako „OV5640" na Ali — Dawid już to przerabiał, patrz <code>~/esp32-cam/DISPUTE-DOWODY.md</code>). Weryfikacja: I2C scan pod 0x21/0x3C, PID = 0x5640. Kupować od sprawdzonego sprzedawcy z dużą liczbą zamówień.</td></tr>
+    <tr><td>Czujnik ruchu</td><td><strong>AM312 (mini PIR)</strong> ~20 µA</td><td>„Na ciepło" = właśnie PIR (podczerwień pasywna). AM312 bije HC-SR501: mniejszy pobór, mniej fałszywych triggerów. Budzi z deep sleep przez RTC GPIO — zero prądu w standby.</td></tr>
+    <tr><td>Akumulator</td><td><strong>2× 18650 równolegle</strong> (3.7 V, ~6000–7000 mAh)</td><td>Równolegle = prostsze ładowanie (1S, jeden kontroler, bez balansera). Szeregowo (2S=7.4 V) wymaga BMS + balanser + step-down — zbędna komplikacja przy systemie 3.3 V.</td></tr>
+    <tr><td>Kontroler ładowania</td><td><strong>CN3791 (MPPT solar, 2 A)</strong></td><td><span class="bad">NIE TP4056</span> — TP4056 nie ma MPPT, słabo zbiera ze słabego słońca i potrafi rozładowywać akumulator gdy panel ciemny. CN3791 jest dedykowany do paneli 6 V, 2 A.</td></tr>
+    <tr><td>Panel słoneczny</td><td><strong>6 V, 5–10 W</strong></td><td>Na zimę w Sztokholmie lepiej 10 W (krótki dzień, śnieg). Budżet energetyczny niżej.</td></tr>
+    <tr><td>Regulator napięcia</td><td><strong>TPS62740 (buck, Iq ~360 nA)</strong> + MOSFET odcinający kamerę</td><td><span class="bad">Kluczowa pułapka:</span> zwykły MP1584/LM2596 zjada 5–10 mA w spoczynku → zabije akumulator w ~2 tygodnie. TPS62740 ma quiescent 360 nA. Alternatywa prostsza: LDO HT7833 (3.3 V, ~4 µA) przy małym prądzie.</td></tr>
+    <tr><td>Load switch</td><td>MOSFET P-kanał (AO3401)</td><td>Odcięcie zasilania kamery + SD w deep sleep (kamera potrafi ciągnąć prąd nawet w standby).</td></tr>
+    <tr><td>Pamięć</td><td>microSD + slot</td><td>Lokalne nagrywanie klipów. Opcja: wysyłka przez WiFi (wtedy karta zbędna, ale zużycie prądu wyższe).</td></tr>
+    <tr><td>Dodatki</td><td>dioda Schottky, kondensatory, rezystory</td><td>Zabezpieczenie przed odwrotną polaryzacją panelu.</td></tr>
+  </tbody>
+</table>
+
+<h3>Budżet energetyczny (po co te wybory)</h3>
+<div class="card">
+<ul>
+  <li><strong>Spoczynek:</strong> ~50–100 µA → 2.4 mAh/dzień.</li>
+  <li><strong>Nagranie 30 s:</strong> ~150 mA × 30 s ≈ 1.25 mAh. Przy 20 triggerach/dzień = 25 mAh/dzień.</li>
+  <li><strong>Razem:</strong> ~30 mAh/dzień. Panel 5 W zimą daje efektywnie ~0.5–1 Wh/dzień = ~140–280 mAh przy 3.7 V. <span class="good">Wystarcza z zapasem.</span> Na zimę (śnieg na panelu, krótki dzień) → 10 W bezpieczniej.</li>
+</ul>
+</div>
+
+<h3>Co lepszego / upgrade'y</h3>
+<ul>
+  <li><strong>Filtr IR-cut + diody IR</strong> — tryb nocny (OV5640 bez filtra widzi podczerwień).</li>
+  <li><strong>21700 zamiast 18650</strong> — większa pojemność (5000 mAh/szt) przy tym samym formacie 1S.</li>
+  <li><strong>Obudowa IP65</strong> — wodoszczelna, przezroczysta kopułka na PIR/soczewkę.</li>
+  <li><strong>BME280</strong> — bonus: temp/wilgotność/ciśnienie w tej samej obudowie.</li>
+  <li><strong>LiFePO4 (3.2 V)</strong> — na mrozy lepszy od Li-ion (ładowanie poniżej 0 °C nie niszczy go), ale mniejsza gęstość i inny kontroler.</li>
+</ul>
+
+<!-- ===================== PROJEKT 2 ===================== -->
+<h2 id="p2">2️⃣ Projekt 2 — Auto RC przez 4G</h2>
+<div class="card">
+<p><strong>Cel:</strong> zdalnie sterowany samochodzik (do ~20 km/h), sterowany <em>z domu</em> przez internet 4G/LTE, gdy auto jest ~4 km dalej. Dwukierunkowe video <strong>i</strong> audio (widzę + słyszę + mówię), niska latencja.</p>
+</div>
+
+<div class="errbox">
+  <strong>Największa pułapka tego projektu — CGNAT.</strong> Operatorzy komórkowi dają prywatne IP za CGNAT → <em>nie da się</em> połączyć z autkiem bezpośrednio z domu. Potrzebny tunel. Rozwiązanie: <strong>Tailscale</strong> (mesh VPN, darmowy, przechodzi przez NAT bez konfiguracji routera). Alternatywy: Zerotier, FRP na VPS, TURN/STUN na VPS.
+</div>
+
+<h3>Architektura / jak to działa</h3>
+<div class="card">
+<ol>
+  <li><strong>Mózg w aucie:</strong> Raspberry Pi (Linux) — ESP32 <span class="bad">za słaby</span> na jednoczesne video + audio + 4G + sterowanie. Pi obsługuje kamerę, audio, modem i WebRTC.</li>
+  <li><strong>Łączność:</strong> modem 4G (SIM7600G-H / A7670E) → internet → Tailscale → Twój laptop/telefon w domu.</li>
+  <li><strong>Streaming:</strong> WebRTC (video+audio dwukierunkowe, ~100–200 ms) — najniższa osiągalna latencja.</li>
+  <li><strong>Sterowanie:</strong> gamepad (Xbox/PS) przez przeglądarkę → WebRTC data channel → Pi → ESC/serwo.</li>
+</ol>
+</div>
+
+<h3>Pełna lista części</h3>
+<table>
+  <thead><tr><th>Komponent</th><th>Wybór</th><th>Uwagi / pułapki</th></tr></thead>
+  <tbody>
+    <tr><td>Mózg</td><td><strong>Raspberry Pi Zero 2W</strong> (lekki) lub <strong>Pi 4 2GB</strong> (zapas mocy)</td><td>Pi Zero 2W wystarczy do WebRTC 720p + audio (HW encode H264). Pi 4 jeśli chcesz większy margin / wyższą rozdzielczość. <span class="bad">Nie ESP32</span> — za mało RAM/mocy na stream.</td></tr>
+    <tr><td>Modem 4G</td><td><strong>SIM7600G-H (Waveshare HAT)</strong> lub <strong>A7670E</strong></td><td>USB (wwan0) — najprościej z Pi. SIM7600 ma wbudowany GPS. Potrzebna <strong>karta SIM z pakietem danych</strong>.</td></tr>
+    <tr><td>Kamera</td><td><strong>CSI IMX219 szerokokątny</strong> (fish-eye)</td><td>CSI = sprzętowe kodowanie, najniższa latencja. Szerokokątny FOV ważny do jazdy. USB UVC (Logitech) też działa, ale wyższa latencja i większy CPU.</td></tr>
+    <tr><td>Audio (mikrofon)</td><td><strong>INMP441 (I2S MEMS)</strong> lub USB audio</td><td>I2S = lżejszy/mniejszy. USB audio adapter = plug&play, mniej lutowania.</td></tr>
+    <tr><td>Audio (głośnik)</td><td><strong>MAX98357A (I2S, 3 W) + głośnik</strong></td><td>Dwukierunkowość: Ty mówisz z domu → słychać w aucie. Wymaga echo-cancellation w sofcie (WebRTC ma wbudowane AEC).</td></tr>
+    <tr><td>Streaming</td><td><strong>mediamtx</strong> (WebRTC/RTSP) lub aiortc</td><td>mediamtx = jeden binarek, niska latencja, prosty. Alternatywa: GStreamer, Janus.</td></tr>
+    <tr><td>Silniki napędowe</td><td><strong>Brushless 2212 + ESC 30 A</strong> <em>albo</em> 2× DC z przekładnią 12 V + TB6612FNG</td><td>20 km/h na ~1 kg = ~50–100 W. Brushless + ESC = wydajne i lekkie. DC z przekładnią = prostsze sterowanie (PWM), ale mniej wydajne. <span class="bad">Nie L298N</span> — stary, spadek napięcia, grzeje się.</td></tr>
+    <tr><td>Kierowanie</td><td><strong>MG996R (metal gear)</strong> — minimum</td><td><span class="bad">SG90 ZA SŁABY</span> (1.8 kg·cm, plastikowe tryby — pęknie przy 20 km/h). MG996R (9–13 kg·cm) lub DS3218 (20 kg·cm) do szybszego/szerszego auta.</td></tr>
+    <tr><td>Zasilanie</td><td><strong>LiPo 3S (11.1 V) + UBEC 5 V/5 A</strong></td><td>Pi potrzebuje stabilnego 5 V 2.5 A+. <span class="bad">Pułapka:</span> skoki prądu silników potrafią zresetować Pi (brownout) → duży kondensator na zasilaniu Pi.</td></tr>
+    <tr><td>Sterowanie</td><td>Gamepad + WebRTC data channel</td><td>Albo MQTT przez Tailscale. WebRTC DC = najniższa latencja (ta sama sesja co video).</td></tr>
+  </tbody>
+</table>
+
+<h3>Kluczowe liczby / pułapki latencji</h3>
+<div class="card">
+<ul>
+  <li><strong>Ping 4G + Tailscale:</strong> ~30–80 ms.</li>
+  <li><strong>Latencja video (WebRTC):</strong> ~100–200 ms.</li>
+  <li><strong>Total:</strong> ~150–300 ms. Przy 20 km/h (5.5 m/s) to <strong>~1–1.7 m drogi „na ślepo"</strong> — trzeba o tym pamiętać (jazda na otwartym terenie, nie w ciasnych miejscach).</li>
+  <li><strong>Zużycie danych:</strong> 720p ≈ 1–2 Mbps ≈ 0.5–1 GB/h. Potrzebny sensowny pakiet danych.</li>
+  <li><strong>Zasięg 4 km:</strong> to nie problem dla 4G (BTS-y mają kilkanaście km), ale jakość sygnału ma znaczenie → dobra antena LTE.</li>
+</ul>
+</div>
+
+<h3>Co lepszego / upgrade'y</h3>
+<ul>
+  <li><strong>GPS tracking</strong> — SIM7600 ma GPS wbudowany, tylko podpiąć antenę.</li>
+  <li><strong>Druga kamera (tylna) + przełącznik</strong> — widok do tyłu.</li>
+  <li><strong>Gimbal 2-osiowy kamery</strong> (2× MG996R) — stabilizacja + rozglądanie.</li>
+  <li><strong>Oświetlenie LED</strong> — nocna jazda.</li>
+  <li><strong>Failsafe</strong> — auto-stop silników przy utracie sygnału (bezpieczeństwo!).</li>
+  <li><strong>Antena LTE zewnętrzna</strong> — lepszy zasięg/parametry.</li>
+</ul>
+
+<!-- ===================== WSPÓLNE ===================== -->
+<h2 id="common">3️⃣ Części wspólne</h2>
+<table>
+  <thead><tr><th>Komponent</th><th>Dotyczy</th><th>Uwagi</th></tr></thead>
+  <tbody>
+    <tr><td>Kamera OV5640</td><td>P1 (i jako zapas do P2 jeśli chcesz CSI→USB)</td><td>Ta sama walka z podróbkami.</td></tr>
+    <tr><td>18650 + ładowanie</td><td>P1 głównie</td><td>Do P2 lepiej LiPo 3S.</td></tr>
+    <tr><td>Złącza JST XH 2.54</td><td>Oba</td><td>Masz już kit (90 pcs).</td></tr>
+    <tr><td>Serwo</td><td>P2</td><td>SG90 do drobiazgów, MG996R do skrętu.</td></tr>
+    <tr><td>Druk 3D</td><td>Oba</td><td>Obudowy, uchwyty, podwozie — wszystko sam drukujesz (PETG na zewnątrz).</td></tr>
+  </tbody>
+</table>
+
+<!-- ===================== NEXT ===================== -->
+<h2 id="next">4️⃣ Następny krok — ceny w sklepach</h2>
+<div class="card">
+<p>To jest <strong>krok 1 z 2</strong> — pełne listy części + uzasadnienia. <strong>Krok 2</strong> (na Twoje „go") to sprawdzenie tych części w sklepach EU (Botland, Electrokit, TME, AZ-Delivery, BerryBase, Amazon.se) i rozpisanie:</p>
+<pre style="background:var(--panel2);padding:14px;border-radius:8px;overflow-x:auto;">
+Sklep 1:   Projekt A: X SEK   |   Projekt B: Y SEK
+Sklep 2:   Projekt A: X SEK   |   Projekt B: Y SEK  (np. brakuje modemu → reszta tu, modem tam za Z SEK)
+...</pre>
+<p>Wtedy dopiszę ceny i linki do tego samego raportu.</p>
+</div>
+
+<div class="note">
+<strong>TL;DR wyborów:</strong> (1) ESP32-S3 z PSRAM + OV5640 (uważaj na podróbki GC0308) + AM312 PIR + CN3791 MPPT + regulator niskoprądowy TPS62740 — bo zwykły buck zje akumulator w standby. (2) Raspberry Pi + modem 4G SIM7600 + Tailscale (bo CGNAT!) + WebRTC + brushless/ESC + MG996R — bo SG90 i L298N są za słabe, a ESP32 za mały na stream.
+</div>
+
+</div>
+</body>
+</html>

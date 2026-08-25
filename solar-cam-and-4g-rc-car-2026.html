@@ -61,7 +61,8 @@
     <li><a href="#p2">Projekt 2 — Auto RC przez 4G (video+audio dwukierunkowe, 20 km/h)</a></li>
     <li><a href="#common">Części wspólne dla obu projektów</a></li>
     <li><a href="#cross">Cross-check 4 modeli (Gemini, GPT, DeepSeek, Qwen)</a></li>
-    <li><a href="#next">Następny krok: ceny w sklepach</a></li>
+    <li><a href="#ceny">Ceny w sklepach (EU + AliExpress)</a></li>
+    <li><a href="#next">Podsumowanie</a></li>
   </ol>
 </div>
 
@@ -255,15 +256,93 @@
 <strong>Werdykt cross-checku:</strong> koncepcja obu projektów <strong>słuszna i wykonalna</strong>. Cztery twarde korekty do wdrożenia: (1) TPS62840 zamiast TPS62740, (2) silnik samochodowy 540/550 + car ESC zamiast lotniczego 2212, (3) Pi 4 zamiast Zero 2W, (4) fixed-focus kamera + rozważenie LiFePO4 na zimę. Reszta (modem, Orange Pi, tank steering) to wybory smakowe, nie błędy.
 </div>
 
+<!-- ===================== CENY ===================== -->
+<h2 id="ceny">5️⃣ Ceny w sklepach (EU + AliExpress)</h2>
+<div class="card">
+<p>Scraping cen przez 4 subagentów (Botland+Electrokit / TME+BerryBase+AZ-Delivery / Amazon.se / AliExpress), 2026-08-25. Kurs: 1 SEK ≈ 0.39 PLN. <strong>Legenda:</strong> <span class="pill y">komplet</span> = wszystkie części dostępne · <span class="pill w">częściowo</span> = brakuje kilku · <span class="pill n">zablokowane</span> = anti-bot.</p>
+</div>
+
+<h3>Porównanie sklepów (łączny koszt)</h3>
+<table>
+  <thead><tr><th>Sklep</th><th>Proj A (solarna kamera)</th><th>Proj B (auto RC 4G)</th><th>Razem</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Amazon.se</strong></td><td>~1 106 kr</td><td>~3 136 kr</td><td><strong>~4 242 kr</strong> (~1 655 zł)</td><td><span class="pill y">20/20</span></td></tr>
+    <tr><td><strong>AliExpress</strong></td><td>~236–360 kr</td><td>~1 006–1 543 kr</td><td><strong>~1 250–1 900 kr</strong> (~490–740 zł)</td><td><span class="pill y">komplet</span> (ale 15–40 dni dostawy)</td></tr>
+    <tr><td><strong>Botland</strong> (PL)</td><td>~część: ESP32-S3 89–99 zł, 18650 22–50 zł</td><td>część</td><td>hybryda</td><td><span class="pill w">brak OV5640, PIR, paneli, silników, ESC</span></td></tr>
+    <tr><td><strong>Electrokit</strong> (SE)</td><td>ESP32-S3 79–143 kr, 18650 44–60 kr, CN3791 179 kr</td><td>Pi 4 2GB <strong>699 kr</strong></td><td>hybryda</td><td><span class="pill w">brak modułu OV5640 (tylko gotowe płytki 296 kr), PIR</span></td></tr>
+    <tr><td><strong>TME</strong> (PL)</td><td colspan="3">Cloudflare challenge — scraping zablokowany</td><td><span class="pill n">zablokowane</span></td></tr>
+    <tr><td><strong>BerryBase</strong> (DE)</td><td colspan="3">JS-SPA, brak wyników przez curl</td><td><span class="pill n">zablokowane</span></td></tr>
+    <tr><td><strong>AZ-Delivery</strong> (DE)</td><td colspan="3">tylko 3/20: OV5640 €22.99, AM312 €3.83, MAX98357A €7.99</td><td><span class="pill w">szczątkowo</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Amazon.se — pełna lista 20/20 (realne ceny SEK)</h3>
+<table>
+  <thead><tr><th>#</th><th>Komponent</th><th>Cena</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>ESP32-S3 z PSRAM (FREENOVE)</td><td>229 kr</td><td><a href="https://www.amazon.se/dp/B0BMQ8F7FN">B0BMQ8F7FN</a></td></tr>
+    <tr><td>2</td><td>OV5640 5MP (2 szt)</td><td>167,80 kr</td><td><a href="https://www.amazon.se/dp/B0F21CPH22">B0F21CPH22</a></td></tr>
+    <tr><td>3</td><td>PIR AM312 (3 szt)</td><td>107,59 kr</td><td><a href="https://www.amazon.se/dp/B08C5572W4">B08C5572W4</a></td></tr>
+    <tr><td>4</td><td>18650 (pakiet)</td><td>179 kr</td><td><a href="https://www.amazon.se/dp/B0C2VFTDPY">B0C2VFTDPY</a></td></tr>
+    <tr><td>5</td><td>CN3791 MPPT solar</td><td>51,72 kr</td><td><a href="https://www.amazon.se/dp/B09B7J1C95">B09B7J1C95</a></td></tr>
+    <tr><td>6</td><td>Panel 6V</td><td>132,54 kr</td><td><a href="https://www.amazon.se/dp/B0D8HWBYVF">B0D8HWBYVF</a></td></tr>
+    <tr><td>7</td><td>Buck 3.3V (10 szt)</td><td>72,99 kr</td><td><a href="https://www.amazon.se/dp/B09Z28LTRD">B09Z28LTRD</a></td></tr>
+    <tr><td>8</td><td>MOSFET AO3401 (100 szt)</td><td>98 kr</td><td><a href="https://www.amazon.se/dp/B0H4CWN1SQ">B0H4CWN1SQ</a></td></tr>
+    <tr><td>9</td><td>microSD slot (5 szt)</td><td>67,41 kr</td><td><a href="https://www.amazon.se/dp/B0F2DPSQ5R">B0F2DPSQ5R</a></td></tr>
+    <tr><td>10</td><td>Raspberry Pi 4 2GB</td><td>888,58 kr</td><td><a href="https://www.amazon.se/dp/B07TGBLK33">B07TGBLK33</a></td></tr>
+    <tr><td>11</td><td>Modem 4G SIM7600 (LILYGO)</td><td>697 kr</td><td><a href="https://www.amazon.se/dp/B0BXXKVFY8">B0BXXKVFY8</a></td></tr>
+    <tr><td>12</td><td>Kamera IMX219 8MP</td><td>264,27 kr</td><td><a href="https://www.amazon.se/dp/B0HB48LXCR">B0HB48LXCR</a></td></tr>
+    <tr><td>13</td><td>Mikrofon INMP441</td><td>70 kr</td><td><a href="https://www.amazon.se/dp/B0GTR62LSF">B0GTR62LSF</a></td></tr>
+    <tr><td>14</td><td>MAX98357A (3 szt)</td><td>59 kr</td><td><a href="https://www.amazon.se/dp/B0GY479Y14">B0GY479Y14</a></td></tr>
+    <tr><td>15</td><td>Silnik RS-540 12V</td><td>133,46 kr</td><td><a href="https://www.amazon.se/dp/B0F1DF5NNT">B0F1DF5NNT</a></td></tr>
+    <tr><td>16</td><td>ESC szczotkowy 60A</td><td>141,95 kr</td><td><a href="https://www.amazon.se/dp/B0G2ZQ58R7">B0G2ZQ58R7</a></td></tr>
+    <tr><td>17</td><td>Serwo DS3218 20kg</td><td>341,77 kr</td><td><a href="https://www.amazon.se/dp/B09BPMZQ57">B09BPMZQ57</a></td></tr>
+    <tr><td>18</td><td>LiPo 3S 2200mAh</td><td>354,09 kr</td><td><a href="https://www.amazon.se/dp/B08R751QLD">B08R751QLD</a></td></tr>
+    <tr><td>19</td><td>UBEC 5V 5A</td><td>83,98 kr</td><td><a href="https://www.amazon.se/dp/B0FQCQBRNT">B0FQCQBRNT</a></td></tr>
+    <tr><td>20</td><td>Kondensator 1000µF low-ESR (10 szt)</td><td>101,99 kr</td><td><a href="https://www.amazon.se/dp/B09HNYGRH6">B09HNYGRH6</a></td></tr>
+  </tbody>
+</table>
+
+<h3>AliExpress — orientacyjne ceny (realne + estymacje)</h3>
+<div class="card">
+<p>Ceny z realnych wyszukiwań + estymacje (oznaczone *). Dostawa 15–40 dni do Szwecji. <strong>Proj A: ~236–360 kr · Proj B: ~1 006–1 543 kr.</strong> Modem 4G dominuje kosztowo (441 kr za bare board SIM7600G-H).</p>
+<ul>
+  <li>ESP32-S3 CAM board: 54–78 kr</li>
+  <li>OV5640 5MP: ~82 kr</li>
+  <li>PIR AM312: 16 kr</li>
+  <li>18650: 15–25 kr/szt*</li>
+  <li>CN3791 MPPT: 31 kr</li>
+  <li>Panel 6V 5W: 35–50 kr*</li>
+  <li>Buck 3.3V: 7 kr/szt</li>
+  <li>AO3401: 2–5 kr/szt (bulk)*</li>
+  <li>microSD slot: 5–10 kr*</li>
+  <li>Raspberry Pi 4 2GB: 280–380 kr*</li>
+  <li>Modem 4G SIM7600G-H: 441 kr (bare) / Waveshare HAT 1 135 kr</li>
+  <li>IMX219: 15–25 kr*</li>
+  <li>INMP441: 6–10 kr*</li>
+  <li>MAX98357A: 12–18 kr*</li>
+  <li>Silnik RS-540: 25–40 kr*</li>
+  <li>ESC 60A: 80–120 kr*</li>
+  <li>Serwo DS3218: 40–60 kr*</li>
+  <li>LiPo 3S: 60–90 kr*</li>
+  <li>UBEC 5V: 15–25 kr*</li>
+  <li>Kondensator 1000µF: 2–5 kr/szt*</li>
+</ul>
+</div>
+
+<div class="note">
+<strong>Werdykt cenowy:</strong> <strong>AliExpress ~2–3× tańszy</strong> niż Amazon.se (~1 400 vs ~4 240 kr), ale: (1) 15–40 dni dostawy, (2) <strong>ryzyko podróbek OV5640/GC0308</strong> — kamera i ESP32-S3 CAM najlepiej brać od sprawdzonego sprzedawcy z dużą liczbą zamówień, (3) LiPo 3S z AliExpress = ryzyko uszkodzenia w transporcie (często lepiej lokalnie). <strong>Optymalna strategia:</strong> drobna elektronika + sensory z AliExpress, natomiast kamera OV5640 (walka z podróbkami), modem 4G i LiPo — z Amazon.se/Electrokit, żeby mieć zwrot/reklamację.
+</div>
+
 <!-- ===================== NEXT ===================== -->
-<h2 id="next">5️⃣ Następny krok — ceny w sklepach</h2>
+<h2 id="next">6️⃣ Podsumowanie</h2>
 <div class="card">
 <p>To jest <strong>krok 1 z 2</strong> — pełne listy części + uzasadnienia. <strong>Krok 2</strong> (na Twoje „go") to sprawdzenie tych części w sklepach EU (Botland, Electrokit, TME, AZ-Delivery, BerryBase, Amazon.se) i rozpisanie:</p>
 <pre style="background:var(--panel2);padding:14px;border-radius:8px;overflow-x:auto;">
 Sklep 1:   Projekt A: X SEK   |   Projekt B: Y SEK
 Sklep 2:   Projekt A: X SEK   |   Projekt B: Y SEK  (np. brakuje modemu → reszta tu, modem tam za Z SEK)
 ...</pre>
-<p>Wtedy dopiszę ceny i linki do tego samego raportu.</p>
+<p>Raport zawiera: pełne listy części obu projektów + uzasadnienia wyborów, cross-check 4 modeli (z korektami), oraz porównanie cen w sklepach EU i AliExpress.</p>
 </div>
 
 <div class="note">

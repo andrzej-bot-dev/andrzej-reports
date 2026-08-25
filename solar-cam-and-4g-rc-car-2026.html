@@ -91,7 +91,7 @@
   <thead><tr><th>Komponent</th><th>Wybór</th><th>Uwagi / pułapki</th></tr></thead>
   <tbody>
     <tr><td>Mikrokontroler</td><td><strong>ESP32-S3 z PSRAM (8 MB)</strong></td><td>OV5640 = 5 MP JPEG, klatka to ~500 KB+ — <span class="bad">wymaga PSRAM</span>. Klasyczny ESP32-WROOM (bez PSRAM) nie utrzyma 5 MP bufora. FREENOVE ESP32-S3-WROOM CAM albo ESP32-S3-EYE.</td></tr>
-    <tr><td>Kamera</td><td><strong>OV5640 (5 MP, AF)</strong></td><td><span class="bad">UWAGA na podróbki GC0308</span> (sprzedawane jako „OV5640" na Ali — Dawid już to przerabiał, patrz <code>~/esp32-cam/DISPUTE-DOWODY.md</code>). Weryfikacja: I2C scan pod 0x21/0x3C, PID = 0x5640. Kupować od sprawdzonego sprzedawcy z dużą liczbą zamówień.</td></tr>
+    <tr><td>Kamera</td><td><strong>OV5640 (5 MP, AF)</strong></td><td><span class="bad">UWAGA na podróbki GC0308</span> — Dawid już dostał podróbkę GC0308 (sprzedaną jako „OV5640") <strong>z Amazona</strong>, patrz <code>~/esp32-cam/DISPUTE-DOWODY.md</code>. OV5640 z AliExpress jeszcze nie doszły. Weryfikacja: I2C scan pod 0x21/0x3C, PID = 0x5640. Podróbki mogą być na KAŻDEJ platformie, nie tylko na Ali.</td></tr>
     <tr><td>Czujnik ruchu</td><td><strong>AM312 (mini PIR)</strong> ~20 µA</td><td>„Na ciepło" = właśnie PIR (podczerwień pasywna). AM312 bije HC-SR501: mniejszy pobór, mniej fałszywych triggerów. Budzi z deep sleep przez RTC GPIO — zero prądu w standby.</td></tr>
     <tr><td>Akumulator</td><td><strong>2× 18650 równolegle</strong> (3.7 V, ~6000–7000 mAh)</td><td>Równolegle = prostsze ładowanie (1S, jeden kontroler, bez balansera). Szeregowo (2S=7.4 V) wymaga BMS + balanser + step-down — zbędna komplikacja przy systemie 3.3 V.</td></tr>
     <tr><td>Kontroler ładowania</td><td><strong>CN3791 (MPPT solar, 2 A)</strong></td><td><span class="bad">NIE TP4056</span> — TP4056 nie ma MPPT, słabo zbiera ze słabego słońca i potrafi rozładowywać akumulator gdy panel ciemny. CN3791 jest dedykowany do paneli 6 V, 2 A.</td></tr>
@@ -331,7 +331,7 @@
 </table>
 
 <div class="note">
-<strong>Werdykt cenowy (dokładne koszyki, 2026-08-25):</strong> <strong>Amazon.se = 4 242 kr</strong> (Proj A 1 106 kr + Proj B 3 136 kr) vs <strong>AliExpress = 2 701 kr</strong> (Proj A 363 kr + Proj B 2 338 kr). AliExpress jest <strong>~36% tańszy</strong> (~1 540 kr oszczędności), ale: (1) 15–40 dni dostawy, (2) <strong>ryzyko podróbek OV5640/GC0308</strong>, (3) LiPo 3S z Chin = ryzyko uszkodzenia w transporcie (często wraca). <strong>Optymalna strategia:</strong> drobna elektronika + sensory z AliExpress (oszczędność największa na drobnicy), natomiast kamera OV5640, modem 4G i LiPo — z Amazon.se/Electrokit (zwrot/reklamacja). Największe pojedyncze pozycje to Pi 4 (864 kr) i modem (664 kr) — te z Amazon kosztują porównywalnie.
+<strong>Werdykt cenowy (dokładne koszyki, 2026-08-25):</strong> <strong>Amazon.se = 4 242 kr</strong> (Proj A 1 106 kr + Proj B 3 136 kr) vs <strong>AliExpress = 2 701 kr</strong> (Proj A 363 kr + Proj B 2 338 kr). AliExpress jest <strong>~36% tańszy</strong> (~1 540 kr oszczędności), ale: (1) 15–40 dni dostawy, (2) <strong>ryzyko podróbek OV5640/GC0308 jest na KAŻDEJ platformie</strong> — Dawid dostał podróbkę GC0308 właśnie <strong>z Amazona</strong>, (3) LiPo 3S z Chin = ryzyko uszkodzenia w transporcie (często wraca). <strong>Optymalna strategia:</strong> drobna elektronika + sensory z AliExpress (oszczędność największa na drobnicy), natomiast modem 4G i LiPo — z Amazon.se/Electrokit (zwrot/reklamacja). Kamera OV5640: weryfikuj sensor po dostawie (I2C scan + PID 0x5640) niezależnie od sklepu. Największe pojedyncze pozycje to Pi 4 (864 kr) i modem (664 kr) — te z Amazon kosztują porównywalnie.
 </div>
 
 <!-- ===================== NEXT ===================== -->
@@ -346,7 +346,7 @@ Sklep 2:   Projekt A: X SEK   |   Projekt B: Y SEK  (np. brakuje modemu → resz
 </div>
 
 <div class="note">
-<strong>TL;DR po cross-checku:</strong> (1) ESP32-S3 z PSRAM + OV5640 fixed-focus (uważaj na podróbki GC0308) + AM312 PIR + CN3791 MPPT + regulator <strong>TPS62840</strong> (nie TPS62740 — za słaby) + MOSFET. Na zimę rozważ LiFePO4. (2) <strong>Pi 4 2GB</strong> (nie Zero 2W) + modem 4G (SIM7600G-H lub A7670E) + Tailscale (bo CGNAT!) + WebRTC + <strong>silnik 540/550 + car ESC</strong> (nie lotniczy 2212) + serwo DS3218 (nie MG996R) + hardware failsafe. Jazda tylko po terenie prywatnym (prawo SE).
+<strong>TL;DR po cross-checku:</strong> (1) ESP32-S3 z PSRAM + OV5640 fixed-focus (uwaga: podróbki GC0308 zdarzają się na każdej platformie — Dawid dostał taką z Amazona) + AM312 PIR + CN3791 MPPT + regulator <strong>TPS62840</strong> (nie TPS62740 — za słaby) + MOSFET. Na zimę rozważ LiFePO4. (2) <strong>Pi 4 2GB</strong> (nie Zero 2W) + modem 4G (SIM7600G-H lub A7670E) + Tailscale (bo CGNAT!) + WebRTC + <strong>silnik 540/550 + car ESC</strong> (nie lotniczy 2212) + serwo DS3218 (nie MG996R) + hardware failsafe. Jazda tylko po terenie prywatnym (prawo SE).
 </div>
 
 </div>

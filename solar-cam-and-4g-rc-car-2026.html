@@ -72,6 +72,7 @@
     <li><a href="#cross">Cross-check 6 modeli AI</a></li>
     <li><a href="#ceny">Ceny: Amazon.se vs AliExpress (linki do każdego produktu)</a></li>
     <li><a href="#save">Jak oszczędzić (bateria z hulajnogi, januszowe rozwiązania)</a></li>
+    <li><a href="#alternatives">Gdzie kupić POZA AliExpress i Amazonem (v5 — 26.08)</a></li>
   </ol>
 </div>
 
@@ -316,6 +317,68 @@
   <li><strong>Proj 2:</strong> audio (pierwsza wersja tylko video), GPS (SIM7600 ma go wbudowanego — nie dokupuj), drugi silnik (1 napędowy + skręt = prościej).</li>
   <li><strong>Zawsze zostaw:</strong> failsafe, UBEC dla Pi, kondensator low-ESR, bezpiecznik przy LiPo. Na tym się nie oszczędza.</li>
 </ul>
+
+
+<section id="alternatives">
+<h2>7️⃣ Gdzie kupić POZA AliExpress i Amazonem <span class="tag">nowe 26.08</span></h2>
+<p><strong>Skąd te ceny:</strong> 5 scraper-agentów (26.08, 17:50–18:22) przeszukało sklepy SE/EU/PL, RC, Blocket/Tradera, eBay i Banggood. Uwaga metodologiczna: wszystkie duże e-sklepy komponentowe (Electrokit, Berrybase, AZ-Delivery, Reichelt, TME, Kamami, Allegro) renderują się JS-em — podane ceny tych sklepów to <em>orientacyjne widełki</em>, do potwierdzenia przy zamówieniu. Ceny eBay/HobbyKing/Hobbex/Blocket/Tradera zweryfikowane na żywo.</p>
+
+<h3>🏆 Najtańsze realne znaleziska (zweryfikowane live)</h3>
+<table>
+<thead><tr><th>Co</th><th>Sklep</th><th>Cena</th><th>Link</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>Combo: silnik 540 + ESC 60A</td><td>HobbyKing</td><td><strong>83 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/trackstar-540-16t-brushed-motor.html">TrackStar 540-16T combo</a></td><td>Wyprzedaż $7.99 — silnik+ESC w cenie jednego silnika. Sprawdź magazyn wysyłki (EU=bez cła)</td></tr>
+<tr><td>Serwo 23kg metal wodoodporne</td><td>HobbyKing</td><td><strong>73 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/turnigy-tgy-wp23-23kg-0-12s-2wd-waterproof-metal-gear-servo.html">Turnigy TGY-WP23</a></td><td>Zamiast DS3218 za 146 kr — lepsze i tańsze</td></tr>
+<tr><td>LiPo 3S 2200mAh 60C XT60</td><td>HobbyKing</td><td><strong>104 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/turnigy-hd-2200mah-3s-60c-lipo-battery-with-xt60-plug.html">Turnigy HD 3S</a></td><td>Uwaga: LiPo z HK = ryzyko transportu; alternatywa używana z Blocket 150–200 kr</td></tr>
+<tr><td>XT60 wtyczki 10 par</td><td>Hobbex</td><td><strong>39 kr</strong></td><td><a href="https://hobbex.se/product/xt60-connectors-10-pair-set">Hobbex XT60</a></td><td>SE sklep, szybka wysyłka</td></tr>
+<tr><td>UBEC 5V 6A (2-4S)</td><td>Barkarby Hobby</td><td><strong>62 kr</strong></td><td><a href="https://rconline.se">rconline.se / barkarbyhobby.se</a></td><td>Sklep stacjonarny w Järfälla — odbiór tego samego dnia</td></tr>
+<tr><td>Silnik 540 szczotkowy 17.5T</td><td>Hobbex</td><td><strong>99 kr</strong></td><td><a href="https://hobbex.se/product/maxxan-mr17-5-17-5t-brushed-motor">Maxxan MR17</a></td><td>Jak RS-540, dostępny od ręki w SE</td></tr>
+<tr><td>CN3791 MPPT solar charger</td><td>eBay</td><td><strong>57 kr</strong></td><td><a href="https://www.ebay.com/itm/364857845041">eBay 364857845041</a></td><td>Free ship (Chiny) + ~14 kr VAT przy imporcie</td></tr>
+<tr><td>Mini560 buck 3.3V</td><td>eBay</td><td><strong>32 kr</strong> (10-pk: 17 kr/szt)</td><td><a href="https://www.ebay.com/itm/406752726947">eBay 406752726947</a></td><td>Najtańszy niezbędnik do kamery solarnej</td></tr>
+<tr><td>OV5640 5MP DVP</td><td>eBay</td><td><strong>51 kr</strong></td><td><a href="https://www.ebay.com/itm/157361398992">eBay 157361398992</a></td><td>Dalej obowiązuje: weryfikuj I2C PID po dostawie (podróbki!)</td></tr>
+<tr><td>SIM7600G-H 4G HAT</td><td>eBay</td><td><strong>614 kr</strong></td><td><a href="https://www.ebay.com/itm/376832595934">eBay open-box</a></td><td>vs 987 kr (Ali) / 1443 kr (Amazon). Alternatywa SIM7600E breakout 507 kr</td></tr>
+<tr><td>iMAX B6 Mini ładowarka</td><td>Hobbex</td><td><strong>299 kr</strong></td><td><a href="https://hobbex.se/product/skyrc-imax-b6-mini-35w-3a-li-po-charger">SkyRC B6 Mini</a></td><td>Do ładowania LiPo 3S i testowania ogniw 18650</td></tr>
+</tbody>
+</table>
+
+<h3>♻️ Używki — Blocket/Tradera (sprawdzone 26.08)</h3>
+<ul>
+<li><strong>18650 za darmo/mamuśki:</strong> 64× Sanyo z Ystad <strong>15 kr/całość</strong> (Blocket), ~140 ogniw Dell na Tradera od 1 kr licytacji, 36V 10s5p Sanyo od 55 kr</li>
+<li><strong>Panel 5W z USB:</strong> 150 kr (Lofsdalen, Blocket) — dokładnie ten, którego potrzebuje kamera</li>
+<li><strong>Pi 4:</strong> Tradera 470–666 kr (z akcesoriami), Blocket do 1500 kr — bierz z Tradera</li>
+<li><strong>Całe auto RC 1:10 RTR:</strong> 900 kr (Åkersberga, BSD Dune Racer) — silnik+ESC+serwo+radio w komplecie, czyli podwozie do projektu 4G w cenie samego ESC</li>
+<li><strong>LiPo 3S używane:</strong> 150–260 kr (Blocket/Tradera)</li>
+<li><strong>Hulajnogi na części:</strong> od 10 kr (Malmö, bortskänkes) do ~500 kr</li>
+</ul>
+
+<h3>🧩 Najtrudniejsze do dostania (i co z nimi)</h3>
+<table>
+<thead><tr><th>Część</th><th>Status</th><th>Najlepsza opcja poza Ali/Ama</th></tr></thead>
+<tbody>
+<tr><td>Mechaniczny filtr IR-cut (cewka)</td><td>🔴 <strong>Chyba najtrudniejsza</strong></td><td>Na eBay istnieje tylko jako gotowy moduł kamery; na Banggood brak. Opcje: moduł OV5640 z wbudowanym IR-cut (206 kr na Ali…) albo wersja z filtrem stałym + osobna dioda IR bez filtra (kompromis)</td></tr>
+<tr><td>PT4115 driver LED</td><td>🟡 Tylko eBay</td><td>67.78 kr/szt lub 3 szt za 104.74 kr (34.91/szt) — jedyna platforma poza Ali z tym modułem</td></tr>
+<tr><td>ESP32-S3-CAM N16R8</td><td>🟡 Odpada prawie wszędzie</td><td>Oficjalne kanały (Botland/Kamami) mają tylko drogie zamienniki (Seeed XIAO 77 kr, Arduino Nano 230 kr). Na eBay orientacyjnie 30–60 kr. Freenove kit (229 kr Amazon) pozostaje najpewniejszym nie-Ali źródłem</td></tr>
+<tr><td>CN3791</td><td>🟢 eBay OK</td><td>57 kr (Chiny, free ship)</td></tr>
+<tr><td>Mini560</td><td>🟢 eBay OK</td><td>32 kr / 17 kr w 10-packu</td></tr>
+<tr><td>Ogniwa 18650</td><td>🟢 używki królują</td><td>Blocket/Tradera — patrz wyżej. Nowe LiitoKala tylko Ali/Amazon</td></tr>
+<tr><td>Kondensator 1000µF low-ESR</td><td>🟢 każdy dystrybutor</td><td>TME/Reichelt/Electrokit po 2–5 kr/szt (EU-shipment)</td></tr>
+<tr><td>PIR AM312</td><td>🟡 Botland ma, ale 228 kr (!)</td><td>eBay ~15 kr/szt z wysyłką; orientacyjnie AZ-Delivery ~1.5 €</td></tr>
+<tr><td>INMP441 / MAX98357A</td><td>🟡 tylko eBay/EU-AG</td><td>Orientacyjnie: Reichelt ~23–28 kr, AZ-Delivery ~28 kr — ceny do potwierdzenia</td></tr>
+<tr><td>IMX219 (kamera do Pi)</td><td>🟢 Botland ma zamiennik</td><td>ArduCam B0176R 220 kr (Botland, wysyłka do SE) vs 95 kr na Ali — tu niestety Ali wygrywa 2×</td></tr>
+</tbody>
+</table>
+
+<h3>🇸🇪/🇪🇺/🇵🇱 Mapa sklepów (co gdzie się opłaca)</h3>
+<ul>
+<li><strong>HobbyKing</strong> — król RC (silnik+ESC 83 kr, serwo 73 kr, LiPo 104 kr). Zawsze filtruj „EU warehouse", inaczej + VAT/cło. Hobbex (SE) = drożej o ~50%, ale szybciej i bez ryzyka</li>
+<li><strong>Barkarby Hobby (Järfälla)</strong> — jedyny stacjonarny RC pod Sztokholmem: UBEC 43–62 kr, serwa od 125 kr. Botshop.se, hobbyflow.se i subslot.se — domeny martwe, nie istnieją</li>
+<li><strong>Botland (PL)</strong> — wysyłka do SE od ~25–35 zł; opłacalny tylko na oryginały (Seeed/Arduino/M5Stack). Na drobnicy (AM312 za 228 kr!) przegrywa 50× z eBayem</li>
+<li><strong>Allegro</strong> — potencjalnie tanie (OV5640 ~12–25 zł, CN3791 ~8–15 zł), ale blokuje boty — trzeba klikać ręcznie z polskim IP/VPN</li>
+<li><strong>TME/Reichelt/Electrokit</strong> — tylko na pasywy i MOSFET-y (po grosze), nie na moduły</li>
+</ul>
+
+<div class="note"><strong>Werdykt zakupowy (poza Ali/Amazon):</strong> budżetowy zestaw RC: silnik+ESC combo 83 kr + serwo WP23 73 kr + LiPo używana 150–200 kr + UBEC 62 kr + XT60 39 kr + ładowarka 299 kr ≈ <strong>~710–760 kr</strong> (vs ~1030 kr na Ali część-po-części, vs ~1500 kr w SE-sklepach). Kamera solarna: eBay drobnica (CN3791 57 + Mini560 32 + OV5640 51 + PT4115 68) ≈ <strong>~210 kr + VAT importowy</strong>, ogniwa i panel z Blocket za ~165 kr. Największa pozostałość: IR-cut mechaniczny i ESP32-S3-CAM — bez AliExpress realnie zostaje eBay/Freenove-Amazon.</div>
+</section>
 
 <div class="note">
 <strong>TL;DR całości:</strong> (1) ESP32-S3+OV5640+PIR+CN3791+buck niskoprądowy — kamera solarna za ~384 kr (Ali) z trybem nocnym +~50–110 kr. (2) Pi 4 + SIM7600G-H + Tailscale + WebRTC + RS-540 + QuicRun 1060 + DS31 — auto RC za ~2 722 kr (Ali), latencja 80–250 ms, 720p@30fps. Failsafe obowiązkowy. Baterię z hulajnogi (Blocket ~200–1000 kr) da się użyć PO przebudowie na 3S. Podróbki OV5640 na każdej platformie — weryfikuj sensor.

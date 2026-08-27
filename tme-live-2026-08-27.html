@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TME.eu — żywe ceny BOM 24 (2026-08-27)</title>
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#0f1420;color:#e6e9ef}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:1.5rem} h2{font-size:1.15rem;margin-top:2rem;color:#7ec8ff}
+.badge{display:inline-block;background:#1d3a5f;color:#7ec8ff;border-radius:6px;padding:2px 8px;font-size:.75rem;margin-left:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem}
+th,td{padding:7px 9px;border-bottom:1px solid #22304a;text-align:left;vertical-align:top}
+th{background:#16203a;color:#9fc3ea;position:sticky;top:0}
+tr:hover td{background:#141d33}
+.oos{color:#ff9d9d} .ok{color:#8ee6a8} .dim{color:#8b96ab}
+a{color:#7ec8ff;text-decoration:none} a:hover{text-decoration:underline}
+.meta{background:#16203a;border-radius:10px;padding:14px 16px;font-size:.85rem;line-height:1.6}
+.warn{background:#3a2530;border:1px solid #6e3a4a;border-radius:10px;padding:12px 16px;margin:16px 0;font-size:.85rem}
+.small{font-size:.75rem;color:#8b96ab}
+.tot td{background:#101a30;font-weight:600}
+</style>
+</head>
+<body><div class="wrap">
+<h1>TME.eu — żywe ceny dla BOM-24 (solar cam + 4G RC)</h1>
+<div class="meta">
+<b>Metoda:</b> scraping na żywo przez prawdziwą przeglądarkę (Chromium na pulpicie Pi, region <b>Szwecja/SV, ceny EUR netto</b> — tak rozlicza TME SE). Cloudflare pobity bez captchy.<br>
+<b>Data zebrania danych:</b> 2026-08-27, 10:50–11:20 CEST · <b>Zero estymat</b> — każda cena to wartość wyświetlona na stronie TME w momencie scrape'u.<br>
+<b>Przeliczenie EUR→SEK:</b> kurs EBC z 2026-08-26: <b>1 EUR = 11,0785 SEK</b> (frankfurter.app). SEK = konwersja kursowa (oznaczona), <b>nie</b> cena sklepu. Ceny netto (bez VAT/moms 25%).<br>
+<b>Koszty wysyłki TME→SE:</b> <span class="oos">niezweryfikowane w tym scrape'cie</span> — sprawdź w koszyku / <a href="https://www.tme.eu/se/sv/">warunki na stronie</a>. Nie zgaduję.
+</div>
+<div class="warn">⚠️ <b>14 z 24 pozycji BOM nie istnieje w ofercie TME</b> (lista na dole). TME to dystrybutor komponentów — chińskie moduły (CN3791, PT4115, AM312, Mini560, MAX98357…) i RC (ESC/serwo/LiPo) po prostu nie są w asortymencie. Dla tych pozycji zostają: LaskaKit, Botland, BerryBase, AZ-Delivery, AliExpress (z raportu głównego).</div>
+
+<h2>✅ Pozycje dostępne w TME — ceny live</h2>
+<table>
+<tr><th>#</th><th>Komponent BOM</th><th>Symbol TME / producent</th><th>Cena EUR netto (próg szt.)</th><th>≈ SEK netto</th><th>Magazyn</th><th>Link</th></tr>
+<tr><td>4</td><td>Li-Ion 18650 3350 mAh</td><td><b>ACCU-NCR18650B</b> · PANASONIC<br><span class="dim">multipel: 2 szt</span></td><td>6,54 (2+) · 5,37 (60+) · 5,18 (180+) · 4,79 (1080+)</td><td>72,5 /szt</td><td class="ok">5 116 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=ACCU-NCR18650B">TME</a></td></tr>
+<tr><td>4</td><td>18650 alternatywa 3500 mAh</td><td>INR18650-MJ1 · LG Energy<br><span class="dim">multipel: 100 szt (!)</span></td><td>5,25 (100+) · 4,90 (800+) · 4,55 (1000+)</td><td>58,2 /szt</td><td class="ok">5 400 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=INR18650">TME</a></td></tr>
+<tr><td>4</td><td>18650 alternatywa 3500 mAh</td><td>AKY2465 (INR18650-35M-PCM) · AKYGA</td><td>5,78 (1+) · 5,16 (10+) · 4,81 (50+)</td><td>64,0 /szt</td><td class="ok">358 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=INR18650">TME</a></td></tr>
+<tr><td>4</td><td>18650 budżet 2200 mAh</td><td>AKY2460 (INR18650-22M-PCM) · AKYGA</td><td>3,30 (1+) · 2,93 (10+) · 2,75 (50+)</td><td>36,6 /szt</td><td class="ok">61 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=INR18650">TME</a></td></tr>
+<tr><td>8</td><td>N-MOSFET 30V 4,7A SOT23</td><td><b>AO3400A</b> · ALPHA &amp; OMEGA</td><td>0,0792 (10+) · 0,0713 (50+) · 0,0630 (250+) · 0,0566 (1000+)</td><td>0,88 /szt</td><td class="ok">45 383 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=AO3400A">TME</a></td></tr>
+<tr><td>9</td><td>Moduł microSD SPI</td><td>OKY3915 · OKYSTAR</td><td>1,06 (1+)</td><td>11,7</td><td class="ok">3 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=microSD%20module">TME</a></td></tr>
+<tr><td>9</td><td>Moduł microSD SPI</td><td>DFR0229 · DFROBOT</td><td>4,83 (1+) · 4,27 (3+)</td><td>53,5</td><td class="ok">20 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=microSD%20module">TME</a></td></tr>
+<tr><td>10</td><td>IR LED 850 nm 5mm THT (150 mW)</td><td><b>LL-503SIRC2E-1BD</b> · LUCKYLIGHT<br><span class="dim">multipel: 2 szt · 7,8–15 mW/sr · 30°</span></td><td>0,343 (2+) · 0,153 (10+) · 0,127 (50+) · 0,105 (1000+)</td><td>3,80 /szt</td><td class="ok">7 223 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=IR%20LED%20850nm">TME</a></td></tr>
+<tr><td>10</td><td>IR LED 850 nm 5mm (30 mW)</td><td>OSI3CA5111A · OPTOSUPPLY</td><td>0,120 (5+) · 0,100 (25+) · 0,086 (100+)</td><td>1,33 /szt</td><td class="ok">4 096 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=IR%20LED%20850nm">TME</a></td></tr>
+<tr class="tot"><td>14</td><td><b>Raspberry Pi 4 Model B 2GB</b></td><td><b>SC0193-9</b> · RASPBERRY PI</td><td><b>47,94 (1+)</b></td><td><b>531,1</b></td><td class="ok">2 493 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=Raspberry%20Pi%204%20Model%20B%202GB">TME</a></td></tr>
+<tr><td>15</td><td>LTE CAT4 moduł (SMD!) — SIM7600G-H-R2</td><td>S2-1097D · SIMCOM<br><span class="dim">UWAGA: kość SMD 30×30mm, NIE HAT Waveshare z BOM. Stary S2-108T7 (SIM7600G-H) wycofany.</span></td><td>54,25 (1+) · 51,08 (3+) · 49,36 (10+) · 47,65 (30+)</td><td>601,0</td><td class="oos">0 szt · 300 szt spodz. 27-10-2026</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=SIM7600G-H">TME</a></td></tr>
+<tr class="tot"><td>16</td><td><b>Kamera IMX219 8Mpx (RPi Cam V2)</b></td><td><b>SC0024 (V2 NOIR)</b> · RASPBERRY PI</td><td><b>12,85 (1+)</b></td><td><b>142,4</b></td><td class="ok">153 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=IMX219">TME</a></td></tr>
+<tr><td>16</td><td>Kamera IMX219 (V2 zwykła)</td><td>SC0023 · RASPBERRY PI</td><td>12,85 (1+)</td><td>142,4</td><td class="oos">0 szt · 1 056 spodz. 15-10-2026</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=IMX219">TME</a></td></tr>
+<tr><td>16</td><td>Alternatywa: Cam Module 3 WIDE (IMX708 11,9Mpx)</td><td>SC1224 · RASPBERRY PI</td><td>29,99 (1+)</td><td>332,2</td><td class="ok">239 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=Raspberry%20Pi%20kamera%20modul">TME</a></td></tr>
+<tr><td>24</td><td>Kondensator 1000 µF 16V polymer THT</td><td><b>16SEPF1000M</b> · PANASONIC</td><td>1,46 (1+) · 1,29 (3+) · 1,19 (5+) · 1,04 (10+)</td><td>16,2</td><td class="ok">12 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=1000uF%2016V">TME</a></td></tr>
+<tr><td>24</td><td>Kondensator 1000 µF 16V polymer THT</td><td>16SEF1000M · PANASONIC</td><td>2,19 (1+) · 1,83 (5+) · 1,55 (10+) · 1,19 (25+)</td><td>24,3</td><td class="ok">324 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=1000uF%2016V">TME</a></td></tr>
+<tr><td>1</td><td>ESP32-S3 z kamerą (zamiennik CAM kit)</td><td><b>ESP32-S3-EYE</b> · ESPRESSIF<br><span class="dim">dev kit: kamera + mic + ESP32-S3-WROOM-1</span></td><td>41,99 (1+) · 39,42 (3+)</td><td>465,2</td><td class="ok">9 szt</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=ESP32-S3">TME</a></td></tr>
+<tr><td>1</td><td>ESP32-S3 (goły SoC QFN56)</td><td>ESP32-S3 · ESPRESSIF</td><td>1,91 (1+)</td><td>21,2</td><td class="oos">0 szt · 2 000 spodz. 29-09-2026</td><td><a href="https://www.tme.eu/se/katalog/?queryPhrase=ESP32-S3">TME</a></td></tr>
+</table>
+
+<h2>❌ Brak w ofercie TME (zweryfikowane 2026-08-27)</h2>
+<table>
+<tr><th>#</th><th>Pozycja BOM</th><th>Szukane frazy (status)</th></tr>
+<tr><td>1</td><td>ESP32-S3-CAM / ESP32-CAM (moduły kam. chińskie)</td><td>„ESP32-S3-CAM", „ESP32-CAM" → hittades inte</td></tr>
+<tr><td>2</td><td>OV5640 (moduł DVP)</td><td>„OV5640" → brak</td></tr>
+<tr><td>3</td><td>PIR AM312 / AS312</td><td>„AM312" → trafienia to radiatory; „AS312" → dioda BAS31 (false positive)</td></tr>
+<tr><td>5</td><td>CN3791 MPPT</td><td>„CN3791" → brak</td></tr>
+<tr><td>6</td><td>Panel solarny 6V 2–5W</td><td>„solcell 6V" / „solpanel 6V" → tylko miernik SEFRAM (false positive)</td></tr>
+<tr><td>7</td><td>Buck Mini560</td><td>„Mini560" → brak (MP1584 istnieje, ale: sama kość SMD, 0 szt w magazynie)</td></tr>
+<tr><td>10</td><td>IR LED 850 nm <b>1 W</b> (mocny)</td><td>„IR LED 1W 850nm" → brak frazy; 850 nm jest 110 poz. ale 5mm/30–165 mW</td></tr>
+<tr><td>11</td><td>PT4115</td><td>„PT4115" → brak</td></tr>
+<tr><td>12</td><td>Filtr IR-cut mechaniczny</td><td>„IR-cut" → brak</td></tr>
+<tr><td>13</td><td>LDR GL5528</td><td>„GL5528" → brak</td></tr>
+<tr><td>17</td><td>INMP441</td><td>„INMP441" → brak</td></tr>
+<tr><td>18</td><td>MAX98357A</td><td>„MAX98357" → brak</td></tr>
+<tr><td>19–23</td><td>RS-540, QuicRun 1060, DS3218, LiPo 3S, UBEC</td><td>wszystkie → brak (trafienia RS-540 to diody/termostat — false positives)</td></tr>
+</table>
+
+<h2>Metodologia</h2>
+<div class="meta">
+<ol style="margin:6px 0 0 16px;padding:0">
+<li>Przejście Cloudflare: pełna przeglądarka Chromium na realnym pulpicie (labwc/XWayland, świeży profil, <code>--password-store=basic</code>) — bez captchy.</li>
+<li>Region przełączony na <b>Szwecja/SV</b>; ceny sklepu: <b>EUR netto</b>.</li>
+<li>28 fraz wyszukiwania (24 pozycje BOM + warianty), każda strona parsowana na żywo przez CDP; surowe zrzuty: <code>memory/research/elektronika-eu-2026-08/tme-se-*.jsonl</code>.</li>
+<li>False positives (AM312=radiatory, AS312=dioda, RS-540=diody) odrzucone ręcznie po opisach produktów.</li>
+<li>Kurs EBC 2026-08-26 (frankfurter.app): 11,0785 SEK/EUR. Kolumna „≈ SEK" = mnożnik, nie cena sklepu.</li>
+</ol>
+<p class="small">Raport: Andrzej (OpenClaw) · dane live 2026-08-27 10:50–11:20 CEST · strona TME: <a href="https://www.tme.eu/se/sv/">tme.eu/se/sv</a></p>
+</div>
+</div></body></html>

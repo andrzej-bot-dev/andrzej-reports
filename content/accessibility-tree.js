@@ -12,9 +12,19 @@
   window.__ocxTreeInstalled = true;
 
   // ---------- ref maps ----------
+  // This file is injected into BOTH the MAIN world (used by the CDP path) and
+  // the ISOLATED world (used by the content-script fallback). The ref maps are
+  // per-world, so the counters MUST NOT overlap: otherwise "ref_12" minted in
+  // one world silently resolves to a DIFFERENT element in the other. The
+  // ISOLATED world (where chrome.runtime is available) starts at 10000000 — a
+  // ref from the "wrong" world then fails resolution loudly (→ fresh snapshot)
+  // instead of clicking the wrong thing.
   if (!window.__ocxElementMap) window.__ocxElementMap = {};
   if (!window.__ocxElementReverseMap) window.__ocxElementReverseMap = new WeakMap();
-  if (!window.__ocxRefCounter) window.__ocxRefCounter = 0;
+  if (!window.__ocxRefCounter) {
+    const isolatedWorld = typeof chrome !== 'undefined' && !!chrome.runtime?.id;
+    window.__ocxRefCounter = isolatedWorld ? 10000000 : 0;
+  }
 
   // ---------- role detection ----------
   function getRole(el) {
@@ -79,7 +89,8 @@
         if (title?.trim()) return title.trim();
         return '[value redacted]';
       }
-      const selected = el.querySelector('option[selected]') || el.options[el.selectedIndex];
+      // Live selection first — selectOption sets the property, never the attribute.
+      const selected = el.options[el.selectedIndex] || el.querySelector('option[selected]');
       if (selected?.textContent) return selected.textContent.trim();
     }
 
@@ -140,6 +151,14 @@
       return trimmed.length > 100 ? trimmed.substring(0, 100) + '...' : trimmed;
     }
 
+    // Interactive element with no label so far → use the subtree text. Captions
+    // are very often nested (<button><span>Save</span></button>, framework
+    // div-buttons) and would otherwise render as an unusable bare ref.
+    if (isInteractive(el)) {
+      const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      if (t) return t.length > 80 ? t.substring(0, 80) + '…' : t;
+    }
+
     return '';
   }
 
@@ -169,6 +188,18 @@
     const role = el.getAttribute('role');
     if (['button', 'link', 'combobox', 'checkbox', 'radio', 'switch', 'tab', 'menuitem', 'option', 'searchbox', 'textbox', 'slider'].includes(role)) return true;
     if (el.getAttribute('contenteditable') === 'true') return true;
+    // Framework "div buttons": React/Vue attach listeners via addEventListener
+    // (often delegated to the root), leaving NO attribute on the element. The
+    // reliable tell is styling: cursor:pointer. It inherits, so only treat the
+    // POINTER ROOT (its parent is not pointer) as interactive — that's the
+    // outermost clickable box, and a click at its center bubbles to whatever
+    // listener the framework registered.
+    try {
+      if (window.getComputedStyle(el).cursor === 'pointer') {
+        const parent = el.parentElement;
+        if (!parent || window.getComputedStyle(parent).cursor !== 'pointer') return true;
+      }
+    } catch { /* detached node etc. */ }
     return false;
   }
 
@@ -212,7 +243,10 @@
 
     const include = shouldInclude(el, opts) || (opts.refId !== null && depth === 0);
     if (include) {
-      const role = getRole(el);
+      let role = getRole(el);
+      // Heuristic-detected div/span buttons would render as "generic" — tell
+      // the model plainly that the element is clickable.
+      if (role === 'generic' && isInteractive(el)) role = 'clickable';
       const label = getLabel(el);
 
       // Get or create ref
@@ -236,35 +270,58 @@
       }
       line += ' [' + refId + ']';
 
-      // Extra attributes
+      // Extra attributes — skip ones already covered by the label (context economy)
       const href = el.getAttribute('href');
-      if (href) line += ' href="' + href + '"';
+      if (href && href !== '#') line += ' href="' + (href.length > 120 ? href.substring(0, 120) + '…' : href) + '"';
       const type = el.getAttribute('type');
       if (type) line += ' type="' + type + '"';
       const placeholder = el.getAttribute('placeholder');
-      if (placeholder) line += ' placeholder="' + placeholder + '"';
+      if (placeholder && placeholder.trim() !== label) line += ' placeholder="' + placeholder.replace(/"/g, '\\"') + '"';
 
-      // <select> options
-      if (el.tagName.toLowerCase() === 'select' && !isSensitiveField(el)) {
-        for (const option of el.options) {
-          const optText = option.textContent ? option.textContent.trim() : '';
-          if (optText) {
-            let optLine = '  '.repeat(depth + 1) + 'option "' + optText.replace(/\s+/g, ' ').substring(0, 100).replace(/"/g, '\\"') + '"';
-            if (option.selected) optLine += ' (selected)';
-            if (option.value && option.value !== optText) optLine += ' value="' + option.value.replace(/"/g, '\\"') + '"';
-            lines.push(optLine);
-          }
-        }
-      }
+      // Interaction state — cheap to include, saves the model a screenshot
+      if (el.disabled) line += ' disabled';
+      if (el.checked) line += ' checked';
+      const expanded = el.getAttribute('aria-expanded');
+      // Quoted like every other attribute — an UNQUOTED page-controlled value
+      // could smuggle a literal "[ref_N]" past quote-blind ref matching.
+      if (expanded) line += ' expanded="' + String(expanded).replace(/"/g, '\\"') + '"';
 
       lines.push(line);
+
+      // <select> options — listed under their combobox, capped
+      if (el.tagName.toLowerCase() === 'select' && !isSensitiveField(el)) {
+        const MAX_OPTIONS = 12;
+        let shown = 0;
+        for (const option of el.options) {
+          const optText = option.textContent ? option.textContent.trim() : '';
+          if (!optText) continue;
+          if (shown >= MAX_OPTIONS && !option.selected) continue; // always show the selected one
+          let optLine = '  '.repeat(depth + 1) + 'option "' + optText.replace(/\s+/g, ' ').substring(0, 100).replace(/"/g, '\\"') + '"';
+          if (option.selected) optLine += ' (selected)';
+          if (option.value && option.value !== optText) optLine += ' value="' + option.value.replace(/"/g, '\\"') + '"';
+          lines.push(optLine);
+          shown++;
+        }
+        if (el.options.length > shown) {
+          lines.push('  '.repeat(depth + 1) + 'option … (+' + (el.options.length - shown) + ' more — use select_option with the visible label)');
+        }
+      }
     }
 
-    // Recurse into children (skip <select> children since we handled options above)
-    if (el.tagName.toLowerCase() === 'select' && isSensitiveField(el)) return;
-    if (el.children && depth < maxDepth) {
-      for (const child of el.children) {
-        buildTree(child, include ? depth + 1 : depth, maxDepth, opts, lines, maxElements, counter);
+    // Recurse into children (skip <select> children since we handled options above).
+    // Also descend into open shadow roots — web-component UIs (e.g. custom
+    // dropdowns, date pickers) are invisible without this.
+    if (el.tagName.toLowerCase() === 'select') return;
+    if (depth < maxDepth) {
+      if (el.shadowRoot) {
+        for (const child of el.shadowRoot.children) {
+          buildTree(child, include ? depth + 1 : depth, maxDepth, opts, lines, maxElements, counter);
+        }
+      }
+      if (el.children) {
+        for (const child of el.children) {
+          buildTree(child, include ? depth + 1 : depth, maxDepth, opts, lines, maxElements, counter);
+        }
       }
     }
   }

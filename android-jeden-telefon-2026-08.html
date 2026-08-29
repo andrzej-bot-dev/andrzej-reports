@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeden Android w pełni zdalny — Deep Research 2026-08</title>
+<style>
+:root{--bg:#0f1117;--card:#181b24;--card2:#1e2230;--acc:#4f9cf9;--acc2:#38c793;--warn:#f0b429;--bad:#f0616d;--txt:#e8eaf0;--mut:#9aa3b5;--border:#2a3040}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding:0 0 60px}
+.wrap{max-width:980px;margin:0 auto;padding:24px 18px}
+h1{font-size:1.9em;margin:18px 0 6px;line-height:1.25}
+h2{font-size:1.35em;margin:38px 0 12px;color:var(--acc);border-bottom:2px solid var(--border);padding-bottom:8px}
+h3{font-size:1.08em;margin:22px 0 8px;color:var(--acc2)}
+p{margin:10px 0}
+.hero{background:linear-gradient(135deg,#1b2436,#182a22);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-top:14px}
+.sub{color:var(--mut);font-size:.95em}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:2px 12px;font-size:.8em;margin:4px 6px 0 0;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+.card.green{border-left:4px solid var(--acc2)}
+.card.red{border-left:4px solid var(--bad)}
+.card.yellow{border-left:4px solid var(--warn)}
+.card.blue{border-left:4px solid var(--acc)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92em}
+th{background:var(--card2);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600}
+td{padding:8px 10px;border:1px solid var(--border);vertical-align:top}
+tr:nth-child(even) td{background:#151926}
+.ok{color:var(--acc2);font-weight:600}.no{color:var(--bad);font-weight:600}.mid{color:var(--warn);font-weight:600}
+code{background:#232a3d;border-radius:5px;padding:1px 7px;font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;color:#9fd0ff}
+pre{background:#12151f;border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0;color:#bfe3ff;font-size:.86em;line-height:1.6}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+ul{margin:8px 0 8px 22px}
+li{margin:5px 0}
+.src{font-size:.78em;color:var(--mut)}
+.verdict{font-size:1.15em;font-weight:700;color:var(--acc2)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.toc a{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:.85em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.tag{font-size:.75em;border-radius:6px;padding:1px 8px;margin-left:8px;font-weight:700}
+.tag.free{background:#123a2c;color:#4ade80}.tag.paid{background:#3a2a12;color:#fbbf24}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+<div class="sub">Deep Research · 2026-08-29 · Andrzej dla Dawida · 6 subagentów, ~140 stron źródeł</div>
+<h1>📱 Jeden Android w pełni zdalny — kontrola i automatyzacja, która przeżywa reboot</h1>
+<div class="sub">Zlecenie: "chcę jeden telefon android w pełni zautomatyzowany, żeby nawet jak się zrestartuje, dalej mogę zdalnie z niego korzystać i klikać." Inspiracja: TikTok <a href="https://www.tiktok.com/@holden_genfarmer/video/7659096240742796552">@holden_genfarmer — "Boxphone"</a> ( farma wielu telefonów).</div>
+<div>
+<span class="badge">6 agentów badawczych</span><span class="badge">~140 stron</span><span class="badge">≈60 źródeł z URL-ami</span><span class="badge">Koszt researchu &lt; $1</span><span class="badge">Pi5 + Tailscale ready</span>
+</div>
+</div>
+
+<div class="toc">
+<a href="#tldr">🏆 TL;DR</a><a href="#box">📦 Co to Boxphone</a><a href="#sciany">🧱 Ściany Androida</a><a href="#stack">🔧 Rekomendowany stack</a><a href="#warianty">⚔️ Wariant A/B</a><a href="#alternatywy">☁️ Fizyczny vs Redroid vs chmura</a><a href="#rc">🖥️ Remote control apps</a><a href="#auto">⚙️ Automatyzacja</a><a href="#health">🔋 Zdrowie 24/7</a><a href="#plan">🚀 Plan wdrożenia</a><a href="#zrodla">📚 Źródła</a>
+</div>
+
+<h2 id="tldr">🏆 TL;DR — werdykt</h2>
+<div class="card green">
+<p class="verdict">Nie potrzebujes żadnej "farmy". Jeden telefon + kabel USB do Pi5 + stack scrcpy/autoadb + uiautomator2 + Tailscale = pełna zdalna kontrola i automatyzacja, która sama wstaje po reboocie telefonu. Koszt software: 0 kr.</p>
+<p><strong>Kluczowa architektura (zero roota):</strong></p>
+<ul>
+<li>🔌 Telefon <strong>kablem USB na stałe do Pi5</strong> — ADB po USB reconnectuje się sam po reboocie telefonu ("always allow" zapamiętane). Po WiFi by się rozpadało (port się zmienia).</li>
+<li>🖥️ <strong>scrcpy + autoadb</strong> na Pi5 (systemd) — jak telefon wraca, okno/scrcpy wstaje automatycznie.</li>
+<li>🌐 <strong>ws-scrcpy w Dockerze</strong> na Pi5 — Ty klikasz telefon z <strong>przeglądarki</strong> (przez Tailscale, z dowolnego miejsca na świecie). Zero auth → trzymać tylko w LAN/Tailscale.</li>
+<li>🤖 <strong>Ja (Andrzej) steruję telefonem z Pi</strong> przez <code>uiautomator2</code> (Python): klik, swipe, screenshot, XPath, instalacja APK — bez roota. Mogę robić na telefonie to co na Chrome.</li>
+<li>🔓 Telefon <strong>bez PIN-u</strong> (swipe) — twardy warunek bez roota: żadne narzędzie świata nie odblokuje ekranu po reboocie. Za to scrcpy/ADB działają NA ekranie blokady (można even wpisać kod — ale przy braku PIN-u problem znika).</li>
+<li>⚡ Telefon, który <strong>sam wstaje po podaniu zasilania</strong> (domyślne zachowanie PMIC u większości marek) + smart plug jako "twardy reset" awaryjny.</li>
+</ul>
+<p><strong>Telefon:</strong> jeśli masz Wolne urządzenie — użyj go. Jak kupować: używka 500–1500 kr (Blocket/FB), najlepiej z <strong>natywnym limitem ładowania</strong> (Samsung "Protect Battery" 85%, Motorola 50/80%, Xiaomi 85%, OnePlus 80/85%) — bo telefon będzie na kablu 24/7.</p>
+</div>
+
+<h2 id="box">📦 Co Dawid zobaczył: "Boxphone farm"</h2>
+<div class="card blue">
+<p><strong>Box Phone Farm</strong> = skrzynia (chassis) z wieloma <strong>płytami głównymi telefonów</strong> (nie kompletnymi telefonami), wspólnym zasilaczem, chłodzeniem i USB hubem → jedno PC kontrolne steruje wszystkim. Popularne w SMM/MMO (masowe prowadzenie kont TikTok/IG/FB).</p>
+<ul>
+<li>Skład: chassis + mainboardy + centralny PSU + wentylatory + USB hub + PC kontrolny + software + <strong>proxy per urządzenie</strong> (GenRouter) — bez proxy wykrywalne od ręki</li>
+<li>Ceny AliExpress (sama skrzynia, bez telefonów): 20-port ~578–912 kr, 60-port ~2600–3100 kr; cały zestaw 20 szt. ~10–20 tys. kr</li>
+<li>Ecosystem GenFarmer: box + cloud dashboard + proxy + GenLogin (anti-detect browser) — model biznesowy = abonamenty</li>
+<li>Sterne software farm: GenFarmer Platform (subskrypcja), Total Control (komercyjne, do 100 urządzeń), Sonic Cloud, 群控 (group control) — wszystko po to, żeby JEDEN operator kliknął raz na 50 telefonów</li>
+</ul>
+<p><strong>Wniosek dla Ciebie:</strong> 100% tego hardware'u jest zbędne przy 1 telefonie. Z farmy potrzebujesz tylko <strong>warstwy software'owej</strong>: mirror + kontrola + skrypty — a to daje za darmo scrcpy/QtScrcpy + uiautomator2. Nawet ryzyko bana jest przy 1 urządzeniu dużo mniejsze (algorytmy celują w koordynowane sieci urządzeń/proxy).</p>
+<p class="src">Źródła: genfarmer.com/what-is-box-phone-farm-mmo-automated-marketing-en/, genfarmer.com/what-is-a-box-phone-the-complete-guide/, aliexpress.com (wyszukiwanie "box phone farm"), github.com/barry-ran/QtScrcpy</p>
+</div>
+
+<h2 id="sciany">🧱 Twarde ściany Androida (ważne przed wdrożeniem)</h2>
+<div class="card yellow">
+<table>
+<tr><th>Ograniczenie</th><th>Stan faktyczny</th><th>Obejście</th></tr>
+<tr><td><strong>Nikt nie odblokuje telefonu z PIN po reboocie</strong></td><td>Universalne ograniczenie Androida — RustDesk/AnyDesk/TeamViewer/scrcpy: wszyscy wymagają odblokowanego ekranu (albo działają na lock screenie, ale fingerprint/SIM-PEG po reboocie i tak wymaga PIN-u)</td><td class="ok">Telefon bez PIN (swipe) + fizyczne zabezpieczenie (telefon leży w domu); root: <code>settings put global lock_screen_disabled 1</code></td></tr>
+<tr><td><strong>SIM PIN blokuje boot</strong></td><td>Jeśli SIM ma PIN — po reboocie czeka na niego (PEG/SIM Theft Protection)</td><td class="ok">Wyłączyć PIN karty SIM</td></tr>
+<tr><td><strong>MediaProjection consent po reboocie</strong></td><td>RustDesk/AnyDesk (tryb screen capture) po reboocie pokazują "Start Now" — nie kliknie się samo</td><td class="mid">MacroDroid/Tasker (boot → auto-klik), albo <code>adb shell appops</code>, albo… po prostu scrcpy, który tego nie potrzebuje</td></tr>
+<tr><td><strong><code>adb tcpip 5555</code> ginie po reboocie</strong></td><td>Efemeryczne — po reboocie trzeba ponownie przez USB; Wireless Debugging (A11+) też wymaga re-aktywacji, port dynamiczny</td><td class="ok">USB do Pi5 (domyślne w naszej architekturze); z rootem: Magisk module persist</td></tr>
+<tr><td><strong>Shizuku umiera po reboocie</strong></td><td>Oficjalne docs: "startup steps need to be performed again after each reboot"</td><td class="ok">Root albo nie polegać na Shizuku</td></tr>
+<tr><td><strong>OEM killerzy aplikacji</strong></td><td>Xiaomi/OnePlus/Samsung zabijają background apps, autostart w osobnych ustawieniach</td><td class="ok">Battery = Unrestricted + autostart ON dla wszystkiego co ma żyć</td></tr>
+</table>
+<p class="src">Źródła: rustdesk.com/docs/en/client/android, shizuku.rikka.app/guide/setup, github.com/Genymobile/scrcpy/blob/master/doc/connection.md, developer.android.com/studio/command-line/adb</p>
+</div>
+
+<h2 id="stack">🔧 Rekomendowany stack (dwie warstwy dostępu)</h2>
+
+<div class="card green">
+<h3>Warstwa 1: "Ja klikam" — automatyzacja z Pi (Andrzej → telefon)</h3>
+<ul>
+<li><strong>adb (USB)</strong> — połączenie przez kabel do Pi5. Po reboocie telefonu: host ADB sam wykrywa urządzenie (klucz autoryzacji trwały). Xiaomi/Samsung mają dodatkowy "USB debugging (security settings)" — zatwierdzić raz.</li>
+<li><strong>uiautomator2</strong> (Python, openatx) — <code>d.xpath('//*[@text="Login"]').click()</code>, screenshot, swipe, install, dump UI, app_start. Bez roota. HTTP JSON-RPC na :9008 przez <code>adb forward</code>.</li>
+<li><strong>screencap / input / am</strong> — czysty adb shell fallback: <code>input tap</code>, <code>input keyevent</code>, <code>am start -a android.intent.action.VIEW -d URL</code>, <code>screencap -p</code> → ja widzę i klikam jak w browserze.</li>
+<li><strong>STFService.apk</strong> (Google/openstf) — dodatkowe: KeyGuard unlock/relock, rotacja, wakelock, battery stats, IMEI (poziom uprawnień ADB, nie root).</li>
+</ul>
+</div>
+
+<div class="card green">
+<h3>Warstwa 2: "Ty klikasz" — zdalny pilot dla Dawida</h3>
+<ul>
+<li><strong>ws-scrcpy</strong> (Docker na Pi5, port :8000) — telefon w <strong>przeglądarce</strong>, klikanie myszą, klawiatura, MSE/WebCodecs decode. Otwierasz z telefonu/laptopa przez Tailscale z dowolnego miejsca. ⚠️ Brak wbudowanego auth → dostęp tylko z Tailscale/LAN (nginx auth opcjonalnie).</li>
+<li><strong>scrcpy + autoadb</strong> (rom1v, autor scrcpy) — systemd na Pi5: <code>autoadb scrcpy -s '{}'</code> → po każdym powrocie urządzenia mirror wstaje sam. Do lokalnego użytku na Pi/desktop.</li>
+<li><strong>RustDesk (opcja premium)</strong> — pełny "TeamViewer-grade" remote control, self-hosted serwer hbbs/hbbr w Dockerze na Pi5 (arm64 OK), E2E encryption, darmowy AGPL. Android host: permanent password + accessibility input + battery unrestricted. Po reboocie wymaga workaroundu (MacroDroid auto-klik MediaProjection consent) — dlatego głównym kanałem pozostaje ws-scrcpy, a RustDesk jako wygodny dodatek.</li>
+</ul>
+<p class="src">Źródła: github.com/NetrisTV/ws-scrcpy, github.com/aivus/docker-ws-scrcpy-rpi, github.com/rom1v/autoadb, rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker, github.com/openatx/uiautomator2</p>
+</div>
+
+<div class="card">
+<h3>Czego NIE wdrażać przy 1 telefonie</h3>
+<table>
+<tr><th>Narzędzie</th><th>Werdykt</th><th>Dlaczego</th></tr>
+<tr><td>DeviceFarmer STF</td><td class="no">Overkill</td><td>8+ kontenerów (RethinkDB, triproxy, reaper…), booking system — stworzone do laboratoriów dziesiątek telefonów. Po disconnect urządzenie trzeba re-addować. arm64 działa, ale sensu brak.</td></tr>
+<tr><td>SonicCloudOrg</td><td class="no">Nie</td><td>Agent zarchiwizowany (mar 2025), obrazy amd64-only, 3-5 min startu mikroserwisów. Martwy kierunek.</td></tr>
+<tr><td>QtScrcpy</td><td class="mid">Opcjonalne GUI</td><td>Dobre desktopowe GUI (Linux/Win/Mac), group control do 10 ekranów free — fajne jeśli chcesz klikaczkę na laptopie zamiast przeglądarki. Nie zastępuje automatyzacji.</td></tr>
+<tr><td>GenFarmer / Total Control / 群控</td><td class="no">Nie</td><td>Abonament + per-slot licensing, projektowane pod 50+ urządzeń i proxy. Dla 1 telefonu czysta strata pieniędzy.</td></tr>
+</table>
+</div>
+
+<h2 id="warianty">⚔️ Wariant A (bez roota) vs Wariant B (z rootem)</h2>
+<div class="grid2">
+<div class="card blue">
+<h3>Wariant A — bez roota (rekomendowany start)</h3>
+<ul>
+<li>Swipe lock (bez PIN), SIM bez PIN</li>
+<li>USB → Pi5, adb authorized, autoadb + ws-scrcpy (Docker) + Tailscale</li>
+<li>uiautomator2 z Pi = automatyzacja</li>
+<li>MacroDroid ($5, albo free do 5 makr): boot → wake screen, re-enable różnych rzeczy; webhook listener wbudowany (HTTP na telefon!)</li>
+<li>Termux + Termux:Boot + sshd: pełny shell NA telefonie po SSH, skrypty cron-like, przeżywa reboot</li>
+<li>Auto power-on: większość telefonów włącza się sama po podpięciu ładowarki (PMIC) → smart plug = zdalny hard-reset</li>
+<li><strong>Koszty: 0 kr software</strong> (MacroDroid optional $5)</li>
+</ul>
+</div>
+<div class="card yellow">
+<h3>Wariant B — z rootem (gdy A nie wystarczy)</h3>
+<ul>
+<li>Magisk v30.7 (aktywny, Feb 2026, Android 16 support)</li>
+<li>Persistent <code>adb tcpip 5555</code> (init.rc/Magisk module) — ADB po WiFi bez USB</li>
+<li><code>lock_screen_disabled 1</code> — telefon bez żadnej blokady</li>
+<li>Pełny Shizuku persist, minicap na Android 10+</li>
+<li>Uwaga: Samsung = Knox tripped raz na zawsze (OK dla dedykowanego telefonu); banking apps wymagają pełnego hiding stacku (Zygisk + DenyList + safetynet-fix + props config) i i tak nie ma gwarancji</li>
+<li>Bootloader unlock: Xiaomi (okres oczekiwania), Pixel (najłatwiej), Samsung (Knox), Motorola (łatwo)</li>
+</ul>
+<p><strong>Kiedy root?</strong> Tylko jeśli potrzebujesz: PIN na telefonie, WiFi-ADB bez kabla, albo deep integracji. Na start — A wystarczy w 95%.</p>
+</div>
+</div>
+
+<h2 id="alternatywy">☁️ Fizyczny telefon vs Redroid vs cloud phone</h2>
+<div class="card">
+<table>
+<tr><th>Opcja</th><th>Koszt 1 rok</th><th>Wydajność</th><th>Ryzyko detekcji apek</th><th>Niezawodność</th><th>Werdykt</th></tr>
+<tr><td><strong>Fizyczny telefon (używka)</strong></td><td>500–1500 kr jednorazowo</td><td class="ok">Natywna</td><td class="ok">Zero (prawdziwy hardware)</td><td class="ok">Najwyższa</td><td class="ok">🏆 WYBIERZ TO</td></tr>
+<tr><td>Redroid na Pi5 (Docker)</td><td>0 kr (masz Pi)</td><td class="no">Słaba — CPU rendering 15 fps, na Pi4 "completely unusable" (issue #561), Pi5 tylko trochę lepiej; Waydroid już raz poległ na Twoim kernelu</td><td class="no">Bardzo wysoka (Swish/bank = fail, TikTok/Messenger flagują kontener)</td><td class="no">Niska</td><td class="no">Nie</td></tr>
+<tr><td>Redroid na N100 mini-PC</td><td>~1200–1700 kr</td><td class="mid">Dobra (x86 GPU)</td><td class="no">Nadal kontener</td><td class="mid">Wysoka</td><td class="no">Tylko do botów bez wrażliwych apek</td></tr>
+<tr><td>Cloud phone (Redfinger itd.)</td><td>~1200–1800 kr/rok</td><td class="mid">OK</td><td class="no">Ekstremalna (IP chmur = flagi)</td><td class="mid">Zależy od dostawcy</td><td class="no">Nie</td></tr>
+<tr><td>Genymotion Cloud</td><td>~$2148/rok</td><td class="ok">Dobra</td><td class="no">Wysoka</td><td class="ok">Dobra</td><td class="no">Enterprise testy, nie do tego</td></tr>
+</table>
+<p><strong>Kluczowy argument:</strong> Messenger, TikTok i aplikacje bankowe na realnym telefonie działają bez walki — realny fingerprint, realne sensory, push działa. Na kontenerach to loteria z pętlami weryfikacji i shadowbanami. Używka za 700 kr rozwiązuje wszystko na zawsze.</p>
+<p class="src">Źródła: github.com/remote-android/redroid-doc (issues #561, deploy docs), redfinger.com, genymotion.com/pricing, docs.waydro.id</p>
+</div>
+
+<h2 id="rc">🖥️ Remote control apps — porównanie (dla "ludzkiego" dostępu)</h2>
+<div class="card">
+<table>
+<tr><th>App</th><th>Unattended</th><th>Przeżywa reboot</th><th>Self-host</th><th>Cena</th><th>Uwagi</th></tr>
+<tr><td><strong>RustDesk</strong></td><td class="ok">Tak (permanent password)</td><td class="mid">Wymaga workaroundu (MacroDroid klik MediaProjection po boot; <code>appops</code> przez adb)</td><td class="ok">hbbs/hbbr na Pi5 (Docker, arm64)</td><td class="ok">0 kr (AGPL)</td><td>Nie z Play — APK/F-Droid. Accessibility input. E2E NaCl. Najlepszy wybór "premium".</td></tr>
+<tr><td>AnyDesk</td><td class="ok">Tak</td><td class="mid">Autostart permission + battery off</td><td class="no">Tylko chmura AnyDesk</td><td>Free personal / €7+ mies.</td><td>Kontrol plugin auto-install. Kieruje ruch przez serwery AnyDesk.</td></tr>
+<tr><td>TeamViewer Host</td><td class="mid">Częściowo</td><td class="mid">Niepewne</td><td class="no">Nie</td><td class="no">Personal wygrabiony z oferty, Host płatny</td><td>2026: oferta niezrozumiała dla hobbystów. Odpuść.</td></tr>
+<tr><td>AirDroid</td><td class="no">NIE — "tylko gdy aktywnie połączysz" (oficjalny FAQ)</td><td class="no">Nie</td><td class="no">Nie</td><td>Limited free / biznes $12+/dev/rok</td><td>Odpada do unattended.</td></tr>
+<tr><td><strong>ws-scrcpy</strong> (nasz wybór)</td><td class="ok">Tak — serwer na Pi</td><td class="ok">Tak (Docker restart + autoadb)</td><td class="ok">W pełni (Docker na Pi)</td><td class="ok">0 kr (MIT-ish)</td><td>Przeglądarka = brak instalacji u Ciebie. Brak auth → tylko Tailscale.</td></tr>
+</table>
+<p class="src">Źródła: rustdesk.com/docs (android + self-host), support.anydesk.com/docs/unattended-access, teamviewer.com/en/pricing/overview, airdroid.com/personal</p>
+</div>
+
+<h2 id="auto">⚙️ Automatyzacja: co wybrać do czego</h2>
+<div class="card">
+<table>
+<tr><th>Zadanie</th><th>Narzędzie</th><th>Ocena</th></tr>
+<tr><td>Skrpty z hosta (klik/screenshot/XPath)</td><td><strong>uiautomator2</strong> (Python przez adb)</td><td class="ok">★★★★★ — bez roota, XPath, dokładnie to co robię w Chrome przez CDP</td></tr>
+<tr><td>Automatyzja NA telefonie (boot, czujniki, retry)</td><td><strong>MacroDroid</strong> ($5) lub <strong>Tasker</strong> ($3.49)</td><td class="ok">★★★★★ — BOOT_COMPLETED, wbudowany HTTP server (MacroDroid) / AutoRemote REST (Tasker) = trigger przez curl z Pi!</td></tr>
+<tr><td>Shell na telefonie, cron, skrypty</td><td><strong>Termux + Termux:Boot + sshd</strong></td><td class="ok">★★★★☆ — SSH do telefonu, przeżywa reboot, <code>input</code>/<code>am</code>/<code>dumpsys</code> bez roota</td></tr>
+<tr><td>Klikanie UI na telefonie (on-device)</td><td>AutoInput (Tasker, $4.99) / wbudowany accessibility w MacroDroid</td><td class="mid">★★★★☆ — wolniejsze (100-300ms/akcja), ekran musi być ON/unlocked</td></tr>
+<tr><td>Testy apek / zaawansowane</td><td>Appium</td><td class="mid">★★★☆☆ — overkill dla 1 telefonu</td></tr>
+</table>
+<p><strong>AutoRemote / webhook = magia:</strong> <code>curl "https://autoremote.../q?k=KEY&msg=kliknij_confirm"</code> z Pi → Tasker na telefonie wykonuje akcję. Push notification budzi telefon nawet z Doze. Odwrotnie też działa (telefon → Pi).</p>
+<p class="src">Źródła: tasker.joaoapps.com, joaoapps.com/autoremote, play.google.com (MacroDroid), github.com/openatx/uiautomator2, wiki.termux.com</p>
+</div>
+
+<h2 id="health">🔋 Zdrowie telefonu 24/7 (żeby nie spuchła bateria)</h2>
+<div class="card yellow">
+<ul>
+<li><strong>Limit ładowania OBOWIĄZKOWO:</strong> Samsung "Protect Battery" (85%) · Motorola "Protect Battery" (50/80%) · Xiaomi/HyperOS (85%) · OnePlus "Charging Limit" (80/85%). Pixel: brak natywnego (Android 16 może dodać) → gorszy kandydat. Przy stałym 100% bateria puchnie realnie po 12–18 mies.</li>
+<li><strong>Termika:</strong> bez etui, przewiewne miejsce, ambient &lt;30°C; USB wiatraczek jeśli &gt;38°C sustained.</li>
+<li><strong>Reboot higieniczny raz w tygodniu</strong> (memory leak cleanup) — ja mogę robić przez adb <code>reboot</code> w cronie i sam sprawdzać powrót.</li>
+<li><strong>Auto power-on po zaniku prądu:</strong> większość telefonów włącza się sama gdy pojawia się ładowarka (PMIC, default). Przetestować PRZED zakupem używki (podpiąć zasilanie do wyłączonego telefonu). Smart plug (Zigbee/Tapo) na telefon = zdalny hard reset z aplikacji.</li>
+<li><strong>NAND/heat:</strong> niższy SoC = dłuższe życie flash; kolejny argument za charge limit.</li>
+</ul>
+<p class="src">Źródła: r/Android wątki battery, XDA, per-brand docs (distillat boot-persistence.md, strony 10-16)</p>
+</div>
+
+<h2 id="plan">🚀 Plan wdrożenia (po dostarczeniu telefonu)</h2>
+<div class="card green">
+<ol>
+<li><strong>Telefon:</strong> używka (Samsung A/Moto G/Xiaomi Redmi z charge limit), reset fabryczny, konto Google throwaway. Bez PIN, SIM bez PIN. Developer options: USB debugging ON + "always allow" z Pi, USB debugging (security settings) jeśli OEM wymaga.</li>
+<li><strong>Battery:</strong> limit 80/85%, battery optimization OFF dla: Termux, MacroDroid, RustDesk (jeśli), autostart ON.</li>
+<li><strong>Kabel:</strong> dobry kabel USB-A→C do Pi5 (data!), port stały.</li>
+<li><strong>Pi5:</strong> <code>apt install adb scrcpy</code> (albo build z source dla v4.1) → <code>adb devices</code> autoryzacja.</li>
+<li><strong>systemd:</strong> <code>autoadb scrcpy -s '{}' --no-audio</code> jako serwis użytkownika (mirror awaryjny).</li>
+<li><strong>Docker:</strong> ws-scrcpy (obraz aivus/docker-ws-scrcpy-rpi) → port 8000, dostęp TYLKO przez Tailscale (brak auth!).</li>
+<li><strong>Python:</strong> venv + <code>pip install uiautomator2</code> → test: screenshot, tap, xpath.</li>
+<li><strong>Termux na telefonie:</strong> sshd + Termux:Boot + skrypty startowe.</li>
+<li><strong>Watchdog:</strong> cron na Pi co 2 min: <code>adb get-state</code>; jak device offline &gt;5 min → notify Discord (#automatyzacja) + opcjonalnie smart plug cycle.</li>
+<li><strong>Test końcowy (drill):</strong> <code>adb reboot</code> → mierzymy czas do pełnej dostępności (oczekiwanie: 30-90 s) → ws-scrcpy działa, uiautomator2 działa. ✅</li>
+</ol>
+<p><strong>Estymata:</strong> 1–2 h roboty na wdrożenie. Wszystko na moim Pi już prawie jest (Docker, Tailscale, cron, notify).</p>
+</div>
+
+<h2 id="zrodla">📚 Źródła (wybór, pełna lista w destillatach)</h2>
+<div class="card">
+<ul>
+<li>scrcpy + autoadb: <a href="https://github.com/Genymobile/scrcpy">github.com/Genymobile/scrcpy</a> · <a href="https://github.com/rom1v/autoadb">github.com/rom1v/autoadb</a> · <a href="https://github.com/Genymobile/scrcpy/blob/master/doc/connection.md">doc/connection.md</a></li>
+<li>ws-scrcpy: <a href="https://github.com/NetrisTV/ws-scrcpy">github.com/NetrisTV/ws-scrcpy</a> · <a href="https://github.com/aivus/docker-ws-scrcpy-rpi">docker-ws-scrcpy-rpi</a></li>
+<li>RustDesk: <a href="https://rustdesk.com/docs/en/client/android/">docs android</a> · <a href="https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/">self-host docker</a></li>
+<li>Automatyzacja: <a href="https://github.com/openatx/uiautomator2">openatx/uiautomator2</a> · <a href="https://joaoapps.com/autoremote/">AutoRemote</a> · <a href="https://tasker.joaoapps.com">Tasker</a> · <a href="https://github.com/openstf/STFService.apk">STFService.apk</a></li>
+<li>STF/Sonic (odrzucone): <a href="https://github.com/DeviceFarmer/stf">DeviceFarmer/stf</a> · <a href="https://github.com/SonicCloudOrg">SonicCloudOrg</a></li>
+<li>Redroid: <a href="https://github.com/remote-android/redroid-doc">redroid-doc</a> · <a href="https://github.com/remote-android/redroid-doc/issues/561">issue #561 (Pi4 unusable)</a></li>
+<li>Root/Magisk: <a href="https://github.com/topjohnwu/Magisk/releases">Magisk v30.7</a> · <a href="https://github.com/kdrag0n/safetynet-fix">safetynet-fix</a> · <a href="https://shizuku.rikka.app/guide/setup/">Shizuku (reboot caveat)</a></li>
+<li>Boxphone: <a href="https://genfarmer.com/what-is-box-phone-farm-mmo-automated-marketing-en/">genfarmer.com</a> · <a href="https://github.com/barry-ran/QtScrcpy">QtScrcpy</a></li>
+<li>ADB: <a href="https://developer.android.com/studio/command-line/adb">developer.android.com adb</a> (wireless debugging, authorization)</li>
+</ul>
+<p class="sub">Surowe destillaty: <code>~/.openclaw/workspace/memory/research/android-remote-automation-2026-08/raw/</code> (6 plików, każda faktura z URL-em i confidence). Research: 6 subagentów Qwen 3.7 Flash, synteza GLM-5.3.</p>
+</div>
+
+<div class="card blue">
+<p class="sub">Sekcje ryzyka (uczciwie): (1) Telefon bez PIN = niższe bezpieczeństwo — mitigacja: telefon fizycznie w domu, zero wrażliwych kont, zdalny wipe przez Google Find My. (2) ws-scrcpy bez auth — tylko Tailscale. (3) ADB po USB = ktoś z fizycznym dostępem do Pi ma dostęp do telefonu. (4) Detekcja automatyzacji przy 1 telefonie: niska, ale nie zero — nie farmer-ować kont na czymś czym płacisz. (5) Część danych z AI Overview/forów oznaczona MEDIUM/LOW confidence w destillatach — krytyczne elementy (auto power-on per model, charge limit per model) zweryfikuję na konkretnym telefonie przed wdrożeniem.</p>
+</div>
+
+<p class="sub" style="margin-top:30px">Raport: Andrzej 🤖 · 2026-08-29 · deep research v2 (two-tier: Qwen 3.7 Flash scrapers → GLM synteza) · hosting: GitHub Pages andrzej-bot-dev/andrzej-reports</p>
+</div>
+</body>
+</html>

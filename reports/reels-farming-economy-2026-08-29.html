@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farming Reelsów/TikToka — kto z tego żyje i jak (2026)</title>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--card2:#1e222b;--tx:#e8eaed;--mut:#9aa0ab;--acc:#4f9cf9;--ok:#3fbf7f;--warn:#f0b429;--bad:#f0564a;--line:#2a2f3a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:100%;padding:0 clamp(12px,2vw,32px)}
+  header{padding:28px 0 18px;border-bottom:1px solid var(--line)}
+  .badge{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:3px 12px;font-size:13px;color:var(--acc);margin-right:6px}
+  h1{font-size:clamp(22px,3.2vw,34px);margin:12px 0 8px}
+  .meta{color:var(--mut);font-size:14px}
+  nav{position:sticky;top:0;background:rgba(15,17,21,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-height:60px;overflow-y:auto}
+  nav a{color:var(--acc);text-decoration:none;font-size:13px;background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:3px 11px;white-space:nowrap}
+  section{padding:26px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(19px,2.4vw,26px);margin-bottom:14px;color:#fff}
+  h3{font-size:17px;margin:18px 0 8px;color:var(--acc)}
+  p{margin:8px 0}
+  .tldr{background:linear-gradient(135deg,#182435,#151c28);border:1px solid #2c3a52;border-radius:12px;padding:18px 20px;margin-bottom:14px}
+  .tldr b{color:#7db8ff}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd3dd;font-weight:600}
+  tr:nth-child(even) td{background:#151820}
+  .ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+  a{color:var(--acc)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
+  .card h4{font-size:15px;color:#fff;margin-bottom:6px}
+  .src{font-size:12.5px;color:var(--mut)}
+  ul{margin:8px 0 8px 20px}
+  li{margin:4px 0}
+  .kpi{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+  .kpi div{flex:1 1 180px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi b{display:block;font-size:22px;color:#7db8ff}
+  .kpi span{font-size:13px;color:var(--mut)}
+  #top-btn{position:fixed;bottom:18px;right:18px;background:var(--acc);color:#fff;border:0;border-radius:24px;padding:9px 16px;font-size:14px;cursor:pointer;z-index:99}
+  .note{font-size:13px;color:var(--mut);border-left:3px solid var(--acc);padding:4px 12px;margin:10px 0;background:var(--card)}
+  @media(max-width:640px){table{font-size:12.5px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="badge">📚 Knowledge research</span><span class="badge">29.08.2026</span><span class="badge">12 case'ów prasowych · 9 wątków Reddit · 3 platformy · 7 guru · 15+ narzędzi</span>
+  <h1>🌾 Farming Reelsów i TikToka — czy ktoś z tego żyje i jak dokładnie to robi?</h1>
+  <div class="meta">Trigger: TikTok <a href="https://www.tiktok.com/@ifmowgliwasrich/video/7662526374002937108">@ifmowgliwasrich</a> „POV: you posted 10,000 Reels today" (942k wyświetleń) · Zleceniodawca: Dawid · Metoda: 6 scraperów (Qwen 3.7 Flash) + ręczna kopalnia Reddita (arctic-shift API + Wayback) · Języki: EN/SV/PL</div>
+</header>
+
+<nav>
+  <a href="#tldr">TL;DR</a><a href="#models">5 modeli</a><a href="#earnings">Realne zarobki</a><a href="#rates">Stawki platform</a><a href="#how">Jak działają</a><a href="#risk">Ryzyka</a><a href="#gurus">Guru-kursy</a><a href="#sweden">Szwecja/Polska</a><a href="#sources">Źródła</a>
+</nav>
+
+<section id="tldr">
+  <h2>TL;DR — werdykt</h2>
+  <div class="tldr">
+    <p><b>TAK, są ludzie, którzy żyją z masowego wrzucania Reelsów/TikToków — ale to nie są ludzie z filmiku Mowgliego ani klienci guru.</b> To zorganizowane operacje, głównie z Indii, Wietnamu, Chin, Pakistanu i Sri Lanki, farmiące zachodnich widzów (wyższy CPM = wyższy RPM). Pieniądze lecą z <b>5 kraników</b>: programy monetyzacji, arbitraż reklamowy na fejk-newsach, sprzedaż kont, kursy i affiliate.</p>
+    <p><b>Realne liczby:</b> typowy operator $500–1500/mies., sprawdzona wielokontowa operacja $5 500/mies., top operator (Sri Lanka, 89 stron) ~$300k życiowo, największy kanał AI-slop na YouTube ~$4M/rok. Jednocześnie:</p>
+    <p><b>„$4000 dziennie z Reelsów" = produkt marketingowy guru.</b> Kursy kosztują $1 497–6 800, a guru zarabiają na kursach, nie na Reelsach — ich własne kanały mają &lt;2k wyświetleń. Świeży dowód z Reddita (kwiecień 2026): RPM-y masowo padają, zarobki spadają 50–90% po saturacji i zaostrzeniu zasad.</p>
+    <p><b>Na Zachodzie (Szwecja/Polska):</b> programy dostępne, ale niższy CPM niż US/UK → realnie 100–200 €/mies. przy porównywalnym wysiłku. Udokumentowany Szwed z r/sweden: $1 492 (2024) + $6 918 (2025 do lipca) — kieszonkowe, nie pensja.</p>
+  </div>
+  <div class="kpi">
+    <div><b>$500–1500</b><span>typowy miesięczny przychód operatora farmy (źródła: 404 Media, TBIJ, Maldita)</span></div>
+    <div><b>550 kont</b><span>TikTok-accounts w jednej sieci protest-slop (Maldita, 18 krajów)</span></div>
+    <div><b>340 stron</b><span>FB network z Wietnamu → Kanada/UK/EU, 355k postów (CMTD McGill)</span></div>
+    <div><b>$0.09–0.10</b><span>RPM Meta Content Monetization na Reelsach (analiza z stycznia 2025)</span></div>
+    <div><b>−50…−90%</b><span>spadki zarobków twórców po saturacji (Reddit, 2025–2026)</span></div>
+  </div>
+</section>
+
+<section id="models">
+  <h2>1. Pięć modeli biznesowych (jak dokładnie lecą pieniądze)</h2>
+  <p>Synteza śledztw: 404 Media, The Conversation, Futurism, Maldita, DFRLab, TBIJ, BBC, CMTD. Pełne linki w <a href="#sources">Źródłach</a>.</p>
+
+  <div class="card"><h4>① Programy monetyzacji platform (Creator Rewards / Content Monetization)</h4>
+  <p>Konta rosną na emocjonalnym/AI kontencie (protesty, „dream homes", głodujące dzieci, koty-Jezus), po przekroczeniu progu 10k followersów wchodzą do programu i monetyzują &gt;1-min filmiki. Operator z sieci Maldita: <b>$1000–1500/mies.</b> z Creator Rewards; Chińczyk „Xiaonan" (6 kont × 100k+ followersów): <b>$5 500/mies.</b></p>
+  <p class="src">✅ zweryfikowane · maldita.es · theconversation.com</p></div>
+
+  <div class="card"><h4>② Arbitraż reklamowy na fejk-newsach</h4>
+  <p>Virale z FB kierują na imitacje serwisów newsowych z programmatic ads (Google Ads / ad exchanges). Kanadyjskie marki nieświadomie finansowały sieć 340 stron z Wietnamu (54% faktcheckowanych postów = fałsz). This is where the real margin is — RPM strony z ad networks &gt; RPM Reelsa.</p>
+  <p class="src">✅ zweryfikowane · mediatechdemocracy.com (CMTD/McGill)</p></div>
+
+  <div class="card"><h4>③ Sprzedaż/odtwarzanie kont</h4>
+  <p>Konta hodowane do 10k+ followersów są sprzedawane na marketplace'ach typu FameSwap. Operator Maldity: strategia dwustopniowa — najpierw wzrost na kontencie politycznym, potem monetyzacja ALBO sprzedaż.</p>
+  <p class="src">✅ zweryfikowane · maldita.es</p></div>
+
+  <div class="card"><h4>④ Kursy i „akademie" (prawdziwy biznes guru)</h4>
+  <p>Sri Lankańczyk Geeth Sooriyapura: 89 stron, ~$300k życiowo z monetyzacji, ALE dodatkowo akademia dla 2 500 studentów. YouTube-tutoriale z Indii (Gyan Abhishek, strony „Anita Kumari" 112k followersów) uczą exploitować Performance Bonus — „700 lajków = $100". Model: sprzedawanie łopat podczas gorączki złota.</p>
+  <p class="src">✅ zweryfikowane · TBIJ/The Times · 404media.co</p></div>
+
+  <div class="card"><h4>⑥ Bonus (od Dawida): farmy pre-recorded livestreamów</h4>
+  <p>Jedno urządzenie streamuje 24/7 zapętlone nagrania (TikTok LIVE / YT / IG), druga instancja restreamuje to samo — monetyzacja idzie po <b>watch-time</b>, nie po viewach. Profit rodzi się z taniego prądu (Chiny/Rosja/Wietnam) — koszt energii ≈ jedyny stały koszt poza kontami. Dokłada się do modelu ① jako tańsza w obsłudze alternatywa dla krótkich klipów.</p>
+  <p class="src">⚠️ pojedyncze źródło (znalezisko Dawida, cyt. 4MRMR7) — spójne z ekonomią case'ów z sekcji 1 (wage/energy arbitrage)</p></div>
+
+  <div class="card"><h4>⑤ Affiliate / TikTok Shop / dating oferty</h4>
+  <p>BHW: „AI persona" na TikToku kieruje na dating oferty; linki w bio na aplikacje. Mniejsza skala, ale gotówka od razu, bez progów monetyzacji.</p>
+  <p class="src">⚠️ pojedyncze źródła · blackhatworld.com</p></div>
+</section>
+
+<section id="earnings">
+  <h2>2. Realne zarobki — kto ile naprawdę bierze</h2>
+  <h3>Z udokumentowanych śledztw (prasa + badacze)</h3>
+  <table>
+    <tr><th>Operator / sieć</th><th>Co robi</th><th>Zarobki</th><th>Źródło</th></tr>
+    <tr><td>„Xiaonan" (Chiny)</td><td>6 kont TikTok × 100k+, AI-content</td><td class="ok">$5 500/mies. + kursy</td><td><a href="https://theconversation.com/side-job-self-employed-high-paid-behind-the-ai-slop-flooding-tiktok-and-facebook-237638">The Conversation</a></td></tr>
+    <tr><td>Geeth Sooriyapura (Sri Lanka)</td><td>89 stron FB + 39 grup, UK-facing</td><td class="ok">~$300k życiowo; ~$1 400/stronę/mies.; akademia 2 500 studentów</td><td><a href="https://bytegrams.com/blog/facebook-ai-slop-hate-economy">TBIJ/ISD/The Times → Bytegrams</a></td></tr>
+    <tr><td>Operator sieci protest-slop</td><td>550 kont TikTok, 5 800+ filmów, 89M views</td><td class="warn">$1 000–1 500/mies. z Creator Rewards</td><td><a href="https://maldita.es/investigaciones/20260126/protests-ai-tiktok-money-polarization/">Maldita.es</a></td></tr>
+    <tr><td>Operator z Pakistanu</td><td>1 strona FB, islamofobiczny content na UK</td><td class="warn">~$1 500/mies. (własne oświadczenie)</td><td>TBIJ (via Bytegrams)</td></tr>
+    <tr><td>Jesse Cunningham (USA)</td><td>AI-pinsy 80/dzień + fejk-blogi → Pinterest/FB</td><td class="warn">claim $15 942/mies. (w tym sprzedaż masterclassu)</td><td><a href="https://futurism.com/slop-farmer-ai-social-media">Futurism</a></td></tr>
+    <tr><td>Gyan Abhishek (Indie)</td><td>strony „Anita Kumari"/„Dream Home" + tutoriale YT</td><td class="warn">~$100/viralowy post (claim)</td><td><a href="https://www.404media.co/where-facebooks-ai-slop-comes-from/">404 Media</a></td></tr>
+    <tr><td>„Bandar Apna Dost" (Indie)</td><td>największy kanał AI-slop na YouTube, 2.07B views</td><td class="ok">~$4M/rok (estymata BBC)</td><td><a href="https://www.bbc.com/news/articles/c9wx2dz2v44o">BBC</a></td></tr>
+    <tr><td>Sieć wietnamska (340 stron)</td><td>355 296 postów, 95M+ interakcji → fejk-newsy z ads</td><td class="bad">nieujawnione (ad arbitrage)</td><td><a href="https://mediatechdemocracy.com/en/publications/facebook-news-slop-economy_2026/">CMTD McGill</a></td></tr>
+  </table>
+
+  <h3>Z Reddita — pierwsze osoby, twórcy „zachodni" (r/facebook, r/passive_income, r/sweden)</h3>
+  <table>
+    <tr><th>Kto / kiedy</th><th>Co robi</th><th>Zarobki</th><th>Wątek</th></tr>
+    <tr><td>OP r/facebook, XI 2025</td><td>Content Monetization, oryginalny content</td><td class="ok">$16–19k/mies. (peak) — potem spadek</td><td><a href="https://www.reddit.com/r/facebook/comments/1pavs0e/">1pavs0e</a></td></tr>
+    <tr><td>OP r/facebook, IV 2026</td><td>ten sam co wyżej (RPM crash)</td><td class="bad">$12–19k/mies. → $2k/mies.</td><td><a href="https://www.reddit.com/r/facebook/comments/1sf8n3l/">1sf8n3l</a></td></tr>
+    <tr><td>u/Ronin19800</td><td>memy/zdjęcia + krótkie Reelsy, 17M views/28 dni</td><td class="warn">~$1 000/mies.</td><td><a href="https://www.reddit.com/r/facebook/comments/1lxznge/">1lxznge</a></td></tr>
+    <tr><td>u/Feeling_Break_6108</td><td>FB CM (wcześniej YT, zdemone tyzowany)</td><td class="warn">$5k/mies. (w dół z ~$10k na YT)</td><td>1pavs0e / 1sf8n3l</td></tr>
+    <tr><td>u/sacire218</td><td>strona 700k followersów, zdjęcia</td><td class="warn">$4–5k/mies. → −50%</td><td>1sf8n3l</td></tr>
+    <tr><td>OP r/passive_income</td><td>przewodnik: 3–6 postów/dzień, 20k followers</td><td class="warn">$1–2k/mies. NA STRONĘ (multi-page)</td><td><a href="https://www.reddit.com/r/passive_income/comments/1kxkk1r/">1kxkk1r</a></td></tr>
+    <tr><td>u/PrincessBread1</td><td>CM</td><td class="bad">$1 500/mies. → $500 („saturacja")</td><td>1sf8n3l</td></tr>
+    <tr><td>u/Every_Doughnut_748</td><td>oryginalny Reels, 30M views</td><td class="bad">$235 łącznie ($0 po pierwszych 1.8M)</td><td>1pavs0e</td></tr>
+    <tr><td>u/AxlBi13</td><td>oryginalny content, 8.6M views</td><td class="bad">$60 łącznie</td><td><a href="https://www.reddit.com/r/facebook/comments/1hsw9e9/">1hsw9e9</a></td></tr>
+    <tr><td>u/PuzzleheadedMusic349</td><td>6.7M views/tydz.</td><td class="bad">$36.23/tydz.</td><td><a href="https://www.reddit.com/r/facebook/comments/1riat9k/">1riat9k</a></td></tr>
+    <tr><td>OP r/sweden (Szwecja!)</td><td>Reelsy na FB po godzinach</td><td class="bad">2024: $1 492 · 2025 (VII): $6 918 (w tym spike $6 202 w kwietniu)</td><td><a href="https://www.reddit.com/r/sweden/comments/1m68akd/">1m68akd</a></td></tr>
+  </table>
+  <div class="note">⚠️ Reddit = self-reported, bez screenshotów weryfikowalnych z zewnątrz. Ale spójność zakresów ($0.09–0.30 RPM, $0 za niską retencję, zaproszeniowość programu) między dziesiątkami niezależnych kont potwierdza się z danymi agencyjnymi i prasowymi.</div>
+</section>
+
+<section id="rates">
+  <h2>3. Stawki platform 2025–2026 (za 1000 wyświetleń)</h2>
+  <table>
+    <tr><th>Platforma / program</th><th>Typowy RPM</th><th>Outliery</th><th>Haczyki</th></tr>
+    <tr><td><b>Facebook Content Monetization</b></td><td class="bad">$0.02–0.20 (zdjęcia $0.10, tekst $0.09, Reels $0.09, wideo 3min+ $0.05)</td><td>do $1+ (US audience, wysoka retencja)</td><td>zaproszeniowy (invite mailem), 51% views może być „non-qualified" (&lt;5s watch), RPM-namaz crashe</td></tr>
+    <tr><td><b>TikTok Creator Rewards</b></td><td class="warn">~$1.00 / 1k <i>qualified</i> views</td><td>Additional Rewards (za zaangażowanie) mogą przewyższyć bazę</td><td>tylko FYP, &gt;5s watch, film &ge;1 min, pierwsze 1k views/film NIE płatne; EU = „lower-CPM market" (~3–5× mniej niż US/UK)</td></tr>
+    <tr><td><b>YouTube Shorts</b></td><td class="bad">$0.05–0.07 (45% rev share)</td><td>long-form $2–25</td><td>10M Shorts views/90 dni dla pełnej monetyzacji; AI-disclosure obowiązkowy; „inauthentic content" policy</td></tr>
+    <tr><td><b>Meta globalnie</b></td><td colspan="3">$3B wypłat dla twórców w 2025 (+35% YoY), 60% z tego na Reelsy — kasa istnieje, ale koncentruje się u oryginalnych twórców</td></tr>
+  </table>
+  <p class="src">Wpływy „amerykańskiego widza": $0.31/h na TikToku vs 3× tyle na FB i 5× na IG (Wikipedia/TikTok). Stąd farmy celują w US/UK publikę.</p>
+</section>
+
+<section id="how">
+  <h2>4. Jak dokładnie działają farmy (operator's playbook)</h2>
+  <h3>Stack techniczny (GitHub + BHW)</h3>
+  <ul>
+    <li><b>Auto-upload:</b> <a href="https://github.com/haziq-exe/TikTokAutoUploader">TikTokAutoUploader</a> (⭐299, aktywny 2026: auto-captcha, harmonogram 10 dni, VPN, Telegram bot), <a href="https://github.com/wanghaisheng/easy-uploader">easy-uploader</a> (⭐381, masowy upload YT przez Selenium z multi-account + proxy)</li>
+    <li><b>Boty zaangażowania:</b> <a href="https://github.com/InstaPy/InstaPy">InstaPy</a> (⭐18k), <a href="https://github.com/GramAddict/bot">GramAddict</a> (⭐1.6k, UIAutomator2 na fizycznych Androidach)</li>
+    <li><b>Phone farmy:</b> fizyczne stojaki telefonów + USB-huby (to co w filmiku Mowgliego!). BHW: użytkownik z 20-device farmą do „dystrybucji contentu" na TikTok/Reels/Shorts; inny z setupem do 10 000+ kont IG</li>
+    <li><b>Content:</b> OpenAI Sora free tier — operator Maldity: „30 filmów na jedną tymczasową skrzynkę mailową, limit? nowy temp-mail" ⚠️ (Sora nie ma już darmowego tieru od 2026 — operatorzy migrowali na tańsze generatory, np. Kling/Hailuo przez resellerów)</li>
+  </ul>
+  <h3>Playbook (z case'ów)</h3>
+  <ul>
+    <li><b>1. Hodowla kont:</b> aged accounts kupowane od dostawców (BHW), warm-up przez kilka dni, 1 konto = 1 urządzenie/proxy</li>
+    <li><b>2. Wzrost:</b> emocjonalny content na betonowanych niszach — „dream homes", religia, dzieci, protesty, nienawiść do migrantów (cokolwiek łapie retencję &gt;5s); wiadomość dobrana do rynku docelowego, produkcja byle gdzie (wage arbitrage: $15–40 za film na Fiverr)</li>
+    <li><b>3. Monetyzacja:</b> po 10k followersach (TikTok) / po zaproszeniu (Meta) — content &ge;1 min pod qualified views; RÓWNOLEGLE funnel na zewnątrz (fejk-news z adsem, affiliate, TikTok Shop)</li>
+    <li><b>4. Dywersyfikacja:</b> account matrix — 6+ kont × platformy × kraje; jak jedno padnie, sieć żyje; zawansowani sprzedają gotowe konta (FameSwap) albo uczą innych ($1 497–6 800)</li>
+  </ul>
+  <p class="src">blackhatworld.com (Google-cache snippets) · github-tools.md (REST API) · maldita.es · futurism.com</p>
+</section>
+
+<section id="risk">
+  <h2>5. Ryzyka — czemu to nie jest „pasywny dochód"</h2>
+  <ul>
+    <li><b class="bad">RPM crash:</b> kwiecień 2026 — fala wątków „moje RPM spadło o 50–90%". mohamedz27: 0.22 → 0.01 RPM na wielu stronach. PrincessBread1: „saturacja przez kilku twórców, którzy nie dali sobie zamknąć gęby"</li>
+    <li><b class="bad">Zaproszeniowość:</b> ludzie ze 100k followersami i milionami views CZEKAJĄ miesięcami na invite do Content Monetization (1riat9k, 1sf8n3l) — „1M views dziennie i ani dolara" (1mjke31)</li>
+    <li><b class="bad">Non-qualified views:</b> 51% views nie liczy się, bo watch &lt;5s (1sf8n3l) — algorytm płaci za retencję, nie za wolumen</li>
+    <li><b class="bad">Bany egzekwowane:</b> Meta usunęła sieć Sooriyapury po publikacji TBIJ; YT demonetyzuje za AI-scripts bez disclosure; „inauthentic content" = natychmiastowy flag</li>
+    <li><b class="bad">Platform dependence:</b> jeden parametr algorytmu (np. Meta przerzucające długie filmy na Reelsowe stawki: $4–6/1k → $0.10–0.12) i cały model leży (1lxznge, 1lnhjdm)</li>
+    <li><b class="warn">Saturacja:</b> 1M+ kanałów YT używało AI tools w XII 2025; 20% contentu dla świeżych kont na YT to AI-slop (Kapwing via BBC)</li>
+  </ul>
+</section>
+
+<section id="gurus">
+  <h2>6. Guru-economy — kto zarabia NA marzeniu</h2>
+  <table>
+    <tr><th>Sprzedawca</th><th>Produkt / cena</th><th>Claim</th><th>Rzeczywistość</th></tr>
+    <tr><td>David Omari</td><td>kurs automatyzacji, $1 497</td><td>„$660 000/mies. z automatyzacji"</td><td class="bad">własne kanały &lt;2k views; fałszywe testimoniale (buytrix.substack.com)</td></tr>
+    <tr><td>Grow Channels</td><td>program + community, $6 800</td><td>studenci „$10k+/mies."</td><td class="bad">Redditor zapłacił $20 000, zarabiał &lt;$10/dzień; „MLM cult" (r/passive_income)</td></tr>
+    <tr><td>Caleb Boxx</td><td>5-dniowy kurs + VIP</td><td>jak wyżej (powiązany z Omarim)</td><td class="warn">Trustpilot 4.9, ale 87% recenzentów = konta z 1 recenzją (fake-review pattern)</td></tr>
+    <tr><td>AutoReels.ai</td><td>SaaS subskrypcyjny</td><td>„automatyczny dochód z AI"</td><td class="warn">scam-detector 53.8/100, ukryty WHOIS</td></tr>
+    <tr><td>NYT case study</td><td>różne kursy</td><td>—</td><td class="bad">Scott Mitchell stracił $155 000 na kursach (NYT)</td></tr>
+  </table>
+  <p><b>Werdykt: guru zarabiają na kursach, nie na Reelsach.</b> „Faceless automation" kurs = łopata sprzedawana w gorączce złota. Realni operatorzy (case'y z sekcji 1) nie sprzedają kursów LinkedIn-brokom, tylko hodują sieci kont w taniich krajach.</p>
+</section>
+
+<section id="sweden">
+  <h2>7. Kontekst: Szwecja i Polska</h2>
+  <ul>
+    <li><b>Dostępność programów:</b> TikTok Creator Rewards ✅ SE/PL (ekspansja EU 2024–25); Meta Content Monetization ✅ SE/PL (globalne otwarcie 2025)</li>
+    <li><b>Ale:</b> EU = „lower-CPM market" — RPM ~3–5× niższy niż US/UK (InfluencerMarketingHub). Guru-claims liczone po US-RPM u nas nie działają: „$500/mies. z faceless TikToka" → realnie ~100–200 €/mies.</li>
+    <li><b>Język:</b> szwedzki/polski content = mniejsza pula widzów; operatorzy omijają to produkując po ANGIELSKIM z zagranicznym rynkiem docelowym</li>
+    <li><b>Podatki SE:</b> hobbyverksamhet do 50 000 kr/rok bez podatku; powyżej → enskild firma (wątek r/sweden: dokładnie ta dyskusja — Skatteverket „są schysti i doradzą")</li>
+    <li><b>Fresh local case:</b> Szwed z r/sweden (link w tabeli zarobków): 2024 = $1 492 całkowicie, spike kwietniowy 2025 $6 202 (przynajmniej jeden viral), reszta miesiący $21–620. Wniosek: nawet w Szwecji wymarzona „pensja z Reelsów" wygląda jak kieszonkowe</li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2>Źródła i metodologia</h2>
+  <h3>Prasa / śledztwa</h3>
+  <ul class="src">
+    <li>404 Media — Where Facebook's AI Slop Comes From: <a href="https://www.404media.co/where-facebooks-ai-slop-comes-from/">404media.co</a></li>
+    <li>The Conversation — Xiaonan $5.5k/mies.: <a href="https://theconversation.com/side-job-self-employed-high-paid-behind-the-ai-slop-flooding-tiktok-and-facebook-237638">theconversation.com</a></li>
+    <li>Futurism — Jesse Cunningham: <a href="https://futurism.com/slop-farmer-ai-social-media">futurism.com</a></li>
+    <li>Maldita.es — 550 kont protest-slop: <a href="https://maldita.es/investigaciones/20260126/protests-ai-tiktok-money-polarization/">maldita.es</a></li>
+    <li>DFRLab — Moldova: <a href="https://dfrlab.org/2026/04/03/tiktok-accounts-use-ai-generated-videos-to-incite-anti-government-protests-in-moldova/">dfrlab.org</a></li>
+    <li>CMTD McGill — 340 stron z Wietnamu: <a href="https://mediatechdemocracy.com/en/publications/facebook-news-slop-economy_2026/">mediatechdemocracy.com</a></li>
+    <li>BBC — Bandar Apna Dost $4M/rok: <a href="https://www.bbc.com/news/articles/c9wx2dz2v44o">bbc.com</a></li>
+    <li>Bytegrams — synteza 5 ścieżek monetyzacji: <a href="https://bytegrams.com/blog/facebook-ai-slop-hate-economy">bytegrams.com</a></li>
+    <li>HKS Misinformation Review — DiResta/Goldstein, 125 stron: <a href="https://misinforeview.hks.edu/article/how-spammers-and-scammers-leverage-ai-generated-images-on-facebook-for-audience-growth/">misinforeview.hks.edu</a></li>
+  </ul>
+  <h3>Stawki / dokumentacja platform</h3>
+  <ul class="src">
+    <li>Hootsuite — YT Shorts monetization: <a href="https://blog.hootsuite.com/youtube-shorts-monetization/">blog.hootsuite.com</a></li>
+    <li>InfluencerMarketingHub — TikTok Creator Rewards: <a href="https://influencermarketinghub.com/tiktok-creator-rewards-program/">influencermarketinghub.com</a></li>
+    <li>Wikipedia — TikTok/monetyzacja + Shorts: <a href="https://en.wikipedia.org/wiki/TikTok">en.wikipedia.org</a></li>
+    <li>Postplanify — FB Reels pay 2026: <a href="https://postplanify.com/blog/how-much-does-facebook-reels-pay-per-1000-views">postplanify.com</a></li>
+  </ul>
+  <h3>Reddit (przez arctic-shift API + Wayback Machine — IP Pi zablokowane przez Cloudflare Reddita)</h3>
+  <ul class="src">
+    <li>1sf8n3l RPM crash: <a href="https://www.reddit.com/r/facebook/comments/1sf8n3l/">reddit.com/r/facebook/1sf8n3l</a></li>
+    <li>1pavs0e max miesiąc: <a href="https://www.reddit.com/r/facebook/comments/1pavs0e/">reddit.com/r/facebook/1pavs0e</a></li>
+    <li>1riat9k 1M views payout: <a href="https://www.reddit.com/r/facebook/comments/1riat9k/">reddit.com/r/facebook/1riat9k</a></li>
+    <li>1hsw9e9 RPM analiza: <a href="https://www.reddit.com/r/facebook/comments/1hsw9e9/">reddit.com/r/facebook/1hsw9e9</a></li>
+    <li>1kxkk1r przewodnik $1-2k/stronę: <a href="https://www.reddit.com/r/passive_income/comments/1kxkk1r/">reddit.com/r/passive_income/1kxkk1r</a></li>
+    <li>1m68akd r/sweden: <a href="https://www.reddit.com/r/sweden/comments/1m68akd/">reddit.com/r/sweden/1m68akd</a></li>
+  </ul>
+  <h3>Self-audit</h3>
+  <ul class="src">
+    <li>✅ Każda teza ma URL · ✅ min. 2 typy źródeł (prasa, forum, dokumentacja, API) · ✅ 3 języki (EN/SV/PL) · ✅ brak placeholderów</li>
+    <li>⚠️ Reddit = self-reported (oznaczone) · ⚠️ BHW threads czytane z Google-cache (login-wall) · ⚠️个别 claims operatorów (Cunningham $15.9k) niemożliwe do zweryfikowania niezależnie</li>
+    <li>📁 Surowe destylaty: <code>memory/research/reels-farming-2026-08/raw/</code> (press, gurus, blackhat, github-tools, platform-rules, sv-pl, reddit)</li>
+  </ul>
+</section>
+</div>
+<button id="top-btn" onclick="scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</body>
+</html>

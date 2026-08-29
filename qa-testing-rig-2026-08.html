@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Rig dual-platform — deep linki, OTP, attribution (iOS+Android) 2026-08</title>
+<style>
+:root{--bg:#0f1117;--card:#181b24;--card2:#1e2230;--acc:#4f9cf9;--acc2:#38c793;--warn:#f0b429;--bad:#f0616d;--txt:#e8eaf0;--mut:#9aa3b5;--border:#2a3040}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding:0 0 60px}
+.wrap{max-width:980px;margin:0 auto;padding:24px 18px}
+h1{font-size:1.85em;margin:18px 0 6px;line-height:1.25}
+h2{font-size:1.32em;margin:38px 0 12px;color:var(--acc);border-bottom:2px solid var(--border);padding-bottom:8px}
+h3{font-size:1.05em;margin:20px 0 8px;color:var(--acc2)}
+p{margin:10px 0}
+.hero{background:linear-gradient(135deg,#12231c,#1b2436);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-top:14px}
+.sub{color:var(--mut);font-size:.95em}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:2px 12px;font-size:.8em;margin:4px 6px 0 0;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+.card.green{border-left:4px solid var(--acc2)}
+.card.red{border-left:4px solid var(--bad)}
+.card.yellow{border-left:4px solid var(--warn)}
+.card.blue{border-left:4px solid var(--acc)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9em}
+th{background:var(--card2);text-align:left;padding:8px 10px;border:1px solid var(--border);font-weight:600}
+td{padding:8px 10px;border:1px solid var(--border);vertical-align:top}
+tr:nth-child(even) td{background:#151926}
+.ok{color:var(--acc2);font-weight:600}.no{color:var(--bad);font-weight:600}.mid{color:var(--warn);font-weight:600}
+code{background:#232a3d;border-radius:5px;padding:1px 7px;font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;color:#9fd0ff}
+pre{background:#12151f;border:1px solid var(--border);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0;color:#bfe3ff;font-size:.84em;line-height:1.6}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+ul{margin:8px 0 8px 22px}li{margin:5px 0}
+.src{font-size:.78em;color:var(--mut)}
+.verdict{font-size:1.12em;font-weight:700;color:var(--acc2)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.toc a{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:.85em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+<div class="sub">Deep Research · 2026-08-29 · część 3 trylogii (Android rig → iPhone → QA rig) · 4 subagenty, ~85 źródeł</div>
+<h1>🧪 QA Rig: testowanie apek iOS + Android — screeny, deep linki, kody SMS, attribution</h1>
+<div class="sub">Use case Dawida: automatyzacja testów na obu platformach — nawigacja po apkach (screeny/buttony), deep linki, kody SMS (OTP), oraz instalacja apki z linka z pełnym resetem stanu pod deep linking / attribution testing.</div>
+<div><span class="badge">Maestro 2.8.2</span><span class="badge">Mac M1 Pro = host</span><span class="badge">Pi5 + Android</span><span class="badge">Twilio OTP</span><span class="badge">Koszt: ~0 kr/mies</span></div>
+</div>
+
+<div class="toc">
+<a href="#tldr">🏆 TL;DR</a><a href="#rig">🏗️ Architektura</a><a href="#maestro">🎼 Maestro</a><a href="#matrix">📐 Gdzie co testować</a><a href="#deeplink">🔗 Deep linki</a><a href="#attribution">🎯 Attribution reset</a><a href="#otp">💬 OTP/SMS</a><a href="#cloud">☁️ Chmura vs własne</a><a href="#plan">🚀 Wdrożenie</a><a href="#zrodla">📚 Źródła</a>
+</div>
+
+<h2 id="tldr">🏆 TL;DR</h2>
+<div class="card green">
+<p class="verdict">Masz już 90% sprzętu: Mac M1 Pro (symulatory iOS + podpisywanie + host) + Pi5 + telefon Android (rig z raportu #1). Do tego Maestro (open source) jako jeden framework na obie platformy i numer Twilio do OTP. Koszt miesięczny: ~0 kr. BrowserStack odpowiednik: $150/mies.</p>
+<ul>
+<li><strong>Framework: Maestro 2.8.2</strong> (Apache 2.0, YAML flows, cli z 2026-08-27) — <code>tapOn</code>, <code>openLink</code> (deep linki!), <code>clearState</code> (reset apki do czystego stanu!), <code>assertVisible</code>, <code>takesScreenshot</code>, <code>retry</code> (anty-flaky), <code>startRecording</code> (wideo z testu). Jeden plik YAML → iOS i Android.</li>
+<li><strong>Mac M1 Pro = serce rigu</strong>: host Maestro + <strong>iOS symulatory</strong> (za darmo, <code>simctl erase</code> = pełny reset, kilka równolegle) + podpis WDA/TestFlight + Android emulator (obrazy ARM na Apple Silicon). Fast loop testowy: minuty, nie godziny.</li>
+<li><strong>Fizyczne urządzenia tylko tam gdzie muszą być</strong>: attribution (GAID/IDFA, Install Referrer wymaga sklepu), OTP z prawdziwym SMS, universal links.</li>
+<li><strong>OTP: numer wirtualny Twilio</strong> — apka wysyła kod na numer +46 → skrypt czyta kod przez Twilio API → wpisuje w apkę przez Maestro. Działa identycznie na iOS i Androidzie.</li>
+</ul>
+</div>
+
+<h2 id="rig">🏗️ Architektura rigu</h2>
+<div class="card blue">
+<pre><code>┌───────────────────────────── Mac M1 Pro ─────────────────────────────┐
+│  Maestro host (Java 17+)                                             │
+│  ├─ iOS SYMULATORY (fast loop: 70% testów, simctl erase = reset)     │
+│  ├─ Android EMULATOR ARM (fast loop Android)                         │
+│  └─ iPhone 17e (USB, WDA) ← podpis z Xcode, deep linki real-device   │
+└──────────────────────────────────────────────────────────────────────┘
+              │ (LAN/Tailscale — może sterować zdalnie)
+┌─────────────┴─── Raspberry Pi 5 ─────────────────────────────────────┐
+│  adb + uiautomator2 + Tasker bridge                                  │
+│  └─ Telefon Android (USB, rig z raportu #1)                          │
+│     = GAID reset, Play Store install z linka, prawdziwe SMS          │
+└──────────────────────────────────────────────────────────────────────┘
+        + Twilio API (numer wirtualny na OTP)
+        + Ja (Andrzej): odpalam flows, zbieram wyniki, raporty</code></pre>
+<p>Oba hosty widzą się po Tailscale → mogę odpalać testy na Macu z Pi (ssh) i odwrotnie; Ty dostajesz wyniki na Discordzie.</p>
+</div>
+
+<h2 id="maestro">🎼 Maestro — komendy pod Twój use case</h2>
+<div class="card">
+<table>
+<tr><th>Use case</th><th>Komenda Maestro</th><th>Uwagi</th></tr>
+<tr><td>Screeny/buttony/nawigacja</td><td><code>tapOn</code>, <code>scrollUntilVisible</code>, <code>assertVisible</code>, <code>back</code>, <code>inputText</code></td><td>Selektory po id/tekście — stabilniejsze niż koordynaty</td></tr>
+<tr><td>Deep link</td><td><code>openLink: "myapp://product/123"</code> lub <code>https://...</code></td><td>Samo wybiera mechanizm per platforma (scheme / universal link)</td></tr>
+<tr><td>Reset stanu apki</td><td><code>clearState: com.example.app</code> (≈ <code>pm clear</code>) lub <code>launchApp: {appId, clearState: true}</code></td><td>Kluczowe pod deep-link/attribution tests</td></tr>
+<tr><td>Instalacja od zera</td><td><code>maestro test</code> + skrypt: uninstall → install APK/IPA → flow</td><td>Pełny "fresh install" (clearState ≠ reinstall przy attribution!)</td></tr>
+<tr><td>Anty-flaky</td><td><code>retry: {maxRetries: 3}</code></td><td>Retry per krok</td></tr>
+<tr><td>Dokumentacja</td><td><code>takesScreenshot</code>, <code>startRecording</code>, <code>assertScreenshot</code> (visual regression)</td><td>Evidence z każdego testu</td></tr>
+</table>
+<p class="src">docs.maestro.dev · github.com/mobile-dev-inc/maestro (15.4k ⭐, cli-2.8.2 2026-08-27). Instalacja: <code>curl -fsSL "https://get.maestro.mobile.dev" | bash</code> (Java 17+). Apache 2.0 = darmowy; Maestro Cloud (opcjonalny hosting wyników) osobno płatny.</p>
+<p><strong>Kiedy Appium zamiast Maestro:</strong> gdy potrzebujeszWebDriver spec w CI korpo/złożone hybrid webview. Dla solo dev — Maestro zjada Appium na śniadanie (mniej kodu, mniej flakiness). <strong>Detox</strong> tylko jeśli apka jest w React Native i chcesz integrację z testami jednostkowymi.</p>
+</div>
+
+<h2 id="matrix">📐 Matrix: gdzie co testować (sim vs emulator vs real device)</h2>
+<div class="card">
+<table>
+<tr><th>Test</th><th>iOS Symulator (Mac, free)</th><th>Android Emulator (Mac ARM)</th><th>Real Android (Pi rig)</th><th>Real iPhone (17e)</th></tr>
+<tr><td>Screeny, buttony, flows UI</td><td class="ok">✅ szybki loop</td><td class="ok">✅ szybki loop</td><td class="ok">✅</td><td class="ok">✅</td></tr>
+<tr><td>Deep link custom scheme</td><td class="ok"><code>simctl openurl</code></td><td class="ok"><code>am start -d</code></td><td class="ok">✅</td><td class="ok">WDA <code>/wda/url</code></td></tr>
+<tr><td>Universal Links / App Links</td><td class="mid">częściowo (przez Safari)</td><td class="mid">częściowo</td><td class="ok">✅ + <code>pm verify-app-links</code></td><td class="ok">✅ (to tu realnie działa)</td></tr>
+<tr><td>Deferred deep links</td><td class="no">❌</td><td class="no">❌</td><td class="ok">✅ Play Install Referrer</td><td class="ok">✅ App Store + SKAN/IDFA</td></tr>
+<tr><td>Attribution (GAID/IDFA, SDK)</td><td class="no">❌</td><td class="no">❌ (SDK wykrywa emulator)</td><td class="ok">✅ z resetem GAID</td><td class="ok">✅ z resetem IDFA</td></tr>
+<tr><td>OTP SMS</td><td class="no">❌</td><td class="no">❌</td><td class="ok">✅ (SIM/Twilio)</td><td class="mid">⚠️ tylko numer zewnętrzny (Twilio)</td></tr>
+<tr><td>Reset stanu</td><td class="ok"><code>simctl erase</code> (sekundy)</td><td class="ok">snapshot AVD</td><td class="ok">uninstall+install</td><td class="mid">uninstall+install (App Store/TestFlight wolniej)</td></tr>
+</table>
+</div>
+
+<h2 id="deeplink">🔗 Deep linki — konkretne przepisy</h2>
+<div class="grid2">
+<div class="card blue">
+<h3>Android</h3>
+<pre><code># scheme / app link:
+adb shell am start -W -a android.intent.action.VIEW \
+  -d "myapp://product/123" com.example.app
+
+# czy app links zweryfikowane (assetlinks.json):
+adb shell pm verify-app-links com.example.app
+
+# który handler łapie intent (bez uruchamiania):
+adb shell cmd package resolve-activity --brief \
+  -a android.intent.action.VIEW -d "https://example.com/x"</code></pre>
+<p class="src">developer.android.com/training/app-links · tools/adb#am-start</p>
+</div>
+<div class="card blue">
+<h3>iOS</h3>
+<pre><code># symulator:
+xcrun simctl openurl booted "myapp://product/123"
+
+# real device (WDA przez USB):
+curl -X POST http://localhost:8100/session/$SID/url \
+  -d '{"url": "https://example.com/path"}'
+
+# albo przez Appium capability:
+"deepLinkUrl": "https://example.com/path"
+
+# w Maestro po prostu:
+openLink: "https://example.com/path"</code></pre>
+<p class="src">WDA wiki (Queries) · appium docs · simctl docs</p>
+</div>
+</div>
+<div class="card yellow">
+<p><strong>Na realnym iPhonie NIE MA odpowiednika <code>am start</code></strong> — jedyna droga to WDA <code>/wda/url</code> (potrzebny działający WDA z raportu #2). Na symulatorze wszystko proste. Custom scheme vs Universal Link: UL trudniejsze w debugowaniu (wymaga apple-app-site-association na domenie; FB/X Messenger potrafią łamać UL → fallback do Safari).</p>
+</div>
+
+<h2 id="attribution">🎯 Attribution testing — workflow "reset stanu + instalacja z linka"</h2>
+<div class="card green">
+<h3>Android (rig na Pi, pełna automatyzacja)</h3>
+<ol>
+<li><strong>Dezynstalacja:</strong> <code>adb uninstall com.example.app</code></li>
+<li><strong>Reset identyfikatorów reklamowych:</strong> GAID: Ustawienia → Google → Reklamy → "Resetuj identyfikator reklamowy" (+ wyłącz personalizację) — najpewniej przez <code>adb shell am start</code> deep-link do ekranu ustawień + tap (uiautomator2), bo GAID nie ma bezpośredniego polecenia adb</li>
+<li><strong>Instalacja Z LINKA:</strong> otwórz <code>https://play.google.com/store/apps/details?id=com.example.app&referrer=utm_source%3Dtest%26utm_campaign%3Dqa</code> — klik "Install" automatyzujemy tapami (uiautomator2) albo przez <code>market://details?id=...&referrer=...</code></li>
+<li><strong>Pierwsze uruchomienie:</strong> apka przez bibliotekę <code>installreferrer:2.2</code> czyta <code>getInstallReferrer()</code> → weryfikujemy w logach SDK / ekranie</li>
+<li><strong>Weryfikacja SDK:</strong> AppsFlyer: tryb dev + logi <code>af</code> (dev.appsflyer.com/harness) · Adjust: sandbox mode · Branch: Liveview</li>
+</ol>
+<h3>iOS (17e przez Mac/WDA)</h3>
+<ol>
+<li>Dezynstalacja + <strong>reset IDFA:</strong> Ustawienia → Prywatność → Śledzenie → wyłącz/włącz (reset przy wyłączeniu) — tapujemy przez WDA; ATT prompt obsłużony w teście</li>
+<li>Instalacja z App Store link (tap automation przez WDA) albo TestFlight build dla dev-flow</li>
+<li>Uwaga SKAdNetwork: konwersje przychodzą z opóźnieniem — do QA używać postbacków testowych (AppsFlyer/Adjust mają tryby testowe)</li>
+</ol>
+<p class="src">developer.android.com/google/play/installreferrer · dev.appsflyer.com · help.adjust.com · Branch docs — pełne URL-e w destillacie deeplink-attr.md</p>
+</div>
+
+<h2 id="otp">💬 OTP / kody SMS — rekomendacja: Twilio API</h2>
+<div class="card green">
+<table>
+<tr><th>Metoda</th><th>Platformy</th><th>Jak działa</th><th>Werdykt</th></tr>
+<tr><td><strong>Numer wirtualny Twilio</strong></td><td>obie</td><td>Apka wysyła SMS na Twilio +46 → skrypt pobiera kod REST API → <code>inputText</code> w Maestro</td><td class="ok">🏆 standard branżowy, ~$1.15/mies + ~$0.05/SMS</td></tr>
+<tr><td><code>adb shell content query --uri content://sms/inbox</code></td><td>Android</td><td>Shell ma przywileje (działa bez roota na 10-15, Google zaciska)</td><td class="mid">OK jako fallback na rigu z prawdziwym SIM</td></tr>
+<tr><td>Tasker + AutoNotification → HTTP POST</td><td>Android</td><td>Przechwytuje SMS na telefonie → wysyła na Pi</td><td class="mid">działa, ale kolejny element do utrzymania</td></tr>
+<tr><td>Google SMS Retriever API</td><td>Android</td><td>Apka sama czyta OTP (hash kodu w treści SMS) — zero uprawnień</td><td class="ok">🏆 jeśli apka jest Twoja — wbuduj to</td></tr>
+<tr><td>iOS: czytanie SMS</td><td>iOS</td><td class="no">NIE ISTNIEJE (sandbox). Systemowe autofill (oneTimeCode) działa tylko interaktywnie</td><td class="no">→ dlatego Twilio/fixed codes</td></tr>
+<tr><td>Fixed test codes w staging</td><td>obie</td><td>Backend akceptuje np. 000000 dla numerów testowych</td><td class="ok">najszybsze, jeśli kontrolujesz backend</td></tr>
+</table>
+<p><strong>⚠️ Ważne 2026:</strong> Android 17 wprowadza <strong>3-godzinne opóźnienie dostarczania OTP-SMS</strong> dla apek niebędących domyślną apką SMS (ograniczenie anty-scam Google) — kolejny argument, by polegać na numerze zewnętrznym (Twilio) lub SMS Retriever w własnej apce, nie na "przechwytywaniu" SMS na urządzeniu.</p>
+<p class="src">twilio.com · developers.android.com (SMS Retriever, Behavior changes Android 17) · Apple docs oneTimeCode — destillat sms-otp.md</p>
+</div>
+
+<h2 id="cloud">☁️ Chmura vs własny rig (solo dev, 2026)</h2>
+<div class="card">
+<table>
+<tr><th>Serwis</th><th>Cena solo</th><th>Co daje</th><th>Werdykt</th></tr>
+<tr><td>BrowserStack App Live</td><td>$150/mies (annual)</td><td>Manual real devices; App Automate osobno</td><td class="no">Drogo; publiczne device'y bez SIM = zero OTP/attribution</td></tr>
+<tr><td>Firebase Test Lab</td><td>free ~30 min/dzień (wirtualne) + limit real</td><td>Skrypty na matriks urządzeń (nie interaktywnie)</td><td class="ok">Darmowy bonus do matrixa OS wersji</td></tr>
+<tr><td>HeadSpin</td><td>od ~$49/mies</td><td>Jedyne z SIM-capable device'y</td><td class="mid">niszowe</td></tr>
+<tr><td>Sauce / LambdaTest / AWS Device Farm</td><td>$50-250/mies</td><td>podobny model</td><td class="no">j.w.</td></tr>
+<tr><td><strong>Twój rig (Mac+Pi+telefony)</strong></td><td class="ok">~0 kr/mies</td><td>Pełna kontrola: SIM, GAID reset, store install, Twilio, bez limitów</td><td class="ok">🏆 dla solo dev bez dyskusji</td></tr>
+</table>
+<p>Chmura wygrywa tylko gdy potrzebujesz <strong>macierzy urządzeń</strong> (test na 20 modelach/OEM raz na kwartał) — wtedy BrowserStack na miesiąc albo FTL free tier.</p>
+</div>
+
+<h2 id="plan">🚀 Wdrożenie (kolejność sensowna)</h2>
+<div class="card green">
+<ol>
+<li><strong>Mac (30 min):</strong> <code>brew install maestro</code> → <code>maestro start-device ios</code> (simulator) → pierwszy flow YAML na symulatorze → <code>xcrun simctl</code> erase/reuse</li>
+<li><strong>Android emulator na Macu (30 min):</strong> Android Studio → AVD ARM (API 33-35, Play image) → Maestro wskazuje emulator</li>
+<li><strong>Rig Android z raportu #1 (już zaprojektowany):</strong> telefon na USB do Pi, adb, uiautomator2 — dokładamy: skrypt reset GAID + Play install z referrerem + weryfikacja logów</li>
+<li><strong>iPhone real (z raportu #2):</strong> Mac + WDA + (ewentualnie 17e) — deep linki przez <code>/wda/url</code>, IDFA reset flow</li>
+<li><strong>Twilio (15 min):</strong> numer +46, klucz API, skrypt <code>get-last-sms.py</code> → wpiąć do flow OTP</li>
+<li><strong>CI lekkie:</strong> cron na Pi/Macu: <code>maestro test flows/ --format junit</code> → wyniki na Discord (ja raportuję)</li>
+</ol>
+<p><strong>Co dostaję ja:</strong> mogę sam pisać flow YAML, odpalać je przez ssh na Macu/Pi, zbierać screenshoty/wideo i raportować na Discord — czyli "test apki" staje się komendą w czacie.</p>
+</div>
+
+<h2 id="zrodla">📚 Źródła (wybór)</h2>
+<div class="card">
+<ul>
+<li>Maestro: <a href="https://docs.maestro.dev">docs.maestro.dev</a> · <a href="https://github.com/mobile-dev-inc/maestro">github (15.4k⭐)</a></li>
+<li>Deep linki: developer.android.com/tools/adb · /training/app-links/verify-site-associations · developer.apple.com (simctl) · WDA wiki (Queries, /wda/url) · appium docs (deepLinkUrl)</li>
+<li>Attribution: developer.android.com/google/play/installreferrer · dev.appsflyer.com · help.adjust.com · branch.io</li>
+<li>OTP: developers.android.com/identity/sms-retriever · Android 17 behavior changes (3h OTP delay) · twilio.com · Apple oneTimeCode</li>
+<li>Cloud: browserstack.com/pricing · firebase.google.com/docs/test-lab · headspin.io</li>
+</ul>
+<p class="sub">Destillaty: <code>memory/research/qa-testing-rig-2026-08/raw/</code> (4 pliki, 857 linii, każda faktura z URL). Raport dostarczony przez fallback-cron (agenci skończyli 14:20, ale event ostatniego nie odpalił syntezy — safety-net zadziałał jak był projektowany).</p>
+</div>
+
+<p class="sub" style="margin-top:30px">Raport: Andrzej 🤖 · 2026-08-29 · trylogia: [1] Android rig → [2] iPhone → [3] QA rig · GitHub Pages andrzej-bot-dev/andrzej-reports</p>
+</div>
+</body>
+</html>

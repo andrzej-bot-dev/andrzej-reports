@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt: Rover z kamerą sterowany z przeglądarki — projekt</title>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--card2:#1e222b;--tx:#e8eaed;--mut:#9aa0ab;--acc:#4f9cf9;--line:#2a2f3a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px clamp(12px,3vw,32px)}
+  h1{font-size:clamp(20px,3vw,28px);margin-bottom:6px}
+  .meta{color:var(--mut);font-size:14px;margin-bottom:18px}
+  .bar{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px 10px 0 0;padding:10px 14px}
+  .bar b{font-size:14px;color:#cdd3dd}
+  button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer}
+  button:hover{filter:brightness(1.1)}
+  pre{background:var(--card);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:18px;overflow-x:auto;font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word;color:#dbe3ee}
+  .foot{margin-top:14px;font-size:13px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🤖 Prompt projektowy: Rover z kamerą sterowany z przeglądarki</h1>
+  <div class="meta">Wysterylizowana wersja po polsku · do podania dowolnemu LLM (Claude / GPT / Gemini / DeepSeek…) · 29.08.2026</div>
+  <div class="bar"><b>Prompt (kopiuj całość poniżej)</b><button onclick="navigator.clipboard.writeText(document.getElementById('p').innerText).then(this.innerText='Skopiowane ✅')">📋 Kopiuj</button></div>
+  <pre id="p">PROJEKT: Pojazd z kamerą sterowany z przeglądarki (robotyka hobby + aplikacja webowa)
+
+KONTEKST
+Buduję zdalnie sterowany pojazd (rover) z transmisją live z kamery, którym jeździ się z przeglądarki. Pojazd działa na zewnątrz, łączność przez 4G/LTE (zakładam brak zasięgu WiFi). Część webowa odpowiada za: wyświetlanie wideo, sterowanie oraz prosty system, w którym kilku operatorów (domownicy/znajomi) jeździ na zmianę w limitowanych czasowo sesjach. Mój background: full-stack Node/TypeScript, trochę elektroniki (ESP32), mam dostęp do druku 3D.
+
+SPRZĘT (zbadany / częściowo posiadany)
+- Podwozie: platforma RC 1:10, silnik szczotkowy (RS-540) + ESC (w stylu HoWu/QuicRun 1060), serwo skrętu (DS3218), LiPo 3S
+- Compute: Raspberry Pi 4 (2GB), ewentualnie Pi Zero 2 W jako fallback
+- Kamera: IMX219 (lub podobna CSI); opcjonalnie później IR do nocy
+- Łączność: modem 4G SIM7600G-H (Cat-4) + VPN (Tailscale/WireGuard) — pojazd siedzi za CGNAT, nie ma publicznego IP
+- Zasilanie: LiPo z monitoringiem napięcia, przetwornice buck dla Pi i serw
+- Obudowa: drukowana 3D, odporna na warunki, mocowanie kamery
+
+ARCHITEKTURA (plan)
+Pojazd (Pi): odczyt kamery -> streaming niskolatencyjny (WebRTC przez MediaMTX lub podobne) -> serwer sterowania
+Serwer sterowania (VPS albo home server, Node.js):
+  - przekazuje komendy sterujące (WebSocket / WebRTC datachannel) z przeglądarki do pojazdu
+  - menedżer sesji: kolejka operatorów, każdy dostaje limitowany czas (np. 2 min), odliczanie, automatyczne przekazanie kontroli następnej osobie w kolejce
+  - telemetria: napięcie baterii, RSSI, GPS (opcjonalnie), prędkość
+Klient webowy (React/Next.js, mobile-first): odtwarzacz wideo (cel: latencja poniżej sekundy), wirtualny joystick + klawiatura (WASD), UI sesji (dołącz do kolejki, czekaj, jedź, koniec czasu), tryb widza (oglądanie bez kontroli), przycisk awaryjnego STOP
+
+FUNKCJE GŁÓWNE
+1. Live video w przeglądarce, cel <300 ms glass-to-glass po 4G
+2. Sterowanie w czasie rzeczywistym: joystick + WASD, regulowany max. prędkość, gładkie krzywe przyspieszania/hamowania (serwo bez szarpania)
+3. System sesji: operatorzy w kolejce, sloty czasowe, odliczanie, płynne przekazanie sterowania
+4. Bezpieczeństwo (krytyczne):
+   - failsafe STOP gdy brak poprawnej komendy przez X ms (deadman switch na SAMYM pojazdzie, nie po stronie serwera)
+   - awaryjny stop dostępny dla każdego operatora/widza
+   - geofence: pojazd odmawia jazdy poza zdefiniowanym obszarem (GPS albo granice ręczne)
+   - hardware watchdog na Pi, serwo/ESC wraca do neutralnych przy każdej awarii
+5. Nakładka telemetrii: prędkość, % baterii, siła sygnału
+6. Autoryzacja: komendy sterujące tylko od zalogowanych operatorów (podpisane tokeny), rate limiting, widzowie tylko do odczytu
+7. Auto-reconnect: krótka przerwa w 4G nie może zabić sesji (buforowanie/retry, pojazd tymczasem bezpiecznie staje)
+
+OGRANICZENIA
+- Wszystko musi działać za CGNAT (stąd VPN), budżet latencji ważniejszy niż przepustowość
+- Komponenty budżetowe (poziom AliExpress), ale funkcje bezpieczeństwa są bez kompromisów
+- Klimat: skandynawski outdoor (deszcz, zimno), przeważnie płaskie miejskie nawierzchnie
+- Solo developer, rozwój inkrementalny — najpierw wersja v1, która bezpiecznie jeździ, dopiero potem dodatki
+
+CO CHCĘ OD CIEBIE
+1. Review tej architektury: słabe punkty, braki, przerost formy
+2. Rozbicie latencji: gdzie narosną ms (kodowanie kamery, modem, WebRTC, relay serwera) i jak je zminimalizować
+3. Konkretne wybory technologiczne: MediaMTX vs alternatywy dla niskolatencyjnego fanoutu, najlepsze podejście do kanału sterowania, maszyna stanów sesji/kolejki
+4. Analiza trybów awaryjnych: co się dzieje, gdy 4G padnie w trakcie jazdy, Pi się zawiesi, bateria siądzie, dwóch operatorów walczy o kontrolę
+5. Proponowana kolejność budowy (kamienie milowe), żeby każdy etap dało się testować niezależnie
+6. Wskaż, co w liście sprzętowej mnie ugryzie (np. Pi Zero 2W za słaby na encode? dziwactwa sygnału ESC?)</pre>
+  <div class="foot">Wersja EN dostępna w wątku. Hosting: andrzej-reports (GitHub Pages, branch main).</div>
+</div>
+</body>
+</html>

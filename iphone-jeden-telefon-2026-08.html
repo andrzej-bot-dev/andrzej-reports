@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone w pełni zdalny — Deep Research 2026-08</title>
+<style>
+:root{--bg:#0f1117;--card:#181b24;--card2:#1e2230;--acc:#4f9cf9;--acc2:#38c793;--warn:#f0b429;--bad:#f0616d;--txt:#e8eaf0;--mut:#9aa3b5;--border:#2a3040}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding:0 0 60px}
+.wrap{max-width:980px;margin:0 auto;padding:24px 18px}
+h1{font-size:1.9em;margin:18px 0 6px;line-height:1.25}
+h2{font-size:1.35em;margin:38px 0 12px;color:var(--acc);border-bottom:2px solid var(--border);padding-bottom:8px}
+h3{font-size:1.08em;margin:22px 0 8px;color:var(--acc2)}
+p{margin:10px 0}
+.hero{background:linear-gradient(135deg,#1b2436,#241b2e);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-top:14px}
+.sub{color:var(--mut);font-size:.95em}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:2px 12px;font-size:.8em;margin:4px 6px 0 0;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+.card.green{border-left:4px solid var(--acc2)}
+.card.red{border-left:4px solid var(--bad)}
+.card.yellow{border-left:4px solid var(--warn)}
+.card.blue{border-left:4px solid var(--acc)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92em}
+th{background:var(--card2);text-align:left;padding:9px 10px;border:1px solid var(--border);font-weight:600}
+td{padding:8px 10px;border:1px solid var(--border);vertical-align:top}
+tr:nth-child(even) td{background:#151926}
+.ok{color:var(--acc2);font-weight:600}.no{color:var(--bad);font-weight:600}.mid{color:var(--warn);font-weight:600}
+code{background:#232a3d;border-radius:5px;padding:1px 7px;font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;color:#9fd0ff}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+ul{margin:8px 0 8px 22px}
+li{margin:5px 0}
+.src{font-size:.78em;color:var(--mut)}
+.verdict{font-size:1.15em;font-weight:700;color:var(--acc2)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.toc a{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:.85em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+<div class="sub">Deep Research · 2026-08-29 · Andrzej dla Dawida · 5 subagentów (Qwen 3.7 Flash + DeepSeek V4 Flash), ~110 stron źródeł</div>
+<h1>🍏 iPhone w pełni zdalny — da się? (kontynuacja badania Android)</h1>
+<div class="sub">Pytanie: to samo co Android — jeden telefon, zdalny available control + automatyzacja, <strong>przeżywa reboot bez człowieka</strong>. Kontekst: masz iPhone 17e + Maca M1 Pro.</div>
+<div><span class="badge">5 agentów</span><span class="badge">~110 stron</span><span class="badge">iOS 15–26</span><span class="badge">Werdykt wewnątrz</span></div>
+</div>
+
+<div class="toc">
+<a href="#tldr">🏆 TL;DR</a><a href="#sciany">🧱 Ściany iOS</a><a href="#s1">🛠️ Ścieżka 1: bez JB (17e)</a><a href="#s2">🔓 Ścieżka 2: jailbreak</a><a href="#s3">🖥️ Ścieżka 3: Mac jako most</a><a href="#porownanie">⚔️ Android vs iOS</a><a href="#reboot">🔄 Surviving reboot</a><a href="#plan">🚀 Co bym wdrożył</a><a href="#zrodla">📚 Źródła</a>
+</div>
+
+<h2 id="tldr">🏆 TL;DR — da się, ale…</h2>
+<div class="card yellow">
+<p class="verdict">Krótko: automatyzacja i zdalne klikanie na iPhone — TAK (WebDriverAgent robi to lepiej niż uiautomator2). Ale "w pełni samodzielny po reboocie" — Android wygrywa wysoko. iOS postawił 3 ściany: brak wstrzykiwania dotyku przez appki, passcode po reboocie (Face ID martwy), i dialog Developer Mode po każdym reboocie.</p>
+<p><strong>Każda z ścian ma obejście</strong> (klawiatura BT wpisująca kod na ekranie blokady, supervision/MDM, TrollStore), więc da się złożyć działający system — ale to projekt inżynierski, nie weekendowe wdrożenie jak na Androidzie.</p>
+<p><strong>Najkrótsza droga dla Ciebie:</strong> skoro masz <strong>Maca M1 Pro</strong> — ścieżka 3 (Mac + iPhone Mirroring + WDA) daje 90% tego czego chcesz bez jailbreaka i bez walki. Najtańsza "pełna kontrola": używany <strong>iPhone SE2 (~500–1000 kr Blocket) + Dopamine</strong>. A jeśli celem jest po prostu "zdalny telefon do automatyzacji" — Android z poprzedniego raportu pozostaje bezkonkurencyjny.</p>
+</div>
+
+<h2 id="sciany">🧱 Trzy ściany iOS (i ich obejścia)</h2>
+<div class="card red">
+<table>
+<tr><th>Ściana</th><th>Stan</th><th>Obejście</th><th>Koszt obejścia</th></tr>
+<tr><td><strong>Touch injection ban</strong></td><td>Aplikacje NIE mogą wstrzykiwać dotyku w inne apki (sandbox + brak publicznego API; AXAPI tylko czyta). Dlatego TeamViewer/AnyDesk w trybie hosta na iOS = VIEW-ONLY.</td><td class="ok">WebDriverAgent (XCTest framework — systemowy poziom) — tapy/swype/tekst w DOWOLNEJ apce; działa znacznie głębiej niż accessibility na Androidzie</td><td>Podpisany WDA: free Apple ID (re-sign 7 dni) lub $99/rok (roczny)</td></tr>
+<tr><td><strong>Passcode po reboocie</strong></td><td>Po restarcie Face ID/Touch ID martwe aż do pierwszego wpisania kodu. Na Androidzie bez PIN — tu iPhone bez passcode NIE ZEZWALA na Face ID w ogóle (i palera1n A11 wymaga wyłączenia kodu).</td><td class="ok">Sparowana wcześniej klawiatura Bluetooth (albo USB przez Camera Adapter) wpisze kod na ekranie blokady — potwierdzone (osxdaily, fora). Pi może emulować BT HID.</td><td>Klawiatura ~200 kr lub emulacja BlueZ z Pi</td></tr>
+<tr><td><strong>Developer Mode dialog po reboocie</strong></td><td>Od iOS 16: po każdym reboocie telefon z Developer Mode pokazuje "confirm" przed użyciem developer services (WDA!). To zabija headless.</td><td class="mid">Obejścia niepotwierdzone w źródłach: supervision/MDM może sterować; kluczowy punkt do przetestowania na 17e PRZED zakupie dalszych elementów</td><td>? (test na Twoim 17e)</td></tr>
+<tr><td>(bonus) AirPlay chicken-and-egg</td><td>UxPlay pokazuje ekran, ale mirror trzeba STARTować z telefonu</td><td class="ok">WDA tap na Control Center → Screen Mirroring → UxPlay. Krążek się zamyka (po unlocku).</td><td>—</td></tr>
+</table>
+<p class="src">Źródła: facebookarchive/WebDriverAgent (archive note), appium/WebDriverAgent wiki Queries, osxdaily.com/2013/08/22/unlock-ios-device-with-external-keyboard/, support.apple.com/HT208857, teamviewer/anydesk docs — pełne URL-e w destillatach</p>
+</div>
+
+<h2 id="s1">🛠️ Ścieżka 1: Nowoczesny iPhone bez jailbreaka (np. Twoja 17e)</h2>
+<div class="card blue">
+<h3>Stack "developer"</h3>
+<ul>
+<li><strong>WebDriverAgent</strong> (appium fork, aktywny): serwer HTTP na telefonie (:8100) — <code>/element/{id}/click</code>, <code>/touch/tap {x,y}</code>, <code>/screenshot</code>, MJPEG stream, XPath-queries, lock/unlock screen (bez passcode), launch/kill apek. Napędza go XCTest = poziom systemowy, działa w każdej apce.</li>
+<li><strong>go-ios</strong> / <strong>pymobiledevice3</strong> (z Pi5, bez Maca): instalacja i launch apek, screenshoty, syslog, crash logs, crash pull, mount Developer Disk Image/cryptex (iOS 17+ RSD tunnel). pymobiledevice3 = najbogatszy (CLI: <code>developer mount-auto</code>, <code>apps launch</code>, springboard services).</li>
+<li><strong>UxPlay</strong> na Pi5: AirPlay mirror receiver (H.264, aktywny rozwój, v1.73 marzec 2026) — obraz na żywo do przeglądarki przez ws-scrcpy-style web UI.</li>
+<li><strong>USB pairing</strong>: pierwsze "Trust" tapped raz fizycznie → potem headless reconnect po każdym reboocie (pairing record w /var/lib/lockdown + device-side permanent).</li>
+<li><strong>idevicescreenshot</strong>: działa na LOCKED ekranie (potrzebuje DDI mounted) — 1-3 s/szt → wolny "obraz" gdy telefon zablokowany.</li>
+</ul>
+<h3>Signowanie WDA — realne opcje</h3>
+<ul>
+<li>Free Apple ID: re-sign co 7 dni (automatyzacja możliwa z Maca: <code>sign-wda.mjs</code> z appium-xcuitest-driver, p12 cert)</li>
+<li>$99/rok dev account: podpis roczny — koniec tematu</li>
+<li><strong>Mac M1 Pro</strong>: Xcode lokalnie = najmniej bólu</li>
+</ul>
+<h3>Gdzie to nie działa (uczciwie)</h3>
+<ul>
+<li class="no">Po reboocie: wpisania kodu (klawiatura BT ✅ ale) + Developer Mode confirm (❓ niepotwierdzone obejście) + relaunch WDA (go-ios launch ✅ jeśli dev services żyją)</li>
+<li class="no">Brak Termux-odpowiednika — skrypty mogą żyć tylko na hoście (Pi/Mac), nie na telefonie</li>
+<li class="mid">17e eSIM-only: do automatyzacji nie szkodzi, do "świeżego numeru" — transfer wymaga czasu</li>
+</ul>
+</div>
+
+<h2 id="s2">🔓 Ścieżka 2: Używany iPhone z jailbreakiem = pełny remote desktop</h2>
+<div class="card green">
+<h3>Matrix 2026</h3>
+<table>
+<tr><th>Narzędzie</th><th>Urządzenia</th><th>iOS</th><th>Typ</th><th>Co daje</th></tr>
+<tr><td><strong>Dopamine 3.0.x</strong> (aktywny, 3.0.9 sie 2026)</td><td>A8–A13 (arm64/arm64e)</td><td>15.0–18.7.1, 26.0–26.0.1 (!)</td><td>Semi-untethered (re-jb z apki po reboocie)</td><td>Rootless tweaks, Sileo/Zebra; Face ID działa; TrollStore path = permanent .ipa</td></tr>
+<tr><td><strong>palera1n</strong> (checkm8 — niezałatany bo bootrom)</td><td>A8–A11 (6s→X)</td><td>15.0+ dowolny</td><td>Semi-tethered (komputer do re-jb)</td><td>Rootful/rootless, dropbear SSH port 44; A11: passcode/Face ID/Apple Pay OFF przy jb</td></tr>
+<tr><td><strong>TrollStore 2</strong></td><td>wszystkie (nie-jb)</td><td>14.0b2–16.6.1, 16.7RC, 17.0 <span class="no">i nic nowszego</span></td><td>To NIE jailbreak</td><td>Permanentna instalacja dowolnych .ipa (nawet z entitlements) bez re-sign — np. permanentny WDA!</td></tr>
+<tr><td>iOS 17.4–18.x na A14–A17 / A18–A19 (iPhone 15/16/17)</td><td colspan="4" class="no">NIC. Zero publicznych jailbreaków. (Twoja 17e = A19 → ta ścieżka dla niej nie istnieje)</td></tr>
+</table>
+<h3>Co bym kupił</h3>
+<ul>
+<li><strong>iPhone SE2 (A13) ~500–1000 kr Blocket</strong> + Dopamine: sweet spot — tanio, Face ID/Apple Pay żyją, jb do iOS 18.7.1, semi-untethered re-jb z ikonki (można tapować przez WDA/TrollStore — jeśli WDA z TrollStore permanent, to relaunch po reboocie: tap tap w appce Dopamine → jb wraca → VNC/SSH wstają)</li>
+<li><strong>iPhone 7 (~750 kr)</strong> + palera1n + Project Sandcastle (Linux na telefonie! VNC/SSH natywnie, status 2026: działa dla 7/7+) — ale re-jb wymaga komputera po każdym reboocie → gorszy do unattended</li>
+</ul>
+<h3>Co daje jb dla remote control</h3>
+<ul>
+<li>Veency (VNC server) — musi być budowany ze source (rootless .deb nieutrzymywany), potem: pełny obraz + sterowanie z dowolnego klienta VNC (na Pi → web noVNC → Ty klikasz z przeglądarki)</li>
+<li>OpenSSH/dropbear — shell na telefonie, daemony, crontab-like</li>
+<li class="no">Brak: automatyczny start tweaków po reboocie (semi-untethered = ręcznie z ikonki)</li>
+</ul>
+<p class="src">Źródła: github.com/palera1n/palera1n, ellekit.space/dopamine, github.com/opa334/TrollStore, ios.cfw.guide, projectsandcastle — destillat ios-jailbreak.md</p>
+</div>
+
+<h2 id="s3">🖥️ Ścieżka 3: Mac M1 Pro jako "most" (masz go!)</h2>
+<div class="card green">
+<ul>
+<li><strong>iPhone Mirroring</strong> (macOS Sequoia+): obraz + <strong>pełne sterowanie</strong> iPhone'em z Maca, natywnie, z klawiatury/myszy — Apple-owy odpowiednik scrcpy. Wymaga: ten sam Apple ID, Continuity (bliskość WiFi/BT) → Mac stoi obok telefonu na półce.</li>
+<li><strong>Zdalny dostęp do Maca</strong>: Tailscale + RustDesk/Screen Sharing → z dowolnego miejsca na świecie widzisz Mac, a na nim iPhone. Dwa ekrany w jednym.</li>
+<li><strong>Mac robi też resztę roboty</strong>: Xcode podpisuje WDA bez 7-dniowego bólu (p12 + skrypt), Apple Configurator supervise'uje telefon (Single App Mode = apka auto-relaunch po reboocie/crashu), Fastlane/idb do automatyzacji.</li>
+<li><strong>Reboot iPhone w tej ścieżce</strong>: klawiatura BT (sparowana z IPHONE, nie Maciem — może być ta sama fizyczna? nie — potrzebna osobna lub emulacja) wpisuje kod; Developer Mode confirm nadal otwarty problem do testu.</li>
+<li class="mid">Ograniczenie: iPhone Mirroring nie działa przez internet sam z siebie (Continuity proximity) — dlatego Mac musi być fizycznie obok telefonu.</li>
+</ul>
+<p class="src">Uwaga: iPhone Mirroring = funkcja macOS 15+/iOS 18+; Mac M1 Pro z Sequoia+ → spełnia. Dawid: masz M1 Pro (memory plugin Jun 2026: Feather/uYou sideload).</p>
+</div>
+
+<h2 id="porownanie">⚔️ Android vs iPhone — tabela porównawcza (jedno pytanie: przeżywa reboot sam?)</h2>
+<div class="card">
+<table>
+<tr><th>Kryterium</th><th>Android (poprzedni raport)</th><th>iPhone bez JB (17e)</th><th>iPhone z JB (SE2+Dopamine)</th></tr>
+<tr><td>Automatyzacja UI z hosta</td><td class="ok">uiautomator2/adb</td><td class="ok">WDA+go-ios (równie dobre)</td><td class="ok">WDA + SSH + VNC</td></tr>
+<tr><td>Zdalny podgląd obrazu</td><td class="ok">scrcpy/ws-scrcpy (60fps)</td><td class="mid">UxPlay (AirPlay) / screenshot 0.3-1 fps</td><td class="ok">VNC (Veency)</td></tr>
+<tr><td>Klikanie przez CZŁOWIEKA zdalnie</td><td class="ok">ws-scrcpy w przeglądarce</td><td class="mid">przez Maca (iPhone Mirroring) lub web→WDA bridge</td><td class="ok">pełny VNC z klawiaturą i myszą</td></tr>
+<tr><td>Unlock po reboocie</td><td class="ok">nie potrzebny (bez PIN)</td><td class="mid">klawiatura BT wpisze kod ✅</td><td class="mid">klawiatura BT / passcode wyłączony (A11)</td></tr>
+<tr><td>Rejailbreak/re-launch po reboocie</td><td class="ok">zero — adb reconnectuje sam</td><td class="mid">WDA relaunch przez go-ios ✅ ALE Developer Mode confirm ❓</td><td class="no">re-jb z ikonki po każdym reboocie (można sparametryzować WDA-tapem)</td></tr>
+<tr><td>Auto power-on po zaniku prądu</td><td class="ok">tak (PMIC)</td><td class="ok">tak — wszystkie iPhone'y (sprzętowe, potwierdzone)</td><td class="ok">tak</td></tr>
+<tr><td>Skrypty NA telefonie</td><td class="ok">Termux+Boot+sshd</td><td class="no">brak (Shortcuts tylko)</td><td class="ok">SSH+daemony</td></tr>
+<tr><td>Koszt startowy</td><td class="ok">0 kr (telefon masz)</td><td class="ok">0 kr (17e masz; klawiatura 200 kr opcjonalnie)</td><td class="mid">500–1000 kr (SE2) + czas</td></tr>
+<tr><td><strong>Łączny werdykt "unattended po reboocie"</strong></td><td class="ok">🏆 9/10</td><td class="mid">6/10 (jeśli DevMode confirm da się okrążyć — inaczej 4/10)</td><td class="mid">6/10 (re-jb z ręki/WDA)</td></tr>
+</table>
+</div>
+
+<h2 id="reboot">🔄 Co dokładnie dzieje się z iPhone po reboocie (mapa)</h2>
+<div class="card yellow">
+<ol>
+<li>Telefon sam wstaje po podpięciu zasilania (sprzętowo, wszystkie modele — MacRumors: "firmware BLE dla Find My gdy off")</li>
+<li>Ekran blokady czeka na passcode (Face ID martwy do 1. unlocku) → <strong>klawiatura BT (sparowana WCZEŚNIEJ!) wpisuje kod</strong> — każda klawiatura budzi ekran, "hit any key"</li>
+<li>USB accessory access: iOS 16+ domyślnie blokuje USB na locked — ustawione raz "Allow Accessories When Locked" (albo odblokowane przez klawiaturę)</li>
+<li>Pairing trust z Pi/Mac: przetrwał (raz nadany, permanent do factory reset)</li>
+<li>Developer Mode: <strong>może pokazać confirm dialog</strong> → test na 17e; ewentualnie supervision/MDM to wyłącza</li>
+<li>WDA: nie żyje → go-ios/pymobiledevice3 <code>launch</code> ponownie (jeśli dev services OK)</li>
+<li>Shortcuts automations: przetrwały reboot, time-of-day trigegery odpalają się same (bez potwierdzeń po jednorazowym "Enable")</li>
+<li>Supervised Single App Mode: apka wraca sama, pełny ekran, auto-relaunch po crashu</li>
+</ol>
+<p class="src">Destillat ios-unattended.md (Apple support, MacRumors, MDM docs)</p>
+</div>
+
+<h2 id="plan">🚀 Co bym wdrożył (rekomendacja)</h2>
+<div class="card green">
+<ol>
+<li><strong>Test krytyczny na Twojej 17e (30 min, zanim wydasz złotówkę):</strong> włącz Developer Mode → reboot → sprawdź czy confirm dialog faktycznie blokuje dev services (go-ios launch WDA). Jeśli tak i nie da się go okrążyć supervisionem → ścieżka "17e unattended" umiera i zostają ścieżki 2/3.</li>
+<li><strong>Jeśli chcesz iPhone do zdalnej roboty:</strong> SE2 z Blocket (~700 kr, sprawdź Find My OFF i iOS ≤18.7) + Dopamine + Veency (build z source) + SSH. Budżet czasu: dzień roboty.</li>
+<li><strong>Jeśli chcesz sterować SWOJĄ 17e zdalnie:</strong> Mac M1 Pro na półce obok + iPhone Mirroring + Tailscale/RustDesk do Maca. Zero ryzyka, zero jb, działa dziś. (Werdykt: to nie jest "unattended phone farm" — to "remote control Twojego telefonu". Inny cel, inna droga.)</li>
+<li><strong>Jeśli cel = automatyka 24/7 (boty, farmy, apki):</strong> wracamy do Androida z raportu #1. iOS do tego nie służy — Apple wygrywa w prywatności, przegrywa w programowalności.</li>
+</ol>
+</div>
+
+<h2 id="zrodla">📚 Źródła (wybór)</h2>
+<div class="card">
+<ul>
+<li>WDA/Appium: <a href="https://github.com/appium/WebDriverAgent">appium/WebDriverAgent</a> · <a href="https://github.com/appium/appium-xcuitest-driver">xcuitest-driver</a> (sign-wda.mjs #2836) · <a href="https://doronz88.github.io/pymobiledevice3/guides/cli-recipes/">pymobiledevice3 CLI recipes</a></li>
+<li>USB: <a href="https://github.com/libimobiledevice/libimobiledevice">libimobiledevice</a> · <a href="https://github.com/libimobiledevice/usbmuxd">usbmuxd</a> (pairing persistence) · <a href="https://github.com/danielpaulus/go-ios">go-ios</a></li>
+<li>View/control: <a href="https://github.com/antimof/UxPlay">UxPlay</a> · Apple Support HT208857 (USB accessories) · <a href="https://osxdaily.com/2013/08/22/unlock-ios-device-with-external-keyboard/">keyboard unlock</a></li>
+<li>Jailbreak: <a href="https://github.com/opa334/Dopamine">Dopamine</a> · <a href="https://github.com/palera1n/palera1n">palera1n</a> · <a href="https://github.com/opa334/TrollStore">TrollStore</a> · <a href="https://ios.cfw.guide">ios.cfw.guide</a> · <a href="https://github.com/corellium/projectsandcastle">Project Sandcastle</a></li>
+<li>Unattended: support.apple.com/119586 (passcode po reboocie) · MacRumors (auto power-on) · developer.apple.com MDM (Single App Mode)</li>
+</ul>
+<p class="sub">Destillaty: <code>memory/research/iphone-remote-automation-2026-08/raw/</code> (5 plików). Nota metodologiczna: 2 z 7 tasków researchowych padły na starcie (provider reject) — respawn na DeepSeek V4 Flash przeszedł. Część faktów (Developer Mode po reboocie, supervision workaround) oznaczona do weryfikacji na sprzęcie.</p>
+</div>
+
+<p class="sub" style="margin-top:30px">Raport: Andrzej 🤖 · 2026-08-29 · deep research two-tier · GitHub Pages andrzej-bot-dev/andrzej-reports</p>
+</div>
+</body>
+</html>

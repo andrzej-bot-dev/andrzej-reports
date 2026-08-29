@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gdzie najtaniej kupić Raspberry Pi Zero 2 W + Camera Module 3? — Raport 2026</title>
+  <title>Gdzie najtaniej kupić Raspberry Pi Zero 2 W + Camera Module 3? — Raport 2026 (v2)</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -25,30 +25,21 @@
       line-height: 1.6;
       padding: 20px;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 95%;
-    }
-    header {
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
+    .container { max-width: 1200px; margin: 0 auto; width: 95%; }
+    header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
     .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--primary);
-      margin-bottom: 10px;
+      display: inline-block; padding: 4px 12px; border-radius: 9999px;
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.15); color: var(--primary); margin-bottom: 10px;
+    }
+    .badge-ver {
+      display: inline-block; padding: 4px 12px; border-radius: 9999px;
+      font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+      background: rgba(74, 222, 128, 0.15); color: var(--success); margin-bottom: 10px; margin-left: 6px;
     }
     h1 { font-size: 2rem; margin-bottom: 10px; color: #fff; }
     .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
-    
+
     .winner-card {
       background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(74, 222, 128, 0.1));
       border: 2px solid var(--primary);
@@ -56,120 +47,160 @@
       padding: 24px;
       margin-bottom: 30px;
     }
-    .winner-card h2 { color: var(--primary); margin-bottom: 12px; font-size: 1.5rem; display: flex; align-items: center; gap: 8px; }
-    
+    .winner-card h2 { color: var(--primary); margin-bottom: 12px; font-size: 1.5rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin: 18px 0 6px;
+    }
+    .prod-card {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      transition: border-color 0.15s;
+    }
+    .prod-card:hover { border-color: var(--primary); }
+    .prod-card img {
+      width: 100%; height: 140px; object-fit: contain;
+      background: #fff; border-radius: 8px; margin-bottom: 10px; padding: 8px;
+    }
+    .prod-card .prod-name { font-weight: 700; color: #fff; font-size: 0.98rem; min-height: 40px; }
+    .prod-card .prod-price { font-size: 1.15rem; font-weight: 800; color: var(--success); margin: 4px 0 2px; }
+    .prod-card .prod-sub { color: var(--text-muted); font-size: 0.85rem; }
+    .prod-card a.btn-small {
+      display: inline-block; margin-top: 10px; background: var(--primary); color: #0f172a;
+      font-weight: 700; padding: 6px 14px; border-radius: 6px; font-size: 0.9rem;
+    }
+    .prod-card a.btn-small:hover { background: #7dd3fc; text-decoration: none; }
+    .prod-card.oos { opacity: 0.75; }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
       margin-bottom: 30px;
     }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-    }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
     .card h3 { margin-bottom: 12px; color: var(--accent); font-size: 1.25rem; }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-size: 0.95rem;
-    }
-    th, td {
-      padding: 12px 14px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    th {
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-muted);
-      font-weight: 600;
-    }
+
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: rgba(255, 255, 255, 0.03); color: var(--text-muted); font-weight: 600; }
     tr:hover { background: rgba(255, 255, 255, 0.02); }
-    
+
     .price { font-weight: 700; color: #fff; }
     .price-sek { color: var(--success); font-weight: 600; }
     .status-in-stock { color: var(--success); font-weight: 600; }
     .status-oos { color: var(--danger); font-weight: 600; }
     .status-preorder { color: var(--warning); font-weight: 600; }
-    
+    .strike { text-decoration: line-through; color: var(--text-muted); }
+
     .warning-box {
       background: rgba(250, 204, 21, 0.1);
       border-left: 4px solid var(--warning);
-      padding: 16px;
-      border-radius: 4px 8px 8px 4px;
-      margin: 20px 0;
+      padding: 16px; border-radius: 4px 8px 8px 4px; margin: 20px 0;
     }
     .warning-box h4 { color: var(--warning); margin-bottom: 6px; }
+    .verify-box {
+      background: rgba(74, 222, 128, 0.08);
+      border-left: 4px solid var(--success);
+      padding: 16px; border-radius: 4px 8px 8px 4px; margin: 20px 0;
+    }
+    .verify-box h4 { color: var(--success); margin-bottom: 6px; }
+    .verify-box ul { font-size: 0.88rem; color: var(--text-muted); }
 
     a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    
+
     .btn {
-      display: inline-block;
-      background: var(--primary);
-      color: #0f172a;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 6px;
-      margin-top: 10px;
+      display: inline-block; background: var(--primary); color: #0f172a; font-weight: 700;
+      padding: 8px 16px; border-radius: 6px; margin-top: 10px;
     }
     .btn:hover { background: #7dd3fc; text-decoration: none; }
-    
+
     ul { padding-left: 20px; margin-bottom: 15px; }
     li { margin-bottom: 6px; }
+    ol { padding-left: 20px; }
   </style>
 </head>
 <body>
 
 <div class="container">
   <header>
-    <div class="badge">🛒 E-Commerce Deep Research • Raport Zakupowy</div>
+    <div class="badge">🛒 E-Commerce Deep Research • Raport Zakupowy</div><span class="badge-ver">v2 • linki do produktów zweryfikowane 29.08</span>
     <h1>Raspberry Pi Zero 2 W + Camera Module 3: Gdzie kupić najtaniej w Szwecji / UE?</h1>
     <div class="meta">
-      Data badania: 27 sierpnia 2026 • Przeanalizowano ~25 sklepów (SE, DK, DE, PL, CZ, UK) • Kursy: 1 DKK ≈ 1.48 SEK, 1 EUR ≈ 11.10 SEK, 1 PLN ≈ 2.58 SEK, 1 GBP ≈ 12.95 SEK
+      Badanie: 27.08.2026 (~25 sklepów: SE, DK, DE, PL, CZ, UK) • <strong>v2: 29.08.2026</strong> — każdy link prowadzi bezpośrednio do karty produktu; ceny i stany magazynowe odświeżone na żywo (08:12–08:35 CEST) • Kursy: 1 DKK ≈ 1.48 SEK, 1 EUR ≈ 11.10 SEK, 1 PLN ≈ 2.58 SEK, 1 GBP ≈ 12.95 SEK
     </div>
   </header>
 
   <!-- WINNER -->
   <div class="winner-card">
     <h2>🏆 ZWYCIĘZCA: raspberrypi.dk (Dania → Szwecja)</h2>
-    <p>Dla zamówienia wysyłanego do Szwecji, <strong>oficjalny duński reseller (raspberrypi.dk)</strong> bezkonkurencyjnie wygrywa pod względem <strong>dostępności od ręki</strong>, cen katalogowych i prostoty wysyłki.</p>
-    <br>
-    <ul>
-      <li><strong>Pi Zero 2 W:</strong> 159 DKK (ok. <strong>235 SEK</strong>) — <span class="status-in-stock">✅ Dostępny na stanie</span></li>
-      <li><strong>Camera Module 3 (Standard 12MP):</strong> 249 DKK (ok. <strong>369 SEK</strong>) — <span class="status-in-stock">✅ Dostępny na stanie</span></li>
+    <p>Dla zamówienia wysyłanego do Szwecji <strong>oficjalny duński reseller</strong> bezkonkurencyjnie wygrywa: dostępność od ręki, najniższe ceny katalogowe, prosta wysyłka. <strong>Wszystkie produkty na stanie (sprawdzone 29.08):</strong></p>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <img src="https://raspberrypi.dk/wp-content/uploads/2021/10/Raspberry-Pi-Zero-2-W.jpg" alt="Raspberry Pi Zero 2 W">
+        <div class="prod-name">Raspberry Pi Zero 2 W</div>
+        <div class="prod-price">159 DKK ≈ 235 SEK</div>
+        <div class="prod-sub status-in-stock">✅ Na stanie (29.08)</div>
+        <a class="btn-small" href="https://raspberrypi.dk/produkt/raspberry-pi-zero-2-w/" target="_blank">→ Karta produktu</a>
+      </div>
+      <div class="prod-card">
+        <img src="https://raspberrypi.dk/wp-content/uploads/2023/01/STANDARD_TOP.jpg" alt="Raspberry Pi Camera Module 3">
+        <div class="prod-name">Camera Module 3<br>(Standard, 12MP, AF)</div>
+        <div class="prod-price">249 DKK ≈ 369 SEK</div>
+        <div class="prod-sub status-in-stock">✅ Na stanie (29.08)</div>
+        <a class="btn-small" href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3/" target="_blank">→ Karta produktu</a>
+      </div>
+      <div class="prod-card">
+        <img src="https://raspberrypi.dk/wp-content/uploads/2023/01/WIDE_TOP.jpg" alt="Camera Module 3 Wide">
+        <div class="prod-name">Camera Module 3 Wide<br>(120° FOV, AF)</div>
+        <div class="prod-price">349 DKK ≈ 517 SEK</div>
+        <div class="prod-sub status-in-stock">✅ Na stanie (29.08)</div>
+        <a class="btn-small" href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-wide/" target="_blank">→ Karta produktu</a>
+      </div>
+      <div class="prod-card">
+        <img src="https://raspberrypi.dk/wp-content/uploads/2023/01/STANDARD_NOIR_TOP.jpg" alt="Camera Module 3 NoIR">
+        <div class="prod-name">Camera Module 3 NoIR<br>(nocna, bez filtra IR)</div>
+        <div class="prod-price">249 DKK ≈ 369 SEK</div>
+        <div class="prod-sub status-in-stock">✅ Na stanie (29.08)</div>
+        <a class="btn-small" href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-noir/" target="_blank">→ Karta produktu</a>
+      </div>
+    </div>
+    <ul style="margin-top: 14px;">
       <li><strong>Wysyłka PostNord do Szwecji:</strong> ~75–95 DKK (~110–140 SEK)</li>
-      <li><strong>Łączny koszt zestawu z dostawą do drzwi:</strong> <strong>~715 – 745 SEK</strong> (z VAT, brak cła, wysyłka wewnątrzwspólnotowa UE)</li>
+      <li><strong>Łączny koszt zestawu z dostawą do drzwi:</strong> <strong>~715–745 SEK</strong> (z VAT, brak cła, wysyłka wewnątrzwspólnotowa UE)</li>
     </ul>
-    <a href="https://raspberrypi.dk/" target="_blank" class="btn">Przejdź do raspberrypi.dk →</a>
   </div>
 
   <!-- CRITICAL HARDWARE NOTE -->
   <div class="warning-box">
     <h4>⚠️ BARDZO WAŻNY SZCZEGÓŁ TECHNICZNY (Ukryty koszt):</h4>
-    <p>Standardowy kabel FPC 15-pin dołączony do Camera Module 3 <strong>NIE PASUJE do Pi Zero 2 W</strong>! Pi Zero ma mniejsze złącze kamery (22-pin, 0.5mm pitch vs 15-pin 1.0mm pitch).<br>
-    Musisz dokupić adapter: <strong>Raspberry Pi Zero Camera Cable (22-pin → 15-pin)</strong>. Na raspberrypi.dk kabel 15cm kosztuje 39 DKK (~58 SEK, ale bywa OOS) — alternatywnie kupisz go za kilkanaście koron na Electrokit lub Amazon.se.</p>
+    <p>Standardowy kabel FPC 15-pin dołączony do Camera Module 3 <strong>NIE PASUJE do Pi Zero 2 W</strong>! Pi Zero ma mniejsze złącze kamery (22-pin, 0.5&nbsp;mm pitch vs 15-pin 1.0&nbsp;mm pitch).<br>
+    Musisz dokupić adapter <strong>Raspberry Pi Zero Camera Cable (22-pin → 15-pin)</strong>.<br>
+    <strong>Status na 29.08:</strong> na raspberrypi.dk kabel 15&nbsp;cm (39 DKK) jest <span class="status-oos">❌ chwilowo wyprzedany</span> (<a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-camera-kabel-15cm/" target="_blank">karta produktu — obserwuj</a>) → <strong>weź kabel z Amazon.se</strong>: AZDelivery 15&nbsp;cm <a href="https://www.amazon.se/dp/B079H41LSY" target="_blank">33,29 kr</a> lub GeeekPi 2-pak (16+30&nbsp;cm) <a href="https://www.amazon.se/dp/B07MW7V3Y7" target="_blank">79 kr</a>, oba z Prime.</p>
   </div>
 
-  <!-- PODSUMOWANIE SKLEPÓW Z POPRZEDNIEGO RAPORTU -->
+  <!-- PODSUMOWANIE SKLEPÓW -->
   <div class="card" style="margin-bottom: 30px;">
     <h3>Czy warto kupować w sklepach z wczorajszego raportu (LaskaKit, BerryBase, Botland)?</h3>
-    <p>Wczorajszy raport skupiał się na drobnicy elektronicznej (ESP32, moduły solarne, zasilacze). W przypadku oficjalnych płytek Raspberry Pi sytuacja wygląda inaczej ze względu na restrykcyjną sieć dystrybucyjną:</p>
+    <p>Wczorajszy raport skupiał się na drobnicy elektronicznej (ESP32, moduły solarne, zasilacze). Przy oficjalnych płytkach Raspberry Pi sieć dystrybucyjna jest restrykcyjna:</p>
     <br>
     <ul>
-      <li><strong>LaskaKit.cz:</strong> <span class="status-oos">❌ NIE</span> — nie są oficjalnym dystrybutorem Raspberry Pi, nie mają Zero 2 W w ofercie.</li>
-      <li><strong>BerryBase.de:</strong> <span class="status-oos">❌ NIE</span> — Zero 2 W jest kompletnie wyprzedany (0 szt.).</li>
-      <li><strong>Botland.store (Polska/UE):</strong> <span class="status-preorder">⚠️ Preorder</span> — Pi Zero 2 W kosztuje 16.50 EUR (~183 SEK), ale to preorder z wysyłką dopiero na <strong>grudzień 2026</strong>. Camera HD v3 (Module 3) kosztuje 26.90 EUR (~298 SEK).</li>
-      <li><strong>Kamami.pl (Polska):</strong> <span class="status-oos">❌ Brak Zero</span> — Pi Zero 2 W wyprzedany (82.90 zł). Camera 3 NoIR dostępna (138.84 zł ≈ 358 SEK), Wide (171.86 zł ≈ 443 SEK).</li>
+      <li><strong>LaskaKit.cz:</strong> <span class="status-oos">❌ NIE</span> — nie są oficjalnym dystrybutorem RPi, Zero 2 W nie ma w ofercie.</li>
+      <li><strong>BerryBase.de:</strong> <span class="status-oos">❌ NIE</span> — Zero 2 W kompletnie wyprzedany (0 szt.).</li>
+      <li><strong>Botland.store (PL):</strong> <span class="status-preorder">⚠️ Preorder</span> — Zero 2 W 16.50 € (~183 SEK), wysyłka dopiero <strong>grudzień 2026</strong>; Camera Module 3 26.90 € (~298 SEK). Wyszukiwarka JS — <a href="https://botland.store/search?s=raspberry+pi+zero+2+w" target="_blank">tak trafiłeś najbliżej produktu</a>.</li>
+      <li><strong>Kamami.pl:</strong> <span class="status-oos">❌ Brak Zero</span> — Zero 2 W wyprzedany (82.90 zł); Camera 3 NoIR 138.84 zł (~358 SEK), Wide 171.86 zł (~443 SEK). Ceny z 27.08.</li>
     </ul>
   </div>
 
   <!-- COMPARISON TABLE -->
-  <h2 style="margin-bottom: 15px;">📊 Pełne zestawienie sklepów i cen</h2>
+  <h2 style="margin-bottom: 15px;">📊 Pełne zestawienie sklepów i cen (odświeżone 29.08)</h2>
   <div class="card" style="overflow-x: auto;">
     <table>
       <thead>
@@ -177,7 +208,7 @@
           <th>Sklep / Kraj</th>
           <th>Pi Zero 2 W</th>
           <th>Camera Module 3</th>
-          <th>Dostępność</th>
+          <th>Dostępność (29.08)</th>
           <th>Wysyłka do SE</th>
           <th>Ocena opłacalności</th>
         </tr>
@@ -185,25 +216,25 @@
       <tbody>
         <tr style="background: rgba(56, 189, 248, 0.08);">
           <td><strong>raspberrypi.dk</strong> 🇩🇰</td>
-          <td><span class="price">159 DKK</span><br><span class="price-sek">~235 SEK</span></td>
-          <td><span class="price">249 DKK</span><br><span class="price-sek">~369 SEK</span></td>
+          <td><a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-2-w/" target="_blank"><span class="price">159 DKK</span></a><br><span class="price-sek">~235 SEK</span></td>
+          <td><a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3/" target="_blank"><span class="price">249 DKK</span></a><br><span class="price-sek">~369 SEK</span></td>
           <td><span class="status-in-stock">✅ OBA NA STANIE</span></td>
           <td>~75–95 DKK (PostNord)</td>
           <td>⭐⭐⭐⭐⭐ <strong>Najlepszy wybór</strong></td>
         </tr>
         <tr>
           <td><strong>Electrokit.se</strong> 🇸🇪</td>
-          <td><span class="price">~239 SEK</span></td>
-          <td><span class="price">~389 SEK</span></td>
-          <td><span class="status-preorder">⚠️ Zmienna (Malmö)</span></td>
-          <td>49–69 SEK (szybko 1-2 dni)</td>
-          <td>⭐⭐⭐⭐ Bardzo dobry lokalny backup</td>
+          <td><a href="https://www.electrokit.com/raspberry-pi-zero-2-w" target="_blank"><span class="price">239 SEK</span></a></td>
+          <td><span class="price">~389 SEK</span><br><span class="strike" style="font-size:0.8rem;">(cena katalogowa 27.08 — karta produktu niedostępna przez bot-block)</span></td>
+          <td><span class="status-oos">⚠️ Zero: WYPRZEDANE (29.08)</span></td>
+          <td>35–69 SEK (1-2 dni)</td>
+          <td>⭐⭐⭐⭐ Dobry backup, gdy uzupełnią stan</td>
         </tr>
         <tr>
           <td><strong>Pimoroni.com</strong> 🇬🇧</td>
-          <td><span class="price">£12.00</span><br><span class="price-sek">~155 SEK</span></td>
+          <td><a href="https://shop.pimoroni.com/products/raspberry-pi-zero-2-w" target="_blank"><span class="price">£14.40</span></a><br><span class="price-sek">~186 SEK</span></td>
           <td><span class="price">£27.50</span><br><span class="price-sek">~356 SEK</span></td>
-          <td><span class="status-in-stock">✅ Dostępne</span></td>
+          <td><span class="status-in-stock">✅ Zero na stanie (29.08)</span></td>
           <td>£3.90 Royal Mail</td>
           <td>⭐⭐⭐ Tani sprzęt, ale ryzyko opłat celnych (UK poza UE)</td>
         </tr>
@@ -224,86 +255,101 @@
           <td>⭐⭐ Zero wyprzedane</td>
         </tr>
         <tr>
-          <td><strong>Amazon.se</strong> 🇸🇪 (R2)</td>
-          <td><span class="status-oos">❌ BRAK standalone płytki</span><br>(tylko stary Zero W 2017: 399 kr)<br>kit od 799 kr</td>
-          <td><span class="price">452,00 kr</span> (std, oryginał)<br>Wide: 578 kr · Wide NoIR: 524 kr</td>
-          <td><span class="status-in-stock">✅ Kamera na stanie</span></td>
+          <td><strong>Amazon.se</strong> 🇸🇪</td>
+          <td><span class="status-oos">❌ BRAK standalone płytki</span><br>(kit od 799 kr)</td>
+          <td><a href="https://www.amazon.se/dp/B0BRY6MVXL" target="_blank"><span class="price">452,00 kr</span></a> (std)<br>Wide: <a href="https://www.amazon.se/dp/B0BRY757NX" target="_blank">501,05 kr</a> · Wide NoIR: <a href="https://www.amazon.se/dp/B0BRY6VLR6" target="_blank">528,98 kr</a></td>
+          <td><span class="status-in-stock">✅ Kamery na stanie</span></td>
           <td>Prime / 0 kr</td>
-          <td>⭐⭐⭐ Dobra na kamerę + kabel (Prime), ale płytki nie kupisz</td>
+          <td>⭐⭐⭐⭐ Najlepsze na kamerę + kabel (Prime); płytki nie kupisz</td>
         </tr>
       </tbody>
     </table>
+    <p style="color: var(--text-muted); font-size: 0.85rem;">💡 Ciekawostka z odświeżenia: <strong>Camera Module 3 Wide potaniała na Amazon.se z 578 → 501,05 kr</strong> (−77 kr) — przy wersji Wide Amazon jest dziś tańszy niż raspberrypi.dk (501 vs ~517 SEK), płacisz 0 kr fraktem Prime.</p>
   </div>
 
   <!-- R2: AMAZON + INNE -->
   <div class="card" style="margin-top: 25px;">
-    <h3>🔎 Runda 2 (17:56–18:15): Amazon.se szczegółowo + pozostałe sklepy SE</h3>
-    <p><strong>Amazon.se — pełny scraping (1,9 MB HTML, 48+ listingów):</strong></p>
+    <h3>🔎 Amazon.se szczegółowo + pozostałe sklepy SE (ceny live 29.08)</h3>
+    <p><strong>Amazon.se — pełny scraping (1,9 MB HTML, 48+ listingów) + weryfikacja kart produktu 29.08:</strong></p>
     <ul>
-      <li><strong>Raspberry Pi Camera Module 3 (standard, oryginał):</strong> <span class="price">452,00 kr</span> — <a href="https://www.amazon.se/dp/B0BRY6MVXL" target="_blank">B0BRY6MVXL</a> ✅</li>
-      <li><strong>Camera Module 3 Wide:</strong> 578,00 kr — <a href="https://www.amazon.se/dp/B0BRY757NX" target="_blank">B0BRY757NX</a></li>
-      <li><strong>Camera Module 3 Wide NoIR:</strong> 524,30 kr — <a href="https://www.amazon.se/dp/B0BRY6VLR6" target="_blank">B0BRY6VLR6</a></li>
-      <li><strong>Zero 2 W standalone:</strong> ❌ nie istnieje na amazon.se. Wszystkie wyniki „Zero 2 W” to kity (db-tronic 799 kr, Waveshare 1639–1729 kr) albo stara płytka Zero W z 2017 (399 kr).</li>
-      <li><strong>Kabel kamery 22→15 pin (kluczowy!):</strong> AZDelivery 15cm <strong>33,29 kr</strong> (<a href="https://www.amazon.se/dp/B079H41LSY" target="_blank">B079H41LSY</a>), 30cm 34,69 kr (<a href="https://www.amazon.se/dp/B079H33VCM" target="_blank">B079H33VCM</a>), GeeekPi 2-pack (16+30cm) 79 kr (<a href="https://www.amazon.se/dp/B07MW7V3Y7" target="_blank">B07MW7V3Y7</a>), AZDelivery 3-pack 15cm 47 kr — często z dostawą Prime.</li>
-      <li>Zamiennik: Waveshare IMX708-120 (sensor jak w CM3 Wide + autofokus) 442,99 kr.</li>
+      <li><strong>Raspberry Pi Camera Module 3 (standard, oryginał):</strong> <span class="price">452,00 kr</span> — <a href="https://www.amazon.se/dp/B0BRY6MVXL" target="_blank">amazon.se/dp/B0BRY6MVXL</a> ✅</li>
+      <li><strong>Camera Module 3 Wide:</strong> <span class="price">501,05 kr</span> (wcześniej 578 kr!) — <a href="https://www.amazon.se/dp/B0BRY757NX" target="_blank">amazon.se/dp/B0BRY757NX</a></li>
+      <li><strong>Camera Module 3 Wide NoIR:</strong> <span class="price">528,98 kr</span> — <a href="https://www.amazon.se/dp/B0BRY6VLR6" target="_blank">amazon.se/dp/B0BRY6VLR6</a></li>
+      <li><strong>Zero 2 W standalone:</strong> ❌ nie istnieje na amazon.se — wszystkie wyniki „Zero 2 W" to kity (db-tronic 799 kr, Waveshare 1639–1729 kr) albo stary Zero W z 2017 (399 kr).</li>
+      <li><strong>Kabel kamery 22→15 pin (kluczowy!):</strong> AZDelivery 15 cm <strong>33,29 kr</strong> (<a href="https://www.amazon.se/dp/B079H41LSY" target="_blank">B079H41LSY</a>) · 30 cm 34,69 kr (<a href="https://www.amazon.se/dp/B079H33VCM" target="_blank">B079H33VCM</a>) · GeeekPi 2-pak (16+30 cm) 79 kr (<a href="https://www.amazon.se/dp/B07MW7V3Y7" target="_blank">B07MW7V3Y7</a>) — z Prime.</li>
+      <li>Zamiennik: Waveshare IMX708-120 (sensor jak w CM3 Wide + AF) 442,99 kr.</li>
     </ul>
     <p><strong>Inne sprawdzone sklepy SE (R2):</strong></p>
     <ul>
-      <li><strong>Komplett.se:</strong> wg Prisjakt mieli Zero 2 W za ~239 kr, ale scraping niemożliwy (HTTP/2 reset). Sprawdzić ręcznie — może być najtańsza opcja SE na płytkę.</li>
+      <li><strong>Komplett.se:</strong> wg Prisjakt ~239 kr za Zero 2 W, ale scraping niemożliwy (HTTP/2 reset) — sprawdź ręcznie, może być najtańsza opcja SE na płytkę.</li>
       <li><strong>NetOnNet:</strong> SPA (Next.js) — brak potwierdzenia oferty RPi.</li>
       <li><strong>Webhallen / Inet.se:</strong> Cloudflare challenge — brak dostępu.</li>
-      <li><strong>CDON.se:</strong> SPA, „Oops! Ingen sida hittades”.</li>
+      <li><strong>CDON.se:</strong> SPA, „Oops! Ingen sida hittades".</li>
       <li><strong>RS Online SE:</strong> zablokowany (423).</li>
-      <li><strong>ThePiHut.com (UK):</strong> 142 wyniki „zero 2 w”, ale JS-rendered — cen nie wyciągnięto. UK = ryzyko cła po zniesieniu de minimis, nie polecam.</li>
+      <li><strong>ThePiHut.com (UK):</strong> JS-rendered — cen nie wyciągnięto. UK = ryzyko cła po zniesieniu de minimis, nie polecam.</li>
     </ul>
   </div>
 
   <!-- R3: USED MARKET -->
   <div class="card" style="margin-top: 25px;">
-    <h3>♻️ Runda 3 (19:20–19:35): Rynek wtórny — Blocket + FB Marketplace (na żywo, zalogowana sesja)</h3>
+    <h3>♻️ Rynek wtórny — Blocket + FB Marketplace (live 27.08, link potwierdzony 29.08)</h3>
     <p><strong>Blocket.se (cała Szwecja, live):</strong></p>
     <ul>
-      <li>„raspberry pi zero 2" → <strong>0 trafień</strong></li>
-      <li>„raspberry pi zero” → <strong>0 trafień</strong></li>
-      <li>„raspberry pi kamera” → 2 trafienia, oba bezużyteczne: zasilacz 12V/100W (125 kr) i OV2640 2MP moduły ×2 (49 kr — chińskie zamienniki, nie Camera Module 3)</li>
-      <li>Jedyna ścieżka: <a href="https://www.blocket.se/recommerce/forsale/item/25671839" target="_blank">„Two Raspberry Pi boards for sale” — 500 kr</a> (2 szt. = 250 kr/szt., „jak nowe”, jeden z obudową, 12032 Stockholm, sprzedawca zweryfikowany, aktualizacja 13.08) — <strong>⚠️ model niepodany w ogłoszeniu</strong>, trzeba pytać sprzedawcę czy to Zero 2 W</li>
+      <li>„raspberry pi zero 2" → <strong>0 trafień</strong> · „raspberry pi zero" → <strong>0 trafień</strong> · „raspberry pi kamera" → 2 bezużyteczne trafienia (zasilacz 12V/100W; OV2640 2MP moduły ×2 za 49 kr — chińskie zamienniki)</li>
+      <li>Jedyna ścieżka: <a href="https://www.blocket.se/recommerce/forsale/item/25671839" target="_blank">„Two Raspberry Pi boards for sale" — 500 kr</a> (2 szt. = 250 kr/szt., „jak nowe", jeden z obudową, 120 32 Stockholm, sprzedawca zweryfikowany, aktualizacja 13.08) — <strong>⚠️ model niepodany w ogłoszeniu</strong>, pytaj sprzedawcy czy to Zero 2 W</li>
       <li>Za eggsy: używany RPi 5 8GB za 2400 kr (przepłacone vs nowy)</li>
     </ul>
-    <p><strong>Facebook Marketplace (live, sesja działa — marketplace w promieniu 40 km od Sztokholma + reszta SE):</strong></p>
+    <p><strong>Facebook Marketplace (live, promień 40 km od Sztokholmu + reszta SE):</strong></p>
     <ul>
       <li><strong>Pi Zero 2 W standalone: 0 trafień</strong> · Camera Module 3 solo: 0 trafień</li>
-      <li>📦 Ciekawostka: <strong>Raspberry Pi 4 Model B 8GB + Camera Module 3 + PIR sensor + 2× microSD — 1550 kr</strong> (Mölndal, obniżone z 1650) — jeśli kamera warta ~400 kr, Pi 4 8GB wychodzi ~1150 kr; ale to Pi 4, nie Zero</li>
-      <li>„Pi1541 Zero 2 + Epyx Fast Load Cartridge” — 520 kr (Smålandsstenar) — retro-emulator stacji C64, prawdopodobnie na Pi Zero 2 W w środku</li>
+      <li>📦 Ciekawostka: <strong>Raspberry Pi 4 Model B 8GB + Camera Module 3 + PIR + 2× microSD — 1550 kr</strong> (Mölndal) — jeśli kamera warta ~400 kr, Pi 4 8GB wychodzi ~1150 kr; ale to Pi 4, nie Zero</li>
+      <li>„Pi1541 Zero 2 + Epyx Fast Load Cartridge" — 520 kr (Smålandsstenar) — retro-emulator C64, prawdopodobnie na Pi Zero 2 W w środku</li>
       <li>Pakiet (stary Pi Zero W 2017 + Pi 4 + akcesoria) — 4500 kr (Västerås) — przepłacone</li>
       <li>Ceny orientacyjne używek: RPi 4 8GB: 1200–1800 kr · RPi 5: 1000–1400 kr · RPi 3: 200–455 kr</li>
     </ul>
-    <p><strong>Wniosek R3:</strong> rynek wtórny jest pusty na te konkretne SKU. Zero 2 W to płytka tak tania nowa (~235 kr), że prawie nikt jej osobno nie sprzedaje — ludzie sprzedają całe zestawy/pakiety. Rekomendacja pozostaje: nowy zestaw z raspberrypi.dk.</p>
+    <p><strong>Wniosek:</strong> rynek wtórny jest pusty na te konkretne SKU — Zero 2 W jest tak tani nowy (~235 kr), że prawie nikt nie sprzedaje go osobno. Rekomendacja: nowy zestaw z raspberrypi.dk.</p>
   </div>
 
   <!-- REKOMENDACJA KROK PO KROKU -->
   <div class="grid" style="margin-top: 30px;">
     <div class="card">
-      <h3>🎯 Rekomendowany koszyk zakupowy</h3>
+      <h3>🎯 Rekomendowany koszyk zakupowy (kliknij i zamawiasz)</h3>
       <p>Żeby nie przepłacać i dostać sprzęt w 2-4 dni robocze:</p>
       <br>
-      <ol style="padding-left: 20px;">
-        <li>Zamów <strong>Raspberry Pi Zero 2 W</strong> (159 DKK) + <strong>Camera Module 3</strong> (249 DKK) na <a href="https://raspberrypi.dk/" target="_blank">raspberrypi.dk</a>.</li>
-        <li>Jeśli na raspberrypi.dk kabel do Zero (39 DKK) jest wyprzedany, dorzuć <strong>kabel FPC 22→15 pin</strong> na Electrokit.se lub Amazon.se (~20–35 SEK).</li>
-        <li>Alternatywa: jeśli wolisz mieć wszystko z jednej szwedzkiej faktury, sprawdź stan w <strong>Electrokit.se</strong> (różnica w cenie to raptem kilkadziesiąt koron).</li>
+      <ol>
+        <li>Na raspberrypi.dk dorzuć do koszyka: <a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-2-w/" target="_blank">Pi Zero 2 W (159 DKK)</a> + <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3/" target="_blank">Camera Module 3 (249 DKK)</a>.</li>
+        <li>Jeśli chcesz wersję Wide/NoIR — <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-wide/" target="_blank">Wide (349 DKK)</a> lub <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-noir/" target="_blank">NoIR (249 DKK)</a>. Wide: porównaj z <a href="https://www.amazon.se/dp/B0BRY757NX" target="_blank">Amazon (501,05 kr, Prime)</a>.</li>
+        <li>Kabel FPC 22→15 pin: na dk chwilowo <a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-camera-kabel-15cm/" target="_blank">wyprzedany (39 DKK)</a> → bierz <a href="https://www.amazon.se/dp/B079H41LSY" target="_blank">AZDelivery 15 cm / 33,29 kr z Prime</a>.</li>
+        <li>Alternatywa gdy dk znów zniknie stany: <a href="https://www.electrokit.com/raspberry-pi-zero-2-w" target="_blank">Electrokit — Zero 2 W (239 kr)</a> (29.08: chwilowo OOS) + <a href="https://shop.pimoroni.com/products/raspberry-pi-zero-2-w" target="_blank">Pimoroni (£14.40, na stanie)</a> — pamiętaj o ryzyku cła z UK.</li>
       </ol>
     </div>
 
     <div class="card">
       <h3>📦 Warianty kamery (na co zwrócić uwagę)</h3>
-      <p>Camera Module 3 występuje w 4 wersjach:</p>
+      <p>Camera Module 3 występuje w 4 wersjach (ceny raspberrypi.dk, wszystkie na stanie 29.08):</p>
       <br>
       <ul>
-        <li><strong>Standard (75° FOV, Autofocus):</strong> 249 DKK — uniwersalna, najlepsza ostrość.</li>
-        <li><strong>Wide (120° FOV, Autofocus):</strong> 349 DKK — szeroki kąt (np. do monitoringu pomieszczeń lub auta).</li>
-        <li><strong>NoIR (bez filtra IR):</strong> 249 DKK — do projektów nocnych z doświetlaczem podczerwieni (np. solarna kamera nocna).</li>
-        <li><strong>NoIR Wide:</strong> 349 DKK — połączenie szerokiego kąta i trybu nocnego.</li>
+        <li><strong>Standard (75° FOV, Autofocus):</strong> <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3/" target="_blank">249 DKK</a> — uniwersalna, najlepsza ostrość.</li>
+        <li><strong>Wide (120° FOV, AF):</strong> <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-wide/" target="_blank">349 DKK</a> — szeroki kąt (monitoring pomieszczeń, auto).</li>
+        <li><strong>NoIR (bez filtra IR):</strong> <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-noir/" target="_blank">249 DKK</a> — projekty nocne z doświetlaczem IR (np. solarna kamera nocna).</li>
+        <li><strong>Wide NoIR:</strong> <a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-noir-wide/" target="_blank">349 DKK</a> — szeroki kąt + tryb nocny.</li>
       </ul>
     </div>
+  </div>
+
+  <!-- VERIFICATION -->
+  <div class="verify-box">
+    <h4>✅ Weryfikacja ręczna linków (29.08.2026, 08:12–08:35 CEST)</h4>
+    <p>Każdy link w tym raporcie otwiera kartę konkretnego produktu (żadnych stron głównych) i został otwarty/zbudowany na nowo dzisiaj rano:</p>
+    <ul>
+      <li>raspberrypi.dk (5): Zero 2 W, CM3 std/wide/noir/wide-noir — HTTP 200, ceny i stany pobrane z danych produktowych (JSON-LD), zdjęcia z oficjalnych obrazów produktów.</li>
+      <li>Amazon.se (6): wszystkie ASIN-y HTTP 200, tytuły i ceny potwierdzone na kartach produktu (Wide: spadek 578 → 501,05 kr).</li>
+      <li>Electrokit (1): Zero 2 W HTTP 200 — status: wyprzedany (zaktualizowany w tabeli).</li>
+      <li>Pimoroni (1): Zero 2 W HTTP 200, „in stock", £14.40.</li>
+      <li>Blocket (1): ogłoszenie 25671839 HTTP 200, tytuł potwierdzony.</li>
+      <li>Botland (1): link do wyszukiwarki z gotowym zapytaniem (karty produktów Botlandu renderują się przez JS — bezpośredni URL nietrwały).</li>
+    </ul>
+    <p style="color: var(--text-muted); font-size: 0.85rem;">Uwaga: ceny w e-commerce zmieniają się dynamicznie — jeśli widzisz inną cenę po kliknięciu, ta z daty weryfikacji była aktualna o 08:35.</p>
   </div>
 
 </div>

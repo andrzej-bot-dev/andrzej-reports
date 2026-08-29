@@ -1,0 +1,17 @@
+{
+  "pct": 100,
+  "done": 5,
+  "active": 0,
+  "failed": 0,
+  "total": 5,
+  "elapsed": "01:30",
+  "lastLog": "✅ DONE! 4 pliki .md + starter-repo gotowe. Możesz zacząć nagrywać.",
+  "updated": "2026-07-20T15:00:00+02:00",
+  "steps": [
+    {"name": "Krok 0: Status page", "status": "done"},
+    {"name": "Krok 1: my_signal.md", "status": "done"},
+    {"name": "Krok 2: whats_changed.md", "status": "done"},
+    {"name": "Krok 3: episode_1_plan.md", "status": "done"},
+    {"name": "Krok 4: Starter repo + recording_kit.md", "status": "done"}
+  ]
+}

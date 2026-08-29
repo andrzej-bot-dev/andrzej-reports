@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanie Suknie Ślubne – Butiki Stacjonarne w Szwecji (max 300km od Sztokholmu)</title>
+<style>
+:root {
+  --bg: #0f0f14;
+  --card: #1a1a24;
+  --card2: #222236;
+  --accent: #e8a0bf;
+  --accent2: #b784a7;
+  --gold: #d4a853;
+  --text: #e4e4e4;
+  --muted: #9a9aaa;
+  --green: #7ecb76;
+  --orange: #f0b050;
+  --red: #f06666;
+  --border: #2a2a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  padding: 0 0 60px 0;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 1.5rem; text-align: center; padding: 20px 0 8px; color: var(--accent); }
+h2 { font-size: 1.2rem; color: var(--accent); margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); opacity: 0.9; }
+h3 { font-size: 1rem; color: var(--accent2); margin: 16px 0 6px; }
+.subtitle { text-align: center; color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+
+/* Hero Summary Cards */
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
+.summary-card { background: var(--card); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid var(--border); }
+.summary-card .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+.summary-card .label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+/* Store Card */
+.store-card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 14px 0;
+  border: 1px solid var(--border);
+}
+.store-card.featured { border-color: var(--gold); background: linear-gradient(135deg, #1a1a24 0%, #1f1a24 100%); }
+.store-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: var(--card2);
+  border-bottom: 1px solid var(--border);
+}
+.store-header .rank { font-size: 1.4rem; font-weight: 800; color: var(--gold); min-width: 28px; }
+.store-header .info { flex: 1; }
+.store-header .store-name { font-size: 1.05rem; font-weight: 700; }
+.store-header .store-loc { font-size: 0.78rem; color: var(--muted); }
+.store-header .distance { font-size: 0.75rem; color: var(--accent); }
+.badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.badge {
+  font-size: 0.65rem; padding: 2px 8px; border-radius: 20px;
+  font-weight: 600; white-space: nowrap;
+}
+.badge-used { background: rgba(126,203,118,0.15); color: var(--green); }
+.badge-new { background: rgba(240,176,80,0.15); color: var(--orange); }
+.badge-outlet { background: rgba(240,102,102,0.15); color: var(--red); }
+.badge-tailor { background: rgba(212,168,83,0.15); color: var(--gold); }
+.badge-stars { background: rgba(232,160,191,0.15); color: var(--accent); }
+
+.store-body { padding: 12px 16px; }
+.store-body p { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
+.store-body strong { color: var(--text); }
+.price-tag { display: inline-block; background: rgba(212,168,83,0.12); color: var(--gold); padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 0.85rem; margin-right: 8px; }
+.price-tag.low { color: var(--green); background: rgba(126,203,118,0.12); }
+.detail-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+.detail-item { font-size: 0.78rem; color: var(--muted); }
+.detail-item span { color: var(--text); font-weight: 600; }
+
+.store-actions { padding: 8px 16px 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 8px 16px; border-radius: 8px;
+  font-size: 0.82rem; font-weight: 600; text-decoration: none;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--accent); color: #0f0f14; }
+.btn-secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.btn:hover { opacity: 0.85; }
+
+/* Section intro */
+.section-intro { background: var(--card); border-radius: 10px; padding: 14px 16px; margin: 10px 0; font-size: 0.85rem; color: var(--muted); border-left: 3px solid var(--accent); }
+
+/* Price comparison table */
+.price-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; background: var(--card); border-radius: 10px; overflow: hidden; }
+.price-table th { background: var(--card2); color: var(--accent); padding: 10px 12px; text-align: left; font-weight: 700; }
+.price-table td { padding: 8px 12px; border-top: 1px solid var(--border); }
+.price-table tr:hover td { background: rgba(232,160,191,0.04); }
+.price-table .hi { color: var(--green); font-weight: 700; }
+
+/* Tips box */
+.tips-box { background: var(--card2); border-radius: 12px; padding: 16px; margin: 20px 0; border: 1px solid var(--border); }
+.tips-box h3 { color: var(--gold); margin-bottom: 10px; }
+.tips-box ul { padding-left: 18px; }
+.tips-box li { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
+.tips-box li strong { color: var(--text); }
+
+/* Map placeholder */
+.map-note { font-size: 0.78rem; color: var(--muted); text-align: center; padding: 12px; background: var(--card); border-radius: 8px; margin: 12px 0; }
+
+/* Footer */
+.footer { text-align: center; font-size: 0.72rem; color: var(--muted); padding: 30px 0 20px; }
+.footer a { color: var(--accent); }
+
+@media (max-width: 480px) {
+  .store-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .detail-row { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>💍 Tanie Suknie Ślubne – Butiki Stacjonarne</h1>
+<p class="subtitle">Szwecja · max 300 km od Sztokholmu · Używane & Nowe · 2026</p>
+
+<!-- Summary Cards -->
+<div class="summary-grid">
+  <div class="summary-card">
+    <div class="num">35+</div>
+    <div class="label">Znalezione butiki</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">12</div>
+    <div class="label">Przeszukanych miast</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">990 kr</div>
+    <div class="label">Najniższa cena (Eskilstuna!)</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">200-300</div>
+    <div class="label">Sukien na butik (Bröllopsbruket)</div>
+  </div>
+</div>
+
+<!-- ==================== #1 Bröllopsbruket ==================== -->
+<h2>🏆 #1 Bröllopsbruket – NAJLEPSZY wybór budżetowy</h2>
+<div class="section-intro">
+  <strong>To jest Twój cel nr 1.</strong> Największa w Szwecji sieć z używanymi sukniami ślubnymi. 
+  8 sklepów w kraju, 5 w zasięgu 300 km od Sztokholmu. Każdy butik ma 200-300 sukien na miejscu, 
+  ceny od 5 000 kr za second-hand (jak nowe, czyszczone chemicznie), do 25 000 kr za nowe. 
+  <strong>Przymiarka GRATIS</strong> (1.5h, prywatny pokój), bez presji zakupu. 
+  Krawiectwo na miejscu we wszystkich lokalizacjach.
+</div>
+
+<!-- Store: Sthlm Norra -->
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">🥇</div>
+    <div class="info">
+      <div class="store-name">Bröllopsbruket – Stockholm Norra</div>
+      <div class="store-loc">Bällstaågatan 18, Bromma</div>
+      <div class="distance">📍 ~10 km od centrum Sztokholmu</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand 🤍</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec na miejscu</span>
+        <span class="badge badge-stars">~300 sukien</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Flagowy butik w Bromma – <strong>największy wybór</strong>, blisko 300 sukien ślubnych na wieszakach. 
+    Second-hand (pre-loved, czyszczone) + nowe od projektantów. Storlekar 32-56+.</p>
+    <span class="price-tag low">5 000 – 15 000 kr (używane)</span>
+    <span class="price-tag">15 000 – 25 000 kr (nowe)</span>
+    <div class="detail-row">
+      <div class="detail-item">📏 Rozmiary: <span>32-56+</span></div>
+      <div class="detail-item">✂️ Krawiec: <span>Tak, na miejscu</span></div>
+      <div class="detail-item">🕐 Przymiarka: <span>1.5h, GRATIS</span></div>
+      <div class="detail-item">👥 Goście: <span>do 4 osób</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopsbruket.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+    <a href="https://brollopsbruket.se/showroom" class="btn btn-secondary" target="_blank">📸 Showroom</a>
+  </div>
+</div>
+
+<!-- Store: Sthlm Södra -->
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">🥈</div>
+    <div class="info">
+      <div class="store-name">Bröllopsbruket – Stockholm Södra</div>
+      <div class="store-loc">Sjöviksbacken 55, Årsta</div>
+      <div class="distance">📍 ~5 km od centrum Sztokholmu</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand 🤍</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec na miejscu</span>
+        <span class="badge badge-stars">~200 sukien</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Południowa lokalizacja w Årsta. <strong>Dostępny dla wózków inwalidzkich</strong>. ~200 sukien na miejscu, 
+    ten sam model co Norra – second-hand + nowe kolekcje. Tel: 076-666 59 99.</p>
+    <span class="price-tag low">5 000 – 15 000 kr (używane)</span>
+    <span class="price-tag">15 000 – 25 000 kr (nowe)</span>
+    <div class="detail-row">
+      <div class="detail-item">📏 Rozmiary: <span>32-56+</span></div>
+      <div class="detail-item">✂️ Krawiec: <span>Tak, na miejscu</span></div>
+      <div class="detail-item">🕐 Przymiarka: <span>1.5h, GRATIS</span></div>
+      <div class="detail-item">♿ Dostępność: <span>Dla wózków</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopsbruket.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+    <a href="tel:0766665999" class="btn btn-secondary">📞 076-666 59 99</a>
+  </div>
+</div>
+
+<!-- Store: Västerås -->
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">🥉</div>
+    <div class="info">
+      <div class="store-name">Bröllopsbruket – Västerås</div>
+      <div class="store-loc">Slottsgatan 6, Västerås</div>
+      <div class="distance">📍 ~110 km od Sztokholmu</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand 🤍</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec na miejscu</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>Największy butik Bröllopsbruket w regionie Mälardalen.</strong> Centrum Västerås, łatwy dojazd 
+    ze Sztokholmu (1h pociągiem + 10 min pieszo). Tel: 070-680 08 60.</p>
+    <span class="price-tag low">5 000 – 15 000 kr (używane)</span>
+    <span class="price-tag">15 000 – 25 000 kr (nowe)</span>
+    <div class="detail-row">
+      <div class="detail-item">🚆 Dojazd ze Sztokholmu: <span>~1h pociągiem</span></div>
+      <div class="detail-item">📅 Przymiarka: <span>Gratis, booking online</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopsbruket.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+    <a href="tel:0706800860" class="btn btn-secondary">📞 070-680 08 60</a>
+  </div>
+</div>
+
+<!-- Store: Linköping -->
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">4</div>
+    <div class="info">
+      <div class="store-name">Bröllopsbruket – Linköping</div>
+      <div class="store-loc">Industrigatan 24, Linköping</div>
+      <div class="distance">📍 ~200 km od Sztokholmu</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand 🤍</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec na miejscu</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Lokal w zabytkowym budynku (K-märkt) na 1 piętrze. Tel: 076-876 37 49.</p>
+    <span class="price-tag low">5 000 – 15 000 kr (używane)</span>
+    <span class="price-tag">15 000 – 25 000 kr (nowe)</span>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopsbruket.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<!-- Store: Karlstad -->
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">5</div>
+    <div class="info">
+      <div class="store-name">Bröllopsbruket – Karlstad (Forshaga)</div>
+      <div class="store-loc">Storgatan 55, Forshaga</div>
+      <div class="distance">📍 ~300 km od Sztokholmu (granica zasięgu)</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand 🤍</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec na miejscu</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>Najnowszy butik</strong> (otwarty 2025) – drop-in możliwy po wcześniejszym telefonie. Tel: 079-311 25 81.</p>
+    <span class="price-tag low">5 000 – 15 000 kr (używane)</span>
+    <span class="price-tag">15 000 – 25 000 kr (nowe)</span>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopsbruket.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<!-- ==================== Bröllopsbruket Price Details ==================== -->
+<h3>💰 Szczegóły cenowe Bröllopsbruket</h3>
+<table class="price-table">
+  <tr><th>Kategoria</th><th>Cena (SEK)</th><th>Cena (€)</th></tr>
+  <tr><td>Second-hand / Pre-loved</td><td class="hi">5 000 – 15 000 kr</td><td>~430 – 1 290 €</td></tr>
+  <tr><td>Nowe suknie</td><td>15 000 – 25 000 kr</td><td>~1 290 – 2 150 €</td></tr>
+  <tr><td>Przymiarka standardowa (1.5h)</td><td class="hi">GRATIS</td><td>0 €</td></tr>
+  <tr><td>VIP-przymiarka (bubbel, czekolada, więcej gości)</td><td>550 kr</td><td>~47 €</td></tr>
+  <tr><td>Konsultacja krawiecka (pierwsze 30 min)</td><td class="hi">GRATIS</td><td>0 €</td></tr>
+  <tr><td>Dodatkowa konsultacja krawiecka (za 30 min)</td><td>350 kr</td><td>~30 €</td></tr>
+  <tr><td>Voucher prezentowy</td><td>1 000 – 5 000 kr</td><td>~86 – 430 €</td></tr>
+</table>
+
+<div class="tips-box">
+  <h3>📋 Jak działa Bröllopsbruket?</h3>
+  <ul>
+    <li><strong>Rezerwacja online:</strong> app.boka.se/brollopsbruket – wybierz miasto, datę, godzinę</li>
+    <li><strong>1.5h prywatnej przymiarki</strong> – Ty + max 4 gości (VIP do 6 osób)</li>
+    <li><strong>Bez presji zakupu</strong> – "utan köptvång", możesz wyjść bez kupowania</li>
+    <li><strong>Nowe suknie co tydzień</strong> – model cyrkularny, ciągła rotacja</li>
+    <li><strong>80% sukien sprzedaje się w 12 tygodni</strong> – wysoka rotacja = zawsze świeży asortyment</li>
+    <li><strong>Wszystkie suknie czyszczone chemicznie</strong> – second-hand jak nowe</li>
+    <li><strong>Krawiec na miejscu:</strong> skracanie, zwężanie, wymiana miseczek, dodawanie rękawów itp.</li>
+    <li><strong>Płatność:</strong> karta lub Swish (bezgotówkowo)</li>
+    <li><strong>Założone 2018</strong> (Göteborg), 6 000+ sprzedanych sukien</li>
+    <li><strong>Ocena Google (Göteborg):</strong> 4.7★ (406 opinii)</li>
+  </ul>
+</div>
+
+<!-- ==================== STOCKHOLM BUDGET STORES ==================== -->
+<h2>🏪 Stockholm – Butiki budżetowe i outlet</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">6</div>
+    <div class="info">
+      <div class="store-name">Stockholm Brud & Fest</div>
+      <div class="store-loc">Hornsgatan 132, Södermalm</div>
+      <div class="badges">
+        <span class="badge badge-outlet">SAMPLE SALE -30-50%!</span>
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.1★ (199)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>🔥 SAMPLE SALE AKTUALNIE TRWA – zniżki 30-50%!</strong> Duży wybór sukien ślubnych i wieczorowych. 
+    Marki: Milla Nova, Demetrios, Sincerity. Opinie chwalą pomocny personel i dobry wybór na miejscu.</p>
+    <span class="price-tag low">od ~5 000 kr (sample sale)</span>
+    <span class="price-tag">10 000 – 25 000 kr (regularne)</span>
+    <div class="detail-row">
+      <div class="detail-item">📍 Lokalizacja: <span>Hornsgatan 132, Södermalm</span></div>
+      <div class="detail-item">🛍️ Marki: <span>Milla Nova, Demetrios, Sincerity</span></div>
+      <div class="detail-item">🎉 Promocja: <span>Sample Sale -30% do -50%</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://stockholmbrudofest.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">7</div>
+    <div class="info">
+      <div class="store-name">Matildas Fest</div>
+      <div class="store-loc">Kamomillagatan 10, Bromma</div>
+      <div class="badges">
+        <span class="badge badge-used">Budżetowe 💰</span>
+        <span class="badge badge-new">Nowe i custom</span>
+        <span class="badge badge-stars">4.3★ (56)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Znany jako <strong>"billig brudklänning"</strong> – jeden z tańszych butików w Sztokholmie. 
+    Oferuje zarówno gotowe suknie, jak i <strong>szycie na miarę</strong>. Różne półki cenowe. 
+    Dobry wybór dla oszczędnych.</p>
+    <span class="price-tag low">od ~3 000 kr</span>
+    <span class="price-tag">do ~15 000 kr</span>
+    <div class="detail-row">
+      <div class="detail-item">📍 Lokalizacja: <span>Kamomillagatan 10, Bromma</span></div>
+      <div class="detail-item">🔧 Custom: <span>Tak, szycie na miarę</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.matildasfest.com" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">8</div>
+    <div class="info">
+      <div class="store-name">Wedding Castle Stockholm</div>
+      <div class="store-loc">Barkarbyvägen 45, Järfälla</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">Designer marki</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Butik w Järfälla/Barkarby z markami: Demetrios, Morilee, Sima Couture, House of St. Patrick. 
+    Suknie ślubne + akcesoria. Warto sprawdzić czy mają wyprzedaże.</p>
+    <span class="price-tag">8 000 – 20 000+ kr</span>
+    <div class="detail-row">
+      <div class="detail-item">🛍️ Marki: <span>Demetrios, Morilee, Sima Couture, House of St. Patrick</span></div>
+      <div class="detail-item">📍 Dojazd: <span>Barkarby, ~20 km od centrum</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.weddingcastle.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">9</div>
+    <div class="info">
+      <div class="store-name">Milagro (Sample Sale)</div>
+      <div class="store-loc">Karlavägen 38, Östermalm</div>
+      <div class="badges">
+        <span class="badge badge-outlet">Sample Sale</span>
+        <span class="badge badge-new">Designer</span>
+        <span class="badge badge-stars">4.3★ (116)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Ekskluzywny butik na Östermalmie, ale regularnie organizuje <strong>sample sales</strong> gdzie 
+    poprzednie kolekcje są sprzedawane z dużymi zniżkami. Marki: Pronovias, Eva Lendel, Woná Concept, 
+    Made With Love, Enzoani, Rosa Clará. Przymiarka 1h, max 3 gości.</p>
+    <span class="price-tag">15 000 – 35 000 kr (regularne)</span>
+    <span class="price-tag low">~8 000 – 15 000 kr (sample sale)</span>
+    <div class="detail-row">
+      <div class="detail-item">👗 Marki: <span>Pronovias, Eva Lendel, Woná, Made With Love, Enzoani, Rosa Clará</span></div>
+      <div class="detail-item">🎉 Sample Sale: <span>Okresowo – sprawdź social media</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://milagro.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+    <a href="https://instagram.com/milagrodenahrin/" class="btn btn-secondary" target="_blank">📸 Instagram</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">10</div>
+    <div class="info">
+      <div class="store-name">Wedding Bells by Little Fairies</div>
+      <div class="store-loc">Hägersten, Stockholm</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.0★ (43)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Butik w Hägersten. Sprzedaje zarówno suknie ślubne, jak i smokingi. 
+    Mniejszy butik z rodzinną atmosferą.</p>
+    <span class="price-tag">od ~8 000 kr</span>
+  </div>
+  <div class="store-actions">
+    <a href="#" class="btn btn-secondary">📞 Sprawdź godziny</a>
+  </div>
+</div>
+
+<!-- ==================== UPPSALA ==================== -->
+<h2>🎓 Uppsala (70 km od Sztokholmu)</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">11</div>
+    <div class="info">
+      <div class="store-name">Bröllopslandet</div>
+      <div class="store-loc">Boksta 506, 744 95 Vittinge</div>
+      <div class="distance">📍 ~80 km od Sztokholmu (30 min od Uppsali)</div>
+      <div class="badges">
+        <span class="badge badge-used">Wszystkie półki 💰</span>
+        <span class="badge badge-stars">5.0★ (51)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>Perfekcyjna ocena 5.0!</strong> Butik na wsi między Uppsalą a Västerås. 
+    "Kilka różnych modeli dla wszystkich rozmiarów, półek cenowych i stylów". 
+    Prowadzony przez dwa siostrzane pary. Blisko do Sztokholmu, Uppsali, Enköping, Västerås i Gävle.</p>
+    <span class="price-tag low">Wszystkie półki cenowe</span>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>070-244 43 54</span></div>
+      <div class="detail-item">🌐 Strona: <span>brollopslandet.se</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.brollopslandet.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">12</div>
+    <div class="info">
+      <div class="store-name">Hefa Brud & Fest</div>
+      <div class="store-loc">Gamla Uppsalagatan 40, Uppsala</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.6★ (19)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Jeden z największych butików ślubnych w środkowej Szwecji. Suknie ślubne, wieczorowe, akcesoria.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>018-20 43 88</span></div>
+      <div class="detail-item">🌐 Strona: <span>hefabrudofest.se</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.hefabrudofest.se" class="btn btn-secondary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Mäster Arnes Dam & Herrskrädderi</div>
+      <div class="store-loc">Drottninggatan 6C, Uppsala</div>
+      <div class="badges">
+        <span class="badge badge-tailor">Krawiec ✂️</span>
+        <span class="badge badge-new">Szycie na miarę</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Zakład krawiecki z przymiarkami ślubnymi. Specjalizuje się w szyciu na miarę i przeróbkach.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>018-13 20 54</span></div>
+      <div class="detail-item">🌐 Strona: <span>masterarnes.se</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== VÄSTERÅS ==================== -->
+<h2>🏭 Västerås (110 km od Sztokholmu)</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">13</div>
+    <div class="info">
+      <div class="store-name">Ruths – Västerås äldsta bröllopsbutik</div>
+      <div class="store-loc">Stora Gatan 74, Västerås</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.5★ (74)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Najstarszy butik ślubny w Västerås. Specjalizacja: ślub i przyjęcia – damskie, męskie i dziecięce. 
+    <strong>Przymiarka GRATIS</strong>, drop-in możliwy, zalecana rezerwacja (1h).</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>021-13 12 56</span></div>
+      <div class="detail-item">🌐 Strona: <span>ruths.se</span></div>
+      <div class="detail-item">🕐 Przymiarka: <span>Gratis, drop-in ok</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.ruths.se" class="btn btn-secondary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Ursulas Fest & Bröllopskläder</div>
+      <div class="store-loc">Källgatan 14, Västerås</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.7★ (35)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Butik ślubny – suknie, smokingi, fraki, garnitury, sukienki do chrztu.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>021-12 25 10</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ESKILSTUNA ==================== -->
+<h2>🛍️ Eskilstuna (~115 km od Sztokholmu) – 🔥 NAJTAŃSZE OPCJE</h2>
+<div class="section-intro">
+  <strong>🔥 UWAGA!</strong> Eskilstuna ma dwie niesamowite okazje: Mäster Skoog WYPRZEDAJE swoją kolekcję ślubną (kończą z tym działem!), 
+  a Saras Brud och Fest ma suknie <strong>od 990 kr</strong>! To absolutnie najtańsze opcje w całym zestawieniu.
+</div>
+
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">💰</div>
+    <div class="info">
+      <div class="store-name">Saras Brud och Fest 🏆 NAJTANIEJ!</div>
+      <div class="store-loc">Rådhustorget, Eskilstuna</div>
+      <div class="badges">
+        <span class="badge badge-outlet">OD 990 KR!</span>
+        <span class="badge badge-used">Budżet 💰</span>
+        <span class="badge badge-new">Frack do wynajęcia</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>SUKNIE ŚLUBNE OD 990 KR!</strong> To najtańsza opcja w całym zestawieniu. 
+    Mały butik, ale mega przystępne ceny. Oferuje również fraki dla pana młodego w cenach wynajmu.</p>
+    <span class="price-tag low">od 990 kr!</span>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>070-751 65 57</span></div>
+      <div class="detail-item">📍 Adres: <span>Rådhustorget, Eskilstuna</span></div>
+      <div class="detail-item">🔗 Social: <span>Facebook (~350 obserwujących)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">🔥</div>
+    <div class="info">
+      <div class="store-name">Mäster Skoog AB – WYPRZEDAŻ!</div>
+      <div class="store-loc">Kungsgatan 33, Eskilstuna</div>
+      <div class="badges">
+        <span class="badge badge-outlet">REA! Likviderar brud!</span>
+        <span class="badge badge-new">Marki designerskie</span>
+        <span class="badge badge-stars">4.7★ (35)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>⚠️ Kończą dział ślubny – WYPRZEDAŻ!</strong> "Postanowiliśmy nie sprzedawać już sukien ślubnych, 
+    dlatego mamy teraz WYPRZEDAŻ. Zapraszamy na łowy!" Marki: Morilee, Party Line, Ladybird, Bianco Evento.</p>
+    <span class="price-tag low">Ceny wyprzedażowe!</span>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>016-13 11 32</span></div>
+      <div class="detail-item">🌐 Strona: <span>masterskoog.se</span></div>
+      <div class="detail-item">🛍️ Marki: <span>Morilee, Party Line, Ladybird, Bianco Evento</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://www.masterskoog.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<!-- ==================== ÖREBRO ==================== -->
+<h2>🏰 Örebro (~200 km od Sztokholmu)</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">14</div>
+    <div class="info">
+      <div class="store-name">Dentelle AB</div>
+      <div class="store-loc">Trädgårdsgatan 3B, Örebro</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-stars">4.8★ (135)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Elegancki butik ślubny z <strong>"oslagbara priser"</strong> (bezkonkurencyjnymi cenami). 
+    Szeroki wybór od prostych po ekstrawaganckie. Szycie na miarę i przeróbki dostępne.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>019-12 01 90</span></div>
+      <div class="detail-item">🌐 Strona: <span>dentelle.se</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://dentelle.se" class="btn btn-primary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Brudspecialisten Örebro AB</div>
+      <div class="store-loc">Rudbecksgatan 19, Örebro</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe + Wynajem</span>
+        <span class="badge badge-stars">4.4★ (35)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Działa od 40+ lat. Opcje budżetowe z wynajmem. Ograniczona kolekcja ślubna, 
+    głównie wynajem odzieży formalnej.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>019-13 30 30</span></div>
+      <div class="detail-item">🌐 Strona: <span>brudspecialisten.com</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== NORRKÖPING ==================== -->
+<h2>🌊 Norrköping (~160 km od Sztokholmu)</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">15</div>
+    <div class="info">
+      <div class="store-name">Diamant Mode AB</div>
+      <div class="store-loc">Hospitalsgatan 13, Norrköping</div>
+      <div class="badges">
+        <span class="badge badge-new">Odzież formalna</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Sklep z odzieżą formalną. Warto zadzwonić i zapytać o suknie ślubne.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>072-011 24 51</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LINKÖPING EXTRA ==================== -->
+<h2>🎓 Linköping (~200 km od Sztokholmu)</h2>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">16</div>
+    <div class="info">
+      <div class="store-name">Bröllopshuset BH AB</div>
+      <div class="store-loc">Drottninggatan 28, Linköping</div>
+      <div class="badges">
+        <span class="badge badge-new">Nowe</span>
+        <span class="badge badge-tailor">Krawiec in-house</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Lokalny butik ślubny, balowy i przyjęciowy. <strong>Wszystkie przeróbki wliczone w cenę!</strong> 
+    Krawcowa na miejscu. Opcje custom – dostawa 3-5 miesięcy na zamówienia specjalne.</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>013-14 99 97</span></div>
+      <div class="detail-item">🌐 Strona: <span>brollopshuset.se</span></div>
+      <div class="detail-item">✂️ Przeróbki: <span>Wliczone w cenę!</span></div>
+    </div>
+  </div>
+  <div class="store-actions">
+    <a href="https://brollopshuset.se" class="btn btn-secondary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<!-- ==================== GÄVLE ==================== -->
+<h2>🏒 Gävle (~170 km od Sztokholmu) – Second-hand!</h2>
+
+<div class="store-card featured">
+  <div class="store-header">
+    <div class="rank">17</div>
+    <div class="info">
+      <div class="store-name">Clarity Bridal Studio</div>
+      <div class="store-loc">Brynäsgatan 1, Gävle</div>
+      <div class="badges">
+        <span class="badge badge-used">Pre-loved 🤍</span>
+        <span class="badge badge-new">Nowe też</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p><strong>Pre-loved & nowe</strong> suknie ślubne i balowe. Fokus na zrównoważoną modę. 
+    Możesz też sprzedać swoją suknię przez nich. Instagram: @claritybridal (150+ obserwujących). 
+    <strong>Tylko umówione przymiarki.</strong></p>
+    <span class="price-tag low">Second-hand – budżetowo!</span>
+    <div class="detail-row">
+      <div class="detail-item">📍 Adres: <span>Brynäsgatan 1, Gävle</span></div>
+      <div class="detail-item">📸 Instagram: <span>@claritybridal</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="rank">18</div>
+    <div class="info">
+      <div class="store-name">Gävle Bröllop & Fest (Ateljé Pierina)</div>
+      <div class="store-loc">Valbogatan 44, Gävle</div>
+      <div class="badges">
+        <span class="badge badge-used">Second-hand</span>
+        <span class="badge badge-outlet">Wynajem też!</span>
+        <span class="badge badge-tailor">Szycie na miarę</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Atelier w kamienicy z przełomu wieków. <strong>Second-hand + wynajem</strong> – opcja super budżetowa! 
+    Możesz wypożyczyć zamiast kupować. Specjalne szycie i przeróbki. Elastyczne godziny (dzień/wieczór/weekend).</p>
+    <div class="detail-row">
+      <div class="detail-item">📞 Telefon: <span>070-695 31 95</span></div>
+      <div class="detail-item">📸 Instagram: <span>@brollopochfestpierinapierre</span></div>
+      <div class="detail-item">🏠 Adres: <span>Valbogatan 44, 1tr, Gävle</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== STOCKHOLM OTHER STORES ==================== -->
+<h2>🏙️ Stockholm – Pozostałe butiki (warte uwagi)</h2>
+<div class="section-intro">
+  Te butiki są generalnie droższe, ale warto je odwiedzić dla porównania fasonów lub w poszukiwaniu wyprzedaży.
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Sublime Style</div>
+      <div class="store-loc">Upplandsgatan 54, Vasastan</div>
+      <div class="badges">
+        <span class="badge badge-new">Premium</span>
+        <span class="badge badge-stars">4.9★ (592)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Prywatna przymiarka (tylko Ty + 3 goście, cały butik dla Was). Wysokiej klasy marki z całego świata. 
+    Przed wizytą wybierasz 5 klänning ze strony. Duży wybór akcesoriów.</p>
+  </div>
+  <div class="store-actions">
+    <a href="https://sublimestyle.se" class="btn btn-secondary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Amarà</div>
+      <div class="store-loc">Hamngatan 10, PK-huset, City</div>
+      <div class="badges">
+        <span class="badge badge-new">Premium</span>
+        <span class="badge badge-tailor">Krawiec in-house</span>
+        <span class="badge badge-stars">4.7★ (120)</span>
+      </div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>Ekskluzywny butik w PK-huset. Profesjonalne krawiectwo na miejscu. Szeroki wybór – 
+    od minimalistycznych po bogato zdobione.</p>
+  </div>
+  <div class="store-actions">
+    <a href="https://amarastockholm.se" class="btn btn-secondary" target="_blank">🌐 Strona</a>
+  </div>
+</div>
+
+<div class="store-card">
+  <div class="store-header">
+    <div class="info">
+      <div class="store-name">Pozostałe butiki stockholmskie</div>
+      <div class="store-loc">Różne lokalizacje</div>
+    </div>
+  </div>
+  <div class="store-body">
+    <p>
+      <strong>Sara Poul</strong> – Sveavägen 17, Norrmalm (designer, skandynawski styl)<br>
+      <strong>By Malina Bridal</strong> – Brunnsgatan 21, City (szwedzki designer, showroom)<br>
+      <strong>Olars Ulla</strong> – Västerlånggatan 57, Gamla Stan<br>
+      <strong>Abby Waits</strong> – Fleminggatan 36, Kungsholmen<br>
+      <strong>Ivory Field / Balklänning Stockholm</strong> – Ringvägen 80, Södermalm<br>
+      <strong>Garamaj of Sweden</strong> – Karlavägen 6, Östermalm<br>
+      <strong>Wedding Outlet Stockholm</strong> – (sprawdź Facebook)<br>
+      <strong>Wedding House Stockholm</strong> – Märsta (~40 km od Sztokholmu)
+    </p>
+  </div>
+</div>
+
+<!-- ==================== PLAN DZIAŁANIA ==================== -->
+<h2>📋 Rekomendowany plan działania</h2>
+<div class="tips-box">
+  <h3>🗓️ 3-dniowy plan poszukiwań</h3>
+  <ol style="padding-left:18px; font-size:0.85rem; color:var(--muted);">
+    <li style="margin-bottom:10px">
+      <strong style="color:var(--text)">Dzień 1: Bröllopsbruket Stockholm Norra (Bromma) + Stockholm Brud & Fest (Södermalm)</strong><br>
+      Zacznij od Bröllopsbruket – mają ~300 sukien, największy wybór w najniższych cenach. 
+      Potem Stockholm Brud & Fest – sample sale -30-50%. Oba w zasięgu 20 min jazdy.
+    </li>
+    <li style="margin-bottom:10px">
+      <strong style="color:var(--text)">Dzień 2: Bröllopsbruket Stockholm Södra (Årsta) + Matildas Fest (Bromma)</strong><br>
+      Jeśli nie znalazłaś w Norra, sprawdź Södra – inny asortyment. Potem Matildas Fest 
+      dla tańszych opcji i custom szycia.
+    </li>
+    <li style="margin-bottom:10px">
+      <strong style="color:var(--text)">Dzień 3: Milagro Sample Sale + Wedding Castle (Järfälla)</strong><br>
+      Jeśli sample sale akurat trwa – okazja na designerską suknię za pół ceny. 
+      Wedding Castle po drodze.
+    </li>
+    <li style="margin-bottom:10px">
+      <strong style="color:var(--text)">Opcja weekendowa: Bröllopsbruket Västerås + Linköping</strong><br>
+      Wycieczka 1-dniowa. Västerås 1h pociągiem ze Sztokholmu, potem 1.5h do Linköping. 
+      Dwa różne butiki, różny asortyment.
+    </li>
+  </ol>
+</div>
+
+<div class="tips-box">
+  <h3>💡 Wskazówki</h3>
+  <ul>
+    <li><strong>Rezerwuj z wyprzedzeniem</strong> – weekendy są zarezerwowane na kilka tygodni do przodu</li>
+    <li><strong>Weź ze sobą:</strong> bezszwową bieliznę w kolorze skóry, buty na obcasie (jeśli planujesz), spinki do włosów</li>
+    <li><strong>Maks 2 butiki dziennie</strong> – po trzecim wszystkie suknie wyglądają tak samo</li>
+    <li><strong>Mów o budżecie głośno</strong> – personel nie pokaże Ci sukni, na którą Cię nie stać</li>
+    <li><strong>Zapytaj o koszty przeróbek</strong> – zwykle 1 500 – 4 000 kr dodatkowo</li>
+    <li><strong>Second-hand = ekologicznie i tanio</strong> – suknia za 25 000 kr w second-handzie kosztuje 5 000 – 10 000 kr</li>
+    <li><strong>Czas dostawy nowej sukni:</strong> 3-6 miesięcy + przeróbki. Second-hand bierzesz od ręki</li>
+    <li><strong>Sprawdzaj Instagram butików</strong> – sample sale i nowe dostawy ogłaszają tam najpierw</li>
+  </ul>
+</div>
+
+<!-- ==================== PRICE COMPARISON ==================== -->
+<h2>📊 Porównanie cen – wszystkie opcje</h2>
+<table class="price-table">
+  <tr><th>Kategoria</th><th>Przedział cenowy (SEK)</th><th>Gdzie</th></tr>
+  <tr><td>Second-hand / używana</td><td class="hi">5 000 – 15 000 kr</td><td>Bröllopsbruket (wszystkie lokalizacje)</td></tr>
+  <tr><td>Sample Sale (designer -30-50%)</td><td class="hi">5 000 – 12 000 kr</td><td>Stockholm Brud & Fest, Milagro</td></tr>
+  <tr><td>Budżetowy butik</td><td class="hi">3 000 – 15 000 kr</td><td>Matildas Fest (Bromma)</td></tr>
+  <tr><td>Nowa, średnia półka</td><td>8 000 – 20 000 kr</td><td>Wedding Castle, Wedding Bells</td></tr>
+  <tr><td>Nowa, Bröllopsbruket</td><td>15 000 – 25 000 kr</td><td>Bröllopsbruket (nowe kolekcje)</td></tr>
+  <tr><td>Nowa, premium</td><td>18 000 – 35 000+ kr</td><td>Milagro, Amarà, Sublime Style, Sara Poul</td></tr>
+  <tr><td>🔥 Super okazja (wyprzedaż)</td><td class="hi">990 – 5 000 kr</td><td>Saras Brud och Fest (Eskilstuna), Mäster Skoog (Eskilstuna)</td></tr>
+  <tr><td>Online (Europa → Szwecja)</td><td>500 – 6 000 kr</td><td><a href="https://andrzej-bot-dev.github.io/andrzej-reports/wedding-dresses-europe.html" target="_blank">Zobacz raport online</a></td></tr>
+</table>
+
+<div class="map-note">
+  🗺️ <strong>Dystans ze Sztokholmu:</strong><br>
+  Bromma 10 km · Årsta 5 km · Uppsala ~70 km · Vittinge ~80 km · Västerås 110 km · Eskilstuna ~115 km · Gävle ~170 km · Norrköping ~160 km · Örebro ~200 km · Linköping 200 km · Karlstad ~300 km · Jönköping ~320 km
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<p>Raport wygenerowany 15 lipca 2026 · Andrzej 🤖</p>
+  <p>Źródła: Bröllopstorget, ViewStockholm, Thatsup, Weddingly, Lovio, Bröllopsbruket, Google, Facebook, Instagram</p>
+  <p>Przeszukanych miast: 12 · Sprawdzonych butików: 35+ · Subagentów: 3 (parallel research)</p>
+  <p><a href="https://andrzej-bot-dev.github.io/andrzej-reports/wedding-dresses-europe.html">📦 Raport: Tanie suknie ONLINE (Europa → Szwecja)</a></p>
+</div>
+
+</div>
+</body>
+</html>

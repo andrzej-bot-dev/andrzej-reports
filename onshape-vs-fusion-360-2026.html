@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onshape vs Fusion 360 — Deep Research 2026</title>
+<style>
+  :root{--bg:#0f1216;--card:#171c22;--card2:#1d242c;--text:#e8e6e1;--muted:#9aa3ad;--acc:#4fc3f7;--acc2:#ffb74d;--good:#81c784;--bad:#e57373;--border:#2a323c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.6;padding:0 0 60px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(135deg,#1a2332,#0f1216);border-bottom:1px solid var(--border);padding:48px 0 32px;margin-bottom:32px}
+  h1{font-size:2rem;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:1rem}
+  .badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:2px 12px;font-size:.8rem;color:var(--acc);margin:12px 6px 0 0}
+  h2{font-size:1.4rem;margin:40px 0 16px;color:var(--acc);border-bottom:1px solid var(--border);padding-bottom:8px}
+  h3{font-size:1.1rem;margin:24px 0 10px;color:var(--acc2)}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:16px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;margin:12px 0}
+  th{background:var(--card2);text-align:left;padding:10px 12px;border:1px solid var(--border);font-size:.85rem;color:var(--acc)}
+  td{padding:9px 12px;border:1px solid var(--border);vertical-align:top}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+  .good{color:var(--good)}.bad{color:var(--bad)}.warn{color:var(--acc2)}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .quote{background:var(--card2);border-left:3px solid var(--acc2);padding:10px 14px;margin:10px 0;font-style:italic;color:#cfd6dd;font-size:.92rem;border-radius:0 8px 8px 0}
+  .quote small{display:block;color:var(--muted);font-style:normal;margin-top:4px}
+  .verdict{background:linear-gradient(135deg,#1b2a1e,#171c22);border:1px solid #2e4a33;border-radius:12px;padding:20px 24px;margin:20px 0}
+  .src{font-size:.82rem;color:var(--muted)}
+  .verdict h3{margin-top:0}
+  .medal{font-size:1.2rem;margin-right:6px}
+  .foot{color:var(--muted);font-size:.8rem;margin-top:48px;border-top:1px solid var(--border);padding-top:16px}
+  code{background:var(--card2);padding:1px 6px;border-radius:4px;font-size:.85em}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>⚙️ Onshape vs Fusion 360 — Deep Research</h1>
+    <div class="sub">Który CAD dla kogo i dlaczego · Plusy i minusy obu · Stan na 20 sierpnia 2026</div>
+    <span class="badge">28 źródeł</span>
+    <span class="badge">8 oficjalnych</span>
+    <span class="badge">20 społecznościowych (Reddit / HN / fora)</span>
+    <span class="badge">Zakres: ceny, free plany, funkcje, opinie, trendy 2025–2026</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="verdict">
+  <h3>🎯 TL;DR — werdykt</h3>
+  <p><span class="medal">🥇</span><b>Fusion 360</b> — lepszy dla: majsterkowiczów 3D print (prywatne pliki za darmo!), każdego kto chce CAM/CNC, symulacji, PCB, elektroniki — i wszystkich na Windows/Mac. Najlepszy stosunek ceny do możliwości.</p>
+  <p style="margin-top:10px"><span class="medal">🥈</span><b>Onshape</b> — lepszy dla: użytkowników <b>Linuxa</b> i tabletów, zespołów (multiplayer CAD jak Google Docs), osób uczących się CAD od zera, fanów gita (branching/merge) i tych, których wkurzają crashe desktopowego CAD-u. Ale: free plan = <b>wszystkie projekty publiczne</b>.</p>
+  <p style="margin-top:10px">💡 <b>Trzecia droga:</b> FreeCAD 1.0 (darmowy, open source, bez limitów i bez chmury) — coraz popularniejszy po premierze 1.0 (2024), choć UI nadal odstrasza część ludzi w stronę Onshape.</p>
+</div>
+
+<h2>📊 Szybkie porównanie</h2>
+<table>
+  <tr><th></th><th>Onshape</th><th>Fusion 360</th></tr>
+  <tr><td><b>Typ</b></td><td>100% cloud (przeglądarka)</td><td>Desktop + chmura (hybryda)</td></tr>
+  <tr><td><b>Platformy</b></td><td class="good">PC, Mac, Linux, Chromebook, iPad, iPhone, Android — wszystko przez przeglądarkę</td><td>Windows, Mac, Chromebook (tylko edukacja). <span class="bad">Brak Linuxa</span></td></tr>
+  <tr><td><b>Free plan</b></td><td>Pełny CAD bez limitów ilościowych, ale <span class="bad">wszystkie dokumenty PUBLICZNE</span>, tylko non-commercial</td><td class="good">Prywatne dokumenty</span>, ale <span class="bad">limit 10 aktywnych</span>, CAM tylko 3-osiowy, bez symulacji, przychód &lt;$1000/rok</td></tr>
+  <tr><td><b>Cena komercyjna</b></td><td class="bad">Standard $1500/user/rok · Professional $2500/user/rok (tylko biling roczny)</td><td class="good">≈$680/rok ($57/mies. przy bilingu rocznym) + edycje Manufacturing/Design drożej</td></tr>
+  <tr><td><b>CAM / CNC</b></td><td>Dodany ~2025, wciąż młody — społeczność nieufna</td><td class="good">Dojrzały, królestwo Fusion: 2D→5-osi, turning, postprocesory</td></tr>
+  <tr><td><b>Symulacje FEA</b></td><td>Od planu Professional ($2500/rok)</td><td>W pakiecie płatnym; generative design w edycji Design</td></tr>
+  <tr><td><b>Elektronika / PCB</b></td><td>PCB Studio (od planu Professional)</td><td class="good">Wbudowane (EAGLE) — w personal z limitami rozmiaru/warstw</td></tr>
+  <tr><td><b>Współpraca</b></td><td class="good">Najlepsza w branży: multiplayer realtime, git-like branching/merge, PDM wbudowany</td><td>Multi-user w planach płatnych, solidnie ale klasycznie</td></tr>
+  <tr><td><b>Wersjonowanie</b></td><td class="good">Git-owe DNA: branch, merge, pełna historia każdej zmiany</td><td>Wersje + timeline w pliku, klasycznie</td></tr>
+  <tr><td><b>Internet wymagany</b></td><td class="bad">Tak — bez sieci nie ma CAD-u</td><td class="good">Działa offline (sync po powrocie)</td></tr>
+  <tr><td><b>Aktualizacje</b></td><td class="good">Co 3 tygodnie, automatycznie, zero instalacji</td><td>Okresowe, przez instalator</td></tr>
+  <tr><td><b>AI (2026)</b></td><td>AI Advisor (beta)</td><td>Autodesk Assistant — AI wykonujące operacje w modelu</td></tr>
+</table>
+
+<h2>✅❌ Plusy i minusy</h2>
+<div class="grid2">
+  <div class="card">
+    <h3 style="color:var(--good)">Onshape — plusy</h3>
+    <ul>
+      <li><b>Zero crashy desktop</b> — najczęstszy powód migracji z Fusion ("Fusion crashes 10×/day na Macu" vs "nigdy od switcha")</li>
+      <li><b>Działa wszędzie</b> — Linux, Chromebook, iPad, Android. Zero instalacji, zero IT</li>
+      <li><b>Free plan bez limitów ilościowych</b> — nieograniczone publiczne dokumenty, pełne CAD: rysunki techniczne, asemblacje, sheet metal</li>
+      <li><b>Versioning jak w gicie</b> — branching, merging, pełna historia; dla devów naturalne jak oddech</li>
+      <li><b>Multiplayer CAD</b> — kilka osób edytuje jeden model realtime jak w Google Docs (hit w robotyce FRC)</li>
+      <li><b>Najpłynniejszy workflow czystego designu</b> wg switcherów; szybka nauka</li>
+      <li><b>Learning Center</b> — darmowe kursy self-paced, świetne do nauki od zera</li>
+      <li>Edukacja i startupy: professional-grade za darmo (po kwalifikacji)</li>
+    </ul>
+    <h3 style="color:var(--bad)">Onshape — minusy</h3>
+    <ul>
+      <li><b>Free = publiczne dokumenty</b> — nie tylko "widoczne online", ale quasi-public domain: każdy może je skopiować. Prywatność dopiero od $1500/rok</li>
+      <li><b>Cena komercyjna wysoka</b> — Standard $1500/rok vs Fusion ~$680/rok ("makes OnShape look like they're stealing from you" — r/Fusion360)</li>
+      <li><b>Bez internetu nie istnieje</b> — pełna zależność od serwerów PTC</li>
+      <li><b>CAM młody</b> — dodany ~2025, machiniści jeszcze nie ufają</li>
+      <li>Symulacje/rendering/PCB dopiero od Professional ($2500/rok)</li>
+      <li>Nieufność historyczna: "always felt tenuous that the free plan would remain free" (HN)</li>
+      <li>API/FeatureScript ma ograniczenia mocy vs scripting Fusion</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="color:var(--good)">Fusion 360 — plusy</h3>
+    <ul>
+      <li><b>Free personal z PRYWATNYMI plikami</b> — 10 aktywnych dokumentów, nieaktywnych bez limitu (swapowanie działa)</li>
+      <li><b>CAM bez konkurencji</b> w tej cenie — 2D→5-osi, turning, probing, darmowe edytowalne postprocesory (w personal: 2/2.5/3 osie)</li>
+      <li><b>All-in-one</b>: CAD + CAM + symulacje + PCB (EAGLE) + rendering w jednym</li>
+      <li><b>Najlepszy stosunek ceny do funkcji</b> — ~$680/rok komercyjnie (społeczność: "good value")</li>
+      <li><b>Działa offline</b> — projektuj w pociągu, synchronizuje później</li>
+      <li><b>Największa społeczność tutoriali</b> — YouTube, kursy Autodesk; "using the same tool as everyone else really helps" (efekt sieciowy)</li>
+      <li>STL i STEP export dostępne w personal (STEP został po buncie społeczności 2020)</li>
+      <li>Autodesk Assistant — najbardziej zaawansowane AI w CADzie (2026)</li>
+    </ul>
+    <h3 style="color:var(--bad)">Fusion 360 — minusy</h3>
+    <ul>
+      <li><b>Crashe</b> — zwłaszcza na macOS; najczęstsza przyczyna odejścia do Onshape</li>
+      <li><b>Limit 10 aktywnych dokumentów</b> w personal — ciasno przy wielu projektach</li>
+      <li><b>Brak Linuxa</b> — natywnie nie istnieje</li>
+      <li>Personal: bez symulacji/animacji/generative design, rysunki 2D okrojone, PCB z limitami, tylko 1 edytowalny rysunek</li>
+      <li>Cloud credits do symulacji/addonów — "minimum $100/mies." (źródło oburzenia)</li>
+      <li><b>Wizerunek Autodesku</b>: subskrypcje zamiast licencji, zabijanie produktów (EAGLE), cięcia w free plan 2020 — stały strumień "de-Autodesk"</li>
+      <li>Historia cofania decyzji pod presją (STEP 2020) — dowód, że limity mogą się zmienić</li>
+    </ul>
+  </div>
+</div>
+
+<h2>👤 Który dla kogo — scenariusze</h2>
+<div class="card">
+<table>
+  <tr><th>Kim jesteś / co robisz</th><th>Rekomendacja</th><th>Dlaczego</th></tr>
+  <tr><td>🧑‍🔧 Hobbiasta 3D print (enclosures, części zamienne)</td><td><b>Fusion 360 Personal</b> (albo Onshape jeśli nie przeszkadza Ci publiczność)</td><td>STL/STEP export działa, pliki prywatne; 10 dokumentów zwykle wystarcza przy swapowaniu. Nie publikujesz przecież wymiarów domu 🙃</td></tr>
+  <tr><td>🐧 Użytkownik Linuxa</td><td><b>Onshape</b> (albo FreeCAD)</td><td>Fusion nie istnieje na Linuksie; Onshape działa w każdej przeglądarce</td></tr>
+  <tr><td>🍎 Mac user</td><td><b>Onshape</b></td><td>Crashe Fusiona na Macu to najczęstszy powód migracji ("crashes 10×/day")</td></tr>
+  <tr><td>🔧 CNC / frezowanie / tokarka</td><td><b>Fusion 360</b></td><td>CAM to królestwo Fusion: dojrzały, 5-osi, posty. Onshape CAM zbyt młody</td></tr>
+  <tr><td>🔌 Elektronika + mechanika w jednym (PCB, obudowy)</td><td><b>Fusion 360</b></td><td>Wbudowany PCB (EAGLE) z integracją MCAD; u Onshape dopiero w Professional</td></tr>
+  <tr><td>👥 Zespół / startup (2+ osoby nad tym samym modelem)</td><td><b>Onshape</b></td><td>Multiplayer realtime + PDM bez serwerów + branching — nic innego tego nie ma w tej cenie</td></tr>
+  <tr><td>🎓 Nauka CAD od zera</td><td><b>Onshape</b></td><td>Najłagodniejsza krzywa nauki, darmowy Learning Center, działa na czymkolwiek — idealne do klasy/samodzielnej nauki</td></tr>
+  <tr><td>💻 Dev który lubi gita i automatyzację</td><td><b>Onshape</b></td><td>Versioning z branch/merge, API, FeatureScript; dla programisty to naturalne środowisko</td></tr>
+  <tr><td>🏭 Firma komercyjna, jeden inżynier</td><td><b>Fusion 360</b></td><td>$680/rok vs $1500/rok za porównywalne możliwości</td></tr>
+  <tr><td>🔒 Projekt poufny, budżet zero</td><td><b>Fusion Personal</b> lub FreeCAD</td><td>Onshape Free = publiczne; Fusion Personal = prywatne; FreeCAD = zawsze prywatne, offline</td></tr>
+  <tr><td>🤖 Robotyka FRC / drużyny studenckie</td><td><b>Onshape</b></td><td>Standard w FRC: multiplayer, darmowe licencje edukacyjne, parts libraries; czasem hybryda Onshape→Fusion na CAM</td></tr>
+  <tr><td>🎨 Organiczne rzeźby / postacie</td><td><b>Żaden</b> → Blender/ZBrush/Plasticity</td><td>Oba to parametryczny CAD do części technicznych; community to podkreśla</td></tr>
+</table>
+</div>
+
+<h2>💰 Ceny i plany — szczegóły (oficjalne, 2026)</h2>
+<div class="grid2">
+  <div class="card">
+    <h3>Onshape</h3>
+    <table>
+      <tr><th>Plan</th><th>Cena</th><th>Co dostajesz</th></tr>
+      <tr><td><b>Free</b></td><td>$0</td><td>Pełne CAD (parts, assemblies, drawings, sheet metal, weldments), versioning, mobile apps. <b>Non-commercial, wszystkie dokumenty PUBLICZNE</b></td></tr>
+      <tr><td><b>Standard</b></td><td>$1500/user/rok</td><td>Wszystko z Free + <b>prywatne dokumenty</b> (IP) + support</td></tr>
+      <tr><td><b>Professional</b></td><td>$2500/user/rok</td><td>+ Simulation, Rendering, PCB Studio, CAM, release management, advanced PDM</td></tr>
+      <tr><td><b>Enterprise Plus</b></td><td>kontakt sales</td><td>+ SSO, analytics, Arena PLM, priority support</td></tr>
+    </table>
+    <p class="src">Startups: Professional za darmo po kwalifikacji · Studenci: professional-grade za darmo · Discovery: do 6 mies. Professional free</p>
+  </div>
+  <div class="card">
+    <h3>Fusion 360</h3>
+    <table>
+      <tr><th>Plan</th><th>Cena</th><th>Co dostajesz</th></tr>
+      <tr><td><b>Personal Use</b></td><td>$0</td><td>Non-commercial, przychód &lt;$1000/rok. <b>10 aktywnych dokumentów</b>, CAM 2/2.5/3-osiowy, STL+STEP export, rysunki okrojone, bez sim/anim/generative</td></tr>
+      <tr><td><b>Fusion (base)</b></td><td>$57/mies. (biling roczny) ≈ $680/rok</td><td>Pełny CAD/CAM/CAE/PCB/PDM, wszystkie formaty, konfiguracje, BOM, cloud render+sim</td></tr>
+      <tr><td><b>for Manufacturing</b></td><td>drożej (JS-render, niepotwierdzone)</td><td>Advanced CAM: 5-osi, probing, automatyzacja, postprocesory</td></tr>
+      <tr><td><b>for Design</b></td><td>drożej (JS-render, niepotwierdzone)</td><td>11 symulacji advanced, generative design, advanced surfacing, PLM</td></tr>
+    </table>
+    <p class="src">Studenci/educatorzy: pełna wersja za darmo · Trial: 30 dni · Extensions płatne osobno (cloud credits)</p>
+  </div>
+</div>
+
+<div class="card">
+  <h3>⚠️ Pułapki free planów — na które uważać</h3>
+  <ul>
+    <li><b>Onshape Free:</b> dokumenty są publiczne w stopniu, w którym każdy może je <b>kopiować</b> ("It's public like 'public domain'" — r/3Dprinting). Zero limitów ilościowych, ale zero prywatności.</li>
+    <li><b>Fusion Personal:</b> asemblacja + każda jej referencja to <b>osobne dokumenty</b> z puli 10 — duże projekty zjadają limit szybciej niż się wydaje. PDFy/obrazy się nie liczą.</li>
+    <li><b>Fusion Personal:</b> DXF tylko przez "Save As DXF" ze sketcha (nie przez File→Export) — istotne przy laser-cuttingu.</li>
+    <li><b>Fusion Personal:</b> tylko 1 edytowalny rysunek techniczny (drawing) naraz — ból przy dokumentacji.</li>
+    <li><b>Oba:</b> limity bywały zmieniane (Fusion 2020: chcieli zabrać STEP — cofnęli pod presją; Onshape: "limited the free plan quite a bit" historycznie). Nic nie jest na zawsze.</li>
+  </ul>
+</div>
+
+<h2>🗣️ Co mówi społeczność (wybrane cytaty)</h2>
+<div class="card">
+  <div class="quote">"Fusion freezes and crashes a lot. I've never had that problem since switching to Onshape."<small>— r/Onshape, <a href="https://www.reddit.com/r/Onshape/comments/17nr0id/">"How does onshape compare to fusion 360?"</a>, 2023</small></div>
+  <div class="quote">"It's not only public like 'anyone can view this online.' It's public like 'public domain'."<small>— r/3Dprinting o Onshape Free, <a href="https://www.reddit.com/r/3Dprinting/comments/qt65l6/">"Fusion 360 vs Onshape?"</a>, 2021</small></div>
+  <div class="quote">"Fusion's free license also allows for non-public documents, and by comparison, AutoDesk's pricing makes OnShape look like they're stealing from you."<small>— r/Fusion360, <a href="https://www.reddit.com/r/Fusion360/comments/1b57u2g/">"Who has used Onshape?"</a>, 2024</small></div>
+  <div class="quote">"Long time fusion user to permanent onshape user here. From a design perspective, onshape wins hands down. The workflow is a lot smoother."<small>— r/Onshape, <a href="https://www.reddit.com/r/Onshape/comments/1bc62nq/">"Fusion 360 to Onshape, anyone did this switch?"</a>, 2024</small></div>
+  <div class="quote">"My current workflow is onshape for all modeling (excellent multi-player concurrent editing), then Fusion for CAM if it's going to CNC equipment."<small>— Hacker News, wątek "A nicer voltmeter clock", 2026-05 (via <a href="https://hn.algolia.com/?q=onshape+fusion">Algolia</a>)</small></div>
+  <div class="quote">"One of the reasons I switched to OnShape recently is that I can run it on my MacBook... knowing what I know now I would make the same decision again."<small>— Hacker News, 2025-12</small></div>
+  <div class="quote">"I switched to OnShape... then switched over to Fusion360 because the vast majority of the people in my hobby (amateur rocketry) use Fusion360. Using the same tool as everyone else really helps."<small>— Hacker News, 2022</small></div>
+  <div class="quote">"After 10+ years with SolidWorks I switched to OnShape. A small learning curve but now I enjoy it just as much."<small>— Hacker News, 2026-01</small></div>
+  <div class="quote">"OnShape was nice... but it always felt tenuous that the plan would remain free so I didn't really feel like I could trust it long term."<small>— Hacker News, 2024</small></div>
+</div>
+
+<h2>📈 Trendy 2025–2026</h2>
+<div class="card">
+  <ul>
+    <li><b>Onshape dodał CAM (~2025)</b> — sygnał, że celują w klientów CNC Fusiona, ale machiniści dopiero testują; popularna pozostaje hybryda "Onshape do designu + Fusion do CAM".</li>
+    <li><b>AI w obu obozach:</b> Autodesk Assistant (AI wykonujące operacje w modelu) vs Onshape AI Advisor (beta). Startupy AI-CAD (np. Adam, YC W25) robią pluginy symetrycznie do obu. AI na razie nie rozstrzyga wyboru.</li>
+    <li><b>Trend "de-Autodesk" trwa:</b> zabicie EAGLE (2026), subskrypcje, Rossmann-gate — zasilają Exodus do Onshape i FreeCAD.</li>
+    <li><b>FreeCAD 1.0 (październik 2024)</b> rośnie jako trzecia droga: zero limitów, zero chmury, zero kosztów — ale UI wciąż odstrasza część userów (najczęściej w stronę Onshape, nie z powrotem do Fusion).</li>
+    <li><b>Limity Fusion Personal stabilne od 2024</b> (10 doc, brak sim) — backlash przygasł, stan się "ustabilizował".</li>
+  </ul>
+</div>
+
+<h2>🧭 Historie migracji (37 historii, 2022–2026)</h2>
+<div class="card">
+  <p><b>Kierunek Fusion → Onshape (23 historii):</b> motory migracji to <b>Linux</b> (8+ wyraźnych przypadków — Fusion nie działa), <b>crashe i „walka" Fusiona</b> (buggy sketch, connection errors, timeline skaczący przy edycji wstecz) oraz <b>płynność workflow</b>. Praktycznie nikt z tej grupy nie żałuje — typowe cytaty: „breath of fresh air", „nie walczy ze mną jak Fusion". Czas przestawki: <b>dni do tygodnia</b> do komfortu; realny koszt to nawyki (organizacja Part Studios), nie nauka klikania.</p>
+  <div class="quote">„I just switched to OnShape after 10 years on Fusion 360 and I'm happy I did — truly a breath of fresh air." (Fusion był „buggy as hell": crashe, błędy sieci, constraint który chcesz usunąć nigdy nie jest tym usuwanym)<small>— u/djscoox, r/Fusion360, 2025-05</small></div>
+  <div class="quote">„From day 0, [OnShape] was a breath of fresh air. Things just worked, smooth as butter, and assemblies are so much better than they are in Fusion." (po Fusion trialu: paywall na „Save As" i limit komponentów)<small>— u/raikaimiyamoto, r/Fusion360, 2025-04</small></div>
+  <div class="quote">„It doesn't fight me constantly like fusion does when I make a small change to an earlier feature or sketch. The architecture lends itself to more organized projects." — a tydzień później, w tym samym wątku, społeczność wyliczyła „catch": publiczne dokumenty w free, brak offline, limitowane hotkeye, brak assembly mirror.<small>— u/cathode_01, r/Onshape, 2025-02 („Refugee from Fusion — what's the catch?")</small></div>
+  <p><b>Kierunek Onshape → Fusion (powroty):</b> trzy motory — <b>CAM/CNC</b> (Onshape CAM za drogi/niedojrzały: „Linux wypchnął mnie z Fusion do Onshape, CAM ciągnie mnie z powrotem" — irrenhaus, HN 2025), <b>cena komercyjna</b> ($1500/rok vs ~$467/rok Fusion: „za $1000 rocznie różnicy kupisz potężny komputer" — u/JoeKling) i <b>prywatność plików</b> („Onshape isn't free. Their payment is your files" — u/darkapollo1982; client/proprietarny work wyklucza publiczne dokumenty).</p>
+  <h3>Top 7 wzorców z historii</h3>
+  <ol>
+    <li><b>Linux = główny motor migracji</b> w Fusion→Onshape; bez Linuksa powodów do zmiany jest mało.</li>
+    <li><b>Stabilność vs funkcje:</b> odchodzą przez crashe, zostają dla płynności i porządku (feature tree „mówi co zrobiłeś" vs timeline Fusion „tolerancyjny na bałagan").</li>
+    <li><b>CAM = główny magnes powrotu</b>; popularna hybryda: Onshape (CAD) + Fusion (CAM).</li>
+    <li><b>Cena komercyjna rozstrzyga:</b> freelancerzy i mali twórcy lądują przy Fusion.</li>
+    <li><b>Publiczne dokumenty</b> to deal-breaker dla pracy komercyjnej/poufnej; dla hobby „99% plików nikogo nie interesuje".</li>
+    <li><b>Migracja danych jednokierunkowa:</b> STEP przenosi geometrię, NIE historię/timeline — stare projekty zostają w Fusion, nowe rysuje się w Onshape.</li>
+    <li><b>Zmienia się sposób myślenia, nie klik:</b> Onshape nagradza plan z góry (Part Studios ≤250 featurów, nazywanie drzewka, mate connectory); Fusion wybacza improwizację.</li>
+  </ol>
+</div>
+
+<h2>🧭 Rekomendacja dla Ciebie (Dawid)</h2>
+<div class="card">
+  <p>Do druku 3D na Kobrze S1 (enclosures ESP32, części do klikacza XY, stelaże): <b>Fusion 360 Personal</b> jako podstawowe narzędzie — prywatne pliki, STL/STEP export, CAM na przyszłość. 10 dokumentów przy Twoim tempie będzie ciasno → swapuj nieaktywne projekty albo trzymaj drugi kanał w <b>Onshape Free</b> (tam, gdzie publiczność nie boli: checklisty druku, projekty open-source).</p>
+  <p style="margin-top:8px">Gdyby projekt wymagał współpracy z kimś realtime albo chcesz CAD z tabletu/telefonu w warsztacie → Onshape. Gdy pojawi się CNC/frezowanie → Fusion (płatny albo personal z CAM 3-osiowym).</p>
+</div>
+
+<h2>📚 Źródła</h2>
+<div class="card">
+  <h3>Oficjalne (dostęp 2026-08-20)</h3>
+  <ul>
+    <li><a href="https://www.onshape.com/en/pricing/">Onshape — Plans and Pricing</a> (ceny: Free/Standard $1500/Professional $2500)</li>
+    <li><a href="https://www.onshape.com/en/products/free">Onshape — Free Plan</a> (publiczne dokumenty, non-commercial)</li>
+    <li><a href="https://www.onshape.com/en/standard/">Onshape — Standard</a> (private documents od Standard)</li>
+    <li><a href="https://www.onshape.com/en/education/">Onshape — Education</a></li>
+    <li><a href="https://www.autodesk.com/products/fusion-360/pricing">Autodesk Fusion — Pricing/Overview</a> ($57/mies., edycje Manufacturing/Design)</li>
+    <li><a href="https://www.autodesk.com/products/fusion-360/personal">Autodesk Fusion — Personal Use</a> (limity, &lt;$1000/rok)</li>
+    <li><a href="https://www.autodesk.com/products/fusion-360/blog/changes-to-fusion-360-for-personal-use/">Autodesk Blog — zmiany w Personal Use</a> (STEP 2020, CAM 3-osi)</li>
+    <li><a href="https://www.autodesk.com/products/fusion-360/blog/the-10-document-limit-for-personal-use-explained-in-7-steps/">Autodesk Blog — limit 10 dokumentów</a></li>
+    <li><a href="https://www.autodesk.com/education/edu-software/fusion">Autodesk — Fusion Education</a></li>
+  </ul>
+  <h3>Społecznościowe</h3>
+  <ul>
+    <li><a href="https://www.reddit.com/r/cad/comments/yut1cy/">r/cad — "Fed up with Fusion 360, should I switch?"</a> (crashe na Macu)</li>
+    <li><a href="https://www.reddit.com/r/Fusion360/comments/18ntfri/">r/Fusion360 — "Fusion 360 vs Onshape"</a> (offline, publiczne pliki)</li>
+    <li><a href="https://www.reddit.com/r/Fusion360/comments/1b57u2g/">r/Fusion360 — "Who has used Onshape?"</a> (CAM, ceny)</li>
+    <li><a href="https://www.reddit.com/r/3Dprinting/comments/qt65l6/">r/3Dprinting — "Fusion 360 vs Onshape?"</a> (public domain)</li>
+    <li><a href="https://www.reddit.com/r/Onshape/comments/1bc62nq/">r/Onshape — "Fusion 360 to Onshape switch"</a> (workflow)</li>
+    <li><a href="https://www.reddit.com/r/3Dprinting/comments/wergmo/">r/3Dprinting — "Fusion 360 VS Onshape"</a> (2022)</li>
+    <li><a href="https://www.reddit.com/r/Onshape/comments/17nr0id/">r/Onshape — "How does onshape compare"</a> (stabilność)</li>
+    <li><a href="https://www.reddit.com/r/SolidWorks/comments/15olopc/">r/SolidWorks — "is Onshape or Fusion 360 enough?"</a> (produkcja)</li>
+    <li><a href="https://www.reddit.com/r/3Dprinting/comments/yuxpov/">r/3Dprinting — "Best alternative to Fusion 360"</a> (Linux)</li>
+    <li><a href="https://www.reddit.com/r/Fusion360/comments/itsgwe/">r/Fusion360 — "personal use license restricted"</a> (2020, ceny)</li>
+    <li><a href="https://forums.autodesk.com/t5/fusion-design-validate-document/specific-limitations-of-fusion-free-version/td-p/13193784">Fora Autodesk — limity free</a></li>
+    <li><a href="https://forums.autodesk.com/t5/fusion-electronics-forum/restrictions-in-the-hobbyist-version/td-p/9536686">Fora Autodesk — PCB w personal</a></li>
+    <li><a href="https://forum.langmuirsystems.com/t/fusion-360-hobby-personal-use-license/41478">Langmuir Forum — hobby CNC</a></li>
+    <li><a href="https://productdesignonline.com/tips-and-tricks/making-the-most-of-fusion-360s-personal-use-license/">Product Design Online — personal license tips</a></li>
+    <li><a href="https://autocadeverything.com/fusion-360-for-personal-use/">Autocad Everything — Personal Use guide</a> (2025-10)</li>
+    <li><a href="https://hn.algolia.com/?q=onshape">Hacker News (Algolia) — wątki onshape/fusion 2022–2026</a></li>
+    <li><a href="https://www.youtube.com/watch?v=SlnEThQ4HR8">YouTube — Fusion Personal LIMITATIONS</a> (backlash STEP)</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>🔬 Metodologia i niepotwierdzone</h3>
+  <p class="src">28 źródeł: 8 oficjalnych (onshape.com, autodesk.com — ceny Onshape wydobyte curl-em z JS-renderowanej strony) + 20 społecznościowych (Reddit przez SERP-y DDG, HN przez Algolia API, fora Autodesk/Langmuir, blogi). Reddit bezpośrednio zablokowany dla scrapera — cytaty z wątków pochodzą ze snippetów SERP + pełnych komentarzy HN.</p>
+  <p class="src" style="margin-top:6px"><b>Niepotwierdzone (JS-render / blokady):</b> dokładna roczna kwota Fusion base w USD (≈$680 liczone z $57×12), ceny edycji Manufacturing/Design, ceny Onshape w EUR/SEK, pełna lista formatów eksportu Fusion Personal (3MF?), szczegółowe wymagania sprzętowe Fusion. Cytaty Reddita są parafrazą snippetów SERP — pełne wątki do weryfikacji po zalogowaniu.</p>
+</div>
+
+<div class="foot">
+  Raport: Andrzej 🤖 · Deep research dla Dawida · 2026-08-20 · Dane: onshape.com, autodesk.com, Reddit, Hacker News, fora · Destylaty surowe: <code>memory/research/onshape-vs-fusion/raw/</code>
+</div>
+
+</div>
+</body>
+</html>

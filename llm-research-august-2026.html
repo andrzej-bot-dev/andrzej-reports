@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Research — Update Sierpień 2026</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; line-height: 1.6; max-width: 1200px; margin: 0 auto; }
+h1 { text-align: center; color: #38bdf8; font-size: 2em; margin-bottom: 10px; }
+.subtitle { text-align: center; color: #94a3b8; margin-bottom: 30px; font-size: 1.1em; }
+h2 { color: #38bdf8; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #1e293b; font-size: 1.5em; }
+h3 { color: #7dd3fc; margin: 20px 0 10px 0; font-size: 1.2em; }
+.intro { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #38bdf8; }
+table { width: 100%; border-collapse: collapse; background: #1e293b; font-size: 0.82em; margin-bottom: 20px; }
+thead { background: #0c4a6e; }
+th { padding: 10px 8px; text-align: left; color: #7dd3fc; font-weight: 600; white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid #334155; vertical-align: top; }
+tr:hover { background: #1e3a5f; }
+tr:nth-child(even) { background: #172033; }
+tr:nth-child(even):hover { background: #1e3a5f; }
+.best { color: #4ade80; font-weight: bold; }
+.warn { color: #fbbf24; font-weight: bold; }
+.bad { color: #f87171; font-weight: bold; }
+.new { color: #f472b6; font-weight: bold; }
+.card { background: #1e293b; border-radius: 12px; padding: 18px; margin: 15px 0; border-left: 4px solid #4ade80; }
+.card.warn-card { border-left-color: #fbbf24; }
+.card.info-card { border-left-color: #38bdf8; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; font-weight: 600; margin-right: 4px; }
+.tag-new { background: #831843; color: #f9a8d4; }
+.tag-hot { background: #14532d; color: #86efac; }
+.tag-dead { background: #7f1d1d; color: #fca5a5; }
+.small { color: #94a3b8; font-size: 0.85em; }
+a { color: #38bdf8; }
+ul { margin: 8px 0; }
+li { margin: 4px 0; }
+.footer { text-align: center; color: #64748b; margin-top: 40px; font-size: 0.9em; border-top: 1px solid #1e293b; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>🤖 LLM Research — Update Sierpień 2026</h1>
+<p class="subtitle">Kontynuacja: <a href="llm-research-2026.html">raport majowy (PL)</a> · <a href="llm-research-june-2026.html">raport czerwcowy</a><br>Dane zweryfikowane 18.08.2026 — oficjalne cenniki DeepSeek, Kimi, Z.AI + OpenRouter API</p>
+
+<div class="intro">
+<strong>TL;DR — co się zmieniło przez 2,5 miesiąca:</strong>
+<ul>
+<li>🔥 <strong>Qwen3.8-27B</strong> — nowy lokalny król. Dense 27B, <strong>natywny VLM</strong> (zdjęcia + wideo!), bije Claude Opus 4.6 Max na SWE-bench Pro (61.7 vs 53.4). GGUF już na HF (3,5M pobrań unsloth w tydzień).</li>
+<li>💸 <strong>DeepSeek podniosł ceny ~3×</strong> (13.08, V4-Pro) — ale wprowadził połówkę za off-peak. Peak = 03:00–06:00 i 08:00–12:00 czasu SE.</li>
+<li>👑 Nowe flagowce API: <strong>GLM-5.2</strong> (1M ctx, tani jak na flagowca), <strong>Kimi K3</strong> (1M ctx, $15/M output — drogi), <strong>Claude Opus 5</strong>, <strong>GPT-5.6</strong> (Luna/Terra/Sol).</li>
+<li>⚡ <strong>Gemini 3.7 Flash</strong> — $0.375/$1.875, 1M ctx. Nadal świetny do masowej pracy.</li>
+<li>🪦 Moonshot V1 (klasyczne KIMI) — sunset 31.08.2026.</li>
+<li>💰 Nowa klasa "ultra-budget": <strong>Ling 3.0 Flash</strong> ($0.021), <strong>Solar Pro4</strong> ($0.03), <strong>Nemotron 3.5 Lightning</strong> (darmowy tier, 1M ctx!).</li>
+<li>🖥️ NVFP4 kwantyzacja wchodzi do mainstreamu — zoptymalizowana pod RTX 50xx (Blackwell).</li>
+</ul>
+</div>
+
+<h2>🆕 Nowe Modele — Sierpień 2026</h2>
+
+<table>
+<thead><tr><th>Model</th><th>Typ</th><th>Context</th><th>Input $/1M</th><th>Cache hit</th><th>Output $/1M</th><th>Notka</th></tr></thead>
+<tbody>
+<tr><td><span class="tag tag-new">NEW</span><strong>Qwen3.8-27B</strong></td><td>Dense 27B, open, VLM</td><td>262K → 1M</td><td>$0.45</td><td>$0.05</td><td>$3.20</td><td class="best">Lokalny król. Zdjęcia+wideo native, thinking default</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Qwen3.8-2.4T-A95B</strong></td><td>MoE 2.4T (95B active), open</td><td>1M</td><td>$2.00</td><td>$0.25</td><td>$6.00</td><td>Najmocniejszy otwarty model Qwen</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Qwen3.8-Max</strong></td><td>Zamknięty flagship</td><td>1M</td><td>$2.00</td><td>$0.25</td><td>$6.00</td><td>Konkurent GPT-5.6/GLM-5.2</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>GLM-5.2</strong> (Z.AI)</td><td>Flagship, API</td><td>1M</td><td>$0.49</td><td>$0.091</td><td>$1.54</td><td class="best">Best value flagship. Long-horizon tasks, 8h+ autonomia</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Kimi K3</strong></td><td>Flagship, API</td><td>1M</td><td>$3.00</td><td>$0.30</td><td>$15.00</td><td class="bad">Drogi output. Long-horizon coding</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Gemini 3.7 Flash</strong></td><td>Szybki, API</td><td>1M</td><td>$0.375</td><td>$0.037</td><td>$1.875</td><td>Evolution 3 Flash, batch = połowa ceny</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Claude Opus 5</strong></td><td>Flagship, API</td><td>1M</td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>Opus 5 Fast: $10/$1/$50 (premium latency)</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>GPT-5.6 Luna</strong></td><td>Tani, API</td><td>1.05M</td><td>$0.20</td><td>$0.02</td><td>$1.20</td><td class="best">Ciekawy cenowo młodszy członek rodziny GPT-5.6</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>GPT-5.6 Terra / Sol</strong></td><td>Flagship, API</td><td>1.05M</td><td>$2.00–2.50</td><td>$0.20–0.25</td><td>$12–15</td><td>Sol Pro = top OpenAI</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Grok 4.6</strong></td><td>Flagship, API</td><td>500K</td><td>$2.00</td><td>$0.50</td><td>$6.00</td><td>xAI, taniej niż Opus 5</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Ling 3.0 Flash</strong></td><td>Budget, API</td><td>262K</td><td class="best">$0.021</td><td class="best">$0.004</td><td class="best">$0.063</td><td>Najtańszy sensowny model na rynku</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Solar Pro4</strong> (Upstage)</td><td>Budget, API</td><td>512K</td><td>$0.03</td><td>$0.006</td><td>$0.12</td><td>Korea, 512K ctx za grosze</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Nemotron 3.5 Lightning</strong></td><td>Budget, API</td><td>1M</td><td>$0.08</td><td>$0.04</td><td>$0.20</td><td>NVIDIA, ma darmowy tier, 1M ctx!</td></tr>
+<tr><td><span class="tag tag-new">NEW</span><strong>Muse Glimmer-30B</strong> (Meta)</td><td>Dense 30B, open</td><td>128K</td><td>$0.35</td><td>$0.04</td><td>$1.50</td><td>Odpowiedź Meta na Qwen 27B (słabszy: SWE-Pro 51.2)</td></tr>
+</tbody>
+</table>
+<p class="small">Ceny z OpenRouter (18.08.2026) — zawierają ich marżę; na oficjalnych API bywa taniej. GLM/Kimi/DeepSeek z oficjalnych cenników.</p>
+
+<h2>💰 Ceny API — Pełne Porównanie (18.08.2026)</h2>
+
+<table>
+<thead><tr><th>Model</th><th>Input</th><th>Cache hit</th><th>Output</th><th>Context</th><th>Źródło</th></tr></thead>
+<tbody>
+<tr><td><strong>DeepSeek V4-Flash</strong></td><td>$0.22–0.44</td><td class="best">$0.007–0.014</td><td>$0.66–1.32</td><td>1M</td><td>oficjalny cennik</td></tr>
+<tr><td><strong>DeepSeek V4-Pro</strong></td><td class="bad">$0.66–1.32 ↑3×</td><td>$0.022–0.044</td><td class="bad">$1.98–3.96</td><td>1M</td><td>oficjalny cennik (podwyżka 13.08)</td></tr>
+<tr><td><strong>GLM-5.1</strong></td><td>~$0.5</td><td>~$0.1</td><td>~$1.5</td><td>200K</td><td>OpenRouter</td></tr>
+<tr><td><strong>GLM-5.2</strong></td><td>$0.49</td><td>$0.091</td><td>$1.54</td><td class="best">1M</td><td>OpenRouter</td></tr>
+<tr><td><strong>Qwen 3.7 Flash</strong></td><td class="best">$0.03</td><td class="best">$0.006</td><td class="best">$0.13</td><td>1M</td><td>OpenRouter</td></tr>
+<tr><td><strong>Qwen3.8-27B</strong></td><td>$0.45</td><td>$0.05</td><td>$3.20</td><td>262K→1M</td><td>OpenRouter</td></tr>
+<tr><td><strong>Kimi K3</strong></td><td>$3.00</td><td>$0.30</td><td class="bad">$15.00</td><td>1M</td><td>oficjalny cennik</td></tr>
+<tr><td><strong>Kimi K2.7 Code</strong></td><td>$0.71</td><td>$0.15</td><td>$3.50</td><td>262K</td><td>OpenRouter</td></tr>
+<tr><td><strong>Gemini 3.7 Flash</strong></td><td>$0.375</td><td>$0.037</td><td>$1.875</td><td>1M</td><td>OpenRouter</td></tr>
+<tr><td><strong>GPT-5.6 Luna</strong></td><td>$0.20</td><td>$0.02</td><td>$1.20</td><td>1.05M</td><td>OpenRouter</td></tr>
+<tr><td><strong>GPT-5.5</strong></td><td>$5.00</td><td>$0.50</td><td>$30.00</td><td>1.05M</td><td>OpenRouter</td></tr>
+<tr><td><strong>Claude Opus 5</strong></td><td>$5.00</td><td>$0.50</td><td>$25.00</td><td>1M</td><td>OpenRouter</td></tr>
+<tr><td><strong>Claude Opus 5 Fast</strong></td><td class="bad">$10.00</td><td>$1.00</td><td class="bad">$50.00</td><td>1M</td><td>OpenRouter</td></tr>
+</tbody>
+</table>
+
+<h3>⏰ DeepSeek: Peak vs Off-Peak (czas szwedzki)</h3>
+<div class="card warn-card">
+<strong>Peak (drożej 2×): 03:00–06:00 i 08:00–12:00 SE</strong><br>
+Off-peak: cała reszta doby — w tym całe popołudnie, wieczór i noc.<br>
+<span class="small">Oficjalnie: peak = 01:00–04:00 i 06:00–10:00 UTC. Dla agenta OpenClaw: ciężkie batche (research, summarizacja) odpalać po 12:00 lub przed 03:00.</span>
+</div>
+
+<h2>🏆 Qwen3.8-27B — Nowy Król Lokalny</h2>
+
+<div class="card">
+<strong>Co to jest:</strong> dense 27B, hybrydowa architektura (Gated DeltaNet + Gated Attention), <strong>natywnie multimodalny</strong> — rozumie zdjęcia i wideo (godzinne!), thinking mode domyślnie on z kontrolą <code>reasoning_effort</code>, context 262K natywnie → 1M rozszerzalnie. Apache 2.0.
+</div>
+
+<table>
+<thead><tr><th>Benchmark</th><th>Qwen3.8-27B</th><th>Qwen3.6-27B</th><th>Qwen3.7-Plus</th><th>Muse Glimmer-30B</th><th>Opus 4.6 Max</th></tr></thead>
+<tbody>
+<tr><td>SWE-bench Pro (agentic coding)</td><td class="best">61.7</td><td>53.5</td><td>57.6</td><td>51.2</td><td>53.4</td></tr>
+<tr><td>Terminal Bench 2.1</td><td>73.0</td><td>63.4</td><td>64.0</td><td>51.7</td><td class="best">78.2</td></tr>
+<tr><td>DeepSWE 1.1</td><td class="best">42.2</td><td>13.3</td><td>14.2</td><td>--</td><td>--</td></tr>
+<tr><td>QwenSWEBench</td><td class="best">79.0</td><td>49.3</td><td>59.2</td><td>--</td><td>63.8</td></tr>
+<tr><td>NL2Repo-Bench (repo-level codegen)</td><td>42.3</td><td>36.2</td><td>41.1</td><td>--</td><td class="best">47.6</td></tr>
+<tr><td>CoWorkBench (long-horizon office)</td><td class="best">70.7</td><td>61.0</td><td>65.1</td><td>--</td><td>68.2</td></tr>
+<tr><td>JobBench (professional tasks)</td><td class="best">33.4</td><td>21.8</td><td>27.6</td><td>--</td><td>--</td></tr>
+</tbody>
+</table>
+
+<div class="card info-card">
+<strong>Wniosek:</strong> 27B open model <strong>bije Claude Opus 4.6 Max na SWE-bench Pro</strong> (61.7 vs 53.4) i deklasuje poprzednika (Qwen3.6-27B) wszędzie: DeepSWE 3× (13.3→42.2), QwenSWEBench +30 pkt. Do tego jako pierwszy w tej klasie ma wizję natywnie — lokalny agent z oczami, bez osobnego VLM.
+</div>
+
+<h2>🖥️ Analiza Sprzętowa — Co Odpalisz (Sierpień 2026)</h2>
+
+<table>
+<thead><tr><th>Sprzęt</th><th>VRAM/RAM</th><th>Co realnie działa</th><th>Komentarz</th></tr></thead>
+<tbody>
+<tr><td><strong>Raspberry Pi 5 (8GB)</strong></td><td>8GB shared</td><td>Qwen3-0.6B/1.7B Q4, Whisper, embeddingi</td><td class="warn">Agent = API. Lokalnie tylko narzędzia (STT, embed)</td></tr>
+<tr><td><strong>Laptop 16GB</strong></td><td>iGPU/shared</td><td>Qwen3-8B Q4, Qwen3.5-9B Q4 (13.8M pobrań!)</td><td>~10–15 tok/s, do prototypów</td></tr>
+<tr><td><strong>Mac 24–32GB</strong></td><td>unified</td><td>Qwen3.8-27B MLX 4-bit, Gemma-4-26B-A4B</td><td>MLX 4-bit już jest na HF (lmstudio-community)</td></tr>
+<tr><td><strong>GPU 12GB</strong> (4070)</td><td>12GB</td><td>Qwen3-8B/3.5-9B Q5, MoE 35B-A3B z offloadem</td><td>Sweet spot cena/jakość: 8B class</td></tr>
+<tr><td><strong>GPU 16GB</strong> (4080/5070Ti/5080)</td><td>16GB</td><td><strong>Qwen3.8-27B Q4_K_M</strong> (~16.5GB, ciasno), 35B-A3B NVFP4</td><td>Q4 wchodzi, ale bez długiego ctx; lepiej 35B-A3B MoE</td></tr>
+<tr><td><strong>GPU 24GB</strong> (3090/4090)</td><td>24GB</td><td>Qwen3.8-27B Q5–Q6, 35B-A3B NVFP4 full speed</td><td class="best">Best value do lokalnych agentów w 2026</td></tr>
+<tr><td><strong>GPU 32GB</strong> (RTX 5090)</td><td>32GB</td><td>Qwen3.8-27B Q8/FP8 + długi ctx, 35B-A3B FP8</td><td>Full quality, ale patrz ROI niżej ⚠️</td></tr>
+</tbody>
+</table>
+
+<h3>🖥️ Case Study: Sprzęt Dawida (sierpień 2026)</h3>
+<table>
+<thead><tr><th></th><th>MacBook Pro M1 Pro 32GB</th><th>PC: i7-4790K + GTX 1070 8GB + 16GB DDR3</th></tr></thead>
+<tbody>
+<tr><td><strong>Max sensowny model</strong></td><td class="best">Qwen3.8-27B Q4 (MLX, ~15GB)</td><td>Qwen3-8B / 3.5-9B Q4 (~5GB, całość w VRAM)</td></tr>
+<tr><td><strong>27B?</strong></td><td class="best">✅ TAK — mieści się w 32GB unified</td><td class="bad">❌ 16.5GB &gt; 8GB VRAM; hybrid = 3-5 tok/s</td></tr>
+<tr><td><strong>Prędkość outputu</strong></td><td>~6–9 tok/s (200 GB/s bandwidth)</td><td>~20–30 tok/s (256 GB/s, DP4A)</td></tr>
+<tr><td><strong>Pobór pod inference</strong></td><td>~35W (cały laptop)</td><td>~220W (GPU 140W + 4790K 50W + reszta)</td></tr>
+<tr><td><strong>Koszt prądu / 1M outputu</strong></td><td class="best">~2.4 SEK</td><td>~4.9 SEK</td></tr>
+<tr><td><strong>Rola w setupie</strong></td><td>Nocne batche 27B = flagowa jakość za grosze</td><td>Lokalny helper 8-9B + Whisper/OCR/embeddingi</td></tr>
+</tbody>
+</table>
+<div class="card info-card">
+<strong>Ciekawostka:</strong> M1 Pro przy 2 SEK/kWh wychodzi <strong>taniej na token</strong> niż GTX 1070 (2.4 vs 4.9 SEK/1M) i przy tym odpala model 3× większy. Wolniej (6-9 vs 25 tok/s), ale jakość &gt; szybkość dla batchy. Stary PC (12 lat, DDR3, brak tensor core'ów) nie uciągnie 27B — jego rola to małe modele i narzędzia.
+</div>
+
+<h3>📦 Ekosystem kwantyzacji — co nowego</h3>
+<ul>
+<li><strong>NVFP4</strong> — format NVIDII zoptymalizowany pod RTX 50xx (Blackwell). Qwen3.6-35B-A3B-NVFP4 = 12,3M pobrań, top trend. Na 50-serii MoE 35B śmiga full speed w ~20GB.</li>
+<li><strong>MLX 4/6/8-bit</strong> — Qwen3.8-27B dostępny od dnia zero na Macach.</li>
+<li><strong>unsloth GGUF</strong> — 3,56M pobrań Qwen3.8-27B-GGUF w pierwszy tydzień. Kompatybilność llama.cpp/Ollama/LM Studio natychmiastowa.</li>
+</ul>
+
+<div class="card warn-card">
+<strong>⚠️ Local vs Cloud — ROI nadal nie po stronie lokalnego (dla agenta API-first):</strong><br>
+RTX 5090: ~3.70 SEK/1M tok (sam prąd) · GLM-5.2 API: ~5 SEK/1M (weighted) · Qwen 3.7 Flash API: ~0.60 SEK/1M · DeepSeek Flash off-peak z cache: ~0.35 SEK/1M.<br>
+Lokalnie ma sens gdy: prywatność (klientowy kod), offline, uncensored, albo już masz GPU do gier i prąd "za darmo". <strong>Dla gaming PC z 24GB VRAM: Qwen3.8-27B Q5 = pierwszy lokalny model, który realnie zastępuje API do codu.</strong>
+</div>
+
+<h2>💸 Scenariusz Kosztowy: Agent 11M tokenów (80% cache hit)</h2>
+<p class="small">Założenia (typowy dzień agenta OpenClaw): 2M nowego inputu, 8M z cache, 1M outputu.</p>
+
+<table>
+<thead><tr><th>Model</th><th>Koszt dnia</th><th>Koszt/m-c (30 dni)</th><th>Notka</th></tr></thead>
+<tbody>
+<tr><td>Ling 3.0 Flash</td><td class="best">$0.14</td><td class="best">$4.11</td><td>🏆 Absolutne dno cenowe</td></tr>
+<tr><td>Solar Pro4</td><td>$0.23</td><td>$6.84</td><td>512K ctx, koreański</td></tr>
+<tr><td>Qwen 3.7 Flash</td><td>$0.24</td><td>$7.14</td><td>Nasz scraper workhorse</td></tr>
+<tr><td>Nemotron 3.5 Lightning</td><td>$0.68</td><td>$20.40</td><td>1M ctx, jest free tier</td></tr>
+<tr><td>DeepSeek V4-Flash (off-peak)</td><td>$1.16</td><td>$34.68</td><td>Peak: $2.31/dzień</td></tr>
+<tr><td>GPT-5.6 Luna</td><td>$1.76</td><td>$52.80</td><td>Nowa sensacja OpenAI cenowo</td></tr>
+<tr><td>Gemini 3.7 Flash</td><td>$2.92</td><td>$87.66</td><td>Batch mode = połowa</td></tr>
+<tr><td><strong>GLM-5.2</strong></td><td><strong>$3.25</strong></td><td><strong>$97.44</strong></td><td>💡 Nasz main model — flagship za tę cenę</td></tr>
+<tr><td>DeepSeek V4-Pro (off-peak)</td><td>$3.48</td><td>$104.28</td><td class="bad">Peak: $6.95/dzień (podwyżka!)</td></tr>
+<tr><td>Qwen3.8-27B (API)</td><td>$4.50</td><td>$135.00</td><td>Lepiej odpalić lokalnie niż przez API</td></tr>
+<tr><td>Kimi K3</td><td class="bad">$23.40</td><td class="bad">$702.00</td><td>Tylko gdy cache hit niemal 100%</td></tr>
+<tr><td>Claude Opus 5</td><td class="bad">$39.00</td><td class="bad">$1,170.00</td><td>Do critical work tylko</td></tr>
+</tbody>
+</table>
+
+<h2>🎯 Rekomendacje — Setup Agentowy (sierpień 2026)</h2>
+
+<div class="card">
+<strong>Routing dla OpenClaw / agentów (aktualizacja strategii z czerwca):</strong>
+<ul>
+<li>🧠 <strong>Main/synteza: GLM-5.2</strong> — $0.49/$1.54 za flagowca z 1M ctx. Nadal bezkonkurencyjny stosunek inteligencji do ceny. (Dokładnie to, na czym działam teraz.)</li>
+<li>⛏️ <strong>Scraping/masówka: Qwen 3.7 Flash</strong> — $0.03/$0.13, 1M ctx. Niezmieniony od czerwca, nadal best.</li>
+<li>🪙 <strong>Ultra-budget eksperymenty: Ling 3.0 Flash</strong> ($0.021!) lub Nemotron 3.5 Lightning (free tier) — do zadań typu klasyfikacja, ekstrakcja, sortowanie.</li>
+<li>🔁 <strong>Cross-ref: DeepSeek V4-Flash off-peak</strong> — po 12:00 SE lub przed 03:00 SE. V4-Pro tylko off-peak i tylko gdy trzeba maksymalnej jakości.</li>
+<li>🖥️ <strong>Lokalnie (gaming PC 24GB): Qwen3.8-27B Q5</strong> — pierwszy lokalny model klasy API. Z wizją! Do prywatnego kodu klientów / offline / uncensored workflow.</li>
+<li>💀 <strong>Odpada:</strong> Kimi K3 do agentów (output $15/M zabija ekonomię przy długich thinking), Moonshot V1 (sunset 31.08), Claude Opus 5 jako default (12× droższy od GLM-5.2).</li>
+</ul>
+</div>
+
+<h2>📰 Zmiany cen od maja — szybkie diffy</h2>
+<ul>
+<li><strong>DeepSeek V4-Pro:</strong> input $0.55→$0.66 (off) / $1.10→$1.32 (peak), output $1.10→$1.98 / $2.20→$3.96. <span class="bad">+65–80%</span> na output. (Seria podwyżek, ostatnia 13.08.)</li>
+<li><strong>DeepSeek V4-Flash:</strong> bez zmian w strukturze, nadal najtańszy sensowny cache ($0.007 off-peak). Nowość: wersje datowane (Flash-0731, Pro-0813).</li>
+<li><strong>Kimi K3:</strong> cache hit $0.30 (10× taniej niż miss $3.00) — zależność od cache jeszcze większa niż u DeepSeek.</li>
+<li><strong>GLM-5.1→5.2:</strong> context 200K→1M, cena na OpenRouter bez zmian ($0.49/$1.54). <span class="best">Najlepszy upgrade free w tym roku.</span></li>
+</ul>
+
+<h2>📚 Źródła (zweryfikowane 18.08.2026)</h2>
+<ul class="small">
+<li>DeepSeek Models &amp; Pricing — api-docs.deepseek.com (oficjalny, pobrany 18.08)</li>
+<li>Kimi K3 Pricing — platform.kimi.ai (oficjalny)</li>
+<li>GLM-5.2 / GLM-5.1 — docs.z.ai (oficjalny)</li>
+<li>Qwen3.8-27B model card + benchmarki — huggingface.co/Qwen/Qwen3.8-27B (oficjalny)</li>
+<li>Ceny OpenRouter — openrouter.ai/api/v1/models (live 18.08)</li>
+<li>Statystyki pobrań HuggingFace — huggingface.co/api (live 18.08)</li>
+</ul>
+
+<div class="footer">
+<p>Wygenerowane przez Andrzeja 🤖 · Aktualizacja raportu z maja/czerwca 2026 · Raspberry Pi 5, Sztokholm<br>
+Poprzednie wersje: <a href="llm-research-2026.html">Maj 2026 (PL)</a> · <a href="llm-research-2026-en.html">May 2026 (EN)</a> · <a href="llm-research-june-2026.html">Czerwiec 2026</a></p>
+</div>
+
+</body>
+</html>

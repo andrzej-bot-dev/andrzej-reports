@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polacy z IT wracający z emigracji — doświadczenia, historie, dane</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.7; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-bottom: 2px solid #334155; padding: 30px 0; margin-bottom: 30px; }
+header .container { padding: 0 20px; }
+h1 { font-size: 1.8em; color: #f1f5f9; margin-bottom: 10px; }
+.subtitle { color: #94a3b8; font-size: 1em; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75em; font-weight: 600; margin-right: 8px; }
+.badge-knowledge { background: #7c3aed; color: white; }
+.badge-date { background: #334155; color: #94a3b8; }
+nav.sticky { position: sticky; top: 0; z-index: 100; background: #1e293b; border-bottom: 1px solid #334155; padding: 10px 0; margin: -30px 0 30px 0; }
+nav.sticky .container { display: flex; flex-wrap: wrap; gap: 6px; }
+nav.sticky a { color: #93c5fd; text-decoration: none; padding: 4px 12px; border-radius: 6px; font-size: 0.8em; background: #1e3a5f; transition: all 0.2s; }
+nav.sticky a:hover { background: #2563eb; color: white; }
+h2 { font-size: 1.4em; color: #93c5fd; margin: 35px 0 15px; padding-bottom: 8px; border-bottom: 1px solid #334155; }
+h3 { font-size: 1.15em; color: #e2e8f0; margin: 25px 0 10px; }
+h4 { font-size: 1em; color: #cbd5e1; margin: 15px 0 8px; }
+p, li { color: #cbd5e1; margin-bottom: 10px; }
+a { color: #60a5fa; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin: 15px 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.card-title { font-weight: 700; color: #f1f5f9; font-size: 1.05em; }
+.card-badge { font-size: 0.7em; padding: 2px 8px; border-radius: 8px; }
+.badge-uk { background: #dc2626; color: white; }
+.badge-se { background: #2563eb; color: white; }
+.badge-de { background: #f59e0b; color: #1e293b; }
+.badge-nl { background: #f97316; color: white; }
+.badge-ie { background: #16a34a; color: white; }
+.badge-us { background: #7c3aed; color: white; }
+.badge-pl { background: #ef4444; color: white; }
+.badge-multi { background: #6366f1; color: white; }
+.quote { border-left: 3px solid #475569; padding: 10px 15px; margin: 12px 0; background: #1a2332; font-style: italic; color: #94a3b8; }
+.quote::before { content: "„"; font-size: 1.5em; color: #475569; }
+.tldr { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 25px; margin: 20px 0 30px; }
+.tldr h2 { border: none; margin-top: 0; color: #60a5fa; }
+.tldr ul { padding-left: 20px; }
+.tldr li { margin-bottom: 8px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+.stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 15px; text-align: center; }
+.stat-number { font-size: 1.8em; font-weight: 800; color: #60a5fa; }
+.stat-label { font-size: 0.8em; color: #94a3b8; margin-top: 5px; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #334155; }
+th { background: #1e3a5f; color: #93c5fd; font-weight: 600; font-size: 0.85em; }
+td { color: #cbd5e1; font-size: 0.9em; }
+tr:hover { background: #1a2332; }
+.pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+.pros, .cons { padding: 15px; border-radius: 10px; }
+.pros { background: #0a2a1a; border: 1px solid #166534; }
+.cons { background: #2a0a0a; border: 1px solid #991b1b; }
+.pros h4 { color: #4ade80; }
+.cons h4 { color: #f87171; }
+.pros li, .cons li { font-size: 0.9em; margin-bottom: 6px; }
+.section-divider { border: none; border-top: 1px solid #334155; margin: 40px 0; }
+.back-to-top { position: fixed; bottom: 20px; right: 20px; background: #2563eb; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.3em; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: all 0.3s; z-index: 99; }
+.back-to-top:hover { background: #3b82f6; transform: scale(1.1); }
+footer { margin-top: 50px; padding: 30px 0; border-top: 1px solid #334155; text-align: center; }
+footer p { color: #64748b; font-size: 0.85em; }
+.source-tag { display: inline-block; font-size: 0.7em; padding: 2px 6px; border-radius: 4px; background: #334155; color: #94a3b8; margin-left: 5px; }
+@media (max-width: 768px) {
+  .pros-cons { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  h1 { font-size: 1.4em; }
+}
+</style>
+</head>
+<body>
+<a href="#top" class="back-to-top">↑</a>
+
+<header id="top">
+<div class="container">
+<h1>🇵🇱 Polacy z IT wracający z emigracji</h1>
+<p class="subtitle">Doświadczenia, historie, twarde dane — dlaczego wracają, co ich zaskakuje, ile zarabiają</p>
+<p style="margin-top: 10px;">
+<span class="badge badge-knowledge">📚 Knowledge</span>
+<span class="badge badge-date">18.08.2026</span>
+<span class="badge badge-date">20+ źródeł</span>
+<span class="badge badge-date">PL + EN</span>
+</p>
+</div>
+</header>
+
+<nav class="sticky">
+<div class="container">
+<a href="#tldr">TL;DR</a>
+<a href="#trend">Trend</a>
+<a href="#historie">Historie</a>
+<a href="#zarobki">Zarobki IT</a>
+<a href="#podatki">Podatki B2B</a>
+<a href="#dlaczego">Dlaczego wracają</a>
+<a href="#szoki">Co szokuje</a>
+<a href="#rada">Rady</a>
+<a href="#twoja-sytuacja">Twoja sytuacja</a>
+<a href="#zrodla">Źródła</a>
+</div>
+</nav>
+
+<div class="container">
+
+<div class="tldr" id="tldr">
+<h2>⚡ TL;DR — co musisz wiedzieć</h2>
+<ul>
+<li><strong>Reverse brain drain jest realny.</strong> Od 2017 Polska ma dodatnie saldo migracyjne — pierwszy raz od 30+ lat. Z Niemiec wraca więcej Polaków niż wyjeżdża (netto -11 239 w 2024).</li>
+<li><strong>Wyjeżdżasz za kasą, wracasz za ludźmi.</strong> Prawie każdy powracający mówi to samo: powód to rodzina, tęsknota, poczucie bycia "wiecznym gościem" na zachodzie.</li>
+<li><strong>IT w Polsce nie jest już "tańsze".</strong> Senior dev zarabia 15-30k PLN brutto UoP, 22-28k netto B2B. Ryczałt 12% dla programistów to jedna z najlepszych stawek w UE.</li>
+<li><strong>Zdalna praca dla zagranicznych firm = game changer.</strong> Wielu powracających pracuje z PL dla firm z UK/DE/US — zachodnie stawki, polskie koszty życia.</li>
+<li><strong>Szok powrotny jest realny.</strong> 2-3 lata na pełną aklimatyzację. "Pierwszy rok to koszmar" — powtarza się w wielu historiach. Ale prawie nikt nie żałuje.</li>
+<li><strong>Dla Ciebie (SE→PL):</strong> Szwecja ma wyższe podatki (52% marginal) ale też wyższy social safety net. Polska ma niższe koszty życia i ryczałt 12%. Zdalna praca ze szwedzkim/US klientem = optymalna opcja.</li>
+</ul>
+</div>
+
+<!-- ==================== TREND ==================== -->
+<h2 id="trend">📊 Reverse Brain Drain — liczby</h2>
+
+<div class="stat-grid">
+<div class="stat-card">
+<div class="stat-number">+6 800</div>
+<div class="stat-label">saldo migracyjne PL w 2023 (GUS)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">-11 239</div>
+<div class="stat-label">netto wyjazd z DE do PL w 2024</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">7 lat</div>
+<div class="stat-label">z rzędu dodatnie saldo migracji</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">2,23 mln</div>
+<div class="stat-label">Polaków za granicą (z 3+ mln w 2017)</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Kluczowe statystyki</h3>
+<ul>
+<li><strong>Irlandia:</strong> Polaków spadło z 122 000 (2016) do 93 000 — <strong>-24%</strong></li>
+<li><strong>Wielka Brytania:</strong> z 911 000 (2016) do 691 000 (2020) — <strong>-24%</strong></li>
+<li><strong>Niemcy 2024:</strong> po raz pierwszy od 30 lat więcej Polaków wraca niż wyjeżdża</li>
+<li><strong>Bezrobocie PL:</strong> z 19,9% (20 lat temu) do <strong>3,16%</strong> (2021) — jedno z najniższych w UE</li>
+<li><strong>PKB per capita:</strong> potroiło się od akcesji do UE, wzrost 826,9% (1989-2018) — najwyższy w Europie</li>
+<li><strong>Realne pensje:</strong> potroiły się od 2004</li>
+</ul>
+<p><span class="source-tag">GUS, AFP, France24, Polskie Radio, Poland Insight</span></p>
+</div>
+
+<div class="card">
+<h3>IT w Polsce — kontekst</h3>
+<ul>
+<li><strong>500 000-580 000</strong> specjalistów IT w Polsce (~25% talentu CEE)</li>
+<li>IT/tech = <strong>8% PKB</strong> Polski</li>
+<li>Google, Microsoft, Nvidia obecne w Polsce</li>
+<li>8. miejsce na świecie w FDI (inwestycje zagraniczne)</li>
+<li>"Goldmine of tech talent" — dominik Andrzejczuk, investor PL-US</li>
+<li>Prognoza Labour Party: do 2030 Polska może wyprzedzić UK w GDP per person</li>
+</ul>
+<p><span class="source-tag">Polskie Radio, Monterail, forsal.pl</span></p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== HISTORIE ==================== -->
+<h2 id="historie">📖 Historie powracających</h2>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">1. IT Specialist — 13 lat w UK → Warszawa</span>
+<span class="card-badge badge-uk">UK → PL</span>
+</div>
+<p><strong>Kto:</strong> Facet, 34 lata, żona + córka 11 lat. Wyjechał z PL w wieku 19 lat, całe dorosłe życie w UK. Od gównopracy do specjalisty IT. Mieszkał na osiedlu white middle class pod Londynem (mortgage).</p>
+<p><strong>Powód rozważania powrotu:</strong> "Nigdzie nie czuję się jak u siebie — ani w PL ani w UK."</p>
+<p><strong>Strategia:</strong> Praca zdalna dla obecnego pracodawcy z PL + equity z domu w UK na zakup domu/szeregowki pod Warszawą bez kredytu.</p>
+<div class="pros-cons">
+<div class="pros">
+<h4>✅ Plusy PL</h4>
+<ul>
+<li>Bycie "u siebie"</li>
+<li>Dom pod Warszawą bez kredytu w wieku 34 lat</li>
+<li>Blisko do rodziny — nie marnowanie urlopu</li>
+<li>Życie wolniejsze, bardziej "stałe"</li>
+<li>Bezpieczniej (wg niego)</li>
+<li>Bez mortgage → żona nie musi pracować</li>
+</ul>
+</div>
+<div class="cons">
+<h4>❌ Minusy PL</h4>
+<ul>
+<li>Polityka (post z 2022)</li>
+<li>Chamstwo, najgorsza obsługa klienta na świecie</li>
+<li>"Walczysz" na co dzień</li>
+<li>Aklimatyzacja córki (rasizm w szkole?)</li>
+<li>Inflacja</li>
+</ul>
+</div>
+</div>
+<p class="quote">Córka zawsze była jedną nogą w PL — mama (nauczycielka) brała ją do szkoły w PL na wakacje.</p>
+<p><span class="source-tag">old.reddit.com/r/Polska — 2022</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">2. Web Dev PHP/Laravel — 10 lat w UK → Kraków</span>
+<span class="card-badge badge-uk">UK → PL</span>
+</div>
+<p><strong>Kto:</strong> Mężczyzna, 10+ lat w UK, studia + praca. Full-stack dev (PHP, Laravel). Nie czuje się jak w domu w UK.</p>
+<p><strong>Powód:</strong> "Po każdym urlopie w PL zastanawiam się, czy nie wrócić. Za każdym razem po tygodniu-dwóch zmieniałem zdanie. Teraz myślę poważnie."</p>
+<p><strong>Plan:</strong> Kraków (99%), nauczyć się React/Node.js, mid full-stack dev. Pyta o zarobki i kulturę pracy w PL IT.</p>
+<p class="quote">Nie czuję się już tutaj jak w domu. Chcę wyjechać, ale nie wiem dokąd. Niemcy/Austria — nie mogę się nauczyć niemieckiego.</p>
+<p><span class="source-tag">old.reddit.com/r/Polska — 2020</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">3. Małżeństwo — 10 lat UK → Włocławek (szef kuchni, nie IT)</span>
+<span class="card-badge badge-uk">UK → PL</span>
+</div>
+<p><strong>Kto:</strong> Ona — blogerka, on — szef kuchni. Wyjechali w 2004, wrócili ~2015. Dwójka dzieci. Zbudowali dom za pieniądze z UK.</p>
+<p><strong>Finanse po powrocie (2015-2016):</strong></p>
+<ul>
+<li>Budżet: <strong>4 000 zł/mies.</strong> — wystarczało im</li>
+<li>Rachunki: 2 210 zł (woda, prąd, śmieci, net, telefon, opał)</li>
+<li>Jedzenie + chemia + dziecko: ~1 400 zł</li>
+<li>Paliwo: 150 zł (auto na gaz)</li>
+<li>Zostawało ~1 700 zł/mc na inwestycje w dom</li>
+<li>Bez kredytu!</li>
+</ul>
+<p><strong>Kluczowa rada:</strong> "Zarejestruj się w UK o Jobseeker's Allowance ZANIM wrócisz, potem transferuj do PL. W PL Urząd Pracy odmówi zasiłku."</p>
+<p><strong>10 lat później (2024):</strong> "Nigdy nie żałowaliśmy. Pensje rosły, żyjemy komfortowo, stać nas na zagraniczne wakacje."</p>
+<p class="quote">Tutaj nikt nam nie powie "wracaj skąd przyjechałeś".</p>
+<p><span class="source-tag">smartpolak.co.uk — 2024</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">4. Budowlaniec — 20 lat UK/Holandia/Dania/DE → Lublin</span>
+<span class="card-badge badge-multi">Multi-kraj → PL</span>
+</div>
+<p><strong>Kto:</strong> Maciek, 46 lat. Po utracie pracy i rozwodzie w Lublinie wyjechał do UK. Pracował 6 lat na budowach w UK, potem Holandia, Dania, Niemcy (ostatnie 4 lata). Wrócił po spotkaniu ze starym znajomym.</p>
+<p><strong>Obserwacje po 20 latach:</strong></p>
+<ul>
+<li>"Gdziekolwiek teraz nie pojadę w PL, wciąż się nie mogę nadziwić, jak wiele tu się zmieniło"</li>
+<li>"Nigdzie w Europie nie widziałem, żeby powstawało tyle nowych domów jak u nas"</li>
+<li>"Kiedy ja wyjeżdżałem, zarabiałem 2 tys. zł. Dzisiaj młodzi nie potrzebują Zachodu. Mają go tutaj."</li>
+<li>Anglia: "Nigdy nie czułem się tam jak w domu. Wszędzie widziałem Polskę"</li>
+<li>Niemcy 2024: "To już nie ta sama dyscyplina i porządek. Dużo się zmieniło na gorsze"</li>
+</ul>
+<p><strong>Po powrocie:</strong> Założył własną firmę budowlaną w Lublinie. Zna perfekt angielski i niemiecki.</p>
+<p class="quote">Na Zachodzie się jednak nie odnalazłem. Od roku poznaję Polskę na nowo.</p>
+<p><span class="source-tag">onet.pl — 2025/2026</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">5. Po 13 latach w Szwecji → PL (nie żałuje)</span>
+<span class="card-badge badge-se">SE → PL</span>
+</div>
+<p><strong>Kto:</strong> Razem z dziewczyną, oboje pracowali w Szwecji 13 lat.</p>
+<p><strong>Jak to się stało:</strong> "Któregoś dnia wraz z dziewczyną po powrocie z pracy pomarudziliśmy sobie, że może by tak Polska? I zrobiliśmy to."</p>
+<p><strong>Werdykt:</strong> <strong>"W ogóle nie żałuję."</strong></p>
+<p><em>⚠️ Uwaga: to snippet z wyszukiwania — pełny post nie był dostępny (Reddit blokuje scraping). Ale sam fakt, że ktoś po 13 latach w SE wraca i nie żałuje — znaczący, szczególnie dla Twojej sytuacji.</em></p>
+<p><span class="source-tag">reddit.com/r/Polska — ~2023</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">6. Marketing & Research — 10 lat Londyn → PL</span>
+<span class="card-badge badge-uk">UK → PL</span>
+</div>
+<p><strong>Kto:</strong> Kobieta, przyjechała do UK w wieku 18 lat, skończyła 3 kierunki studiów. Praca w marketing & research insights.</p>
+<p><strong>Powód:</strong> Zakończenie ważnego związku. "Nie wyobrażam sobie tkwić tutaj, przeprowadzać się do jakiejś małej klitki, chodzić na kolejne randki... Chcę stałego związku z kimś kto jest Polakiem, chcę wpadać do mamy na kawę."</p>
+<p><strong>Problem:</strong> "Koszt życia w Londynie — wynajem mieszkania to koszmar. Mimo dość sporej wypłaty nie potrafię nawet odłożyć znacznej sumy."</p>
+<p class="quote">Nigdy tak do końca nie czułam się u siebie, pomimo tego że całe moje dorosłe życie jest tutaj.</p>
+<p><span class="source-tag">old.reddit.com/r/Polska — 2024</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">7. Po 12 latach w Londynie → "na zadupie" w PL</span>
+<span class="card-badge badge-uk">UK → PL</span>
+</div>
+<p><strong>Kluczowy cytat:</strong></p>
+<p class="quote">Z wypłaty w Anglii zostawało mi może 15-20%, a w Polsce z dobre 60%. Oczywiście zarabiam mniej, ale jestem zadowolony z tego co robię i mi na życie starcza. Miałem dość miasta i wróciłem "na zadupie".</p>
+<p><span class="source-tag">reddit.com/r/Polska</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">8. Monika Pudlik — 20 lat w Irlandii → Płock</span>
+<span class="card-badge badge-ie">IE → PL</span>
+</div>
+<p><strong>Kto:</strong> 48 lat, machine operator. Wyjechała w 2004 (akcesja PL do UE). Wraca po 20 latach.</p>
+<p><strong>Powód:</strong> "Poland looks completely different than it did over 20 years ago. I see many more opportunities for myself."</p>
+<p><strong>Strategia:</strong> Otwarcie polskiego konta bankowego, job-hunting, budowanie sieci kontaktów ZANIM się przeprowadzi.</p>
+<p><span class="source-tag">AFP/France24 — styczeń 2026</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">9. Paulina Sacha — Niemcy → PL (położna)</span>
+<span class="card-badge badge-de">DE → PL</span>
+</div>
+<p><strong>Kto:</strong> 42 lata, położna i reżyser dźwięku. Przeniosła się z mężem i dziećmi do Niemiec, praca w szpitalu.</p>
+<p><strong>Werdykt:</strong> "Byłam absolutnie zachwycona karierą w Niemczech, ale wróciłam, żeby być bliżej rodziny i wychować dzieci w Polsce."</p>
+<p class="quote">Wszędzie jest dobrze, ale Polska jest najlepsza. W Berlinie... zawsze jesteś gościem.</p>
+<p><span class="source-tag">AFP/France24 — styczeń 2026</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">10. Radek H. — 20 lat w Irlandii → PL (sprzedaż)</span>
+<span class="card-badge badge-ie">IE → PL</span>
+</div>
+<p><strong>Kto:</strong> 47 lat, sprzedaż. Wrócił 2 lata temu po 20 latach w Irlandii.</p>
+<p><strong>Co mówi o Irlandii:</strong></p>
+<p class="quote">Ludzie pracują tam tylko po to, żeby przeżyć i opłacić rachunki. Nie ma oszczędzania.</p>
+<p><span class="source-tag">AFP/France24 — styczeń 2026</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">11. Zbyszek Perzyna — DE → PL (self-employed)</span>
+<span class="card-badge badge-de">DE → PL</span>
+</div>
+<p><strong>Kto:</strong> Self-employed w Niemczech z żoną Gierko. Finansowo stabilni, podatki płacone.</p>
+<p><strong>Powód powrotu:</strong> Lista frustracji w DE — brak zimnej wody w mieszkaniu przez 10+ lat, niemożność wzięcia mortgage mimo stabilnych dochodów, biurokracja.</p>
+<p class="quote">To jest wiele małych rzeczy — razem wzięte: jeden wielki problem.</p>
+<p><span class="source-tag">Tagesschau via newstarget.com — 2025</span></p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span class="card-title">12. Jacek Dehnel — pisarz, Berlin → PL</span>
+<span class="card-badge badge-de">DE → PL</span>
+</div>
+<p><strong>Kto:</strong> Pisarz i artysta, otwarcie gej, wyjechał do Berlina po zwycięstwach prawicy w PL. Wrócił rozczarowany.</p>
+<p class="quote">Mam wrażenie, że Niemcy to "failed state" w kwestii codziennej jakości życia. Niemieckie społeczeństwo jest przyzwyczajone do tego, że państwo je nęka i uważa to za normalne.</p>
+<p><strong>O Polsce:</strong> "Stały wzrost, poprawa, modernizacja, ułatwianie i optymalizacja codziennego życia."</p>
+<p><span class="source-tag">Tagesschau via newstarget.com — 2025</span></p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== ZAROBKI ==================== -->
+<h2 id="zarobki">💰 Zarobki IT w Polsce (2024-2025)</h2>
+
+<h3>Umowa o pracę (brutto miesięcznie)</h3>
+<table>
+<tr><th>Poziom</th><th>Junior</th><th>Mid</th><th>Senior</th></tr>
+<tr><td>Ogólnie</td><td>5 000 – 8 500 zł</td><td>10 000 – 19 000 zł</td><td>15 000 – 30 000 zł</td></tr>
+<tr><td>Java</td><td>6 143 – 9 929 zł</td><td>14 439 – 20 820 zł</td><td>19 624 – 27 424 zł</td></tr>
+<tr><td>JavaScript</td><td>6 500 zł</td><td>9 000 – 13 000 zł</td><td>~22 000 zł</td></tr>
+<tr><td>Python</td><td>5 000 – 8 000 zł</td><td>~11 000 zł</td><td>22 000+ zł</td></tr>
+<tr><td>C#</td><td>6 500 zł</td><td>~14 000 zł</td><td>25 000 – 31 000 zł</td></tr>
+<tr><td>Go (Golang)</td><td>—</td><td>—</td><td>22 000 – 27 000 zł</td></tr>
+<tr><td>PHP</td><td>—</td><td>11 000 – 17 000 zł</td><td>—</td></tr>
+</table>
+
+<h3>B2B (netto + VAT)</h3>
+<table>
+<tr><th>Poziom</th><th>Stawka</th><th>Komentarz</th></tr>
+<tr><td>Mid</td><td>12 000 – 20 000 zł</td><td>Typowy zakres mid-level</td></tr>
+<tr><td>Senior (dolne widełki)</td><td>21 800 zł netto</td><td>Mediana 2024, +3% r/r</td></tr>
+<tr><td>Senior Java</td><td>22 723 – 28 562 zł</td><td>Netto + VAT</td></tr>
+<tr><td>Senior Golang</td><td>22 000 – 27 000 zł</td><td>Jeden z najlepiej płatnych</td></tr>
+</table>
+
+<h3>Mediana ogólna</h3>
+<div class="stat-grid">
+<div class="stat-card">
+<div class="stat-number">11 900 zł</div>
+<div class="stat-label">mediana programisty UoP brutto</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">~21 800 zł</div>
+<div class="stat-label">mediana senior B2B netto + VAT</div>
+</div>
+</div>
+
+<h3>Konwersja: ile to po szwedzku?</h3>
+<div class="card">
+<p>Przy kursie ~1 SEK ≈ 0,38 PLN (sierpień 2026):</p>
+<table>
+<tr><th>Polska (brutto UoP)</th><th>≈ SEK/mc</th><th>Kontekst SE</th></tr>
+<tr><td>15 000 zł (mid)</td><td>~39 500 SEK</td><td>Porównywalne z mid dev w SE</td></tr>
+<tr><td>23 000 zł (senior)</td><td>~60 500 SEK</td><td>Niżej niż senior w SE</td></tr>
+<tr><td>30 000 zł (senior top)</td><td>~79 000 SEK</td><td>Porównywalne z SE senior</td></tr>
+</table>
+<p><strong>ALE:</strong> Koszt życia w Warszawie to ~60-70% kosztów Sztokholmu. Więc 23 000 zł w PL ≈ 38 000 SEK siły nabywczej w Sztokholmie.</p>
+<p><strong>B2B na ryczałcie 12%:</strong> 20 000 zł netto na rękę po podatku. W Szwecji z 60 000 SEK brutto zostaje ~38 000 SEK netto (= ~14 400 zł). Ale koszt życia...</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== PODATKI ==================== -->
+<h2 id="podatki">🏛️ Podatki programisty w Polsce (B2B / JDG)</h2>
+
+<div class="card">
+<h3>Trzy opcje opodatkowania</h3>
+<table>
+<tr><th></th><th>Ryczałt 12%</th><th>Podatek liniowy 19%</th><th>Skala podatkowa</th></tr>
+<tr><td><strong>Stawka</strong></td><td>12% od PRZYCHODU</td><td>19% od DOCHODU</td><td>12% do 120k, 32% powyżej</td></tr>
+<tr><td><strong>Koszty</strong></td><td>❌ Brak odliczeń</td><td>✅ Odliczasz koszty</td><td>✅ Odliczasz koszty</td></tr>
+<tr><td><strong>Zdrowotna</strong></td><td>Stała (~336-1008 zł/mc)</td><td>4,9% dochodu</td><td>9% dochodu</td></tr>
+<tr><td><strong>IP-Box</strong></td><td>❌ Nie</td><td>✅ Tak</td><td>✅ Tak</td></tr>
+<tr><td><strong>Wspólne z małżonkiem</strong></td><td>❌ Nie</td><td>❌ Nie</td><td>✅ Tak</td></tr>
+<tr><td><strong>Najlepsze dla</strong></td><td>Niskie koszty, wysoki przychód</td><td>Wysokie koszty</td><td>Niskie dochody</td></tr>
+</table>
+
+<h4>Przykład: Senior dev, 20 000 zł/mc przychodu, koszty 2 000 zł/mc</h4>
+<table>
+<tr><th>Ryczałt 12%</th><th>Liniowy 19%</th></tr>
+<tr><td>Podatek: 20 000 × 12% = <strong>2 400 zł</strong></td><td>Podatek: 18 000 × 19% = <strong>3 420 zł</strong></td></tr>
+<tr><td>Zdrowotna: ~560 zł</td><td>Zdrowotna: 18 000 × 4,9% = 882 zł</td></tr>
+<tr><td>ZUS: ~1 600 zł (mały ZUS przez 2 lata)</td><td>ZUS: ~1 600 zł</td></tr>
+<tr><td><strong>Na rękę: ~15 440 zł</strong></td><td><strong>Na rękę: ~13 098 zł</strong></td></tr>
+</table>
+<p><span class="source-tag">cgolegal.pl — 2024</span></p>
+</div>
+
+<div class="card">
+<h3>Porównanie podatków: Polska vs Szwecja</h3>
+<table>
+<tr><th></th><th>Polska (B2B ryczałt)</th><th>Szwecja (egenföretagare)</th></tr>
+<tr><td>Stawka podatku</td><td>12%</td><td>30% (kommunal) + 20% (statlig)</td></tr>
+<tr><td>Składki socjalne</td><td>ZUS ~1 600 zł/mc</td><td>Egenavgifter ~29% zysku</td></tr>
+<tr><td>VAT</td><td>23% (ale B2B = 0% intra-EU)</td><td>25% moms</td></tr>
+<tr><td>Eff. tax rate @ 20k PLN/mc</td><td>~23% (podatek + ZUS + zdrowotna)</td><td>~45-52%</td></tr>
+<tr><td>Na rękę z 20k brutto</td><td>~15 400 zł</td><td>~9 600-11 000 zł ekwiw.</td></tr>
+</table>
+<p><strong>Wniosek:</strong> Podatkowo Polska jest ZNACZNIE korzystniejsza dla self-employed dev'ów. W Szwecji oddajesz ~50% na podatki+składki, w PL ~23% na ryczałcie.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== DLACZEGO WRACAJĄ ==================== -->
+<h2 id="dlaczego">🧭 Dlaczego wracają? Wzorzec z 12+ historii</h2>
+
+<div class="card">
+<h3>Top powody powrotu (kolejność częstotliwości)</h3>
+<ol>
+<li><strong>🏠 Rodzina i tęsknota</strong> — pojawia się w PRAWIE KAŻDEJ historii. "Chcę wpadać do mamy na kawę", "blisko do rodziny", "wychować dzieci w polskiej kulturze"</li>
+<li><strong>🚪 Poczucie bycia "wiecznym gościem"</strong> — "nigdy nie czułem się u siebie", "zawsze będziesz gościem w Berlinie/Londynie", "nie należałem do ich świata"</li>
+<li><strong>💸 Koszt życia na zachodzie</strong> — "pracuję tylko żeby przeżyć i opłacić rachunki" (Irlandia), "mimo sporej wypłaty nie mogę odłożyć" (Londyn)</li>
+<li><strong>🏗️ Polska się zmieniła</strong> — "to nie ten sam kraj", infrastruktura, bezpieczeństwo, możliwości. "Nigdzie w Europie nie buduje się tyle co u nas"</li>
+<li><strong>💻 Możliwość pracy zdalnej</strong> — zachodnie stawki z polskimi kosztami życia. Game changer.</li>
+<li><strong>😤 Frustracja biurokracją zachodnią</strong> — zwłaszcza Niemcy: "failed state of everyday life", analogowa biurokracja, brak cyfryzacji</li>
+<li><strong>❤️ Kwestie osobiste</strong> — rozwody, rozstania, chęć "zaczęcia od nowa" w miejscu gdzie się ma korzenie</li>
+</ol>
+
+<h3>Ekspert mówi</h3>
+<p class="quote">Jeśli chodzi o migrację wewnątrz UE, prosty wzorzec się ujawnia: ludzie wyjeżdżają z powodów ekonomicznych, ale wracają z osobistych. — prof. Izabela Grabowska, Kozminski University</p>
+<p class="quote">Wracają przede wszystkim osoby w średnim wieku, które poradziły sobie na emigracji. Przedłużały pobyt o rok, dwa, aż uznały że sytuacja ekonomiczna pozwala na powrót. — dr Dominika Pszczółkowska, Ośrodek Badań nad Migracjami UW</p>
+<p><span class="source-tag">Newsweek PL — styczeń/luty 2026</span></p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== SZOKI ==================== -->
+<h2 id="szoki">😱 Co szokuje po powrocie?</h2>
+
+<div class="card">
+<h3>⚡ Szok kulturowy (prawie wszyscy o tym mówią)</h3>
+<ul>
+<li><strong>"Pierwszy rok to koszmar"</strong> — potrzeba 2-3 lat na pełną aklimatyzację</li>
+<li><strong>Nikt nie rozumie Twojego doświadczenia</strong> — "czuję się wycofana, nikt z bliskich mnie nie rozumie"</li>
+<li><strong>Rozdarcie między dwoma krajami</strong> — "Wszędzie dobrze, gdzie nas nie ma. Myślę że po wielu latach emigracji zawsze będziemy czuć się rozdarci"</li>
+<li><strong>Polski "zapomniał"</strong> — język rdzewieje ("mówi mi się niewygodnie, czuję się bardziej elokwentny po angielsku")</li>
+</ul>
+
+<h3>😤 Co wkurza w Polsce</h3>
+<ul>
+<li><strong>Chamstwo i obsługa klienta</strong> — "najgorsza obsługa klienta na świecie" (wielokrotny cytat)</li>
+<li><strong>Polityka/PiS</strong> — szczególnie w starszych postach (2020-2022)</li>
+<li><strong>Biurokracja (ZUS, US)</strong> — "poczucie, że tu żyjąc walczysz"</li>
+<li><strong>Inflacja</strong> — szczególnie 2022-2024</li>
+<li><strong>Brak zasiłku po powrocie</strong> — Urząd Pracy odmawia, trzeba załatwić w kraju emigracji PRZED wyjazdem</li>
+</ul>
+
+<h3>😍 Co pozytywnie zaskakuje</h3>
+<ul>
+<li><strong>Bezpieczeństwo</strong> — "7-letnie dzieci chodzą same do szkoły nawet w Warszawie" (wielokrotnie)</li>
+<li><strong>Infrastruktura</strong> — autostrady, nowe budynki, inwestycje. "Nie poznaję miasta"</li>
+<li><strong>Jedzenie</strong> — wielokrotny cytat: "tęsknię za polskim jedzeniem"</li>
+<li><strong>Przyroda</strong> — "zapach lasu po deszczu", "las, zieleń, przestrzeń"</li>
+<li><strong>Koszt życia</strong> — "stać nas na więcej niż w UK/IE/DE przy niższych zarobkach"</li>
+<li><strong>Rynek IT</strong> — praca jest, stawki rosną, remote z zachodu możliwy</li>
+</ul>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== RADY ==================== -->
+<h2 id="rada">💡 Rady od tych co wrócili</h2>
+
+<div class="card">
+<ol>
+<li><strong>Zanim wrócisz — załatw finanse w kraju emigracji:</strong> Jobseeker's Allowance (UK), zasiłki, transfer świadczeń. Po powrocie PL Urząd Pracy odmówi.</li>
+<li><strong>Zbuduj poduszkę finansową:</strong> Minimum 6 miesięcy kosztów życia. Smart Polak wróciła z domem zbudowanym za pieniądze z UK.</li>
+<li><strong>Zabezpiecz pracę PRZED przeprowadzką:</strong> Remote z obecnym pracodawcą, albo kontrakty B2B z zagranicy.</li>
+<li><strong>Nie wracaj "na styk":</strong> Otwórz konto bankowe w PL, zarejestruj firmę, ZANIM się przeprowadzisz (radzi Monika z Irlandii).</li>
+<li><strong>Wybierz miasto świadomie:</strong> Warszawa = najwięcej ofert, najwyższe stawki. Kraków = jakość życia. Wrocław = tech hub. Ale też rozważ mniejsze miasta — "na zadupie" może być taniej i spokojniej.</li>
+<li><strong>Daj sobie 2-3 lata na aklimatyzację:</strong> Nie oceniaj decyzji po pierwszym roku. "Pierwszy rok to koszmar, ale potem jest lepiej."</li>
+<li><strong>B2B na ryczałcie:</strong> Dla programisty z zagranicznymi klientami to optymalna forma. 12% podatku, stała zdrowotna, brak ZUS od przychodu.</li>
+<li><strong>Skorzystaj z programów dla powracających:</strong> powroty.gov.pl, pożyczka na samozatrudnienie do 175 000 zł, dotacje PUP 35-50k zł, LGD do 150k zł.</li>
+</ol>
+<p><span class="source-tag">da-vinci.com.pl, smartpolak.co.uk, powroty.gov.pl</span></p>
+</div>
+
+<div class="card">
+<h3>🏛️ Programy wsparcia dla powracających</h3>
+<ul>
+<li><strong>powroty.gov.pl</strong> — rządowy portal z informacjami o procesie powrotu</li>
+<li><strong>Pożyczka na samozatrudnienie</strong> — do ~175 000 zł, niskie oprocentowanie, możliwość częściowego umorzenia</li>
+<li><strong>Dotacje PUP</strong> — 35 000-50 000 zł bezzwrotne na start firmy</li>
+<li><strong>Lokalne Grupy Działania (LGD)</strong> — do 150 000 zł na start/rozwój firmy (szczególnie w mniejszych miejscowościach)</li>
+<li><strong>Platformy Startowe</strong> — inkubacja + granty dla innowacyjnych startupów</li>
+<li><strong>Program "Powrót" (symbol bociana)</strong> — skierowany do młodych: darmowe studia, staże zawodowe</li>
+<li><strong>Helpline dla powracających</strong> — planowana infolinia (2025-2026)</li>
+<li><strong>Ulgi podatkowe i administracyjne</strong> — ułatwienia w uznawaniu kwalifikacji zagranicznych</li>
+</ul>
+<p><span class="source-tag">polandinsight.com, da-vinci.com.pl, MFA strategy 2025-2030</span></p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== TWOJA SYTUACJA ==================== -->
+<h2 id="twoja-sytuacja">🎯 Twoja sytuacja: SE → PL</h2>
+
+<div class="card">
+<h3>Co masz za sobą</h3>
+<ul>
+<li>10+ lat w Szwecji, stabilna praca konsultanta</li>
+<li>DP Media AB — własna firma (może działać dalej jako szwedzka spółka z polskim rezydentem?)</li>
+<li>Full-stack JS/TS — wysoko poszukiwane technologie</li>
+<li>Żona Ola — świeżo po ślubie, oboje z korzeniami w PL</li>
+<li>Znajomość szwedzkiego — dodatkowy atut</li>
+</ul>
+
+<h3>Twoje opcje</h3>
+<table>
+<tr><th>Opcja</th><th>Zarobki</th><th>Podatki</th><th>Ryzyko</th></tr>
+<tr><td><strong>A) Remote z SE dla szwedzkich klientów, mieszkając w PL</strong></td><td>50-70k SEK/mc (= 19-27k zł)</td><td>PL ryczałt 12% + ZUS ≈ 23% eff.</td><td>Podwójne opodatkowanie? (umowa PL-SE)</td></tr>
+<tr><td><strong>B) B2B w PL dla PL firm</strong></td><td>15-25k zł/mc</td><td>PL ryczałt 12%</td><td>Niższe zarobki niż SE</td></tr>
+<tr><td><strong>C) B2B w PL dla US/UK klientów</strong></td><td>$6-12k/mc (= 24-48k zł)</td><td>PL ryczałt 12%</td><td>Strefa czasowa, niestabilność</td></tr>
+<tr><td><strong>D) Zatrudnienie w PL (UoP)</strong></td><td>15-30k zł brutto</td><td>Skala 12/32%</td><td>Najmniej elastyczności</td></tr>
+<tr><td><strong>E) Hybryda: pół roku SE, pół roku PL</strong></td><td>SE stawki przez część roku</td><td>Zależy od rezydencji podatkowej</td><td>183 dni rule, skomplikowane</td></tr>
+</table>
+
+<h3>Kluczowe pytania do rozważenia</h3>
+<ul>
+<li><strong>Rezydencja podatkowa:</strong> Gdzie będziesz >183 dni w roku? To determinuje podatki. Umowa o unikaniu podwójnego opodatkowania PL-SE istnieje.</li>
+<li><strong>DP Media AB:</strong> Czy firma może dalej działać jako szwedzka spółka z Tobą jako właścicielem-rezydentem PL? (Potrzebujesz księgowego znającego oba systemy.)</li>
+<li><strong>Klient vs pracownik:</strong> W SE jesteś konsultantem (egenföretagare?) — to ułatwia przejście na PL B2B.</li>
+<li><strong>Ola:</strong> Skąd jest? Chce wracać do PL? To kluczowe — decyzje "za rodziną" to #1 powód powrotu w każdej historii.</li>
+<li><strong>Język:</strong> Po 10 latach w SE Twój polski jest OK? Wszyscy mówią, że "rdzewieje" ale szybko wraca.</li>
+<li><strong>Timing:</strong> Ślub za wami — idealny moment na decyzję "gdzie budujemy bazę?"</li>
+</ul>
+
+<h3>Moja opinia (tak, mam opinię)</h3>
+<p>Na podstawie 12+ historii które przeczytałem: <strong>najlepsza opcja dla senior dev'a z SE to Opcja A lub C</strong> — praca zdalna z Polski dla zagranicznych klientów, na polskim B2B/ryczałcie. To daje Ci:</p>
+<ul>
+<li>Zachodnie stawki (50-70k SEK albo $6-12k USD)</li>
+<li>Polskie koszty życia (Warszawa/Kraków/Wrocław = 60-70% kosztów Sztokholmu)</li>
+<li>Ryczałt 12% zamiast ~50% w SE</li>
+<li>Bycie blisko rodziny</li>
+<li>Elastyczność — możesz zawsze wrócić do SE na kilka miesięcy</li>
+</ul>
+<p><strong>Ale uwaga:</strong> Żadna z 12 historii nie mówi "wróciłem i jest idealnie". Każdy mówi "jest lepiej, ale było ciężko na początku". Daj sobie 2 lata.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ==================== ŹRÓDŁA ==================== -->
+<h2 id="zrodla">📚 Źródła</h2>
+<div class="card">
+<h3>Osobiste historie i fora</h3>
+<ul>
+<li><a href="https://www.reddit.com/r/Polska/comments/rpmww7/powrot_do_polski_z_uk/">r/Polska: Powrót do Polski z UK (IT specialist, 13 lat)</a></li>
+<li><a href="https://www.reddit.com/r/Polska/comments/f1fcqr/powr%C3%B3t_do_polski_z_emigracji_praca_jako/">r/Polska: Powrót z emigracji, praca jako developer</a></li>
+<li><a href="https://www.reddit.com/r/Polska/comments/177nukk/powr%C3%B3t_do_polski_po_10_latach/">r/Polska: Powrót po 10 latach (marketing, Londyn)</a></li>
+<li><a href="https://www.reddit.com/r/Polska/comments/15n7kp5/powr%C3%B3t_do_polski_z_anglii_po_latach_tak_czy_nie/">r/Polska: Powrót z Anglii — tak czy nie?</a></li>
+<li><a href="https://www.reddit.com/r/Polska/comments/ylw057/">r/Polska: Czy ktoś z was wrócił po dłuższym czasie?</a></li>
+<li><a href="https://www.smartpolak.co.uk/moj-powrot-z-emigracji-wnioski-i-rady/">Smart Polak: Mój powrót z emigracji — wnioski i rady</a></li>
+<li><a href="https://www.onet.pl/styl-zycia/facet-xl/wrocilem-do-polski-nigdy-sie-nie-odnalazlem-na-zachodzie/tj4e6l6,30bc1058">Onet: "Wróciłem do Polski. Nigdy się nie odnalazłem na Zachodzie"</a></li>
+<li><a href="https://www.hejto.pl/wpis/jakis-czas-temu-wrocilem-do-polski-bo-wieloletniej-emigracji-mieszkalem-w-roznyc">Hejto: Wróciłem do Polski po wieloletniej emigracji (Paryż, Floryda, NYC, Londyn)</a></li>
+</ul>
+
+<h3>Prasa i raporty</h3>
+<ul>
+<li><a href="https://www.france24.com/en/live-news/20260128-polish-migrants-return-home-to-a-changed-country">AFP/France24: Polish migrants return home to a changed country (styczeń 2026)</a></li>
+<li><a href="https://www.newsweek.pl/polska/spoleczenstwo/powrot-do-polski-z-emigracji-to-nie-jest-ten-sam-kraj/hm6b23m">Newsweek PL: "To nie ten sam kraj" (luty 2026)</a></li>
+<li><a href="https://www.polskieradio.pl/395/7789/Artykul/3245598,polish-expats-returning-home-in-reverse-brain-drain-report">Polskie Radio: Reverse brain drain report</a></li>
+<li><a href="https://www.newstarget.com/2025-08-21-more-poles-are-moving-back-to-poland.html">NewsTarget: First time in 30 years — more Poles returning from Germany</a></li>
+<li><a href="https://polandinsight.com/poland-increasingly-focuses-on-encouraging-citizens-to-return-from-abroad-46509/">Poland Insight: Government strategy for diaspora return</a></li>
+<li><a href="https://polishexpress.eu/powrot-do-polski-po-latach-emigracji-nie-jest-uslany-rozami/">Polish Express: Powrót nie jest usłany różami</a></li>
+<li><a href="https://expatriateconsultancy.com/polish-returning-to-poland/">Expatriate Consultancy: Polish citizens returning due to economic growth</a></li>
+<li><a href="https://tvpworld.com/92560862/poles-returning-from-the-west-why-and-what-awaits-them">TVP World: Poles returning from the West</a></li>
+</ul>
+
+<h3>Dane o zarobkach i podatkach</h3>
+<ul>
+<li><a href="https://biznesmagazyn.pl/ile-zarabia-programista-w-polsce/">BiznesMagazyn: Ile zarabia programista w Polsce (2024/2025)</a></li>
+<li><a href="https://cgolegal.pl/baza-wiedzy/biezace-doradztwo-prawne/opodatkowanie-programistow-prowadzacych-jednoosobowa-dzialalnosc-gospodarcza/">CGO Legal: Opodatkowanie programistów JDG</a></li>
+<li><a href="https://bulldogjob.pl/it-report/2024/zarobki-w-it">Bulldogjob: Raport IT 2024 — zarobki</a></li>
+<li><a href="https://wynagrodzenia.pl/moja-placa/ile-zarabia-programista-stanowisko-ogolne">Wynagrodzenia.pl: Mediana programisty</a></li>
+<li><a href="https://da-vinci.com.pl/aktualnosci/powrot-z-emigracji-do-polski-jak-zaczac-wlasny-biznes-i-zdobyc-dofinansowanie-na-start/">Da Vinci: Powrót z emigracji — biznes i dofinansowanie</a></li>
+<li><a href="https://powroty.gov.pl">powroty.gov.pl — rządowy portal dla powracających</a></li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+<div class="container">
+<p>Research przeprowadzony 18.08.2026 | 20+ źródeł (PL + EN) | Reddit, fora programistyczne, AFP, France24, Newsweek, Polskie Radio, blogi, raporty</p>
+<p>Metodologia: DuckDuckGo + web_fetch (direct page reads), old.reddit.com bypass, multiple search queries w obu językach</p>
+<p style="margin-top: 10px;">Andrzej 🤖 dla Dawida</p>
+</div>
+</footer>
+
+</body>
+</html>

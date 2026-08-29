@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WS2812B 45 LED Ring 120mm — Deep Research Report</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --text-bright: #f0f6fc;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --orange: #db6d28;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+h1 { color: var(--text-bright); font-size: 1.8em; margin-bottom: 8px; }
+h2 { color: var(--accent); font-size: 1.4em; margin: 32px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+h3 { color: var(--text-bright); font-size: 1.15em; margin: 20px 0 10px; }
+.subtitle { color: var(--text); font-size: 0.95em; margin-bottom: 24px; }
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.spec-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.spec-card .label { color: var(--text); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; }
+.spec-card .value { color: var(--text-bright); font-size: 1.3em; font-weight: 600; margin-top: 4px; }
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+.stat { text-align: center; }
+.stat .num { font-size: 2em; font-weight: 700; }
+.stat .lbl { font-size: 0.8em; color: var(--text); text-transform: uppercase; }
+.stat .num.green { color: var(--green); }
+.stat .num.blue { color: var(--accent); }
+.stat .num.yellow { color: var(--yellow); }
+.stat .num.red { color: var(--red); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  font-size: 0.9em;
+}
+th {
+  background: #21262d;
+  color: var(--text-bright);
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+tr:hover td { background: #1c2128; }
+tr:last-child td { border-bottom: none; }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+.badge.match { background: rgba(63,185,80,0.2); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+.badge.no { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+.badge.close { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.25); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.platform-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.platform-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.platform-name { font-size: 1.2em; font-weight: 600; color: var(--text-bright); }
+.product-count { color: var(--text); font-size: 0.9em; }
+.price-tag {
+  font-weight: 700;
+  color: var(--green);
+  font-size: 1.05em;
+}
+.note { color: var(--text); font-size: 0.85em; font-style: italic; }
+.callout {
+  background: linear-gradient(135deg, rgba(88,166,255,0.1), rgba(88,166,255,0.05));
+  border: 1px solid rgba(88,166,255,0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.callout h3 { color: var(--accent); margin-top: 0; }
+.winner-card {
+  background: linear-gradient(135deg, rgba(63,185,80,0.1), rgba(63,185,80,0.05));
+  border: 2px solid rgba(63,185,80,0.4);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.winner-card h3 { color: var(--green); margin-top: 0; font-size: 1.3em; }
+.winner-card .price { font-size: 2em; font-weight: 700; color: var(--green); margin: 12px 0; }
+.footer { text-align: center; color: var(--text); font-size: 0.85em; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+.searched-phases { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.searched-phases span {
+  background: #21262d;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  color: var(--text);
+}
+@media (max-width: 768px) {
+  .stats-bar { flex-direction: column; }
+  table { font-size: 0.8em; }
+  th, td { padding: 6px 8px; }
+}
+</style>
+</head>
+<body>
+
+<h1>🔍 WS2812B 45 LED Ring 120mm — Deep Research</h1>
+<p class="subtitle">Szukanie identycznego LED ringa (nie z Chin) — Amazon, Allegro, szwedzkie i polskie sklepy, eBay EU</p>
+
+<!-- SPECS -->
+<div class="specs-grid">
+  <div class="spec-card"><div class="label">LED Type</div><div class="value">WS2812B</div></div>
+  <div class="spec-card"><div class="label">LED Count</div><div class="value">45</div></div>
+  <div class="spec-card"><div class="label">Outer Ø</div><div class="value">120 mm</div></div>
+  <div class="spec-card"><div class="label">Inner Ø</div><div class="value">102 mm</div></div>
+  <div class="spec-card"><div class="label">Height</div><div class="value">9 mm</div></div>
+  <div class="spec-card"><div class="label">Voltage</div><div class="value">DC 5V</div></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="num blue">5</div><div class="lbl">Platformy</div></div>
+  <div class="stat"><div class="num blue">25+</div><div class="lbl">Sklepów</div></div>
+  <div class="stat"><div class="num yellow">298</div><div class="lbl">Produktów sprawdzone</div></div>
+  <div class="stat"><div class="num green">14</div><div class="lbl">Exact matche</div></div>
+  <div class="stat"><div class="num green">122 kr</div><div class="lbl">Najniższa cena</div></div>
+</div>
+
+<!-- WINNER -->
+<div class="winner-card">
+  <h3>🏆 NAJTANSZY MATCH</h3>
+  <p><strong>Amazon.pl — ASIN B0B492G3ZM</strong></p>
+  <p>WS2812B LED Pixel Ring 45 LED, Black PCB — Generic brand</p>
+  <div class="price">50.17 zł (~122 SEK)</div>
+  <p>📋 Specyfikacja potwierdzona w opisie: 45 LED × 120mm OD × 102mm ID × 9mm × DC 5V</p>
+  <p>📦 Dostawa do SE: ~38 SEK (15 zł) — dostawa 26 Aug - 1 Sep lub szybciej</p>
+  <p>🔗 <a href="https://www.amazon.pl/dp/B0B492G3ZM" target="_blank">Otwórz na Amazon.pl →</a></p>
+</div>
+
+<!-- KEY FINDING -->
+<div class="callout">
+  <h3>⚠️ Ważne odkrycie</h3>
+  <p>WS2812B 45-LED ring 120mm to <strong>standardowy chiński produkt OEM</strong>. Żaden zachodni producent (Adafruit, SparkFun, Pimoroni) nie robi ringu z 45 LEDami. Wszystkie 14 matchy to ten sam fizyczny produkt z różnych sellerów na Amazon/eBay/Allegro. Różnice to tylko PCB kolor (czarny/biały), brandowanie i cena.</p>
+  <p>Zero matchy w: Electrokit, Elfa, Mouser, Digikey, RS Components, Conrad, Kjell, Botland, Kamami, And-Tech, Forbot, ABC-RC, Adafruit, BerryBase, PiHut, Pimoroni.</p>
+</div>
+
+<!-- ============================================ -->
+<!-- MATCHES TABLE -->
+<h2>✅ Produkty spełniające wymagania (14 listingów)</h2>
+
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Platforma</th>
+  <th>Brand / ASIN</th>
+  <th>PCB</th>
+  <th>Cena</th>
+  <th>Dostawa</th>
+  <th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Amazon.pl</td>
+  <td>Generic — B0B492G3ZM</td>
+  <td>Czarny</td>
+  <td class="price-tag">50.17 zł (~122 SEK)</td>
+  <td>~38 SEK do SE</td>
+  <td><a href="https://www.amazon.pl/dp/B0B492G3ZM" target="_blank">→ Amazon.pl</a></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>Amazon.de</td>
+  <td>Generic — B0B492G3ZM</td>
+  <td>Czarny</td>
+  <td class="price-tag">~129 SEK</td>
+  <td>~66 SEK do SE</td>
+  <td><a href="https://www.amazon.de/dp/B0B492G3ZM" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Amazon.pl</td>
+  <td>TOPXCDZ — B0BNKSJRRY</td>
+  <td>Czarny</td>
+  <td class="price-tag">55.51 zł (~135 SEK)</td>
+  <td>~38 SEK / 5 Aug</td>
+  <td><a href="https://www.amazon.pl/dp/B0BNKSJRRY" target="_blank">→ Amazon.pl</a></td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>Amazon.de</td>
+  <td>TOPXCDZ — B0BNKSJRRY</td>
+  <td>Czarny</td>
+  <td class="price-tag">~143 SEK</td>
+  <td>~66 SEK do SE</td>
+  <td><a href="https://www.amazon.de/dp/B0BNKSJRRY" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>Amazon.se</td>
+  <td>TOPXCDZ — B0BNKSJRRY</td>
+  <td>Czarny</td>
+  <td class="price-tag">Sprawdź cenę</td>
+  <td>Lokalna SE</td>
+  <td><a href="https://www.amazon.se/dp/B0BNKSJRRY" target="_blank">→ Amazon.se</a></td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>Amazon.de</td>
+  <td>TOPXCDZ — B0DZDB1PP5</td>
+  <td>Czarny</td>
+  <td class="price-tag">~176 SEK</td>
+  <td>19 szt. w magazynie</td>
+  <td><a href="https://www.amazon.de/dp/B0DZDB1PP5" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>Amazon.de</td>
+  <td>TOPXCDZ — B0DZD6B9RC</td>
+  <td>Biały</td>
+  <td class="price-tag">~176 SEK</td>
+  <td>2 szt. w magazynie</td>
+  <td><a href="https://www.amazon.de/dp/B0DZD6B9RC" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>Amazon.pl</td>
+  <td>TOPXCDZ — B0DZD6B9RC</td>
+  <td>Biały</td>
+  <td class="price-tag">82.69 zł (~201 SEK)</td>
+  <td>FREE / 5 Aug</td>
+  <td><a href="https://www.amazon.pl/dp/B0DZD6B9RC" target="_blank">→ Amazon.pl</a></td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>Amazon.de</td>
+  <td>saiyuchen — B0GZMVBRNV</td>
+  <td>Czarny</td>
+  <td class="price-tag">~143 SEK</td>
+  <td>via Amazon</td>
+  <td><a href="https://www.amazon.de/dp/B0GZMVBRNV" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>Amazon.de</td>
+  <td>Sparkleiot — B09YTB999V (2-pack)</td>
+  <td>Czarny</td>
+  <td class="price-tag">~274 SEK (137/szt)</td>
+  <td>4.6★ (13 opinii)</td>
+  <td><a href="https://www.amazon.de/dp/B09YTB999V" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>Amazon.pl</td>
+  <td>Sparkleiot — B09YTB999V (2-pack)</td>
+  <td>Czarny</td>
+  <td class="price-tag">155.55 zł (~378 SEK)</td>
+  <td>FREE / 24-31 Aug</td>
+  <td><a href="https://www.amazon.pl/dp/B09YTB999V" target="_blank">→ Amazon.pl</a></td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>Amazon.se</td>
+  <td>Sparkleiot — B09YTB999V (2-pack)</td>
+  <td>Czarny</td>
+  <td class="price-tag">490.49 kr (245/szt)</td>
+  <td>Lokalna SE</td>
+  <td><a href="https://www.amazon.se/dp/B09YTB999V" target="_blank">→ Amazon.se</a></td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>Amazon.de</td>
+  <td>Sparkleiot — B0F9L75373 (z kontrolerem)</td>
+  <td>Czarny</td>
+  <td class="price-tag">~219 SEK</td>
+  <td>Z kontrolerem music mode</td>
+  <td><a href="https://www.amazon.de/dp/B0F9L75373" target="_blank">→ Amazon.de</a></td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>Allegro.pl</td>
+  <td>Moduł Pierścień RGB 45 WS2812B NeoPixel</td>
+  <td>—</td>
+  <td class="price-tag">49.95 zł (~121 SEK)</td>
+  <td>Smart! 48.71 zł</td>
+  <td><a href="https://allegro.pl/produkt/modul-pierscien-wyswietlacz-rgb-45-diod-led-ws2812b-neopixel-2ef851f6-4847-4119-862c-29f680b8f995" target="_blank">→ Allegro.pl</a></td>
+</tr>
+</tbody>
+</table>
+
+<!-- ============================================ -->
+<!-- PLATFORM DETAILS -->
+
+<h2>📋 Przegląd platform — co sprawdzono</h2>
+
+<!-- Amazon EU -->
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-name">🛒 Amazon EU (.se / .de / .pl / .co.uk)</span>
+    <span class="product-count">120 produktów skanowanych • 95 unikalnych ASIN • 13 matchy</span>
+  </div>
+  <p><strong>Frazy wyszukiwania (18):</strong> WS2812B ring 45, WS2812 ring 45 LED, LED ring 45, NeoPixel ring 45, RGB LED ring 120mm, pixel ring 45 LED, WS2812B 120mm, LED ring 5V 45, addressable LED ring 45, WS2812B LED ring, + wersje PL/DE/SE</p>
+  <p><strong>Amazon.co.uk:</strong> Zablokowany anti-bot (captcha na web_fetch i curl)</p>
+  <p><strong>Najtańszy:</strong> B0B492G3ZM na Amazon.pl — 50.17 zł (~122 SEK)</p>
+  <p><strong>Najlepszy brand:</strong> TOPXCDZ B0BNKSJRRY — dostępny na .de, .pl, .se</p>
+  <p><strong>Najlepszy 2-pack:</strong> Sparkleiot B09YTB999V — 274 SEK za 2 (137/szt) na Amazon.de</p>
+</div>
+
+<!-- Allegro -->
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-name">🇵🇱 Allegro.pl</span>
+    <span class="product-count">56 produktów sprawdzone • 1 exact match</span>
+  </div>
+  <p><strong>Metoda:</strong> Google search site:allegro.pl (DataDome captcha zablokował bezpośredni dostęp browserem)</p>
+  <p><strong>Frazy (20):</strong> WS2812B ring 45, pierścień LED 45, NeoPixel ring 45, RGB LED ring 45, WS2812B pierścień, ring LED adresowalny, + site: queries</p>
+  <p><strong>1 MATCH:</strong> Moduł Pierścień RGB 45 diod LED WS2812B NeoPixel — 49.95 zł (48.71 zł Smart!)</p>
+  <p><strong>Pozostałe 55 produktów:</strong> 24 ringi WS2812B (3-35 LED), 7 ringów samochodowych (nie-WS2812B), 24 inne (taśmy, sterowniki, pojedyncze diody)</p>
+  <p class="note">Uwaga: Większość ringów WS2812B na Allegro to 8, 12, 16, 24 LED. 45-LED jest rzadki — tylko 1 listing.</p>
+</div>
+
+<!-- Swedish/Nordic -->
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-name">🇸🇪 Szwedzkie / Nordyckie sklepy</span>
+    <span class="product-count">23 produkty sprawdzone • 0 matchy</span>
+  </div>
+  <p><strong>Sklepy (11):</strong> Electrokit.se, Elfa Distrelec, TME.eu, Mouser.se, Digikey.se, RS Components, Conrad.se, Kjell.com, Led-produkt.se, Elftek.se, Herkes Elektronik</p>
+  <p><strong>Dostępne:</strong> Electrokit (11 WS2812 ringów), Kjell (tylko paski LED)</p>
+  <p><strong>Zablokowane anti-bot:</strong> Elfa (timeout), Mouser (403), Digikey (403/Cloudflare), RS (offline), Conrad (Cloudflare)</p>
+  <p><strong>Domeny nie istnieją:</strong> Led-produkt.se, Elftek.se, Herkes Elektronik</p>
+  <p><strong>Najbliższy match na Electrokit:</strong></p>
+  <ul>
+    <li>32 LED ø104mm WS2812 — 87.20 SEK (za mało LED, za mały Ø)</li>
+    <li>93 LED ø125mm WS2812 — 175.20 SEK (za dużo LED)</li>
+  </ul>
+</div>
+
+<!-- Polish Shops -->
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-name">🇵🇱 Polskie sklepy elektroniczne</span>
+    <span class="product-count">49 produktów sprawdzone • 0 matchy</span>
+  </div>
+  <p><strong>Sklepy (10):</strong> Botland.pl, Kamami.pl, And-Tech.pl, Forbot.pl, ABC-RC.pl, E-Gizmo.pl, Edw.com.pl, Extronic.pl, Lumitron.pl, Kontronik.pl</p>
+  <p><strong>Frazy (15):</strong> WS2812B ring 45, WS2812B 45 LED, pierścień LED WS2812, LED ring 45, NeoPixel 45, RGB ring 45, LED ring 120mm, WS2812 ring, pixel ring 45, moduł LED ring RGB, addressable LED ring, WS2812B 120mm</p>
+  <p><strong>Botland.pl:</strong> 11 produktów — ringi 8, 12, 16, 24, 40 LED. Zero 45 LED.</p>
+  <p><strong>Kamami.pl:</strong> 38 produktów — ringi 8, 12, 16, 24 LED + taśmy + sterowniki. Zero 45 LED.</p>
+  <p><strong>Inne:</strong> And-Tech, Forbot, ABC-RC — brak ringów WS2812B w ogóle lub tylko małe rozmiary.</p>
+</div>
+
+<!-- eBay + EU/UK Shops -->
+<div class="platform-section">
+  <div class="platform-header">
+    <span class="platform-name">🇪🇺 eBay EU + UK sklepy</span>
+    <span class="product-count">50 produktów sprawdzone • 0 confirmed matchy • 3 partial</span>
+  </div>
+  <p><strong>eBay (.de/.co.uk/.com/.pl):</strong> 171+ listingów na eBay.de! Anti-bot zablokował odczyt wymiarów. 3 multi-variant listingi z opcją 45 LED:</p>
+  <ul>
+    <li><a href="https://www.ebay.de/itm/355858652082" target="_blank">bingo_led</a> — 98.6% (10K ratings) — ~€6-8 + €3.75 shipping</li>
+    <li><a href="https://www.ebay.de/itm/183995599001" target="_blank">flyfun_diymall</a> — 99.7% (15K ratings) — ~€8-10 + €7.58 shipping</li>
+    <li><a href="https://www.ebay.de/itm/205660821379" target="_blank">aineuu</a> — 100% (33K ratings) — ~€10-15, FREE shipping</li>
+  </ul>
+  <p><strong>UK sklepy sprawdzone:</strong></p>
+  <ul>
+    <li><strong>Adafruit:</strong> Tylko 12, 16, 24, 60 LED ringi. NIE robią 45 LED.</li>
+    <li><strong>BerryBase.de:</strong> Tylko 8, 16, 32 LED ringi.</li>
+    <li><strong>PiHut:</strong> 74 wyniki dla "NeoPixel ring" — zero WS2812 ringów na stanie.</li>
+    <li><strong>Pimoroni:</strong> Brak WS2812 ringów.</li>
+    <li><strong>CoolComponents:</strong> 48 LED ø152mm — £16.00 — najbliższy ale zły rozmiar.</li>
+    <li><strong>Watterott / EXP-Tech / Eckstein:</strong> Timeout / brak ringów.</li>
+  </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- PRICE COMPARISON -->
+<h2>💰 Porównanie cen (sortowane od najtańszego)</h2>
+
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Platforma</th>
+  <th>Produkt</th>
+  <th>Cena (SEK)</th>
+  <th>Dostawa (SEK)</th>
+  <th>Razem (SEK)</th>
+  <th>Czas dostawy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Allegro.pl</td>
+  <td>Moduł RGB 45 WS2812B NeoPixel</td>
+  <td class="price-tag">~121</td>
+  <td>~0 (Smart!)</td>
+  <td class="price-tag">~121</td>
+  <td>sobota (jeśli Smart!)</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>Amazon.pl</td>
+  <td>Generic B0B492G3ZM</td>
+  <td class="price-tag">~122</td>
+  <td>~38</td>
+  <td class="price-tag">~160</td>
+  <td>5 Aug - 1 Sep</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Amazon.pl</td>
+  <td>TOPXCDZ B0BNKSJRRY</td>
+  <td class="price-tag">~135</td>
+  <td>~38</td>
+  <td class="price-tag">~173</td>
+  <td>5 Aug (najszybciej)</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>Amazon.de</td>
+  <td>Generic B0B492G3ZM</td>
+  <td class="price-tag">~129</td>
+  <td>~66</td>
+  <td class="price-tag">~195</td>
+  <td>~3-5 dni</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>Amazon.de</td>
+  <td>TOPXCDZ B0BNKSJRRY</td>
+  <td class="price-tag">~143</td>
+  <td>~66</td>
+  <td class="price-tag">~209</td>
+  <td>~3-5 dni</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>eBay.de</td>
+  <td>bingo_led (multi-variant)</td>
+  <td class="price-tag">~60-80</td>
+  <td>~40</td>
+  <td class="price-tag">~100-120</td>
+  <td>2-4 tyg (z Chin)</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>eBay.de</td>
+  <td>aineuu (FREE shipping)</td>
+  <td class="price-tag">~100-150</td>
+  <td>0</td>
+  <td class="price-tag">~100-150</td>
+  <td>2-4 tyg (z Chin)</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>Amazon.de</td>
+  <td>Sparkleiot 2-pack B09YTB999V</td>
+  <td class="price-tag">~274 (137/szt)</td>
+  <td>~66</td>
+  <td class="price-tag">~340 (170/szt)</td>
+  <td>~3-5 dni</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ============================================ -->
+<!-- RECOMMENDATION -->
+<h2>🎯 Rekomendacja</h2>
+
+<div class="callout">
+  <h3>Best bet dla Dawida</h3>
+  <p><strong>Opcja 1 — Najtaniej + najszybciej:</strong> <a href="https://www.amazon.pl/dp/B0BNKSJRRY" target="_blank">Amazon.pl TOPXCDZ B0BNKSJRRY</a> — ~135 SEK + ~38 SEK dostawa = <strong>~173 SEK</strong>, dostawa 5 Aug. Fulfilled by Amazon.</p>
+  <p><strong>Opcja 2 — Absolutnie najtaniej:</strong> <a href="https://allegro.pl/produkt/modul-pierscien-wyswietlacz-rgb-45-diod-led-ws2812b-neopixel-2ef851f6-4847-4119-862c-29f680b8f995" target="_blank">Allegro.pl</a> — 49.95 zł (~121 SEK) z Allegro Smart! darmowa dostawa. Jedyna opcja: musisz mieć adres w PL albo przekierowanie paczki.</p>
+  <p><strong>Opcja 3 — Najwygodniej (SE):</strong> <a href="https://www.amazon.se/dp/B0BNKSJRRY" target="_blank">Amazon.se TOPXCDZ</a> — sprawdź cenę zalogowany. Prawdopodobnie ~140-180 SEK z dostawą.</p>
+  <p><strong>Opcja 4 — 2 sztuki:</strong> <a href="https://www.amazon.de/dp/B09YTB999V" target="_blank">Amazon.de Sparkleiot 2-pack</a> — 274 SEK za 2 ringi (137/szt). Najlepsza wartość jeśli potrzebujesz zapas.</p>
+</div>
+
+<!-- ============================================ -->
+<!-- ALL PRODUCTS CHECKED -->
+<h2>📋 Wszystkie sprawdzone produkty (nie-matche)</h2>
+
+<h3>Electrokit.se — WS2812 LED Ringi (11 produktów)</h3>
+<table>
+<thead><tr><th>LED</th><th>Ø (mm)</th><th>Typ</th><th>Cena (SEK)</th><th>Link</th></tr></thead>
+<tbody>
+<tr><td>7</td><td>23</td><td>WS2812</td><td>39.20</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-7-led-23mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>8</td><td>32</td><td>WS2812</td><td>23.20</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-8-led-32mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>40</td><td>WS2812B</td><td>52.00</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-12-led-40mm-ws2812b/" target="_blank">→</a></td></tr>
+<tr><td>16</td><td>60</td><td>WS2812</td><td>39.20</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-16-led-60mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>21</td><td>58</td><td>WS2812</td><td>79.20</td><td><a href="https://www.electrokit.com/produkt/led-ringar-med-21-led-58mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>67</td><td>WS2812B</td><td>103.20</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-24-led-67mm-ws2812b/" target="_blank">→</a></td></tr>
+<tr><td>32</td><td>104</td><td>WS2812</td><td>87.20</td><td><a href="https://www.electrokit.com/produkt/led-ring-med-32-led-104mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>93</td><td>125</td><td>WS2812</td><td>175.20</td><td><a href="https://www.electrokit.com/produkt/led-ringar-med-93-led-125mm-ws2812/" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>37</td><td>NeoPixel</td><td>—</td><td><a href="https://www.electrokit.com/produkt/neopixel-ring-12-rgb-leds-37mm/" target="_blank">→</a></td></tr>
+<tr><td>16</td><td>44.5</td><td>NeoPixel</td><td>119.20</td><td><a href="https://www.electrokit.com/produkt/neopixel-ring-16-rgb-leds-44mm/" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>66</td><td>NeoPixel</td><td>199.20</td><td><a href="https://www.electrokit.com/produkt/neopixel-ring-24-rgb-leds-66mm/" target="_blank">→</a></td></tr>
+</tbody>
+</table>
+
+<h3>Allegro.pl — WS2812 Ringi (nie-matche)</h3>
+<table>
+<thead><tr><th>LED</th><th>Tytuł</th><th>Cena (zł)</th><th>Link</th></tr></thead>
+<tbody>
+<tr><td>35</td><td>Moduł Pierścień RGB 35 WS2812B (Biały)</td><td>49.95</td><td><a href="https://allegro.pl/produkt/modul-pierscien-wyswietlacz-rgb-35-diod-led-ws2812b-neopixel-bialy-d16ab661-4782-45ba-bd68-eba4489725d2" target="_blank">→</a></td></tr>
+<tr><td>35</td><td>SPARKLEIOT 35 WS2812 Ring</td><td>45.99</td><td><a href="https://allegro.pl/produkt/sparkleiot-35-bitow-ws2812-adresowalny-pierscien-led-dla-arduino-esp8266-f38dca29-8978-4897-9b8a-4eda59e0a9bb" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>Pierścień RGB 24 WS2812 5050 (86mm)</td><td>22.15</td><td><a href="https://allegro.pl/produkt/pierscien-rgb-24-x-led-ws2812-5050-ring-arduino-a0a9f2be-df84-4f22-86bd-f3e4885d3286" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>Pierścień Ring 24 WS2812B 5050 RGB</td><td>16</td><td><a href="https://allegro.pl/produkt/285-pierscien-ring-24-diod-led-ws2812b-5050-rgb-arduino-fc4debf6-40fa-4ab6-8de0-c342cee98812" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>Sterownik MSALAMON Pierścień 24 LED</td><td>19</td><td><a href="https://allegro.pl/produkt/sterownik-msalamon-pierscien-24-diod-adresowalnych-led-rgb-ws2812-5v-d5017e79-dc2c-4c02-8cb7-5a076a3bee97" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>MODUŁ WS2812 24 LED RING</td><td>16</td><td><a href="https://allegro.pl/produkt/modul-ws2812-24-led-ring-ceb05bf6-9558-4436-b612-89b9cb74a301" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>Sterownik Pierścień LED 24 WS2812</td><td>5</td><td><a href="https://allegro.pl/produkt/sterownik-pierscien-led-24-diod-ws2812-ring-modul-swiecacy-ccec0278-9e80-4197-a032-3890d3e4ed3a" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>Pierścień LED 24 WS2812 RING</td><td>12</td><td><a href="https://allegro.pl/produkt/pierscien-led-24-diod-ws2812-ring-modul-swiecacy-853798c9-29d5-42e6-b888-fadeb8dbf750" target="_blank">→</a></td></tr>
+<tr><td>24</td><td>MODUŁ PIERŚCIEŃ 24 WS2812 5050</td><td>29</td><td><a href="https://allegro.pl/produkt/modul-pierscien-z-24-diodami-adresowalnymi-led-rgb-ws2812-5050-d60fb61e-204f-4879-9565-f5163ecf2a8e" target="_blank">→</a></td></tr>
+<tr><td>16</td><td>MODUŁ WS2812 16 LED RING</td><td>8</td><td><a href="https://allegro.pl/produkt/modul-ws2812-16-led-ring-398f74dc-8917-497b-860b-ec80a063d955" target="_blank">→</a></td></tr>
+<tr><td>16</td><td>Pierścień RGB 16 WS2812B 5050</td><td>12</td><td><a href="https://allegro.pl/produkt/pierscien-rgb-16-x-led-ws2812b-5050-ring-zgodny-z-arduino-8e7cd3d0-b39c-4986-b9e1-57d9e7461803" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>Pierścień RGB 12 WS2812B 5050</td><td>9</td><td><a href="https://allegro.pl/produkt/pierscien-rgb-12-x-led-ws2812b-5050-ring-arduino-ae8cbb5a-a4ca-43e0-8156-c329f18445c8" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>Pierścień LED ring 12 RGB WS2812B czarny</td><td>7.50</td><td><a href="https://allegro.pl/produkt/pierscien-led-ring-12-diod-rgb-ws2812b-czarny-20562626-9302-46cb-bbf8-e57d00f22b0b" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>ELEKING Pierścień Ring 12 WS2812B</td><td>9</td><td><a href="https://allegro.pl/produkt/sterownik-eleking-pierscien-ring-12-diod-led-ws2812b-5050-rgb-3bff9f69-3cb8-4f03-801b-cbbf847d6c1d" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>Pierścień RGB-LED 12 WS2812 RING</td><td>6.16</td><td><a href="https://allegro.pl/produkt/pierscien-rgb-led-12-diod-ws2812-ring-modul-swiecacy-45a43583-4533-40a6-a0a0-98b670d1ebff" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>WS2812-12 RGB LED Ring + AMS1117</td><td>33.96</td><td><a href="https://allegro.pl/produkt/ws2812-12-rgb-led-ring-pierscien-swietlny-modul-zasilania-ams1117-5-0-ams1117-3-3-z-listwa-zaciskowa-zestaw" target="_blank">→</a></td></tr>
+<tr><td>12</td><td>Mikrobot Moduł LED 12 WS2812 5050</td><td>7</td><td><a href="https://allegro.pl/produkt/dioda-led-mikrobot-modul-led-12-diod-ws2812-5050-5mm-7dcca94d-b95b-4502-80e8-5cadbab4c7b1" target="_blank">→</a></td></tr>
+<tr><td>8</td><td>Pierścień LED 8 WS2812</td><td>11</td><td><a href="https://allegro.pl/produkt/pierscien-led-8-diod-ws2812-pierscien-modul-swiecacy-ccae8283-fb7b-4314-871c-f47a97e95ec6" target="_blank">→</a></td></tr>
+<tr><td>8</td><td>ELEKING Pierścień Ring 8 WS2812B</td><td>6</td><td><a href="https://allegro.pl/produkt/sterownik-eleking-pierscien-ring-8-diod-led-ws2812b-5050-rgb-3aef9e03-8835-443a-8a6f-bab6d8d3f022" target="_blank">→</a></td></tr>
+<tr><td>3</td><td>Pierścień 3 Diod LED WS2812B 5050</td><td>10</td><td><a href="https://allegro.pl/produkt/pierscien-3-diod-led-ws2812b-5050-rgb-028594c3-0555-4e17-aa31-4173d59939df" target="_blank">→</a></td></tr>
+</tbody>
+</table>
+
+<h3>Adafruit — NeoPixel Ringi (nie mają 45 LED)</h3>
+<table>
+<thead><tr><th>LED</th><th>Model</th><th>Ø (mm)</th><th>Cena</th></tr></thead>
+<tbody>
+<tr><td>12</td><td>NeoPixel Ring 12 RGB</td><td>37</td><td>$9.95</td></tr>
+<tr><td>16</td><td>NeoPixel Ring 16 RGB</td><td>44.5</td><td>$12.50</td></tr>
+<tr><td>24</td><td>NeoPixel Ring 24 RGB</td><td>65.5</td><td>$16.95</td></tr>
+<tr><td>60</td><td>NeoPixel 1/4 60 Ring (full 157mm)</td><td>157</td><td>$9.95/qtr</td></tr>
+</tbody>
+</table>
+
+<h3>Inne platformy — produkty nie-matche</h3>
+<table>
+<thead><tr><th>Sklep</th><th>Produkt</th><th>LED</th><th>Ø</th><th>Match?</th></tr></thead>
+<tbody>
+<tr><td>BerryBase.de</td><td>NeoPixel Ring 8 WS2812</td><td>8</td><td>—</td><td><span class="badge no">NIE</span></td></tr>
+<tr><td>BerryBase.de</td><td>NeoPixel Ring 16 WS2812</td><td>16</td><td>—</td><td><span class="badge no">NIE</span></td></tr>
+<tr><td>BerryBase.de</td><td>NeoPixel Ring 32 WS2812</td><td>32</td><td>—</td><td><span class="badge no">NIE</span></td></tr>
+<tr><td>CoolComponents</td><td>48 LED 152mm Ring WS2812B</td><td>48</td><td>152mm</td><td><span class="badge close">CLOSE</span></td></tr>
+<tr><td>Amazon.de</td><td>AZDelivery 3x RGB Ring 12-Bit 50mm</td><td>12</td><td>50mm</td><td><span class="badge no">NIE</span></td></tr>
+<tr><td>Kjell.com</td><td>Luxorparts LED-list 1m NeoPixel</td><td>60</td><td>strip</td><td><span class="badge no">NIE</span></td></tr>
+<tr><td>eBay.de</td><td>bingo_led multi-variant (8/16/24/35/45)</td><td>45 available</td><td>~120mm*</td><td><span class="badge close">PARTIAL</span></td></tr>
+<tr><td>eBay.de</td><td>flyfun_diymall multi-variant</td><td>45 available</td><td>~120mm*</td><td><span class="badge close">PARTIAL</span></td></tr>
+<tr><td>eBay.de</td><td>aineuu multi-variant</td><td>45 available</td><td>~120mm*</td><td><span class="badge close">PARTIAL</span></td></tr>
+</tbody>
+</table>
+<p class="note">* eBay wymiary niepotwierdzone (anti-bot zablokował odczyt). Standard 45-LED WS2812B ring = 120mm.</p>
+
+<!-- SEARCH PHRASES USED -->
+<h2>🔍 Frazy wyszukiwania (łącznie 50+)</h2>
+<div class="searched-phases">
+<span>WS2812B ring 45</span>
+<span>WS2812 ring 45 LED</span>
+<span>LED ring 45</span>
+<span>NeoPixel ring 45</span>
+<span>RGB LED ring 120mm</span>
+<span>pixel ring 45 LED</span>
+<span>WS2812B 120mm</span>
+<span>LED ring 5V 45</span>
+<span>addressable LED ring 45</span>
+<span>WS2812B LED ring</span>
+<span>pierścień LED 45</span>
+<span>pierścień WS2812 45</span>
+<span>WS2812B pierścień</span>
+<span>ring LED adresowalny</span>
+<span>moduł LED ring RGB</span>
+<span>pixel ring</span>
+<span>RGB ring 45</span>
+<span>LED ring 120mm</span>
+<span>addressable LED ring</span>
+<span>WS2812B moduł</span>
+<span>NeoPixel pierścień 45</span>
+<span>WS2812B 45 diód</span>
+<span>LED Ring 120mm 45 WS2812B (DE)</span>
+<span>5V RGB Ring 45 LED adressierbar (DE)</span>
+<span>WS2812B 45 LED Ring adresserbar (SE)</span>
+<span>site:allegro.pl WS2812B pierścień</span>
+<span>site:allegro.pl LED ring 120mm</span>
+</div>
+
+<!-- SITES BLOCKED -->
+<h2>🚫 Sklepy zablokowane (anti-bot)</h2>
+<table>
+<thead><tr><th>Sklep</th><th>Problem</th></tr></thead>
+<tbody>
+<tr><td>Amazon.co.uk</td><td>Captcha (wszystkie metody)</td></tr>
+<tr><td>Elfa Distrelec</td><td>Timeout (3 próby)</td></tr>
+<tr><td>Mouser.se</td><td>403 anti-bot</td></tr>
+<tr><td>Digikey.se</td><td>403 / Cloudflare</td></tr>
+<tr><td>RS Components</td><td>Offline/maintenance</td></tr>
+<tr><td>Conrad.se</td><td>Cloudflare JS challenge</td></tr>
+<tr><td>TME.eu</td><td>Maintenance mode</td></tr>
+<tr><td>Watterott.com</td><td>Timeout</td></tr>
+<tr><td>Eckstein-shop.de</td><td>Timeout</td></tr>
+<tr><td>eBay (wszystkie)</td><td>Anti-bot blokuje scraping</td></tr>
+<tr><td>Allegro.pl (direct)</td><td>DataDome captcha</td></tr>
+</tbody>
+</table>
+
+<!-- SUMMARY -->
+<h2>📊 Podsumowanie</h2>
+<div class="callout">
+  <h3>Co znalazłem</h3>
+  <ul>
+    <li><strong>298 produktów</strong> sprawdzonych na 25+ sklepach i 5 platformach</li>
+    <li><strong>14 listingów</strong> które spełniają wymagania (45 LED × 120mm × 102mm × 9mm × 5V)</li>
+    <li>Wszystkie 14 to <strong>ten sam fizyczny chiński produkt</strong> — różne sellery/brandy na Amazon/Allegro/eBay</li>
+    <li><strong>Najtańszy:</strong> Allegro.pl 49.95 zł (~121 SEK) z darmową dostawą Smart!</li>
+    <li><strong>Najtańszy na Amazon:</strong> Amazon.pl B0B492G3ZM — 50.17 zł (~122 SEK)</li>
+    <li><strong>Najszybsza dostawa do SE:</strong> Amazon.pl TOPXCDZ — 5 Aug</li>
+    <li>Zero sklepow zachodnich (Adafruit, Electrokit, Botland itd.) nie ma tego produktu</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>Raport wygenerowany 2026-08-02 przez Andrzeja • DeepSeek V4 Pro × 5 agentów • 298 produktów • 25+ sklepów</p>
+</div>
+
+</body>
+</html>

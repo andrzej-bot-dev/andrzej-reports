@@ -310,7 +310,7 @@ chrome.storage.onChanged.addListener(async (changes, area) => {
   if (area !== "local") return;
   const keys = ["gatewayUrl", "gatewayUrlRemote", "gatewayToken", "assistantName",
     "actionMode", "maxSteps", "allowScreenshots", "debug", "allowedSites",
-    "providerKeys", "providerModels", "providerBaseUrls", "directMaxTokens"];
+    "providerKeys", "providerModels", "providerBaseUrls", "directMaxTokens", "contextTokenLimit"];
   if (!keys.some((k) => k in changes)) return;
   settings = await loadSettings();
   groups.assistantName = settings.assistantName;

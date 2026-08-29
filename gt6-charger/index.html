@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Najtańsza ładowarka do Huawei Watch GT 6 — research 2026-08-19</title>
+<style>
+  :root { --bg:#0f1117; --card:#171a23; --card2:#1d2130; --text:#e8eaf0; --muted:#9aa0b0; --acc:#4f9cf9; --ok:#3ecf8e; --warn:#f5b942; --bad:#ef5b5b; --border:#2a2f40; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.55; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 20px 80px; }
+  nav.sticky { position:sticky; top:0; z-index:50; background:rgba(15,17,23,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); height:52px; display:flex; align-items:center; gap:8px; padding:0 20px; overflow-x:auto; }
+  nav a { color:var(--acc); text-decoration:none; font-size:.82rem; white-space:nowrap; padding:4px 10px; border:1px solid var(--border); border-radius:14px; }
+  nav a:hover { background:var(--card2); }
+  header { padding:34px 0 18px; }
+  h1 { font-size:1.7rem; margin-bottom:8px; }
+  .meta { color:var(--muted); font-size:.88rem; display:flex; flex-wrap:wrap; gap:10px 18px; }
+  .badge { display:inline-block; background:var(--card2); border:1px solid var(--border); border-radius:14px; padding:2px 12px; font-size:.8rem; color:var(--text); margin-bottom:10px; }
+  h2 { font-size:1.25rem; margin:38px 0 14px; padding-top:10px; border-top:1px solid var(--border); }
+  h3 { font-size:1.02rem; margin:20px 0 8px; color:var(--acc); }
+  table { width:100%; border-collapse:collapse; margin:12px 0 20px; font-size:.88rem; }
+  th { text-align:left; background:var(--card2); padding:9px 10px; border:1px solid var(--border); white-space:nowrap; }
+  td { padding:8px 10px; border:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--card); }
+  a { color:var(--acc); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 18px; margin:14px 0; }
+  .win { border-left:4px solid var(--ok); }
+  .warnl { border-left:4px solid var(--warn); }
+  .badl { border-left:4px solid var(--bad); }
+  .pill-ok{color:var(--ok)} .pill-w{color:var(--warn)} .pill-b{color:var(--bad)}
+  .muted { color:var(--muted); font-size:.85rem; }
+  blockquote { border-left:3px solid var(--border); padding:4px 12px; margin:8px 0; color:var(--muted); font-style:italic; font-size:.86rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin:14px 0; }
+  .toc-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+  #top-btn { position:fixed; right:18px; bottom:18px; z-index:60; background:var(--acc); color:#fff; border:none; border-radius:24px; padding:10px 16px; font-size:.85rem; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.4); }
+  footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--border); color:var(--muted); font-size:.82rem; }
+  @media(max-width:640px){ table{font-size:.78rem} th,td{padding:6px 6px} }
+</style>
+</head>
+<body>
+<nav class="sticky">
+  <a href="#tldr">TL;DR</a><a href="#ranking">Ranking</a><a href="#ali">AliExpress</a><a href="#amazon">Amazon</a><a href="#blocket">Blocket/FB</a><a href="#se">Sklepy SE</a><a href="#qi">Qi check</a><a href="#hidden">Ukryte koszty</a><a href="#sources">Źródła</a>
+</nav>
+<div class="wrap">
+<header>
+  <div class="badge">🛒 Product research</div>
+  <h1>Najtańsza ładowarka do Huawei Watch GT 6 (46 mm)</h1>
+  <div class="meta">
+    <span>📅 2026-08-19, 13:54–15:30 SE</span>
+    <span>🔍 4 scraper-subagentów (Qwen 3.7 Flash) + synteza GLM-5.2</span>
+    <span>📊 30+ produktów / 4 platformy + 8 kanałów SE</span>
+    <span>🌐 PL / SV / EN</span>
+  </div>
+  <div class="meta" style="margin-top:6px">
+    <span class="pill-ok">✅ 100% cen z klikalnych URL</span>
+    <span class="pill-ok">✅ recenzje potwierdzające GT6 (Ali)</span>
+    <span class="pill-w">⚠️ Ceny amazon.pl/.de tylko poglądowo (nie wysyłają tanio do SE)</span>
+  </div>
+</header>
+
+<h2 id="tldr">TL;DR — Rekomendacja</h2>
+<div class="card win">
+  <h3 style="margin-top:0">🥇 Najtaniej w ogóle: AliExpress Aishismart — <b>44,41 kr</b> (+wysyłka)</h3>
+  <p><a href="https://www.aliexpress.com/item/1005006936528787.html" target="_blank">aliexpress.com/item/1005006936528787.html</a> — magnetyczny kabel USB-C, <b>1000+ sprzedanych, 4.4★</b>, recenzja wprost: <i>„It works and charges the HUAWEI GT6 perfectly"</i>. Dostawa ~28.08–03.09 (9–15 dni). Uwaga: przy 1 szt. wysyłka płatna (darmowa od 100 kr) — realnie ~65–85 kr total. 9× tag „does not charge" — miej buyer protection.</p>
+</div>
+<div class="card">
+  <h3 style="margin-top:0">🥈 Najtaniej SZYBKO (2–3 dni, Szwecja): Amazon.se — <b>87,61 kr</b>, darmowa dostawa</h3>
+  <p><a href="https://www.amazon.se/dp/B0H9KJKWNY" target="_blank">amazon.se/dp/B0H9KJKWNY</a> — aluminiowa stacja ładująca, GT6 w tytule, <b>0 ocen</b> (nowy listing = loteria). Bezpieczniejszy wariant za 10 kr więcej: <a href="https://www.amazon.se/dp/B0GYJ9JS7C" target="_blank">B0GYJ9JS7C — 98,41 kr</a> (dostawa sob 23.08).</p>
+</div>
+<div class="card">
+  <h3 style="margin-top:0">🥉 Bez ryzyka (duża baza opinii): sciuU — <b>169,99 kr</b>, 4.3★ / 375 ocen</h3>
+  <p><a href="https://www.amazon.se/dp/B0CNCDYR5Y" target="_blank">amazon.se/dp/B0CNCDYR5Y</a> — stacja + dock aluminiowy, najwięcej opinii na Amazon.se w tej niszy.</p>
+</div>
+<div class="card badl">
+  <h3 style="margin-top:0">❌ Czego NIE robić</h3>
+  <p><b>Zwykła podkładka Qi do telefonu NIE zadziała niezawodnie.</b> GT6 używa proprietytnego protokołu Huawei Wireless Smart Charge + nowy układ cewek (maja 2025) — nawet stare oryginalne cradle Huawei ładują next-gen zegarki wolno lub wcale. <b>Blocket i FB Marketplace: ZERO ładowarek GT6 w całej Szwecji</b> (stan 19.08) — nie ma sensu szukać używanej.</p>
+</div>
+
+<h2 id="ranking">Ranking total cost (wszystko z dostawą do Szwecji)</h2>
+<table>
+<tr><th>#</th><th>Produkt</th><th>Platforma</th><th>Cena</th><th>Wysyłka</th><th>~Total</th><th>ETA</th><th>Ocena</th><th>GT6 potwierdzone przez</th></tr>
+<tr><td>1</td><td><a href="https://www.aliexpress.com/item/1005006936528787.html" target="_blank">Aishismart kabel USB-C</a></td><td>AliExpress</td><td>44,41 kr</td><td>płatna (~20–40 kr, free od 100 kr)</td><td><b>~65–85 kr</b></td><td>28.08–03.09</td><td>4.4★ / 1000+ sold</td><td class="pill-ok">✅ recenzja kupującego GT6</td></tr>
+<tr><td>2</td><td><a href="https://www.aliexpress.com/item/1005012242864225.html" target="_blank">LIEI Magnetic Charger</a></td><td>AliExpress</td><td>45,53 kr</td><td>płatna (~20–40 kr)</td><td>~66–86 kr</td><td>28.08–03.09</td><td>4.7★ / 700+ sold</td><td>tytuł (deklaracja)</td></tr>
+<tr><td>3</td><td><a href="https://www.aliexpress.com/item/1005010488223209.html" target="_blank">Yingzi Charging Station</a></td><td>AliExpress</td><td>52,41 kr</td><td>płatna</td><td>~73–93 kr</td><td>30.08–05.09</td><td>3.7★ / 83 sold</td><td class="pill-ok">✅ 2× recenzja GT6 (ale wolne ładowanie)</td></tr>
+<tr><td>4</td><td><a href="https://www.amazon.se/dp/B0H9KJKWNY" target="_blank">DgYuanLiYuan stacja alum.</a></td><td>Amazon.se</td><td>87,61 kr</td><td>FREE</td><td><b>87,61 kr</b></td><td>kilka dni</td><td>brak ocen</td><td>tytuł</td></tr>
+<tr><td>5</td><td><a href="https://www.amazon.se/dp/B0GYJ9JS7C" target="_blank">Weimu laddare</a></td><td>Amazon.se</td><td>98,41 kr</td><td>FREE</td><td>98,41 kr</td><td>sob 23.08</td><td>brak ocen</td><td>tytuł</td></tr>
+<tr><td>6</td><td><a href="https://fyndiq.se/produkt/laddare-for-huawei-watch-gt-honor-och-magic-watch-svart-965f3e90ba9e4f6c/" target="_blank">Fyndiq laddare (zamiennik)</a></td><td>Fyndiq</td><td>79 kr</td><td>39 kr</td><td>118 kr</td><td>21–27.08</td><td>—</td><td>⚠️ starsza lista kompat. (GT-era)</td></tr>
+<tr><td>7</td><td><a href="https://www.amazon.se/dp/B0H14X1BV8" target="_blank">Ermorgen kabel</a></td><td>Amazon.se</td><td>119,37 kr</td><td>FREE</td><td>119,37 kr</td><td>27.08</td><td>4.4★ / 8</td><td>tytuł</td></tr>
+<tr><td>8</td><td><a href="https://batteritema.se/produkter/smartwatch-laddare-for-huawei-watch-6544-pro-gt-3-gt-4-vit-ebe69dd9" target="_blank">SiGN Smartwatch Laddare</a></td><td>Batteritema/Teknikdelar</td><td>149 kr</td><td>wg sklepu</td><td>~149 kr+</td><td>I lager</td><td>—</td><td>opis: jawnie „Huawei Watch GT 6"</td></tr>
+<tr><td>9</td><td><a href="https://www.amazon.se/dp/B0CNCDYR5Y" target="_blank">sciuU Charging Stand</a></td><td>Amazon.se</td><td>169,99 kr</td><td>FREE</td><td>169,99 kr</td><td>22–23.08</td><td><b>4.3★ / 375</b></td><td>tytuł (największa baza opinii)</td></tr>
+</table>
+<p class="muted">Ceny z 19.08.2026 — przed zakupem zweryfikuj na żywo (Amazon cut-off okna się przesuwają). Oryginalna ładowarka Huawei GT6 <b>nie istnieje w szwedzkiej detalicznej sprzedaży osobno</b> (cradle tylko w zestawie z zegarkiem).</p>
+
+<h2 id="ali">AliExpress — 20+ produktów, 4 wyszukiwania</h2>
+<div class="card">
+<p><b>Zakres cen z GT6 w tytule:</b> 41,47–415,94 kr (SEK, z VAT). Wszystkie z wysyłką z Chin ~9–17 dni, „Free shipping over 100 kr" (przy 1 szt. zwykle płatna). Uwaga na warianty — tego samego produktu często są wersje GT6 / GT6 Pro / Fit 4, a najniższa cena bywa „bez kabla" (sama podstawka).</p>
+</div>
+<h3>Top 3 destylaty</h3>
+<table>
+<tr><th>Produkt</th><th>Cena</th><th>Sprzedaż/ocena</th><th>Sklep</th><th>Kluczowe recenzje</th></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005006936528787.html" target="_blank">Aishismart USB-C charger</a> ⭐</td><td>44,41 kr (39,97 @2szt)</td><td>1000+ / 4.4★</td><td>Aishismart Flagship 88,8%</td><td>„charges the HUAWEI GT6 perfectly… works very well" · „charges my GT4 in minutes" · ⚠️ tag „does not charge" ×9</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012242864225.html" target="_blank">LIEI Magnetic Charger</a></td><td>45,53 kr</td><td>700+ / 4.7★</td><td>LIEI Select 95,8%</td><td>„works well & fast shipping" · ⚠️ tag „slow charging" ×4</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005010488223209.html" target="_blank">Yingzi Charging Station</a></td><td>52,41 kr</td><td>83 / 3.7★</td><td>Yingzi Store 95,6%</td><td>„it charges my huawei watch gt6 but not as fast as the original… build quality is crap but as long as it works" · „watch gives notification to use original charger"</td></tr>
+</table>
+<p class="muted">Tańsze od Aishismart: EAEY 41,47 kr — ale to <b>sama podstawka bez kabla</b> i 4 zamówienia/brak recenzji; Antermart 44,50 kr — wariant „GT6 Pro", 3 sold. Odrzucone jako ryzykowne.</p>
+
+<h2 id="amazon">Amazon.se / .pl / .de</h2>
+<div class="card">
+<p><b>Amazon.se</b> (deliver to Stockholm): najtańszy GT6-dedykowany = <b>87,61 kr</b> (B0H9KJKWNY, stacja aluminiowa, 0 ocen, free delivery). Następne: 98,41 / 98,58 / 119,00–119,37 kr. Wszystkie 3rd-party „shipped by Amazon" = darmowa dostawa i zwrot przez Amazon.</p>
+<p><b>amazon.pl</b>: te same ASIN-y taniej w PLN (np. 30,29 zł ≈ 78 kr) — <b>ale amazon.pl NIE wysyła do Szwecji</b> (zweryfikowane na stronie produktu). Odpada.</p>
+<p><b>amazon.de</b>: wysyła do SE, ale dostawa ~67 kr do ceny → i tak wychodzi drożej niż .se (144–166 kr total). Odpada.</p>
+</div>
+
+<h2 id="blocket">Blocket + FB Marketplace — używane</h2>
+<div class="card warnl">
+<p><b>Blocket (cała Szwecja):</b> 0 ładowarek GT6. Wszystkie „huawei laddare" = ładowarki telefonowe (USB-A/C, 50–150 kr, niepasujące). Jedyny GT6-related: cały zegarek GT6 z paskami 2500 kr Trollhättan (bez sensu jako źródło ładowarki).</p>
+<p><b>FB Marketplace (Sthlm ~40 km + kraj):</b> 0 ładowarek GT6. Jedyna „zegarkowa" ładowarka to 3-w-1 stacja 600 kr Spånga w formacie Apple Watch (niepasująca). Podejrzanie tani cały GT6 za 800 kr w Halmstad (2 tyg. temu, „fel köpt") — bez podanej ładowarki, daleko.</p>
+<p><b>Werdykt: używany rynek ładowarek GT6 w SE nie istnieje.</b> GT1/GT2 docki z ogłoszeń NIE pasują do GT6 (inny magnetyzm/cewki).</p>
+</div>
+
+<h2 id="se">Sklepy szwedzkie (baseline)</h2>
+<table>
+<tr><th>Sklep</th><th>Produkt</th><th>Cena</th><th>Uwagi</th></tr>
+<tr><td>Fyndiq</td><td><a href="https://fyndiq.se/produkt/laddare-for-huawei-watch-gt-honor-och-magic-watch-svart-965f3e90ba9e4f6c/" target="_blank">Laddare för Huawei Watch GT/Honor</a></td><td>79 kr + 39 frakt</td><td>starsza era GT — kompat. z GT6 niepewna</td></tr>
+<tr><td>Batteritema / Teknikdelar</td><td><a href="https://batteritema.se/produkter/smartwatch-laddare-for-huawei-watch-6544-pro-gt-3-gt-4-vit-ebe69dd9" target="_blank">SiGN Smartwatch Laddare (EAN 7350149976333)</a></td><td>149 kr</td><td>opis jawnie: Huawei Watch <b>GT 6</b>, I lager</td></tr>
+<tr><td>CDON</td><td>USB-C magnetisk laddare GT-serien</td><td>143–209 kr</td><td>marketplace</td></tr>
+<tr><td>NetOnNet / Kjell / Elgiganten / Power / Prisjakt</td><td>—</td><td>—</td><td>brak wyników / bot-wall / brak oryginału</td></tr>
+<tr><td>Huawei SE (oficjalnie)</td><td>WATCH Wireless SuperCharger 2nd gen</td><td>brak ceny SE</td><td>cradle GT6 tylko in-box; osobno nie dostępny w SE</td></tr>
+</table>
+
+<h2 id="qi">Czy GT6 ładuje się na zwykłym Qi? — NIE (niezawodnie)</h2>
+<div class="card badl">
+<p><b>Werdykt: MIESZANE → w praktyce NIE.</b> GT6 = proprietytny protokół <b>Huawei Wireless Smart Charge</b> + magnetyczna cradle. Huawei oficjalnie: <i>„next-generation watch adopts a more compact coil layout, which shifts the positioning between the new watch coil and the legacy cradle coil, affecting the legacy cradle's charging performance"</i> — nawet <b>stare oryginalne cradle Huawei</b> ładują next-gen zegarki wolno/wcale. Zero wiarygodnych raportów o GT6 na generycznym padzie Qi; historycznie Huawei Watch na padach Qi = 5h+/przegrzewanie/3W. Spec-bazy twierdzące „Qi" (Zens, Versus) = sprzeczne z oficjalną dokumentacją.</p>
+</div>
+
+<h2 id="hidden">Ukryte koszty i pułapki</h2>
+<ul style="margin:10px 0 0 20px">
+  <li><b>AliExpress „free shipping over 100 kr"</b> — przy 1 szt. za 44 kr dostawa płatna; trzymaj w koszyku 2 szt. (druga na zapas / do progu 100 kr) albo zaakceptuj ~20–40 kr frachtu. VAT w cenie, ale „import charges may apply".</li>
+  <li><b>Warianty produktów</b> — GT6 vs GT6 Pro vs Fit 4 to różne doki w tej samej aukcji. Najniższa cena często = „bez kabla" (sama podstawka) lub inny model.</li>
+  <li><b>Zamienniki = wolniejsze ładowanie</b> — GT6 wyświetla powiadomienie „użyj oryginalnej ładowarki"; realne czasy dłuższe niż cradle z zestawu.</li>
+  <li><b>amazon.pl</b> — nie wysyła do SE; <b>amazon.de</b> — wysyła, ale +67 kr frachtu. Zawsze taniej na amazon.se.</li>
+  <li><b>GT1/GT2/GT Runner docki</b> z Blocket/FB — NIE kompatybilne z GT6.</li>
+</ul>
+
+<h2 id="sources">Źródła (wszystkie klikalne)</h2>
+<div class="grid">
+<div class="toc-item"><b>AliExpress</b><br><a href="https://www.aliexpress.com/item/1005006936528787.html" target="_blank">Aishismart 44,41 kr</a><br><a href="https://www.aliexpress.com/item/1005012242864225.html" target="_blank">LIEI 45,53 kr</a><br><a href="https://www.aliexpress.com/item/1005010488223209.html" target="_blank">Yingzi 52,41 kr</a><br><a href="https://www.aliexpress.com/item/1005012537674666.html" target="_blank">EAEY 41,47 kr (bez kabla)</a><br><a href="https://www.aliexpress.com/item/1005006932794345.html" target="_blank">AISHISMART dock 54,29 kr</a></div>
+<div class="toc-item"><b>Amazon.se</b><br><a href="https://www.amazon.se/dp/B0H9KJKWNY" target="_blank">B0H9KJKWNY 87,61 kr</a><br><a href="https://www.amazon.se/dp/B0GYJ9JS7C" target="_blank">B0GYJ9JS7C 98,41 kr</a><br><a href="https://www.amazon.se/dp/B0H14X1BV8" target="_blank">Ermorgen 119,37 kr</a><br><a href="https://www.amazon.se/dp/B0G3NM4DJL" target="_blank">B0G3NM4DJL 119,90 kr</a><br><a href="https://www.amazon.se/dp/B0CNCDYR5Y" target="_blank">sciuU 169,99 kr</a></div>
+<div class="toc-item"><b>Sklepy SE</b><br><a href="https://fyndiq.se/produkt/laddare-for-huawei-watch-gt-honor-och-magic-watch-svart-965f3e90ba9e4f6c/" target="_blank">Fyndiq 79 kr</a><br><a href="https://batteritema.se/produkter/smartwatch-laddare-for-huawei-watch-6544-pro-gt-3-gt-4-vit-ebe69dd9" target="_blank">Batteritema SiGN 149 kr</a><br><a href="https://www.teknikdelar.se/produkt/sign-smartwatch-laddare-for-huawei-watch-series" target="_blank">Teknikdelar SiGN 149 kr</a><br><a href="https://cdon.se/produkt/usb-c-magnetisk-laddare-kompatibel-med-huawei-watch-gt-serien-och-fler-2d0e53b5e1c958ed/" target="_blank">CDON 143 kr</a></div>
+<div class="toc-item"><b>Qi / oficjalne</b><br><a href="https://consumer.huawei.com/en/support/content/en-us16044154/" target="_blank">Huawei: nowy układ cewek (kluczowy!)</a><br><a href="https://consumer.huawei.com/en/accessories/watch-wireless-supercharger-2nd-generation/" target="_blank">SuperCharger 2nd gen</a><br><a href="https://consumer.huawei.com/se/wearables/watch-gt6/" target="_blank">GT6 strona SE</a><br><a href="https://www.netonnet.se/sok?q=huawei+gt+6+laddare" target="_blank">NetOnNet (0 wyników)</a><br><a href="https://www.kjell.com/se/sok?q=huawei+gt+6+laddare" target="_blank">Kjell (0 wyników)</a></div>
+</div>
+
+<footer>
+  <p><b>Metodologia:</b> 4 scraper-subagentów (Qwen 3.7 Flash, browser dla Ali/Amazon/Blocket/FB, web_fetch dla baseline SE/Qi) → destylaty → synteza GLM-5.2. Surowe dane: <code>memory/research/gt6-charger/raw/</code>. Ceny live z 19.08.2026 14:00–15:00 SE.</p>
+  <p><b>Self-audit:</b> ✅ każda cena z URL · ✅ min 2 języki (PL/SV/EN) · ✅ ukryte koszty (fracht, warianty, import) · ✅ recenzje jako first-class data · ✅ rynek używany sprawdzony mimo że pusty · ✅ brak placeholderów · ✅ wszystkie platformy z promptu (Ali, Amazon, Blocket, Marketplace) obecne · ⚠️ Allegro pominięte poza promptem (cło/dostawa PL→SE zboże — na życzenie dorobię) · ⚠️ Fyndiq/CDON nie otwierane w browserze (web_fetch).</p>
+  <p>Andrzej 🤖 · Deep Research v2 · 2026-08-19</p>
+</footer>
+</div>
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</body>
+</html>

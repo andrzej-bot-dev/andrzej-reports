@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS Ad-Blockers 2026 — Porównanie i Alternatywy dla NextDNS</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0d1117; color: #e6edf3; line-height: 1.6;
+  max-width: 1200px; margin: 0 auto; padding: 16px;
+}
+h1 { font-size: 1.8em; margin-bottom: 8px; color: #58a6ff; }
+h2 { font-size: 1.4em; margin: 24px 0 12px; color: #79c0ff; border-bottom: 1px solid #30363d; padding-bottom: 6px; }
+h3 { font-size: 1.1em; margin: 16px 0 8px; color: #d2a8ff; }
+p { margin-bottom: 10px; }
+ul, ol { margin: 8px 0 12px 24px; }
+li { margin-bottom: 4px; }
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75em; font-weight: 600; }
+.badge-free { background: #238636; color: #fff; }
+.badge-paid { background: #da3633; color: #fff; }
+.badge-self { background: #8957e5; color: #fff; }
+.badge-best { background: #f0883e; color: #000; }
+.header { text-align: center; margin-bottom: 24px; padding: 16px; background: #161b22; border-radius: 8px; border: 1px solid #30363d; }
+.header .meta { color: #8b949e; font-size: 0.85em; margin-top: 8px; }
+.tldr { background: #1a2332; border: 1px solid #1f6feb; border-radius: 8px; padding: 16px; margin: 16px 0; }
+.tldr h2 { border: none; margin-top: 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85em; }
+th, td { padding: 8px 10px; text-align: left; border: 1px solid #30363d; }
+th { background: #161b22; color: #79c0ff; font-weight: 600; }
+tr:nth-child(even) { background: #0d1117; }
+tr:nth-child(odd) { background: #161b22; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; margin: 10px 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.card-header h3 { margin: 0; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+.pros { color: #3fb950; }
+.cons { color: #f85149; }
+.nav { position: sticky; top: 0; background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 8px 12px; margin-bottom: 16px; z-index: 100; display: flex; flex-wrap: wrap; gap: 6px; }
+.nav a { padding: 4px 10px; background: #21262d; border-radius: 6px; font-size: 0.8em; white-space: nowrap; }
+.nav a:hover { background: #30363d; }
+.winner { border: 2px solid #238636; position: relative; }
+.winner::before { content: "🏆 BEST VALUE"; position: absolute; top: -10px; right: 10px; background: #238636; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.7em; font-weight: 700; }
+.hidden { display: none; }
+.bar { height: 8px; border-radius: 4px; background: #21262d; margin: 4px 0; }
+.bar-fill { height: 100%; border-radius: 4px; }
+.bar-green { background: #238636; }
+.bar-yellow { background: #d29922; }
+.bar-red { background: #da3633; }
+.bar-blue { background: #1f6feb; }
+.note { background: #1c2128; border-left: 3px solid #d29922; padding: 10px 14px; margin: 10px 0; border-radius: 0 6px 6px 0; font-size: 0.9em; }
+.note strong { color: #d29922; }
+.setup { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 12px; margin: 8px 0; font-family: monospace; font-size: 0.85em; }
+.back-top { position: fixed; bottom: 20px; right: 20px; background: #1f6feb; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2em; z-index: 200; }
+.back-top:hover { background: #388bfd; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🛡️ DNS Ad-Blockers 2026</h1>
+  <p>Porównanie alternatyw dla NextDNS — darmowe i płatne rozwiązania</p>
+  <div class="meta">📅 2026-07-23 | 🔍 20+ rozwiązań | 📊 7 subagentów research | ⏱️ ~3h deep dive</div>
+</div>
+
+<nav class="nav" id="nav">
+  <a href="#tldr">TL;DR</a>
+  <a href="#ranking">Ranking</a>
+  <a href="#free-dns">Darmowe DNS</a>
+  <a href="#paid-dns">Płatne DNS</a>
+  <a href="#selfhosted">Self-hosted</a>
+  <a href="#android">Android</a>
+  <a href="#effectiveness">Skuteczność</a>
+  <a href="#privacy">Prywatność</a>
+  <a href="#blocklists">Blocklisty</a>
+  <a href="#advanced">Zaawansowane</a>
+  <a href="#setup">Setup</a>
+  <a href="#verdict">Werdykt</a>
+</nav>
+
+<div class="tldr" id="tldr">
+  <h2>⚡ TL;DR — Co wybrać zamiast NextDNS?</h2>
+  <ol>
+    <li><strong>Chcesz za darmo i bez limitów?</strong> → <strong>AdGuard DNS Public</strong> (94.140.14.14) — nielimitowany, zero rejestracji, działa z Android Private DNS</li>
+    <li><strong>Chcesz customizację jak NextDNS ale za darmo?</strong> → <strong>AdGuard Home</strong> (self-hosted na Raspberry Pi) — pełny dashboard, per-device, encrypted DNS built-in</li>
+    <li><strong>Chcesz najlepszą prywatność?</strong> → <strong>Mullvad DNS</strong> (adblock.dns.mullvad.net) — Szwecja, zero logów, anycast, nielimitowany</li>
+    <li><strong>Chcesz app na Androida z firewallem?</strong> → <strong>RethinkDNS</strong> — 190+ blocklist, firewall per-app, open source</li>
+    <li><strong>NextDNS za 25 SEK/mies jest OK</strong> — jeśli potrzebujesz per-device profiles i analytics, to nadal najlepsza opcja paid</li>
+  </ol>
+  <div class="note"><strong>⚠️ Ważne:</strong> DNS blokuje ~60-70% reklam ogółem. Nie zablokuje YouTube ads, sponsored postów na FB/IG, ani Google Search ads. Do pełni szczęścia potrzebujesz DNS + uBlock Origin w przeglądarce.</div>
+</div>
+
+<h2 id="ranking">🏆 Ranking — Top Rozwiązania</h2>
+
+<table>
+<tr>
+  <th>#</th><th>Rozwiązanie</th><th>Typ</th><th>Cena</th><th>Limit</th><th>Android</th><th>Custom</th><th>Ocena</th>
+</tr>
+<tr class="winner">
+  <td>1</td><td><strong>AdGuard DNS Public</strong></td><td>Cloud</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>✅ Private DNS</td><td>❌</td><td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>2</td><td><strong>AdGuard Home</strong></td><td>Self-host</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>⚠️ VPN/router</td><td>✅ Full</td><td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>3</td><td><strong>NextDNS</strong></td><td>Cloud</td><td><span class="badge badge-paid">25 SEK/m</span></td><td>300K free</td><td>✅ Private DNS</td><td>✅ Full</td><td>⭐⭐⭐⭐½</td>
+</tr>
+<tr>
+  <td>4</td><td><strong>Mullvad DNS</strong></td><td>Cloud</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>✅ Private DNS</td><td>❌</td><td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>5</td><td><strong>Pi-hole</strong></td><td>Self-host</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>⚠️ VPN/router</td><td>✅ Full</td><td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>6</td><td><strong>RethinkDNS</strong></td><td>App</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>✅ Native</td><td>✅ Lists</td><td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>7</td><td><strong>ControlD</strong></td><td>Cloud</td><td><span class="badge badge-paid">~$2/m</span></td><td>Free basic</td><td>✅ App</td><td>✅ Full</td><td>⭐⭐⭐½</td>
+</tr>
+<tr>
+  <td>8</td><td><strong>Blokada 6</strong></td><td>App</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>✅ Native</td><td>⚠️ Partial</td><td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+  <td>9</td><td><strong>Technitium DNS</strong></td><td>Self-host</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>⚠️ VPN/router</td><td>✅ Full</td><td>⭐⭐⭐½</td>
+</tr>
+<tr>
+  <td>10</td><td><strong>Blocky</strong></td><td>Self-host</td><td><span class="badge badge-free">FREE</span></td><td>∞</td><td>⚠️ VPN/router</td><td>✅ YAML</td><td>⭐⭐⭐</td>
+</tr>
+</table>
+
+<h2 id="free-dns">🆓 Darmowe Publiczne DNS (bez limitów!)</h2>
+
+<div class="card winner">
+  <div class="card-header">
+    <h3>AdGuard DNS Public</h3>
+    <span class="badge badge-free">FREE ∞</span>
+  </div>
+  <p><strong>Nielimitowany, zero rejestracji, działa od ręki.</strong></p>
+  <ul>
+    <li><strong>IP:</strong> 94.140.14.14 / 94.140.15.15</li>
+    <li><strong>DoT/DoH hostname:</strong> <code>dns.adguard-dns.com</code></li>
+    <li><strong>Android Private DNS:</strong> Wpisz <code>dns.adguard-dns.com</code></li>
+    <li><strong>Blokuje:</strong> Reklamy, trackery, phishing, malware</li>
+    <li><strong>Tryby:</strong> Default (ads), Family (+adult), Non-filtering</li>
+    <li><strong>CNAME uncloaking:</strong> ✅ Tak</li>
+    <li><strong>91M+ użytkowników</strong></li>
+  </ul>
+  <div class="pros">✅ Zero limitów, zero rejestracji, zero konta</div>
+  <div class="pros">✅ Działa z Android Private DNS out-of-the-box</div>
+  <div class="pros">✅ DoH + DoT + DoQ + DNSCrypt</div>
+  <div class="cons">❌ Brak customizacji (stałe listy)</div>
+  <div class="cons">❌ Brak analytics / dashboard na free</div>
+  <div class="cons">❌ Brak per-device config</div>
+  <p><strong>Paid (Personal):</strong> ~$2.49/mies — dashboard, custom rules, stats, parental</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Mullvad DNS (Ad-blocking)</h3>
+    <span class="badge badge-free">FREE ∞</span>
+  </div>
+  <p><strong>Szwedzki, zero-log, anycast — prywatność premium za darmo.</strong></p>
+  <ul>
+    <li><strong>Ad-block IP:</strong> 194.242.2.3</li>
+    <li><strong>DoT hostname:</strong> <code>adblock.dns.mullvad.net</code></li>
+    <li><strong>Android Private DNS:</strong> <code>adblock.dns.mullvad.net</code></li>
+    <li><strong>Warianty:</strong>
+      <ul>
+        <li><code>dns.mullvad.net</code> — bez blokowania</li>
+        <li><code>adblock.dns.mullvad.net</code> — ads + trackers</li>
+        <li><code>base.dns.mullvad.net</code> — + malware</li>
+        <li><code>extended.dns.mullvad.net</code> — + gambling + social</li>
+        <li><code>family.dns.mullvad.net</code> — + adult content</li>
+        <li><code>all.dns.mullvad.net</code> — wszystko</li>
+      </ul>
+    </li>
+    <li><strong>Jurysdykcja:</strong> Szwecja (Activify Solutions AB)</li>
+    <li><strong>QNAME minimization:</strong> ✅</li>
+  </ul>
+  <div class="pros">✅ Zero logów, zero rejestracji</div>
+  <div class="pros">✅ Szwedzka jurysdykcja (GDPR)</div>
+  <div class="pros">✅ Anycast, dobra latencja w Europie</div>
+  <div class="pros">✅ 6 wariantów blokowania</div>
+  <div class="cons">❌ Brak customizacji</div>
+  <div class="cons">❌ Brak dashboard / analytics</div>
+  <div class="cons">❌ Brak CNAME uncloaking</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Quad9</h3>
+    <span class="badge badge-free">FREE ∞</span>
+  </div>
+  <p><strong>Non-profit, szwajcarska fundacja — malware blocking, NIE reklamy.</strong></p>
+  <ul>
+    <li><strong>IP:</strong> 9.9.9.9 / 149.112.112.112</li>
+    <li><strong>DoT hostname:</strong> <code>dns.quad9.net</code></li>
+    <li><strong>Blokuje:</strong> Tylko malware/phishing (25+ threat intel feeds)</li>
+    <li><strong>230+ resolverów w 110 krajach</strong></li>
+    <li><strong>DNSSEC validation:</strong> ✅</li>
+    <li><strong>Quad9 Connect app</strong> na Android (F-Droid)</li>
+  </ul>
+  <div class="pros">✅ Non-profit, audytowany, zero IP logging</div>
+  <div class="pros">✅ Świetny na malware, najszybszy w benchmarkach</div>
+  <div class="cons">❌ NIE blokuje reklam ani trackerów!</div>
+  <div class="note"><strong>💡 Tip:</strong> Użyj jako upstream resolver z Pi-hole/AdGuard Home — dostajesz malware blocking + ad blocking w jednym.</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Cloudflare for Families</h3>
+    <span class="badge badge-free">FREE ∞</span>
+  </div>
+  <ul>
+    <li><strong>1.1.1.2 / 1.0.0.2</strong> — malware blocking</li>
+    <li><strong>1.1.1.3 / 1.0.0.3</strong> — malware + adult content</li>
+    <li><strong>DoT:</strong> <code>security.cloudflare-dns.com</code> / <code>family.cloudflare-dns.com</code></li>
+    <li>Najszybszy DNS na świecie (DNSPerf #1)</li>
+    <li>Zero logging (audited KPMG)</li>
+  </ul>
+  <div class="cons">❌ NIE blokuje reklam!</div>
+</div>
+
+<div class="note"><strong>⚠️ DNS0.eu:</strong> Serwis został <strong>zamknięty w lutym 2025</strong>. Nie działa — nie używać.</div>
+
+<h2 id="paid-dns">💰 Płatne Cloud DNS (z customizacją)</h2>
+
+<div class="card">
+  <div class="card-header">
+    <h3>NextDNS</h3>
+    <span class="badge badge-paid">25 SEK/mies</span>
+  </div>
+  <ul>
+    <li><strong>Free tier:</strong> 300,000 zapytań/miesiąc (potem non-blocking DNS)</li>
+    <li><strong>Paid:</strong> ~25 SEK/mies (~$2.40) — unlimited</li>
+    <li><strong>Features:</strong> 100+ blocklist, per-device config, CNAME uncloaking, analytics, parental controls, custom allow/deny</li>
+    <li><strong>Protokoły:</strong> DoH, DoT, DoQ, DNSCrypt, legacy</li>
+    <li><strong>Android:</strong> ✅ Private DNS + native app</li>
+  </ul>
+  <div class="pros">✅ Najlepsza customizacja w cloud</div>
+  <div class="pros">✅ Per-device profiles</div>
+  <div class="pros">✅ CNAME uncloaking built-in</div>
+  <div class="cons">❌ 300K free to mało na rodzinę</div>
+  <div class="cons">❌ Po limicie — przestaje filtrować (nie fail-open do innego blockera)</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>AdGuard DNS Personal</h3>
+    <span class="badge badge-paid">~$2.49/mies</span>
+  </div>
+  <ul>
+    <li>Dashboard, custom rules, per-device stats</li>
+    <li>Parental controls, safe search enforcement</li>
+    <li>Te same blocklisty co public, ale z customizacją</li>
+    <li>30-dniowy trial</li>
+  </ul>
+  <div class="pros">✅ Tańszy niż NextDNS (roczny plan ~$20)</div>
+  <div class="pros">✅ 91M+ users, dojrzała platforma</div>
+  <div class="cons">❌ Mniej blocklist niż NextDNS</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>ControlD (by Windscribe)</h3>
+    <span class="badge badge-paid">~$2/mies</span>
+  </div>
+  <ul>
+    <li><strong>Free tier:</strong> Tylko malware blocking (bez ads)</li>
+    <li><strong>Paid:</strong> 20 native filter categories, 1000+ service toggles</li>
+    <li><strong>Unikalne:</strong> Traffic redirection via proxies (69 krajów)</li>
+    <li><strong>Geo-IP rules:</strong> blokuj/zezwól per kraj</li>
+    <li><strong>ML malware blocking</strong></li>
+    <li>DoH, DoT, DoQ, DoH3</li>
+  </ul>
+  <div class="pros">✅ Najbardziej zaawansowane reguły (geo-IP, proxy)</div>
+  <div class="pros">✅ 1000+ service-specific toggles</div>
+  <div class="cons">❌ Pricing nieprzejrzysty na stronie</div>
+  <div class="cons">❌ Free tier nie blokuje reklam</div>
+  <div class="cons">❌ Młodszy produkt (2024+)</div>
+</div>
+
+<h2 id="selfhosted">🖥️ Self-Hosted (całkowicie darmowe, bez limitów)</h2>
+
+<div class="grid">
+<div class="card">
+  <h3>AdGuard Home 🏆</h3>
+  <span class="badge badge-self">Self-hosted</span>
+  <ul>
+    <li><strong>Język:</strong> Go (single binary)</li>
+    <li><strong>RAM:</strong> ~50-70 MB</li>
+    <li><strong>Platformy:</strong> Linux, Mac, Windows, FreeBSD, ARM (Pi!)</li>
+    <li><strong>Encrypted DNS:</strong> DoH + DoT + DoQ + DNSCrypt (built-in!)</li>
+    <li><strong>UI:</strong> Nowoczesny web UI, HTTPS admin</li>
+    <li><strong>Features:</strong> Per-device config, parental controls, safe search, DHCP, browsing security</li>
+    <li><strong>Upstream:</strong> Bootstrap servers, parallel/concurrent requests</li>
+    <li><strong>Cache:</strong> Built-in DNS cache z auto-size</li>
+  </ul>
+  <div class="pros">✅ Encrypted DNS out-of-the-box</div>
+  <div class="pros">✅ Cross-platform (nawet Windows)</div>
+  <div class="pros">✅ Parental controls built-in</div>
+  <div class="pros">✅ Community favorite 2026</div>
+  <div class="cons">❌ Brak mobilnej apki (tylko web UI)</div>
+</div>
+
+<div class="card">
+  <h3>Pi-hole</h3>
+  <span class="badge badge-self">Self-hosted</span>
+  <ul>
+    <li><strong>Język:</strong> PHP + dnsmasq (FTLDNS)</li>
+    <li><strong>RAM:</strong> ~100-150 MB</li>
+    <li><strong>Platformy:</strong> Linux (Debian/Raspbian), Docker</li>
+    <li><strong>Encrypted DNS:</strong> ❌ Wymaga cloudflared/DoH-proxy</li>
+    <li><strong>UI:</strong> FTL engine, long-term stats, API</li>
+    <li><strong>Features:</strong> Query log, regex, groups, DHCP</li>
+    <li><strong>V6 (2025):</strong> Nowy Lua scripting, dual-stack</li>
+  </ul>
+  <div class="pros">✅ Największa społeczność, najwięcej tutoriali</div>
+  <div class="pros">✅ FTL engine — szybki i lekki</div>
+  <div class="pros">✅ Groups — per-device reguły</div>
+  <div class="cons">❌ Encrypted DNS wymaga dodatkowego softu</div>
+  <div class="cons">❌ Tylko Linux/Docker</div>
+  <div class="cons">❌ Brak CNAME uncloaking out-of-box</div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+  <h3>Blocky</h3>
+  <span class="badge badge-self">Self-hosted</span>
+  <ul>
+    <li><strong>Język:</strong> Go</li>
+    <li><strong>RAM:</strong> ~12-30 MB (!!!)</li>
+    <li><strong>Config:</strong> YAML</li>
+    <li><strong>Encrypted DNS:</strong> DoH + DoT upstream</li>
+    <li><strong>CNAME uncloaking:</strong> ✅</li>
+    <li><strong>Caching:</strong> Prefetching, EDE</li>
+    <li><strong>Deploy:</strong> Single binary lub Docker</li>
+  </ul>
+  <div class="pros">✅ Najniższe zużycie RAM (12 MB!)</div>
+  <div class="pros">✅ CNAME uncloaking</div>
+  <div class="pros">✅ Prefetching cache</div>
+  <div class="cons">❌ Brak web UI (config YAML)</div>
+  <div class="cons">❌ Brak DHCP</div>
+</div>
+
+<div class="card">
+  <h3>Technitium DNS</h3>
+  <span class="badge badge-self">Self-hosted</span>
+  <ul>
+    <li><strong>Język:</strong> C# (.NET)</li>
+    <li><strong>RAM:</strong> ~200+ MB</li>
+    <li><strong>Features:</strong> Authoritative + recursive, DoH/DoT/DoQ, DHCP, wildcard blocking</li>
+    <li><strong>UI:</strong> Web GUI, REST API</li>
+    <li><strong>Apps:</strong> adblock, dns-rebind-protection</li>
+  </ul>
+  <div class="pros">✅ Authoritative + recursive w jednym</div>
+  <div class="pros">✅ Wildcard domain blocking</div>
+  <div class="pros">✅ Surprise pick na Reddicie 2026</div>
+  <div class="cons">❌ .NET runtime = więcej RAM</div>
+  <div class="cons">❌ Mniejsza społeczność</div>
+</div>
+</div>
+
+<div class="card">
+  <h3>Router-Level: Diversion / Adblock-lean</h3>
+  <span class="badge badge-self">Router</span>
+  <ul>
+    <li><strong>Diversion (v5.6.3):</strong> ASUS Merlin firmware — ad blocking na routerze</li>
+    <li><strong>Adblock-lean:</strong> OpenWrt — minimalistyczny, DNS-based</li>
+    <li><strong>Zalety:</strong> Cała sieć chroniona automatycznie, zero konfiguracji na urządzeniach</li>
+    <li><strong>Wady:</strong> Diversion = tylko ASUS; Adblock-lean = tylko OpenWrt</li>
+  </ul>
+</div>
+
+<h2 id="android">📱 Android — Co wybrać?</h2>
+
+<div class="tldr">
+  <h3>🎯 Najszybsza odpowiedź:</h3>
+  <p><strong>Wariant A (najprostszy):</strong> Ustawienia → Sieć → Prywatny DNS → <code>dns.adguard-dns.com</code><br>
+  Gotowe. Zero instalacji, zero limitów, działa od ręki.</p>
+  <p><strong>Wariant B (więcej kontroli):</strong> Zainstaluj <strong>RethinkDNS</strong> z F-Droid/Play Store → 190+ blocklist, firewall per-app, statystyki.</p>
+  <p><strong>Wariant C (combo):</strong> Private DNS (AdGuard) + <strong>uBlock Origin</strong> w Firefox/Brave = ~95% reklam zablokowanych.</p>
+</div>
+
+<h3>Android Private DNS — jak ustawić:</h3>
+<div class="setup">
+Ustawienia → Sieć i internet → Prywatny DNS → Nazwa hosta prywatnego DNS:<br><br>
+<strong>AdGuard (ads+trackers):</strong> <code>dns.adguard-dns.com</code><br>
+<strong>AdGuard (family):</strong> <code>family.adguard-dns.com</code><br>
+<strong>Mullvad (adblock):</strong> <code>adblock.dns.mullvad.net</code><br>
+<strong>NextDNS (twój config):</strong> <code>[id].dns.nextdns.io</code>
+</div>
+
+<h3>Android Apps do blokowania:</h3>
+<table>
+<tr><th>App</th><th>Typ</th><th>Root?</th><th>Bateria</th><th>Features</th></tr>
+<tr>
+  <td><strong>RethinkDNS</strong></td><td>DNS+Firewall</td><td>Nie</td><td>Średnia (VPN)</td><td>190+ blocklist, firewall per-app, WireGuard</td>
+</tr>
+<tr>
+  <td><strong>Blokada 6</strong></td><td>DNS</td><td>Nie</td><td>Niska</td><td>Cloud DNS, open source, prosta</td>
+</tr>
+<tr>
+  <td><strong>personalDNSfilter</strong></td><td>DNS</td><td>Nie</td><td>Bardzo niska</td><td>Java, lightweight, custom filters</td>
+</tr>
+<tr>
+  <td><strong>AdAway</strong></td><td>Hosts file</td><td>TAK</td><td>Zero</td><td>Modyfikuje /etc/hosts</td>
+</tr>
+<tr>
+  <td><strong>NetGuard</strong></td><td>Firewall</td><td>Nie</td><td>Niska</td><td>Firewall per-app, nie ad-blocker</td>
+</tr>
+</table>
+
+<div class="note"><strong>🔋 Bateria:</strong> Private DNS (system-level) ma <strong>zerowy wpływ na baterię</strong>. VPN-based apps (RethinkDNS, Blokada) zużywają ~2-5% więcej baterii. Wybierz Private DNS jeśli zależy Ci na baterii.</div>
+
+<h2 id="effectiveness">📊 Skuteczność — Co DNS blokuje, a co nie?</h2>
+
+<h3>Co DNS BLOKUJE skutecznie ✅</h3>
+<table>
+<tr><th>Kategoria</th><th>Skuteczność DNS</th><th>Pasek</th></tr>
+<tr><td>Banner ads (third-party)</td><td>~90%</td><td><div class="bar"><div class="bar-fill bar-green" style="width:90%"></div></div></td></tr>
+<tr><td>Tracking pixels / analytics</td><td>~85%</td><td><div class="bar"><div class="bar-fill bar-green" style="width:85%"></div></div></td></tr>
+<tr><td>Pop-up ads</td><td>~85%</td><td><div class="bar"><div class="bar-fill bar-green" style="width:85%"></div></div></td></tr>
+<tr><td>Malware / phishing domains</td><td>~80%</td><td><div class="bar"><div class="bar-fill bar-green" style="width:80%"></div></div></td></tr>
+<tr><td>Telemetry (MS, Samsung, etc.)</td><td>~70%</td><td><div class="bar"><div class="bar-fill bar-green" style="width:70%"></div></div></td></tr>
+<tr><td>In-app ads (AdMob, AppLovin)</td><td>~50-70%</td><td><div class="bar"><div class="bar-fill bar-yellow" style="width:60%"></div></div></td></tr>
+</table>
+
+<h3>Co DNS NIE blokuje ❌</h3>
+<table>
+<tr><th>Kategoria</th><th>Dlaczego nie działa</th><th>Alternatywa</th></tr>
+<tr><td><strong>YouTube ads</strong></td><td>Ads z tego samego domainu (googlevideo.com), Server-Side Ad Insertion</td><td>ReVanced, SmartTube, uBlock Origin (Firefox), YT Premium</td></tr>
+<tr><td><strong>FB/IG sponsored posts</strong></td><td>W tym samym API response co organic posts</td><td>uBlock cosmetic (web), brak na mobile app</td></tr>
+<tr><td><strong>Google Search ads</strong></td><td>Inline z wynikami, ten sam domain</td><td>uBlock Origin cosmetic filtering</td></tr>
+<tr><td><strong>TikTok ads</strong></td><td>Built-in DoH w appce — omija Twój DNS!</td><td>Brak realnej opcji</td></tr>
+<tr><td><strong>Smart TV UI ads</strong></td><td>Wbuddowane w OS, hardcodowane IPs</td><td>Ograniczone, może zepsuć streaming</td></tr>
+</table>
+
+<h3>Combo = najlepsze wyniki:</h3>
+<table>
+<tr><th>Setup</th><th>Score (adblock-tester.com)</th><th>Ogólna skuteczność</th></tr>
+<tr><td>DNS only (AdGuard/NextDNS)</td><td>65-70/100</td><td>~60-70% ogółem</td></tr>
+<tr><td>Brave (aggressive)</td><td>96/100</td><td>~90% w przeglądarce</td></tr>
+<tr><td>Firefox + uBlock Origin</td><td>98-99/100</td><td>~95% w przeglądarce</td></tr>
+<tr><td><strong>DNS + uBlock Origin</strong></td><td><strong>99/100</strong></td><td><strong>~95% ogółem</strong></td></tr>
+</table>
+
+<div class="note"><strong>💡 Wniosek:</strong> DNS blokuje ~60-70% reklam. Combo DNS + uBlock Origin = ~95%. YouTube/TikTok ads wymagają dedykowanych rozwiązań (ReVanced, SmartTube).</div>
+
+<h2 id="privacy">🔒 Prywatność — Kto loguje?</h2>
+
+<table>
+<tr><th>Provider</th><th>Logging</th><th>Jurysdykcja</th><th>Audyt</th></tr>
+<tr><td>AdGuard DNS</td><td>Anonimowe agregaty (24h delete)</td><td>Cypr (EU)</td><td>Nie</td></tr>
+<tr><td>NextDNS</td><td>Opcjonalny (off by default)</td><td>USA</td><td>Nie</td></tr>
+<tr><td>Mullvad DNS</td><td><strong>Zero logów</strong></td><td>Szwecja</td><td>Nie (ale reputation)</td></tr>
+<tr><td>Quad9</td><td><strong>Zero IP logging</strong></td><td>Szwajcaria</td><td>Tak</td></tr>
+<tr><td>Cloudflare</td><td>Zero (KPMG audyt)</td><td>USA</td><td>Tak (KPMG)</td></tr>
+<tr><td>ControlD</td><td>Minimal (operational)</td><td>Kanada (Windscribe)</td><td>Nie</td></tr>
+<tr><td>Self-hosted</td><td><strong>Zero (Twoje dane)</strong></td><td>Twój serwer</td><td>N/A</td></tr>
+</table>
+
+<div class="note"><strong>🏴‍☠️ Najlepsza prywatność:</strong> Self-hosted (AdGuard Home / Pi-hole) > Mullvad > Quad9 > Cloudflare > AdGuard DNS > NextDNS</div>
+
+<h3>Encrypted DNS Protocols</h3>
+<table>
+<tr><th>Provider</th><th>DoH</th><th>DoT</th><th>DoQ</th><th>DNSCrypt</th></tr>
+<tr><td>AdGuard DNS</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>NextDNS</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Mullvad</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+<tr><td>Quad9</td><td>✅</td><td>✅</td><td>❌</td><td>✅</td></tr>
+<tr><td>Cloudflare</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+<tr><td>ControlD</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+<tr><td>AdGuard Home</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+</table>
+
+<h2 id="blocklists">📋 Blocklisty — Które wybrać?</h2>
+
+<h3>HaGeZi (⭐ rekomendowane 2026)</h3>
+<ul>
+  <li><strong>Light:</strong> ~297K domen — minimalny, nie psuje nic</li>
+  <li><strong>Normal:</strong> ~450K domen — codzienna ochrona, false positive-free</li>
+  <li><strong>Pro:</strong> ~500K domen — najlepsza ochrona (⭐ sweet spot)</li>
+  <li><strong>Ultimate:</strong> ~3M domen — agresywny, może coś zepsuć</li>
+  <li><strong>GitHub:</strong> <a href="https://github.com/hagezi/dns-blocklists">github.com/hagezi/dns-blocklists</a></li>
+</ul>
+
+<h3>Inne godne polecenia:</h3>
+<ul>
+  <li><strong>Steven Black Unified Hosts:</strong> ~220K, konserwatywny, zintegrowany z Pi-hole</li>
+  <li><strong>1Hosts (Pro):</strong> ~400K domen — rywal HaGeZi</li>
+  <li><strong>OISD Big:</strong> ~430K — zero false positives (celowo)</li>
+  <li><strong>Developer Dan (Ads + Tracking):</strong> 42K + 12K — minimalne ale skuteczne</li>
+  <li><strong>DNS Blocklists (UK):</strong> 320K — zintegrowane z dnsmasq</li>
+</ul>
+
+<div class="note"><strong>📐 Zasada:</strong> HaGeZi Pro jako baza + OISD jako uzupełnienie = najlepszy stosunek ochrony do false positives. Nie przesadzaj z rozmiarem — większa lista ≠ lepsza ochrona.</div>
+
+<h2 id="advanced">🔧 Zaawansowane Setup'y</h2>
+
+<div class="card">
+  <h3>Tailscale + Pi-hole/AdGuard Home (mobilna ochrona)</h3>
+  <p>Zabierz swój DNS ze sobą — Pi-hole/AGH w domu + Tailscale VPN na telefonie.</p>
+  <ul>
+    <li>Tailscale free: do 100 urządzeń</li>
+    <li>Override DNS w tailnet → Twój Pi/AGH</li>
+    <li>Android: Tailscale app + exit node = pełna ochrona poza domem</li>
+    <li>WireGuard alternatywa: tańszy, lżejszy, ale mniej features</li>
+  </ul>
+  <div class="pros">✅ Ochrona wszędzie, nie tylko w domu</div>
+  <div class="pros">✅ Pełna kontrola, zero cloud dependency</div>
+  <div class="cons">❌ Wymaga Tailscale/WireGuard na telefonie</div>
+  <div class="cons">❌ Latencja = odległość do domu (nie problem w Sztokholmie)</div>
+</div>
+
+<div class="card">
+  <h3>AdGuard Home + Upstream Encrypted DNS</h3>
+  <p>Najlepszy combo self-hosted: AGH jako lokalny DNS + Mullvad/Quad9 jako upstream.</p>
+  <div class="setup">
+  Upstream DNS servers:<br>
+  <code>https://dns.mullvad.net/dns-query</code> (DoH)<br>
+  <code>tls://adblock.dns.mullvad.net</code> (DoT)<br>
+  <code>https://dns.quad9.net/dns-query</code> (DoH fallback)<br><br>
+  Bootstrap: 9.9.9.9, 194.242.2.3
+  </div>
+  <div class="pros">✅ Encrypted upstream + lokalny cache = szybki i prywatny</div>
+  <div class="pros">✅ Pełna customizacja blocklist</div>
+</div>
+
+<div class="card">
+  <h3>Raspberry Pi jako DNS Sinkhole</h3>
+  <p>Masz już Pi w Sztokholmie — postaw AdGuard Home:</p>
+  <div class="setup">
+  # Instalacja AdGuard Home na Pi:<br>
+  curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v<br><br>
+  # Albo Docker:<br>
+  docker run -d --name adguardhome \<br>
+  &nbsp;&nbsp;-v /opt/adguardhome/work:/opt/adguardhome/work \<br>
+  &nbsp;&nbsp;-v /opt/adguardhome/conf:/opt/adguardhome/conf \<br>
+  &nbsp;&nbsp;-p 53:53/tcp -p 53:53/udp -p 8080:80/tcp \<br>
+  &nbsp;&nbsp;adguard/adguardhome
+  </div>
+  <p>RAM: ~50-70 MB (Pi 5 8GB ma zapas)</p>
+</div>
+
+<h2 id="setup">⚙️ Szybki Setup — Co zrobić TERAZ</h2>
+
+<h3>Opcja 1: AdGuard DNS na telefonie (30 sekund)</h3>
+<div class="setup">
+1. Ustawienia → Sieć i internet → Prywatny DNS<br>
+2. Wybierz "Nazwa hosta prywatnego DNS"<br>
+3. Wpisz: <code>dns.adguard-dns.com</code><br>
+4. Zapisz → Gotowe!
+</div>
+
+<h3>Opcja 2: Mullvad DNS (jeśli wolisz szwedzki)</h3>
+<div class="setup">
+1. Ustawienia → Sieć i internet → Prywatny DNS<br>
+2. Wpisz: <code>adblock.dns.mullvad.net</code><br>
+3. Zapisz → Gotowe!
+</div>
+
+<h3>Opcja 3: RethinkDNS (więcej kontroli)</h3>
+<div class="setup">
+1. Pobierz RethinkDNS z F-Droid lub Play Store<br>
+2. Otwórz → Włącz DNS filtering<br>
+3. Wybierz blocklisty (HaGeZi Normal rekomendowane)<br>
+4. Opcjonalnie: Włącz firewall per-app<br>
+5. Gotowe!
+</div>
+
+<h3>Opcja 4: AdGuard Home na Pi (15 minut)</h3>
+<div class="setup">
+1. SSH na Pi<br>
+2. curl install (patrz wyżej)<br>
+3. Otwórz http://[pi-ip]:8080<br>
+4. Setup wizard → upstream DNS, blocklisty<br>
+5. Na routerze: DHCP DNS → IP twojego Pi<br>
+6. Albo: Tailscale + Private DNS na telefonie
+</div>
+
+<h2 id="verdict">🏆 Werdykt — Co ja bym zrobił</h2>
+
+<div class="card" style="border-color: #238636;">
+  <h3>Scenariusz 1: "Chcę za darmo i prosto" (Twój obecny)</h3>
+  <p><strong>Zrób:</strong> Zmień Private DNS na <code>dns.adguard-dns.com</code></p>
+  <p><strong>Koszt:</strong> 0 kr</p>
+  <p><strong>Czas:</strong> 30 sekund</p>
+  <p><strong>Wynik:</strong> Te same ~90% reklam co NextDNS, ale bez limitu 300K zapytań</p>
+</div>
+
+<div class="card" style="border-color: #1f6feb;">
+  <h3>Scenariusz 2: "Chcę customizację NextDNS za darmo"</h3>
+  <p><strong>Zrób:</strong> Postaw AdGuard Home na swoim Raspberry Pi</p>
+  <p><strong>Koszt:</strong> 0 kr (Pi już masz)</p>
+  <p><strong>Czas:</strong> 15 minut setup + Tailscale</p>
+  <p><strong>Wynik:</strong> Pełny dashboard, per-device, custom blocklisty, zero limitów, zero monthly fee</p>
+</div>
+
+<div class="card" style="border-color: #8957e5;">
+  <h3>Scenariusz 3: "Chcę najlepsze combo"</h3>
+  <p><strong>Zrób:</strong> AdGuard Home (Pi) + Mullvad upstream + HaGeZi Pro + Tailscale + uBlock Origin</p>
+  <p><strong>Koszt:</strong> 0 kr</p>
+  <p><strong>Wynik:</strong> ~95% reklam zablokowanych, full privacy, mobile + home</p>
+</div>
+
+<div class="note"><strong>💡 Moja rekomendacja dla Ciebie:</strong> Zacznij od <strong>Opcji 1</strong> (AdGuard DNS Private DNS) — to dosłownie 30 sekund i masz spokój. Jak będziesz chciał więcej kontroli, postaw AdGuard Home na Pi. NextDNS za 25 SEK/mies jest OK jeśli chcesz analytics i per-device profiles w cloud, ale AdGuard DNS robi to samo za darmo (bez customizacji).</div>
+
+<h2>📚 Źródła</h2>
+<ul>
+  <li><a href="https://adguard-dns.io">AdGuard DNS</a> — oficjalna strona</li>
+  <li><a href="https://mullvad.net/en/help/dns-over-https-and-dns-over-tls">Mullvad DNS DoH/DoT</a> — setup guide</li>
+  <li><a href="https://github.com/hagezi/dns-blocklists">HaGeZi DNS Blocklists</a> — GitHub</li>
+  <li><a href="https://github.com/AdguardTeam/AdGuardHome">AdGuard Home</a> — GitHub</li>
+  <li><a href="https://pi-hole.net">Pi-hole</a> — oficjalna strona</li>
+  <li><a href="https://github.com/0xERR0R/blocky">Blocky</a> — GitHub</li>
+  <li><a href="https://technitium.com/dns/">Technitium DNS</a> — oficjalna strona</li>
+  <li><a href="https://controld.com">ControlD</a> — oficjalna strona</li>
+  <li><a href="https://rethinkdns.com">RethinkDNS</a> — oficjalna strona</li>
+  <li><a href="https://nextdns.io">NextDNS</a> — pricing</li>
+  <li><a href="https://www.privacyguides.org/en/dns/">PrivacyGuides DNS</a> — rekomendacje</li>
+  <li><a href="https://adblock-tester.com">Adblock Tester</a> — benchmark tool</li>
+  <li>Reddit: r/pihole, r/Adguard, r/selfhosted, r/privacy — dyskusje 2025-2026</li>
+</ul>
+
+<div class="header" style="margin-top: 24px;">
+  <p style="color: #8b949e; font-size: 0.85em;">📊 Research: 7 subagentów | ⏱️ Czas: ~3h | 📡 Źródła: 30+ | 🔄 Rundy: R1 (6 agents) + R2 (2 agents)<br>
+  Wygenerowano: 2026-07-23 | Andrzej AI Research Protocol v2</p>
+</div>
+
+<a href="#" class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+</body>
+</html>

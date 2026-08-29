@@ -262,7 +262,44 @@ header is simply `/model <id>` for the current session.
 
 `snapshot` (page element map with refs e1, e2…), `get_text`,
 `screenshot`, `click`, `fill`, `press`, `select_option`, `scroll`, `find`,
-`navigate`, `back`, `new_tab`, `wait_for`, `wait`, `tab_info`.
+`navigate`, `back`, `new_tab`, `wait_for`, `wait`, `tab_info`,
+`spawn_workers` (parallel sub-workers — see below; aliases: `fan_out`, `parallel`,
+`map_tasks`).
+
+### Parallel fan-out (orchestration of multiple LLM sessions)
+
+The agent can delegate independent tasks to **parallel sub-workers**, each in its
+own tab with its own LLM session. This turns sequential O(N) work into parallel O(1):
+
+```
+User: "for every product in my cart, find a cheaper alternative"
+
+Planner (main session, strong model):
+  1. snapshot cart → extract N products
+  2. {"tool":"spawn_workers","subtasks":[
+       {"goal":"find cheaper alternative for: Red Shirt M (249kr)","url":"…"},
+       {"goal":"find cheaper alternative for: Blue Jeans L (499kr)","url":"…"},
+       …
+     ],"concurrency":4,"result_schema":{"found":"bool","title":"string","price":"number","currency":"string","url":"string"}}
+  3. each task → background tab + BrowserWorker (cheaper model, stateless),
+     concurrency-capped (default 4, max 6; up to 20 sub-tasks)
+  4. planner receives ONE aggregated report with an entry per sub-task
+  5. synthesizes: "Here are alternatives for 3 of your 5 items…"
+```
+
+- **Thinking vs navigation split**: the planner (strong model) holds the high-level
+  plan and synthesizes results; workers (cheaper model) handle DOM navigation and
+  return compressed or JSON-structured reports — the planner's context stays clean (no DOM noise).
+- **Tab + chip = progress view**: each worker gets its own background tab in the
+  group (plus a per-task chip in the panel). Worker tabs are closed automatically
+  after the fan-out completes.
+- **Workers are read-only researchers**: navigation and reads run autonomously;
+  sensitive actions (purchase, checkout, pay, credentials, delete) are denied —
+  the planner performs those itself, sequentially, after aggregating.
+- **Structured results**: pass `result_schema` (or per-subtask `schema`) and each
+  worker returns strict JSON, making aggregation reliable.
+- Requires a **selected direct provider with an API key** for workers (they use
+  DirectBackend, not the OpenClaw gateway). Configure in ⚙ Settings → Models & keys.
 
 ## 5. Security
 
@@ -307,7 +344,11 @@ For diagnostics, enable "debug panel" in options — it shows raw WS frames
 - A screenshot is sent to the agent only if the model in OpenClaw accepts images
   (otherwise the extension falls back to a text snapshot).
 - One action per agent step (intentionally — like in Claude in Chrome, you see
-  each step and can abort).
+  each step and can abort). Fan-out is the exception: it spawns parallel workers
+  that each act autonomously in their own tabs.
+- Fan-out requires a selected direct provider with an API key (workers use
+  DirectBackend, not the OpenClaw gateway). If you're in OpenClaw mode, pick a
+  provider in ⚙ Settings → Models & keys for fan-out to work.
 
 ## 8. Code structure
 
@@ -322,6 +363,8 @@ lib/providers.js       — provider presets (addresses, format, models, key link
 lib/brandicons.js      — provider logos as inline SVG (options page)
 lib/device.js          — Ed25519 device identity (OpenClaw pairing)
 lib/agent.js           — agent loop + ```browser block protocol
+lib/agent/context.js   — context economy: marked sections, snapshot diffs, safe JSON, compaction helpers
+lib/worker.js          — stateless sub-agent (browser DOM heavy lifting, structured reports)
 lib/tools.js           — tool executor within a tab group
 lib/settings.js        — settings (chrome.storage)
 sidepanel/panel.*      — thin chat view (Port to service worker)

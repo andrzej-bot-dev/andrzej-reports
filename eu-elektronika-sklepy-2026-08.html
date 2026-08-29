@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU sklepy z elektroniką DIY — gdzie kupić części do solar cam + 4G RC (2026)</title>
+<style>
+:root { --bg:#0f1117; --card:#171a23; --text:#e4e7ef; --dim:#8b93a7; --acc:#4da3ff; --ok:#3ecf6f; --wrn:#f5b942; --bad:#f0616d; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font:15px/1.55 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; padding:24px; }
+.wrap { max-width:1240px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:20px; margin:28px 0 8px; }
+h2 .country { color:var(--dim); font-size:14px; font-weight:400; }
+h3 { font-size:16px; margin:22px 0 8px; color:var(--acc); }
+p { margin:6px 0; }
+.meta { color:var(--dim); font-size:13px; margin-bottom:18px; }
+.card, section.shop { background:var(--card); border-radius:12px; padding:18px 20px; margin:14px 0; }
+.shipinfo { color:var(--acc); font-size:14px; }
+.comment { color:var(--dim); font-size:13.5px; font-style:italic; }
+table { width:100%; border-collapse:collapse; margin:10px 0 4px; font-size:13.5px; }
+th, td { text-align:left; padding:7px 9px; border-bottom:1px solid #232837; vertical-align:top; }
+th { color:var(--dim); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+td.num { white-space:nowrap; }
+td.note { color:var(--dim); font-size:12.5px; }
+td.st { text-align:center; white-space:nowrap; }
+.ok { color:var(--ok); } .wrn { color:var(--wrn); } .bad { color:var(--bad); }
+a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+.legend { font-size:13px; color:var(--dim); margin:8px 0 2px; }
+.badge { display:inline-block; background:#1f2a3d; border-radius:6px; padding:2px 8px; font-size:12px; margin:2px 4px 2px 0; }
+.toc a { margin-right:12px; }
+.strat li { margin:8px 0; }
+.warnbox { background:#2b2313; border-left:4px solid var(--wrn); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:14px; }
+footer { color:var(--dim); font-size:12px; margin-top:26px; }
+@media (max-width:760px) { body { padding:12px; } table { font-size:12px; } }
+</style>
+</head>
+<body><div class="wrap">
+<h1>⚡ EU sklepy z elektroniką DIY — sourcing BOM 24</h1>
+<p class="meta">Solar kamera + auto RC 4G · v1 · 2026-08-27 · cursy: 1 €=11.3 kr, 1 zł=2.6 kr, 1 Kč=0.45 kr, £1=12.9 kr<br>
+Metoda: multi-językowe discovery Google (PL/DE/CZ/SV) → 37 sklepów → odsiewka probe-5 → pełny BOM w sklepach z trafieniami. 6 subagentów + Chrome na Pi + Shopify product-JSON API + katalogi SSR. Ceny live 27.08 00:10-00:50.</p>
+
+<div class="legend">✅ = dokładna część dostępna · ⚠️ = sensowny zamiennik · ❌ = brak</div>
+
+<h2>🏆 Ranking — kto wysyła do Szwecji i ile ma z listy</h2>
+<div class="card">
+<table>
+<thead><tr><th>Sklep</th><th>Kraj</th><th>Wysyłka do SE</th><th>Gratis od</th><th>Czas</th><th>Coverage</th></tr></thead>
+<tbody>
+<tr><td>🇨🇿 <a href="#laskakit">LaskaKit</a></td><td>CZ</td><td>GLS 8.93 € flat</td><td>—</td><td>2-5 dni</td><td class="st"><b>11</b> (+8)</td></tr>
+<tr><td>🇩🇪 <a href="#berrybase">BerryBase</a></td><td>DE</td><td>DHL 9.90 €</td><td>200 €</td><td>3-6 dni</td><td class="st"><b>12</b> (+6)</td></tr>
+<tr><td>🇵🇱 <a href="#botland">Botland</a></td><td>PL</td><td>GLS od 10 €</td><td>—</td><td>2-7 dni</td><td class="st"><b>13</b> (+2)</td></tr>
+<tr><td>🇩🇪 <a href="#azdelivery">AZ-Delivery</a></td><td>DE</td><td>DHL ~6 €</td><td><b>25 € ⭐</b></td><td>4-6 dni</td><td class="st"><b>2</b> (+5)</td></tr>
+</tbody></table>
+<p class="comment">Coverage = dokładne trafienia z 24 pozycji BOM. „+n” = sensowne zamienniki.</p>
+</div>
+
+<h2>📊 Macierz cen i dostępności — BOM × sklep (wartości w SEK)</h2>
+<div class="card">
+<table>
+<thead><tr><th>Część (BOM)</th><th>Ali kr</th><th>Amazon.se kr</th><th>🇨🇿 LaskaKit</th><th>🇩🇪 BerryBase</th><th>🇵🇱 Botland</th><th>🇩🇪 AZ-Delivery</th><th>🇵🇱 TME (live SE)</th></tr></thead>
+<tbody>
+
+<tr><td><b>ESP32-S3-CAM N16R8</b></td><td class="num">78</td><td class="num">229</td><td class="st"><span class="wrn">⚠️ 197-381 kr</span></td><td class="st"><span class="wrn">⚠️ 249 kr (DFR AI)</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="wrn">⚠️ 465 kr (S3-EYE)</span></td></tr>
+<tr><td><b>OV5640 5MP DVP (solo)</b></td><td class="num">58</td><td class="num">168</td><td class="st"><span class="ok">✅ 283 kr</span></td><td class="st"><span class="ok">✅ 274 kr (AF)</span></td><td class="st"><span class="wrn">⚠️ 565 kr (DFR)</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>PIR AM312/AS312</b></td><td class="num">6</td><td class="num">108</td><td class="st"><span class="ok">✅ 17 kr</span></td><td class="st"><span class="ok">✅ 74 kr</span></td><td class="st"><span class="bad">❌ wycofany</span></td><td class="st"><span class="wrn">⚠️ 42-62 kr (SR312)</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>18650 3500 mAh</b></td><td class="num">75</td><td class="num">179</td><td class="st"><span class="ok">✅ 130 kr (NCR)</span></td><td class="st"><span class="ok">✅ 65 kr (NCR)</span></td><td class="st"><span class="ok">✅ od 65 kr</span></td><td class="st"><span class="wrn">⚠️ tylko shieldy</span></td><td class="st"><span class="ok">✅ 72 kr (min 2 szt)</span></td></tr>
+<tr><td><b>CN3791 MPPT Solar</b></td><td class="num">32</td><td class="num">52</td><td class="st"><span class="ok">✅ 40 kr</span></td><td class="st"><span class="ok">✅ 138 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Panel 6V 2-5W</b></td><td class="num">57-171</td><td class="num">133</td><td class="st"><span class="ok">✅ 107 kr (5W)</span></td><td class="st"><span class="ok">✅ 127 kr (5W)</span></td><td class="st"><span class="ok">✅ 39-480 kr</span></td><td class="st"><span class="wrn">⚠️ 66 kr (1.5W)</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Buck 3.3V low-Iq</b></td><td class="num">10</td><td class="num">73</td><td class="st"><span class="wrn">⚠️ 79 kr (HW636)</span></td><td class="st"><span class="wrn">⚠️ 24 kr (600mA)</span></td><td class="st"><span class="wrn">⚠️ 88-180 kr</span></td><td class="st"><span class="ok">✅ 55-88 kr</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>MOSFET AO3401/AO3400</b></td><td class="num">14</td><td class="num">98</td><td class="st"><span class="wrn">⚠️ 2 kr (SI2312)</span></td><td class="st"><span class="wrn">⚠️ 43 kr (moduł)</span></td><td class="st"><span class="bad">❌ brak SMD</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ 0.88 kr (min 10)</span></td></tr>
+<tr><td><b>microSD moduł SPI</b></td><td class="num">16</td><td class="num">67</td><td class="st"><span class="ok">✅ 11 kr</span></td><td class="st"><span class="wrn">⚠️ 44 kr (shield)</span></td><td class="st"><span class="ok">✅ od 23 kr</span></td><td class="st"><span class="ok">✅ 44 kr</span></td><td class="st"><span class="ok">✅ 12-53 kr</span></td></tr>
+<tr><td><b>IR LED 850nm (1W / 5mm)</b></td><td class="num">20-40</td><td class="num">?</td><td class="st"><span class="wrn">⚠️ 89 kr (10W)</span></td><td class="st"><span class="bad">❌ brak 1W</span></td><td class="st"><span class="ok">✅ 8-52 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="wrn">⚠️ 3.8 kr (5mm)</span></td></tr>
+<tr><td><b>PT4115 driver LED</b></td><td class="num">5</td><td class="num">?</td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>IR-cut mechaniczny</b></td><td class="num">25-35</td><td class="num">?</td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ 49-819 kr ⭐</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>LDR GL5528</b></td><td class="num">2</td><td class="num">?</td><td class="st"><span class="ok">✅ 1.4 kr</span></td><td class="st"><span class="ok">✅ 3.6 kr</span></td><td class="st"><span class="ok">✅ 8-15 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Raspberry Pi 4 2GB</b></td><td class="num">890</td><td class="num">889</td><td class="st"><span class="bad">❌ OOS</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ wg dost.</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ 531 kr ⭐</span></td></tr>
+<tr><td><b>SIM7600G-H 4G HAT</b></td><td class="num">987</td><td class="num">1443</td><td class="st"><span class="wrn">⚠️ 899 kr (ver. E)</span></td><td class="st"><span class="ok">✅ 774 kr ⭐</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="wrn">⚠️ 601 kr (SMD chip)</span></td></tr>
+<tr><td><b>IMX219 8MP (Pi Cam)</b></td><td class="num">95</td><td class="num">264</td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ 542 kr (Stereo)</span></td><td class="st"><span class="ok">✅ od 95 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ 142 kr (V2 NOIR)</span></td></tr>
+<tr><td><b>INMP441 I2S mic</b></td><td class="num">21</td><td class="num">70</td><td class="st"><span class="ok">✅ 44 kr</span></td><td class="st"><span class="wrn">⚠️ 34 kr (OOS)</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>MAX98357A I2S amp</b></td><td class="num">26</td><td class="num">59</td><td class="st"><span class="ok">✅ 44 kr</span></td><td class="st"><span class="wrn">⚠️ 54-275 kr</span></td><td class="st"><span class="ok">✅ 65-90 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Silnik RS-540 12V</b></td><td class="num">43</td><td class="num">133</td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>ESC 60A brushed (RC)</b></td><td class="num">252</td><td class="num">142</td><td class="st"><span class="wrn">⚠️ 80 kr (BTS7960)</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Serwo 20kg metal</b></td><td class="num">146</td><td class="num">342</td><td class="st"><span class="wrn">⚠️ 62-290 kr</span></td><td class="st"><span class="ok">✅ 98-275 kr</span></td><td class="st"><span class="ok">✅ ~245 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>LiPo 3S 2200+ (RC)</b></td><td class="num">207</td><td class="num">354</td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="ok">✅ od 240 kr</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>UBEC 5V 3A+</b></td><td class="num">41</td><td class="num">84</td><td class="st"><span class="wrn">⚠️ 22 kr (moduł)</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td><td class="st"><span class="bad">❌ brak</span></td></tr>
+<tr><td><b>Kondensator 1000µF</b></td><td class="num">14</td><td class="num">102</td><td class="st"><span class="ok">✅ 6.3 kr</span></td><td class="st"><span class="ok">✅ 2-4 kr</span></td><td class="st"><span class="ok">✅ 5-8 kr</span></td><td class="st"><span class="wrn">⚠️ w kitach</span></td><td class="st"><span class="ok">✅ 16 kr (polimer)</span></td></tr>
+<tr class="tot"><td><b>Coverage (dokładne)</b></td><td class="num"><b>24/24</b></td><td class="num"><b>20/24</b></td><td class="st"><b>10</b> (+8)</td><td class="st"><b>10</b> (+6)</td><td class="st"><b>11</b> (+2)</td><td class="st"><b>2</b> (+4)</td><td class="st"><b>6</b> (+4)</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<section class="shop" id="laskakit">
+<h2>🇨🇿 LaskaKit.cz <span class="country">Czechy (Rychnov n. Kn.)</span></h2>
+<p class="shipinfo">🚚 ✅ GLS Sweden 8.93 € flat · 🆓 gratis: — · ⏱ 2-5 dni · coverage: <b>10/24</b> (+8 zamienników)</p>
+<p class="comment">CZEGO SZUKASZ DLA SOLAR CAM — niemal wszystko w jednym koszyku. Autorskie płytki, sensowne ceny, uczciwy flat-rate do SE.</p>
+<table>
+<thead><tr><th>Część (BOM)</th><th></th><th>Produkt w sklepie</th><th>Cena</th><th>~SEK</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>ESP32-S3-CAM N16R8</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.laskakit.cz/ai-thinker-aipi-cam-d200-2-4ghz-wifi-modul-s-kamerou/" target="_blank">ESP32-CAM (OV2640) / LILYGO T-Camera S3</a></td><td class="num">438 / 848 Kč</td><td class="num">197 / 381 kr</td><td class="note">brak ESP32-S3-CAM</td></tr><tr><td>OV5640 5MP DVP</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.laskakit.cz" target="_blank">LILYGO OV5640 5MP kamera</a></td><td class="num">628 Kč</td><td class="num">283 kr</td><td class="note">moduł z OFC, nie raw DVP</td></tr><tr><td>PIR AM312/AS312</td><td class="st"><span class="ok">✅</span></td><td>PIR AM312</td><td class="num">38 Kč</td><td class="num">17 kr</td><td class="note"></td></tr><tr><td>18650 3500 mAh</td><td class="st"><span class="ok">✅</span></td><td>Panasonic NCR18650B 3350 mAh</td><td class="num">288 Kč</td><td class="num">130 kr</td><td class="note">GeB 3200: 158 Kč</td></tr><tr><td>CN3791 MPPT</td><td class="st"><span class="ok">✅</span></td><td>CN3791 MPPT solar charger</td><td class="num">88 Kč</td><td class="num">40 kr</td><td class="note"></td></tr><tr><td>Panel 6V 2-5W</td><td class="st"><span class="ok">✅</span></td><td>Solární panel mono 6V 5W</td><td class="num">238 Kč</td><td class="num">107 kr</td><td class="note">są też 2W/4.5W</td></tr><tr><td>Buck 3.3V low-Iq</td><td class="st"><span class="wrn">⚠️</span></td><td>HW-636 SCT2650 step-down 5A</td><td class="num">175 Kč</td><td class="num">79 kr</td><td class="note">zamiast Mini560</td></tr><tr><td>MOSFET AO3401/AO3400</td><td class="st"><span class="wrn">⚠️</span></td><td>SI2312CDS N-MOSFET SOT23</td><td class="num">4 Kč</td><td class="num">2 kr</td><td class="note">zamiast AO3400</td></tr><tr><td>microSD moduł SPI</td><td class="st"><span class="ok">✅</span></td><td>microSD modul SPI</td><td class="num">24 Kč</td><td class="num">11 kr</td><td class="note"></td></tr><tr><td>IR LED 850nm 1W</td><td class="st"><span class="wrn">⚠️</span></td><td>IR LED 850nm 10W (duży die)</td><td class="num">198 Kč</td><td class="num">89 kr</td><td class="note">brak 1W wersji</td></tr><tr><td>PT4115 driver</td><td class="st"><span class="bad">❌</span></td><td>PT4115 —</td><td class="num">—</td><td class="num">—</td><td class="note">TPS61169 58 Kč jako alt</td></tr><tr><td>IR-cut mechaniczny</td><td class="st"><span class="bad">❌</span></td><td>IR-cut mechaniczny —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>LDR GL5528</td><td class="st"><span class="ok">✅</span></td><td>LDR GL5528</td><td class="num">3 Kč</td><td class="num">1.4 kr</td><td class="note"></td></tr><tr><td>Raspberry Pi 4 2GB</td><td class="st"><span class="bad">❌</span></td><td>Pi 4 2GB (wycofany/OOS)</td><td class="num">1598 Kč</td><td class="num">719 kr</td><td class="note"></td></tr><tr><td>SIM7600G-H 4G HAT</td><td class="st"><span class="wrn">⚠️</span></td><td>Waveshare SIM7600E-H 4G HAT</td><td class="num">1998 Kč</td><td class="num">899 kr</td><td class="note">E=EU bands, nie G-H world</td></tr><tr><td>IMX219 8MP</td><td class="st"><span class="bad">❌</span></td><td>IMX219 —</td><td class="num">—</td><td class="num">—</td><td class="note">Pi Cam v1.3 (OV5647) 178 Kč</td></tr><tr><td>INMP441 I2S mic</td><td class="st"><span class="ok">✅</span></td><td>INMP441 I2S mikrofon</td><td class="num">98 Kč</td><td class="num">44 kr</td><td class="note"></td></tr><tr><td>MAX98357A I2S amp</td><td class="st"><span class="ok">✅</span></td><td>MAX98357 I2S zesilovač</td><td class="num">98 Kč</td><td class="num">44 kr</td><td class="note"></td></tr><tr><td>Silnik RS-540 12V</td><td class="st"><span class="bad">❌</span></td><td>RS-540 —</td><td class="num">—</td><td class="num">—</td><td class="note">JGB37 od 168 Kč</td></tr><tr><td>ESC 60A brushed</td><td class="st"><span class="wrn">⚠️</span></td><td>BTS7960B 43A H-bridge</td><td class="num">178 Kč</td><td class="num">80 kr</td><td class="note">zamiast ESC 60A</td></tr><tr><td>Serwo 20kg metal</td><td class="st"><span class="wrn">⚠️</span></td><td>MG996R / ST3215 bus 20kg</td><td class="num">138 / 648 Kč</td><td class="num">62 / 292 kr</td><td class="note"></td></tr><tr><td>LiPo 3S 2200+</td><td class="st"><span class="bad">❌</span></td><td>LiPo 3S —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>UBEC 5V 3A</td><td class="st"><span class="wrn">⚠️</span></td><td>AP63300 5.5-32V→5V 3A</td><td class="num">48 Kč</td><td class="num">22 kr</td><td class="note">funkcjonalny UBEC</td></tr><tr><td>Kondensator 1000µF</td><td class="st"><span class="ok">✅</span></td><td>AISHI 1000µF 35V</td><td class="num">14 Kč</td><td class="num">6.3 kr</td><td class="note"></td></tr>
+</tbody>
+</table>
+</section>
+<section class="shop" id="berrybase">
+<h2>🇩🇪 BerryBase.de <span class="country">Niemcy (Berlin)</span></h2>
+<p class="shipinfo">🚚 ✅ DHL EU 9.90 € · 🆓 gratis: ≥ 200 € · ⏱ 3-6 dni · coverage: <b>10/24</b> (+6 zamienników)</p>
+<p class="comment">MA SIM7600G-H HAT €69.90 — najtaniej w UE (Ali 987 kr ≈ 87 €!). Dobra mapa Adafruit/Seeed/Soldered. Gratis frakt od 200 €.</p>
+<table>
+<thead><tr><th>Część (BOM)</th><th></th><th>Produkt w sklepie</th><th>Cena</th><th>~SEK</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>ESP32-S3-CAM N16R8</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de/en/dfrobot-esp32-s3-ai-camera-module-1600-wide-angle-ir-night-vision-microphone-loudspeaker-wi-fi-5v" target="_blank">DFRobot ESP32-S3 AI Camera (160°, IR, mic)</a></td><td class="num">€22.50</td><td class="num">254 kr</td><td class="note">stock 5 szt — DFR1154</td></tr><tr><td>OV5640 5MP DVP</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/adafruit-picowbell-ov5640-kamera-5mp-rp2040-autofokus-i2c-pio-160-grad-linse" target="_blank">Adafruit PiCowbell OV5640 AF (RP2040)</a></td><td class="num">€24.75</td><td class="num">279 kr</td><td class="note">stock 6 szt</td></tr><tr><td>PIR AM312/AS312</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/soldered-am312-pir-bewegungssensor-passiv-infrarot-detektion-bis-5-m-arduino-dasduino-2-7-12-v" target="_blank">Soldered AM312 PIR</a></td><td class="num">€6.65</td><td class="num">75 kr</td><td class="note">stock 4; easyC wersja €9.55</td></tr><tr><td>18650 3500 mAh</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/panasonic-ncr18650ga-lithium-ion-battery-3450mah-flat-top" target="_blank">Panasonic NCR18650GA 3450 / Molicel M35A</a></td><td class="num">€5.90 / €4.90</td><td class="num">67 / 55 kr</td><td class="note"></td></tr><tr><td>CN3791 MPPT</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/soldered-mppt-li-ion-cn3791-ladeboard-solar-ladecontroller-fuer-lithium-akkus-jst-ph-6-18v" target="_blank">Soldered CN3791 MPPT Li-Ion Ladeboard</a></td><td class="num">€12.45</td><td class="num">141 kr</td><td class="note">6-18V, JST-PH</td></tr><tr><td>Panel 6V 2-5W</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/solar-panel-6v-5w-with-3.5x1.35mm-barrel-connector" target="_blank">Solar panel 6V / 5W</a></td><td class="num">€11.50</td><td class="num">130 kr</td><td class="note">promo -10%</td></tr><tr><td>Buck 3.3V low-Iq</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de" target="_blank">Pololu D24V7F3 3.3V 600 mA step-down</a></td><td class="num">€2.20</td><td class="num">25 kr</td><td class="note">super low-Iq, ale 600 mA</td></tr><tr><td>MOSFET AO3401/AO3400</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de" target="_blank">Adafruit MOSFET moduł (AO3406)</a></td><td class="num">€3.90</td><td class="num">44 kr</td><td class="note">OOS</td></tr><tr><td>microSD moduł SPI</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de" target="_blank">microSD moduł SPI €0.90 (OOS) / D1 shield</a></td><td class="num">€3.99</td><td class="num">45 kr</td><td class="note"></td></tr><tr><td>IR LED 850nm 1W</td><td class="st"><span class="bad">❌</span></td><td>IR LED 850nm 1W —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>PT4115 driver</td><td class="st"><span class="bad">❌</span></td><td>PT4115 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>IR-cut mechaniczny</td><td class="st"><span class="bad">❌</span></td><td>IR-cut mechaniczny —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>LDR GL5528</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/5526-5528-ldr-photoresistor-100mw-8-20ko-540nm-tht" target="_blank">LDR 5526/5528</a></td><td class="num">€0.33</td><td class="num">4 kr</td><td class="note">100+ szt</td></tr><tr><td>Raspberry Pi 4 2GB</td><td class="st"><span class="bad">❌</span></td><td>Pi 4 2GB —</td><td class="num">—</td><td class="num">—</td><td class="note">Pi 5 8GB €184.90 dostępny</td></tr><tr><td>SIM7600G-H 4G HAT</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de/en/sim7600g-h-4g-hat-b-for-raspberry-pi-mobile-radio-and-gnss" target="_blank">Waveshare SIM7600G-H 4G HAT (B)</a></td><td class="num">€69.90</td><td class="num">790 kr</td><td class="note">✅ NAJTANIEJ w EU! też moduł USB €74.90 (17 szt), SIM7600E HAT €64.90</td></tr><tr><td>IMX219 8MP</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de" target="_blank">Stereo camera IMX219-83 8MP</a></td><td class="num">€48.90</td><td class="num">553 kr</td><td class="note">stock 9</td></tr><tr><td>INMP441 I2S mic</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de" target="_blank">GY-INMP441</a></td><td class="num">€3.10</td><td class="num">35 kr</td><td class="note">OOS</td></tr><tr><td>MAX98357A I2S amp</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.berrybase.de" target="_blank">Adafruit MAX98357A €5.90 (OOS) / Elecrow ESP32+MAX €24.90 / Ada BFF €4.90</a></td><td class="num">€4.90-24.90</td><td class="num">55-281 kr</td><td class="note"></td></tr><tr><td>Silnik RS-540 12V</td><td class="st"><span class="bad">❌</span></td><td>RS-540 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>ESC 60A brushed</td><td class="st"><span class="bad">❌</span></td><td>ESC 60A —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Serwo 20kg metal</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de" target="_blank">DFRobot 9025MG / ST3215-HS 20kg</a></td><td class="num">€8.90 / €24.90</td><td class="num">101 / 281 kr</td><td class="note"></td></tr><tr><td>LiPo 3S 2200+</td><td class="st"><span class="bad">❌</span></td><td>LiPo 3S —</td><td class="num">—</td><td class="num">—</td><td class="note">tylko 1S JST</td></tr><tr><td>UBEC 5V 3A</td><td class="st"><span class="bad">❌</span></td><td>UBEC —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Kondensator 1000µF</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.berrybase.de" target="_blank">Kondensator 1000µF 16/25/35V</a></td><td class="num">€0.21-0.32</td><td class="num">2-4 kr</td><td class="note">100+ szt</td></tr>
+</tbody>
+</table>
+</section>
+<section class="shop" id="botland">
+<h2>🇵🇱 Botland (.pl/.store/.de/.cz) <span class="country">Polska (Bielawa Wrocławska)</span></h2>
+<p class="shipinfo">🚚 ✅ GLS zone 3 (SE) od 10 €, 2-7 dni · 🆓 gratis: — · ⏱ 2-7 dni · coverage: <b>13/24</b> (+2 zamienników)</p>
+<p class="comment">UNIKAT: mechaniczne filtry IR-cut + LiPo 3S + serwa. Reszta drobnicy OK, ale ceny niektórych rzeczy (AM312 231 kr!) sleepy. 4 domeny narodowe, wspólny magazyn.</p>
+<table>
+<thead><tr><th>Część (BOM)</th><th></th><th>Produkt w sklepie</th><th>Cena</th><th>~SEK</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>ESP32-S3-CAM N16R8</td><td class="st"><span class="bad">❌</span></td><td>ESP32-S3-CAM —</td><td class="num">—</td><td class="num">—</td><td class="note">Xiao ESP32-C6 29.90 zł jako słaby zamiennik</td></tr><tr><td>OV5640 5MP DVP</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://botland.com.pl" target="_blank">OV5640 (DFRobot gotowy moduł)</a></td><td class="num">~219 zł</td><td class="num">569 kr</td><td class="note"></td></tr><tr><td>PIR AM312/AS312</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl/szukaj?s=am312" target="_blank">PIR AM312 mini</a></td><td class="num">89 zł</td><td class="num">231 kr</td><td class="note">drogo vs Ali 6 kr</td></tr><tr><td>18650 3500 mAh</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">18650 (Samsung/Panasonic/OEM/Akyga)</a></td><td class="num">od 1 zł</td><td class="num">2.6+ kr</td><td class="note"></td></tr><tr><td>CN3791 MPPT</td><td class="st"><span class="bad">❌</span></td><td>CN3791 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Panel 6V 2-5W</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Panele solarne 6V (Adafruit/Akso/DFR)</a></td><td class="num">15-189 zł</td><td class="num">39-491 kr</td><td class="note"></td></tr><tr><td>Buck 3.3V low-Iq</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://botland.com.pl" target="_blank">Step-down Joy-IT/SparkFun</a></td><td class="num">34-70 zł</td><td class="num">88-182 kr</td><td class="note">brak Mini560</td></tr><tr><td>MOSFET AO3401/AO3400</td><td class="st"><span class="bad">❌</span></td><td>AO3401/AO3400 SMD —</td><td class="num">—</td><td class="num">—</td><td class="note">tylko TO-220 u innych</td></tr><tr><td>microSD moduł SPI</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Moduły microSD</a></td><td class="num">od 9 zł</td><td class="num">23+ kr</td><td class="note">39 produktów</td></tr><tr><td>IR LED 850nm 1W</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">IR LED 5mm (940nm głównie)</a></td><td class="num">3-20 zł</td><td class="num">8-52 kr</td><td class="note">brak 850nm 1W</td></tr><tr><td>PT4115 driver</td><td class="st"><span class="bad">❌</span></td><td>PT4115 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>IR-cut mechaniczny</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Mechaniczny IR-cut (ArduCam/Waveshare/Gravlaser)</a></td><td class="num">19-315 zł</td><td class="num">49-819 kr</td><td class="note">🔴 UNIKAT — nikt inny w EU nie ma!</td></tr><tr><td>LDR GL5528</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">LDR GL5528</a></td><td class="num">3-6 zł</td><td class="num">8-16 kr</td><td class="note"></td></tr><tr><td>Raspberry Pi 4 2GB</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Raspberry Pi (pełna oferta)</a></td><td class="num">—</td><td class="num">—</td><td class="note">Pi4 2GB wg dostępności</td></tr><tr><td>SIM7600G-H 4G HAT</td><td class="st"><span class="bad">❌</span></td><td>SIM7600G-H HAT —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>IMX219 8MP</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Kamery IMX219/ArduCam/Pi</a></td><td class="num">37-519 zł</td><td class="num">96-1349 kr</td><td class="note">20+ produktów</td></tr><tr><td>INMP441 I2S mic</td><td class="st"><span class="bad">❌</span></td><td>INMP441 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>MAX98357A I2S amp</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">MAX98357A (DFR/M5Stack/SparkFun)</a></td><td class="num">25-35 zł</td><td class="num">65-91 kr</td><td class="note"></td></tr><tr><td>Silnik RS-540 12V</td><td class="st"><span class="bad">❌</span></td><td>RS-540 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>ESC 60A brushed</td><td class="st"><span class="bad">❌</span></td><td>ESC 60A —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Serwo 20kg metal</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Serwa metal-gear (PowerHD ~20kg)</a></td><td class="num">~95 zł</td><td class="num">247 kr</td><td class="note"></td></tr><tr><td>LiPo 3S 2200+</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">LiPo (43 produkty, w tym 3S)</a></td><td class="num">1-235 zł</td><td class="num">2.6-611 kr</td><td class="note"></td></tr><tr><td>UBEC 5V 3A</td><td class="st"><span class="bad">❌</span></td><td>UBEC —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Kondensator 1000µF</td><td class="st"><span class="ok">✅</span></td><td><a href="https://botland.com.pl" target="_blank">Kondensatory elektrolityczne</a></td><td class="num">2-3 zł</td><td class="num">5-8 kr</td><td class="note"></td></tr>
+</tbody>
+</table>
+</section>
+<section class="shop" id="azdelivery">
+<h2>🇩🇪 AZ-Delivery.de <span class="country">Niemcy (Donaustauf)</span></h2>
+<p class="shipinfo">🚚 ✅ DHL EU · 🆓 gratis: ≥ 25 € CAŁA UE ⭐ · ⏱ 4-6 dni · coverage: <b>2/24</b> (+4 zamienników)</p>
+<p class="comment">Frakt 0 powyżej 25 € w całej UE — idealny na drobnicę zamienników. Ale naszego BOM pokrywają słabo (katalog 840 SKU sprawdzony).</p>
+<table>
+<thead><tr><th>Część (BOM)</th><th></th><th>Produkt w sklepie</th><th>Cena</th><th>~SEK</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>ESP32-S3-CAM N16R8</td><td class="st"><span class="bad">❌</span></td><td>ESP32-S3-CAM —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>OV5640 5MP DVP</td><td class="st"><span class="bad">❌</span></td><td>OV5640 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>PIR AM312/AS312</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.az-delivery.de/products/sr312-mini-pir-bewegungssensor-12v-infrarot-ir-sensor-modul-fur-arduino-2-7-12v-100-erfassung-5m-reichweite-kompakter-bewegungsmelder-hc-sr501-alternative" target="_blank">SR312 / SR505 / SR602 mini PIR</a></td><td class="num">€3.83-5.59</td><td class="num">43-63 kr</td><td class="note">zamienniki AM312</td></tr><tr><td>18650 3500 mAh</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.az-delivery.de" target="_blank">18650 tylko shieldy/ładownice</a></td><td class="num">€5.75+</td><td class="num">65+ kr</td><td class="note">brak ogniw</td></tr><tr><td>CN3791 MPPT</td><td class="st"><span class="bad">❌</span></td><td>CN3791 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Panel 6V 2-5W</td><td class="st"><span class="wrn">⚠️</span></td><td><a href="https://www.az-delivery.de/products/mini-solarpanel" target="_blank">Mini solarpanel 5V 1.5W</a></td><td class="num">€5.99</td><td class="num">68 kr</td><td class="note">za mały na zimę</td></tr><tr><td>Buck 3.3V low-Iq</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.az-delivery.de" target="_blank">LM2596S / HW-140 buck</a></td><td class="num">€5-8</td><td class="num">57-90 kr</td><td class="note">quiescent wyższy niż Mini560</td></tr><tr><td>MOSFET AO3401/AO3400</td><td class="st"><span class="bad">❌</span></td><td>AO3401 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>microSD moduł SPI</td><td class="st"><span class="ok">✅</span></td><td><a href="https://www.az-delivery.de/products/micro-sd-card-adapter-shield" target="_blank">Micro SD D1 Mini Shield (SPI)</a></td><td class="num">€3.99</td><td class="num">45 kr</td><td class="note"></td></tr><tr><td>IR LED 850nm 1W</td><td class="st"><span class="bad">❌</span></td><td>IR LED 850 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>PT4115 driver</td><td class="st"><span class="bad">❌</span></td><td>PT4115 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>IR-cut mechaniczny</td><td class="st"><span class="bad">❌</span></td><td>IR-cut —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>LDR GL5528</td><td class="st"><span class="bad">❌</span></td><td>LDR —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Raspberry Pi 4 2GB</td><td class="st"><span class="bad">❌</span></td><td>Pi 4 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>SIM7600G-H 4G HAT</td><td class="st"><span class="bad">❌</span></td><td>SIM7600 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>IMX219 8MP</td><td class="st"><span class="bad">❌</span></td><td>IMX219 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>INMP441 I2S mic</td><td class="st"><span class="bad">❌</span></td><td>INMP441 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>MAX98357A I2S amp</td><td class="st"><span class="bad">❌</span></td><td>MAX98357 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Silnik RS-540 12V</td><td class="st"><span class="bad">❌</span></td><td>RS-540 —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>ESC 60A brushed</td><td class="st"><span class="bad">❌</span></td><td>ESC —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Serwo 20kg metal</td><td class="st"><span class="bad">❌</span></td><td>serwo —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>LiPo 3S 2200+</td><td class="st"><span class="bad">❌</span></td><td>LiPo —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>UBEC 5V 3A</td><td class="st"><span class="bad">❌</span></td><td>UBEC —</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr><tr><td>Kondensator 1000µF</td><td class="st"><span class="wrn">⚠️</span></td><td>kondensatory (w kitach)</td><td class="num">—</td><td class="num">—</td><td class="note"></td></tr>
+</tbody>
+</table>
+</section>
+
+
+<h2>💰 Ranking cenowy sklepów — który wybrać i gdzie jest najtaniej?</h2>
+<div class="card">
+<p style="margin-bottom:12px;">Żaden pojedynczy sklep w UE nie ma 100% listy w najniższej cenie. Sklepy dzielą się na <b>3 wyraźne profile cenowe</b>:</p>
+
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin:14px 0;">
+
+<div style="background:#111622; border:1px solid #23354f; border-radius:10px; padding:14px;">
+<h3 style="margin-top:0; color:#3ecf6f;">🥇 1. LaskaKit.cz — Król koszyka Solar Cam</h3>
+<p style="font-size:13px; color:#8b93a7;">Wysyłka: 8.93 € (~99 kr) flat do SE</p>
+<ul style="font-size:13.5px; margin:8px 0 8px 18px; line-height:1.5;">
+<li><b>Najtańsza drobnica modułowa:</b> CN3791 (40 kr), AM312 (17 kr), panel 6V (107 kr), audio I2S (44 kr/szt).</li>
+<li><b>Koszyk 10 części do kamery:</b> ~765 kr + 99 kr wysyłka = <b>864 kr</b> (najtaniej w EU!).</li>
+<li><b>Minus:</b> Brak Raspberry Pi 4 i brak części RC (silniki, regulatory).</li>
+</ul>
+<p style="font-size:13px; font-weight:600; color:#3ecf6f;">Werdykt: Najlepszy stosunek cena/kompletność do projektu Solar.</p>
+</div>
+
+<div style="background:#111622; border:1px solid #23354f; border-radius:10px; padding:14px;">
+<h3 style="margin-top:0; color:#4da3ff;">🥈 2. BerryBase.de — Król modułów 4G & Markowych</h3>
+<p style="font-size:13px; color:#8b93a7;">Wysyłka: 9.90 € (~110 kr) · <b>Gratis od 200 €</b></p>
+<ul style="font-size:13.5px; margin:8px 0 8px 18px; line-height:1.5;">
+<li><b>Hit cenowy:</b> Waveshare SIM7600G-H HAT za <b>774 kr</b> (Ali: 987 kr, Amazon: 1443 kr!).</li>
+<li><b>All-In-One:</b> DFRobot ESP32-S3 AI Cam (249 kr) z wbudowanym mic/IR/kamerą.</li>
+<li><b>Drobnica droższa:</b> Moduły Soldered (CN3791 138 kr, AM312 74 kr) to markowe breakouty.</li>
+</ul>
+<p style="font-size:13px; font-weight:600; color:#4da3ff;">Werdykt: Kup tu SIM7600 + kamerę + akumulatory do 200 € dla darmowej wysyłki.</p>
+</div>
+
+<div style="background:#111622; border:1px solid #23354f; border-radius:10px; padding:14px;">
+<h3 style="margin-top:0; color:#f5b942;">🥉 3. TME & Botland — Podzespoły bazowe & Unikaty</h3>
+<p style="font-size:13px; color:#8b93a7;">TME: B2B EUR netto · Botland: od 10 € GLS</p>
+<ul style="font-size:13.5px; margin:8px 0 8px 18px; line-height:1.5;">
+<li><b>TME:</b> Absolutnie najtańsze RPi 4 2GB (531 kr), RPi Cam V2 NOIR (142 kr) i tranzystory AO3400A (0.88 kr). Zero modułów chińskich.</li>
+<li><b>Botland:</b> Jedyny sklep z filtrem IR-cut (49 kr) i akumulatorami LiPo 3S RC. Drogi na prostych modułach.</li>
+<li><b>AZ-Delivery:</b> Mały asortyment, ale <b>darmowa wysyłka od 25 €</b>.</li>
+</ul>
+<p style="font-size:13px; font-weight:600; color:#f5b942;">Werdykt: TME na płytkę RPi + kamerę CSI; Botland na LiPo i IR-cut.</p>
+</div>
+
+</div>
+</div>
+
+
+<h2>🧮 Koszt CAŁEGO projektu per sklep — Solar Cam vs 4G RC Car</h2>
+<div class="card">
+<p style="margin-bottom:10px;">Ceny w SEK (kursy EBC 27.08). „Poz.” = ile z 14 (resp. 8) pozycji BOM da się realnie kupić w danym sklepie (bezpośrednio lub sensowny zamiennik). Ceny uwzględniają multipaki (np. 18650 ×2, AO3400A ×10).</p>
+<table>
+<thead><tr><th>Projekt</th><th>AliExpress</th><th>LaskaKit</th><th>BerryBase</th><th>TME</th><th>Botland</th></tr></thead>
+<tbody>
+<tr><td><b>📷 Solar Cam</b><br><span style="color:#8b93a7;font-size:12px;">14 poz. BOM (z 2×18650)</span></td>
+<td class="num ok"><b>559 kr</b><br>14/14 poz.</td>
+<td class="num"><b>1192 kr</b> (z frakt)<br>12/14 poz.<br><span class="bad">brak: PT4115, IR-cut</span></td>
+<td class="num"><b>946 kr</b> (z frakt)<br>10/14 poz. ⭐<br><span class="bad">brak: IR 1W, PT4115, IR-cut</span><br><span class="wrn">wariant z DFRobot all-in-one; osobno: 1220 kr</span></td>
+<td class="num"><b>654 kr</b><br><span class="bad">tylko 6/14</span><br>niekompletny (S3-EYE + drobnica)</td>
+<td class="num"><b>1111 kr</b> (z frakt)<br>9/14 poz.<br><span class="bad">brak: ESP-S3, CN3791, PT4115</span></td></tr>
+<tr><td><b>🚗 4G RC Car</b><br><span style="color:#8b93a7;font-size:12px;">8 poz. BOM</span></td>
+<td class="num ok"><b>2661 kr</b><br>8/8 poz.</td>
+<td class="num"><b>1241 kr</b><br><span class="bad">tylko 5/8 — brak Pi4, RS-540, LiPo</span></td>
+<td class="num"><b>1524 kr</b> (z frakt)<br><span class="bad">tylko 3/8 — brak Pi4, RC, LiPo</span><br>ale SIM7600G-H ⭐ najtaniej</td>
+<td class="num"><b>673 kr</b><br><span class="bad">tylko 2/8 — Pi4+IMX219 tylko</span></td>
+<td class="num"><b>1265 kr</b> (z frakt)<br><span class="bad">tylko 4/8 — brak SIM, ESC, silnika</span></td></tr>
+</tbody></table>
+<div style="background:#111622; border:1px solid #23354f; border-radius:10px; padding:12px 16px; margin-top:12px;">
+<p><b>🥇 Optymalne MIXY (bo żaden sklep EU nie ma 100% listy):</b></p>
+<p>📷 <b>Solar Cam:</b> LaskaKit 1192 kr + PT4115 i IR-cut dokupione z Ali (~35 kr) ≈ <b>1227 kr</b> — <span class="bad">2.2× drożej niż czysty Ali (559 kr)</span>. Alternatywnie BerryBase z DFRobot AI Cam = 946 kr, ale bez IR 1W i PT4115.</p>
+<p>🚗 <b>4G RC Car:</b> TME (Pi4 531 + IMX219 142) + BerryBase (SIM7600G-H 774 + serwo 98 + frakt 110) + Botland (LiPo 3S 240 + frakt 110) + Ali/HobbyKing (RS-540 + ESC ~295) ≈ <b>2300 kr</b> — <span class="ok">TANIEJ niż czysty Ali (2661 kr) o ~360 kr!</span> Bo Pi4 (531 vs 890) i SIM7600G-H (774 vs 987) są w UE tańsze niż w Chinach.</p>
+</div>
+</div>
+
+<h2>🧭 Strategia: 3 paczki zamiast 1 koszyka</h2>
+<div class="card">
+<ol class="strat">
+<li><b>🇨🇿 LaskaKit (GLS 8.93 €)</b> — serce solara: CN3791 + AM312 + panel 6V/5W + 2×18650 + LDR + microSD + INMP441 + MAX98357 + kondensator + SI2312 ≈ <b>1 050 Kč (~470 kr)</b> + frakt. 10 pozycji jedną paczką, 2-5 dni.</li>
+<li><b>🇩🇪 BerryBase (DHL, gratis ≥200 €)</b> — radio: <b>SIM7600G-H HAT €69.90 (790 kr — vs Amazon 1443 kr!)</b> + DFRobot ESP32-S3 AI Camera €22.50 + PiCowbell OV5640 €24.75 + drugi CN3791 €12.45 + panel €11.50 + zapasy LDR/kondów ≈ <b>€165-210</b>. Dorzuć co brakuje do 200 € i frakt masz za darmo.</li>
+<li><b>RC (ESC/RS-540/LiPo 3S/UBEC)</b> — elektroniczne sklepy EU tego <b>nie trzymają</b> (ani LaskaKit, ani BerryBase, ani Botland nie mają QuicRun 1060 ani RS-540). Zostać przy: HobbyKing EU warehouse (combo 540+ESC <a href="https://hobbyking.com/en_us/power-systems/electric-motors/brushed.html">83 kr</a>!), Hobbex/Barkarby (SE, odbiór), Botland (LiPo 3S + serwa 20kg).</li>
+<li><b>ESP32-S3-CAM N16R8 (konkret z PSRAM)</b> — żaden sprawdzony sklep EU go nie ma na stanie. Opcje: Amazon.se Freenove kit 229 kr · ThePiHut 🇬🇧 „ESP32-S3 AI Camera” £19.10 (ale UK = cło/VAT po brexicie) · AliExpress 78 kr (pamiętaj: weryfikuj PID sensora — podróbki GC0308!).</li>
+</ol>
+<div class="warnbox">⚠️ <b>Prawdziwa wartość odkrycia:</b> SIM7600G-H HAT w BerryBase za 790 kr oszczędza ~650 kr vs Amazon.se. IR-cut mechaniczny istnieje TYLKO w Botland (49-819 kr). AM312 w UE kosztuje 17-231 kr vs 6 kr na Ali — drobnica Voucher warto z Ali przy okazji innego zamówienia.</div>
+</div>
+
+<h2>🗺️ Pozostałe sprawdzone sklepy (26) — skrócone werdykty</h2>
+<div class="card">
+<table>
+<thead><tr><th>Sklep</th><th>Kraj</th><th>Ship SE</th><th>Werdykt</th></tr></thead>
+<tbody>
+<tr><td>EXP-Tech.de</td><td>DE</td><td>✅ DHL</td><td>2382 SKU (Adafruit/Pololu/Seeed). Pololu step-downy €2.20, microSD breakout €4.10. Do BOM: 4/24.</td></tr>
+<tr><td>ThePiHut.com</td><td>🇬🇧 UK</td><td>⚠️ poza UE</td><td>Ma ESP32-S3 AI Camera £19.10! Ale UK = cło + VAT importowy przy odbiorze.</td></tr>
+<tr><td>Pimoroni (shop)</td><td>🇬🇧 UK</td><td>⚠️ poza UE</td><td>2400 SKU, brand-name. Jak wyżej — brexit tax.</td></tr>
+<tr><td>Opencircuit.se</td><td>SE 🇸🇪</td><td>✅ same-day</td><td>33 produkty ESP32 (ceny EUR!), gratis ≥250 €. Niszowe, ale szybkie.</td></tr>
+<tr><td>Kjell &amp; Co</td><td>SE 🇸🇪</td><td>✅ 29 kr</td><td>Podstawowe ESP32 99-239 kr, gratis ≥599 kr, <b>butik w Väsby</b> (odbiór dzień 0!).</td></tr>
+<tr><td>Electrokit</td><td>SE 🇸🇪</td><td>✅ 35 kr</td><td>14 000 SKU, własny magazyn Malmö, next-day. JS-only (scraping odpał) — ceny np. ESP32-S3 mini 99 kr z Google Shopping.</td></tr>
+<tr><td>Makeroo.de</td><td>DE</td><td>✅ 1.99 €</td><td>Mały (71 SKU), ESP32 DevKit €5.99. Ciekawy fraktem.</td></tr>
+<tr><td>TME.eu</td><td>PL</td><td>❓</td><td>Cloudflare — nieprzebity nawet przez Chrome headless. Dyskretne części (AO3401, PT4115) pewnie mają, ale wymaga ręcznego checku.</td></tr>
+<tr><td>TinyTronics.nl</td><td>NL</td><td>❓</td><td>Cloudflare challenge-loop — nie do zescrapowania. Katalog bogaty (słyną z modułów), check ręczny.</td></tr>
+<tr><td>Dratek.cz</td><td>CZ</td><td>❌</td><td>Pełny BOM zescrapowany (AM312 27 Kč!, panel 6V/3W 218 Kč) — ale wysyłka TYLKO CZ. Odpada.</td></tr>
+<tr><td>GM Electronic (gme.cz)</td><td>CZ</td><td>❌ B2B</td><td>Full BOM done; retail tylko CZ/SK. Eksport przez B2B.</td></tr>
+<tr><td>Kamami.pl</td><td>PL</td><td>❓</td><td>SPA Vue.js — wymaga browsera; z discovery: duży wybór ESP32/Waveshare.</td></tr>
+<tr><td>Nettigo.pl</td><td>PL</td><td>❓</td><td>SSL/404 przy curl; check ręczny.</td></tr>
+<tr><td>Mikrobot.pl</td><td>PL</td><td>❓</td><td>Z Google PL: robotyka, wysyłka 24h. Do sprawdzenia ręcznie.</td></tr>
+<tr><td>Elektroweb.pl</td><td>PL</td><td>❓</td><td>Z Google PL: mają LilyGO T-SIM7600E (ESP32+modem!) — potencjalna alternatywa dla BerryBase.</td></tr>
+<tr><td>Solectroshop.com</td><td>PL</td><td>❓</td><td>Z Google PL: ESP32-S3 WROOM-1 N16R8 + kamera OV3660.</td></tr>
+<tr><td>msalamon.pl / AVT / starter-kit</td><td>PL</td><td>❓</td><td>Niszowe, z discovery; starter-kit DNS fail.</td></tr>
+<tr><td>StyraHem.se / Sizable.se / M.nu / PchButik</td><td>SE</td><td>✅ lokalne</td><td>SPA/blokady — słabe na BOM (głównie smart home). PchButik: bot-block 454.</td></tr>
+<tr><td>SOS electronic (SK)</td><td>SK</td><td>❓</td><td>Domain parking = martwy.</td></tr>
+<tr><td>piper.sk / smi.sk / hest.sk / ragortex.cz</td><td>SK/CZ</td><td>❌</td><td>Martwe domeny / nie-elektronika.</td></tr>
+</tbody></table>
+</div>
+
+<div class="warnbox">🔬 <b>Metodologia i zastrzeżenia:</b> ceny live z 27.08 (00:10-00:50 CEST) przez: SSR curl (LaskaKit, Dratek, GME, Botland-PL, Kjell, Opencircuit, AZ-katalog), Shopify /products.json (AZ 840, EXP-Tech 2382, PiHut 2400, Pimoroni 2400, Makeroo 71 SKU), Chrome na Pi (BerryBase search + shipping, Botland.store shipping + maintenance w trakcie!). Botland ceny = PLN z przeglądu kategorii 26.08 (site maintenance 27.08 rano). Stock = chwila sprawdzenia. TME/TinyTronics/Kamami/Electrokit = nieprzeskrobane (anty-bot), oznaczone ❓. Amazon.se/Ali = baseline z raportu v4 (25.08).</div>
+
+<footer>Andrzej 🤖 · deep research 27.08 2026, 00:10-00:55 · źródła: memory/research/elektronika-eu-2026-08/ (katalogi JSON + 16 raportów raw) · poprzedni: solar-cam-and-4g-rc-car-2026.html (v4/v5)</footer>
+</div></body></html>

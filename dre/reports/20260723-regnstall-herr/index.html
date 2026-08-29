@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>regnställ herr — Deep Research Report</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --card: #1a1d27;
+  --card-hover: #222636;
+  --border: #2d3142;
+  --text: #e4e6eb;
+  --text-dim: #8b8fa3;
+  --accent: #4f9eff;
+  --green: #3ddc84;
+  --red: #ff5252;
+  --yellow: #ffb74d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Sticky Nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 17, 23, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-height: 52px;
+  overflow: hidden;
+}
+.nav-brand { font-weight: bold; font-size: 0.9rem; white-space: nowrap; }
+.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--card-hover); color: var(--text); }
+
+.container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 32px 16px;
+  margin-bottom: 16px;
+}
+.header h1 { font-size: 1.6rem; margin-bottom: 8px; }
+.header .subtitle { color: var(--text-dim); font-size: 0.95rem; }
+.header .date { color: var(--text-dim); font-size: 0.8rem; margin-top: 4px; }
+
+/* Stats Bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.stat-card .stat-value { font-size: 1.4rem; font-weight: bold; }
+.stat-card .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-top: 4px; }
+.stat-card.green .stat-value { color: var(--green); }
+.stat-card.blue .stat-value { color: var(--accent); }
+
+/* Top Picks */
+.section { margin-bottom: 24px; }
+.section-title {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+.top-pick {
+  display: flex;
+  gap: 12px;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.top-pick:hover { border-color: var(--accent); background: var(--card-hover); }
+.pick-img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--border);
+}
+.pick-img img { width: 100%; height: 100%; object-fit: cover; }
+.no-img {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; color: var(--text-dim);
+}
+.pick-info { flex: 1; }
+.pick-title {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.pick-title:hover { color: var(--accent); }
+.medal { margin-right: 4px; }
+.pick-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.pick-price { color: var(--green); font-weight: bold; }
+.pick-loc { color: var(--text-dim); }
+.pick-notes { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
+
+.badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.badge-green { background: rgba(61, 220, 132, 0.2); color: var(--green); }
+.badge-yellow { background: rgba(255, 183, 77, 0.2); color: var(--yellow); }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+th {
+  background: var(--card);
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  border-bottom: 2px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+th:hover { color: var(--accent); }
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.product-row { cursor: pointer; transition: background 0.15s; }
+.product-row:hover { background: var(--card-hover); }
+.product-row a { color: var(--text); text-decoration: none; }
+.product-row a:hover { color: var(--accent); }
+.price-cell { color: var(--green); font-weight: 600; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.filter-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* Mobile table */
+@media (max-width: 640px) {
+  table thead { display: none; }
+  table, table tbody, table tr, table td { display: block; }
+  table tr {
+    background: var(--card);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid var(--border);
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border: none;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+  .header h1 { font-size: 1.2rem; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+}
+
+/* QR Code section */
+.qr-section {
+  text-align: center;
+  padding: 16px;
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+/* Hidden state */
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">🔍 DRE</span>
+  <div class="nav-links">
+    <a href="#top">Top</a>
+    <a href="#picks">🏆 Top 3</a>
+    <a href="#all">📋 All</a>
+    <a href="#info">ℹ️ Info</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header" id="top">
+    <h1>regnställ herr</h1>
+    <div class="subtitle">regnställ herr</div>
+    <div class="date">Generated: 2026-07-23 10:11:05 · 3 products from blocket.se sources</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-card green">
+      <div class="stat-value">150–299 kr</div>
+      <div class="stat-label">Price Range</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">233 kr</div>
+      <div class="stat-label">Average</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Products</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">1/2</div>
+      <div class="stat-label">New/Used</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">0/0</div>
+      <div class="stat-label">Links OK</div>
+    </div>
+  </div>
+
+  <div class="section" id="picks">
+    <div class="section-title">🏆 Top 3 Picks</div>
+    
+      <div class="top-pick">
+        <div class="pick-img"><div class="no-img">📷</div></div>
+        <div class="pick-info">
+          <span class="medal">🥇</span>
+          <a href="https://blocket.se/test1" target="_blank" rel="noopener" class="pick-title">Regnställ herr XL</a>
+          <div class="pick-meta">
+            <span class="pick-price">150 kr</span>
+            <span class="badge badge-yellow">used</span>
+            <span class="pick-domain">blocket.se</span>
+            <span class="pick-loc">📍 Stockholm</span>
+          </div>
+          
+        </div>
+      </div>
+      <div class="top-pick">
+        <div class="pick-img"><div class="no-img">📷</div></div>
+        <div class="pick-info">
+          <span class="medal">🥈</span>
+          <a href="https://blocket.se/test3" target="_blank" rel="noopener" class="pick-title">MC Regnställ L</a>
+          <div class="pick-meta">
+            <span class="pick-price">250 kr</span>
+            <span class="badge badge-yellow">used</span>
+            <span class="pick-domain">blocket.se</span>
+            <span class="pick-loc">📍 Täby</span>
+          </div>
+          
+        </div>
+      </div>
+      <div class="top-pick">
+        <div class="pick-img"><div class="no-img">📷</div></div>
+        <div class="pick-info">
+          <span class="medal">🥉</span>
+          <a href="https://blocket.se/test2" target="_blank" rel="noopener" class="pick-title">NY Regnställ Set</a>
+          <div class="pick-meta">
+            <span class="pick-price">299 kr</span>
+            <span class="badge badge-green">new</span>
+            <span class="pick-domain">blocket.se</span>
+            <span class="pick-loc">📍 Uppsala</span>
+          </div>
+          
+        </div>
+      </div>
+  </div>
+
+  <div class="section" id="all">
+    <div class="section-title">📋 All Results</div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterProducts('all', this)">Alla (3)</button>
+      <button class="filter-btn" onclick="filterProducts('new', this)">Nya (1)</button>
+      <button class="filter-btn" onclick="filterProducts('used', this)">Begagnade (2)</button>
+      <button class="filter-btn" onclick="filterProducts('market', this)">Marketplace (3)</button>
+    </div>
+    <div class="table-wrap">
+      <table id="product-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Produkt</th>
+            <th onclick="sortTable(2)">Pris ⇅</th>
+            <th onclick="sortTable(3)">Skick ⇅</th>
+            <th>Källa</th>
+            <th>Plats</th>
+            <th>✓</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr onclick="window.open('https://blocket.se/test1', '_blank')" class="product-row">
+        <td data-label="#">1</td>
+        <td data-label="Produkt"><a href="https://blocket.se/test1" target="_blank" rel="noopener">Regnställ herr XL</a></td>
+        <td data-label="Pris" class="price-cell">150 kr</td>
+        <td data-label="Skick">used</td>
+        <td data-label="Källa">blocket.se</td>
+        <td data-label="Plats">Stockholm</td>
+        <td data-label="Status">❓</td>
+      </tr>
+      <tr onclick="window.open('https://blocket.se/test3', '_blank')" class="product-row">
+        <td data-label="#">2</td>
+        <td data-label="Produkt"><a href="https://blocket.se/test3" target="_blank" rel="noopener">MC Regnställ L</a></td>
+        <td data-label="Pris" class="price-cell">250 kr</td>
+        <td data-label="Skick">used</td>
+        <td data-label="Källa">blocket.se</td>
+        <td data-label="Plats">Täby</td>
+        <td data-label="Status">❓</td>
+      </tr>
+      <tr onclick="window.open('https://blocket.se/test2', '_blank')" class="product-row">
+        <td data-label="#">3</td>
+        <td data-label="Produkt"><a href="https://blocket.se/test2" target="_blank" rel="noopener">NY Regnställ Set</a></td>
+        <td data-label="Pris" class="price-cell">299 kr</td>
+        <td data-label="Skick">new</td>
+        <td data-label="Källa">blocket.se</td>
+        <td data-label="Plats">Uppsala</td>
+        <td data-label="Status">❓</td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="info">
+    <div class="section-title">ℹ️ Research Info</div>
+    <div class="card" style="background: var(--card); border-radius: 10px; padding: 16px; border: 1px solid var(--border);">
+      
+      
+      
+      
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Deep Research Engine v3 · 20260723-regnstall-herr · 2026-07-23</p>
+    <p style="margin-top: 4px;">Links verified: 0✅ 0⚠️ 0❌ · Images: 0✅ 0❌</p>
+  </div>
+</div>
+
+<script>
+// Sortable table
+function sortTable(colIdx) {
+  const table = document.getElementById('product-table');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const isAsc = tbody.dataset.sort !== 'asc';
+  tbody.dataset.sort = isAsc ? 'asc' : 'desc';
+  
+  rows.sort((a, b) => {
+    const aText = a.cells[colIdx]?.textContent?.trim() || '';
+    const bText = b.cells[colIdx]?.textContent?.trim() || '';
+    const aNum = parseFloat(aText.replace(/[^0-9.]/g, ''));
+    const bNum = parseFloat(bText.replace(/[^0-9.]/g, ''));
+    if (!isNaN(aNum) && !isNaN(bNum)) return isAsc ? aNum - bNum : bNum - aNum;
+    return isAsc ? aText.localeCompare(bText) : bText.localeCompare(aText);
+  });
+  
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+// Filter buttons
+function filterProducts(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  
+  const rows = document.querySelectorAll('#product-table tbody tr');
+  rows.forEach(row => {
+    const cond = row.cells[3]?.textContent?.trim().toLowerCase() || '';
+    const source = row.cells[4]?.textContent?.trim().toLowerCase() || '';
+    
+    if (type === 'all') {
+      row.classList.remove('hidden');
+    } else if (type === 'new') {
+      row.classList.toggle('hidden', cond !== 'new');
+    } else if (type === 'used') {
+      row.classList.toggle('hidden', cond !== 'used');
+    } else if (type === 'market') {
+      row.classList.toggle('hidden', !source.includes('blocket') && !source.includes('fb') && !source.includes('tradera'));
+    }
+  });
+}
+</script>
+</body>
+</html>

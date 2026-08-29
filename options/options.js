@@ -149,6 +149,7 @@ async function init() {
   $("a-maxtok").value = s.directMaxTokens;
   $("a-screenshots").checked = s.allowScreenshots;
   $("a-debug").checked = s.debug;
+  $("a-maxctx").value = s.contextTokenLimit ?? 0;
 
   buildProviderRows(s.providerKeys || {}, s.providerModels || {}, s.providerBaseUrls || {});
   // Auto-fetch models on init for providers that have a key
@@ -184,6 +185,7 @@ $("btn-save").addEventListener("click", async () => {
     directMaxTokens: Math.max(256, Math.min(128000, Number($("a-maxtok").value) || 8192)),
     allowScreenshots: $("a-screenshots").checked,
     debug: $("a-debug").checked,
+    contextTokenLimit: Math.max(0, Math.min(1000000, Number($("a-maxctx")?.value) || 0)),
     providerKeys,
     providerModels,
     providerBaseUrls,

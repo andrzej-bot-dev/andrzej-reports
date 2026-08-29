@@ -142,7 +142,15 @@ function setWorking(on, label) {
 }
 
 function onPartial(fullText) {
-  const cut = fullText.split(/```(?:browser|json)/)[0];
+  let cut = fullText.split(/```(?:browser|json)/)[0];
+  // Also strip bare (unfenced) JSON action blocks the model may emit without
+  // fences — cut at the start of the line so partial JSON never flashes in the bubble.
+  const bareMatch = cut.match(/\n[ \t]*\{\s*"tool"\s*:/);
+  if (bareMatch) {
+    cut = cut.slice(0, bareMatch.index + 1);
+  } else if (/^\s*\{\s*"tool"\s*:/.test(cut)) {
+    cut = "";
+  }
   if (!pendingBubble) pendingBubble = addMsg("assistant", "");
   pendingBubble.innerHTML = renderMarkdown(cut);
   scrollDown();

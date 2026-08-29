@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Camera + 4G RC Car — kompletny przewodnik zakupowy</title>
+<style>
+  :root{ --bg:#0f1115; --panel:#1a1d24; --panel2:#22262f; --text:#e8eaed; --muted:#9aa0a6; --accent:#4da3ff; --green:#34c759; --red:#ff5f56; --amber:#ffb340; --border:#2c313a; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .wrap{ max-width:1040px; margin:0 auto; padding:32px 20px 100px; }
+  h1{ font-size:2rem; margin:0 0 8px; line-height:1.25; }
+  h2{ font-size:1.45rem; margin:44px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border); }
+  h3{ font-size:1.15rem; margin:26px 0 8px; color:var(--accent); }
+  .sub{ color:var(--muted); margin-bottom:28px; }
+  .tag{ display:inline-block; padding:3px 10px; border-radius:20px; font-size:.78rem; font-weight:600; margin-right:6px; }
+  .tag.p1{ background:#1c3a2a; color:#6fe39a; }
+  .tag.p2{ background:#1c2f3a; color:#6fd0e3; }
+  .tag.warn{ background:#3a2a1c; color:#ffb340; }
+  .card{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin:16px 0; }
+  table{ width:100%; border-collapse:collapse; margin:12px 0; font-size:.9rem; }
+  th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th{ background:var(--panel2); color:var(--muted); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; user-select:none; white-space:nowrap; }
+  th:hover{ color:var(--text); }
+  th .arrow{ opacity:.5; }
+  tr:hover td{ background:#1f232b; }
+  .good{ color:var(--green); font-weight:600; }
+  .bad{ color:var(--red); font-weight:600; }
+  .meh{ color:var(--amber); font-weight:600; }
+  .pill{ display:inline-block; padding:2px 9px; border-radius:14px; font-size:.75rem; font-weight:700; }
+  .pill.y{ background:#14301e; color:#6fe39a; }
+  .pill.n{ background:#301414; color:#ff8a80; }
+  .pill.w{ background:#302414; color:#ffc46b; }
+  ul,ol{ padding-left:22px; }
+  li{ margin:5px 0; }
+  .note{ background:#1c2a1c; border-left:3px solid var(--green); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  .warnbox{ background:#2a241c; border-left:3px solid var(--amber); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  .errbox{ background:#2a1c1c; border-left:3px solid var(--red); padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0; }
+  code{ background:var(--panel2); padding:2px 6px; border-radius:4px; font-size:.85em; }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:720px){ .grid{ grid-template-columns:1fr; } }
+  .toc{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 22px; }
+  .toc ol{ margin:8px 0 0; }
+  .big{ font-size:1.5rem; font-weight:700; }
+  .price{ font-weight:700; color:#ffd166; white-space:nowrap; }
+  .rating{ color:var(--amber); font-weight:600; }
+  .stars{ color:#ffd166; }
+  .filterbar{ display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+  .filterbar button{ background:var(--panel2); color:var(--text); border:1px solid var(--border); border-radius:8px; padding:6px 14px; cursor:pointer; font-size:.85rem; }
+  .filterbar button.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .hide{ display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🔧 Dwa projekty DIY — kompletny przewodnik zakupowy</h1>
+<div class="sub">
+  <span class="tag p1">Projekt 1: Solarna kamera</span>
+  <span class="tag p2">Projekt 2: Auto RC przez 4G</span><br>
+  v4 · 2026-08-25 · linki zweryfikowane, ceny realne, sortowalne tabele, oceny jakości, tryb nocny, oszczędności
+</div>
+
+<div class="toc">
+  <strong>Spis treści</strong>
+  <ol>
+    <li><a href="#p1">Projekt 1 — Solarna kamera (części + oceny)</a></li>
+    <li><a href="#night">Tryb nocny kamery (IR + filtr)</a></li>
+    <li><a href="#p2">Projekt 2 — Auto RC 4G (części + oceny + latencja/FPS)</a></li>
+    <li><a href="#cross">Cross-check 6 modeli AI</a></li>
+    <li><a href="#ceny">Ceny: Amazon.se vs AliExpress (linki do każdego produktu)</a></li>
+    <li><a href="#save">Jak oszczędzić (bateria z hulajnogi, januszowe rozwiązania)</a></li>
+    <li><a href="#alternatives">Gdzie kupić POZA AliExpress i Amazonem (v5 — 26.08)</a></li>
+  </ol>
+</div>
+
+<div class="note">
+<strong>Jak czytać:</strong> każda tabela jest <em>sortowalna</em> (kliknij nagłówek kolumny). Przy każdej części: <span class="pill y">✔ dobry wybór</span>, <span class="pill w">⚠ uwaga</span>, <span class="pill n">✘ unikaj</span>. Ocena jakości 1–5★ w kontekście tego projektu (nie "ogólnie na rynku").
+</div>
+
+<!-- ===================== PROJEKT 1 ===================== -->
+<h2 id="p1">1️⃣ Projekt 1 — Solarna kamera</h2>
+<div class="card">
+<p><strong>Cel:</strong> zewnętrzna kamera na panel + akumulator, budzi się z deep sleep przy ruchu (PIR), nagrywa klip, wraca spać. Ma działać latami. <strong>Kluczowa metryka:</strong> pobór prądu w spoczynku (im niżej, tym dłużej przeżyje zimę).</p>
+</div>
+
+<h3>Lista części + oceny jakości</h3>
+<table id="t1">
+  <thead><tr><th data-k="name">Komponent</th><th data-k="choice">Wybór</th><th data-k="price">Cena (Ali)</th><th data-k="rate">Ocena</th><th>Dlaczego / pułapki</th></tr></thead>
+  <tbody>
+    <tr data-p="p1" data-rate="5" data-price="78"><td>Mikrokontroler</td><td>ESP32-S3 CAM (N16R8, PSRAM)</td><td class="price">78 kr</td><td><span class="rating">★★★★★</span></td><td>PSRAM 8 MB wymagany do bufora 5 MP JPEG. Klasyczny ESP32 bez PSRAM nie utrzyma OV5640. <span class="good">Best choice.</span></td></tr>
+    <tr data-p="p1" data-rate="3" data-price="58"><td>Kamera</td><td>OV5640 5MP AF (DVP)</td><td class="price">58 kr</td><td><span class="rating">★★★☆☆</span></td><td><span class="bad">Ryzyko podróbki GC0308 na KAŻDEJ platformie</span> (Dawid dostał podróbkę z Amazona). Weryfikuj po dostawie: I2C scan PID=0x5640. AF startuje 1.5–3 s → szybki ruch ucieknie; lepszy fixed-focus. Jest też wersja <strong>z IR 850nm (206 kr)</strong> — od razu tryb nocny.</td></tr>
+    <tr data-p="p1" data-rate="4" data-price="6"><td>Czujnik ruchu</td><td>PIR AM312 / AS312 (Senba)</td><td class="price">6 kr</td><td><span class="rating">★★★★☆</span></td><td>~20 µA, budzi z deep sleep przez RTC GPIO. AM312 &gt; HC-SR501 (mniej false-trigger). Na mróz/słońce bywa kapryśny — Panasonic EKMB to upgrade, ale 10× droższy.</td></tr>
+    <tr data-p="p1" data-rate="4" data-price="75"><td>Akumulator</td><td>2× 18650 LiitoKala 3500 mAh (równolegle)</td><td class="price">75 kr</td><td><span class="rating">★★★★☆</span></td><td>Równolegle = 1S, prosty charging, bez balansera. LiitoKala/35E solidne. <span class="warnbox" style="margin:6px 0">Zima: Li-ion NIE ładuje się &lt;0°C → rozważ LiFePO4.</span></td></tr>
+    <tr data-p="p1" data-rate="4" data-price="32"><td>Ładowarka solarna</td><td>CN3791 MPPT</td><td class="price">32 kr</td><td><span class="rating">★★★★☆</span></td><td>MPPT zbiera lepiej przy słabym słońcu niż TP4056 (którego <span class="bad">unikaj</span> — potrafi rozładowywać akumulator w nocy).</td></tr>
+    <tr data-p="p1" data-rate="3" data-price="57"><td>Panel</td><td>6V, 2W–5W</td><td class="price">57–171 kr</td><td><span class="rating">★★★☆☆</span></td><td><span class="bad">Na zimę w Sztokholmie 5W to minimum</span>, realnie daje 5–15% nominalnej mocy pod śniegiem. 2W to prototyp letni.</td></tr>
+    <tr data-p="p1" data-rate="4" data-price="48"><td>Regulator napięcia</td><td>Buck Mini560 5A (3.3V)</td><td class="price">48 kr/5szt</td><td><span class="rating">★★★★☆</span></td><td><span class="bad">Kluczowa pułapka:</span> zwykły MP1584 zjada 5–10 mA w spoczynku → zabije akumulator w 2 tyg. Mini560/TPS62740 = niski quiescent. Do piku prądu ESP32 (500 mA) weź ≥750 mA.</td></tr>
+    <tr data-p="p1" data-rate="4" data-price="14"><td>Load switch</td><td>MOSFET P-kanał AO3401 (50 szt)</td><td class="price">14 kr</td><td><span class="rating">★★★★☆</span></td><td>Odcięcie kamery+SD w deep sleep (kamera ciągnie prąd w standby).</td></tr>
+    <tr data-p="p1" data-rate="4" data-price="16"><td>Pamięć</td><td>MicroSD slot SPI</td><td class="price">16 kr</td><td><span class="rating">★★★★☆</span></td><td>Lokalne klipy. Karta high-endurance, bo ciągły zapis niszczy tanie SD.</td></tr>
+  </tbody>
+</table>
+<div class="card"><strong>Suma Projekt 1 (AliExpress):</strong> ~<span class="price">384 kr</span> (z panelem 2W) / ~<span class="price">499 kr</span> (z panelem 5W)</div>
+
+<h3>Budżet energetyczny</h3>
+<div class="card">
+<ul>
+  <li><strong>Spoczynek:</strong> ~50–100 µA → ~2.4 mAh/dzień.</li>
+  <li><strong>Nagranie 30 s:</strong> ~150 mA × 30 s ≈ 1.25 mAh. 20 triggerów/dzień = 25 mAh.</li>
+  <li><strong>Razem ~30 mAh/dzień.</strong> Panel 5W zimą daje ~140–280 mAh/dzień → wystarcza z zapasem. Na 2W zimą nie licz.</li>
+  <li><strong>Opóźnienie wybudzenia:</strong> PIR → ESP32 wake → kamera gotowa = 800–1800 ms. Szybki obiekt zdąży przejść. Fix: pre-roll buffer albo akceptacja.</li>
+</ul>
+</div>
+
+<!-- ===================== TRYB NOCNY ===================== -->
+<h2 id="night">2️⃣ Tryb nocny kamery (IR)</h2>
+<div class="note">
+<strong>Dlaczego wcześniej tego nie było w BOM:</strong> modele AI wymieniały "IR LEDs + filtr IR-cut" tylko jako opcjonalny upgrade, nie jako pierwszorzędną funkcję. To błąd — dla kamery zewnętrznej tryb nocny to podstawa. Poniżej pełny zestaw.
+</div>
+<table>
+  <thead><tr><th>Komponent</th><th>Wybór</th><th>Cena</th><th>Uwagi</th></tr></thead>
+  <tbody>
+    <tr><td>Oświetlacz</td><td>2–4× IR LED 850 nm, 1W (soczewka 30–60°)</td><td>~20–40 kr</td><td>850 nm = lepszy obraz, lekko widoczny czerwony żar. 940 nm = niewidoczny, ale obraz ciemniejszy.</td></tr>
+    <tr><td>Sterownik LED</td><td>PT4115 (stałoprądowy)</td><td>~5 kr</td><td><span class="bad">Nie przez rezystor</span> — LED 1W wymaga źródła prądowego.</td></tr>
+    <tr><td>Przełącznik</td><td>MOSFET N-kanał (AO3400A, logic-level)</td><td>~2 kr</td><td>GPIO → bramka przez 100 Ω, pull-down 10 kΩ. Nie zasilaj LED bezpośrednio z GPIO.</td></tr>
+    <tr><td>Filtr IR-cut</td><td>Mechaniczny IR-cut (cewka)</td><td>~25–35 kr</td><td><span class="bad">Kluczowe:</span> OV5640 ma wklejony filtr IR na stałe — bez IR-cut w nocy obraz czarny, bez filtra w dzień różowy. Cewka wymaga impulsu 30–50 ms (nie trzymaj stanu wysokiego — spalisz).</td></tr>
+    <tr><td>Czujnik światła</td><td>LDR GL5528 + 10 kΩ (dzielnik do ADC)</td><td>~2 kr</td><td>Auto-przełączanie dzień/noc.</td></tr>
+    <tr><td>Opcjonalnie</td><td>OV5640 z IR 850nm wbudowanym</td><td>206 kr</td><td>Zamiast osobnego oświetlacza — gotowy moduł night-vision.</td></tr>
+  </tbody>
+</table>
+<div class="card"><strong>Koszt trybu nocnego:</strong> ~50–110 kr (osobny zestaw) albo +148 kr (gotowy moduł OV5640 IR). <span class="bad">Uwaga:</span> IR LED 1W pobiera ~300 mA → przy słabej baterii na mrozie może wywołać brownout/reset ESP32. Włączaj IR tylko po detekcji ruchu, na krótko. IR odbija się od szyby — LED-y odsuń od obiektywu, daj przegrodę.</div>
+
+<!-- ===================== PROJEKT 2 ===================== -->
+<h2 id="p2">3️⃣ Projekt 2 — Auto RC przez 4G</h2>
+<div class="card">
+<p><strong>Cel:</strong> auto do ~20 km/h, sterowane z domu przez 4G, ~4 km, video+audio dwukierunkowe. <strong>Kluczowe metryki:</strong> latencja end-to-end (im niżej, tym bezpieczniej) + niezawodność failsafe.</p>
+</div>
+
+<h3>Latencja i FPS (realne liczby)</h3>
+<div class="card">
+<ul>
+  <li><strong>Ping 4G:</strong> 30–80 ms (dobra komórka), 100+ ms (gorsza).</li>
+  <li><strong>Tailscale direct (UDP):</strong> +5–10 ms. <span class="bad">Uwaga:</span> jeśli wpadnie w DERP relay (TCP) → +120–250 ms! Sprawdzaj <code>tailscale status</code> czy jest <code>direct</code>.</li>
+  <li><strong>Enkod H.264 (sprzętowo na Pi 4):</strong> 25–35 ms.</li>
+  <li><strong>WebRTC + bufor + dekodowanie:</strong> 40–100 ms.</li>
+  <li><strong>ŁĄCZNIE end-to-end: 80–125 ms (optymalnie) do 250 ms (typowo).</strong> Przy słabej komórce: 300–700+ ms.</li>
+  <li><strong>FPS:</strong> stabilne <strong>720p @ 30 FPS</strong> (H.264, 2.5–3.5 Mbps) na dobrym uplinku. Słaby uplink → 15–25 FPS. <span class="bad">A7670E (Cat-1, 1–3 Mbps) za słaby na 720p — weź SIM7600G-H (Cat-4).</span></li>
+  <li><strong>Przy 20 km/h (5.5 m/s):</strong> 250 ms latencji = ~1.4 m drogi "na ślepo". <span class="bad">Musi być hardware failsafe</span> (auto-stop przy utracie sygnału 200–500 ms).</li>
+</ul>
+</div>
+
+<h3>Lista części + oceny</h3>
+<table id="t2">
+  <thead><tr><th data-k="name">Komponent</th><th data-k="choice">Wybór</th><th data-k="price">Cena (Ali)</th><th data-k="rate">Ocena</th><th>Dlaczego / pułapki</th></tr></thead>
+  <tbody>
+    <tr data-p="p2" data-rate="4" data-price="890"><td>Mózg</td><td>Raspberry Pi 4 2GB</td><td class="price">890 kr</td><td><span class="rating">★★★★☆</span></td><td><span class="bad">Nie Pi Zero 2W</span> (512 MB RAM za mało na WebRTC+audio+modem). Pi 4 = stabilny encode H.264. Alternatywa tania: używany Pi 4 z Blocket.</td></tr>
+    <tr data-p="p2" data-rate="5" data-price="987"><td>Modem 4G</td><td>SIM7600G-H 4G HAT (B)</td><td class="price">987 kr</td><td><span class="rating">★★★★★</span></td><td>Cat-4 (upload do 50 Mbps) — <span class="good">wymóg absolutny</span> na 720p. A7670E (Cat-1) za słaby. Ma wbudowany GPS.</td></tr>
+    <tr data-p="p2" data-rate="3" data-price="95"><td>Kamera</td><td>IMX219 8MP 77°</td><td class="price">95 kr</td><td><span class="rating">★★★☆☆</span></td><td>Jakość ~starego iPhone'a z 2016 (nie 2021) — 1/4" sensor, 1.12 µm piksel. Do jazdy w dzień OK; w nocy iPhone 5-letni zdecydowanie lepszy (szum). Szeroki FOV = atut do manewrowania. Do nocy: IMX462 / Camera Module 3 NoIR.</td></tr>
+    <tr data-p="p2" data-rate="4" data-price="21"><td>Mikrofon</td><td>INMP441 (I2S MEMS)</td><td class="price">21 kr</td><td><span class="rating">★★★★☆</span></td><td>Dobry stosunek cena/jakość. Januszowa alternatywa: karta dźwiękowa USB ~$2.</td></tr>
+    <tr data-p="p2" data-rate="4" data-price="26"><td>Wzmacniacz audio</td><td>MAX98357A (I2S 3W)</td><td class="price">26 kr</td><td><span class="rating">★★★★☆</span></td><td>Do głośnika. Full-duplex wymaga echo-cancellation (WebRTC ma AEC) + fizyczna separacja mic/głośnik.</td></tr>
+    <tr data-p="p2" data-rate="4" data-price="43"><td>Napęd</td><td>Silnik szczotkowy RS-540 (12V)</td><td class="price">43 kr</td><td><span class="rating">★★★★☆</span></td><td><span class="bad">Nie brushless 2212 lotniczy</span> (brak reverse, cogging). RS-540 + car ESC ma reverse+hamulec. Minus: iskrzenie na szczotkach = EMI na kamerę/modem → ferryty + separacja.</td></tr>
+    <tr data-p="p2" data-rate="5" data-price="252"><td>Sterownik napędu</td><td>ESC Hobbywing QuicRun 1060 (60A)</td><td class="price">252 kr</td><td><span class="rating">★★★★★</span></td><td>Wodoodporny, reverse + hamulec + BEC 5V/3A. <span class="good">Best choice do RS-540.</span></td></tr>
+    <tr data-p="p2" data-rate="4" data-price="146"><td>Serwo skrętu</td><td>DS31 20kg (metal gear)</td><td class="price">146 kr</td><td><span class="rating">★★★★☆</span></td><td><span class="bad">SG90 za słaby</span> (plastikowe tryby pękną). DS31/DS3218 20kg = pewny skręt przy 20 km/h. Pobiera kilka A pod obciążeniem → osobny UBEC.</td></tr>
+    <tr data-p="p2" data-rate="4" data-price="207"><td>Zasilanie główne</td><td>LiPo 3S 2200 mAh (YOWOO)</td><td class="price">207 kr</td><td><span class="rating">★★★★☆</span></td><td><span class="bad">LiPo z AliExpress ryzykowne w transporcie</span> (lit) — lepiej lokalnie. Na 20 km/h + Pi + 4G: ~20–40 min jazdy na 2200 mAh. Weź 5000+ mAh.</td></tr>
+    <tr data-p="p2" data-rate="4" data-price="41"><td>Zasilanie Pi</td><td>UBEC 5V 3A/5A</td><td class="price">41 kr</td><td><span class="rating">★★★★☆</span></td><td>Osobne stabilne 5V dla Pi (nie dziel z silnikami — brownout). Kondensator low-ESR 1000 µF przy Pi i przy ESC.</td></tr>
+    <tr data-p="p2" data-rate="5" data-price="14"><td>Kondensator</td><td>1000 µF low-ESR (5 szt)</td><td class="price">14 kr</td><td><span class="rating">★★★★★</span></td><td>Absorbuje szpilki prądowe przy ruszaniu (silniki generują ogromne szpilki). Tanie ubezpieczenie od resetów.</td></tr>
+  </tbody>
+</table>
+<div class="card"><strong>Suma Projekt 2 (AliExpress):</strong> ~<span class="price">2 722 kr</span></div>
+
+<div class="errbox">
+<strong>Failsafe — absolutnie wymagany (wszystkie 6 modeli AI zgodne):</strong> przy utracie sygnału &gt;200–500 ms auto musi SAME zatrzymać silniki. Najlepiej przez osobny mikrokontroler (RP2040/ATTiny, ~15 kr) monitorujący heartbeat z Pi i ustawiający PWM=neutral przy braku ramki. Bez tego 20 km/h na 4G = wypadek.
+</div>
+
+<!-- ===================== CROSS-CHECK ===================== -->
+<h2 id="cross">4️⃣ Cross-check 6 modeli AI</h2>
+<div class="card">
+<p>Oba projekty zrecenzowało 6 niezależnych modeli: <strong>Gemini 3.7 Flash, GPT-5.5, DeepSeek Pro, Qwen Max, Qwen 3.8 Max, GPT 5.6 Terra</strong>. Pełne odpowiedzi w sekcjach poniżej.</p>
+</div>
+
+<h3>Konsensus (wszystkie modele zgodne)</h3>
+<table>
+  <thead><tr><th>Temat</th><th>Werdykt</th></tr></thead>
+  <tbody>
+    <tr><td>Regulator TPS62740</td><td><span class="bad">Za słaby (300 mA)</span> przy piku ESP32 ~500 mA → TPS62840/Mini560.</td></tr>
+    <tr><td>Silnik 2212 lotniczy</td><td><span class="bad">Zły do auta</span> — brak reverse, cogging → szczotkowy 540/550 + car ESC.</td></tr>
+    <tr><td>Pi Zero 2W</td><td><span class="bad">Za mało RAM</span> → Pi 4 2GB minimum.</td></tr>
+    <tr><td>Zima + Li-ion</td><td><span class="bad">Nie ładuje się &lt;0°C</span> → LiFePO4 albo NTC cut-off. (Sztokholm!)</td></tr>
+    <tr><td>Failsafe</td><td><span class="good">Wymagany</span> — osobny watchdog + auto-stop.</td></tr>
+    <tr><td>Prawo SE</td><td>Pojazd RC na drodze publicznej = nielegalne. Kamera na ulicę = zezwolenie monitoringowe.</td></tr>
+    <tr><td>OV5640 fixed-focus</td><td>AF startuje 1.5–3 s → fixed-focus lepszy do detekcji ruchu.</td></tr>
+  </tbody>
+</table>
+
+<h3>Rozbieżności (wybór należy do Ciebie)</h3>
+<table>
+  <thead><tr><th>Temat</th><th>Opcja A</th><th>Opcja B</th></tr></thead>
+  <tbody>
+    <tr><td>Mózg auta</td><td>Pi 4 2GB (większość)</td><td>Orange Pi 5 (Qwen) — NPU do detekcji obiektów</td></tr>
+    <tr><td>Sterowanie</td><td>Ackermann + serwo (większość)</td><td>Tank steering 2× silnik (Qwen) — bez serwa</td></tr>
+    <tr><td>Mózg kamery P1</td><td>ESP32-S3 (ja)</td><td>Luckfox Pico (RV1103, ~$8) — Linux + NPU, boot 300 ms (Qwen 3.8)</td></tr>
+    <tr><td>Bateria P1</td><td>LiFePO4 2S (DeepSeek/Gemini/Qwen)</td><td>Li-ion + NTC (ChatGPT)</td></tr>
+    <tr><td>Napęd P2</td><td>Szczotkowy 540 + ESC (ja/Terra)</td><td>Brushless 3650 + sensored ESC (Qwen — zero EMI)</td></tr>
+  </tbody>
+</table>
+
+<!-- ===================== CENY ===================== -->
+<h2 id="ceny">5️⃣ Ceny — Amazon.se vs AliExpress</h2>
+<div class="card">
+<p>Wszystkie ceny <strong>zweryfikowane na żywo 2026-08-25</strong>. AliExpress: otworzyłem każdą stronę produktu i potwierdziłem cenę. Amazon.se: każdy ASIN sprawdzony po tytule+cenie (curl). Kurs: 1 SEK ≈ 0.39 PLN.</p>
+</div>
+
+<h3>AliExpress — pełny koszyk z linkami (SEK, potwierdzone)</h3>
+<table id="ta">
+  <thead><tr><th data-k="name">#</th><th data-k="choice">Komponent</th><th data-k="price">Cena</th><th>Link (zweryfikowany)</th></tr></thead>
+  <tbody>
+    <tr data-price="78"><td>1</td><td>ESP32-S3 CAM N16R8 (OV2640/OV5640)</td><td class="price">78,17 kr</td><td><a href="https://www.aliexpress.com/item/1005008717118598.html" target="_blank">1005008717118598</a></td></tr>
+    <tr data-price="58"><td>2</td><td>OV5640 5MP AF DVP 24PIN (197 sold)</td><td class="price">58,27 kr</td><td><a href="https://www.aliexpress.com/item/1005007298394579.html" target="_blank">1005007298394579</a></td></tr>
+    <tr data-price="6"><td>3</td><td>PIR AM312/AS312 (Senba)</td><td class="price">5,59 kr</td><td><a href="https://www.aliexpress.com/item/1005010434770736.html" target="_blank">1005010434770736</a></td></tr>
+    <tr data-price="75"><td>4</td><td>18650 LiitoKala 3500mAh (×2)</td><td class="price">74,64 kr</td><td><a href="https://www.aliexpress.com/item/32874974772.html" target="_blank">32874974772</a></td></tr>
+    <tr data-price="32"><td>5</td><td>CN3791 MPPT solar charger</td><td class="price">31,67 kr</td><td><a href="https://www.aliexpress.com/item/1005009726336124.html" target="_blank">1005009726336124</a></td></tr>
+    <tr data-price="57"><td>6</td><td>Panel 6V (2W 56,64 / 5W 171,37)</td><td class="price">57–171 kr</td><td><a href="https://www.aliexpress.com/item/1005012580185809.html" target="_blank">2W</a> · <a href="https://www.aliexpress.com/item/1005012004054743.html" target="_blank">5W</a></td></tr>
+    <tr data-price="48"><td>7</td><td>Buck Mini560 5A 3.3V (5 szt)</td><td class="price">48,09 kr</td><td><a href="https://www.aliexpress.com/item/1005006537133858.html" target="_blank">1005006537133858</a></td></tr>
+    <tr data-price="14"><td>8</td><td>MOSFET AO3401 (50 szt)</td><td class="price">13,67 kr</td><td><a href="https://www.aliexpress.com/item/1005012262818976.html" target="_blank">1005012262818976</a></td></tr>
+    <tr data-price="16"><td>9</td><td>MicroSD slot SPI</td><td class="price">16,33 kr</td><td><a href="https://www.aliexpress.com/item/1005010585559411.html" target="_blank">1005010585559411</a></td></tr>
+    <tr data-price="890"><td>10</td><td>Raspberry Pi 4 2GB</td><td class="price">889,57 kr</td><td><a href="https://www.aliexpress.com/item/1005012852574358.html" target="_blank">1005012852574358</a></td></tr>
+    <tr data-price="987"><td>11</td><td>SIM7600G-H 4G HAT (B) — 126 sold</td><td class="price">987,40 kr</td><td><a href="https://www.aliexpress.com/item/1005004917955593.html" target="_blank">1005004917955593</a></td></tr>
+    <tr data-price="95"><td>12</td><td>IMX219 8MP 77°</td><td class="price">94,91 kr</td><td><a href="https://www.aliexpress.com/item/1005007765263584.html" target="_blank">1005007765263584</a></td></tr>
+    <tr data-price="21"><td>13</td><td>INMP441 mikrofon I2S</td><td class="price">20,91 kr</td><td><a href="https://www.aliexpress.com/item/1005009516607325.html" target="_blank">1005009516607325</a></td></tr>
+    <tr data-price="26"><td>14</td><td>MAX98357A I2S 3W</td><td class="price">25,75 kr</td><td><a href="https://www.aliexpress.com/item/1005011692677657.html" target="_blank">1005011692677657</a></td></tr>
+    <tr data-price="43"><td>15</td><td>Silnik RS-540SH-3780 12V</td><td class="price">42,97 kr</td><td><a href="https://www.aliexpress.com/item/32800058948.html" target="_blank">32800058948</a></td></tr>
+    <tr data-price="252"><td>16</td><td>ESC Hobbywing QuicRun 1060 60A</td><td class="price">251,83 kr</td><td><a href="https://www.aliexpress.com/item/1005001335424744.html" target="_blank">1005001335424744</a></td></tr>
+    <tr data-price="146"><td>17</td><td>Serwo DS31 20kg (metal)</td><td class="price">146,05 kr</td><td><a href="https://www.aliexpress.com/item/1005012697781527.html" target="_blank">1005012697781527</a></td></tr>
+    <tr data-price="207"><td>18</td><td>LiPo 3S 2200mAh (YOWOO)</td><td class="price">207,40 kr</td><td><a href="https://www.aliexpress.com/item/1005011738707687.html" target="_blank">1005011738707687</a></td></tr>
+    <tr data-price="41"><td>19</td><td>UBEC 5V 3A/5A</td><td class="price">40,97 kr</td><td><a href="https://www.aliexpress.com/item/4001219424525.html" target="_blank">4001219424525</a></td></tr>
+    <tr data-price="14"><td>20</td><td>Kondensator 1000µF low-ESR (5 szt)</td><td class="price">13,94 kr</td><td><a href="https://www.aliexpress.com/item/1005006044620978.html" target="_blank">1005006044620978</a></td></tr>
+  </tbody>
+</table>
+
+<h3>Amazon.se — pełna lista (realne ceny SEK)</h3>
+<table>
+  <thead><tr><th>#</th><th>Komponent</th><th>Cena</th><th>ASIN</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>ESP32-S3 z PSRAM (FREENOVE)</td><td class="price">229 kr</td><td>B0BMQ8F7FN</td></tr>
+    <tr><td>2</td><td>OV5640 5MP (2 szt)</td><td class="price">167,80 kr</td><td>B0F21CPH22</td></tr>
+    <tr><td>3</td><td>PIR AM312 (3 szt)</td><td class="price">107,59 kr</td><td>B08C5572W4</td></tr>
+    <tr><td>4</td><td>18650 (pakiet)</td><td class="price">179 kr</td><td>B0C2VFTDPY</td></tr>
+    <tr><td>5</td><td>CN3791 MPPT</td><td class="price">51,72 kr</td><td>B09B7J1C95</td></tr>
+    <tr><td>6</td><td>Panel 6V</td><td class="price">132,54 kr</td><td>B0D8HWBYVF</td></tr>
+    <tr><td>7</td><td>Buck 3.3V (10 szt)</td><td class="price">72,99 kr</td><td>B09Z28LTRD</td></tr>
+    <tr><td>8</td><td>AO3401 (100 szt)</td><td class="price">98 kr</td><td>B0H4CWN1SQ</td></tr>
+    <tr><td>9</td><td>microSD slot (5 szt)</td><td class="price">67,41 kr</td><td>B0F2DPSQ5R</td></tr>
+    <tr><td>10</td><td>Pi 4 2GB</td><td class="price">888,58 kr</td><td>B07TGBLK33</td></tr>
+    <tr><td>11</td><td>Modem 4G <strong>Waveshare SIM7600G-H 4G HAT (B)</strong></td><td class="price">1 442,99 kr</td><td>Waveshare (wyszukanie Amazon)</td></tr>
+    <tr><td>12</td><td>IMX219 8MP</td><td class="price">264,27 kr</td><td>B0HB48LXCR</td></tr>
+    <tr><td>13</td><td>INMP441</td><td class="price">70 kr</td><td>B0GTR62LSF</td></tr>
+    <tr><td>14</td><td>MAX98357A (3 szt)</td><td class="price">59 kr</td><td>B0GY479Y14</td></tr>
+    <tr><td>15</td><td>RS-540 12V</td><td class="price">133,46 kr</td><td>B0F1DF5NNT</td></tr>
+    <tr><td>16</td><td>ESC 60A</td><td class="price">141,95 kr</td><td>B0G2ZQ58R7</td></tr>
+    <tr><td>17</td><td>DS3218 20kg</td><td class="price">341,77 kr</td><td>B09BPMZQ57</td></tr>
+    <tr><td>18</td><td>LiPo 3S 2200mAh</td><td class="price">354,09 kr</td><td>B08R751QLD</td></tr>
+    <tr><td>19</td><td>UBEC 5V 5A</td><td class="price">83,98 kr</td><td>B0FQCQBRNT</td></tr>
+    <tr><td>20</td><td>Kondensator (10 szt)</td><td class="price">101,99 kr</td><td>B09HNYGRH6</td></tr>
+  </tbody>
+</table>
+
+<h3>Porównanie koszyków</h3>
+<table>
+  <thead><tr><th>Sklep</th><th>Proj A</th><th>Proj B</th><th>Razem</th><th>Uwagi</th></tr></thead>
+  <tbody>
+    <tr><td><strong>AliExpress</strong></td><td class="price">384 kr</td><td class="price">2 722 kr</td><td class="price">~3 106 kr</td><td>15–40 dni dostawy</td></tr>
+    <tr><td><strong>Amazon.se</strong></td><td class="price">1 106 kr</td><td class="price">3 882 kr</td><td class="price">~4 988 kr</td><td>1–2 dni, zwroty</td></tr>
+  </tbody>
+</table>
+<div class="note"><strong>Werdykt:</strong> AliExpress ~<strong>38% taniej</strong> (~1 882 kr oszczędności). <strong>Uwaga na modemy:</strong> LILYGO T-SIM7600E (697 kr) to ESP32+modem w jednej płytce — <span class="bad">nie nadaje się do Pi</span>. Właściwy modem do Pi to Waveshare SIM7600G-H 4G HAT (B): 1 443 kr (Amazon) / 987 kr (AliExpress, 126 sold). Podróbki OV5640 na każdej platformie — weryfikuj sensor. LiPo + modem + Pi z Amazon/Electrokit (zwrot), drobnica z Ali.</div>
+
+<!-- ===================== OSZCZĘDNOŚCI ===================== -->
+<h2 id="save">6️⃣ Jak oszczędzić (januszowe rozwiązania)</h2>
+
+<h3>Bateria z hulajnogi — werdykt po researchu</h3>
+<div class="card">
+<p>Sprawdziłem <strong>Blocket.se</strong> — ogłoszenia istnieją:</p>
+<ul>
+  <li><strong>36V battery "helt nytt"</strong> — 1 000 kr (Halmstad)</li>
+  <li><strong>36V Batteri</strong> — 1 000 kr (Vallentuna, do wysyłki)</li>
+  <li><strong>BMS 10S 36V + adapter do Xiaomi</strong> — 200 kr (Ystad)</li>
+  <li>Całe używane hulajnogi (z baterią) — od 750 kr (Tyresö) do 2 400 kr (E-Wheels z nowym baterią)</li>
+</ul>
+<p><strong>Ale uwaga — kluczowa pułapka:</strong> bateria z hulajnogi to <strong>36V (10S) lub 48V</strong>. ESC Hobbywing 1060 obsługuje <strong>max 3S = 12.6V</strong>. Podłączenie 36V w całości <span class="bad">spali ESC i silnik</span>.</p>
+<p><strong>Rozwiązanie (Qwen 3.8 Max):</strong> rozbierz pakiet na ogniwa i <strong>przebuduj na 3S3P</strong> (3 sekcje × 3 ogniwa równolegle). Pakiet 10S3P = 30 ogniw 18650 → zrobisz z tego <strong>trzy pakiety 3S3P (~7.5 Ah, 30A)</strong> — idealne do auta RC, za ułamek ceny modelarskiego LiPo.</p>
+<p><strong>Jak sprawdzić używaną baterię (zanim kupisz):</strong></p>
+<ul>
+  <li><strong>Napięcie sekcji:</strong> multimetrem zmierz każdą z 10 sekcji przez złącze BMS. Sekcja &lt;2.0V = ogniwa do utylizacji (ryzyko pożaru). Rozrzut między sekcjami &gt;0.05V = dyskwalifikacja.</li>
+  <li><strong>Rezystancja wewnętrzna (IR):</strong> ładowarka modelarska (IMAX B6 / LiitoKala). Sprawne ogniwo &lt;35–45 mΩ. &gt;60 mΩ = zużyte (voltage sag przy gazie).</li>
+  <li><strong>Test pojemności:</strong> rozładowanie 1A do 3.0V — min. 75–80% fabrycznej = OK.</li>
+  <li><strong>Oględziny:</strong> brak puchnięcia, korozji, śladów zalania/taśmy.</li>
+</ul>
+</div>
+
+<h3>Inne oszczędności</h3>
+<table>
+  <thead><tr><th>Element</th><th>Zamiast</th><th>Januszowa alternatywa</th><th>Oszczędność</th></tr></thead>
+  <tbody>
+    <tr><td>Modem 4G</td><td>SIM7600 HAT 987 kr</td><td>Używany Huawei E3372h (USB, Cat-4) z Blocket/Tradera — 40–80 kr</td><td>~900 kr</td></tr>
+    <tr><td>Pi 4</td><td>Nowy 890 kr</td><td>Używany Pi 4 2GB z Blocket</td><td>~300–400 kr</td></tr>
+    <tr><td>Audio P2</td><td>INMP441 + MAX98357A (47 kr)</td><td>Karta dźwiękowa USB $2 + PAM8403 $0.5</td><td>~30 kr</td></tr>
+    <tr><td>Podwozie P2</td><td>Druk 3D całego</td><td>Używane podwozie RC 1:10 z Blocket (silnik+ESC w komplecie)</td><td>kilkaset kr</td></tr>
+    <tr><td>Audio dwukierunkowe</td><td>Od razu full-duplex</td><td>Pierwsza wersja bez audio (tylko video), audio dodaj potem</td><td>czas + 47 kr</td></tr>
+    <tr><td>Panel P1</td><td>5W nowy 171 kr</td><td>Używany panel ogrodowy/kamery z Blocket</td><td>~100 kr</td></tr>
+  </tbody>
+</table>
+
+<h3>Co można pominąć (wersja minimalna)</h3>
+<ul>
+  <li><strong>Proj 1:</strong> microSD (wysyłka przez WiFi zamiast lokalnego zapisu), IR-cut (jeśli tylko dzień), drugi 18650 (1 szt na start).</li>
+  <li><strong>Proj 2:</strong> audio (pierwsza wersja tylko video), GPS (SIM7600 ma go wbudowanego — nie dokupuj), drugi silnik (1 napędowy + skręt = prościej).</li>
+  <li><strong>Zawsze zostaw:</strong> failsafe, UBEC dla Pi, kondensator low-ESR, bezpiecznik przy LiPo. Na tym się nie oszczędza.</li>
+</ul>
+
+
+<section id="alternatives">
+<h2>7️⃣ Gdzie kupić POZA AliExpress i Amazonem <span class="tag">nowe 26.08</span></h2>
+<p><strong>Skąd te ceny:</strong> 5 scraper-agentów (26.08, 17:50–18:22) przeszukało sklepy SE/EU/PL, RC, Blocket/Tradera, eBay i Banggood. Uwaga metodologiczna: wszystkie duże e-sklepy komponentowe (Electrokit, Berrybase, AZ-Delivery, Reichelt, TME, Kamami, Allegro) renderują się JS-em — podane ceny tych sklepów to <em>orientacyjne widełki</em>, do potwierdzenia przy zamówieniu. Ceny eBay/HobbyKing/Hobbex/Blocket/Tradera zweryfikowane na żywo.</p>
+
+<h3>🏆 Najtańsze realne znaleziska (zweryfikowane live)</h3>
+<table>
+<thead><tr><th>Co</th><th>Sklep</th><th>Cena</th><th>Link</th><th>Uwagi</th></tr></thead>
+<tbody>
+<tr><td>Combo: silnik 540 + ESC 60A</td><td>HobbyKing</td><td><strong>83 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/trackstar-540-16t-brushed-motor.html">TrackStar 540-16T combo</a></td><td>Wyprzedaż $7.99 — silnik+ESC w cenie jednego silnika. Sprawdź magazyn wysyłki (EU=bez cła)</td></tr>
+<tr><td>Serwo 23kg metal wodoodporne</td><td>HobbyKing</td><td><strong>73 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/turnigy-tgy-wp23-23kg-0-12s-2wd-waterproof-metal-gear-servo.html">Turnigy TGY-WP23</a></td><td>Zamiast DS3218 za 146 kr — lepsze i tańsze</td></tr>
+<tr><td>LiPo 3S 2200mAh 60C XT60</td><td>HobbyKing</td><td><strong>104 kr</strong></td><td><a href="https://www.hobbyking.com/en_us/turnigy-hd-2200mah-3s-60c-lipo-battery-with-xt60-plug.html">Turnigy HD 3S</a></td><td>Uwaga: LiPo z HK = ryzyko transportu; alternatywa używana z Blocket 150–200 kr</td></tr>
+<tr><td>XT60 wtyczki 10 par</td><td>Hobbex</td><td><strong>39 kr</strong></td><td><a href="https://hobbex.se/product/xt60-connectors-10-pair-set">Hobbex XT60</a></td><td>SE sklep, szybka wysyłka</td></tr>
+<tr><td>UBEC 5V 6A (2-4S)</td><td>Barkarby Hobby</td><td><strong>62 kr</strong></td><td><a href="https://rconline.se">rconline.se / barkarbyhobby.se</a></td><td>Sklep stacjonarny w Järfälla — odbiór tego samego dnia</td></tr>
+<tr><td>Silnik 540 szczotkowy 17.5T</td><td>Hobbex</td><td><strong>99 kr</strong></td><td><a href="https://hobbex.se/product/maxxan-mr17-5-17-5t-brushed-motor">Maxxan MR17</a></td><td>Jak RS-540, dostępny od ręki w SE</td></tr>
+<tr><td>CN3791 MPPT solar charger</td><td>eBay</td><td><strong>57 kr</strong></td><td><a href="https://www.ebay.com/itm/364857845041">eBay 364857845041</a></td><td>Free ship (Chiny) + ~14 kr VAT przy imporcie</td></tr>
+<tr><td>Mini560 buck 3.3V</td><td>eBay</td><td><strong>32 kr</strong> (10-pk: 17 kr/szt)</td><td><a href="https://www.ebay.com/itm/406752726947">eBay 406752726947</a></td><td>Najtańszy niezbędnik do kamery solarnej</td></tr>
+<tr><td>OV5640 5MP DVP</td><td>eBay</td><td><strong>51 kr</strong></td><td><a href="https://www.ebay.com/itm/157361398992">eBay 157361398992</a></td><td>Dalej obowiązuje: weryfikuj I2C PID po dostawie (podróbki!)</td></tr>
+<tr><td>SIM7600G-H 4G HAT</td><td>eBay</td><td><strong>614 kr</strong></td><td><a href="https://www.ebay.com/itm/376832595934">eBay open-box</a></td><td>vs 987 kr (Ali) / 1443 kr (Amazon). Alternatywa SIM7600E breakout 507 kr</td></tr>
+<tr><td>iMAX B6 Mini ładowarka</td><td>Hobbex</td><td><strong>299 kr</strong></td><td><a href="https://hobbex.se/product/skyrc-imax-b6-mini-35w-3a-li-po-charger">SkyRC B6 Mini</a></td><td>Do ładowania LiPo 3S i testowania ogniw 18650</td></tr>
+</tbody>
+</table>
+
+<h3>♻️ Używki — Blocket/Tradera (sprawdzone 26.08)</h3>
+<ul>
+<li><strong>18650 za darmo/mamuśki:</strong> 64× Sanyo z Ystad <strong>15 kr/całość</strong> (Blocket), ~140 ogniw Dell na Tradera od 1 kr licytacji, 36V 10s5p Sanyo od 55 kr</li>
+<li><strong>Panel 5W z USB:</strong> 150 kr (Lofsdalen, Blocket) — dokładnie ten, którego potrzebuje kamera</li>
+<li><strong>Pi 4:</strong> Tradera 470–666 kr (z akcesoriami), Blocket do 1500 kr — bierz z Tradera</li>
+<li><strong>Całe auto RC 1:10 RTR:</strong> 900 kr (Åkersberga, BSD Dune Racer) — silnik+ESC+serwo+radio w komplecie, czyli podwozie do projektu 4G w cenie samego ESC</li>
+<li><strong>LiPo 3S używane:</strong> 150–260 kr (Blocket/Tradera)</li>
+<li><strong>Hulajnogi na części:</strong> od 10 kr (Malmö, bortskänkes) do ~500 kr</li>
+</ul>
+
+<h3>🧩 Najtrudniejsze do dostania (i co z nimi)</h3>
+<table>
+<thead><tr><th>Część</th><th>Status</th><th>Najlepsza opcja poza Ali/Ama</th></tr></thead>
+<tbody>
+<tr><td>Mechaniczny filtr IR-cut (cewka)</td><td>🔴 <strong>Chyba najtrudniejsza</strong></td><td>Na eBay istnieje tylko jako gotowy moduł kamery; na Banggood brak. Opcje: moduł OV5640 z wbudowanym IR-cut (206 kr na Ali…) albo wersja z filtrem stałym + osobna dioda IR bez filtra (kompromis)</td></tr>
+<tr><td>PT4115 driver LED</td><td>🟡 Tylko eBay</td><td>67.78 kr/szt lub 3 szt za 104.74 kr (34.91/szt) — jedyna platforma poza Ali z tym modułem</td></tr>
+<tr><td>ESP32-S3-CAM N16R8</td><td>🟡 Odpada prawie wszędzie</td><td>Oficjalne kanały (Botland/Kamami) mają tylko drogie zamienniki (Seeed XIAO 77 kr, Arduino Nano 230 kr). Na eBay orientacyjnie 30–60 kr. Freenove kit (229 kr Amazon) pozostaje najpewniejszym nie-Ali źródłem</td></tr>
+<tr><td>CN3791</td><td>🟢 eBay OK</td><td>57 kr (Chiny, free ship)</td></tr>
+<tr><td>Mini560</td><td>🟢 eBay OK</td><td>32 kr / 17 kr w 10-packu</td></tr>
+<tr><td>Ogniwa 18650</td><td>🟢 używki królują</td><td>Blocket/Tradera — patrz wyżej. Nowe LiitoKala tylko Ali/Amazon</td></tr>
+<tr><td>Kondensator 1000µF low-ESR</td><td>🟢 każdy dystrybutor</td><td>TME/Reichelt/Electrokit po 2–5 kr/szt (EU-shipment)</td></tr>
+<tr><td>PIR AM312</td><td>🟡 Botland ma, ale 228 kr (!)</td><td>eBay ~15 kr/szt z wysyłką; orientacyjnie AZ-Delivery ~1.5 €</td></tr>
+<tr><td>INMP441 / MAX98357A</td><td>🟡 tylko eBay/EU-AG</td><td>Orientacyjnie: Reichelt ~23–28 kr, AZ-Delivery ~28 kr — ceny do potwierdzenia</td></tr>
+<tr><td>IMX219 (kamera do Pi)</td><td>🟢 Botland ma zamiennik</td><td>ArduCam B0176R 220 kr (Botland, wysyłka do SE) vs 95 kr na Ali — tu niestety Ali wygrywa 2×</td></tr>
+</tbody>
+</table>
+
+<h3>🇸🇪/🇪🇺/🇵🇱 Mapa sklepów (co gdzie się opłaca)</h3>
+<ul>
+<li><strong>HobbyKing</strong> — król RC (silnik+ESC 83 kr, serwo 73 kr, LiPo 104 kr). Zawsze filtruj „EU warehouse", inaczej + VAT/cło. Hobbex (SE) = drożej o ~50%, ale szybciej i bez ryzyka</li>
+<li><strong>Barkarby Hobby (Järfälla)</strong> — jedyny stacjonarny RC pod Sztokholmem: UBEC 43–62 kr, serwa od 125 kr. Botshop.se, hobbyflow.se i subslot.se — domeny martwe, nie istnieją</li>
+<li><strong>Botland (PL)</strong> — wysyłka do SE od ~25–35 zł; opłacalny tylko na oryginały (Seeed/Arduino/M5Stack). Na drobnicy (AM312 za 228 kr!) przegrywa 50× z eBayem</li>
+<li><strong>Allegro</strong> — potencjalnie tanie (OV5640 ~12–25 zł, CN3791 ~8–15 zł), ale blokuje boty — trzeba klikać ręcznie z polskim IP/VPN</li>
+<li><strong>TME/Reichelt/Electrokit</strong> — tylko na pasywy i MOSFET-y (po grosze), nie na moduły</li>
+</ul>
+
+<div class="note"><strong>Werdykt zakupowy (poza Ali/Amazon):</strong> budżetowy zestaw RC: silnik+ESC combo 83 kr + serwo WP23 73 kr + LiPo używana 150–200 kr + UBEC 62 kr + XT60 39 kr + ładowarka 299 kr ≈ <strong>~710–760 kr</strong> (vs ~1030 kr na Ali część-po-części, vs ~1500 kr w SE-sklepach). Kamera solarna: eBay drobnica (CN3791 57 + Mini560 32 + OV5640 51 + PT4115 68) ≈ <strong>~210 kr + VAT importowy</strong>, ogniwa i panel z Blocket za ~165 kr. Największa pozostałość: IR-cut mechaniczny i ESP32-S3-CAM — bez AliExpress realnie zostaje eBay/Freenove-Amazon.</div>
+</section>
+
+<div class="note">
+<strong>TL;DR całości:</strong> (1) ESP32-S3+OV5640+PIR+CN3791+buck niskoprądowy — kamera solarna za ~384 kr (Ali) z trybem nocnym +~50–110 kr. (2) Pi 4 + SIM7600G-H + Tailscale + WebRTC + RS-540 + QuicRun 1060 + DS31 — auto RC za ~2 722 kr (Ali), latencja 80–250 ms, 720p@30fps. Failsafe obowiązkowy. Baterię z hulajnogi (Blocket ~200–1000 kr) da się użyć PO przebudowie na 3S. Podróbki OV5640 na każdej platformie — weryfikuj sensor.
+</div>
+
+</div>
+
+<script>
+// sortowalne tabele — kliknij nagłówek
+document.querySelectorAll('table[id]').forEach(function(tbl){
+  tbl.querySelectorAll('th[data-k]').forEach(function(th){
+    th.addEventListener('click', function(){
+      var key = th.getAttribute('data-k');
+      var tbody = tbl.querySelector('tbody');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      var asc = th.getAttribute('data-dir') !== 'asc';
+      rows.sort(function(a,b){
+        var av = a.getAttribute('data-'+key) || a.cells[th.cellIndex].innerText;
+        var bv = b.getAttribute('data-'+key) || b.cells[th.cellIndex].innerText;
+        var an = parseFloat(String(av).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
+        var bn = parseFloat(String(bv).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
+        if(!isNaN(an) && !isNaN(bn) && (av+'').match(/\d/)){ return asc ? an-bn : bn-an; }
+        return asc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+      tbl.querySelectorAll('th').forEach(function(x){ x.removeAttribute('data-dir'); });
+      th.setAttribute('data-dir', asc ? 'asc' : 'desc');
+    });
+  });
+});
+</script>
+</body>
+</html>

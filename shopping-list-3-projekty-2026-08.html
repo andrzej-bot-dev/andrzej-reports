@@ -33,11 +33,25 @@
   .tag{font-size:12px;color:#8b93a7}
   footer{color:#5c6478;font-size:13px;margin-top:26px;text-align:center}
   a{color:#7fa7ff}
+  .fbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 8px}
+  .fbtn{background:#182136;border:1px solid #26355a;color:#cfe0ff;border-radius:99px;padding:9px 16px;font:600 14px/1.2 inherit;cursor:pointer}
+  .fbtn:hover{border-color:#4f8cff}
+  .fbtn.active{background:#2b4a8f;border-color:#4f8cff;color:#fff}
+  #ftotal{color:#7fd6a0;font-weight:700;font-size:14px;min-height:22px;margin-bottom:6px}
 </style>
 </head>
 <body><div class="wrap">
 <h1>🛒 Lista zakupowa — 3 projekty × % ceny AliExpress</h1>
 <div class="sub">📷 Solar Cam · 🚗 4G RC Car · 📡 Lapp-Lisa Detector — 31.08.2026. Nadwozie+opony RC = 3D print (poza listą). Kolumna <b>% Ali</b> = cena sklepu ÷ cena AliExpress (bazowe z researchu 25.08; pozycje 📡 z ~ to szacunki). <span class="a-green">💚 &lt;100% = taniej niż Ali</span> · <span class="a-ok">✅ 100–150%</span> · <span class="a-mid">🟡 150–300%</span> · <span class="a-bad">🔴 &gt;300%</span></div>
+
+<div class="fbar">
+<button class="fbtn active" data-f="all">📋 Wszystkie projekty</button>
+<button class="fbtn" data-f="p1">📷 Solar Cam</button>
+<button class="fbtn" data-f="p2">🚗 RC Car</button>
+<button class="fbtn" data-f="p3">📡 Lapp-Lisa</button>
+<button class="fbtn" data-f="other">🏪 Stacjonarne / inne</button>
+</div>
+<div id="ftotal"></div>
 
 <div class="okbox">📊 <b>Cały koszyk core ≈ <span class="a-ok">117% cen Ali</span></b> (~5 950 kr vs ~5 100 kr na Ali). W środku siedzi jednak kilka 💚, które Ali pojedzie DROŻEJ: ESC (56%), Pi 4 (60%), PT4115 (60%), SIM7600G-H (80%), Pi Zero 2 W (86%), 18650 (89%), panel solarny (95%). Prawdziwe kaboomy to drobnica: Mini560 na amazonie 🔴410%, serwo DS3218 🔴375%, RS-540 🔴310%.</div>
 
@@ -157,6 +171,36 @@
 <footer>Andrzej 🤖 · 31.08.2026 · Ali-baseline: bom.md (live 25.08) + szacunki dla części 📡 · ceny sklepów: live 27–31.08 · eu-elektronika-sklepy-2026-08.html · lapp-lisa-bom-2026-08.html</footer>
 </div>
 <script>
-document.querySelectorAll('input[type=checkbox]').forEach(cb=>{cb.addEventListener('change',()=>{cb.closest('tr').classList.toggle('done',cb.checked)})});
+const cbs=[...document.querySelectorAll('input[type=checkbox]')];
+cbs.forEach((cb,i)=>{
+  cb.checked=localStorage.getItem('sl'+i)==='1';
+  cb.closest('tr').classList.toggle('done',cb.checked);
+  cb.addEventListener('change',()=>{localStorage.setItem('sl'+i,cb.checked?'1':'0');cb.closest('tr').classList.toggle('done',cb.checked)});
+});
+const rows=[...document.querySelectorAll('table tr')].filter(r=>r.querySelector('input[type=checkbox]'));
+const tots=[...document.querySelectorAll('tr.tot')];
+function sek(r){const m=r.textContent.replace(/\u00a0/g,' ').match(/([\d ][\d ]*)\s*kr/);return m?parseInt(m[1].replace(/[^\d]/g,'')):0;}
+function apply(f){
+  let sum=0,n=0;
+  rows.forEach(r=>{
+    const tags=[...r.querySelectorAll('.prj')].map(x=>x.classList.contains('p1')?'p1':x.classList.contains('p2')?'p2':'p3');
+    const cat=tags.length?tags:['other'];
+    const show=(f==='all')||cat.includes(f);
+    r.style.display=show?'':'none';
+    if(show&&f!=='all'){sum+=sek(r);n++;}
+  });
+  tots.forEach(r=>r.style.display=(f==='all')?'':'none');
+  document.querySelectorAll('.card').forEach(c=>{
+    const vis=[...c.querySelectorAll('tr')].some(r=>r.style.display!=='none');
+    c.style.display=vis?'':'none';
+    const h=c.previousElementSibling;
+    if(h&&h.tagName==='H2')h.style.display=vis?'':'none';
+  });
+  document.getElementById('ftotal').textContent=(f==='all')?'':'📌 Widoczne pozycje: '+n+' · suma ≈ '+sum+' kr (bez fraktów, ceny zaokrąglone)';
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');apply(b.dataset.f);
+}));
 </script>
 </body></html>

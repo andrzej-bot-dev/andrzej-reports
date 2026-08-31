@@ -37,6 +37,11 @@
   .fbtn{background:#182136;border:1px solid #26355a;color:#cfe0ff;border-radius:99px;padding:9px 16px;font:600 14px/1.2 inherit;cursor:pointer}
   .fbtn:hover{border-color:#4f8cff}
   .fbtn.active{background:#2b4a8f;border-color:#4f8cff;color:#fff}
+  .mx td,.mx th{font-size:13px;padding:5px 6px}
+  .mx .best{background:#0f2a1a;color:#4ade80;font-weight:700;border-radius:4px}
+  .mx .dim{color:#3a4157}
+  .mx .grp td{background:#182136;color:#cfe0ff;font-weight:700;font-size:14px}
+  .mx .aliref{color:#8b93a7;font-style:italic}
   #ftotal{color:#7fd6a0;font-weight:700;font-size:14px;min-height:22px;margin-bottom:6px}
 </style>
 </head>
@@ -44,15 +49,20 @@
 <h1>🛒 Lista zakupowa — 3 projekty × % ceny AliExpress</h1>
 <div class="sub">📷 Solar Cam · 🚗 4G RC Car · 📡 Lapp-Lisa Detector — 31.08.2026. Nadwozie+opony RC = 3D print (poza listą). Kolumna <b>% Ali</b> = cena sklepu ÷ cena AliExpress (bazowe z researchu 25.08; pozycje 📡 z ~ to szacunki). <span class="a-green">💚 &lt;100% = taniej niż Ali</span> · <span class="a-ok">✅ 100–150%</span> · <span class="a-mid">🟡 150–300%</span> · <span class="a-bad">🔴 &gt;300%</span></div>
 
-<div class="fbar">
+<div class="fbar" id="fbar">
 <button class="fbtn active" data-f="all">📋 Wszystkie projekty</button>
 <button class="fbtn" data-f="p1">📷 Solar Cam</button>
 <button class="fbtn" data-f="p2">🚗 RC Car</button>
 <button class="fbtn" data-f="p3">📡 Lapp-Lisa</button>
 <button class="fbtn" data-f="other">🏪 Stacjonarne / inne</button>
 </div>
+<div class="fbar" id="viewbar">
+<button class="fbtn active" id="v-list" data-v="list">🛒 Lista zakupów</button>
+<button class="fbtn" id="v-matrix" data-v="matrix">📊 Matryca: sklepy × produkty</button>
+</div>
 <div id="ftotal"></div>
 
+<div id="listview">
 <div class="okbox">📊 <b>Cały koszyk core ≈ <span class="a-ok">117% cen Ali</span></b> (~5 950 kr vs ~5 100 kr na Ali). W środku siedzi jednak kilka 💚, które Ali pojedzie DROŻEJ: ESC (56%), Pi 4 (60%), PT4115 (60%), SIM7600G-H (80%), Pi Zero 2 W (86%), 18650 (89%), panel solarny (95%). Prawdziwe kaboomy to drobnica: Mini560 na amazonie 🔴410%, serwo DS3218 🔴375%, RS-540 🔴310%.</div>
 
 <div class="okbox">🔍 <b>CROSS-CHECK 31.08 13:15 (wyszukiwarki wewnętrzne sklepów):</b> LaskaKit sweep — 29 termów, wszystkie pozycje paczki B potwierdzone IN w tych samych cenach ✅. <b>Zmiany:</b> IR LED 850nm na LaskaKit wyprzedany → przeniesiony do paczki E (Botland 8–52 kr); MG996R zniknął z LaskaKit, ale jest na amazonie ~57 kr; Heltec ma tańszy wariant bez OLED (Shell V3 224 kr). <b>Martwe ścieżki:</b> Reichelt Zero 2 W = 226 kr, ale dostawa dopiero 08.01.2027 💀 · NKON = Cloudflare (ręcznie: GA ~€3.5–4) · m.nu + Botland search = SPA (tylko browser) · TME = Cloudflare (dane 27.08 z Chromium).</div>
@@ -154,6 +164,26 @@
 <div class="warnbox">📦 <b>Kolejność:</b> 1) BerryBase (Pi 5 2GB LimitedAvailability!) → 2) amazon.se (MVP na jutro) → 3) LaskaKit → 4) TME → 5) Botland po koszyku. Jeśli Cię rwie do 🔴 pozycji (serwo, Mini560, RS-540) — to jest dokładnie ta lista, którą warto zamiast tego wysłać na Ali przy najbliższej większej paczce: oszczędzisz ~450 kr, ale poczekasz 2–3 tyg.</div>
 
 
+</div><!--/listview-->
+
+<div id="matrixview" style="display:none">
+<h2>📊 Matryca: sklepy × produkty — najtańsze źródło na zielono</h2>
+<div class="card">
+<p class="tag" style="margin-bottom:8px;">Ceny w SEK (za szt.; ¹ = multipak, przeliczone na szt. · ² = zamiennik · ³ = dane 26–27.08: Botland SPA / TME CF · † = dostawa 2027 · ~ = szacunek). Kolumna Ali = punkt odniesienia (nie kupuj ogniw na Ali!). Zielone = najtaniej w wierszu. Zielony wiersz z ❌ = OOS, nie licz tego.</p>
+<table class="mx">
+<thead><tr><th>Część</th><th class="num">🇩🇪 BerryBase</th><th class="num">🇨🇿 LaskaKit</th><th class="num">🇸🇪 amazon.se</th><th class="num">TME</th><th class="num">Botland*</th><th class="num">rpdk</th><th class="num">🏪 Inne</th><th class="num">Ali ~ref</th></tr></thead>
+<tbody>
+<tr class="grp"><td colspan="9">📡 Lapp-Lisa Detector</td></tr><tr><td>Pi Zero 2 W — mózg</td><td class="best">214</td><td class="dim">—</td><td class="">699 ⚠2kvar</td><td class="dim">—</td><td class="dim">—</td><td class="">159 ❌OOS</td><td class="">226 †01/2027</td><td class="aliref">~250</td></tr><tr><td>Camera Module 3 Wide — oko</td><td class="dim">—</td><td class="dim">—</td><td class="best">503</td><td class="dim">—</td><td class="dim">—</td><td class="">541</td><td class="dim">—</td><td class="aliref">~460</td></tr><tr><td>Camera Module 3 (V2 perimeter)</td><td class="dim">—</td><td class="dim">—</td><td class="">476</td><td class="dim">—</td><td class="dim">—</td><td class="best">386</td><td class="dim">—</td><td class="aliref">~360</td></tr><tr><td>Pi 5 2GB — V2 mózg</td><td class="best">779</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="">851 ❌OOS</td><td class="dim">—</td><td class="aliref">~700</td></tr><tr><td>Kabel CSI 22→15</td><td class="dim">—</td><td class="best">17</td><td class="">40 ¹</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~12</td></tr><tr><td>Serwo DS3218MG 270° — pan-scan</td><td class="dim">—</td><td class="dim">—</td><td class="best">244 ¹</td><td class="dim">—</td><td class="">247</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~65</td></tr><tr><td>…albo MG996R (180°) — taniej</td><td class="dim">—</td><td class="dim">—</td><td class="best">57</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~65</td></tr><tr><td>microSD 64 GB — klipy/system</td><td class="dim">—</td><td class="dim">—</td><td class="">115</td><td class="dim">—</td><td class="best">23</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~70</td></tr><tr><td>Powerbank 10 Ah — zasilanie</td><td class="dim">—</td><td class="dim">—</td><td class="best">270</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~180</td></tr><tr><td>GY-521 MPU6050 — antykradzież</td><td class="dim">—</td><td class="best">44</td><td class="">90</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~18</td></tr><tr><td>DS18B20 — temp. baterii/zima</td><td class="dim">—</td><td class="best">24</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~12</td></tr><tr><td>AS5600 — pozycja serwa</td><td class="dim">—</td><td class="best">40</td><td class="">49 ¹</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~16</td></tr><tr><td>PIR AM312 — wybudzanie</td><td class="dim">—</td><td class="">17</td><td class="best">11 ¹</td><td class="dim">—</td><td class="">231</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~6</td></tr><tr><td>Superseal IP67 — złącza</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="best">135</td><td class="aliref">~50</td></tr><tr><td>Heltec LoRa (plan B: biuro)</td><td class="dim">—</td><td class="">224/355</td><td class="best">309</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~160</td></tr><tr><td>Waveshare Core1262 (plan B: moto)</td><td class="dim">—</td><td class="dim">—</td><td class="best">187</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~130</td></tr><tr><td>Mini560 5V/5A — V2 + UBEC</td><td class="dim">—</td><td class="">79 SCT²</td><td class="best">41</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~10</td></tr><tr class="grp"><td colspan="9">📷 Solar Cam</td></tr><tr><td>DFRobot S3 AI Camera — oko+mic+IR</td><td class="">254</td><td class="dim">—</td><td class="best">229 Freenove</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">78</td></tr><tr><td>OV5640 5MP — kamera do S3</td><td class="dim">—</td><td class="">283</td><td class="best">168</td><td class="dim">—</td><td class="">569 ³</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">58</td></tr><tr><td>18650 3500 mAh — magazyn energii</td><td class="best">67</td><td class="">130</td><td class="">179</td><td class="dim">—</td><td class="">3–130 ³</td><td class="dim">—</td><td class="">~40 NKON</td><td class="aliref">75</td></tr><tr><td>CN3791 MPPT — ładowanie z panelu</td><td class="">141</td><td class="best">40</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">32</td></tr><tr><td>Panel solarny 6V/5W</td><td class="">130</td><td class="best">107</td><td class="">133</td><td class="dim">—</td><td class="">39–491 ³</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">57–171</td></tr><tr><td>Mini560 3.3V — zasilanie ESP32</td><td class="">25 Pololu⁴</td><td class="best">14 MP1584</td><td class="">24 ¹</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">10</td></tr><tr><td>MOSFET — odcinanie zasilania</td><td class="">44 ❌OOS</td><td class="best">2</td><td class="dim">—</td><td class="">~1</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">~3</td></tr><tr><td>microSD SPI moduł</td><td class="dim">—</td><td class="best">11</td><td class="">67</td><td class="dim">—</td><td class="">23</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">16</td></tr><tr><td>IR LED 850nm — nocne światło</td><td class="dim">—</td><td class="">89 ❌OOS</td><td class="dim">—</td><td class="dim">—</td><td class="">8–52</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">20–40</td></tr><tr><td>PT4115 — driver IR LED</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="">~5</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">5</td></tr><tr><td>IR-cut mechaniczny — dzień/noc</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="best">49</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">25–35</td></tr><tr><td>LDR GL5528 — czujnik dnia</td><td class="">4</td><td class="best">2</td><td class="dim">—</td><td class="dim">—</td><td class="">8–16</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">2</td></tr><tr><td>Kondensatory 1000µF</td><td class="">~3</td><td class="best">6</td><td class="dim">—</td><td class="">5–8</td><td class="">5–8 ³</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">14</td></tr><tr><td>INMP441 — mikrofon</td><td class="dim">—</td><td class="best">44</td><td class="">70</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">21</td></tr><tr><td>MAX98357A — wzmacniacz</td><td class="dim">—</td><td class="best">44</td><td class="">59</td><td class="dim">—</td><td class="">65–91</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">26</td></tr><tr class="grp"><td colspan="9">🚗 4G RC Car</td></tr><tr><td>Pi 4 2GB — mózg pojazdu</td><td class="dim">—</td><td class="dim">—</td><td class="">889</td><td class="best">531</td><td class="dim">—</td><td class="">773</td><td class="dim">—</td><td class="aliref">890</td></tr><tr><td>SIM7600G-H HAT — internet 4G</td><td class="best">790</td><td class="dim">—</td><td class="">1443</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">987</td></tr><tr><td>IMX219 — kamera pojazdu</td><td class="dim">—</td><td class="dim">—</td><td class="">264</td><td class="best">142</td><td class="">96+ ³</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">95</td></tr><tr><td>Silnik RS-540 — napęd</td><td class="dim">—</td><td class="dim">—</td><td class="best">133</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">43</td></tr><tr><td>ESC QuicRun 1060 — sterownik</td><td class="dim">—</td><td class="dim">—</td><td class="best">142</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">252</td></tr><tr><td>LiPo 3S — bateria</td><td class="dim">—</td><td class="">269 3S1P</td><td class="">354</td><td class="dim">—</td><td class="best">240</td><td class="dim">—</td><td class="dim">—</td><td class="aliref">207</td></tr>
+</tbody></table>
+<div style="background:#111622;border:1px solid #23354f;border-radius:10px;padding:12px 16px;margin-top:12px;">
+<p>🧮 <b>Konsolidacja pod Twoją zasadę „mniej sklepów”:</b></p>
+<p>📡 <b>Lapp-Lisa:</b> najtaniej w 3–4 źródłach ≈ <b>1 730 kr</b> · 2 źródła (BerryBase+amazon) ≈ 1 860 kr → <b>dopłata ~130 kr</b> za jedną paczkę mniej. Superseal i tak weźmiesz w Biltemie przy okazji.</p>
+<p>📷 <b>Solar Cam:</b> najtaniej (LaskaKit+BerryBase+TME/Botland) ≈ <b>810 kr</b> · 2 źródła (BerryBase+amazon) ≈ 880 kr (+70–90 kr), ALE bez IR-cut i PT4115 — te są tylko w Botland/TME.</p>
+<p>🚗 <b>RC Car:</b> najtaniej (TME+BerryBase+amazon+Botland) ≈ <b>2 260 kr</b> · 2 źródła (BerryBase+amazon) ≈ 2 610 kr → <b>dopłata ~350 kr</b> — Pi 4 na amazonie 889 vs 531 w TME robi różnicę, tu opłaca się trzecia paczka.</p>
+<p>💡 <b>Werdykt:</b> realny kompromis to <b>3 paczki</b> — BerryBase (wszystko co mają) + amazon (reszta) + LaskaKit (drobnica CZ). Dopłata ~200–250 kr vs optymalnych 5 źródeł, a paczek o 2 mniej.</p>
+</div>
+</div>
+</div>
 <h2>💰 Ile kosztuje każdy projekt (core, bez opcji i fraktów)</h2>
 <div class="card">
 <table>
@@ -198,7 +228,18 @@ function apply(f){
   });
   document.getElementById('ftotal').textContent=(f==='all')?'':'📌 Widoczne pozycje: '+n+' · suma ≈ '+sum+' kr (bez fraktów, ceny zaokrąglone)';
 }
-document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+function setView(v){
+  const lv=document.getElementById('listview'), mv=document.getElementById('matrixview');
+  lv.style.display=(v==='list')?'':'none';
+  mv.style.display=(v==='matrix')?'':'none';
+  document.getElementById('fbar').style.display=(v==='list')?'flex':'none';
+  document.getElementById('ftotal').style.display=(v==='list')?'block':'none';
+  document.getElementById('v-list').classList.toggle('active',v==='list');
+  document.getElementById('v-matrix').classList.toggle('active',v==='matrix');
+}
+document.getElementById('v-list').addEventListener('click',()=>setView('list'));
+document.getElementById('v-matrix').addEventListener('click',()=>setView('matrix'));
+document.querySelectorAll('.fbtn[data-f]').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');apply(b.dataset.f);
 }));

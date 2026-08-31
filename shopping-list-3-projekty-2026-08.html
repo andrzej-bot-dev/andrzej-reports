@@ -221,9 +221,10 @@
 <script>
 const cbs=[...document.querySelectorAll('input[type=checkbox]')];
 cbs.forEach((cb,i)=>{
+  const tr=cb.closest('tr');
   cb.checked=localStorage.getItem('sl'+i)==='1';
-  cb.closest('tr').classList.toggle('done',cb.checked);
-  cb.addEventListener('change',()=>{localStorage.setItem('sl'+i,cb.checked?'1':'0');cb.closest('tr').classList.toggle('done',cb.checked)});
+  if(tr)tr.classList.toggle('done',cb.checked);
+  cb.addEventListener('change',()=>{localStorage.setItem('sl'+i,cb.checked?'1':'0');if(tr)tr.classList.toggle('done',cb.checked)});
 });
 const rows=[...document.querySelectorAll('table tr')].filter(r=>r.querySelector('input[type=checkbox]'));
 const tots=[...document.querySelectorAll('tr.tot')];
@@ -299,6 +300,7 @@ document.getElementById('kopc').addEventListener('change',e=>{konsOpc=e.target.c
 kRender();
 document.getElementById('v-list').addEventListener('click',()=>setView('list'));
 document.getElementById('v-matrix').addEventListener('click',()=>setView('matrix'));
+document.getElementById('v-kons').addEventListener('click',()=>setView('kons'));
 document.querySelectorAll('.fbtn[data-f]').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');apply(b.dataset.f);

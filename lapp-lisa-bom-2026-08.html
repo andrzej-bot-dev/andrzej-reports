@@ -50,22 +50,22 @@
   <div class="sub">Wykrywacz lapp-lis przy motocyklu • raspberrypi.dk vs amazon.se • sprawdzono live: 31.08.2026, 11:35–11:55 CEST</div>
 
   <div class="stats">
-    <div class="stat"><div class="n">~1 500 kr</div><div class="l">MVP (faza testowa) — 19 pozycji</div></div>
+    <div class="stat"><div class="n">~1 950 kr</div><div class="l">MVP — 19 pozycji (Zero z amazon)</div></div>
     <div class="stat"><div class="n">~1 180 kr</div><div class="l">Nice-to-have / Plan B</div></div>
     <div class="stat"><div class="n">~1 640 kr</div><div class="l">V2 produkcyjna (bez baterii i Androida)</div></div>
     <div class="stat"><div class="n">~4 300 kr</div><div class="l">Wszystko razem (SEK)</div></div>
   </div>
   <div class="note">💱 Kurs roboczy: <b>1 DKK ≈ 1,55 SEK</b>. Ceny amazon.se z wyników wyszukiwania (mogą się minimalnie różnić na stronie produktu). Ceny raspberrypi.dk z oficjalnego WooCommerce Store API.</div>
 
-  <h2>🛒 MVP — faza testowa <span class="sec-price">≈ 1 500 SEK</span></h2>
+  <h2>🛒 MVP — faza testowa <span class="sec-price">≈ 1 950 SEK (Zero z amazon) • ≈ 1 250 SEK (czekając na restock rpdk)</span></h2>
   <table>
     <tr><th class="hide-m"></th><th>Część</th><th>Najlepsza oferta</th><th>Alternatywa</th><th>Status</th></tr>
     <tr>
       <td class="hide-m"><img class="thumb" loading="lazy" src="https://raspberrypi.dk/wp-content/uploads/2021/10/Raspberry-Pi-Zero-2-W.jpg" alt=""></td>
       <td><div class="nm">Raspberry Pi Zero 2 W</div><div class="sm">Mózg detektora; WiFi do syncu klipów</div></td>
-      <td><span class="shop sh-rpdk">raspberrypi.dk</span><br><span class="price dkk">159 DKK <small>≈ 246 SEK</small></span><br><a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-2-wireless/">produkt →</a></td>
-      <td class="sm">Zero 2 WH (header) 169 DKK.<br>Amazon: brak solo boardu (tylko kity/obudowy) → rpdk wygrywa</td>
-      <td><span class="badge b-warn">⚠️ stock niewidoczny w API</span></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">699 SEK</span><br><a href="https://www.amazon.se/dp/B09KLVX4RT">produkt →</a><br><small style="color:var(--warn)">⚠️ „Endast 2 kvar i lager” (31.08)</small></td>
+      <td class="sm"><b style="color:var(--bad)">raspberrypi.dk: 159 DKK — OUT OF STOCK ❌</b><br>electrokit.se: 239 SEK — „Bevaka” = brak ❌<br>kjell.com / m.nu: brak w ofercie ❌<br>💡 <b>Czekaj na restock rpdk</b> (2,8× taniej) albo weź amazonowe 2 sztuki póki są</td>
+      <td><span class="badge b-warn">⚠️ jedyna dostępna: amazon (drogo)</span></td>
     </tr>
     <tr>
       <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/61Gg0KocD3L._AC_UL320_.jpg" alt=""></td>
@@ -209,8 +209,8 @@
   <div class="verdict">
     <h3>🏁 Werdykt — co kupować gdzie</h3>
     <ul>
-      <li><b>raspberrypi.dk</b> — boardy i kamery (Zero 2 W 159 DKK, Pi 5 2GB 549 DKK, kamery 249–349 DKK). Dostawa DK→SE zwykle 2–4 dni. ⚠️ API nie zawsze pokazuje stock — potwierdź w koszyku.</li>
-      <li><b>amazon.se</b> — kabel 22-pin, microSD, powerbank, serwo, PIR, MPU6050, Mini560, AS5600, LoRa. Prime/fast shipping.</li>
+      <li><b>raspberrypi.dk</b> — kamery (249–349 DKK) i Pi 5 2GB (549 DKK). ⚠️ Pi Zero 2 W jest u nich OUT OF STOCK (potwierdzone 31.08). Dostawa DK→SE zwykle 2–4 dni. API nie zawsze pokazuje stock — potwierdź w koszyku.</li>
+      <li><b>amazon.se</b> — kabel 22-pin, microSD, powerbank, serwo, PIR, MPU6050, Mini560, AS5600, LoRa + <b>jedyny dostępny Pi Zero 2 W (699 SEK, „2 kvar”)</b>. Prime/fast shipping.</li>
       <li><b>AliExpress</b> — jak nie spieszy się: serwo (~60 zamiast 280 kr), PIR, MPU6050, AS5600, DS18B20, fisheye USB, LiFePO4. Łącznie można zbić <b>~800–1 000 kr</b> z rachunku za cenę 2–3 tygodni czekania.</li>
       <li><b>Kolejność zakupów pod start MVP</b> (żeby test ruszył najszybciej): raspeberrypi.dk (Zero + kamera Wide) + amazon.se (kabel + SD + powerbank + serwo) — reszta to nice-to-have.</li>
     </ul>
@@ -219,7 +219,7 @@
   <div class="note win">💡 <b>Rachunek ekonomiczny:</b> parking ≈ 80 kr/dzień ≈ 1 680 kr/mies. MVP (~1 500 kr) zwraca się w <b>&lt;1 miesiąca</b>, a V2 z auto-biletem eliminuje stres całkowicie.</div>
 
   <div class="footer">
-    <b>Metodologia:</b> raspberrypi.dk — oficjalne WooCommerce Store API (<code>wp-json/wc/store/v1/products</code>, ceny i permalinki z JSON; stock częściowo niewidoczny). amazon.se — parsowanie HTML wyników wyszukiwania (bloki <code>data-asin</code>, ceny z <code>a-offscreen</code>); po ~25 zapytaniach Amazon zaczął zwracać captcha → DS18B20 i 2 zapytania oznaczone jako niesprawdzone. Wyniki surowe: <code>lapp-lisa/bom-results.json</code> w workspace. Wygenerowano 31.08.2026 przez Andrzeja 🤖
+    <b>Metodologia:</b> raspberrypi.dk — oficjalne WooCommerce Store API (<code>wp-json/wc/store/v1/products</code>, ceny i permalinki z JSON; stock częściowo niewidoczny). amazon.se — parsowanie HTML wyników wyszukiwania + weryfikacja strony produktu (bloki <code>data-asin</code>, ceny z <code>a-offscreen</code>); po ~25 zapytaniach Amazon zaczął zwracać captcha → DS18B20 i 2 zapytania oznaczone jako niesprawdzone. Pi Zero 2 W availability: dodatkowo sprawdzone przez przeglądarkę kjell.com (0 wyników), m.nu (0 wyników), electrokit.se (na liście 239 SEK, ale „Bevaka” = brak na stanie). Wyniki surowe: <code>lapp-lisa/bom-results.json</code> w workspace. Wygenerowano 31.08.2026 przez Andrzeja 🤖
   </div>
 </div>
 </body>

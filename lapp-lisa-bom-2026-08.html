@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapp-Lisa Detector — BOM &amp; dostępność (raspberrypi.dk vs amazon.se)</title>
+<style>
+  :root{--bg:#0f1117;--card:#171a23;--card2:#1d2130;--txt:#e2e6f0;--mut:#8b93a7;--acc:#4f9cf9;--ok:#3fbf6f;--warn:#e8b23a;--bad:#e05555;--dkk:#f2a33c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:32px 16px 60px}
+  .wrap{max-width:1060px;margin:0 auto}
+  h1{font-size:26px;margin-bottom:6px}
+  h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid #2a3040}
+  h2 .sec-price{float:right;font-size:15px;color:var(--ok);font-weight:600}
+  .sub{color:var(--mut);margin-bottom:20px}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 8px}
+  .stat{background:var(--card);border:1px solid #262c3b;border-radius:12px;padding:14px 18px;flex:1;min-width:200px}
+  .stat .n{font-size:22px;font-weight:700}
+  .stat .l{color:var(--mut);font-size:13px;margin-top:2px}
+  table{width:100%;border-collapse:collapse;margin:10px 0 6px}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:8px 10px;border-bottom:1px solid #2a3040}
+  td{padding:10px;border-bottom:1px solid #222836;vertical-align:top}
+  tr:hover td{background:#191d29}
+  .thumb{width:64px;height:48px;object-fit:contain;border-radius:6px;background:#fff;padding:2px}
+  .nm{font-weight:600}
+  .sm{font-size:13px;color:var(--mut)}
+  .shop{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.03em}
+  .sh-rpdk{background:#3a2c12;color:var(--dkk)}
+  .sh-amzn{background:#123047;color:#6ec1ff}
+  .sh-ali{background:#2c123a;color:#d59bff}
+  .sh-irl{background:#1c3324;color:#7fdca3}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .b-ok{background:#123322;color:var(--ok)} .b-warn{background:#3a2f12;color:var(--warn)} .b-bad{background:#3a1616;color:var(--bad)}
+  .price{font-weight:700;white-space:nowrap}
+  .price small{color:var(--mut);font-weight:400}
+  .dkk{color:var(--dkk)}
+  a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+  .note{background:var(--card2);border-left:3px solid var(--acc);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:#c6cddf}
+  .note.warn{border-color:var(--warn)} .note.win{border-color:var(--ok)}
+  .verdict{background:linear-gradient(135deg,#16202e,#1a2436);border:1px solid #2c3a52;border-radius:14px;padding:20px 24px;margin-top:26px}
+  .verdict h3{margin-bottom:10px;font-size:17px}
+  .verdict ul{margin-left:18px} .verdict li{margin:6px 0}
+  .footer{margin-top:40px;color:var(--mut);font-size:13px;border-top:1px solid #262c3b;padding-top:16px}
+  @media(max-width:640px){.hide-m{display:none}td,th{padding:7px 6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🦺 Lapp-Lisa Detector — BOM &amp; dostępność części</h1>
+  <div class="sub">Wykrywacz lapp-lis przy motocyklu • raspberrypi.dk vs amazon.se • sprawdzono live: 31.08.2026, 11:35–11:55 CEST</div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">~1 500 kr</div><div class="l">MVP (faza testowa) — 19 pozycji</div></div>
+    <div class="stat"><div class="n">~1 180 kr</div><div class="l">Nice-to-have / Plan B</div></div>
+    <div class="stat"><div class="n">~1 640 kr</div><div class="l">V2 produkcyjna (bez baterii i Androida)</div></div>
+    <div class="stat"><div class="n">~4 300 kr</div><div class="l">Wszystko razem (SEK)</div></div>
+  </div>
+  <div class="note">💱 Kurs roboczy: <b>1 DKK ≈ 1,55 SEK</b>. Ceny amazon.se z wyników wyszukiwania (mogą się minimalnie różnić na stronie produktu). Ceny raspberrypi.dk z oficjalnego WooCommerce Store API.</div>
+
+  <h2>🛒 MVP — faza testowa <span class="sec-price">≈ 1 500 SEK</span></h2>
+  <table>
+    <tr><th class="hide-m"></th><th>Część</th><th>Najlepsza oferta</th><th>Alternatywa</th><th>Status</th></tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://raspberrypi.dk/wp-content/uploads/2021/10/Raspberry-Pi-Zero-2-W.jpg" alt=""></td>
+      <td><div class="nm">Raspberry Pi Zero 2 W</div><div class="sm">Mózg detektora; WiFi do syncu klipów</div></td>
+      <td><span class="shop sh-rpdk">raspberrypi.dk</span><br><span class="price dkk">159 DKK <small>≈ 246 SEK</small></span><br><a href="https://raspberrypi.dk/produkt/raspberry-pi-zero-2-wireless/">produkt →</a></td>
+      <td class="sm">Zero 2 WH (header) 169 DKK.<br>Amazon: brak solo boardu (tylko kity/obudowy) → rpdk wygrywa</td>
+      <td><span class="badge b-warn">⚠️ stock niewidoczny w API</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/61Gg0KocD3L._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Pi Camera Module 3 Wide</div><div class="sm">11,9 MP, 120° FOV, autofocus</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">503 SEK</span><br><a href="https://www.amazon.se/dp/B0BRY757NX">produkt →</a></td>
+      <td class="sm">rpdk: 349 DKK ≈ 541 SEK<br><a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3-wide/">→</a> (in_stock)</td>
+      <td><span class="badge b-ok">✅ dostępna oba sklepy</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/61Epmnl5IzL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Kabel CSI 22→15 pin</div><div class="sm">Zero ↔ Camera Module 3 — NIE standardowy!</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">79 SEK</span><br><a href="https://www.amazon.se/dp/B07MW7V3Y7">produkt →</a></td>
+      <td class="sm">GeeekPi, 2 szt w zestawie (16+30 cm)<br>rpdk: brak w ofercie</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/51ECdl+WZ2L._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Serwo DS3218MG 270°</div><div class="sm">Pan-scan 360° (270° × FOV 120° = 390° pokrycia)</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">487 SEK <small>2-pack ≈ 244/szt</small></span><br><a href="https://www.amazon.se/dp/B085PVVZNQ">produkt →</a></td>
+      <td class="sm">Solo: Keenso 280 / Changor 293.<br>🏆 AliExpress ~50–80 kr/szt (czekaj 2–3 tyg → oszczędzasz ~350 kr). Druga sztuka = zapas na zimę</td>
+      <td><span class="badge b-ok">✅ 5 ofert</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/61GZUJiEwlL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">microSD 64 GB</div><div class="sm">Klipy eventowe + system</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">115 SEK</span><br><a href="https://www.amazon.se/dp/B0BX9BH17W">produkt →</a></td>
+      <td class="sm">Lexar 633x A1 U3 V30. SanDisk Ultra 219 SEK. rpdk: nie sprzedają</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/71G6UCWbKIL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Powerbank 10 000 mAh</div><div class="sm">9h × 2 W = 18 Wh → zapas ×2</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">270 SEK</span><br><a href="https://www.amazon.se/dp/B0DC93Z911">produkt →</a></td>
+      <td class="sm">INIU 45 W superslim (flygsäker, 150 g — na kierownicę OK). JUOVI 20 000 mAh 370 SEK jeśli chcesz zapas ×4</td>
+      <td><span class="badge b-warn">⚠️ przetestuj low-current przy odbiorze</span></td>
+    </tr>
+  </table>
+  <div class="note warn">⚠️ <b>Powerbank — kluczowy test przy odbiorze:</b> podłącz Pi Zero 2 W (pobór ~100–200 mA) — jeśli powerbank uśnie po 30–60 s, zwróć i weź model z "always on". Alternatywa awaryjna: pack 2× 18650 + Mini560 (poz. V2).</div>
+
+  <h2>🎁 Nice-to-have / Plan B <span class="sec-price">≈ 1 180 SEK</span></h2>
+  <table>
+    <tr><th class="hide-m"></th><th>Część</th><th>Najlepsza oferta</th><th>Uwagi</th><th>Status</th></tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/71EwYMDjxnL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">PIR AM312 ×10</div><div class="sm">Wybudzanie zamiast ciągłego skanu (oszczędność baterii)</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">109 SEK <small>10-pack</small></span><br><a href="https://www.amazon.se/dp/B0B7DLXNWC">produkt →</a></td>
+      <td class="sm">10 sztuk zapas na kolejne 3 projekty 😄</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/71SmFSsVuzL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">MPU6050 (GY-521)</div><div class="sm">Alert „moto ruszone" — anty-kradzież</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">90 SEK</span><br><a href="https://www.amazon.se/dp/B07DJ4KMBF">produkt →</a></td>
+      <td class="sm">DollaTek GY-521</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/713cPtPBXBL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">USB kamera szeroka (plan B pola widzenia)</div><div class="sm">Stała druga kamera łata martwe strefy</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">192 SEK</span><br><a href="https://www.amazon.se/dp/B0CNCSFQC1">produkt →</a></td>
+      <td class="sm">InnoMaker 130° UVC, plug&amp;play na Linux. Pełny fisheye 180°: Fafeicy 494 SEK; oryg. ELP 1 982 SEK — przepłacone. 🏆 Ali: fisheye USB ~100–150 SEK</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/71Co1Uhw9XL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Druga microSD 64 GB</div><div class="sm">Gotowy backup obrazu (wymiana w 30 s na parkingu)</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">115 SEK</span><br><a href="https://www.amazon.se/dp/B0BX9BH17W">produkt →</a></td>
+      <td class="sm">Ta sama Lexar co w MVP</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m">🔩</td>
+      <td><div class="nm">Złącza Superseal IP67</div><div class="sm">Połączenia wystające z obudowy</div></td>
+      <td><span class="shop sh-irl">Biltema Bredden</span><br><span class="price">~70 SEK</span></td>
+      <td class="sm">Stift/Hylskontakthus 1–4 pin (art 43-000…43-009) + piny 50 szt 65 kr. Offline — jedyny stacjonarny w Sthlm</td>
+      <td><span class="badge b-ok">✅ na miejscu</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m">🌡️</td>
+      <td><div class="nm">DS18B20</div><div class="sm">Log temperatury (zima nadchodzi)</div></td>
+      <td><span class="badge b-bad">❌ niesprawdzone</span></td>
+      <td class="sm">Amazon zwrócił captcha w trakcie weryfikacji. Szac. 20–50 SEK — dowolny sklep / Ali</td>
+      <td><span class="badge b-warn">⚠️ do weryfikacji</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m">📡</td>
+      <td><div class="nm">LoRa plan B (łączność bez LTE)</div><div class="sm">Moto → biuro, tekst-only (alert + ACK)</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">496 SEK <small>2 moduły</small></span><br><a href="https://www.amazon.se/dp/B09LV2W64R">moto: Core1262 187 SEK →</a> · <a href="https://www.amazon.se/dp/B0GQSRZCTR">biuro: ESP32 LoRa V3 309 SEK →</a></td>
+      <td class="sm">Do biura bierz <b>ESP32 LoRa V3 z OLED</b> (gotowy dev board z ekranem i anteną) — nie goły moduł</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+  </table>
+
+  <h2>🚀 V2 — produkcyjna z auto-biletem <span class="sec-price">≈ 1 640 SEK bez baterii</span></h2>
+  <table>
+    <tr><th class="hide-m"></th><th>Część</th><th>Najlepsza oferta</th><th>Uwagi</th><th>Status</th></tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://raspberrypi.dk/wp-content/uploads/2023/09/PI_5_HERO.png" alt=""></td>
+      <td><div class="nm">Raspberry Pi 5 — 2 GB</div><div class="sm">ANPR + ADB orchestration + 2× CSI</div></td>
+      <td><span class="shop sh-rpdk">raspberrypi.dk</span><br><span class="price dkk">549 DKK <small>≈ 851 SEK</small></span><br><a href="https://raspberrypi.dk/produkt/raspberry-pi-5-2gb/">produkt →</a></td>
+      <td class="sm">Amazon: tylko kity (db-tronic 2 GB kit 1 600 SEK — drogo) → rpdk wygrywa. Pi 5 1 GB: 399 DKK in_stock</td>
+      <td><span class="badge b-warn">⚠️ stock weryfikuj w koszyku</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://raspberrypi.dk/wp-content/uploads/2023/01/STANDARD_TOP.jpg" alt=""></td>
+      <td><div class="nm">Druga kamera CSI (perimeter)</div><div class="sm">Stała watch-cam; serwówka robi close-up</div></td>
+      <td><span class="shop sh-rpdk">raspberrypi.dk</span><br><span class="price dkk">249 DKK <small>≈ 386 SEK</small></span><br><a href="https://raspberrypi.dk/produkt/raspberry-pi-camera-module-3/">produkt →</a></td>
+      <td class="sm">Amazon: 476 SEK → rpdk wygrywa. NoIR wariant też 249 DKK (lepsza po zmroku z doświetleniem IR)</td>
+      <td><span class="badge b-ok">✅ in_stock (API)</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m">🔋</td>
+      <td><div class="nm">Bateria 12 V na 9h+ (top-case)</div><div class="sm">V2 pobiera 8–10 W → potrzebne ~90–100 Wh</div></td>
+      <td><span class="badge b-bad">❌ amazon.se brak sensownych</span></td>
+      <td class="sm">LiFePO4 12 V 7 Ah: tylko monstra 50–640 Ah (2 000+ SEK). Rekomendacja: pack 6× 18650 3S2P (~40 kr/szt) + BMS + Mini560 (poniżej) — jak w solar cam, albo Ali</td>
+      <td><span class="badge b-warn">⚠️ decyzja: pack vs Ali</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/71tBc6c1eWL._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">Mini560 buck 5 V/5 A</div><div class="sm">12 V → 5 V dla Pi</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">122 SEK <small>3-pack</small></span><br><a href="https://www.amazon.se/dp/B0D9TQSKPL">produkt →</a></td>
+      <td class="sm">Dokładnie ten sam moduł co w projekcie solar cam — znasz go</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m"><img class="thumb" loading="lazy" src="https://m.media-amazon.com/images/I/51XGhhZVUML._AC_UL320_.jpg" alt=""></td>
+      <td><div class="nm">AS5600 enkoder magnetyczny</div><div class="sm">Precyzyjna pozycja serwa (gdy DS3218 gubi kroki)</div></td>
+      <td><span class="shop sh-amzn">amazon.se</span><br><span class="price">98 SEK <small>2-pack</small></span><br><a href="https://www.amazon.se/dp/B0BGPF3WT3">produkt →</a></td>
+      <td class="sm">DollaTek, 12-bit, I2C</td>
+      <td><span class="badge b-ok">✅</span></td>
+    </tr>
+    <tr>
+      <td class="hide-m">📱</td>
+      <td><div class="nm">Android (ADB + LTE tethering)</div><div class="sm">Kupno biletu w appce + internet dla Pi + push live</div></td>
+      <td><span class="price">0 SEK</span></td>
+      <td class="sm">Twój stary telefon + prepaid SIM (~35 kr/mies, Comviq/Vimla/Halebop). Parking 80 kr/dzień → SIM zwraca się pierwszego dnia wykrycia lapp-lisy</td>
+      <td><span class="badge b-ok">✅ masz</span></td>
+    </tr>
+  </table>
+
+  <div class="verdict">
+    <h3>🏁 Werdykt — co kupować gdzie</h3>
+    <ul>
+      <li><b>raspberrypi.dk</b> — boardy i kamery (Zero 2 W 159 DKK, Pi 5 2GB 549 DKK, kamery 249–349 DKK). Dostawa DK→SE zwykle 2–4 dni. ⚠️ API nie zawsze pokazuje stock — potwierdź w koszyku.</li>
+      <li><b>amazon.se</b> — kabel 22-pin, microSD, powerbank, serwo, PIR, MPU6050, Mini560, AS5600, LoRa. Prime/fast shipping.</li>
+      <li><b>AliExpress</b> — jak nie spieszy się: serwo (~60 zamiast 280 kr), PIR, MPU6050, AS5600, DS18B20, fisheye USB, LiFePO4. Łącznie można zbić <b>~800–1 000 kr</b> z rachunku za cenę 2–3 tygodni czekania.</li>
+      <li><b>Kolejność zakupów pod start MVP</b> (żeby test ruszył najszybciej): raspeberrypi.dk (Zero + kamera Wide) + amazon.se (kabel + SD + powerbank + serwo) — reszta to nice-to-have.</li>
+    </ul>
+  </div>
+
+  <div class="note win">💡 <b>Rachunek ekonomiczny:</b> parking ≈ 80 kr/dzień ≈ 1 680 kr/mies. MVP (~1 500 kr) zwraca się w <b>&lt;1 miesiąca</b>, a V2 z auto-biletem eliminuje stres całkowicie.</div>
+
+  <div class="footer">
+    <b>Metodologia:</b> raspberrypi.dk — oficjalne WooCommerce Store API (<code>wp-json/wc/store/v1/products</code>, ceny i permalinki z JSON; stock częściowo niewidoczny). amazon.se — parsowanie HTML wyników wyszukiwania (bloki <code>data-asin</code>, ceny z <code>a-offscreen</code>); po ~25 zapytaniach Amazon zaczął zwracać captcha → DS18B20 i 2 zapytania oznaczone jako niesprawdzone. Wyniki surowe: <code>lapp-lisa/bom-results.json</code> w workspace. Wygenerowano 31.08.2026 przez Andrzeja 🤖
+  </div>
+</div>
+</body>
+</html>

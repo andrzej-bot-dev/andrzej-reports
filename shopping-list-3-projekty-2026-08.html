@@ -228,7 +228,7 @@ cbs.forEach((cb,i)=>{
 });
 const rows=[...document.querySelectorAll('table tr')].filter(r=>r.querySelector('input[type=checkbox]'));
 const tots=[...document.querySelectorAll('tr.tot')];
-function sek(r){const m=r.textContent.replace(/\u00a0/g,' ').match(/([\d ][\d ]*)\s*kr/);return m?parseInt(m[1].replace(/[^\d]/g,'')):0;}
+function sek(r){const t=r.textContent.replace(/\u00a0/g,' ');const m=t.match(/\u2248\s*([\d ]+)\s*kr/)||t.match(/(?:^|\s)([\d][\d ]*?)\s*kr/);if(!m)return 0;const v=parseInt(m[1].replace(/[^\d]/g,''),10);return isNaN(v)?0:v;}
 function apply(f){
   let sum=0,n=0;
   rows.forEach(r=>{

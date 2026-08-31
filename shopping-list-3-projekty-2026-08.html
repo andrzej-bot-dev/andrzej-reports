@@ -59,6 +59,7 @@
 <div class="fbar" id="viewbar">
 <button class="fbtn active" id="v-list" data-v="list">🛒 Lista zakupów</button>
 <button class="fbtn" id="v-matrix" data-v="matrix">📊 Matryca: sklepy × produkty</button>
+<button class="fbtn" id="v-kons" data-v="kons">🧮 Konsolidator</button>
 </div>
 <div id="ftotal"></div>
 
@@ -184,6 +185,23 @@
 </div>
 </div>
 </div>
+
+
+<div id="konsview" style="display:none">
+<h2>🧮 Konsolidator — kup wszystko do projektu w jak najmniej sklepów</h2>
+<div class="card">
+<div class="fbar" style="margin:0 0 10px">
+<button class="fbtn active" data-kp="lisa">📡 Lapp-Lisa</button>
+<button class="fbtn" data-kp="solar">📷 Solar Cam</button>
+<button class="fbtn" data-kp="rc">🚗 RC Car</button>
+<button class="fbtn" data-kp="all">📦 Wszystkie</button>
+<label style="align-self:center;margin-left:auto;color:#8b93a7;font-size:13px"><input type="checkbox" id="kopc"> licz opcje V2 / plan B</label>
+</div>
+<div id="konsout"></div>
+<p class="tag" style="margin-top:10px">Wybrany zestaw sklepów = każda część z tego sklepu (nawet jak 5 kr drożej) · suma bez fraktów · LaskaKit frakt 101 kr · Botland od ~110 kr · BerryBase 0 przy ≥200 € · Botland*/TME = dane 26–27.08, potwierdź w koszyku · „Inne/Biltema” = stacjonarnie.</p>
+</div>
+</div>
+
 <h2>💰 Ile kosztuje każdy projekt (core, bez opcji i fraktów)</h2>
 <div class="card">
 <table>
@@ -236,7 +254,49 @@ function setView(v){
   document.getElementById('ftotal').style.display=(v==='list')?'block':'none';
   document.getElementById('v-list').classList.toggle('active',v==='list');
   document.getElementById('v-matrix').classList.toggle('active',v==='matrix');
+  document.getElementById('v-kons').classList.toggle('active',v==='kons');
+  document.getElementById('konsview').style.display=(v==='kons')?'':'none';
 }
+const KSHOPS={BB:['🇩🇪 BerryBase',0],LK:['🇨🇿 LaskaKit',101],AM:['🇸🇪 amazon.se',0],TME:['TME',null],BL:['Botland*',110]};
+const KITEMS=[{"n": "Pi Zero 2 W", "g": "lisa", "pr": {"BB": 214, "AM": 699}}, {"n": "Camera Module 3 Wide", "g": "lisa", "pr": {"AM": 503}}, {"n": "Kabel CSI 22→15", "g": "lisa", "pr": {"LK": 17, "AM": 40}}, {"n": "Serwo pan-scan (DS3218/MG996R)", "g": "lisa", "pr": {"AM": 57, "BL": 247}}, {"n": "microSD 64 GB", "g": "lisa", "pr": {"AM": 115, "BL": 23}}, {"n": "Powerbank 10 Ah", "g": "lisa", "pr": {"AM": 270}}, {"n": "GY-521 MPU6050", "g": "lisa", "pr": {"LK": 44, "AM": 90}}, {"n": "DS18B20 wodny", "g": "lisa", "pr": {"LK": 24}}, {"n": "AS5600", "g": "lisa", "pr": {"LK": 40, "AM": 49}}, {"n": "PIR AM312", "g": "lisa", "pr": {"LK": 17, "AM": 11, "BL": 231}}, {"n": "Mini560 5V/5A (V2/UBEC)", "g": "lisa", "pr": {"LK": 79, "AM": 41}}, {"n": "Superseal IP67", "g": "lisa", "pr": {"INNE": 135}, "fixed": 1}, {"n": "Pi 5 2GB", "g": "lisa", "opc": 1, "pr": {"BB": 779}}, {"n": "Camera Module 3 (V2)", "g": "lisa", "opc": 1, "pr": {"AM": 476}}, {"n": "Heltec LoRa (plan B)", "g": "lisa", "opc": 1, "pr": {"LK": 224, "AM": 309}}, {"n": "Waveshare Core1262 (plan B)", "g": "lisa", "opc": 1, "pr": {"AM": 187}}, {"n": "DFRobot S3 AI Camera", "g": "solar", "pr": {"BB": 254}}, {"n": "OV5640 5MP", "g": "solar", "pr": {"LK": 283, "AM": 168, "BL": 569}}, {"n": "18650 3500 mAh", "g": "solar", "pr": {"BB": 67, "LK": 130, "AM": 179, "NKON": 40}, "fixed": 0}, {"n": "CN3791 MPPT", "g": "solar", "pr": {"BB": 141, "LK": 40}}, {"n": "Panel solarny 6V/5W", "g": "solar", "pr": {"BB": 130, "LK": 107, "AM": 133}}, {"n": "Buck 3.3V (MP1584/SCT2650)", "g": "solar", "pr": {"BB": 25, "LK": 14, "AM": 24}}, {"n": "MOSFET AO3401/00", "g": "solar", "pr": {"LK": 2, "TME": 1}}, {"n": "microSD SPI moduł", "g": "solar", "pr": {"LK": 11, "AM": 67, "BL": 23}}, {"n": "IR LED 850nm", "g": "solar", "pr": {"BL": 30}}, {"n": "PT4115", "g": "solar", "pr": {"TME": 5}}, {"n": "IR-cut mechaniczny", "g": "solar", "pr": {"BL": 49}}, {"n": "LDR GL5528", "g": "solar", "pr": {"BB": 4, "LK": 2}}, {"n": "Kondensatory 1000µF", "g": "solar", "pr": {"BB": 3, "LK": 6, "TME": 6, "BL": 6}}, {"n": "INMP441", "g": "solar", "pr": {"LK": 44, "AM": 70}}, {"n": "MAX98357A", "g": "solar", "pr": {"LK": 44, "AM": 59, "BL": 78}}, {"n": "Pi 4 2GB", "g": "rc", "pr": {"AM": 889, "TME": 531}}, {"n": "SIM7600G-H HAT", "g": "rc", "pr": {"BB": 790, "AM": 1443}}, {"n": "IMX219", "g": "rc", "pr": {"AM": 264, "TME": 142, "BL": 96}}, {"n": "Silnik RS-540", "g": "rc", "pr": {"AM": 133}}, {"n": "ESC QuicRun 1060", "g": "rc", "pr": {"AM": 142}}, {"n": "LiPo 3S", "g": "rc", "pr": {"LK": 269, "AM": 354, "BL": 240}}];
+let konsProj='lisa', konsOpc=false;
+function kSubsets(a,k){const r=[];(function rec(st,cur){if(cur.length===k){r.push(cur.slice());return;}for(let i=st;i<a.length;i++){cur.push(a[i]);rec(i+1,cur);cur.pop();}})(0,[]);return r;}
+function kEval(set,items){let tot=0,miss=[];for(const it of items){let b=null;for(const s of set){const v=it.pr[s];if(v!=null&&(b===null||v<b))b=v;}if(b===null)miss.push(it.n);else tot+=b;}return{tot,miss,cov:items.length-miss.length};}
+function kRender(){
+  let items=KITEMS.filter(it=>(konsProj==='all'||it.g===konsProj));
+  const fixed=items.filter(it=>it.fixed), core=items.filter(it=>!it.fixed&&(!it.opc||konsOpc)), opcSum=items.filter(it=>it.opc&&!konsOpc).reduce((t,it)=>t+Math.min(...Object.values(it.pr)),0);
+  const out=document.getElementById('konsout');
+  const fmt=x=>x.toLocaleString('sv-SE')+' kr';
+  const shopNames=set=>set.map(s=>KSHOPS[s][0]).join(' + ');
+  let html='';
+  const opt=kEval(Object.keys(KSHOPS),core);
+  const optFixed=opt.tot+fixed.reduce((t,it)=>t+it.pr.INNE,0);
+  html+='<div class="warnbox">🏅 <b>Optimum:</b> '+fmt(optFixed)+' w '+opt.cov+'/'+core.length+' pozycjach ze sklepów: '+shopNames(Object.keys(KSHOPS))+(fixed.length?' (+ '+fmt(fixed.reduce((t,it)=>t+it.pr.INNE,0))+' Biltema stacjonarnie)':'')+(opcSum?' · opcje V2/plan B wyłączone ('+fmt(opcSum)+')':'')+'</div>';
+  for(const k of [1,2,3]){
+    let best=null;
+    for(const set of kSubsets(Object.keys(KSHOPS).filter(s=>s!=='NKON'),k)){
+      const r=kEval(set,core);
+      if(!best||r.cov>best.r.cov||(r.cov===best.r.cov&&r.tot<best.r.tot))best={set,r};
+    }
+    if(!best)continue;
+    const delta=best.r.tot+fixed.reduce((t,it)=>t+it.pr.INNE,0)-optFixed;
+    const shops=best.set.map(s=>KSHOPS[s][0]).join(' + ');
+    const fr=best.set.reduce((t,s)=>t+(KSHOPS[s][1]||0),0);
+    html+='<div class="card" style="margin:10px 0"><b>🛒 '+k+' '+(k===1?'sklep':'sklepy')+': '+shops+'</b><br>'+
+    'Pozycje: '+best.r.cov+'/'+core.length+' · suma ≈ <b>'+fmt(best.r.tot+fixed.reduce((t,it)=>t+it.pr.INNE,0))+'</b> (+'+fmt(delta)+' vs optimum)'+
+    (fr?' · frakty ~'+fmt(fr):' · frakty: sprawdź w koszyku')+
+    (best.r.miss.length?'<br><span style="color:#f87171">❌ Brak w tych sklepach: '+best.r.miss.join(', ')+'</span>':'<br><span style="color:#4ade80">✅ pełne pokrycie</span>')+
+    (best.r.miss.length===0&&k>=2?'<br><span class="tag">💡 '+shops+' = wystarczy. Reszta sklepów zbędna dla tego projektu.</span>':'')+
+    '</div>';
+  }
+  out.innerHTML=html;
+}
+document.querySelectorAll('[data-kp]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-kp]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');konsProj=b.dataset.kp;kRender();
+}));
+document.getElementById('kopc').addEventListener('change',e=>{konsOpc=e.target.checked;kRender();});
+kRender();
 document.getElementById('v-list').addEventListener('click',()=>setView('list'));
 document.getElementById('v-matrix').addEventListener('click',()=>setView('matrix'));
 document.querySelectorAll('.fbtn[data-f]').forEach(b=>b.addEventListener('click',()=>{

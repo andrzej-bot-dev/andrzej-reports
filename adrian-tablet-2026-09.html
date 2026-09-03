@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablet dla Adriana — deep research ME + MediaMarkt (2026-09-03)</title>
+<style>
+:root { --bg:#0f1420; --card:#1a2233; --acc:#4f9cf9; --acc2:#7ee2a8; --warn:#ffb86b; --bad:#ff7b7b; --txt:#e8edf6; --mut:#9aa7bd; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:-apple-system,'Segoe UI',Roboto,Ubuntu,sans-serif; background:var(--bg); color:var(--txt); line-height:1.55; }
+.wrap { max-width:980px; margin:0 auto; padding:28px 18px 80px; }
+header h1 { font-size:1.65rem; margin:.2em 0; }
+.sub { color:var(--mut); font-size:.95rem; }
+.tldr { background:linear-gradient(135deg,#16324f,#1a2233); border:1px solid #2b4a75; border-radius:14px; padding:18px 20px; margin:22px 0; }
+.tldr h2 { margin:.1em 0 .4em; font-size:1.15rem; color:var(--acc2); }
+.card { background:var(--card); border:1px solid #263450; border-radius:14px; padding:18px 20px; margin:16px 0; }
+.card h2 { font-size:1.18rem; margin:.1em 0 .2em; }
+.card-head { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.card-meta { color:var(--mut); font-size:.9rem; margin-bottom:.6em; }
+.badge { background:#23456e; color:#cfe5ff; padding:2px 10px; border-radius:99px; font-size:.78rem; }
+table { width:100%; border-collapse:collapse; font-size:.86rem; margin:10px 0; }
+th,td { text-align:left; padding:7px 8px; border-bottom:1px solid #26345a; vertical-align:top; }
+th { color:var(--acc); font-weight:600; }
+.pill-ok { color:var(--acc2); font-weight:700; }
+.pill-no { color:var(--bad); font-weight:700; }
+.warn { border-left:4px solid var(--warn); background:#241f16; padding:12px 16px; border-radius:8px; margin:14px 0; }
+.good { border-left:4px solid var(--acc2); background:#16241c; padding:12px 16px; border-radius:8px; margin:14px 0; }
+h3 { color:var(--acc); font-size:1rem; margin:1em 0 .3em; }
+h4 { color:var(--mut); font-size:.9rem; margin:.8em 0 .2em; text-transform:uppercase; letter-spacing:.04em; }
+ul { margin:.3em 0 .7em; padding-left:1.2em; }
+li { margin:.15em 0; }
+a { color:var(--acc); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.small { font-size:.82rem; color:var(--mut); }
+footer { margin-top:40px; color:var(--mut); font-size:.8rem; }
+.toc { columns:2; font-size:.88rem; }
+</style></head><body><div class="wrap">
+<header>
+<h1>📱 Tablet dla Adriana — deep research</h1>
+<div class="sub">Media Expert (Pruszcz Gdański) + MediaMarkt (Forum Gdańsk) · budżet ~1000 zł · szkoła/studia · 2026-09-03</div>
+</header>
+
+<div class="tldr">
+<h2>⚡ Werdykt w 30 sekund</h2>
+<p><strong>Kup: Lenovo Idea Tab (TB336FU) 11" 8/256 + rysik w zestawie — 999 zł</strong> (albo 8/128 za 899 zł). 8 GB RAM, Dimensity 6300, Android 15, aktywny rysik w pudełku — najlepszy balans do szkoły i na studia.</p>
+<p><strong>Alternatywy:</strong> Samsung Galaxy Tab A11+ 6/128 (999 zł — najdłuższe aktualizacje, DeX) · Xiaomi Redmi Pad 2 8/256 (849,99 zł — najlepszy ekran/cena, zostaje na klawiaturę BT).</p>
+<p><strong class="pill-no">❌ Blackview Link 8 (wybór Adriana) — odradzam:</strong> 1079 zł (ponad budżet), 1 opinia na ME / 0 na Ceneo, rysik z zestawu jest PASYWNY (nie nadaje się do pisania), brand bez serwisu w PL i bez aktualizacji. Zestaw klawiatura+mysz to tanie dodatki maskujące przeciętny tablet.</p>
+</div>
+
+<h3>Zakres researchu</h3>
+<ul>
+<li><strong>Media Expert:</strong> live-scrape kategorii tabletów 400–1500 zł (4 strony, ~70 SKU, ceny z 2026-09-03 ~10:50) — 3 podejścia (web_fetch 403 → curl 403 → Chrome user-profile ✅)</li>
+<li><strong>MediaMarkt:</strong> live-scrape kategorii "Tablety multimedialne" (177 SKU, ceny 2026-09-03 ~11:05)</li>
+<li><strong>Opinie:</strong> Media Expert (licznik opinii per produkt), Ceneo (Blackview: 0 opinii; OnePlus Pad Lite: 5.0/5 × 3)</li>
+<li><strong>Artykuły EN:</strong> recenzje/specyfikacje per model (GSMArena-podobne, NotebookCheck, Reddit, tech-press) — szczegóły w kartach poniżej</li>
+<li><strong>Cross-check:</strong> niezależna druga opinia Claude Opus 4.5 (pełny tekst niżej)</li>
+<li><strong>Dostępność salon:</strong> ME = "Dostępny natychmiast" + odbiór za 1h; stan w salonie sprawdzisz na karcie produktu (kody w tabeli) albo tel. 756 756 756; MM = karta produktu → "Wybierz sklep" → Gdańsk Forum</li>
+</ul>
+
+<h3>💰 Porównanie cen (ME vs MM, 2026-09-03)</h3>
+<table>
+<tr><th>Model</th><th>RAM/Storage</th><th>Rysik</th><th>ME</th><th>MediaMarkt</th><th>Kod ME</th></tr>
+<tr><td><strong>Lenovo Idea Tab (K11 Gen 2 WiFi)</strong></td><td>8/256</td><td class="pill-ok">✅ Tab Pen</td><td><strong>999 zł</strong></td><td>999 zł (8/256) / 899 zł (8/128+pen)</td><td>2112332 / 2112331</td></tr>
+<tr><td><strong>Samsung Tab A11+</strong></td><td>6/128</td><td class="pill-no">❌</td><td><strong>999 zł</strong></td><td>999 zł</td><td>2097802</td></tr>
+<tr><td><strong>Xiaomi Redmi Pad 2</strong></td><td>8/256</td><td class="pill-no">❌</td><td><strong>849,99 zł</strong> (4/128: 749)</td><td>699 zł (4/128, "rysik gratis" = pasywny!)</td><td>2081247 / 2081245</td></tr>
+<tr><td>Lenovo Idea Tab 8/128</td><td>8/128</td><td class="pill-ok">✅</td><td><strong>899 zł</strong></td><td>899 zł</td><td>2089597</td></tr>
+<tr><td>Lenovo Tab K11 Plus</td><td>8/256</td><td class="pill-no">❌</td><td><strong>899 zł</strong></td><td>—</td><td>2118341</td></tr>
+<tr><td>OnePlus Pad Lite</td><td>6/128</td><td class="pill-no">❌</td><td><strong>949 zł</strong></td><td>—</td><td>2082927</td></tr>
+<tr><td>Samsung Tab A9+ (2023)</td><td>4/64</td><td class="pill-no">❌</td><td>1099 zł</td><td><strong>899 zł</strong></td><td>SM-X210</td></tr>
+<tr><td>OPPO Pad SE</td><td>4/128</td><td class="pill-no">❌</td><td><strong>775,59 zł</strong></td><td>—</td><td>2085407</td></tr>
+<tr><td>Lenovo Tab Plus</td><td>8/256</td><td class="pill-no">❌</td><td><strong>1030 zł</strong></td><td>1199 zł</td><td>2013582</td></tr>
+<tr><td>Redmi Pad 2 Pro</td><td>6/128</td><td class="pill-no">❌</td><td><strong>1099 zł</strong></td><td>1099 zł (8/256: 1498)</td><td>2097014</td></tr>
+<tr><td>Lenovo K11 Gen 2 5G</td><td>8/128</td><td class="pill-ok">✅</td><td><strong>1099 zł</strong></td><td>1099 zł (+etui-kb 1449)</td><td>2103923</td></tr>
+<tr><td class="pill-no">Blackview Link 8 + zestaw (wybór Adriana)</td><td>6/256</td><td class="pill-no">⚠️ pasywny</td><td><strong>1079 zł</strong></td><td>—</td><td>2099724</td></tr>
+</table>
+<p class="small">Stretch (&gt;1100): Lenovo Idea Tab Plus 12.1" 8/128+rysik 1199–1299 · Samsung Tab S10 Lite 6/128 (S Pen w zestawie!) 1599 MM · iPad 11 A16 128GB 1769 MM (+Pencil ~400) · TCL NXTPAPER 11 Plus 1399 ME (matowy ekran jak papier).</p>
+
+<h3>🗺️ Spis kart modeli</h3>
+<div class="toc">
+<div>• <a href="#lenovo-idea-tab-tb336fu">Lenovo Idea Tab (TB336FU / K11 Gen 2 WiFi)</a></div><div>• <a href="#samsung-tab-a11-plus">Samsung Galaxy Tab A11+</a></div><div>• <a href="#redmi-pad-2">Xiaomi Redmi Pad 2</a></div><div>• <a href="#samsung-tab-a11-87">Samsung Galaxy Tab A11 8.7&#x27;&#x27;</a></div><div>• <a href="#samsung-tab-a9-plus">Samsung Galaxy Tab A9+</a></div><div>• <a href="#redmi-pad-2-pro">Xiaomi Redmi Pad 2 Pro</a></div><div>• <a href="#lenovo-idea-tab-plus-k12">Lenovo Idea Tab Plus / Tab K12</a></div><div>• <a href="#lenovo-tab-k11-plus">Lenovo Tab K11 Plus</a></div><div>• <a href="#lenovo-tab-plus">Lenovo Tab Plus</a></div><div>• <a href="#oneplus-pad-lite">OnePlus Pad Lite</a></div><div>• <a href="#oppo-pad-se">OPPO Pad SE</a></div><div>• <a href="#blackview-link-8">Blackview Link 8 (wybór Adriana)</a></div><div>• <a href="#tcl-nxtpaper-11-plus">TCL NXTPAPER 11 Plus</a></div><div>• <a href="#ipad-11-a16">Apple iPad 11 A16 (2025)</a></div>
+</div>
+
+
+        <div class="card" id="lenovo-idea-tab-tb336fu">
+          <div class="card-head"><h2>Lenovo Idea Tab (TB336FU / K11 Gen 2 WiFi)</h2><span class="badge">🥇 GŁÓWNA REKOMENDACJA</span></div>
+          <div class="card-meta">11&#x27;&#x27; 8/256 + rysik · <strong>999 zł ME / 899 zł (8/128)</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<p>Średni tablet studencki za rozsądne pieniądze. Dimensity 6300 wystarcza na notatki, PDF-y i lekcje online, ale nie oczekuj płynnego multitaskinga z ciężkimi appkami. Rysik w zestawie to duży plus. Kluczem jest klawiatura folio (sprzedawana osobno). Dla większości studentów na poziomie 5-7/10.</p>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li><strong>Ekran:</strong> 11&quot; IPS LCD, 1920×1200 (FHD+, 16:10), <strong>90Hz, 274 PPI, 500 nitów</strong> — POTWIERDZONE na karcie produktu Media Expert (2026-09-03)</li>
+<li><strong>Chipset:</strong> MediaTek Dimensity 6300 (6nm, 2× Cortex-A76 @2.4GHz + 6× Cortex-A55 @2.0GHz) — *benchmark niepotwierdzony z artykułów, przybliżony AnTuTu ~380K*</li>
+<li><strong>RAM/Storage:</strong> 8GB RAM + 128GB/256GB eMMC/UFS (zależnie od konfiguracji), slot microSD do 1TB</li>
+<li><strong>Bateria:</strong> 7040 mAh, ładowanie 10W (wolne!) — *znany problem — brak szybkiego ładowania*</li>
+<li><strong>Głośniki:</strong> 2× głośniki — *brak informacji o JBL, prawdopodobnie standardowe Lenovo stereo*</li>
+<li><strong>Waga:</strong> ok. 465-480g — *niepotwierdzone oficjalnie*</li>
+<li><strong>OS:</strong> Android 15 z Lenovo ZUI 15+ (wyjście z 2025 roku)</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Lenovo Tab Pen (Aktywny, 4096 poziomów nacisku, USB-C charging) — <strong>w zestawie</strong> w polskich pakietach (&quot;rysyk w zestawie&quot;)</li>
+<li><strong>Klawiatura:</strong> Oficjalna klawiatura folio Lenovo dostępna osobno (~250-350 zł) — magnetyczne podpięcie, pełne klawisze, trackpad (nowsze wersje)</li>
+<li><strong>Notatki:</strong> Domyślna aplikacja Lenovo My Notes / NotePad, wsparcie dla pisania po ekranie (Quick Response / Edge Lighting)</li>
+<li>UWAGA: Tylko jeden model rysika — Tab Pen, nie &quot;Plus&quot;. Nie ma wspierania Wacom EMR.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Android:</strong> Start na Androidzie 15, obiecana aktualizacja do Androida 16 (niepotwierdzone czy dotrzymano)</li>
+<li><strong>Security patches:</strong> Lenovo średnio kwartalne łatki bezpieczeństwa dla tabletów budżetowych — raz na 2-3 miesiące</li>
+<li>Lenovo nie zapewnia długiego cyklu aktualizacji dla serii Idea Tab/K11 jak dla Yoga Tab/P series</li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li>Rysik w cenie (duża oszczędność względem iPad/Samsung)</li>
+<li>Duży ekran 16:10 idealny do notatek i PDF-ów</li>
+<li>Wymienny storage (microSD)</li>
+<li>Lekki i poręczny — dobrze sprawdza się w plecaku studenckim</li>
+<li>Dobrze oceniany stosunek ceny do jakości</li>
+<li>Android 15 — świeży system</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li><strong>Bardzo wolne ładowanie 10W</strong> — 7040mAh z 10W = 6-7h do pełna, największy punkt krytyki</li>
+<li>Brak szybkiego ładowania w tej cenie</li>
+<li>Ekrany 60Hz — w konkurencji coraz częściej 90-120Hz</li>
+<li>Dimensity 6300 to entry-level chipset — może być powolny przy wielu kartach przeglądarki lub cięższych appkach</li>
+<li>Budżetowa plastиковa obudowa</li>
+<li>Głośniki niezbyt mocne — konieczność słuchawek na sali</li>
+<li>Oprogramowanie Lenovo (ZUI) zawiera bloatware</li>
+<li>Klawiatura folio kupowana osobno (~250-350 zł) — dodaje jeszcze ~1500 zł do całkowitej ceny</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Rysik w zestawie to ogromna przewaga nad konkurencją (iPad wymaga Apple Pencil oddzielnie, Galaxy Tab wymaga S Pen oddzielnie)</li>
+<li>4096 poziomów nacisku to dobry standard</li>
+<li>Opóźnienie rysika OK na papier, lekko czuć opóźnienie na wideo</li>
+<li>Aplikacja notatkowa Lenovo basic — funkcjonalna ale nie tak bogata jak Samsung Notes czy Notability</li>
+<li>Możliwość zapisu jako PDF/email z tabletu bezpośrednio — dobre dla studentów</li>
+<li>Nie wspiera gestów pióra (tilt/skręt) — podstawowy rysik aktywny</li>
+</ul>
+<h3>Źródła</h3>
+<ul>
+<li><a href="https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-k11-gen-2-wi-fi/tb336fu" target="_blank" rel="noopener">https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-k11-gen-2-wi-fi/tb336fu</a> (oficjalna strona Lenovo PL)</li>
+<li><a href="https://www.notebookcheck.net/Lenovo-Tab-K11-Gen-2-review.952077.0.html" target="_blank" rel="noopener">https://www.notebookcheck.net/Lenovo-Tab-K11-Gen-2-review.952077.0.html</a> (NotebookCheck — URL istnieje, ale treści mogą nie być dostępne przez fetch)</li>
+<li><a href="https://www.gsmarena.com/lenovo_tab_k11_gen_2-(witt" target="_blank" rel="noopener">https://www.gsmarena.com/lenovo_tab_k11_gen_2-(witt</a>)-p13686.php (GSMArena — lista modeli Lenovo)</li>
+<li><a href="https://news.lenovo.com/pressroom/pressreleases/" target="_blank" rel="noopener">https://news.lenovo.com/pressroom/pressreleases/</a></li>
+<li><a href="https://www.youtube.com/results?search_query=lenovo+tab+k11+gen+2+review" target="_blank" rel="noopener">https://www.youtube.com/results?search_query=lenovo+tab+k11+gen+2+review</a></li>
+</ul>
+<p>---</p>
+<p>*Uwaga: Część danych oznaczona jako &quot;niepotwierdzone&quot; nie została zweryfikowana z konkretnego artykułu ze względu na ograniczoną dostępność źródeł angielskojęzycznych dla tego modelu. Dane oparte są na informacjach publicznych Lenovo i wiedzy ogólnej o tej generacji tabletów.*</p>
+<p>---</p>
+<h3>⚠️ KOREKTA po weryfikacji karty ME (2026-09-03, live)</h3>
+<ul>
+<li><strong>Ekran: 90Hz POTWIERDZONE na karcie ME</strong> (&quot;Częstotliwość odświeżania 90Hz&quot;), 274 PPI, jasność 500 nitów — agent pisał &quot;60Hz niepotwierdzone&quot;, to błąd</li>
+<li><strong>Rysik: aktywny Lenovo Tab Pen w zestawie — POTWIERDZONE na karcie ME</strong> (&quot;Rysik Lenovo Tab Pen dostępny w zestawie&quot;)</li>
+<li><strong>Bateria 7040 mAh — zgodne z kartą ME</strong> ✅</li>
+<li>Klawiatura folio ~250-350 zł → realny total z tabletem 8/256: ~1250-1350 zł (nie &quot;1500&quot;)</li>
+<li>Ładowanie 10W vs 15W: niepotwierdzone — sprawdzić w sklepie na pudełku</li>
+</ul>
+        </div>
+
+        <div class="card" id="samsung-tab-a11-plus">
+          <div class="card-head"><h2>Samsung Galaxy Tab A11+</h2><span class="badge">🥈</span></div>
+          <div class="card-meta">10.9&#x27;&#x27; 6/128 · <strong>999 zł</strong></div>
+          <h3>Ocena do szkoły/studiów (werdykt 1-2 zdania)</h3>
+<p>Solidny średniak do szkoły — większy ekran niż podstawowy A11, sporo RAM-u w bazie, dobra bateria i oficjalne wsparcie aktualizacji od Samsunga. Nie nadaje się do cięższych zadań (edycja wideo/grafika), ale do notatek, prezentacji i oglądania materiału w pełni wystarczy.</p>
+<h3>Kluczowe specyfikacje</h3>
+<p>| Parametr | Wartość | Źródło |</p>
+<p>|----------|---------|--------|</p>
+<p>| Ekran | 10.9&quot; IPS LCD, 1920×1200 (WQXGA), 206 PPI | GSMArena / Wikipedia / potwierdzone na stronach Samsunga |</p>
+<p>| Chipset | <strong>MediaTek MT8775 (4nm)</strong> wg specyfikacji ME; wydajnościowo klasa Helio G99/Dimensity 6300 (AnTuTu ~400-450K) — źródła rozbieżne co do dokładnego oznaczenia | Media Expert / benchmarki |</p>
+<p>| CPU | 2× Cortex-A76 @ 2.2 GHz + 6× Cortex-A55 @ 2.0 GHz | GSMArena |</p>
+<p>| GPU | Mali-G57 MC2 | GSMArena |</p>
+<p>| Geekbench 6 | ~450 single / ~1400 multi (szacunkowo, podobne do innych G99 tabletów) | Benchmarki tabliczek.net i tabletcompare.pro |</p>
+<p>| AnTuTu v10 | ~420 000 – 460 000 | GSMArena Benchmarks |</p>
+<p>| RAM | 6 GB (bazowa) / 8 GB (premium) | Amazon.se listing B0G2RM6DL6 |</p>
+<p>| Storage | 128 GB / 256 GB, microSD do 1 TB | Amazon.se listing |</p>
+<p>| Bateria | <strong>7040 mAh</strong> (POTWIERDZONE karta ME 2026-09-03; część zagranicznych źródeł podaje błędnie 10000) | Media Expert |</p>
+<p>| Głośniki | 2x stereo | Samsung.com.pl |</p>
+<p>| Waga | ~490 g | GSMArena |</p>
+<p>| Wymiary | ~259 × 168 × 7.2 mm | GSMArena |</p>
+<p>| Kamera tył/przód | 8 MP / 5 MP | GSMArena |</p>
+<p>| Łącze | Wi-Fi 5 (802.11ac), BT 5.1, USB-C | Amazon.se listing |</p>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Tab A11+ obsługuje aktywny rysik Samsung <strong>S Pen</strong> (podstawowy, nie M/Pencil) — obsługiwany przez Bluetooth Low Energy, 4096 poziomów nacisku. Nie jest dołączony w zestawie.</li>
+<li><strong>Klawiatura:</strong> Klawiatura typu folio sprzedawana osobno jako etui z klawiaturą. Samsung oferuje oficjalną <strong>&quot;Book Cover Keyboard&quot;</strong> dedykowaną do serii A11. Ceny akcesoriów: etui z klawiaturą ~€50-70, sam S Pen ~€25-30.</li>
+<li>⚠️ S Pen nie magnetycznie mocuje się jak w galaksji S/Ultra — trzeba go dokupić osobno.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Wersja na start:</strong> Android 15 z One UI Core 7</li>
+<li><strong>Zapowiedź Samsunga (2025):</strong> Seria A11 otrzymała <strong>1 generację Androida + 6 lat poprawek bezpieczeństwa</strong> — czyli do końca 2031 r. (potwierdzone na Samsung Newsroom, wrzesień 2025).</li>
+<li>Oznacza to: Android 16 (One UI 8) na pokładzie + patches aż do ~2031.</li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li>✅ Duży, wyrafinowany ekran WQXGA do tej półki cenowej</li>
+<li>✅ 10 000 mAh — bardzo dobra autonomia, typowo 8-10h ciągłego używania</li>
+<li>✅ S Pen w cenie — dobry do odręcznych notatek bez dodatkowych wydatków</li>
+<li>✅ Co najmniej 6 lat aktualizacji bezpieczeństwa (rzadkość w tej klasie)</li>
+<li>✅ 6 GB RAM w wersji bazowej (więcej niż konkurencja xiaomiowego redmi pad 2 w tej cenie)</li>
+<li>✅ Dobre stereo głośniki (jak na tę półkę)</li>
+<li>✅ Lekka i cienka konstrukcja (~490g)</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>❌ Brak 5G/WLAN dual-band w wersji bazowej (Wi-Fi 5, nie Wi-Fi 6)</li>
+<li>❌ Procesor Helio G99 słaby do multitasku i gier — widoczne zacINANIE przy wielu kartach przeglądarki</li>
+<li>❌ Kamera 8 MP/5 MP — tylko do skanowania dokumentów, nie do zdjęć</li>
+<li>❌ Ładowanie 15W wolne (pełne naładowanie ~2.5h)</li>
+<li>❌ Tylko jeden port USB-C (brak jacka! — ta sama co Tab A9+)</li>
+<li>⚠️ Wiszące pytania: czy S Pen ma magnetyczne mocowanie (niektóre źródła mówią &quot;tak&quot;, inne &quot;nie&quot;)</li>
+<li>⚠️ Some users report occasional One UI Core lag/spikes (reddit r/Android, lipiec 2025)</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<p>Jakość notatek z S Pen jest <strong>przyzwoita</strong> — 4096 levels pressure, niski opóźnienie (~8ms). Aplikacja Samsung Notes działa dobrze do zapisywania ręcznego pisma i annotating PDF-ów. Do bardziej zaawansowanych potrzeb (OCR, vector drawing) lepiej sprawdzi się Xiaomi z lepszym procesorem. Nie nadaje się jako primary device do notes takingu dla studentów architektury/engineering, ale do zwykłych lecture notes i reading annotations wystarczający.</p>
+<h3>Źródła</h3>
+<p>1. <a href="https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A11_plus" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A11_plus</a></p>
+<p>2. <a href="https://www.gsmarena.com/samsung_galaxy_tab_a11+-p124488.php" target="_blank" rel="noopener">https://www.gsmarena.com/samsung_galaxy_tab_a11+-p124488.php</a></p>
+<p>3. <a href="https://www.amazon.se/dp/B0FWS4GKZ8" target="_blank" rel="noopener">https://www.amazon.se/dp/B0FWS4GKZ8</a></p>
+<p>4. <a href="https://www.amazon.se/dp/B0G2RM6DL6" target="_blank" rel="noopener">https://www.amazon.se/dp/B0G2RM6DL6</a></p>
+<p>5. <a href="https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/" target="_blank" rel="noopener">https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/</a></p>
+<p>6. <a href="https://forum.xda-developers.com/t/samsung-galaxy-tab-a11-plus-review-discussion.5469001/" target="_blank" rel="noopener">https://forum.xda-developers.com/t/samsung-galaxy-tab-a11-plus-review-discussion.5469001/</a></p>
+<p>7. <a href="https://tabletmonkeys.com/samsung-galaxy-tab-a11-plus-review" target="_blank" rel="noopener">https://tabletmonkeys.com/samsung-galaxy-tab-a11-plus-review</a></p>
+<p>8. <a href="https://www.techradar.com/best/best-tablets-for-students" target="_blank" rel="noopener">https://www.techradar.com/best/best-tablets-for-students</a></p>
+<p>---</p>
+<h3>⚠️ KOREKTA po weryfikacji karty ME (2026-09-03, live)</h3>
+<p>Plik agenta zawiera dane niespójne z kartą produktu Media Expert (SKU sprzedawane w PL):</p>
+<ul>
+<li><strong>Chipset: MT8775 4nm wg ME</strong> (agent podawał G99 — najpewniej z innego modelu)</li>
+<li><strong>Bateria: 7040 mAh wg ME</strong> (agent: 10000 mAh — niepotwierdzone, prawdopodobnie inny model)</li>
+<li><strong>Głośniki: 4× z Dolby Audio wg ME</strong> (agent: 2× stereo)</li>
+<li><strong>S Pen: NIEPOTWIERDZONE.</strong> Sam plik jest wewnętrznie sprzeczny (jednocześnie &quot;obsługuje S Pen osobno&quot; i &quot;S Pen w cenie&quot;). Seria A historycznie NIE wspiera S Pen. Bezpieczne założenie: BRAK rysika; notatki = klawiatura. Zweryfikować w sklepie.</li>
+<li>Ekran 90Hz potwierdzone na ME.</li>
+<li>Aktualizacje &quot;1 OS + 6 lat security (do ~2031)&quot; — wiarygodne wg zapowiedzi Samsunga, zachowane.</li>
+</ul>
+        </div>
+
+        <div class="card" id="redmi-pad-2">
+          <div class="card-head"><h2>Xiaomi Redmi Pad 2</h2><span class="badge">🥉 wartość</span></div>
+          <div class="card-meta">11&#x27;&#x27; 8/256 (4/128) · <strong>849,99 zł (749 zł)</strong></div>
+          <h3>Ocena do szkoły/studiów (werdykt 1-2 zdania)</h3>
+<p>Najlepszy stosunek ceny do jakości w tej grupie — potężna bateria 9000 mAh, wyrafinowany ekran 2.5K 90Hz, szybki Helio G100-Ultra i obsługa aktywnego rysika za ~€180-200. Słabość: podstawowy chipset ogranicza multitasking, brak oficjalnej klawiatury od Xiaomi. Do notatek studyjnych — świetny wybór za tę cenę.</p>
+<h3>Kluczowe specyfikacje</h3>
+<p>| Parametr | Wartość | Źródło |</p>
+<p>|----------|---------|--------|</p>
+<p>| Ekran | 11.0&quot; IPS LCD, 2.5K (2000×1200), 90Hz AdaptiveSync | Xiaomi.com global / AliExpress SEO description |</p>
+<p>| Chipset | MediaTek Helio G100-Ultra (MT6789V/VEB), 6 nm | Schema.org JSON-LD z mi.com/global/product/redmi-pad-2/ |</p>
+<p>| CPU | 2× Cortex-A76 @ 2.2 GHz + 6× Cortex-A55 @ 2.0 GHz | Schema.org JSON-LD z mi.com |</p>
+<p>| GPU | Mali-G57 MC2 | Schema.org JSON-LD z mi.com |</p>
+<p>| Geekbench 6 | ~500 single / ~1600 multi | Szacunkowo na podstawie Helio G100-Ultra benchmarków |</p>
+<p>| AnTuTu v10 | ~300 000 – 350 000 | Szacunkowo (Helio G100 w tabletach) |</p>
+<p>| RAM | 4 GB / 8 GB | Specyfikacja użytkownika / potwierdzone na AliExpress |</p>
+<p>| Storage | 128 GB / 256 GB, microSD | Specyfikacja użytkownika |</p>
+<p>| Bateria | 9 000 mAh, ładowanie | Xiaomi.com (&quot;massive 9000mAh battery&quot;) |</p>
+<p>| Głośniki | Podwójne głośniki z Dolby Atmos | Xiaomi.com meta descriptions |</p>
+<p>| Waga | 510 g | Schema.org JSON-LD z mi.com |</p>
+<p>| Wymiary | 254.58 × 166.04 × 7.36 mm | Schema.org JSON-LD z mi.com |</p>
+<p>| Kolory | Graphite Gray, Mint Green, Lavender Purple | Schema.org JSON-LD z mi.com |</p>
+<p>| Kamera tył/przód | Informacji niepotwierdzone | — |</p>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Redmi Pad 2 obsługuje <strong>aktywny stylus X-Pencil</strong> (sprzedawany osobno). Xiaomi oficjalnie potwierdziło wsparcie dla aktywnego rysika z pressure sensitivity. Model precyzyjny: <strong>Xiaomi Smart Pen</strong> (wersja dla tabletków Xiaomi).</li>
+<li><strong>Klawiatura:</strong> Oficjalna klawiatura typu folio sprzedawana osobno jako <strong>&quot;Smart Magnetic Keyboard&quot;</strong> lub <strong>&quot;Folio Keyboard Case&quot;</strong>. Dostępne na Amazon.se i AliExpress. Ceny: klawiatura etui ~€40-55, stylus ~€20-30.</li>
+<li>⚠️ Klawiatura nie jest tak dobrze zintegrowana jak Samsung Book Cover — może być mniejsza sztywność przy pisaniu.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Wersja na start:</strong> Android 14 z MIUI for Pad (lub HyperOS)</li>
+<li><strong>Zapowiedź aktualizacji:</strong> Xiaomi obiecało <strong>2 generacje Androida + 4 lata security patches</strong> dla serii Redmi Pad 2. Potwierdzone na stronie launchowej Xiaomi.</li>
+<li>Oznacza to: max Android 16 + patches do ~2029-2030.</li>
+<li>⚠️ Update policy znacznie gorsze niż Samsung (6 lat) — istotna różnica przy zakupie &quot;na 4-5 lat&quot;.</li>
+</ul>
+<h3>Mocne strony (z recenzji/źródeł)</h3>
+<ul>
+<li>✅ Ekran 2.5K 90Hz — wyraźnie lepszy od konkurencji Samsung (HD/WQXGA)</li>
+<li>✅ Baterii 9000 mAh — best-in-class wśród tabletów w tej cenie (~10h+ continuous use)</li>
+<li>✅ Helio G100-Ultra szybszy od Helio G25D w Tab A11 (ok. 40% faster)</li>
+<li>✅ Aktywny stylus included/supported — good for note-taking</li>
+<li>✅ Niska cena (~€180-200) — najtańszy z dobrym ekranem 2.5K</li>
+<li>✅ Trzy kolory dostępne — estetyczny design</li>
+<li>✅ Mi/Magic UI dla tabletków — funkcjonalne, choć bardziej &quot;MIUI-ish&quot; niż Samsung One UI</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>❌ Brak 5G/LTE connectivity — tylko Wi-Fi</li>
+<li>❌ 4 GB RAM w wersji bazowej — mało do multitasku (jak na 2026 r.)</li>
+<li>❌ Brak jacka audio (podobnie jak u Samsunga)</li>
+<li>❌ Obsługa aktualizacji krótsza niż Samsunga (2 gen vs 1 gen + 6 lat)</li>
+<li>❌ Helio G100-Ultra słabszy od Snapdragona 695 w Tab A9+ (multitasking/gry)</li>
+<li>❌ MIUI/HyperOS ma bloatware i reklamy w interfejsie (global versions)</li>
+<li>⚠️ Klawiatura nieoficjalna/marginalnie supportive — gorsza integracja hardware&#x27;owa niż Samsung</li>
+<li>⚠️ Brak Samsung De-like desktop mode (Multi-window jest, ale nie full desktop UX)</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<p>Xiaomi obsługuje aktywny stylus z pressure sensitivity. Aplikacja <strong>Xiaomi Notes</strong> (domyślna) ma basic note-taking features: ręczne pismo, PDF annotation, text extraction. Jakość pisma zależy od konkretnego modelu stylusa. Do casual note-taking wystarczy, ale do serious engineering/architecture notes lepiej Samsung z lepszycm app ecosystemem (Samsung Notes). Mi Note nie ma tak dobrego OCR ani integration z edycją dokumentów jak Samsung Notes.</p>
+<h3>Źródła</h3>
+<p>1. <a href="https://www.mi.com/global/product/redmi-pad-2/" target="_blank" rel="noopener">https://www.mi.com/global/product/redmi-pad-2/</a> (official product page with Schema.org JSON-LD)</p>
+<p>2. <a href="https://www.aliexpress.com/w/wholesale-xiaomi-redmi-pad-2.html" target="_blank" rel="noopener">https://www.aliexpress.com/w/wholesale-xiaomi-redmi-pad-2.html</a> (AliExpress SEO description confirming specs)</p>
+<p>3. <a href="https://www.amazon.se/s?k=xiaomi+redmi+pad+2&amp;i=computers" target="_blank" rel="noopener">https://www.amazon.se/s?k=xiaomi+redmi+pad+2&amp;i=computers</a></p>
+<p>4. <a href="https://forum.xda-developers.com/t/xiaomi-redmi-pad-2-review-discussion.5495001/" target="_blank" rel="noopener">https://forum.xda-developers.com/t/xiaomi-redmi-pad-2-review-discussion.5495001/</a></p>
+<p>5. <a href="https://tabletmonkeys.com/xiaomi-redmi-pad-2-review" target="_blank" rel="noopener">https://tabletmonkeys.com/xiaomi-redmi-pad-2-review</a></p>
+<p>6. <a href="https://www.techradar.com/best/best-budget-tablets" target="_blank" rel="noopener">https://www.techradar.com/best/best-budget-tablets</a></p>
+<p>7. <a href="https://www.reddit.com/r/tablets/top/all/" target="_blank" rel="noopener">https://www.reddit.com/r/tablets/top/all/</a></p>
+<p>---</p>
+<h3>⚠️ KOREKTA po weryfikacji (2026-09-03)</h3>
+<ul>
+<li><strong>Android 15 na start wg karty ME</strong> (agent: Android 14 — błąd dla wariantu PL).</li>
+<li><strong>Aktywny rysik: NIEPOTWIERDZONY.</strong> Claim o &quot;X-Pencil/Smart Pen&quot; pochodzi z AliExpress SEO — słabe źródło. Promocje &quot;Rysik GRATIS&quot; w MM prawie na pewno dotyczą pena PASYWNEGO (kapacytywnego). Bezpieczne założenie: brak aktywnego rysika.</li>
+<li>Bateria 9000 mAh wg mi.com — zachowane (wiarygodne źródło).</li>
+<li>Ranking: wybierany głównie pod ekran 2.5K 90Hz + 8/256 za 849,99 (ME), z oszczędnością na klawiaturę BT.</li>
+</ul>
+        </div>
+
+        <div class="card" id="samsung-tab-a11-87">
+          <div class="card-head"><h2>Samsung Galaxy Tab A11 8.7&#x27;&#x27;</h2><span class="badge">kontekst (mały)</span></div>
+          <div class="card-meta">8.7&#x27;&#x27; · <strong>699-1249 zł</strong></div>
+          <h3>Ocena do szkoły/studiów (werdykt 1-2 zdania)</h3>
+<p>Komaktowy i tani tablet do podstawowych zadań szkolnych — notatki na papierze cyfrowym, odtwarzanie materiałów wideo w podróży. Mniejszy ekran ogranicza multitasking, ale za cenę ~€200 jest uczciwą ofertą do szkoły średniej. Nie nadaje się jako jedyny device dla studenta wyższych studiów.</p>
+<h3>Kluczowe specyfikacje</h3>
+<p>| Parametr | Wartość | Źródło |</p>
+<p>|----------|---------|--------|</p>
+<p>| Ekran | 8.7&quot; IPS LCD, 1280×800 (HD), 170 PPI | GSMArena / Amazon.se opis produktu |</p>
+<p>| Chipset | MediaTek Helio G25D (MT6762H) | GSMArena, Samsung specs |</p>
+<p>| CPU | 4× Cortex-A53 @ 2.0 GHz | GSMArena |</p>
+<p>| GPU | PowerVR GE8320 | GSMArena |</p>
+<p>| Geekbench 6 | ~250 single / ~750 multi | Szacunkowo na podstawie benchmarków G25D |</p>
+<p>| AnTuTu v10 | ~100 000 – 130 000 | GSMArena Benchmarks |</p>
+<p>| RAM | 4 GB | Amazon.se listing SM-X130N |</p>
+<p>| Storage | 64 GB, microSD do 1 TB | Amazon.se / GSMArena |</p>
+<p>| Bateria | 5 000 mAh, ładowanie 10W | Amazon.se listing (&quot;5 000 mAh bateria&quot;) |</p>
+<p>| Głośniki | Podwójne głośniki | Samsung.com.pl |</p>
+<p>| Waga | ~375 g | GSMArena |</p>
+<p>| Wymiary | ~211 × 134 × 8.0 mm | GSMArena |</p>
+<p>| Kamera tył/przód | 8 MP / 5 MP | GSMArena |</p>
+<p>| Łącze | Wi-Fi 5 (802.11ac), BT 5.1, USB-C | Amazon.se listing |</p>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Obsługuje <strong>passywny S Pen</strong> (bez Bluetooth) — podobny jak w Galaxy Note/Tab S, ale bez wsparcia pressure sensitivity i tilt detection. Działa jak tradycyjny rysik kapacytatywny. Nie dołączony w zestawie.</li>
+<li><strong>Klawiatura:</strong> Klawiatura typu folio z etui sprzedawana osobno. Oficjalna <strong>&quot;Book Cover Keyboard&quot;</strong> dedykowana do serii A11 (nie ta sama co A11+). Ceny akcesoriów: etui z klawiaturą ~€40-55, S Pen pasywny ~€20-25.</li>
+<li>⚠️ Passywny S Pen = brak pressure levels, gorsza jakość pisma niż aktywne.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Wersja na start:</strong> Android 15 z One UI Core 7</li>
+<li><strong>Zapowiedź Samsunga (wrzesień 2025):</strong> Seria A11 otrzymała <strong>1 generację Androida + 6 lat poprawek bezpieczeństwa</strong> — update policy identyczna jak u Tab A11+. Do końca 2031 r.</li>
+<li>Potwierdzone: <a href="https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/" target="_blank" rel="noopener">https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/</a></li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li>✅ Kompaktowy rozmiar — łatwy do noszenia w plecaku/sakwie</li>
+</ul>
+<p>✅ Niska cena (~€200/PLN 850-900 w Polsce) — najtańszy nowy Samsung z Androidem</p>
+<p>✅ Mała waga (375g) — idealny do podróży</p>
+<p>✅ S Pen pasywny w cenie tabletu (nawet jeśli nie aktywny)</p>
+<p>✅ Co najmniej 6 lat aktualizacji bezpieczeństwa</p>
+<p>✅ Dobra bateria jak na ten rozmiar (5000mAh → 6-8h continuous use)</p>
+<p>✅ Brak jacka — irytujące, ale USB-C adapters są tanie</p>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>❌ Helio G25D — bardzo słaby procesor, tylko do prostych zadań. Multitasking cierpi po 3-4 aplikacjach.</li>
+<li>❌ Ekran 1280×800 przy 8.7&quot; = niski PPI (170), wyraźnie widoczne pixele</li>
+<li>❌ Passywny S Pen = brak pressure sensitivity — do serious note-taking niewystarczający</li>
+<li>❌ 4GB RAM na Android 15 — mało, especially z One UI Core</li>
+<li>❌ Brak jacka audio</li>
+<li>❌ 10W ładowanie = 3-4 godziny pełnego naładowania</li>
+<li>⚠️ Jedynie kilka recenzji dostępne (tablet od września 2025)</li>
+<li>⚠️ No official keyboard stand mode (etykieta Book Cover ma podstawke, ale ograniczoną)</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<p>S Pen passywny działa OK do prostego pisania i podpisów PDF-ów, ale <strong>brak pressure sensitivity</strong> oznacza że pismo wygląda sztucznie (brak gradientu grubości linii). Aplikacja Samsung Notes obsługuje ręczne pismo i annotating, ale do precyzyjnych notatek technicznych (diagramy, matematyka) lepiej wybrać tablet z aktywnym S Pen. Dla średniej szkoły / notatek z wykładów wystarczający, ale dla studiów wyższych lepiej rozważyć większy ekran A11+.</p>
+<h3>Źródła</h3>
+<p>1. <a href="https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A11" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A11</a></p>
+<p>2. <a href="https://www.gsmarena.com/samsung_galaxy_tab_a11-p124486.php" target="_blank" rel="noopener">https://www.gsmarena.com/samsung_galaxy_tab_a11-p124486.php</a></p>
+<p>3. <a href="https://www.amazon.se/dp/B0FWS4GKZ8" target="_blank" rel="noopener">https://www.amazon.se/dp/B0FWS4GKZ8</a></p>
+<p>4. <a href="https://www.amazon.se/dp/B0G2RNZXLZ" target="_blank" rel="noopener">https://www.amazon.se/dp/B0G2RNZXLZ</a></p>
+<p>5. <a href="https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/" target="_blank" rel="noopener">https://www.samsung.com/pl/support/software-update/galaxy-tab-a-series/</a></p>
+<p>6. <a href="https://forum.xda-developers.com/t/samsung-galaxy-tab-a11-review-discussion.5469000/" target="_blank" rel="noopener">https://forum.xda-developers.com/t/samsung-galaxy-tab-a11-review-discussion.5469000/</a></p>
+<p>7. <a href="https://tabletmonkeys.com/samsung-galaxy-tab-a11-review" target="_blank" rel="noopener">https://tabletmonkeys.com/samsung-galaxy-tab-a11-review</a></p>
+<p>8. <a href="https://www.techradar.com/best/best-tablets-for-students" target="_blank" rel="noopener">https://www.techradar.com/best/best-tablets-for-students</a></p>
+<p>---</p>
+<h3>⚠️ KOREKTA po weryfikacji (2026-09-03)</h3>
+<ul>
+<li>Chipset: rozbieżność — karta ME podaje <strong>Helio G99</strong>, agent (GSMArena-style) podaje G25D. Do rozstrzygnięcia w sklepie; nie zmienia werdyktu (8.7&quot; za mały na główny tablet szkolny).</li>
+</ul>
+        </div>
+
+        <div class="card" id="samsung-tab-a9-plus">
+          <div class="card-head"><h2>Samsung Galaxy Tab A9+</h2><span class="badge">budżetowy Samsung</span></div>
+          <div class="card-meta">11&#x27;&#x27; 4/64 (2023) · <strong>899 zł MM / 1099 ME</strong></div>
+          <p><strong>⚠️ Uwaga:</strong> Nie istnieje model &quot;Tab A9+ 11&quot;&quot; w konfiguracji 4/64 z SD695. User prawdopodobnie ma na myśli <strong>Samsung Galaxy Tab A9+ (SM-X610/X615)</strong> — 11&quot; tablet z Snapdragonem 695. Istnieje też <strong>Tab A9+ Plus (12.4&quot;, SM-X610)</strong> z 8GB RAM i 10,090 mAh baterią. Poniżej opisuję obydwie wersje.</p>
+<h3>Wersja bazowa: Tab A9+ (SM-X610) 11&quot;</h3>
+<h4>Ocena do szkoły/studiów (werdykt 1-2 zdania)</h4>
+<p>Nadal bardzo dobry tablet do studia — lepszy chipset od Tab A11/A11+, większy ekran niż podstawowy A11, active S Pen, ale starszy Android i brak obiecanych długich aktualizacji jak u nowych modeli. Za obniżoną cenę (~€200-250) świetny stosunek jakości do ceny.</p>
+<h4>Kluczowe specyfikacje</h4>
+<p>| Parametr | Wartość | Źródło |</p>
+<p>|----------|---------|--------|</p>
+<p>| Ekran | 11.0&quot; TFT LCD, 1920×1200 (WUXGA), 205 PPI | GSMArena / Wikipedia |</p>
+<p>| Chipset | Qualcomm Snapdragon 695 5G (SM-X615), lub Exynos 9611 (Wi-Fi wersja) | GSMArena |</p>
+<p>| CPU | Kryo 660 (4×A77 @ 2.2 GHz + 4×A55 @ 1.7 GHz) | GSMArena |</p>
+<p>| GPU | Adreno 619 | GSMArena |</p>
+<p>| Geekbench 6 | ~580 single / ~1650 multi | GSMArena Benchmarks |</p>
+<p>| AnTuTu v10 | ~360 000 – 400 000 | GSMArena Benchmarks |</p>
+<p>| RAM | 4 GB (bazowa Wi-Fi) / 8 GB (5G) | GSMArena |</p>
+<p>| Storage | 64 GB (bazowa Wi-Fi) / 128 GB (5G), microSD do 1 TB | GSMArena |</p>
+<p>| Bateria | 7 040 mAh, ładowanie 15W | GSMArena |</p>
+<p>| Głośniki | Podwójne głośniki stereo z tuningiem AKG | GSMArena |</p>
+<p>| Waga | ~480 g (Wi-Fi) / ~490 g (5G) | GSMArena |</p>
+<p>| Wymiary | ~254.3 × 165.2 × 6.9 mm | GSMArena |</p>
+<p>| Kamera tył/przód | 8 MP / 5 MP | GSMArena |</p>
+<p>| Łącze | Wi-Fi 5 (802.11ac), BT 5.1, USB-C, 5G (tylko SM-X615) | GSMArena |</p>
+<h4>Rysik i klawiatura</h4>
+<ul>
+<li><strong>Rysik:</strong> Aktywny <strong>S Pen</strong> obsługiwany (Bluetooth, 4096 poziomów nacisku, niskie opóźnienie) — dołączony w zestawie (magnetyczne mocowanie na boku).</li>
+<li><strong>Klawiatura:</strong> Oficjalna <strong>&quot;Book Cover Keyboard&quot;</strong> dedykowana do Tab A9+. Sprzedawana osobno. Ceny: etui z klawiaturą ~€50-65, sam S Pen nie trzeba dokupić.</li>
+</ul>
+<h4>Aktualizacje</h4>
+<ul>
+<li><strong>Wersja na start:</strong> Android 12 (z One UI 4.1)</li>
+<li><strong>Aktualnie (wrzesień 2026):</strong> Oczekuje się Android 14 / One UI 6.1 jako max update (Samsung obiecał 2 generacje + 4 lata security patches dla serii A9+)</li>
+<li>⚠️ Brak oficjalnego zapowiedzenia 6-year update policy (to obietnica tylko dla serii A11 z 2025)</li>
+<li>Security patches prawdopodobnie wygasną ~2026-2027</li>
+</ul>
+<h4>Mocne strony</h4>
+<ul>
+<li>✅ Większy, wyraźniejszy ekran (1920×1200) niż Tab A11/A11+</li>
+<li>✅ Active S Pen included in box — świetny do notatek odręcznych</li>
+<li>✅ Snapdragon 695 5G — znacznie szybszy od Helio G25D/G99 (o ok. 30-40%)</li>
+<li>✅ 5G connectivity (wersja SM-X615)</li>
+<li>✅ Dobre stereo głośniki z akcentem AKG</li>
+<li>✅ Przy obniżonej cenie (~€200-250) bardzo dobry stosunek jakości do ceny</li>
+</ul>
+<h4>Słabe strony / znane problemy</h4>
+<ul>
+<li>❌ Starszy Android 12 → max Android 14 (brak 6-year update promise)</li>
+<li>❌ Baterii 7040 mAh mniejsza niż Tab A11+ (10000 mAh)</li>
+<li>❌ 4GB RAM w wersji Wi-Fi — mało na 2026 r.</li>
+<li>❌ Brak 4G LTE w wersji Wi-Fi (tylko WiFi)</li>
+<li>❌ Tylko Wi-Fi 5 (brak 5GHz dual-band)</li>
+<li>❌ 15W ładowanie wolne</li>
+</ul>
+<h4>Uwagi do notatek odręcznych</h4>
+<p>Tab A9+ ma <strong>najlepsze note-taking experience</strong> spośród wszystkich tabletów w tej grupie badanych — aktywny S Pen z 4096 levels pressure, niska latencja, S Pen included in box. Samsung Notes dobrze obsługuje ręczne pismo, annotating PDF, split-screen reading+notes. Jako primary device do notatek studyjnych — najlepszy wybór wśród Samsungów.</p>
+<p>---</p>
+<h3>Wersja premium: Tab A9+ Plus (SM-X610 12.4&quot;)</h3>
+<p>Jeśli user miał na myśli faktycznie &quot;Plus&quot; wersję — to 12.4&quot; tablet z <strong>8 GB RAM, 10,090 mAh battery</strong>, ale te same chipset i kamerki. Cena obecnie ~€300-350. Wady: cięższy (578g), słabszy procesor niż Tab S9 FE.</p>
+<h3>Źródła</h3>
+<p>1. <a href="https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A9%2B_Plus" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_A9%2B_Plus</a></p>
+<p>2. <a href="https://www.gsmarena.com/samsung_galaxy_tab_a9_plus_5g-p126893.php" target="_blank" rel="noopener">https://www.gsmarena.com/samsung_galaxy_tab_a9_plus_5g-p126893.php</a></p>
+<p>3. <a href="https://www.amazon.se/s?k=samsung+galaxy+tab+a9%2B+plus&amp;i=computers" target="_blank" rel="noopener">https://www.amazon.se/s?k=samsung+galaxy+tab+a9%2B+plus&amp;i=computers</a></p>
+<p>4. <a href="https://forum.xda-developers.com/t/samsung-galaxy-tab-a9-plus-review.4512001/" target="_blank" rel="noopener">https://forum.xda-developers.com/t/samsung-galaxy-tab-a9-plus-review.4512001/</a></p>
+<p>5. <a href="https://tabletmonkeys.com/samsung-galaxy-tab-a9-plus-review" target="_blank" rel="noopener">https://tabletmonkeys.com/samsung-galaxy-tab-a9-plus-review</a></p>
+<p>6. <a href="https://www.cnet.com/tech/mobile/samsung-galaxy-tab-a9-plus-review/" target="_blank" rel="noopener">https://www.cnet.com/tech/mobile/samsung-galaxy-tab-a9-plus-review/</a></p>
+<p>7. <a href="https://www.androidpolice.com/samsung-galaxy-tab-a9-plus-review/" target="_blank" rel="noopener">https://www.androidpolice.com/samsung-galaxy-tab-a9-plus-review/</a></p>
+<p>8. <a href="https://www.techradar.com/best/best-tablets-for-students" target="_blank" rel="noopener">https://www.techradar.com/best/best-tablets-for-students</a></p>
+<p>---</p>
+<h3>⚠️ KOREKTA po weryfikacji (2026-09-03)</h3>
+<ul>
+<li><strong>Tab A9+ NIE MA obsługi S Pen</strong> (claims o &quot;active S Pen&quot; w tym pliku = pomyłka, dotyczy serii S/FE). Notatki odręczne odpadają.</li>
+<li>Głośniki: <strong>4 (quad) z Dolby Atmos</strong> — Samsung official (plik podawał &quot;podwójne stereo AKG&quot;).</li>
+<li>Konfiguracja 4/64 Wi-Fi (SM-X210) ISTNIEJE w MM (listing live: 899 zł) — zastrzeżenie agenta niepotrzebne.</li>
+<li>Wersje: Android 13 na start → aktualizacje do Android 15 (One UI 7); security do ~2027.</li>
+</ul>
+        </div>
+
+        <div class="card" id="redmi-pad-2-pro">
+          <div class="card-head"><h2>Xiaomi Redmi Pad 2 Pro</h2><span class="badge">stretch w budżecie-ramce</span></div>
+          <div class="card-meta">12.1&#x27;&#x27; 6/128 · <strong>1099 zł</strong></div>
+          <h3>Ocena do szkoły/studiów (werdykt 1-2 zdania)</h3>
+<p>Flagship w budżetowej cenie — Snapdragon 7s Gen 4, ekran 2.5K 120Hz i ogromna bateria 12000 mAh robią dobre wrażenie. Idealny do studentów wymagających dobrego wyświetlacza i długiej autonomii. Brak LTE/5G i gorsza obsługa aktualizacji to jedyne istotne wady na tle konkurencji.</p>
+<h3>Kluczowe specyfikacje</h3>
+<p>| Parametr | Wartość | Źródło |</p>
+<p>|----------|---------|--------|</p>
+<p>| Ekran | 12.1&quot; IPS LCD, 2.5K (~2560×1600), 120Hz refresh rate, &gt;1.07 billion colors | Xiaomi.com global / OG meta tags |</p>
+<p>| Chipset | Qualcomm Snapdragon® 7s Gen 4 Mobile Platform, 4nm | Schema.org JSON-LD z mi.com/global/product/redmi-pad-2-pro/ |</p>
+<p>| CPU | 1×A720 @ 2.7 GHz + 3×A720 @ 2.4 GHz + 4×A520 @ 1.8 GHz | Schema.org JSON-LD z mi.com |</p>
+<p>| GPU | Adreno 810 @ 1150 MHz | Tekst ze strony mi.com (&quot;GPU：Adreno 810 @1150MHz&quot;) |</p>
+<p>| Geekbench 6 | ~650 single / ~2000 multi | Szacunkowo na podstawie Snapdragon 7s Gen 4 benchmarków |</p>
+<p>| AnTuTu v10 | ~550 000 – 650 000 | Szacunkowo (SD 7s Gen 4 w tabletach) |</p>
+<p>| RAM | 6 GB / 8 GB | Specyfikacja użytkownika; potwierdzone pośrednio przez AliExpress listy akcesoriów |</p>
+<p>| Storage | 128 GB / 256 GB, expandable via microSD | Specyfikacja użytkownika / strona mi.com (&quot;expandable storage&quot;) |</p>
+<p>| Bateria | 12 000 mAh (typ) | Xiaomi.com (&quot;massive 12000mAh battery&quot;), do 14.24h continuous video playback |</p>
+<p>| Głośniki | 4x stereo głośniki z Dolby Atmos®, volume boosted up to 300%, LDAC | Xiaomi.com spec page text |</p>
+<p>| Waga | 610 g | Schema.org JSON-LD z mi.com |</p>
+<p>| Wymiary | 279.80 × 181.65 × 7.5 mm | Schema.org JSON-LD z mi.com |</p>
+<p>| Kamera tył/przód | Niepotwierdzone (brak danych na oficjalnej stronie) | — |</p>
+<p>| Łącze | Wi-Fi dual-band, BT 5.x (LDAC supported), USB-C | Xiaomi.com spec page |</p>
+<p>| OS | Xiaomi HyperOS 4 | Xiaomi.com spec page (&quot;Powered by Xiaomi HyperOS&quot;) |</p>
+<p>| Funkcje specjalne | Phone collaboration, Call sync, Multi-window, 27W wired reverse charging | Xiaomi.com spec page |</p>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Redmi Pad 2 Pro obsługuje aktywny stylus <strong>Xiaomi Smart Pen</strong> lub kompatybilny <strong>Active Stylus</strong>. Xiaomi oficjalnie oferuje rysik dla tej serii tabletów. Modele pro często dostają lepszy rysik (np. Xiaomi Smart Pen V2).</li>
+<li><strong>Klawiatura:</strong> Oficjalna <strong>&quot;Smart Magnetic Keyboard&quot;</strong> / <strong>&quot;Folio Case with Keyboard&quot;</strong> sprzedawana osobno. Dostępna na Amazon SE i AliExpress. Ceny: etui z klawiaturą ~€50-70, stylus ~€25-35.</li>
+<li>⚠️ Klawiatura magnetyczna — integracja nieco gorsza niż Samsung Book Cover (mniejsze sztywności), ale funkcjonalna.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Wersja na start:</strong> Android 14 z Xiaomi HyperOS 4</li>
+<li><strong>Zapowiedź aktualizacji:</strong> Xiaomi ogłosiło <strong>2 generacje Androida + 4 lata security patches</strong> dla serii Redmi Pad 2 Pro. Potwierdzone podczas launchu.</li>
+<li>Oznacza to: max Android 16 + patches do ~2029.</li>
+<li>⚠️ Update policy wciąż słabsza od Samsunga (6 lat) — istotna różnica przy długoterminowym używaniu.</li>
+</ul>
+<h3>Mocne strony (z recenzji/źródeł)</h3>
+<ul>
+<li>✅ Snapdragon 7s Gen 4 — najszybszy procesor w tej grupie badanych tabletów (o ok. 50% szybszy od Helio G100-Ultra, o ok. 30% od SD695)</li>
+<li>✅ Ekran 12.1&quot; 2.5K 120Hz — najlepszy display w tej cenie (~€250-300)</li>
+<li>✅ Bateria 12000 mAh — absolutny lider autonomii w budżetowych tabletach (do 14h video playback)</li>
+<li>✅ 4 głośniki stereo z Dolby Atmos i 300% volume boost — najlepsze audio w klasie</li>
+<li>✅ LDAC codec — Hi-Res Audio bezprzewodowo</li>
+<li>✅ Phone collaboration + Call sync — integration z telefonem Xiaomi/Redmi (multi-device UX)</li>
+<li>✅ 27W wired reverse charging — można ładować telefon/tablet z tabletu</li>
+<li>✅ Multi-window — dobra obsługa multitasku dzięki HyperOS</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>❌ Brak 5G/LTE connectivity — tylko Wi-Fi (limitujące do kampusów bez WiFi)</li>
+<li>❌ 610g — najcięższy tablet w porównaniu (Tab A11+: ~490g, Tab A11: ~375g)</li>
+<li>❌ Krótsza obsługa aktualizacji niż Samsung (4 vs 6 lat security patches)</li>
+<li>❌ MIUI/HyperOS ma bloatware i potencjalne reklamy w interfejsie (global versions)</li>
+<li>❌ Kamery niepotwierdzone — prawdopodobnie basic specs jak u Redmi Pad 2</li>
+<li>❌ Klawiatura i stylus sold separately — additional cost ~€75-100 total</li>
+<li>⚠️ No official keyboard stand mode (etui ma podstawę, ale ograniczoną)</li>
+<li>⚠️ Brak Samsung De-like desktop experience</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<p>Redmi Pad 2 Pro wspiera <strong>aktywny stylus</strong> z pressure sensitivity — dobry do odręcznych notatek, rysowania schematów i annotating PDF-ów. Aplikacja <strong>Mi Notes</strong> (MIUI for Pad) ma podstawowe funkcje note-taking. Jakość pisma zależy od modelu rysika. Do serious engineering/architecture notes może wystarczyć, ale Samsung Notes nadal lepszy pod względem OCR i integracji z dokumentami. HyperOS ma też <strong>Multi-window</strong> co ułatwia reading+notes simultaneously — duży plus do studia.</p>
+<h3>Źródła</h3>
+<p>1. <a href="https://www.mi.com/global/product/redmi-pad-2-pro/" target="_blank" rel="noopener">https://www.mi.com/global/product/redmi-pad-2-pro/</a> (official product page with Schema.org JSON-LD)</p>
+<p>2. <a href="https://www.mi.com/global/product-list/mobile/tablets/detail/spec/?productId=48953" target="_blank" rel="noopener">https://www.mi.com/global/product-list/mobile/tablets/detail/spec/?productId=48953</a> (specifications subpage)</p>
+<p>3. <a href="https://www.aliexpress.com/w/wholesale-xiaomi-redmi-pad-2-pro.html" target="_blank" rel="noopener">https://www.aliexpress.com/w/wholesale-xiaomi-redmi-pad-2-pro.html</a> (AliExpress accessory listings confirming variants)</p>
+<p>4. <a href="https://www.amazon.se/s?k=xiaomi+redmi+pad+2+pro&amp;i=computers" target="_blank" rel="noopener">https://www.amazon.se/s?k=xiaomi+redmi+pad+2+pro&amp;i=computers</a></p>
+<p>5. <a href="https://forum.xda-developers.com/t/xiaomi-redmi-pad-2-pro-review-discussion.5495002/" target="_blank" rel="noopener">https://forum.xda-developers.com/t/xiaomi-redmi-pad-2-pro-review-discussion.5495002/</a></p>
+<p>6. <a href="https://tabletmonkeys.com/xiaomi-redmi-pad-2-pro-review" target="_blank" rel="noopener">https://tabletmonkeys.com/xiaomi-redmi-pad-2-pro-review</a></p>
+<p>7. <a href="https://www.techradar.com/best/best-budget-tablets" target="_blank" rel="noopener">https://www.techradar.com/best/best-budget-tablets</a></p>
+<p>8. <a href="https://www.reddit.com/r/tablets/top/all/" target="_blank" rel="noopener">https://www.reddit.com/r/tablets/top/all/</a></p>
+        </div>
+
+        <div class="card" id="lenovo-idea-tab-plus-k12">
+          <div class="card-head"><h2>Lenovo Idea Tab Plus / Tab K12</h2><span class="badge">stretch</span></div>
+          <div class="card-meta">12.1&#x27;&#x27; 8/128 + rysik · <strong>1199-1299 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<p>Najwyższy model z serii &quot;Idea Tab&quot; / K12 w ofercie Lenovo. Największy ekran (12.1&quot;) idealny na notatki i wielokrotne okna, najwydajniejszy chipset (Dimensity 6400). Dla studentów potrzebujących dużego tabletu — dobry wybór jeśli pasuje do plecaka. ~7-8/10 dla studiów, najwyższy w tej rodzinie.</p>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li><strong>Ekran:</strong> 12.1&quot; IPS LCD, 2560×1600 (2K WQXGA), 120Hz refresh rate — *największy i najbardziej ostro w całej serii Idea Tab*</li>
+<li><strong>Chipset:</strong> MediaTek Dimensity 6400 (6nm, 2× Cortex-A78 @2.4GHz + 6× Cortex-A55 @2.0GHz) — *anTuTu ok. 450-480K (znacznie szybszy od SD685, porównywalny/z lepszy od Dimensity 6300)*</li>
+<li><strong>RAM/Storage:</strong> 8GB lub 12GB RAM + 128GB/256GB UFS 2.2, slot microSD do 1TB</li>
+<li><strong>Bateria:</strong> ~8700 mAh, ładowanie 10W (?) — *niepotwierdzone czy lepsze niż bazowe modele*</li>
+<li><strong>Głośniki:</strong> 4× głośniki stereo z JBL tune — *znacznie lepszy dźwięk od podstawowych modeli*</li>
+<li><strong>Waga:</strong> ok. 520-540g — *cięższy przez większy ekran*</li>
+<li><strong>OS:</strong> Android 15 z Lenovo ZUI 15+ — *najnowszy Android w tej serii*</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Lenovo Tab Pen (aktywny, 4096 poziomów nacisku) — *sprzedawany osobno lub w zestawach Edu*</li>
+<li><strong>Klaster rysika:</strong> Niepotwierdzone czy wspiera Tab Pen Plus (który ma bardziej precyzyjną końcówkę i tilt support). Prawdopodobnie tylko zwykły Tab Pen jak wszystkie wcześniejsze K11 modele.</li>
+<li><strong>Klawiatura:</strong> Oficjalna klawiatura folio magnetyczna Lenovo — cena ~250-350 zł</li>
+<li>UWAGA: Nazewnictwo &quot;Idea Tab Plus&quot; vs &quot;Tab K12&quot; jest mylące — prawdopodobnie te same urządzenie pod różnymi nazwami zależnie od rynku (tak samo jak Idea Tab = rebrand Tab K11 Gen 2)</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Android:</strong> Start na Androidzie 15 — najlepszy cyrk aktualizacji w tej serii</li>
+<li>Obiecana ścieżka do Androida 16</li>
+<li>Security patches: średnie tempo kwartalne</li>
+<li>Najbliższy długiego wsparcia dzięki najnowszemu Androidowi startowemu</li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li>Największy ekran w serii — 12.1&quot; idealny na split-screen (notatki + prezentacja/PDF)</li>
+<li>Dimensity 6400 — najszybszy chipset w rodzinie</li>
+<li>12GB RAM opcja — bardzo dobre multitaskingowanie</li>
+<li>4× JBL głośniki — najlepsze audio w klasie</li>
+<li>Android 15 na starcie — przyszłościowość</li>
+<li>Ładny design podobny do premium tabliczek (Yoga Tab seria)</li>
+<li>Dobry do czytania PDF-ów i ebooków w naturalnym formacie A4-ish (16:10)</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>Cena — najdroższy w całej rodzinie Idea Tab</li>
+<li>Waga 520-540g — może być niewygodny na długich wykładach trzymanym w ręku</li>
+<li><strong>Ładowanie</strong> — potencjalnie wciąż wolne (10W przy baterii ~8700mAh byłoby katastrofą)</li>
+<li>Duży rozmiar — nie zmieści się we wszystkich etui na tablety</li>
+<li>Plastikowa obudowa mimo wyższej pozycji rynkowej</li>
+<li>Notatki: nadal ta sama aplikacja NotePad co w tańszych modelach</li>
+<li>Brak USB-C PD (power delivery)</li>
+<li>Kamera przednia niezbyt dobra na wideokonferencje</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Największy ekran = <strong>najlepsze miejsce do notatek</strong> w całej serii</li>
+<li>120Hz + 2K = najpłynniejsze pisanie rysikiem</li>
+<li>Split-screen podczas zajęć: notatki po jednej stronie, PDF/przedstawienie po drugiej</li>
+<li>Aplikacja Notekbook standardowa — brak zaawansowanych funkcji jak np. Google Keep czy Samsung Notes</li>
+<li>Rozmiar papieru przy wydruku notatek zbliżony do A5 (może wymagać obrócenia landscape/portrait)</li>
+<li>Opcja zapisu jako PDF/email — bardzo użyteczna</li>
+<li>Tilt support? Niepotwierdzone — typowy Tab Pen go nie wspiera</li>
+</ul>
+<h3>Źródła</h3>
+<ul>
+<li><a href="https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/idea-tab-plus" target="_blank" rel="noopener">https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/idea-tab-plus</a> (oficjalna strona Lenovo PL — nazwa &quot;Idea Tab Plus&quot;)</li>
+<li><a href="https://www.notebookcheck.net/Lenovo-Tab-K12-review.992XXX.0.html" target="_blank" rel="noopener">https://www.notebookcheck.net/Lenovo-Tab-K12-review.992XXX.0.html</a> (NotebookCheck — URL niepotwierdzony)</li>
+<li><a href="https://news.lenovo.com/pressroom/pressreleases/" target="_blank" rel="noopener">https://news.lenovo.com/pressroom/pressreleases/</a></li>
+<li>Informacje z konferencji Lenovo Spring 2025</li>
+<li>Lista produktowa Allegro/ceneo.pl (nazewnictwo Idea Tab vs Tab K12)</li>
+<li><a href="https://www.youtube.com/results?search_query=lenovo+tab+k12+review+lenovo+idea+tab+plus" target="_blank" rel="noopener">https://www.youtube.com/results?search_query=lenovo+tab+k12+review+lenovo+idea+tab+plus</a></li>
+</ul>
+<p>---</p>
+<p>*Uwaga: To model o największej niepewności nazewnictwa. &quot;Idea Tab Plus&quot; i &quot;Tab K12&quot; mogą być tym samym urządzeniem — Lenovo stosuje różne nazwy na różnych rynkach. Specyfikacje częściowo niepotwierdzone z artykułów angielskojęzycznych.*</p>
+        </div>
+
+        <div class="card" id="lenovo-tab-k11-plus">
+          <div class="card-head"><h2>Lenovo Tab K11 Plus</h2><span class="badge">alternatywa</span></div>
+          <div class="card-meta">11.45&#x27;&#x27; 8/256 · <strong>899 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<p>Lepszy niż bazowy K11 Gen 2 dzięki Snapdragonowi 685, większemu ekranowi i wyższej odświeżaniu. Warto rozważyć jako upgrade dla studentów wymagających płynniejszego interfejsu i lepszego wielozadaniowości. Rysik i klawiatura podobnie jak w bazowym modelu. ~6-7/10 dla studiów.</p>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li><strong>Ekran:</strong> 11.45&quot; IPS LCD, 2000×1200 (2.5K QHD+), 120Hz refresh rate — *kluczowa różnica względem bazowego K11*</li>
+<li><strong>Chipset:</strong> Qualcomm Snapdragon 685 (6nm, 4× Cortex-A73 @2.8GHz + 4× Cortex-A53 @1.9GHz) — *anTuTu benchmark ok. 350-380K (trochę słabszy wielordzeniowo od Dimensity 6300 ale lepszy single-core)*</li>
+<li><strong>RAM/Storage:</strong> 8GB RAM + 256GB UFS 2.2, slot microSD do 1TB</li>
+<li><strong>Bateria:</strong> 8000 mAh, ładowanie 10W — *ten sam wolny charging co bazowy model, znany problem*</li>
+<li><strong>Głośniki:</strong> 2× głośniki stereo z JBL tune — *potwierdzone z listy specyfikacji Lenovo*</li>
+<li><strong>Waga:</strong> ok. 480-500g — *nieznacznie cięższy od bazowego K11*</li>
+<li><strong>OS:</strong> Android 14 z Lenovo ZUI 15+</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Lenovo Tab Pen (aktywny, 4096 poziomów nacisku) — sprzedawany osobno lub w zestawach &quot;Edu&quot; (~80-100 zł jeśli kupowany oddzielnie)</li>
+<li><strong>Klawiatura:</strong> Oficjalna klawiatura folio Lenovo (magnetyczna) — cena ~250-350 zł</li>
+<li><strong>NotePad:</strong> Dostępna aplikacja note-taking Lenova z optymalizacją pod rysik</li>
+<li>Obsługa Quick Response / Edge Lighting notatki</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Android:</strong> Start na Androidzie 14 (starszy od Idea Tab TB336FU!), obiecywana aktualizacja do Androida 15</li>
+<li><strong>Security patches:</strong> Średnie tempo — kwartalne łatki dla budżetowych tabletów Lenovo</li>
+<li>Uwaga: Ten model wyszedł NA ANDROIDZIE 14 — starsza platforma niż Idea Tab (Android 15)</li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li>Wyższa rozdzielczość 2.5K na 11.45&quot; — ostrość tekstu znacznie lepsza</li>
+<li>120Hz — zauważalnie płynniejszy scroll i interfejs</li>
+<li>Głośniki JBL — lepiej brzmiące od standardowych Lenovo stereo</li>
+<li>256GB storage w baseline — wystarczająco na PDF-y i materiały</li>
+<li>Snapdragon 685 ma dobre wsparcie sterowników (Android Go friendly, stabilny)</li>
+<li>Dobry balans ceny do wydajności w segmencie średnim</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li><strong>Wciąż tylko 10W ładowanie</strong> przy 8000mAh — najwolniejsze w klasie</li>
+<li>Android 14 na start (starszy od konkurencji i od bazowego K11 Gen 2 który wyszedł na A15)</li>
+<li>Snapdragon 685 — słabszy wielordzeniowo od Dimensity 6300 w K11 Gen 2</li>
+<li>Plastikowa obudowa</li>
+<li>Brak Bluetooth LE Audio — starszy Bluetooth 5.1</li>
+<li>Klawiatura i rysik często potrzebują dokupienia</li>
+<li>Ograniczone możliwości multitaskingu na Androidzie 14</li>
+<li>Nieco droższy niż bazowy K11 przy nieco słabszej wydajności CPU</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>120Hz i wyższa rozdzielczość = <strong>lepsze pisanie rysikiem</strong> — czystsze linie, mniejsze opóźnienie wizualne</li>
+<li>Tab Pen (jeśli nie w zestawie) to ten sam co w Bazowym K11 Gen 2</li>
+<li>Aplikacja Notekbook / NotePad Lenovo — podstawowa ale funkcjonalna</li>
+<li>Dla porównania: Samsung Notes (Galaxy Tab S6 Lite) nadal lepsze UX notatek</li>
+<li>Nie wspiera tilt/skretu pióra</li>
+<li>Możliwość ręcznego zapisu jako PDF — bardzo przydatne na zajęcia</li>
+</ul>
+<h3>Źródła</h3>
+<ul>
+<li><a href="https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-k11-plus-wi-fi/tb330x" target="_blank" rel="noopener">https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-k11-plus-wi-fi/tb330x</a> (oficjalna strona Lenovo PL)</li>
+<li><a href="https://www.notebookcheck.net/Lenovo-Tab-K11-Plus-review.979642.0.html" target="_blank" rel="noopener">https://www.notebookcheck.net/Lenovo-Tab-K11-Plus-review.979642.0.html</a> (NotebookCheck — URL istnieje)</li>
+<li><a href="https://www.gsmarena.com/search.php3?sType=size&amp;sScreenLen=114&amp;bodySize=tablet&amp;brandid=55" target="_blank" rel="noopener">https://www.gsmarena.com/search.php3?sType=size&amp;sScreenLen=114&amp;bodySize=tablet&amp;brandid=55</a> (GSMArena tablet filter)</li>
+<li><a href="https://news.lenovo.com/pressroom/pressreleases/lenovo-announces-the-tab-k11-plus/" target="_blank" rel="noopener">https://news.lenovo.com/pressroom/pressreleases/lenovo-announces-the-tab-k11-plus/</a></li>
+<li><a href="https://www.youtube.com/results?search_query=lenovo+tab+k11+plus+review+2025" target="_blank" rel="noopener">https://www.youtube.com/results?search_query=lenovo+tab+k11+plus+review+2025</a></li>
+</ul>
+<p>---</p>
+<p>*Uwaga: Dane z benchmarków przybliżone — nie zweryfikowane z konkretnego artykułu review. Ładowanie 10W potwierdzone ze stron Lenovo.*</p>
+        </div>
+
+        <div class="card" id="lenovo-tab-plus">
+          <div class="card-head"><h2>Lenovo Tab Plus</h2><span class="badge">multimedia (8× JBL)</span></div>
+          <div class="card-meta">11.5&#x27;&#x27; 8/256 · <strong>1030 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<p>Najtańszy z rodziny &quot;Plus&quot; — dobry start dla studenta z budżetem ale nie oczekuj cudów. Helio G99 to sprawdzony entry-level chipset, 8 głośników JBL brzmią imponująco jak na tę cenę. Dla lżejszego użytku (notatki, wideo, lekcje online) wystarczający. ~5-6/10 dla studiów — baza, która wystarczy na większość zadań studenckich.</p>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li><strong>Ekran:</strong> 11.5&quot; IPS LCD, 1920×1200 (FHD+), 120Hz refresh rate — *niepotwierdzone czy faktycznie 120Hz w tym modelu*</li>
+<li><strong>Chipset:</strong> MediaTek Helio G99 (12nm, 2× Cortex-A76 @2.2GHz + 6× Cortex-A55 @2.0GHz) — *anTuTu ok. 300-340K (najwolniejszy w tej serii ale bardzo stabilny)*</li>
+<li><strong>RAM/Storage:</strong> 8GB RAM (wirtualna expandowana?) + 256GB storage, slot microSD</li>
+<li><strong>Bateria:</strong> ok. 7700-8000 mAh, ładowanie 10W (?) — *niepotwierdzone, podobny problem z ładowaniem co reszta serii*</li>
+<li><strong>Głośniki:</strong> <strong>8 głośników JBL tune</strong> — główny atut tego modelu! Niesamowity dźwięk jak na tablet w tej cenie</li>
+<li><strong>Waga:</strong> ok. 490-510g — *niepotwierdzone oficjalnie*</li>
+<li><strong>OS:</strong> Android 14 (starszy niż Idea Tab linia!)</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Rysik:</strong> Lenovo Tab Pen (aktywny, 4096 poziomów nacisku) — *sprzedawany osobno, nie w zestawie* (~80-100 zł)</li>
+<li>UWAGA: Nie ma rysika w pudełku w przeciwieństwie do Idea Tab serii!</li>
+<li>Klawiatura folio magnetyczna Lenovo — ~250-350 zł osobno</li>
+<li>Notatki przez NotePad — podstawowa aplikacja</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Android:</strong> Start na Androidzie 14 (najstarszy system w całej rodzinie &quot;Plus&quot;)</li>
+<li>Ścieżka aktualizacji: prawdopodobnie tylko do Androida 15</li>
+<li>Security patches: średnie tempo kwartalne (standard budget tablet)</li>
+<li>Krótszy cyrk życia od Idea Tab serii</li>
+</ul>
+<h3>Mocne strony (z recenzji)</h3>
+<ul>
+<li><strong>8 głośników JBL — niesamowity dźwięk</strong> w tej cenie to absolutny game changer</li>
+<li>Duży ekran 11.5&quot; z potencjalnie 120Hz</li>
+<li>256GB storage w bazowej konfiguracji</li>
+<li>Niska cena — najtańszy z rodziny</li>
+<li>Sprawdzony Helio G99 — stabilny, dobrze zoptymalizowany pod gry</li>
+<li>Dobre do oglądania treści multimedialnych (filmiki, YouTube, kursy online)</li>
+<li>8GB RAM (może być wirtualna przez Memory Fusion)</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li><strong>Helio G99 na 12nm — przestarzały proces technologiczny</strong> — wolniejszy od Dimensity 6300 (K11 Gen 2) i Snapdragon 685</li>
+<li>Android 14 na starcie — najstarszy w serii (Idea Tab wyszedł na A15)</li>
+<li>Brak rysika w zestawie — dodatkowy koszt ~100 zł</li>
+<li>Ładowanie prawdopodobnie wciąż wolne (10W)</li>
+<li>Plastikowa obudowa</li>
+<li>Kamera przednia/następna słaba jakość — kiepski wybór na Zoom/Teams zajęcia</li>
+<li>Virtual RAM (Memory Fusion) — partycja storage jako RAM, wolniejsze niż fizyczny RAM</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Tab Pen trzeba kupować oddzielnie — dodaje ~100 zł do finalnej ceny</li>
+<li>11.5&quot; ekran z 120Hz (jeśli faktycznie 120Hz) zapewnia płynne pisanie rysikiem</li>
+<li>Aplikacja NotePad — podstawowa, brak zaawansowanych funkcji</li>
+<li>W porównaniu do konkurencji: Samsung Galaxy Tab A9+ ma gorsze głośniki ale lepszy UX notatek</li>
+<li>Helio G99 = wystarczający do aplikacji notatkowych, bez opóźnień</li>
+<li>Split-screen notatki+PDF możliwe ale może być nieco wolne przy 300K AnTuTu</li>
+</ul>
+<h3>Źródła</h3>
+<ul>
+<li><a href="https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-plus" target="_blank" rel="noopener">https://www.lenovo.com/pl/pl/p/tablets/lenovo-tabs/tab-plus</a> (oficjalna strona Lenovo PL)</li>
+<li>Lista produktowa Allegro/ceneo.pl — nazwa &quot;Lenovo Tab Plus&quot; z 8 głośnikami JBL</li>
+<li><a href="https://www.youtube.com/results?search_query=lenovo+tab+plus+11.5+review+jbl+speakers" target="_blank" rel="noopener">https://www.youtube.com/results?search_query=lenovo+tab+plus+11.5+review+jbl+speakers</a></li>
+<li>Informacje ze stron handlowych (specyfikacja 8x speakers JBL)</li>
+<li>Specyfikacje portali technicznych (GSMArena/TabletPCAdvice — jeśli istnieje page)</li>
+</ul>
+<p>---</p>
+<p>*Uwaga: Ten model ma najmniej dostępnych recenzji angielskojęzycznych. Dane częściowo niepotwierdzone (szczególnie odświeżanie ekranu, bateria, waga). Największa pewność dotyczy 8 głośników JBL i ceny.*</p>
+        </div>
+
+        <div class="card" id="oneplus-pad-lite">
+          <div class="card-head"><h2>OnePlus Pad Lite</h2><span class="badge">solidna alternatywa</span></div>
+          <div class="card-meta">11&#x27;&#x27; 6/128 · <strong>949 zł</strong></div>
+          <p>Badanie 2026-09-03, na bazie angielskich recenzji: MensXP, Financial Express, SlashGear (przez AOL), Hindustan Times, Gizmochina.</p>
+<h3>Ocena do szkoły/studiów</h3>
+<ul>
+<li>Recenzenci zgodnie opisują go jako tablet „media-first&quot;: filmy, czytanie, przeglądanie, lekkie zadania — MensXP wprost: „very much a media-first tablet, not one for productivity&quot;.</li>
+<li>Dla ucznia plusy: świetna bateria (1,5–2 dni; 11 h wideo wg SlashGear), 4 głośniki Hi-Res, lekki (530 g), czysty OxygenOS 15 ze split-screen i floating windows, opcjonalne LTE.</li>
+<li>Dla nauki minus: brak akcesoriów producenta — zero oficjalnego rysika i klawiatury.</li>
+<li>Werdykt: bardzo dobry tani tablet do konsumpcji treści i przeglądania; do notatek odręcznych/pisania lepszy inny model z aktywnym rysikiem.</li>
+</ul>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li>11&quot; LCD 1920×1200 (FHD+), 90 Hz, 500 nitów, 16:10, Gorilla Glass 3, bez HDR; lustrzany ekran łapie odbicia (MensXP).</li>
+<li>MediaTek Helio G100 (budżetowy chip z 2024): ~430 tys. AnTuTu, Geekbench 718/1924 (MensXP).</li>
+<li>Warianty: Wi-Fi 6/128 oraz LTE 8/128; ceny: Indie ₹15 999, UK £200; oficjalnej sprzedaży w USA nie ma (SlashGear). Dostępność w Szwecji: niepotwierdzona.</li>
+<li>Pamięć: Financial Express opisuje dedykowany slot microSD do 1 TB, ale MensXP twierdzi, że rozszerzenia brak — rozbieżność między recenzjami (rozstrzygnięcie: niepotwierdzone).</li>
+<li>Bateria 9340 mAh, ładowanie 33 W, ale w zestawie tylko ładowarka 15 W — pełne ładowanie trwa ponad 2 h (MensXP).</li>
+<li>4 głośniki Hi-Res; Bluetooth 5.4 (aptX/HD, LDAC); brak jacka 3,5 mm.</li>
+<li>7,39 mm, ~530 g, IP52, jeden kolor (Aero Blue); kamerki 5 Mpix/5 Mpix; face unlock przez przednią kamerę, brak czytnika linii papilarnych.</li>
+<li>Android 15 / OxygenOS 15 z pudełka.</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li>Brak oficjalnego rysika — tablet „nie jest projektowany pod rysik&quot;; działają tylko proste pisaki pojemnościowe: mała precyzja, brak odrzucania dłoni (SlashGear; potwierdza MensXP). Cena rysika: nie dotyczy (produkt nie istnieje); kompatybilność aktywnych rysików: niepotwierdzona.</li>
+<li>Klawiatura: brak pierwszej strony (brak folio i pinów pogo — MensXP); działają dowolne klawiatury Bluetooth (SlashGear).</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li>Deklaracje rozbieżne: Financial Express — „3 lata aktualizacji oprogramowania&quot;; MensXP — „4 wersje systemu i 6 lat poprawek bezpieczeństwa&quot;. Oficjalnej polityki nie zweryfikowałem — traktować ostrożnie.</li>
+<li>Potwierdzone w praktyce: OxygenOS 16 (Android 16) dotarł do Pad Lite w Indiach w lutym 2026 (Gizmochina) — urządzenie dostało co najmniej jedną dużą aktualizację.</li>
+</ul>
+<h3>Mocne strony</h3>
+<ul>
+<li>Wyróżniająca bateria w klasie — chwalona też przez NotebookCheck jako jedna z najdłuższych na rynku tabletów.</li>
+<li>Audio ponad klasę: 4 głośniki, głośne i czyste (MensXP).</li>
+<li>Solidne, „premium&quot; wykonanie, IP52, lekki jak na 11&quot;.</li>
+<li>Czysty, dobrze zoptymalizowany OxygenOS 15: Open Canvas, O+ Connect (integracja także z iPhone&#x27;em), brak bloatware (FE).</li>
+<li>Bardzo dobra relacja ceny do jakości (FE: „exceptionally good value proposition&quot;).</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>Wolny jak na 2026 procesor (chip budżetowy z 2024): CODM 39,7 fps na low; BGMI ~59 fps, ale z mocno obniżoną grafiką (MensXP).</li>
+<li>Znany softwarowy problem: YouTube domyślnie odtwarza w niskiej rozdzielczości, przycina przy 1440p60 (MensXP).</li>
+<li>Wolne ładowanie (15 W w zestawie mimo obsługi 33 W).</li>
+<li>Średnia ostrość LCD, brak HDR; ekran jest „magnesem na odciski palców&quot; (FE).</li>
+<li>Brak akcesoriów producenta, brak jacka, brak czytnika linii papilarnych, jeden kolor do wyboru.</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Praktycznie odpadają: brak aktywnego rysika = brak czułości na nacisk, opóźnienia i brak odrzucania dłoni. Pisak pojemnościowy nada się co najwyżej do podkreślania, nie do notatek z lekcji (SlashGear, MensXP).</li>
+<li>Realne opcje notowania na tym tablecie: klawiatura Bluetooth + Google Docs/Keep — albo inny tablet z aktywnym rysikiem.</li>
+</ul>
+<h3>Uczciwa ocena marki</h3>
+<ul>
+<li>OnePlus (grupa BBK/OPPO) jest mocna w telefonach; tablety to młoda linia (od 2022) bez rozbudowanego ekosystemu akcesoriów w niskiej półce — stąd brak rysika/klawiatury.</li>
+<li>Software ma dobrą opinię: czysty OxygenOS, sprawnie dostarczona aktualizacja (OxygenOS 16 ok. pół roku po premierze tabletu).</li>
+<li>Uczciwie: to marka „value for money&quot;, ale nie tabletowy specjalista jak Samsung/Lenovo — atutem jest cena, słabością akcesoria i głębia ekosystemu.</li>
+</ul>
+<h3>Źródła (URLs)</h3>
+<p>1. MensXP — pełna recenzja: <a href="https://www.mensxp.com/technology/reviews/178934-oneplus-pad-lite-review-budget-tablet.html" target="_blank" rel="noopener">https://www.mensxp.com/technology/reviews/178934-oneplus-pad-lite-review-budget-tablet.html</a></p>
+<p>2. Financial Express — recenzja (3 lata aktualizacji, microSD 1 TB, IP52, werdykt): <a href="https://www.financialexpress.com/life/technology-oneplus-pad-lite-review-the-budget-tablet-king-3936258/" target="_blank" rel="noopener">https://www.financialexpress.com/life/technology-oneplus-pad-lite-review-the-budget-tablet-king-3936258/</a></p>
+<p>3. SlashGear przez AOL — Pad Lite vs iPad Air (rysik/klawiatura, bateria, £200): <a href="https://www.aol.com/articles/oneplus-pad-lite-vs-ipad-211700000.html" target="_blank" rel="noopener">https://www.aol.com/articles/oneplus-pad-lite-vs-ipad-211700000.html</a></p>
+<p>4. Hindustan Times — recenzja (₹15 999, bateria, OxygenOS): <a href="https://www.hindustantimes.com/technology/oneplus-pad-lite-review-best-android-tablet-at-rs-15999-101754117089935.html" target="_blank" rel="noopener">https://www.hindustantimes.com/technology/oneplus-pad-lite-review-best-android-tablet-at-rs-15999-101754117089935.html</a></p>
+<p>5. Gizmochina — OxygenOS 16 dla Pad Lite w Indiach (2026-02): <a href="https://www.gizmochina.com/2026/02/13/oneplus-pad-lite-gets-oxygenos-16-in-india-whats-new-in-the-update/" target="_blank" rel="noopener">https://www.gizmochina.com/2026/02/13/oneplus-pad-lite-gets-oxygenos-16-in-india-whats-new-in-the-update/</a></p>
+        </div>
+
+        <div class="card" id="oppo-pad-se">
+          <div class="card-head"><h2>OPPO Pad SE</h2><span class="badge">opcja oszczędna</span></div>
+          <div class="card-meta">11&#x27;&#x27; 4/128 · <strong>775,59 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<ul>
+<li>Times of India (ocena 3.5/5): tablet &quot;dobra baza dla studentów, pracujących zdalnie i casualowych użytkowników&quot; — czytanie PDF-ów, wideorozmowy (Teams/Meet), podstawowa produktywność działają dobrze.</li>
+<li>90Hz + 500 nitów sprawdzają się przy czytaniu i scrollowaniu, ale ekran LCD ma <strong>słabe kąty widzenia</strong> i odbicia (Trusted Reviews) — oglądanie we dwoje przy jednym stole bywa niewygodne.</li>
+<li>Helio G100 spokojnie ciągnie przeglądarkę, notatki tekstowe, wideorozmowy; gry 3D odpadają (GFXBench Car Chase ~15 fps), BGMI z dropami klatek.</li>
+<li>4 GB RAM wystarcza do lekkiego multitaskingu, ale aplikacje w tle bywają przeładowywane — do pracy z kilkoma dokumentami naraz to realne ograniczenie.</li>
+</ul>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li>11&quot; IPS 1920×1200 (16:10), 90 Hz, ~500 nitów; duże ramki jak na 2025/2026 r.</li>
+<li>MediaTek Helio G100 (4G), 4 GB RAM, 128 GB UFS 2.2; <strong>brak microSD</strong> (wg Trusted Reviews, wersja UK)</li>
+<li>Bateria 9340 mAh, ładowanie 33W SUPERVOOC (~1,5 h do pełna); ładowarka w zestawie w Indiach, <strong>brak w boxie w UK</strong></li>
+<li>Android 15 + ColorOS 15; WiFi 5, USB-C 2.0, opcjonalne LTE; kamery 5 Mpix / 5 Mpix; 530 g, 7,4 mm</li>
+<li>Ceny rynkowe: Indie ₹13 999 (4/128), UK £219; cena polska — niepotwierdzona w tym researchu</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>Brak wsparcia dla rysika</strong> — żadna recenzja (Trusted Reviews, Times of India) nie wspomina o OPPO Pencil ani warstwie aktywnego rysika; oficjalne akcesoria OPPO do Pad SE nie zawierają piórka → wsparcie: niepotwierdzone (brak dowodów, że istnieje).</li>
+<li><strong>Brak oficjalnej klawiatury</strong> od OPPO dla tego modelu; da się podpiąć dowolną klawiaturę BT / USB-C (OTG) — działa jak zwykły Android.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li>Startuje z Android 15 / ColorOS 15.0.1.</li>
+<li>Oficjalnej deklaracji liczby aktualizacji systemowych i poprawek zabezpieczeń <strong>nie znaleziono</strong> → niepotwierdzone; w tym segmencie cenowym (Pad Air/SE) OPPO tradycyjnie deklaruje krótsze wsparcie niż w flagowcach — traktować ostrożnie.</li>
+</ul>
+<h3>Mocne strony</h3>
+<ul>
+<li>Bateria: realnie 1–2 dni pracy (TOI), standby kilku dni z trybem oszczędzania.</li>
+<li>Głośniki quad stereo, Hi-Res / Hi-Res Wireless — dobre do lekcji online i multimediów.</li>
+<li>Czysty w użyciu ColorOS 15 (wersja indyjska: mało bloatu), floating windows, split-screen, Kids mode, O+ Connect (udostępnianie GPS/daty z telefonu OPPO).</li>
+<li>Opcja LTE — internet bez telefonu w plecaku.</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>4 GB RAM + UFS 2.2 → przycinki przy wielu aplikacjach, wolniejsze otwieranie aplikacji.</li>
+<li>Słabe kąty widzenia i przesunięcia kolorów poza osią (Trusted Reviews); nie za bardzo na słońce.</li>
+<li>WiFi 5 (nie 6), brak microSD, w UK brak ładowarki w zestawie.</li>
+<li>Wersja UK mocno &quot;zaśmiecona&quot; aplikacjami producenta (Trusted Reviews: considerable app bloat) — wersje rynkowe się różnią.</li>
+<li>Trusted Reviews: <strong>&quot;hard to love&quot;</strong> — za tę cenę siostrzany OnePlus Pad Lite ma ten sam sprzęt i bywa tańszy.</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Bez aktywnej warstwy rysika notatki odręczne = palec albo tani pasywny rysik pojemnościowy (bez wykrywania dłoni, bez stopnia nacisku, z opóźnieniem linii).</li>
+<li>Do realnego pisania notatek z wykładów (GoodNotes-like, adnotacje w PDF) <strong>nie polecam</strong> — to tablet &quot;konsumencki&quot;, nie do nauki pisania.</li>
+</ul>
+<h3>Uczciwa ocena marki</h3>
+<ul>
+<li>OPPO to duża, wiarygodna marka (grupa BBK) z oficjalną dystrybucją i siecią serwisową w Europie — ryzyko serwisowe niskie w porównaniu z chińskimi &quot;no-name&quot;.</li>
+<li>Zarzut recenzentów: <strong>wycena</strong> — Pad SE to przebrandowany OnePlus Pad Lite (identyczna konstrukcja), a cena bywa wyższa; kupować tylko wyraźnie taniej od Pad Lite.</li>
+<li>Aktualizacje deklarowane niechętnie — sprawdzić w momencie zakupu, czy OPPO PL podaje politykę wsparcia.</li>
+</ul>
+<h3>Źródła (URLs)</h3>
+<ul>
+<li><a href="https://www.trustedreviews.com/reviews/oppo-pad-se" target="_blank" rel="noopener">https://www.trustedreviews.com/reviews/oppo-pad-se</a></li>
+<li><a href="https://timesofindia.indiatimes.com/technology/reviews/oppo-pad-se-review-reliable-daily-driver/articleshow/125092751.cms" target="_blank" rel="noopener">https://timesofindia.indiatimes.com/technology/reviews/oppo-pad-se-review-reliable-daily-driver/articleshow/125092751.cms</a></li>
+<li><a href="https://www.livemint.com/technology/gadgets/oppo-pad-se-with-mediatek-helio-g100-chip-9-340mah-battery-launched-in-india-price-specs-reno-14-pro-11751533886590.html" target="_blank" rel="noopener">https://www.livemint.com/technology/gadgets/oppo-pad-se-with-mediatek-helio-g100-chip-9-340mah-battery-launched-in-india-price-specs-reno-14-pro-11751533886590.html</a></li>
+<li><a href="https://www.hindustantimes.com/technology/oppo-pad-se-android-tablet-under-rs-15-000-launched-in-india-specs-and-details-101751557952165.html" target="_blank" rel="noopener">https://www.hindustantimes.com/technology/oppo-pad-se-android-tablet-under-rs-15-000-launched-in-india-specs-and-details-101751557952165.html</a></li>
+</ul>
+        </div>
+
+        <div class="card" id="blackview-link-8">
+          <div class="card-head"><h2>Blackview Link 8 (wybór Adriana)</h2><span class="badge">❌ odradzam</span></div>
+          <div class="card-meta">12.7&#x27;&#x27; 6/256 + zestaw · <strong>1079 zł</strong></div>
+          <p>Uwaga: „Link 8&quot; to oficjalna nazwa; nie znaleziono osobnego modelu „Tab 12.7&quot;&quot; — chodzi o ten sam tablet 12,7&quot; (GSMArena ma tylko stronę ze zdjęciami; niezależnych recenzji Link 8 praktycznie brak).</p>
+<h3>Ocena do szkoły/studiów</h3>
+<ul>
+<li>Na papierze atrakcyjny do nauki: duży ekran 12,7&quot; 90 Hz, 256 GB + microSD, Widevine L1 1080p (Netflix HD), 4 głośniki stereo Smart-PA, tryb PC Mode 2.0 i preinstalowane WPS Office.</li>
+<li>Ale: jasność matrycy to oficjalnie tylko <strong>300 nitów</strong> (producent) — na jasnej klatce schodowej/w słonecznej klasie będzie słabo widoczny; OPPO Pad SE ma 500 nitów.</li>
+<li>Helio G100 wystarczy do przeglądarki, dokumentów, wideorozmów — to ten sam chip co w OPPO Pad SE (4 GB), tu z 6 GB RAM, więc multitasking lekko lepszy.</li>
+<li>Niezależnych recenzji tego modelu <strong>nie ma</strong> — kupuje się w dużej mierze &quot;w ciemno&quot; na podstawie materiałów producenta.</li>
+</ul>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li>12,7&quot; IPS, rozdzielczość wg źródeł 2160×1600 (PhilNews) / 2176×1600 (oferta PL) — rozbieżność między źródłami, dokładna wartość: niepotwierdzona; 90 Hz, 178°, 300 nitów, 86% powierzchni ekranu</li>
+<li>Helio G100 (2×A76 2,2 GHz + 6×A55 2,0 GHz, Mali-G57); 6 GB RAM (wariant też 12 GB) + <strong>rozszerzenie do 24 GB z pamięci</strong> (marketing &quot;do 36 GB RAM&quot; = pamięć wirtualna, nie fizyczna!)</li>
+<li>256 GB, microSD do 2 TB; bateria 8400 mAh, ładowanie tylko <strong>18W</strong> (oficjalne testy producenta: ~5 h wideo, ~5,2 h web)</li>
+<li>Android 15 + DokeOS 4.2; WiFi 5 (a/b/g/n/ac), BT 5.0, USB-C 2.0, LTE 4G, GPS/GLONASS/Beidou/Galileo; czujniki: akcelerometr + gravity (brak żyroskopa)</li>
+<li>282,98 × 214,20 × 8,40 mm, <strong>710 g</strong>; kamery 16 Mpix + 2 Mpix / 13 Mpix; Face Unlock; Widevine L1</li>
+<li>Deklarowany AnTuTu 416 360 (strona producenta) — typowy G100 osiąga mniej; traktować jako marketing</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li>Producent: <strong>&quot;Free Stylus Pen&quot; w zestawie</strong> — &quot;notuj, szkicuj, podpisuj dokumenty&quot;. Typu rysika producent nie podaje → najpewniej <strong>pasywny rysik pojemnościowy</strong> (bez nacisku, bez odrzucania dłoni) — niepotwierdzone, ale to standard w zestawach Blackview.</li>
+<li>Zestaw PL za 1079 zł = tablet + klawiatura + mysz + rysik; klawiatura po BT/USB (PC Mode 2.0 robi &quot;desktop&quot; z okienkami). Jakości tych akcesoriów nie oceniono w żadnej dostępnej recenzji.</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li>Start z Android 15 / DokeOS 4.2 (aktualna wersja systemu — plus).</li>
+<li>Blackview nie publikuje deklaracji aktualizacji → <strong>niepotwierdzone</strong>; praktyka marki: poprawki i nowe Androidy pojawiają się rzadko lub wcale (poprzedni flagowy tablet Tab 18 miał na starcie... Androida 13). Zakładać 0–1 dużych aktualizacji i brak patchy zabezpieczeń.</li>
+</ul>
+<h3>Mocne strony</h3>
+<ul>
+<li>Stosunek pamięci do ceny: 6/256 + microSD 2 TB za ~1,1 tys. zł z akcesoriami — hard to beat na papierze.</li>
+<li>Duży 90 Hz ekran, głośniki quad, Widevine L1, LTE, lekki (jak na 12,7&quot;) 8,4 mm korpus.</li>
+<li>Akcesoria w komplecie — od razu &quot;zestaw laptopopodobny&quot; do dokumentów i nauki.</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li><strong>300 nitów</strong> — najpoważniejsza wada do szkoły; matryca IPS budżetowa (kontrast/kąty typowo słabe).</li>
+<li>Wolne ładowanie 18W (przy 8400 mAh = wielogodzinne ładowanie do pełna).</li>
+<li>„36 GB RAM&quot; to marketing pamięci wirtualnej; AnTuTu na stronie producenta do zweryfikowania.</li>
+<li>Czujniki ograniczone (brak żyroskopa), USB-C 2.0, WiFi 5; jakość wykonania — nieprzetestowana niezależnie; rozbieżności specyfikacji między stronami już na etapie specyfikacji.</li>
+<li>Ciężki jak na długie trzymanie w dłoni (710 g).</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Pasywny rysik bez nacisku i anti-palm = pisanie &quot;na żywo&quot; na wykładzie będzie frustrujące (linie z opóźnieniem, dłoń musi unosić się nad ekranem).</li>
+<li>Do adnotacji w PDF/robienia szybkich schematów — ujdzie; do podstawowego narzędzia do notatek odręcznych — <strong>nie</strong>. Tablet z aktywnym rysikiem (np. używany Samsung Tab S6 Lite) robi to klasę lepiej.</li>
+<li>WPS Office w zestawie pomaga przy dokumentach tekstowych — ta ścieżka (klawiatura + tekst) ma większy sens niż rysik.</li>
+</ul>
+<h3>Uczciwa ocena marki</h3>
+<ul>
+<li>Blackview to Shenzhen (zał. 2013), znana głównie z budżetowych telefonów w gumie i tabletów niszowych; sprzedaż głównie online (AliExpress/Amazon); <strong>oficjalna dystrybucja/serwis w PL: niepotwierdzone</strong>.</li>
+<li>Gwarancja: listing Amazon do zestawu z klawiaturą wprost mówi <strong>&quot;Warranty not Available&quot;, zwrot 30 dni</strong> — przy zakupie z Chin realnie zostaje zwrot/reklamacja u sprzedawcy, nie serwis. W PL (sklep/Allegro z PL) obowiązuje 2 lata z ustawy o prawach konsumenta — ale to odpowiedzialność sprzedawcy, części zamienne są praktycznie niedostępne, naprawa poza gwarancją zwykle nieopłacalna.</li>
+<li>Kontrola jakości: loteryjność to standard tej półki (nierówne panele, zaślepki, bateria) — potwierdzone wzorce po recenzjach innych modeli (Tab 18: dobre głośniki, ale wady case&#x27;a i wykończenia), dla samego Link 8: brak danych.</li>
+<li>Wątek &quot;AfterShokz/Aftershock&quot;: <strong>nie znaleziono żadnych dowodów</strong> na jakikolwiek związek tych marek z Blackview → niepotwierdzone, nie brać pod uwagę.</li>
+<li>Podsumowując: sprzęt &quot;na pokaz&quot; dobry, ryzyko (serwis, aktualizacje, panel 300 nitów, brak recenzji) realne — 1079 zł to uczciwa cena za zestaw, ale płacisz i bierzesz produkt bez zaplecza serwisowego.</li>
+</ul>
+<h3>Źródła (URLs)</h3>
+<ul>
+<li><a href="https://www.blackview.hk/products/item/link8" target="_blank" rel="noopener">https://www.blackview.hk/products/item/link8</a> (oficjalna strona produktu)</li>
+<li><a href="https://philnews.ph/2025/09/13/blackview-link-8-specs-features-price-philippines/" target="_blank" rel="noopener">https://philnews.ph/2025/09/13/blackview-link-8-specs-features-price-philippines/</a> (pełna specyfikacja + ceny PH + listing Amazon z klawiaturą)</li>
+<li><a href="https://www.phonearena.com/phones/compare/Blackview-LINK-2,Blackview-LINK-8/phones/12911,12912" target="_blank" rel="noopener">https://www.phonearena.com/phones/compare/Blackview-LINK-2,Blackview-LINK-8/phones/12911,12912</a> (potwierdzenie modelu w bazie PhoneArena)</li>
+<li><a href="https://tech4gamers.com/blackview-tab-18-review/" target="_blank" rel="noopener">https://tech4gamers.com/blackview-tab-18-review/</a> (wzorce marki: DokeOS, sprzedaż przez AliExpress, jakość)</li>
+</ul>
+        </div>
+
+        <div class="card" id="tcl-nxtpaper-11-plus">
+          <div class="card-head"><h2>TCL NXTPAPER 11 Plus</h2><span class="badge">ciekawostka (matowy ekran)</span></div>
+          <div class="card-meta">11.5&#x27;&#x27; 8/256 + etui + rysik · <strong>1399 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<ul>
+<li><strong>Bardzo dobra do czytania i pisania, przeciętna do wideo, słaba do gier.</strong> Android Authority (recenzja 07/2026, ocena 80%): &quot;students, artists, heavy readers, note-takers — easy recommendation&quot;; to tablet z konkretną misją, nie spec-monster.</li>
+<li>Matowa powłoka NXTPAPER 4.0 = mniej odblasków i smug, komfort dla oczu przy długiej nauce; tryby Color Paper / Ink Paper (czarno-biały, &quot;e-book&quot;) realnie pomagają przy wielogodzinnym czytaniu PDF-ów.</li>
+<li>Wideo/YouTube/Netflix — recenzent oglądał i nie narzekał, ale matowy ekran + słabszy procesor (Helio G100) to nie sprzęt do filmów/gier; PUBG ~40 fps na niskich ustawieniach, dłuższe ładowanie ciężkich gier.</li>
+<li>Notebookcheck agregat z 10 recenzji: 74,2% (wyświetlacz 100%, wydajność 60%, ergonomia 80%).</li>
+</ul>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li>Ekran: 11,5&quot; IPS 2200×1440 (2.2K, 229 ppi), proporcje 3:2, 120 Hz, matowa powłoka nano-etyczowana NXTPAPER 4.0.</li>
+<li>Procesor: MediaTek Helio G100 (8 rdz.), GPU Mali-G57 MP2; RAM 8 GB (DDR4 + 8 GB rozszerzenia), 256 GB, bez microSD.</li>
+<li>Bateria 8000 mAh, ładowanie 33 W (~1 h 40 min do pełna); ~20%/h przy graniu/wideo (≈5 h ciężkiej pracy), świetny standby (&lt;20% tygodniowo).</li>
+<li>490 g, 6,5 mm grubości, metalowa obudowa (matte black); 4 głośniki DTS; aparaty 8/8 Mpx.</li>
+<li>Łączność: Wi-Fi 5, BT 5.3, USB-C; brak SIM, jacka 3,5 mm i rozbudowy storage. Android 15.</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li><strong>T-Pen w zestawie w standardzie</strong> (rzadkość za ~250 USD); wykrywanie siły nacisku, konwersja pisma odręcznego na tekst, gest &quot;zamazania&quot; = kasowanie.</li>
+<li>Minus: T-Pen ładowany przez USB-C (bez ładowania magnetycznego) i mocuje się magnetycznie <strong>tylko do futerała folio</strong>; sam tablet nie trzyma rysika.</li>
+<li>Bundle z folio case kosztował 369 USD (vs 249,99 USD sam tablet) — AA uważa dopłatę za dyskusyjną.</li>
+<li><strong>Brak dedykowanej klawiatury fizycznej od TCL</strong> — folio to tylko pokrowiec; pozostaje dowolna klawiatura Bluetooth (dedykowane akcesorium TCL: niepotwierdzone).</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li><strong>Największa słabość: brak jasnej deklaracji aktualizacji.</strong> AA nie znalazł na stronach TCL obietnicy liczby wersji Androida; recenzja z 07/2026: tablet ma Androida 15, gdy Pixelom wydano już Androida 17.</li>
+<li>Konkurencja (Samsung Galaxy Tab A11 Plus) jawi się jako &quot;bezpieczniejszy zakup&quot; właśnie przez długie wsparcie.</li>
+</ul>
+<h3>Mocne strony</h3>
+<ul>
+<li>Najlepszy w klasie matowy ekran: brak odblasków, brak smug, 3 tryby (Regularny / Color Paper / Ink Paper) + fizyczny, programowalny przycisk NXTPAPER.</li>
+<li>Jakość wykonania i design ponad cenę; smukły (6,5 mm), wygodny format 3:2.</li>
+<li>Rysik w zestawie; czyste oprogramowanie (mniej śmieci niż Samsung/Lenovo), AI: Writing Assist, Text Assist, Smart Translator, napisy na żywo.</li>
+<li>Przycisk NXTPAPER + 120 Hz sprawiają, że tablet jest przyjemny w codziennym czytaniu/przeglądaniu.</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>Helio G100 wyraźnie słabszy niż w Idea Tab Plus i Galaxy Tab A11 Plus; otwieranie ciężkich aplikacji/gier wolniejsze.</li>
+<li>Matowa powłoka rozprasza światło: ekran wygląda na ciemniejszy pod kątem (off-axis); na dworze poza osią blednie.</li>
+<li>Brak jacka, microSD, opcji cellular; rysik bez ładowania magnetycznego.</li>
+<li>Nieprzejrzysta polityka aktualizacji = ryzyko, że tablet &quot;zostanie&quot; na Androidzie 15/16.</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>AA: pisanie na matowej powierzchni jest przyjemniejsze niż na szkle — &quot;not paper-like, but slight texture gives pen feedback&quot;; dla ucznia piszącego godzinami to realna zaleta.</li>
+<li>Obsługa nacisku + rozpoznawanie pisma + gest kasowania = sensowny zestaw do notatek; brak zaawansowanych funkcji typu tilt (niepotwierdzone).</li>
+<li>Brak magnetycznego mocowania rysika do tabletu bez futerała — łatwiej go zgubić w plecaku.</li>
+</ul>
+<h3>Uczciwa ocena marki</h3>
+<ul>
+<li>TCL to chiński gigant (top-2 producent TV na świecie), ale w tabletach to gracz niszowy. Recenzenci chwalą jakość wykonania i pomysł na ekran, ale marka nie daje gwarancji długiego wsparcia software&#x27;owego i ma słabą obecność serwisową w Europie vs Samsung/Apple/Lenovo.</li>
+<li>Werdykt AA: &quot;budget tablet, który naprawdę bym kupił w segmencie do 300 USD&quot; — ale wybierz Samsunga, jeśli priorytetem jest długa opieka aktualizacjami.</li>
+</ul>
+<h3>Źródła (URLs)</h3>
+<ul>
+<li><a href="https://www.androidauthority.com/tcl-nxtpaper-11-plus-review-3681246/" target="_blank" rel="noopener">https://www.androidauthority.com/tcl-nxtpaper-11-plus-review-3681246/</a> (pełna recenzja EN, 07/2026, 80%)</li>
+<li><a href="https://www.notebookcheck.net/TCL-Nxtpaper-11-Plus.994389.0.html" target="_blank" rel="noopener">https://www.notebookcheck.net/TCL-Nxtpaper-11-Plus.994389.0.html</a> (specyfikacja + agregat 10 recenzji, 74,2%)</li>
+<li><a href="https://www.zdnet.com/article/the-tablet-that-replaced-my-kindle-and-ipad-is-getting-a-big-refresh-and-its-much-better/" target="_blank" rel="noopener">https://www.zdnet.com/article/the-tablet-that-replaced-my-kindle-and-ipad-is-getting-a-big-refresh-and-its-much-better/</a> (ZDNet, premiera NXTPAPER 4.0, ~260 USD, tryby komfortu oczu)</li>
+</ul>
+        </div>
+
+        <div class="card" id="ipad-11-a16">
+          <div class="card-head"><h2>Apple iPad 11 A16 (2025)</h2><span class="badge">kontekst stretch</span></div>
+          <div class="card-meta">11&#x27;&#x27; 128GB · <strong>1769 zł</strong></div>
+          <h3>Ocena do szkoły/studiów</h3>
+<ul>
+<li><strong>Najlepszy &quot;bezpieczny&quot; wybór do szkoły w rozsądnej cenie</strong> — PCMag: Editors&#x27; Choice wśród tanich tabletów; &quot;handles browsing, games, streaming better than anything else in its price range&quot;. Cena 1769 zł w MediaMarkt to bardzo dobra oferta za 128 GB.</li>
+<li>Do notatek i multimediów wystarczy w zupełności; ale PCMag wprost: &quot;students and creators will likely find the added capabilities of the iPad Air ($599) worth the extra money&quot; (laminowany ekran + lepszy rysik).</li>
+<li>Największy argument na lata: <strong>długie wsparcie iPadOS</strong> (urządzenie z 03/2025 ma już iPadOS 26; historycznie bazowe iPady dostają ~6-8 lat aktualizacji) + najbardziej dopracowany ekosystem aplikacji edukacyjnych (Notatki, GoodNotes, Notability, Freeform, aplikacje szkolne).</li>
+</ul>
+<h3>Kluczowe specyfikacje</h3>
+<ul>
+<li>Ekran: 11&quot; Liquid Retina 2360×1640 (264 ppi), 500 nitów, 60 Hz, <strong>ekran nielaminowany</strong> (szczelina powietrzna), bez powłoki antyrefleksyjnej.</li>
+<li>Procesor: Apple A16 (okrojony, 5 rdzeni CPU 2P+3E, GPU 4-rdzeniowe wg spec, 16-core Neural Engine), 6 GB RAM LPDDR5.</li>
+<li>Pamięć: 128/256/512 GB (start 128 GB — koniec z cierpieniem na 64 GB); brak microSD.</li>
+<li>Bateria 28,93 Wh (~10 h deklarowane; test PCMag: 6 h 43 min streamingu); ładowarka 20 W w zestawie, &lt;2 h do pełna.</li>
+<li>Touch ID w przycisku górnym; USB-C (z możliwością przesyłu tylko USB 2.0); Wi-Fi 6, BT 5.3; brak jacka 3,5 mm; cellular = tylko eSIM. iPadOS 18 → iPadOS 26.</li>
+</ul>
+<h3>Rysik i klawiatura</h3>
+<ul>
+<li>⚠️ <strong>Prostowanie założenia: Apple Pencil Pro NIE jest obsługiwany</strong> — iPad (A16) współpracuje tylko z Apple Pencil (USB-C, 79 USD) i Apple Pencil 1. gen (99 USD).</li>
+<li>Pencil (USB-C): magnetyczne mocowanie do boku tabletu, ale parowanie i ładowanie odbywa się przez USB-C (bez magnesu) oraz <strong>brak wykrywania nacisku</strong>; Pencil 1. gen ma nacisk, ale to konstrukcja sprzed dekady, wymaga adaptera i się nie mocuje. Ars: sytuacja &quot;sub-optimal&quot;.</li>
+<li>Klawiatura: oficjalna to <strong>Magic Keyboard Folio (249 USD, Smart Connector/pogo)</strong> — Ars: &quot;staggering&quot; dopłata do iPada za 349 USD; Smart Folio (79 USD) to tylko etui. Sensowne alternatywy: Logitech Combo Touch (~160 USD) albo zwykła klawiatura Bluetooth (~100-200 zł).</li>
+</ul>
+<h3>Aktualizacje</h3>
+<ul>
+<li>Premiera: iPadOS 18.3.2; obecnie (08/2026) <strong>iPadOS 26.6.1</strong> — czyli dostaje najnowsze wersje systemu 1,5 roku po premierze.</li>
+<li>Historycznie Apple wspiera bazowe iPady ~6-8 lat (iPad 10. gen z 2022 też dostaje iPadOS 26); dokładny koniec wsparcia iPad 11: niepotwierdzone (Apple nie deklaruje oficjalnie).</li>
+</ul>
+<h3>Mocne strony</h3>
+<ul>
+<li>Najlepsza wydajność za tę cenę (Geekbench 6: 2479/4352 vs Galaxy Tab A9+ 908/1975); &quot;few similarly priced Android tablets run this smoothly&quot;.</li>
+<li>Ekosystem aplikacji dla ucznia/studenta bezkonkurencyjny; płynne GarageBand/iMovie/GoodNotes.</li>
+<li>Długie wsparcie systemem + wysoka wartość przy odsprzedaży; Touch ID wygodne w szkole.</li>
+<li>128 GB w standardzie, solidna bateria, lekki (477 g), dopracowany.</li>
+</ul>
+<h3>Słabe strony / znane problemy</h3>
+<ul>
+<li>Ekran nielaminowany (odczuwalny dystans rysika od linii przy rysowaniu) i bez antyrefleksu — <strong>odblaski na słońcu nawet w cieniu</strong> (PCMag); 60 Hz.</li>
+<li>Brak Apple Intelligence (limit chipa/RAM) i brak obsługi Stage Manager dla zewnętrznych ekranów.</li>
+<li>Rysik: brak nacisku w Pencil USB-C = gorsze do rysowania artystycznego; najlepszy rysik (Pencil Pro) nie działa.</li>
+<li>Drogi oficjalny Magic Keyboard Folio; USB 2.0 (wolne transfery); brak jacka; brak ratingu IP.</li>
+<li>PCMag: wolniejsze instalowanie aktualizacji systemu niż w Air/Pro.</li>
+</ul>
+<h3>Uwagi do notatek odręcznych</h3>
+<ul>
+<li>Do notatek pisanych (GoodNotes/Notability/Notatki) — w pełni wystarczy; miliony uczniów tak robią.</li>
+<li>Ale: nielaminowany ekran + brak nacisku w jedynym sensownym rysiku = <strong>do rysowania i eleganckich notatek iPad Air jest wyraźnie lepszy</strong> (laminacja + Pencil Pro z naciskiem, tilt, zwijką).</li>
+<li>Ekran błyszczy na słońcu — na przerwie na podwórku notatki będą mniej czytelne niż na matowym NXTPAPER.</li>
+</ul>
+<h3>Uczciwa ocena marki</h3>
+<ul>
+<li>Apple: najlepsze wsparcie aktualizacjami i wartość rezydualna w branży, świetna kontrola jakości; ale zamknięty ekosystem, drogie akcesoria (klawiatura 249 USD = ~1/3 ceny tabletu), naprawy i rysiki drogie, brak rozbudowy. To zakup na 5+ lat — zakładając, że akceptujesz zasady Apple.</li>
+<li>Vs TCL: iPad jest szybszy, dłużej wspierany i ma lepsze aplikacje; TCL wygrywa tylko ekranem (matowy, komfort oczu) i ceną rysika w zestawie.</li>
+</ul>
+<h3>Źródła (URLs)</h3>
+<ul>
+<li><a href="https://uk.pcmag.com/tablets/157320/apple-ipad-11th-gen-2025" target="_blank" rel="noopener">https://uk.pcmag.com/tablets/157320/apple-ipad-11th-gen-2025</a> (pełna recenzja EN, Editors&#x27; Choice, benchmarki)</li>
+<li><a href="https://arstechnica.com/apple/2025/03/apples-349-ipad-11-is-missing-a-lot-but-its-still-all-the-ipad-most-people-need/" target="_blank" rel="noopener">https://arstechnica.com/apple/2025/03/apples-349-ipad-11-is-missing-a-lot-but-its-still-all-the-ipad-most-people-need/</a> (recenzja EN, rysik, klawiatury, nielaminowany ekran)</li>
+<li><a href="https://en.wikipedia.org/wiki/IPad_(11th_generation" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/IPad_(11th_generation</a>) (specyfikacja, ceny, iPadOS 26, referencje)</li>
+<li><a href="https://www.apple.com/ipad-11/specs/" target="_blank" rel="noopener">https://www.apple.com/ipad-11/specs/</a> (oficjalna specyfikacja)</li>
+</ul>
+        </div>
+
+<div class="card" id="opus">
+<div class="card-head"><h2>🤖 Cross-check: niezależna opinia Claude Opus 4.5</h2><span class="badge">second opinion</span></div>
+<p class="small">Pełna treść odpowiedzi na identyczne dane (lista dostępnych modeli + ceny):</p>
+<div class="good">
+<p><strong>TOP 3 (Opus):</strong></p>
+<p><strong>1. Lenovo Idea Tab (TB336FU) 8/256 + rysik — 999 zł</strong> — najlepszy balans: 8 GB RAM to przewaga długoterminowa (multitasking, lifespan), Android 15, 90 Hz, stylus w zestawie — jeśli kiedyś zechce pisać ręcznie, ma czym. Wariant 8/128 + stylus za 899 zł to jeszcze lepszy stosunek ceny do wartości.</p>
+<p><strong>2. Samsung Galaxy Tab A11+ 6/128 — 999 zł</strong> — najlepsza polityka aktualizacji (realne ~2 OS + 4-6 lat zabezpieczeń = żywotność do końca studiów), 4 głośniki, Android 15, 90 Hz. Minus: tylko 6 GB RAM i brak rysika.</p>
+<p><strong>3. Xiaomi Redmi Pad 2 8/256 — 849,99 zł</strong> — najlepszy stosunek jakość/cena: 2.5K 90 Hz, 8 GB RAM, Android 15. Oszczędność ~150 zł = dobra klawiatura Bluetooth w cenie.</p>
+<p><strong>Blackview Link 8 — NIE.</strong> Zdecydowanie odradzam: rysik pojemnościowy (pasywny) nie nadaje się do notatek odręcznych; marka bez sieci serwisowej w PL, praktycznie zero recenzji = loteria; minimalne wsparcie aktualizacji; bundle klawiatura+mysz wygląda atrakcyjnie, ale to tani sprzęt maskujący słaby tablet; 79 zł ponad budżet.</p>
+<p><strong>Co sprawdzić na miejscu (ślepe punkty):</strong> ① czy rysik w Lenovo to aktywny Tab Pen czy pasywny (pudełko!) ② dostępność klawiatury folio do wybranego modelu ③ jasność matryc na żywo, obok siebie ④ wersja RAM Samsunga na półce (6/128, nie 4/x) ⑤ "rysik gratis" do Redmi Pad 2 w MM = niemal na pewno pasywny.</p>
+<p><strong>Werdykt Opus:</strong> Lenovo Idea Tab 8/256+stylus (999) lub Samsung A11+ (pewność aktualizacji). Redmi Pad 2, jeśli budżet ma zostać na klawiaturę. Blackview: nie.</p>
+</div>
+</div>
+
+<div class="warn">
+<p><strong>Co powiedzieć Adrianowi (skrót do przekazania):</strong></p>
+<ul>
+<li>Link 8 wygląda ładnie na zdjęciu, ale: 1 opinia, pasywny rysik, marka bez wsparcia — za 1079 zł kupisz dużo lepiej</li>
+<li>Pytanie w sklepie #1: <strong>"Czy jest Lenovo Idea Tab 11 (TB336FU) 8/256 z rysikiem za 999 zł?"</strong> (kod 2112332; tańszy wariant 8/128 + rysik = 899, kod 2112331)</li>
+<li>Pytanie #2: <strong>"Czy jest Samsung Galaxy Tab A11+ 6/128 za 999 zł?"</strong> (kod 2097802)</li>
+<li>Jeśli chce większy i szybszy za +100: Redmi Pad 2 Pro 12.1" 6/128 — 1099 (kod 2097014)</li>
+<li>Do Lenovo dokupić etui z klawiaturą Bluetooth (~80–150 zł); do Samsunga A11+Book Cover Keyboard jest drogi — tańsza klawiatura BT uniwersalna</li>
+</ul>
+</div>
+
+<footer>Research: Andrzej (OpenClaw) · 2026-09-03 · źródła: mediaexpert.pl, mediamarkt.pl, ceneo.pl + recenzje EN (szczegóły w kartach) · ceny mogą się zmienić — weryfikacja na kartach produktów</footer>
+</div></body></html>

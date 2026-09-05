@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Willys Proteiny 💪 — najlepsze macro per kategori</title>
+<meta name="description" content="Willys produkty z najlepszymi makroskładnikami — sortuj po białku, kaloriach i cenie. High-protein shopping helper.">
+<style>
+:root{
+  --bg:#0f0f10; --card:#1a1a1c; --card2:#232326; --text:#f2f2f2; --muted:#9a9a9f;
+  --yellow:#ffd400; --yellow2:#e6bf00; --green:#3ddc84; --red:#ff5c5c; --accent:#4da3ff;
+  --radius:14px; --maxw:1200px;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:env(safe-area-inset-bottom)}
+a{color:var(--accent)}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 14px}
+
+/* HEADER */
+header{background:linear-gradient(135deg,#000 0%,#1c1c1f 100%); border-bottom:3px solid var(--yellow); padding:18px 0 14px; position:sticky; top:0; z-index:50; backdrop-filter:blur(8px)}
+.h-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.logo{font-size:1.45rem; font-weight:800; letter-spacing:-0.5px}
+.logo .y{color:var(--yellow)}
+.logo-sub{font-size:.72rem; color:var(--muted); font-weight:500}
+.tabs{display:flex; gap:6px; margin-top:12px}
+.tab{border:none; background:var(--card2); color:var(--text); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.85rem; cursor:pointer; transition:.15s; white-space:nowrap}
+.tab:hover{background:#2e2e33}
+.tab.active{background:var(--yellow); color:#000}
+
+/* CONTROLS */
+.controls{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items:center}
+.search{flex:1 1 200px; min-width:160px; background:var(--card2); border:1px solid #333; color:var(--text); border-radius:10px; padding:10px 14px; font-size:.95rem; outline:none}
+.search:focus{border-color:var(--yellow)}
+select{background:var(--card2); border:1px solid #333; color:var(--text); border-radius:10px; padding:10px 12px; font-size:.88rem; cursor:pointer; outline:none}
+select:focus{border-color:var(--yellow)}
+.chips{display:flex; gap:6px; overflow-x:auto; padding:10px 0 4px; -webkit-overflow-scrolling:touch; scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid #3a3a3f; background:transparent; color:var(--muted); padding:6px 12px; border-radius:999px; font-size:.8rem; font-weight:600; cursor:pointer; white-space:nowrap; transition:.15s}
+.chip:hover{border-color:var(--yellow); color:var(--text)}
+.chip.active{background:var(--yellow); border-color:var(--yellow); color:#000}
+.stats{font-size:.78rem; color:var(--muted); padding:6px 0 10px}
+
+/* GRID */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; padding-bottom:40px}
+.card{background:var(--card); border:1px solid #2a2a2e; border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column; transition:.15s}
+.card:hover{border-color:#444; transform:translateY(-2px)}
+.card.oos{opacity:.55}
+.pimg{position:relative; background:#fff; aspect-ratio:1; display:flex; align-items:center; justify-content:center}
+.pimg img{max-width:82%; max-height:82%; object-fit:contain}
+.badge-tl{position:absolute; top:8px; left:8px; background:#000c; color:var(--yellow); font-size:.7rem; font-weight:800; padding:4px 8px; border-radius:8px}
+.badge-tr{position:absolute; top:8px; right:8px; background:#000c; font-size:.7rem; font-weight:700; padding:4px 8px; border-radius:8px}
+.badge-tr.hot{color:var(--green)}
+.badge-tr.oos{color:var(--red)}
+.pbody{padding:10px 12px 12px; display:flex; flex-direction:column; gap:6px; flex:1}
+.pname{font-size:.9rem; font-weight:700; line-height:1.25}
+.pbrand{font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.4px}
+.macro{display:grid; grid-template-columns:repeat(4,1fr); gap:4px; background:var(--card2); border-radius:10px; padding:8px 6px; text-align:center}
+.m .v{font-weight:800; font-size:.95rem}
+.m .l{font-size:.62rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px}
+.m.protein .v{color:var(--green)}
+.m.kcal .v{color:var(--orange, #ffa64d)}
+.price-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:auto}
+.price{font-weight:800; font-size:1.02rem}
+.jmf{font-size:.7rem; color:var(--muted)}
+.plink{display:block; text-align:center; background:var(--yellow); color:#000; font-weight:700; font-size:.8rem; padding:8px; border-radius:10px; text-decoration:none; margin-top:6px}
+.plink:hover{background:var(--yellow2)}
+
+/* PROTIP bar */
+.protip{background:linear-gradient(90deg,#1c2b1c,#16241a); border:1px solid #2e5b2e; border-radius:var(--radius); padding:12px 14px; margin:4px 0 14px; font-size:.82rem; line-height:1.5; color:#c9e8c9}
+.protip b{color:var(--green)}
+
+/* RECIPES */
+.rgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; padding-bottom:50px}
+.rcard{background:var(--card); border:1px solid #2a2a2e; border-radius:var(--radius); overflow:hidden}
+.rcard img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block}
+.rbody{padding:14px}
+.rtitle{font-size:1.05rem; font-weight:800; margin-bottom:2px}
+.rsub{font-size:.78rem; color:var(--muted); margin-bottom:10px}
+.rmacro{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+.rmacro span{background:var(--card2); padding:4px 10px; border-radius:8px; font-size:.74rem; font-weight:700}
+.rmacro .p{color:var(--green)} .rmacro .k{color:#ffa64d}
+.rsec{font-size:.8rem; font-weight:700; color:var(--yellow); margin:10px 0 4px; text-transform:uppercase; letter-spacing:.5px}
+.rlist{font-size:.84rem; line-height:1.6; padding-left:18px}
+.rsteps{font-size:.84rem; line-height:1.65; padding-left:18px}
+.rsteps li{margin-bottom:4px}
+.tip{background:var(--card2); border-radius:10px; padding:10px; font-size:.78rem; color:var(--muted); margin-top:10px; line-height:1.5}
+.tip b{color:var(--yellow)}
+
+/* FOOTER */
+footer{border-top:1px solid #26262a; padding:20px 0 30px; color:var(--muted); font-size:.75rem; line-height:1.7}
+.empty{grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--muted)}
+
+@media (max-width:520px){
+  .grid{grid-template-columns:repeat(2,1fr); gap:10px}
+  .pname{font-size:.8rem}
+  .m .v{font-size:.85rem}
+  .logo{font-size:1.2rem}
+  .rgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="h-row">
+      <div class="logo">WILLYS <span class="y">PROTEINY</span> 💪</div>
+      <div class="logo-sub" id="meta-sub">high-protein finder · data: willys.se</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-view="products">🛒 Produkter</button>
+      <button class="tab" data-view="recipes">👨‍🍳 Przepisy</button>
+      <button class="tab" data-view="about">ℹ️ Info</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- PRODUCTS VIEW -->
+  <section id="view-products">
+    <div class="chips" id="cats"></div>
+    <div class="controls">
+      <input class="search" id="q" type="search" placeholder="🔍 Sök produkt…">
+      <select id="sort">
+        <option value="protein">Białko /100g ↓</option>
+        <option value="proteinkr">Białko /1 kr ↓</option>
+        <option value="proteinkcal">Białko /kcal ↓</option>
+        <option value="kcal-asc">Kcal /100g ↑</option>
+        <option value="kcal-desc">Kcal /100g ↓</option>
+        <option value="karatedesc">Kcal /100g ↓</option>
+        <option value="price-asc">Cena rosnąco</option>
+        <option value="price-desc">Cena malejąco</option>
+      </select>
+      <select id="minp">
+        <option value="0">Białko: wszystko</option>
+        <option value="8" selected>≥ 8 g/100g</option>
+        <option value="12">≥ 12 g/100g</option>
+        <option value="15">≥ 15 g/100g</option>
+        <option value="20">≥ 20 g/100g</option>
+      </select>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="protip" id="protip"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- RECIPES VIEW -->
+  <section id="view-recipes" style="display:none">
+    <div class="stats" style="padding-top:14px">Proste high-protein przepisy na składnikach z Willys. Makro na porcję (orientacyjnie).</div>
+    <div class="rgrid" id="rgrid"></div>
+  </section>
+
+  <!-- ABOUT VIEW -->
+  <section id="view-about" style="display:none">
+    <div style="padding:24px 0; max-width:760px; line-height:1.7; font-size:.92rem">
+      <h2 style="margin-bottom:10px">ℹ️ Co to jest?</h2>
+      <p style="color:var(--muted); margin-bottom:14px">Przegląd produktów high-protein z Willys — z białkiem, kaloriami i cenami na 100 g. Dane pobrane bezpośrednio z willys.se (katalog + wartości odżywcze). Sortuj po białku, cenie za gram białka albo kaloriach i zbuduj koszyk pod cel.</p>
+      <ul style="padding-left:20px; color:var(--muted); font-size:.86rem">
+        <li><b style="color:var(--green)">🔥 15+ g</b> białka/100 g = top jakościowo</li>
+        <li><b>Białko/1 kr</b> = ile gramów białka kupujesz za koronę (na podstawie ceny jednostkowej)</li>
+        <li>Ceny mogą się różnić między sklepami — sprawdź link „Öppna w Willys” przed zakupem</li>
+      </ul>
+      <p style="color:var(--muted); margin-top:14px; font-size:.8rem" id="about-meta"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Zrobione przez 🤖 Andrzeja dla Dawida · dane: willys.se (Axfood) · ceny i dostępność mogą się zmieniać.<br>
+    Niezależne narzędzie — nie jest powiązane z Willys/Axfood.
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+'use strict';
+const CATS = [
+  {id:'all', name:'⭐ Wszystko'},
+  {id:'kvarg', name:'🥛 Kvarg & skyr'},
+  {id:'keso', name:'🧀 Keso & cottage'},
+  {id:'yoghurt', name:'🥄 Jogurt & fil'},
+  {id:'proteinprod', name:'💪 Proteinowe (bary/puddingi/proszki)'},
+  {id:'meat', name:'🍗 Mięso & drób'},
+  {id:'chark', name:'🥓 Chark & wędliny'},
+  {id:'fish', name:'🐟 Ryby & owoce morza'},
+  {id:'cheese', name:'🧀 Sery'},
+  {id:'eggsveg', name:'🥚 Jajka & tofu'},
+  {id:'nuts', name:'🥜 Orzechy & masła'},
+  {id:'snacks', name:'🍿 Przekąski'},
+  {id:'frozen', name:'❄️ Mrożonki'},
+  {id:'other', name:'📦 Inne'},
+];
+
+function cat(p){
+  const t = ((p.name||'')+' '+(p.brand||'')+' '+(p.queries||[]).join(' ')+' '+(p.breadcrumbs||[]).join(' ')).toLowerCase();
+  const bc = (p.breadcrumbs||[]).join(' ').toLowerCase();
+  if(/kvarg|skyr/.test(t)) return 'kvarg';
+  if(/keso|cottage/.test(t)) return 'keso';
+  if(/yoghurt|yogurt|lättfil|fil$|kesam|fromage|crème fraiche|gräddfil/.test(t)) return 'yoghurt';
+  if(/proteinbar|protein bar|proteinpudding|proteinpulver|proteindryck|protein chips|protein glass|proteinpannkaka|proteinbröd|protein snack|whey|kasein/.test(t)) return 'proteinprod';
+  if(/chark|skinka|salami|korv$|falukorv|pastej|leverpastej|kallrökt|varmrökt|rökt lax|mortadella|skuret/.test(t) && !/lax|tonfisk|makrill|räkor/.test(t)) {
+    if(/lax|tonfisk|makrill|räkor|kräft/.test(t)) return 'fish';
+    if(/kyckling|kalkon| nötfärs|köttfärs|biff|kotlett|revben|karré|entrecote/.test(t)) return 'meat';
+    return 'chark';
+  }
+  if(/kyckling|kalkon|nötfärs|köttfärs|färs|biff|kotlett|revben|karré|entrecote|kebab|stroganoff|kotlet/.test(t)) return 'meat';
+  if(/tonfisk|makrill|lax|räkor|kräft|fisk|skaldjur|röding|sill/.test(t)) return 'fish';
+  if(/halloumi|mozzarella|feta|parmesan|ost$|ost |cheddar|prästost|hushållsost|västerbotten/.test(t)) return 'cheese';
+  if(/ägg|ägg|tofu/.test(t)) return 'eggsveg';
+  if(/jordnötssmör|mandelsmör|nötsmör|nötmix|mandel|cashew|jordnöt|nötter|hasselnöt|valnöt/.test(t)) return 'nuts';
+  if(/fryst|frusen|frys/.test(bc) || /fryst/.test(t)) return 'frozen';
+  if(/chips|snacks|snack|kracker|dipp/.test(t)) return 'snacks';
+  return 'other';
+}
+
+function fmt(n, d=1){ return n==null ? '–' : (Math.round(n*10)/10).toString().replace('.', ','); }
+
+// protein g per 1 kr: protein/100g * grams / price. grams from comparePriceUnit (kr/kg) => grams = price/comparePrice*1000
+function proteinPerKr(p){
+  const prot = p.nutri && p.nutri.protein; const price = p.price; const jmf = parseFloat(String(p.comparePrice||'').replace(/[^\d,]/g,'').replace(',','.'));
+  if(!prot || !price || !jmf) return null;
+  const grams = (price / jmf) * 1000;
+  return (prot/100) * grams / price;
+}
+
+let state = {cat:'all', q:'', sort:'protein', minp:8};
+
+function filtered(){
+  let list = (window.PRODUCTS||[]).map(p => Object.assign({}, p, {catId: cat(p)}));
+  list = list.filter(p => p.nutri && p.nutri.protein != null);
+  if(state.cat !== 'all') list = list.filter(p => p.catId === state.cat);
+  if(state.q){ const q = state.q.toLowerCase(); list = list.filter(p => (p.name+' '+p.brand).toLowerCase().includes(q)); }
+  if(state.minp) list = list.filter(p => (p.nutri.protein||0) >= state.minp);
+  const s = state.sort;
+  const key = {
+    'protein': p => -(p.nutri.protein||0),
+    'proteinkr': p => -(proteinPerKr(p)||0),
+    'proteinkcal': p => -( (p.nutri.protein||0) / Math.max(p.nutri.kcal||1,1) ),
+    'kcal-asc': p => p.nutri.kcal||9999,
+    'kcal-desc': p => -(p.nutri.kcal||0),
+    'karatedesc': p => -(p.nutri.kcal||0),
+    'price-asc': p => p.price||9999,
+    'price-desc': p => -(p.price||0),
+  }[s] || (p=>0);
+  list.sort((a,b)=>key(a)-key(b) || (b.nutri.protein||0)-(a.nutri.protein||0));
+  return list;
+}
+
+function card(p){
+  const prot = p.nutri.protein||0, kcal = p.nutri.kcal, carbs = p.nutri.carbs, fat = p.nutri.fat;
+  const hot = prot >= 15;
+  const img = p.image ? `<img loading="lazy" src="${p.image}" alt="${p.name}">` : '🛒';
+  const url = p.url || `https://www.willys.se/sok?q=${encodeURIComponent((p.name||'').split(' ').slice(0,3).join(' '))}`;
+  return `<div class="card ${p.outOfStock?'oos':''}">
+    <div class="pimg">
+      ${hot?'<span class="badge-tl">🔥 TOP</span>':''}
+      <span class="badge-tr ${p.outOfStock?'oos':'hot'}">${p.outOfStock?'SLUT':' '+fmt(prot)+'g P'}</span>
+      ${img}
+    </div>
+    <div class="pbody">
+      <div class="pname">${p.name}</div>
+      <div class="pbrand">${(p.brand||'')}${p.volume? ' · '+p.volume:''}</div>
+      <div class="macro">
+        <div class="m protein"><div class="v">${fmt(prot)}</div><div class="l">Białko g</div></div>
+        <div class="m kcal"><div class="v">${kcal==null?'–':Math.round(kcal)}</div><div class="l">Kcal</div></div>
+        <div class="m carbs"><div class="v">${fmt(carbs)}</div><div class="l">Węgle</div></div>
+        <div class="m fat"><div class="v">${fmt(fat)}</div><div class="l">Tłuszcz</div></div>
+      </div>
+      <div class="price-row">
+        <span class="price">${p.priceDisplay||((p.price||0).toFixed(2).replace('.',',')+' kr')}</span>
+        <span class="jmf">${p.comparePrice?('jmf '+p.comparePrice+' /'+(p.comparePriceUnit==='kg'?'kg':'st')):''}</span>
+      </div>
+      <a class="plink" href="${url}" target="_blank" rel="noopener">Öppna w Willys ↗</a>
+    </div>
+  </div>`;
+}
+
+function render(){
+  const list = filtered();
+  document.getElementById('stats').textContent =
+    `${list.length} produktów · z ${window.PRODUCTS? window.PRODUCTS.filter(p=>p.nutri&&p.nutri.protein).length : 0} z proteinem w bazie`;
+  document.getElementById('grid').innerHTML = list.length
+    ? list.slice(0,400).map(card).join('')
+    : '<div class="empty">Nic nie znalazłem 🤷 spróbuj innych filtrów</div>';
+  // protip
+  const best = list.filter(p=>!p.outOfStock).sort((a,b)=>(proteinPerKr(b)||0)-(proteinPerKr(a)||0))[0];
+  const tipEl = document.getElementById('protip');
+  if(best && proteinPerKr(best)){
+    tipEl.innerHTML = `<b>💰 Najlepszy białko/cena w tym widoku:</b> ${best.name} — ${fmt(proteinPerKr(best)*10,0)/10} g białka za 1 kr (${fmt(best.nutri.protein)} g/100 g, ${best.comparePrice})`;
+    tipEl.style.display='';
+  } else tipEl.style.display='none';
+}
+
+function renderCats(){
+  document.getElementById('cats').innerHTML = CATS.map(c=>`<button class="chip ${c.id===state.cat?'active':''}" data-cat="${c.id}">${c.name}</button>`).join('');
+}
+
+// RECIPES
+function renderRecipes(){
+  const R = window.RECIPES||[];
+  document.getElementById('rgrid').innerHTML = R.map(r=>`
+    <div class="rcard">
+      <img loading="lazy" src="${r.img}" alt="${r.title}">
+      <div class="rbody">
+        <div class="rtitle">${r.title}</div>
+        <div class="rsub">${r.sub}</div>
+        <div class="rmacro"><span class="p">💪 ${r.macro.protein} g białka</span><span class="k">🔥 ${r.macro.kcal} kcal</span><span>⏱ ${r.time}</span></div>
+        <div class="rsec">Składniki</div>
+        <ul class="rlist">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
+        <div class="rsec">Wykonanie</div>
+        <ol class="rsteps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+        ${r.tip?`<div class="tip">💡 <b>Tip:</b> ${r.tip}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+// events
+document.querySelector('.tabs').addEventListener('click', e=>{
+  const b = e.target.closest('.tab'); if(!b) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t===b));
+  ['products','recipes','about'].forEach(v=>document.getElementById('view-'+v).style.display = b.dataset.view===v?'':'none');
+});
+document.getElementById('cats').addEventListener('click', e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  state.cat = b.dataset.cat; renderCats(); render();
+});
+document.getElementById('q').addEventListener('input', e=>{ state.q = e.target.value; render(); });
+document.getElementById('sort').addEventListener('change', e=>{ state.sort = e.target.value; render(); });
+document.getElementById('minp').addEventListener('change', e=>{ state.minp = +e.target.value; render(); });
+
+// init
+renderCats();
+if(window.PRODUCTS){
+  const meta = window.META||{};
+  document.getElementById('meta-sub').textContent = `high-protein finder · ${window.PRODUCTS.length} produktów · ${meta.finished||''}`;
+  document.getElementById('about-meta').textContent = `Ostatnia aktualizacja danych: ${meta.finished||'?'} · produkty: ${meta.products||'?'}`;
+}
+render();
+renderRecipes();
+</script>
+</body>
+</html>

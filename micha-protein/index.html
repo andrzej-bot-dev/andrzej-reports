@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Micha Protein 🥣 — 6 dessertów po 96-125g białka (LeanBrahm × Willys)</title>
+<meta name="description" content="6 najpopularniejszych przepisów LeanBrahm z TikToka: skyr bowl'e 96-125g białka, składniki, kroki po debilu i produkty z Willys z cenami.">
+<style>
+:root{
+  --bg:#0f1115;--card:#181b22;--card2:#1f232c;--text:#e8eaf0;--muted:#9aa1b0;--accent:#ffb020;--accent2:#ff6b35;--good:#4ade80;--chip:#262b35;--border:#2a2f3a;
+  --p100:#7dd3fc;--f100:#fca5a5;--c100:#fcd34d;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:16px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 90px}
+header{padding:26px 0 18px;text-align:center}
+header h1{font-size:clamp(1.5rem,5.5vw,2.2rem);line-height:1.2;letter-spacing:-.5px}
+header h1 .em{font-size:1.1em}
+.sub{color:var(--muted);margin-top:8px;font-size:.95rem}
+.author{display:inline-flex;align-items:center;gap:10px;margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 16px}
+.author img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.author b{font-size:.98rem}
+.author small{display:block;color:var(--muted)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.badge{background:var(--chip);border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-size:.82rem;color:var(--muted)}
+.badge b{color:var(--text)}
+nav{position:sticky;top:0;z-index:50;background:rgba(15,17,21,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 0;margin:14px -14px 0}
+nav .in{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+nav .in::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;background:var(--chip);border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:.85rem;color:var(--text);text-decoration:none;font-weight:600}
+nav a.act{background:var(--accent);color:#1a1a1a;border-color:var(--accent)}
+section{margin-top:26px;scroll-margin-top:70px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.cover{position:relative}
+.cover img{width:100%;display:block;aspect-ratio:9/13;max-height:430px;object-fit:cover}
+.rank{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);color:#fff;border-radius:10px;padding:4px 10px;font-weight:800;font-size:.85rem}
+.views{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);color:#fff;border-radius:10px;padding:4px 10px;font-size:.8rem}
+.cardbody{padding:16px 16px 18px}
+h2{font-size:1.28rem;letter-spacing:-.3px;line-height:1.25}
+h2 small{display:block;color:var(--muted);font-weight:500;font-size:.85rem;margin-top:3px}
+.macro{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0}
+.macro div{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:8px 4px;text-align:center}
+.macro b{display:block;font-size:1.02rem}
+.macro span{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.kcal b{color:var(--accent)}.pro b{color:var(--good)}.car b{color:var(--c100)}.fat b{color:var(--p100)}
+.quote{border-left:3px solid var(--accent);background:var(--card2);border-radius:0 10px 10px 0;padding:10px 12px;margin:12px 0;color:var(--muted);font-style:italic;font-size:.9rem}
+.quote b{color:var(--text);font-style:normal}
+h3{margin:18px 0 8px;font-size:.82rem;text-transform:uppercase;letter-spacing:.8px;color:var(--accent)}
+.ing{display:flex;flex-direction:column;gap:7px}
+.ing details{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden}
+.ing details summary{list-style:none;cursor:pointer;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ing details summary::-webkit-details-marker{display:none}
+.ing details summary .nm{font-weight:700;font-size:.93rem}
+.ing details summary .qt{color:var(--muted);font-size:.82rem;white-space:nowrap}
+.ing details .buy{padding:0 12px 10px;border-top:1px dashed var(--border);font-size:.82rem}
+.ing details .buy a{color:var(--accent);text-decoration:none;font-weight:600}
+.ing details .buy .pr{color:var(--good);font-weight:700}
+.ing details .buy small{color:var(--muted);display:block;margin-top:2px}
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.steps li{list-style:none;counter-increment:s;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:10px 12px 10px 48px;position:relative;font-size:.93rem}
+.steps li::before{content:counter(s);position:absolute;left:12px;top:10px;width:24px;height:24px;border-radius:8px;background:var(--accent);color:#1a1a1a;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.steps li b{color:var(--accent)}
+.tip{background:linear-gradient(135deg,rgba(255,176,32,.12),rgba(255,107,53,.08));border:1px solid rgba(255,176,32,.35);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:.88rem}
+.tip b{color:var(--accent)}
+.recon{display:inline-block;background:rgba(255,107,53,.15);color:var(--accent2);border:1px solid rgba(255,107,53,.4);border-radius:8px;padding:2px 9px;font-size:.72rem;font-weight:700;margin-left:6px;vertical-align:middle}
+.tiktok{display:inline-block;margin-top:12px;color:var(--text);font-size:.85rem;font-weight:600;text-decoration:none;background:var(--chip);border:1px solid var(--border);border-radius:10px;padding:7px 13px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
+td.r{text-align:right;white-space:nowrap}
+td a{color:var(--accent);text-decoration:none;font-weight:600}
+.price{color:var(--good);font-weight:700}
+.total{display:flex;justify-content:space-between;padding:12px 6px;font-weight:800;font-size:1rem}
+.total span:last-child{color:var(--good)}
+footer{margin-top:34px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);padding-top:16px}
+footer p{margin-bottom:8px}
+.anchors{display:none}
+@media(min-width:600px){.cover img{aspect-ratio:16/9;max-height:340px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1><span class="em">🥣</span> Micha Protein</h1>
+  <p class="sub">6 najpopularniejszych dessertów LeanBrahm z TikToka<br>96–125 g białka na miskę · składniki + kroki "po debilu" · wszystko kupisz w Willys</p>
+  <div class="author">
+    <img src="img/7676936508837776673.jpg" alt="LeanBrahm">
+    <div><b>@leanbrahmhabit</b><small>LeanBrahm · 21,9K obserwujących · 454K łapek</small></div>
+  </div>
+  <div class="badges">
+    <span class="badge">📊 <b>4,9 mln</b> wyświetleń razem</span>
+    <span class="badge">💪 <b>96–125g</b> białka / miska</span>
+    <span class="badge">🛒 <b>Willys</b> produkty + ceny</span>
+  </div>
+</header>
+
+<nav><div class="in">
+  <a href="#r1">#1 Biała czekolada</a>
+  <a href="#r2">#2 Biscoff 114g</a>
+  <a href="#r3">#3 Flexible 100g</a>
+  <a href="#r4">#4 Oreo PB 125g</a>
+  <a href="#r5">#5 Kinder Bueno</a>
+  <a href="#r6">#6 Milk Slice</a>
+  <a href="#lista">🛒 Lista zakupów</a>
+</div></nav>
+
+<!-- ============ R1 ============ -->
+<section id="r1">
+<div class="card">
+  <div class="cover"><img src="img/7670243549216066849.jpg" alt="Biała czekolada bowl" loading="lazy">
+    <span class="rank">🥇 #1 · 1,9 mln</span><span class="views">❤️ 149,8K · 🔖 68,8K</span></div>
+  <div class="cardbody">
+    <h2>Bowl z białą czekoladą i Kinder Cards <small>96 g białka · "Dieting Made Easy"</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>1030</b><span>kcal całość</span></div>
+      <div class="pro"><b>96 g</b><span>białko</span></div>
+      <div class="car"><b>72 g</b><span>węgle</span></div>
+      <div class="fat"><b>38 g</b><span>tluszcz</span></div>
+    </div>
+    <div class="quote">💬 <b>LeanBrahm:</b> "Taste comes first. Your food needs to taste good, genuinely good, or you're not going to stick to it."</div>
+
+    <h3>🧺 Składniki</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">400 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g</a> · <span class="pr">18,90 kr</span><small>Dairy Food — potrzebujesz 1 tubka na tę miskę</small></div></details>
+      <details><summary><span class="nm">Whey białkowy czekoladowy (WPC)</span><span class="qt">50 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate 465g</a> · <span class="pr">169,40 kr</span><small>≈ 7 kr za porcję 50g — wystarczy na 9 misek</small></div></details>
+      <details><summary><span class="nm">Kakao bez cukru</span><span class="qt">10 g (~2 łyżki)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kakao" target="_blank">Garant Kakao 200g</a> · <span class="pr">37,76 kr</span><small>staraj się o prawdziwe kakao, nie napój kakaowy</small></div></details>
+      <details><summary><span class="nm">Mleko migdałowe bez cukru</span><span class="qt">20–30 ml</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandeldryck" target="_blank">Garant Mandeldryck Utan Tillsatt Socker 1L</a> · <span class="pr">16,94 kr</span><small>ile dodać zależy od twojego białka — dodawaj po trochu</small></div></details>
+      <details><summary><span class="nm">Kanel</span><span class="qt">szczypta</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kanel" target="_blank">Eldorado Kanel Malen 80g</a> · <span class="pr">14,90 kr</span></div></details>
+      <details><summary><span class="nm">Biała czekolada</span><span class="qt">60 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=vit%20bakchoklad" target="_blank">Garant Vit Bakchoklad 100g</a> · <span class="pr">16,90 kr</span></div></details>
+      <details><summary><span class="nm">Tahini (pasta sezamowa)</span><span class="qt">10 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=tahini" target="_blank">Zeinas Tahina 350g</a> · <span class="pr">34,90 kr</span></div></details>
+      <details><summary><span class="nm">Nerkowce</span><span class="qt">5 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=cashewn%C3%B6tter%20naturell" target="_blank">Eldorado Cashewnötter Naturella 400g</a> · <span class="pr">66,15 kr</span></div></details>
+      <details><summary><span class="nm">Kinder Cards</span><span class="qt">2 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kinder%20card" target="_blank">Kinder Cards 5-pack 128g</a> · <span class="pr">24,51 kr</span></div></details>
+    </div>
+
+    <h3>👉 Kroki</h3>
+    <ol class="steps">
+      <li><b>Baza:</b> wrzuć do miski 400 g skyru, 50 g wheya, 10 g kakao i szczyptę kanelu. Mieszaj mocno 2–3 minuty, aż gładko (mikser/łyżka — ma być gęsta masa).</li>
+      <li>Jeśli masa za gęsta — dodawaj <b>mleko migdałowe po łyżce</b> (max ~30 ml). Lepiej za gęsto niż za rzadko.</li>
+      <li>Przełóż do prostokątnego naczynia (≈19×14 cm), rozsmaruj równo.</li>
+      <li><b>Polewa:</b> białą czekoladę + tahini + 10 ml mleka migdałowego + plusk wody włóż do mikrofalówki. Grzej <b>krótkimi interwałami po 15–20 s</b>, mieszaj po każdym, aż płynne. NIE przepal — biała czekolada łatwo się zwarzy.</li>
+      <li>Polej bazę. Posyp nerkowcami, połóż 2 Kinder Cards.</li>
+      <li>Wstaw do lodówki na minimum 1h (najlepiej 3–5h), aż polewa zastygnie.</li>
+    </ol>
+    <div class="tip"><b>💡 Pro tip:</b> to najtańsza miska z zestawu — baza to tylko skyr + whey + kakao, a reszta to details.</div>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7670243549216066849" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ R2 ============ -->
+<section id="r2">
+<div class="card">
+  <div class="cover"><img src="img/7676936508837776673.jpg" alt="Biscoff bowl" loading="lazy">
+    <span class="rank">🥈 #2 · 1,2 mln</span><span class="views">❤️ 96,4K · 🔖 35,5K</span></div>
+  <div class="cardbody">
+    <h2>Czekoladowy Biscoff Bowl <small>114 g białka · film z linku Dawida 🔥</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>1147</b><span>kcal całość</span></div>
+      <div class="pro"><b>114 g</b><span>białko</span></div>
+      <div class="car"><b>87 g</b><span>węgle</span></div>
+      <div class="fat"><b>40 g</b><span>tluszcz</span></div>
+    </div>
+    <div class="quote">💬 <b>Połowa miski:</b> 573 kcal · 57 g białka · 44 g węgli · 20 g tłuszczu — jak jesteś "normalnym człowiekiem" 😄</div>
+
+    <h3>🧺 Składniki</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">500 g (300+200)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g</a> · <span class="pr">18,90 kr</span><small>potrzebujesz 1,25 tubki — kup 2 albo dolej 100g innego skyr/kvargu</small></div></details>
+      <details><summary><span class="nm">Whey czekoladowy (WPC)</span><span class="qt">40 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate 465g</a> · <span class="pr">169,40 kr</span></div></details>
+      <details><summary><span class="nm">Kakao bez cukru</span><span class="qt">10 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kakao" target="_blank">Garant Kakao 200g</a> · <span class="pr">37,76 kr</span></div></details>
+      <details><summary><span class="nm">Kanel + sól</span><span class="qt">2 g + szczypta</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kanel" target="_blank">Eldorado Kanel Malen 80g</a> · <span class="pr">14,90 kr</span></div></details>
+      <details><summary><span class="nm">Herbatniki (petit-beurre)</span><span class="qt">4 szt. (20 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mariekex" target="_blank">Guld Marie Mariekex 200g</a> · <span class="pr">11,90 kr</span><small>szwedzki odpowiednik petit-beurre. Alternatywa: McVities Digestives 400g (13,50 kr)</small></div></details>
+      <details><summary><span class="nm">Białko cookie smak (najlepiej roślinne)</span><span class="qt">20 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=proteinpulver" target="_blank">brak cookie-smaku na Willys → użyj whey vanilla/choklad</a> · <span class="pr">—</span><small>jeśli używasz whey zamiast plant protein — NIE dodawaj mleka na start</small></div></details>
+      <details><summary><span class="nm">Mleko migdałowe bez cukru</span><span class="qt">0–60 ml</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandeldryck" target="_blank">Garant Mandeldryck Utan Tillsatt Socker 1L</a> · <span class="pr">16,94 kr</span><small>zacznij od 0! dodawaj tylko jeśli za gęsto</small></div></details>
+      <details><summary><span class="nm">Lotus Biscoff</span><span class="qt">2 szt. (15,5 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=lotus%20biscoff" target="_blank">Lotus Biscoff 250g</a> · <span class="pr">16,90 kr</span></div></details>
+      <details><summary><span class="nm">Mleczna czekolada</span><span class="qt">50 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=marabou%20mj%C3%B6lkchoklad" target="_blank">Marabou Mjölkchoklad 160g</a> · <span class="pr">23,90 kr</span></div></details>
+      <details><summary><span class="nm">Olej kokosowy</span><span class="qt">4 g (1 łyżeczka)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kokosolja" target="_blank">Garant Eko Kokosolja Neutral 500ml</a> · <span class="pr">64,90 kr</span><small>robi polewę gładszą i szybciej zastyga</small></div></details>
+      <details><summary><span class="nm">Wiórki kokosowe + tahini + borówki</span><span class="qt">4g + 6g + 6 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kokosflingor" target="_blank">Kokos Riven Eldorado 200g</a> 19,90 kr · <a href="https://www.willys.se/sok?q=tahini" target="_blank">Zeinas Tahina</a> 34,90 kr · <a href="https://www.willys.se/sok?q=bl%C3%A5b%C3%A4r" target="_blank">Garant Blåbär Frysta 225g</a> 23,56 kr</div></details>
+    </div>
+
+    <h3>👉 Kroki</h3>
+    <ol class="steps">
+      <li><b>Warstwa 1:</b> 300 g skyru + 40 g wheya + 10 g kakao + 2 g kanelu + szczypta soli. Mieszaj 2–3 min. Rozsmaruj na dnie naczynia.</li>
+      <li>Ułóż 4 herbatniki płasko na warstwie 1.</li>
+      <li><b>Warstwa 2:</b> 200 g skyru + 20 g białka cookie + kanel. Zacznij BEZ mleka, dodawaj po 20 ml max, aż masa będzie gęsta ale rozsmarowywalna. Przykryj herbatniki.</li>
+      <li><b>Grzbiet Biscoff:</b> 2 ciastka Lotus ustaw NA SZTORC (na długiej krawędzi), po przekątnej naczynia — od środka dłuższego boku w stronę rogu. Dzielą miskę na trójkąt. 📐</li>
+      <li><b>Polewa:</b> 50 g czekolady + 4 g oleju kokosowego → mikrofala po 15–20 s, mieszaj. Rozsmaruj na WIĘKSZEJ stronie (tej bez trójkąta).</li>
+      <li><b>Finisz:</b> wiórki kokosa wzdłuż jednej krawędzi, 6 kropek tahini z borówką na wierzchu, resztę tahini skapnij wzdłuż linii Biscoff.</li>
+      <li>Lodówka aż czekolada zastygnie (1h+). Naczynie: 19×14×5 cm / 0,8L.</li>
+    </ol>
+    <div class="tip"><b>💡 Gdy masa za rzadka:</b> autor daje trik — ⅛ łyżeczki gumy ksantanowej (0,3 g) zagęści warstwę 2. Na Willys nie ma, ale mała torebka zapytasz w Träningstillskott / online.</div>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7676936508837776673" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ R3 ============ -->
+<section id="r3">
+<div class="card">
+  <div class="cover"><img src="img/7681007049509014817.jpg" alt="Flexible dieting bowl" loading="lazy">
+    <span class="rank">🥉 #3 · 544K</span><span class="views">❤️ 32,1K · 🔖 9,7K</span></div>
+  <div class="cardbody">
+    <h2>Flexible Dieting Bowl <span class="recon">REKONSTRUKCJA</span> <small>~100 g białka · bez pisanej recepty</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>~1050</b><span>kcal (szac.)</span></div>
+      <div class="pro"><b>~100 g</b><span>białko (szac.)</span></div>
+      <div class="car"><b>~80 g</b><span>węgle (szac.)</span></div>
+      <div class="fat"><b>~35 g</b><span>tluszcz (szac.)</span></div>
+    </div>
+    <div class="quote">💬 <b>LeanBrahm:</b> "A hundred grams of protein." — jedyny tekst w filmie. Reszta to obraz. 🎬</div>
+
+    <div class="tip"><b>⚠️ Szacunek z wideo:</b> autor nie napisał receptury w opisie. Poniższe ilości odczytałem z kadru (GPT-4o vision na 32 klatkach) — traktuj jako punkt startowy, nie ewangelię.</div>
+
+    <h3>🧺 Składniki (szacowane)</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">~450 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g</a> · <span class="pr">18,90 kr</span></div></details>
+      <details><summary><span class="nm">Whey czekoladowy</span><span class="qt">~60 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate 465g</a> · <span class="pr">169,40 kr</span></div></details>
+      <details><summary><span class="nm">Syrop (honey/maple) albo słodzik płynny</span><span class="qt">~20 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=honung" target="_blank">Eldorado Honung Flytande 350g</a> · <span class="pr">28,29 kr</span></div></details>
+      <details><summary><span class="nm">Herbatniki czekoladowe</span><span class="qt">~4 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=oreo" target="_blank">Oreo Original 154g</a> · <span class="pr">18,83 kr</span></div></details>
+      <details><summary><span class="nm">Lotus Biscoff</span><span class="qt">~3 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=lotus%20biscoff" target="_blank">Lotus Biscoff 250g</a> · <span class="pr">16,90 kr</span></div></details>
+      <details><summary><span class="nm">Kawałki czekolady</span><span class="qt">~30 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=marabou%20mj%C3%B6lkchoklad" target="_blank">Marabou Mjölkchoklad</a> · <span class="pr">23,90 kr</span></div></details>
+    </div>
+
+    <h3>👉 Kroki (jak na filmie)</h3>
+    <ol class="steps">
+      <li>Skyr + whey + syrop do miski. Mieszaj aż połączone.</li>
+      <li>Warstwa w naczyniu: na jednej stronie ułóż czekoladowe herbatniki, na drugiej Biscoff.</li>
+      <li>Zalej/przykryj resztą masy skyr, wygładź.</li>
+      <li>Posyp kawałkami czekolady wzdłuż linii ciastek. Lodówka.</li>
+    </ol>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7681007049509014817" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ R4 ============ -->
+<section id="r4">
+<div class="card">
+  <div class="cover"><img src="img/7676194689392856352.jpg" alt="Oreo peanut butter bowl" loading="lazy">
+    <span class="rank">#4 · 536K</span><span class="views">❤️ 45,5K · 🔖 22,4K</span></div>
+  <div class="cardbody">
+    <h2>Oreo Peanut Butter Bowl <small>125 g białka · najwięcej białka w zestawie 💪</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>1384</b><span>kcal całość</span></div>
+      <div class="pro"><b>125 g</b><span>białko</span></div>
+      <div class="car"><b>79 g</b><span>węgle</span></div>
+      <div class="fat"><b>58 g</b><span>tluszcz</span></div>
+    </div>
+    <div class="quote">💬 <b>LeanBrahm:</b> "Why would I drink one when I can eat this? Half = 692 kcal, 63 g protein. Gram for gram, protein bars have roughly twice the calories."</div>
+
+    <h3>🧺 Składniki</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">450 g (225+225)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g ×2</a> · <span class="pr">37,80 kr</span></div></details>
+      <details><summary><span class="nm">Whey czekoladowy (WPC)</span><span class="qt">20 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate</a> · <span class="pr">169,40 kr</span></div></details>
+      <details><summary><span class="nm">Białko cookie smak</span><span class="qt">40 g (25+15)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=proteinpulver" target="_blank">zamiennik: whey vanilla/choklad</a> · <span class="pr">—</span></div></details>
+      <details><summary><span class="nm">Kakao</span><span class="qt">17 g (5+12)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kakao" target="_blank">Garant Kakao 200g</a> · <span class="pr">37,76 kr</span></div></details>
+      <details><summary><span class="nm">Nasiona chia</span><span class="qt">5 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=chiafr%C3%B6n" target="_blank">Garant Chiafrön 250g</a> · <span class="pr">28,29 kr</span></div></details>
+      <details><summary><span class="nm">Kanel + wanilia + sól</span><span class="qt">do smaku</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=vaniljsocker" target="_blank">Garant Vanillinsocker 140g</a> · <span class="pr">9,36 kr</span></div></details>
+      <details><summary><span class="nm">Herbatniki (petit-beurre)</span><span class="qt">8 szt. (2×20 g) + 1 kakao (5,4 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mariekex" target="_blank">Guld Marie Mariekex 200g</a> · <span class="pr">11,90 kr</span><small>kakao-biscuit zastąpisz ½ Oreo</small></div></details>
+      <details><summary><span class="nm">Oreo Original</span><span class="qt">1 szt. (11 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=oreo" target="_blank">Oreo Original 154g</a> · <span class="pr">18,83 kr</span></div></details>
+      <details><summary><span class="nm">Jordnötssmör creamy</span><span class="qt">60 g (30+30)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=jordn%C3%B6tssm%C3%B6r" target="_blank">Dazzley Peanut Butter Creamy 350g</a> · <span class="pr">28,90 kr</span></div></details>
+      <details><summary><span class="nm">Miód</span><span class="qt">5 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=honung" target="_blank">Eldorado Honung Flytande 350g</a> · <span class="pr">28,29 kr</span></div></details>
+      <details><summary><span class="nm">Mąka migdałowa</span><span class="qt">10 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandelmj%C3%B6l" target="_blank">Garant Mandelmjöl 300g</a> · <span class="pr">49,90 kr</span></div></details>
+      <details><summary><span class="nm">Olej kokosowy</span><span class="qt">4 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kokosolja" target="_blank">Garant Eko Kokosolja 500ml</a> · <span class="pr">64,90 kr</span></div></details>
+      <details><summary><span class="nm">Mleko migdałowe</span><span class="qt">80–170 ml</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandeldryck" target="_blank">Garant Mandeldryck 1L</a> · <span class="pr">16,94 kr</span></div></details>
+    </div>
+
+    <h3>👉 Kroki</h3>
+    <ol class="steps">
+      <li><b>Warstwa 1:</b> 225 g skyru + 20 g wheya + 5 g kakao + 5 g chia + kanel + odrobina wanilii. Mieszaj 2–3 min. Do naczynia.</li>
+      <li>4 herbatniki na wierzch.</li>
+      <li><b>Warstwa 2:</b> 225 g skyru + 25 g białka cookie + kanel + szczypta soli. Zacznij bez mleka, dolej max 20 ml. Rozsmaruj.</li>
+      <li>Kolejne 4 herbatniki.</li>
+      <li><b>Dzielnik:</b> kakao-ciastko złam na pół, ustaw pośrodku jako ściankę, a w szczelinę wciśnij całe Oreo.</li>
+      <li><b>Polewa czekoladowo-orzechowa (lewa strona):</b> 12 g kakao + 5 g miodu + 30 g jordnätssmör + 50 ml mleka migdałowego. Mieszaj kilka minut aż gładko i błyszcząco. Rozsmaruj na jednej połowie.</li>
+      <li><b>Polewa cookie-PB (prawa strona):</b> 30 g jordnötssmör + 15 g białka cookie + 10 g mandelmjöl + 4 g oleju + od 30 ml mleka (zacznij od 30, max 100). Jak za tęgo — 20 s mikrofali. Rozsmaruj na drugiej połowie.</li>
+    </ol>
+    <div class="tip"><b>💡 Makro uwaga:</b> autor liczy makro z pełnymi 100 ml mleka w drugiej polewie — jak wlejesz mniej, kcal lekko spadnie.</div>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7676194689392856352" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ R5 ============ -->
+<section id="r5">
+<div class="card">
+  <div class="cover"><img src="img/7677700728718200097.jpg" alt="Kinder Bueno bowl" loading="lazy">
+    <span class="rank">#5 · 436K</span><span class="views">❤️ 25,3K · 🔖 10,2K</span></div>
+  <div class="cardbody">
+    <h2>Kinder Bueno Bowl <small>115 g białka · 60 g białka w proszku w jednej misce 🤯</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>1122</b><span>kcal całość</span></div>
+      <div class="pro"><b>115 g</b><span>białko</span></div>
+      <div class="car"><b>77 g</b><span>węgle</span></div>
+      <div class="fat"><b>37 g</b><span>tluszcz</span></div>
+    </div>
+    <div class="quote">💬 <b>LeanBrahm:</b> "I thought 40g of chocolate would cover the top. It didn't. So I moved everything to one side and called it aesthetics." 😂</div>
+
+    <h3>🧺 Składniki</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">500 g (300+200)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g ×2</a> · <span class="pr">37,80 kr</span></div></details>
+      <details><summary><span class="nm">Whey czekoladowy (WPC)</span><span class="qt">40 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate</a> · <span class="pr">169,40 kr</span></div></details>
+      <details><summary><span class="nm">Kakao + miód + kanel</span><span class="qt">10g + 5g + 3g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kakao" target="_blank">Garant Kakao</a> 37,76 kr · <a href="https://www.willys.se/sok?q=honung" target="_blank">Eldorado Honung</a> 28,29 kr · <a href="https://www.willys.se/sok?q=kanel" target="_blank">Eldorado Kanel</a> 14,90 kr</div></details>
+      <details><summary><span class="nm">Kakao herbatniki</span><span class="qt">4 szt. (20 g) + 1 (5,4 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=choklad%20cookies" target="_blank">Eldorado Chokladcookies 150g</a> · <span class="pr">10,90 kr</span><small>autor: cocoa petit-beurre; w SE najbliżej chokladcookies lub Oreo</small></div></details>
+      <details><summary><span class="nm">Białko cookie smak</span><span class="qt">20 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=proteinpulver" target="_blank">zamiennik: whey vanilla/choklad</a> · <span class="pr">—</span></div></details>
+      <details><summary><span class="nm">Mąka migdałowa + wanilia</span><span class="qt">10 g + dash</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandelmj%C3%B6l" target="_blank">Garant Mandelmjöl 300g</a> · <span class="pr">49,90 kr</span></div></details>
+      <details><summary><span class="nm">Mleko migdałowe</span><span class="qt">0–50 ml</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandeldryck" target="_blank">Garant Mandeldryck 1L</a> · <span class="pr">16,94 kr</span></div></details>
+      <details><summary><span class="nm">Mleczna czekolada + olej kokosowy</span><span class="qt">40 g + 2 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=marabou%20mj%C3%B6lkchoklad" target="_blank">Marabou Mjölkchoklad</a> 23,90 kr · <a href="https://www.willys.se/sok?q=kokosolja" target="_blank">Kokosolja</a> 64,90 kr</div></details>
+      <details><summary><span class="nm">Kinder Bueno mini</span><span class="qt">2 szt. (10,8 g)</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kinder%20bueno" target="_blank">Kinder Bueno 43g</a> · <span class="pr">9,90 kr</span></div></details>
+      <details><summary><span class="nm">Migdały (skruszone)</span><span class="qt">5 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mandel" target="_blank">Garant Mandel Skållad Hel 100g</a> · <span class="pr">23,56 kr</span></div></details>
+    </div>
+
+    <h3>👉 Kroki</h3>
+    <ol class="steps">
+      <li><b>Warstwa 1:</b> 300 g skyru + 40 g wheya + 10 g kakao + 5 g miodu + 3 g kanelu. Mieszaj 2–3 min → na dno naczynia.</li>
+      <li>4 kakao-ciastka płasko na wierzch. <b>Wstaw do lodówki</b> na czas przygotowania warstwy 2.</li>
+      <li><b>Warstwa 2:</b> 200 g skyru + 20 g białka cookie + 2 g kanelu + 10 g mandelmjöl + wanilia. Mleko od 0, max 50 ml. Rozsmaruj. 5-tą kakao-ciastkiem ustaw przy krótszym boku.</li>
+      <li><b>Polewa:</b> 40 g czekolady + 2 g oleju kokosowego → mikrofala interwałami. Rozsmaruj po wierzchu. (40 g NIE pokryje całości — tak samo było u autora :D)</li>
+      <li>2 mini Bueno połóż obok ciastka, skruszone migdały wysyp przy przeciwnej krawędzi.</li>
+      <li>Lodówka <b>5–6h</b> (autor: 3h + 20 min zamrażarki jak się spieszy).</li>
+    </ol>
+    <div class="tip"><b>💡 Cytat autora:</b> "I make the fancy layout for the video. If you are just making it to eat, layer it however you want. Enjoyable foods do not need to be feared." 🙌</div>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7677700728718200097" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ R6 ============ -->
+<section id="r6">
+<div class="card">
+  <div class="cover"><img src="img/7669460927376330006.jpg" alt="Kinder Milk Slice mousse" loading="lazy">
+    <span class="rank">#6 · 272K</span><span class="views">❤️ 12,1K · 🔖 4,8K</span></div>
+  <div class="cardbody">
+    <h2>Kinder Milk Slice Mus <span class="recon">REKONSTRUKCJA</span> <small>~100 g białka · najszybszy z zestawu</small></h2>
+    <div class="macro">
+      <div class="kcal"><b>~950</b><span>kcal (szac.)</span></div>
+      <div class="pro"><b>~100 g</b><span>białko (szac.)</span></div>
+      <div class="car"><b>~75 g</b><span>węgle (szac.)</span></div>
+      <div class="fat"><b>~30 g</b><span>tluszcz (szac.)</span></div>
+    </div>
+    <div class="quote">💬 <b>LeanBrahm:</b> "This whole dessert, all of it, it's about 100 grams of protein." · Napis na filmie: EASY DIET</div>
+
+    <div class="tip"><b>⚠️ Szacunek z wideo:</b> brak pisanej receptury — ilości odczytane z kadru.</div>
+
+    <h3>🧺 Składniki (szacowane)</h3>
+    <div class="ing">
+      <details><summary><span class="nm">Skyr naturell 0%</span><span class="qt">~500 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2% 400g ×2</a> · <span class="pr">37,80 kr</span></div></details>
+      <details><summary><span class="nm">Whey czekoladowy</span><span class="qt">~50 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate</a> · <span class="pr">169,40 kr</span></div></details>
+      <details><summary><span class="nm">Kinder Milk Slice</span><span class="qt">1–2 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=kinder%20milk%20slice" target="_blank">Kinder Milk-slice 5-pack</a> · <span class="pr">23,56 kr</span></div></details>
+      <details><summary><span class="nm">Orzechy włoskie</span><span class="qt">~15 g</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=valn%C3%B6tter" target="_blank">Eldorado Valnötter Naturella 400g</a> · <span class="pr">63,31 kr</span></div></details>
+      <details><summary><span class="nm">Herbatniki</span><span class="qt">2–3 szt.</span></summary><div class="buy"><a href="https://www.willys.se/sok?q=mariekex" target="_blank">Guld Marie Mariekex 200g</a> · <span class="pr">11,90 kr</span></div></details>
+    </div>
+
+    <h3>👉 Kroki (jak na filmie)</h3>
+    <ol class="steps">
+      <li>Skyr + whey czekoladowy → mieszaj na gładki mus.</li>
+      <li>Przełóż do naczynia, wygładź.</li>
+      <li>Na wierzchu: Kinder Milk Slice, 2 herbatniki i rząd orzechów włoskich.</li>
+      <li>Lodówka 1h+. Zjedz całość = ~100 g białka. 🎯</li>
+    </ol>
+    <a class="tiktok" href="https://www.tiktok.com/@leanbrahmhabit/video/7669460927376330006" target="_blank">▶ Oryginał na TikToku</a>
+  </div>
+</div>
+</section>
+
+<!-- ============ LISTA ============ -->
+<section id="lista">
+<div class="card"><div class="cardbody">
+  <h2>🛒 Lista zakupów Willys <small>kliknij nazwę → wyszukiwarka Willys z produktem</small></h2>
+  <table>
+    <tr><th>Produkt</th><th>Rozmiar</th><th class="r">Cena</th></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=skyr" target="_blank">Naturell Skyr Eko 0,2%</a> ×2</td><td>400g</td><td class="r price">37,80 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=whey%20protein%20choklad" target="_blank">Optimum Whey Double Rich Chocolate</a></td><td>465g</td><td class="r price">169,40 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=mariekex" target="_blank">Guld Marie Mariekex (petit-beurre)</a></td><td>200g</td><td class="r price">11,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=lotus%20biscoff" target="_blank">Lotus Biscoff</a></td><td>250g</td><td class="r price">16,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=oreo" target="_blank">Oreo Original</a></td><td>154g</td><td class="r price">18,83 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=marabou%20mj%C3%B6lkchoklad" target="_blank">Marabou Mjölkchoklad</a></td><td>160g</td><td class="r price">23,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=vit%20bakchoklad" target="_blank">Garant Vit Bakchoklad</a></td><td>100g</td><td class="r price">16,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=jordn%C3%B6tssm%C3%B6r" target="_blank">Dazzley Jordnötssmör Creamy</a></td><td>350g</td><td class="r price">28,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=tahini" target="_blank">Zeinas Tahina Sesampasta</a></td><td>350g</td><td class="r price">34,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kakao" target="_blank">Garant Kakao</a></td><td>200g</td><td class="r price">37,76 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=mandeldryck" target="_blank">Garant Mandeldryck osötad</a></td><td>1L</td><td class="r price">16,94 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kanel" target="_blank">Eldorado Kanel Malen</a></td><td>80g</td><td class="r price">14,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=honung" target="_blank">Eldorado Honung Flytande</a></td><td>350g</td><td class="r price">28,29 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kokosolja" target="_blank">Garant Eko Kokosolja Neutral</a></td><td>500ml</td><td class="r price">64,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kokosflingor" target="_blank">Eldorado Kokos Riven</a></td><td>200g</td><td class="r price">19,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=bl%C3%A5b%C3%A4r" target="_blank">Garant Stora Blåbär Frysta</a></td><td>225g</td><td class="r price">23,56 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=chiafr%C3%B6n" target="_blank">Garant Chiafrön</a></td><td>250g</td><td class="r price">28,29 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=cashewn%C3%B6tter%20naturell" target="_blank">Eldorado Cashewnötter Naturella</a></td><td>400g</td><td class="r price">66,15 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=valn%C3%B6tter" target="_blank">Eldorado Valnötter Naturella</a></td><td>400g</td><td class="r price">63,31 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kinder%20card" target="_blank">Kinder Cards 5-pack</a></td><td>128g</td><td class="r price">24,51 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kinder%20bueno" target="_blank">Kinder Bueno</a></td><td>43g</td><td class="r price">9,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=kinder%20milk%20slice" target="_blank">Kinder Milk-slice</a></td><td>5-pack</td><td class="r price">23,56 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=mandelmj%C3%B6l" target="_blank">Garant Mandelmjöl</a></td><td>300g</td><td class="r price">49,90 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=mandel" target="_blank">Garant Mandel Skållad Hel</a></td><td>100g</td><td class="r price">23,56 kr</td></tr>
+    <tr><td><a href="https://www.willys.se/sok?q=vaniljsocker" target="_blank">Garant Vanillinsocker</a></td><td>140g</td><td class="r price">9,36 kr</td></tr>
+    <tr><td colspan="2" style="text-align:right">Σ pełny koszyk (wszystkie 6 misek):</td><td class="r price">~844 kr</td></tr>
+    <tr><td colspan="2" style="text-align:right">Koszt samych "szybkich" składników (bez whey/kokosolja/orzechów):</td><td class="r price">~250 kr</td></tr>
+  </table>
+  <div class="tip"><b>💰 Realnie:</b> whey (169 kr) + kokosolja (65 kr) + orzechy (129 kr) to zakupy "na miesiące" — na jedną miskę wychodzi ~25–35 kr za 100+ g białka. Tańsze whey: Gaam Tasty Whey 900g (254 kr = 28 kr/porcja 100g… i 10× więcej porcji).</div>
+</div></div>
+</section>
+
+<footer>
+  <p><b>📋 Metodologia:</b> TOP 6 = wszystkie 32 filmy @leanbrahmhabit posortowane po wyświetleniach (konto = 454K łapek łącznie, lista kompletna). Filmy pobrane przez CDP (fetch→blob w kontekście strony — CDN TikToka odrzuca curl). Audio → OpenAI gpt-4o-transcribe. Klatki (fps=2, 960px) → GPT-4o vision. Makro i gramatura z opisów autora (R1, R2, R4, R5) lub rekonstrukcji wizualnej (R3, R6 — oznaczone). Ceny: willys.se API 2026-09-06.</p>
+  <p><b>⚠️ Komentarze TikToka:</b> niedostępne w headless Chromium (TikTok nie renderuje ich bez pełnej sesji przeglądarki — 3 metody przetestowane). Przepisy i tak są pełne z opisów + transkrypcji.</p>
+  <p>Wygenerowane przez Andrzeja 🤖 dla #micha-protein · 2026-09-06</p>
+</footer>
+
+</div>
+<script>
+// nav active state on scroll
+const links=[...document.querySelectorAll('nav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('act'));const i=secs.indexOf(e.target);if(i>-1)links[i].classList.add('act')}})},{rootMargin:'-40% 0px -55% 0px'});
+secs.forEach(s=>s&&io.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mega Deep Research: Pralki w Szwecji 2026 — Nowe, Używane, Logistyka i Ekonomia</title>
+<style>
+:root {
+  --bg: #0b0f19;
+  --card: #141c2e;
+  --card-hover: #1b263d;
+  --acc: #38bdf8;
+  --acc-glow: rgba(56, 189, 248, 0.15);
+  --good: #34d399;
+  --good-bg: rgba(52, 211, 153, 0.12);
+  --bad: #f87171;
+  --bad-bg: rgba(248, 113, 113, 0.12);
+  --warn: #fbbf24;
+  --warn-bg: rgba(251, 191, 36, 0.12);
+  --txt: #f1f5f9;
+  --txt-mut: #94a3b8;
+  --brd: #23304a;
+  --code-bg: #0f172a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.65;
+  padding: 24px 16px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+header {
+  border-bottom: 1px solid var(--brd);
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 40%, var(--acc));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  color: var(--txt-mut);
+  font-size: 0.95rem;
+}
+.meta-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.chip {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--txt-mut);
+}
+h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--acc);
+  margin: 40px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--brd);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 20px 0 10px;
+  color: #fff;
+}
+p { margin-bottom: 12px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.card.pick { border-left: 5px solid var(--good); }
+.card.avoid { border-left: 5px solid var(--bad); }
+.card.warn { border-left: 5px solid var(--warn); }
+.card.info { border-left: 5px solid var(--acc); }
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pill.g { background: var(--good-bg); color: var(--good); border: 1px solid var(--good); }
+.pill.b { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad); }
+.pill.w { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn); }
+.pill.a { background: var(--acc-glow); color: var(--acc); border: 1px solid var(--acc); }
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+  border: 1px solid var(--brd);
+  border-radius: 12px;
+  background: var(--card);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+th {
+  background: #101726;
+  color: var(--txt-mut);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--brd);
+  font-weight: 600;
+  white-space: nowrap;
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--brd);
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--card-hover); }
+
+a { color: var(--acc); text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+
+ul, ol { padding-left: 22px; margin: 10px 0 16px; }
+li { margin-bottom: 6px; }
+strong { color: #fff; }
+.mut { color: var(--txt-mut); }
+.price { font-size: 1.15rem; font-weight: 800; color: #fff; }
+.quote-box {
+  background: #0f1624;
+  border-left: 3px solid var(--txt-mut);
+  padding: 10px 16px;
+  margin: 10px 0;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  border-radius: 0 8px 8px 0;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brd);
+  font-size: 0.85rem;
+  color: var(--txt-mut);
+  text-align: center;
+}
+@media (max-width: 640px) {
+  h1 { font-size: 1.6rem; }
+  .grid-2 { grid-template-columns: 1fr; }
+  body { padding: 16px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧺 Mega Deep Research: Pralki w Szwecji 2026</h1>
+  <div class="subtitle">Wyczerpujące kompendium zakupowe dla 2-osobowego gospodarstwa w Upplands Väsby (Sztokholm)</div>
+  <div class="meta-chips">
+    <span class="chip">📅 2026-09-07</span>
+    <span class="chip">🤖 10 subagentów AI</span>
+    <span class="chip">🌐 ~400+ zbadanych źródeł</span>
+    <span class="chip">🇸🇪 Fora SE + DE + UK + PL</span>
+    <span class="chip">🔬 Testy Stiftung Warentest, Råd &amp; Rön, Which?</span>
+    <span class="chip">🚚 Tiptapp, RUT, Blocket, Serwisy</span>
+  </div>
+</header>
+
+<section>
+  <h2>🎯 1. Macierz Decyzyjna: 4 Ścieżki Zakupowe</h2>
+  <p>Nie musisz ograniczać się do jednej drogi. Oto 4 przetestowane scenariusze z pełnym rachunkiem zysków i strat:</p>
+
+  <div class="grid-2">
+    <div class="card pick">
+      <h3>Ścieżka A: Nowy „Value King” (Rekomendowana)</h3>
+      <div class="price">4 490 – 4 995 SEK</div>
+      <p class="mut">Nowa pralka na promocji (Gorenje / Samsung / Bosch Serie 2/4)</p>
+      <ul>
+        <li><strong>Plusy:</strong> 2-3 lata pełnej gwarancji Konsumentköplagen, zero grzyba po poprzednikach, wysoka klasa energetyczna A, ciche silniki inwerterowe.</li>
+        <li><strong>Minusy:</strong> Budżetowe serie projektowane na 1000–1500 cykli (ok. 5–7 lat życia).</li>
+        <li><strong>Najlepszy wybór:</strong> <strong>Gorenje WG2P84A32</strong> (4 490 kr, Tretti) lub <strong>Samsung WW11DG5B25AEEE</strong> (4 995 kr, Elgiganten promo).</li>
+      </ul>
+    </div>
+
+    <div class="card info">
+      <h3>Ścieżka B: Używane Miele / Asko od Firmy z Gwarancją</h3>
+      <div class="price">2 500 – 3 800 SEK</div>
+      <p class="mut">Odnowione (refurbished) przez warsztat vitvaror w Sztokholmie (np. ARM Huddinge, MW)</p>
+      <ul>
+        <li><strong>Plusy:</strong> Pancerna jakość czołgów (waga 85-95 kg, żeliwne przeciwwagi, bębny na 5000-8000 cykli), pisemna gwarancja 6–12 miesięcy, sprawdzony stan łożysk.</li>
+        <li><strong>Minusy:</strong> Starszy design, wyższe zużycie wody, brak gwarancji producenta.</li>
+        <li><strong>Werdykt:</strong> Znakomity wybór, jeśli chcesz pancerną maszynę na 10+ lat za połowę ceny nowej.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h3>Ścieżka C: Prywatny Blocket / FB Marketplace (Loteria)</h3>
+      <div class="price">500 – 1 800 SEK</div>
+      <p class="mut">Kupno bezpośrednio od osoby prywatnej w okolicy Sztokholmu</p>
+      <ul>
+        <li><strong>Plusy:</strong> Bezkonkurencyjna cena wejścia; działające pralki Cylinda/Electrolux/Bosch trafiają się za 600–1200 kr.</li>
+        <li><strong>Minusy:</strong> Zerowa gwarancja (zasada <em>"befintligt skick"</em> wg Köplagen), ryzyko ukrytej pleśni w fartuchu, zużyte łożyska, transport i wnoszenie całkowicie na Twojej głowie.</li>
+        <li><strong>Zasada:</strong> Kupuj TYLKO po włączeniu krótkiego wirowania na miejscu i teście luzu bębna.</li>
+      </ul>
+    </div>
+
+    <div class="card avoid">
+      <h3>Ścieżka D: Reanimacja Starej Candy EVO 1672</h3>
+      <div class="price">1 500 – 3 200 SEK</div>
+      <p class="mut">Wezwanie serwisu AGD do 10-letniej budżetówki</p>
+      <ul>
+        <li><strong>Koszty serwisu w SE:</strong> Sam dojazd technika (framkörning + felsökning) to 850–1250 kr. Wymiana grzałki/pompy z robocizną = 1800–2400 kr (po RUT 30% ok. 1400–1800 kr).</li>
+        <li><strong>Werdykt:</strong> <strong>CAŁKOWICIE NIERENTOWNE.</strong> Pralka warta 300 kr na złomie. Starą Candy wystaw na Blocket jako <em>"reservdelsmaskin / defekt"</em> za 250–400 kr — majsterkowicze zabiorą w 2 dni.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🏭 2. Głęboka Anatomia Marek: Kto Rządzi, Kto Oszukuje, Kto Upada</h2>
+  <p>Na rynku AGD panuje potężna koncentracja koncernowa. Marki, które znasz, często należą do tych samych fabryk:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Koncern / Marka</th>
+          <th>Kluczowe Podmarki</th>
+          <th>Jakość &amp; Trwałość Mechaniczna</th>
+          <th>Dostępność Części w SE</th>
+          <th>Ocena &amp; Werdykt 2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Miele</strong> (Niemcy, rodzinna)</td>
+          <td>Miele</td>
+          <td>Projektowane na 10 000 h (20 lat). Żeliwo, emalia, zero oszczędności na łożyskach. Waga ~85-98 kg.</td>
+          <td>Doskonała, ale części potwornie drogie</td>
+          <td><span class="pill g">Tier 1 (Król Trwałości)</span> — Nowa za droga (>13k kr), ale używana z serwisu to złoto.</td>
+        </tr>
+        <tr>
+          <td><strong>BSH Hausgeräte</strong> (Niemcy, Bosch)</td>
+          <td>Bosch, Siemens, Constructa</td>
+          <td>Znakomite silniki EcoSilence Drive (VFD). Serie 4/6/8 to absolutny faworyt europejskich forów (Toyota wśród pralek).</td>
+          <td>10+ lat gwarantowanej dostępności w SE</td>
+          <td><span class="pill g">Tier 1.5 (Optimum)</span> — Serie 4/6 to najpewniejszy długoterminowy wybór.</td>
+        </tr>
+        <tr>
+          <td><strong>LG Electronics</strong> (Korea)</td>
+          <td>LG Direct Drive, ThinQ</td>
+          <td>Pionier <strong>Direct Drive</strong> (silnik bezpośrednio na osi bębna — zero paska i kół pasowych). Bardzo szybkie programy TurboWash 360 (39 min).</td>
+          <td>Dobra, popularne w Skandynawii</td>
+          <td><span class="pill g">Tier 1.5 (Innowacja)</span> — Mechanicznie proste, świetna kultura pracy.</td>
+        </tr>
+        <tr>
+          <td><strong>Electrolux Group</strong> (Szwecja)</td>
+          <td>Electrolux, AEG, Zanussi</td>
+          <td>Szwedzka ikona. Najlepsza własna sieć serwisowa w Szwecji. Minus: podatność na pleśnienie fartucha przy braku wietrzenia (ankiety CR: 18%).</td>
+          <td>Najlepsza w całej Szwecji</td>
+          <td><span class="pill a">Tier 2 (Solidny Lokalny)</span> — Bezpieczny zakup, łatwy serwis w każdym szwedzkim mieście.</td>
+        </tr>
+        <tr>
+          <td><strong>Hisense / Gorenje</strong> (Chiny/Słowenia)</td>
+          <td>Gorenje, Hisense, <strong>ASKO</strong></td>
+          <td>Gorenje produkowane w Słowenii. ASKO to szwedzkie dziedzictwo (unikalne zawieszenie 4 amortyzatorów bez sprężyn Quattro). Gorenje SE ma bdb serwis (4.2/5).</td>
+          <td>Gorenje bdb w SE, Hisense czysta loteria (10+ tyg.)</td>
+          <td><span class="pill a">Tier 2.5 (Value)</span> — Gorenje świetne na promocji; Hisense unikać przez serwis.</td>
+        </tr>
+        <tr>
+          <td><strong>Arçelik / Koç</strong> (Turcja)</td>
+          <td>Beko, Blomberg, Grundig</td>
+          <td>Największy wolumen w Europie. Blomberg = wyższa jakość komponentów; Beko = tania masówka. Częste awarie łożysk po 3–5 latach.</td>
+          <td>Przeciętna, tanie zamienniki</td>
+          <td><span class="pill w">Tier 3 (Budżet)</span> — Blomberg ujdzie; najtańszego Beko unikać.</td>
+        </tr>
+        <tr>
+          <td><strong>Haier Group</strong> (Chiny)</td>
+          <td>Candy, Hoover, Haier</td>
+          <td>Najbardziej awaryjne w wieloletnich raportach UK Which?. Zgrzewane zbiorniki uniemożliwiające wymianę łożysk.</td>
+          <td>Słaba poza hurtowniami online</td>
+          <td><span class="pill b">Tier 4 (Jednorazówki)</span> — Candy to sprzęt na 2-4 lata. Nie kupować do stałego domu.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card info">
+    <h3>🔍 Ciekawe odkrycie inżynieryjne: Dlaczego tanie pralki padają tak szybko?</h3>
+    <p>Inżynierowie z <em>UK Whitegoods</em> wyjaśniają: tanie pralki (&lt;4000 SEK) mają <strong>zgrzewane plastikowe zespoły piorące (tub)</strong>. Gdy zużyje się łożysko za 50 kr, nie da się go wybić — trzeba wymienić cały zespół za 2500 kr, co czyni naprawę nieopłacalną. Pralki klasy Miele, Asko i wyższe serie Bosch/Siemens posiadają rozkręcane bębny ze stali/żeliwa, które można serwisować przez 20 lat.</p>
+  </div>
+</section>
+
+<section>
+  <h2>💬 3. Głos Ludu: Co Mówią Fora (Flashback, Reddit, MSE, Gutefrage)</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🇸🇪 Szwecja: Flashback &amp; Byggahus</h3>
+      <ul>
+        <li><strong>Bosch = Król Rozsądku:</strong> Na Flashbacku (wątki od 2008 do 2026) Bosch Serie 4 i 6 to absolutny domyślny wybór Szwedów (<em>"Bästa kompromissen mellan pris och livslängd"</em>).</li>
+        <li><strong>Miele = Szacunek, ale cena boli:</strong> Uznawana za jedyną maszynę, która realnie przeżywa 15-20 lat, ale <em>"nie jest 2x lepsza za 2x wyższą cenę"</em> przy zakupie nówki.</li>
+        <li><strong>Auto-Dosing (i-DOS / TwinDos):</strong> Wątki z 2024-2026 jednogłośnie chwalą automatyczne dozowanie proszku/płynu — oszczędza do 30% detergentu i zapobiega zalewaniu pralki pianą w miękkiej szwedzkiej wodzie.</li>
+        <li><strong>Cylinda / Asko:</strong> Szwedzi z sentymentem wspominają dawną szwedzką produkcję z Vara; współczesne Cylindy chwalone za prostotę i łatwy dostęp do części.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🌍 Międzynarodowy Konsensus (Reddit BIFL, MSE, DE)</h3>
+      <ul>
+        <li><strong>Samsung = Najwięcej łez:</strong> Na Reddit r/appliances i r/BuyItForLife Samsung jest jednogłośnie odradzany za przedwczesne awarie pomp odpływowych, modułów sterujących po 2-3 latach i fatalny support. <em>"Piękny w sklepie, koszmar po 3 latach."</em></li>
+        <li><strong>LG TurboWash = Faworyt prędkości:</strong> Użytkownicy uwielbiają cykle 39-minutowe przy zachowaniu pełnej czystości (Direct Drive).</li>
+        <li><strong>Niemieckie Gutefrage:</strong> Dominacja BSH (Bosch/Siemens). Niemcy ostrzegają przed drogimi naprawami pogwarancyjnymi: <em>"280 € za pompę w 6-letniej maszynie"</em>.</li>
+        <li><strong>Złota reguła forów:</strong> <em>"Nigdy nie bierz pralki na specjalnych wyprzedażach Black Friday o dziwnych numerach modeli — to często serie z tańszymi podzespołami."</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🧪 4. Co Mówią Niezależne Laboratoria (Stiftung Warentest &amp; Råd &amp; Rön)</h2>
+  
+  <div class="card">
+    <h3>🏆 Stiftung Warentest (Niemcy — najbardziej rygorystyczne testy w UE)</h3>
+    <ul>
+      <li><strong>Edycja 11/2025:</strong> Pierwsze miejsce dzielone (ocena <em>GUT</em>): bliźniaki <strong>Bosch WUU28T71 / Siemens WU14UT71</strong> oraz seria wyższa <strong>Siemens WG44B2071 / Bosch WGB244071</strong>. Znakomite wyniki prania i łatwości naprawy.</li>
+      <li><strong>Szokujący Dauerprüfung (Test Wytrzymałości):</strong> W wielkim teście długodystansowym (1200 prań bez przerwy) <strong>wszystkie 3 testowane egzemplarze Miele uległy awarii grzałki</strong>, podczas gdy Bosch/Siemens i AEG przeszły test z oceną 1.0! To dowód, że nawet ikony miewają potknięcia technologiczne.</li>
+      <li><strong>Wniosek laboratoryjny:</strong> Pralki za ~500 EUR (5 500 SEK) piorą dziś tak samo skutecznie jak modele za 1 500 EUR. Płacisz głównie za wyciszenie, Wi-Fi i automatyczne dozowanie.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🇸🇪 Råd &amp; Rön (Szwecja — Konsumentverket)</h3>
+    <ul>
+      <li><strong>Pojemność 9–11 kg to w 80% ściema marketingowa:</strong> Pełna deklarowana waga dotyczy wyłącznie 1 programu (Bawełna Eco). Na programach codziennych (syntetyki, mix, szybkie) dopuszczalny wsad to zaledwie 3.5 – 4.5 kg!</li>
+      <li><strong>Problem współczesnych pralek = PŁUKANIE:</strong> W pogoni za etykietą A+++ pralki drastycznie obcinają zużycie wody. R&amp;R alarmuje, że wiele modeli zostawia resztki detergentu we włóknach (kluczowe przy alergiach/wrażliwej skórze). <em>Zawsze warto włączać "Extra Sköljning"</em>.</li>
+      <li><strong>Czasy prania:</strong> Niektóre energooszczędne cykle Eco 40-60 trwają <strong>ponad 4 godziny</strong>. Sprawdź, czy pralka ma program skrócony (np. SpeedPerfect w Boschu, TurboWash w LG).</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>🚚 5. Logistyka, Wnoszenie na 1. Piętro i Ceny w Szwecji</h2>
+  <p>Masz do wniesienia 65–75 kg nieporęcznego kloca do mieszkania na 1. piętrze w Upplands Väsby. Oto jak to rozwiązać najtaniej i najbezpieczniej:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Opcja Transportu</th>
+          <th>Koszt Szacunkowy</th>
+          <th>Jak to Działa / Warunki</th>
+          <th>Ocena Ryzyka &amp; Wygody</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tiptapp App</strong> (Aplikacja społecznościowa)</td>
+          <td><strong>150 – 350 SEK</strong> (+19 kr opłaty)</td>
+          <td>Wystawiasz ogłoszenie ze zdjęciem i własną ceną (np. <em>"Bärhjälp tvättmaskin från bil till lgh 1 tr"</em>). Pomocnik z pasem transportowym zgłasza się w 15–30 min.</td>
+          <td><span class="pill g">Genialne i najtańsze</span> — Płacisz dopiero po zatwierdzeniu w apce.</td>
+        </tr>
+        <tr>
+          <td><strong>Ungdomskraft.se</strong> (Zarejestrowana firma z młodzieżą)</td>
+          <td><strong>595 SEK</strong> (brutto) <br>👉 <strong>~298 SEK z RUT!</strong></td>
+          <td>Oficjalna usługa w Sztokholmie dedykowana pralkom. Przyjeżdżają, wnoszą po schodach, ustawiają na miejscu. Odliczenie 50% robocizny przez szwedzki RUT-avdrag!</td>
+          <td><span class="pill g">Najpewniejsze i legalne</span> — Pełne ubezpieczenie, zero stresu o plecy.</td>
+        </tr>
+        <tr>
+          <td><strong>Sklepowa Dostawa + Montaż</strong> (Elgiganten/Tretti)</td>
+          <td>Dostawa: 0–399 kr <br>Wniesienie: 399–499 kr <br>Montaż: 495–899 kr</td>
+          <td>Dostarczają pod drzwi / do łazienki, podłączają wąż i odpływ, zabierają starą pralkę (retur/återvinning za ~299 kr).</td>
+          <td><span class="pill a">Wygodne, ale drogie</span> — Łącznie wyjdzie +800–1200 kr do ceny pralki.</td>
+        </tr>
+        <tr>
+          <td><strong>Blocket Tjänster / Svartjobb</strong> (Prywatne busy)</td>
+          <td>200 – 400 SEK (gotówka/Swish)</td>
+          <td>Ogłoszenia "Flytthjälp / Transport billigt i Stockholm".</td>
+          <td><span class="pill b">Ryzykowne prawnie</span> — Brak ubezpieczenia. Jeśli upuszczą pralkę i uszkodzą klatkę schodową lub rury sąsiada, Twoje ubezpieczenie (ansvarsskydd) może robić potężne problemy.</td>
+        </tr>
+        <tr>
+          <td><strong>Samodzielnie (VW Polo + Wózek)</strong></td>
+          <td>0 SEK (wypożyczenie wózka 50-100 kr w Hygglo/Bauhaus)</td>
+          <td>Polo 6R ze złożoną kanapą mieści pralkę na plecach (karton ~64x68x89 cm). Wnoszenie we dwójkę po schodach na pasach transportowych / schodkowo.</td>
+          <td><span class="pill w">Darmowe, ale ciężkie</span> — Tylko we 2 osoby; solo grozi urazem kręgosłupa.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>🛒 6. Rynek Używanych w Sztokholmie: Blocket &amp; Sklepy Refurbished</h2>
+  <p>Na Blocket w regionie Sztokholmu wisi średnio <strong>1800+ ogłoszeń pralek</strong>. Oto jak wygląda ten rynek:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🏪 Profesjonalne Sklepy Vitvaror z Gwarancją (Sztokholm)</h3>
+      <p>Kupują sprzęt poleasingowy / z wymian mieszkań, czyszczą, wymieniają łożyska/szczotki i dają <strong>6–12 miesięcy gwarancji</strong>:</p>
+      <ul>
+        <li><strong>ARM Vitvaror (Huddinge):</strong> Ceny 2 200 – 3 500 kr. Mają Bosch Serie 4/6 za 2499-3499 kr, Miele W1 za 3999 kr z 1-roczną gwarancją.</li>
+        <li><strong>MW Vitvaror (Huddinge):</strong> Bosch Serie 4/6 (3290 kr), Siemens iQ700 (2800 kr), Electrolux PerfectCare (2800 kr) z gwarancją 6 mies.</li>
+        <li><strong>Walles Vitvaror (Södertälje):</strong> Duży wybór Miele (2499–4799 kr) po pełnym przeglądzie.</li>
+        <li><strong>Vitvaror Planet (Vällingby):</strong> Blisko Upplands Väsby! Miele W1716 (3500 kr z przebiegiem 1800h), Bosch Serie 4.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📋 Checklista Przed Zakupem Używanej na Blocket</h3>
+      <ol>
+        <li><strong>Zakręć bębnem ręką na sucho:</strong> Musi kręcić się z jedwabistym szumem. Jeśli słychać metaliczny chrzęst, grzechotanie lub bęben ma luz góra-dół = <strong>ŁOŻYSKA ZNISZCZONE</strong> (naprawa nieopłacalna).</li>
+        <li><strong>Zajrzyj pod gumowy fartuch (bälg):</strong> Odchyl palcem dolną i górną część uszczelki. Czarna maź/pleśń oznacza lata prania w niskich temperaturach i tonach płynu do płukania.</li>
+        <li><strong>Poproś o uruchomienie wirowania na 2 minuty:</strong> Zobacz, czy pompa odprowadza wodę i czy pralka nie skacze po podłodze (zużyte amortyzatory).</li>
+        <li><strong>Śruby transportowe (transportsäkring):</strong> Jeśli sprzedawca ich nie ma, przewoź pralkę wyłącznie W PIONIE lub BARDZO OSTROŻNIE na plecach z miękkim podkładem.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>💡 7. Sprytna Wiedza Lokalna (Upplands Väsby, Woda, Ubezpieczenia)</h2>
+
+  <div class="grid-2">
+    <div class="card pick">
+      <h3>💧 Miękka Woda w Upplands Väsby (Norrvatten)</h3>
+      <p>Woda w Upplands Väsby pochodzi z jeziora Mälaren (stacja uzdatniania Görvälnverket) i jest <strong>BARDZO MIĘKKA (ok. 3–5 °dH)</strong>.</p>
+      <ul>
+        <li><strong>Zero Calgonu / odkamieniaczy:</strong> Grzałka w Twojej pralce nie zakamieni się przez 15 lat! Oszczędzasz 100% na środkach zmiękczających.</li>
+        <li><strong>Dozuj o 40% MNIEJ proszku:</strong> Tabele na pudełkach zakładają twardą wodę kontynentalną. W miękkiej wodzie przedawkowanie proszku powoduje gnicie bębna, puzącą pianę i zacieki na ubraniach.</li>
+        <li><strong>Stosuj proszek Via / Formil zamiast kapsułek:</strong> Kapsułki mają stałą dawkę pod twardą wodę (często za dużą) i kosztują 3-4 kr/pranie. Zwykły proszek to ~1 kr/pranie.</li>
+      </ul>
+    </div>
+
+    <div class="card warn">
+      <h3>🛡️ Ubezpieczenie Mieszkania &amp; Säker Vatten</h3>
+      <p>Szwedzkie regulaminy ubezpieczeniowe (Hedvig, Länsförsäkringar, Folksam) opierają się na normie <strong>Branschregler Säker Vatteninstallation</strong>:</p>
+      <ul>
+        <li><strong>Wymiana pralki w istniejącym punkcie:</strong> Wolno zrobić samemu, JEŚLI zrobisz to <em>"fackmannamässigt"</em> (odpowiednie uszczelki, dokręcenie, brak zagięć węża, prawidłowy spadek odpływu).</li>
+        <li><strong>Wanna ociekowa (droppskyddsbricka):</strong> Warto podłożyć plastikową matę ociekową (~150 kr w Clas Ohlson / Bauhaus) pod pralkę — wyprowadza ewentualny wyciek na środek łazienki zamiast pod meble.</li>
+        <li><strong>Mata antywibracyjna:</strong> W szwedzkim budownictwie wielorodzinnym gruba guma wibroizolacyjna (<em>vibrationsdämpande matta</em>, ~149 kr w Jula/Biltema) drastycznie redukuje dudnienie na podłodze.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>📊 8. Prawda o Klasach Energetycznych i Kosztach (TCO)</h2>
+  <div class="card info">
+    <h3>Czy warto dopłacać 2 000 kr do Klasy A zamiast Klasy D?</h3>
+    <p>Policzmy realne zużycie prądu w Szwecji (cena prądu w SE3 ~1.20 SEK/kWh wraz z dystrybucją i podatkiem):</p>
+    <ul>
+      <li><strong>Pralka Klasy A (np. 45 kWh / 100 cykli):</strong> 270 prań/rok = ~121 kWh/rok = <strong>~145 SEK / rok</strong>.</li>
+      <li><strong>Pralka Klasy D (np. 75 kWh / 100 cykli):</strong> 270 prań/rok = ~202 kWh/rok = <strong>~242 SEK / rok</strong>.</li>
+      <li><strong>RÓŻNICA W KOSZTACH PRĄDU:</strong> zaledwie <strong>~97 SEK ROCZNIE!</strong></li>
+    </ul>
+    <p><strong>Wniosek ekonomiczny:</strong> Nadpłacenie 1500 kr za wyższą klasę energetyczną zwraca się dopiero po... <strong>15 latach</strong>. Nie daj się zwariować etykietom energetycznym — wybieraj pralkę pod kątem jakości mechanicznej i kultury pracy, a nie samej literki A!</p>
+  </div>
+</section>
+
+<section>
+  <h2>🏁 Ostateczna Rekomendacja dla Dawida</h2>
+  <div class="card pick">
+    <h3>Co zrobić w tym tygodniu:</h3>
+    <ol>
+      <li><strong>Opcja 1 (Najszybsza i bezproblemowa — Nówka):</strong> Kup <strong>Gorenje WG2P84A32 za 4 490 kr na Tretti.se</strong> (darmowa dostawa pod klatkę) LUB podjedź do Elgiganten Häggvik po <strong>Samsunga 11kg WW11DG5B25AEEE za 4 995 kr</strong> (w promocji do 20.09).</li>
+      <li><strong>Opcja 2 (Maksymalna trwałość za małe pieniądze — Refurb):</strong> Zadzwoń do <strong>Vitvaror Planet w Vällingby</strong> lub <strong>ARM Vitvaror w Huddinge</strong> i weź używane Miele W1 lub Bosch Serie 6 z roczną gwarancją za 2 500 – 3 200 kr.</li>
+      <li><strong>Wniesienie na 1. piętro:</strong> Zleć wniesienie przez <strong>Tiptapp za 200-250 kr</strong> lub <strong>Ungdomskraft za ~298 kr (po odliczeniu RUT)</strong>. Zero wysiłku, zero ryzyka kontuzji.</li>
+      <li><strong>Stara Candy EVO:</strong> Wystaw na Blocket za 300 kr <em>"defekt reservdelsmaskin, hämtas i Upplands Väsby"</em> — ktoś po nią przyjedzie i sam zniesie z 1. piętra!</li>
+    </ol>
+  </div>
+</section>
+
+<div class="footer">
+  Raport wygenerowany automatycznie przez system Andrzej AI · Projekt DP Media AB / OpenClaw · 2026-09-07<br>
+  Wszystkie dane źródłowe i logi scraperów zapisane w <code>memory/research/pralki-deep/raw/</code>
+</div>
+
+</body>
+</html>

@@ -171,6 +171,42 @@ strong { color: #fff; }
   color: var(--txt-mut);
   text-align: center;
 }
+
+/* === MOBILE FIX + KARUZELE (10.09) === */
+img { max-width: 100%; height: auto; }
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.card, section { min-width: 0; }
+.carousel {
+  display: flex; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 2px 14px; scrollbar-width: thin;
+}
+.cslide {
+  flex: 0 0 clamp(240px, 70vw, 290px);
+  scroll-snap-align: start;
+  background: var(--card); border: 1px solid var(--brd);
+  border-radius: 14px; padding: 12px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.cslide.pick { border-left: 4px solid var(--good); }
+.cslide img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+.cslide .noimg {
+  height: 110px; border-radius: 10px; margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #1b263d, #0f172a);
+  border: 1px dashed var(--brd);
+}
+.cslide .noimg b { font-size: 1.35rem; font-weight: 800; color: #cbd5e1; letter-spacing: 1px; }
+.cslide h3 { font-size: 0.95rem; margin: 0 0 6px; }
+.cslide .price-tag { font-size: 1.25rem; font-weight: 800; color: var(--good); margin-bottom: 4px; }
+.cslide .loc { font-size: 0.8rem; color: var(--txt-mut); margin-bottom: 6px; }
+.cslide .desc { font-size: 0.84rem; margin: 0 0 8px; flex: 1; }
+.cslide .lnk { font-size: 0.85rem; }
+.ctitle { font-size: 1.05rem; margin: 24px 0 4px; color: #fff; }
+.hint { font-size: 0.78rem; color: var(--txt-mut); margin: 0 0 4px; }
+
 @media (max-width: 640px) {
   h1 { font-size: 1.6rem; }
   .grid-2 { grid-template-columns: 1fr; }
@@ -190,6 +226,7 @@ strong { color: #fff; }
     <span class="chip">🇸🇪 Fora SE + DE + UK + PL</span>
     <span class="chip">🔬 Testy Stiftung Warentest, Råd &amp; Rön, Which?</span>
     <span class="chip">🚚 Tiptapp, RUT, Blocket, Serwisy</span>
+    <span class="chip">📱 mobile + karuzele 10.09</span>
   </div>
 </header>
 <nav class="toc" style="background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 18px;margin:18px 0">
@@ -489,253 +526,302 @@ strong { color: #fff; }
 </section>
 
 <section>
-  <h2 id="okazje">🔥 9. Żywe Okazje z Blocket &amp; FB Marketplace (zweryfikowane 10.09, godz. 09:00 — aktualizacja)</h2>
-  <p class="mut">Filtr: Stockholm Län, max 30 km od Väsby. Ceny i linki sprawdzone ręcznie na żywo — ogłoszenia mogą zniknąć w każdej chwili! Kliknij zdjęcie/tytuł = otwiera ogłoszenie.</p>
+  <h2 id="okazje">🔥 9. Żywe Okazje: Blocket &amp; FB Marketplace (zweryfikowane 10.09, 09:00)</h2>
+  <p class="mut">Filtr: Stockholm Län, max 30 km od Väsby. Ceny i linki sprawdzone ręcznie na żywo — ogłoszenia mogą zniknąć w każdej chwili.</p>
 
-  <h3>🆓 GRATIS (hazardliwe, ale warte spojrzenia)</h3>
-  <div class="grid-2">
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/24629337/ad52862d-b151-4002-b694-e017a31c5d1b" alt="Hoover Solna" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Hoover VT D11 — GRATIS <span class="pill w">NOWE POD NOSEM — defekt</span></h3>
-      <p><strong>Solna (8,3 km)</strong>. <em>"Bortskänkes. Defekt Hoover frontmatad VT D11 — maskinen startar program..."</em> + instrukcja. Na naprawę lub części.</p>
-      <p class="mut">8 km od domu — warte rzucenia oka nawet na części. <a href="https://www.blocket.se/recommerce/forsale/item/24629337">blocket.se →</a></p>
+  <h3 class="ctitle">🛒 Blocket — top oferty płatne</h3>
+  <p class="hint">↔ przewijaj karuzelę w bok · 15 ofert</p>
+  <div class="carousel">
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26348235/bd8ecb14-1ea5-4f16-beb3-250096037559" alt="Electrolux 8 kg 1400 rpm" loading="lazy">
+      <h3>Electrolux 8 kg 1400 rpm</h3>
+      <div class="price-tag">800 kr <span class="pill g">W VÄSBY!</span></div>
+      <div class="loc">📍 Upplands Väsby — 0 km!</div>
+      <p class="desc">8 kg, 1400 rpm — w samym Väsby. Odbiór autem za 5 minut.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26348235">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26393048/0c283b41-3452-405e-8e13-e342b4b9a37e" alt="Bosch Rönninge" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 4 VarioPerfect — GRATIS <span class="pill g">WRÓCIŁO! (10.09)</span></h3>
-      <p><strong>Rönninge (29 km)</strong>. ⚠️ Skada på fönsterbälg (uszczelka drzwi) + trzeba wypompować wodę. Poza tym kompletna.</p>
-      <p class="mut">Uszczelka ~200-300 kr i masz pralkę za darmo. <a href="https://www.blocket.se/recommerce/forsale/item/26393048">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26465827/08f36ce6-6db8-49b9-8faa-fef9ee3bea57" alt="Electrolux topmatad 7 kg" loading="lazy">
+      <h3>Electrolux topmatad 7 kg</h3>
+      <div class="price-tag">1 690 kr <span class="pill g">🎯 TOP</span></div>
+      <div class="loc">📍 19463 Upplands Väsby (7,5 km)</div>
+      <p class="desc">„Smal toppmatad tvättmaskin, 7 kg, fungerar som den ska” — wąska, ładowana od góry. Świeże 10.09.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26465827">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26352826/c9ed02b7-b4c5-4d8d-bcac-ff1f711e323d" alt="Kompakt 46cm" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Kompakt 46 cm — GRATIS <span class="pill g">wróciło (10.09)</span></h3>
-      <p><strong>Stockholm (13 km)</strong>. Mała kompaktowa pralka 46 cm — ogłoszenie znowu żywe po przerwie.</p>
-      <p class="mut">Do małego mieszkania lub jako druga. <a href="https://www.blocket.se/recommerce/forsale/item/26352826">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25878511/f8d5b3f8-f661-4351-b12e-34986fdc3055" alt="Bosch Serie 6 WAT283L8SN" loading="lazy">
+      <h3>Bosch Serie 6 WAT283L8SN</h3>
+      <div class="price-tag">1 200 kr</div>
+      <div class="loc">📍 Vega (~30 km)</div>
+      <p class="desc">„En bra tvättmaskin till ett bra pris. Funkar felfritt. Rengjord och klar.” Tier 1.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25878511">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26350436/d25f7d1f-96bf-4787-9ce1-230b257a79f4" alt="Husqvarna Vällingby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Husqvarna — GRATIS <span class="pill g">Skänkes — TOP FREEBIE</span></h3>
-      <p><strong>Vällingby (~18 km)</strong>. <em>"Fullt fungerande, endast använd en gång"</em> — stała w mieszkaniu, właściciel prał w pralni. Stan praktycznie nowy.</p>
-      <p class="mut">Najlepszy gratis w okolicy — kto pierwszy, ten lepszy. <a href="https://www.blocket.se/recommerce/forsale/item/26350436">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26451830/4bf4d465-86e0-417d-bef1-13f4740ac446" alt="Bosch Serie 6 — display" loading="lazy">
+      <h3>Bosch Serie 6 — display</h3>
+      <div class="price-tag">1 400 kr</div>
+      <div class="loc">📍 Vällingby (~18 km)</div>
+      <p class="desc">Świeże ogłoszenie, display + programvred, standardowe przyłącza. Serie 6 w tej cenie szybko znikają.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26451830">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26161404/87bf9580-0457-4bd6-8444-cb59eff26a44" alt="Bosch + torktumlare" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch pralka + suszarka — GRATIS <span class="pill g">ZESTAW 2 W 1</span></h3>
-      <p><strong>Stockholm — 0 kr za OBA urządzenia.</strong> <em>"FULLT FUNGERANDE... bortskänkes pga lägenheten måste tömmas asap. Först till kvarn"</em></p>
-      <p class="mut">🏆 Komplet Bosch za darmo — kto pierwszy, ten lepszy! <a href="https://www.blocket.se/recommerce/forsale/item/26161404">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25291778/7d9bc7a4-dbde-46f4-acbc-4c3f13d443dd" alt="Bosch Serie 6 VarioPerfect" loading="lazy">
+      <h3>Bosch Serie 6 VarioPerfect</h3>
+      <div class="price-tag">850 kr</div>
+      <div class="loc">📍 Sigtuna (~24 km)</div>
+      <p class="desc">Tydlig display, programväljare, duży bęben. Tier 1 za 850 kr.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25291778">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>Fungerande Tvättmaskin — GRATIS</h3>
-      <p><strong>Farsta (~22 km)</strong>. <em>"Fungerar fint, låter lite vid full laddning"</em> — w pełni sprawna pralka za darmo.</p>
-      <p class="mut">Do wzięcia od ręki. <a href="https://www.blocket.se/recommerce/forsale/item/26308604">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25509905/db170c57-6c91-4e03-94a3-d482ddd7170a" alt="Electrolux FlexCare 6 kg — NYSERVAD" loading="lazy">
+      <h3>Electrolux FlexCare 6 kg — NYSERVAD</h3>
+      <div class="price-tag">1 600 kr <span class="pill g">GWARANCJA</span></div>
+      <div class="loc">📍 Vällingby (~15 km)</div>
+      <p class="desc">„Nyservad med nya reservdelar &amp; garanti!” — stan jak nowy, po pełnym serwisie z gwarancją.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25509905">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>Cylinda FT24 + Bosch torkskåp — GRATIS <span class="pill g">2 w 1</span></h3>
-      <p><strong>Vendelsö/Huddinge (~22 km)</strong>. Pralka Cylinda FT24 + szafa susząca Bosch, odbiór jako komplet. Wiek nieznany.</p>
-      <p class="mut">Torkskåp w bonusie. <a href="https://www.blocket.se/recommerce/forsale/item/26156088">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26427979/5d410d60-8e10-4147-b161-73cdb58fe4c0" alt="Siemens iQ300 WM12E164DN" loading="lazy">
+      <h3>Siemens iQ300 WM12E164DN</h3>
+      <div class="price-tag">500 kr</div>
+      <div class="loc">📍 Danderyd (~12 km)</div>
+      <p class="desc">„Fullt fungerande, fint skick” — wymaga nowej gummibälg (~150-250 kr). Tier 1 za 500 kr.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26427979">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26333558/9c9d74a6-bbbc-4c43-ade8-99c20eda8e61" alt="Electrolux 5kg Hägersten" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Electrolux 5 kg — GRATIS <span class="pill g">WRÓCIŁO! (10.09)</span></h3>
-      <p><strong>Hägersten (~16 km)</strong>. Rostig ale działa — ogłoszenie wróciło po jednodniowej przerwie.</p>
-      <p class="mut">Druga szansa. <a href="https://www.blocket.se/recommerce/forsale/item/26333558">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25776511/7f30f38c-3b8a-4b6e-aa83-f390eadbf880" alt="Miele W1513" loading="lazy">
+      <h3>Miele W1513</h3>
+      <div class="price-tag">500 kr</div>
+      <div class="loc">📍 Täby (~6 km)</div>
+      <p class="desc">Model z ok. 2006 r., sprawna, dobrze pierze. Legendarna trwałość Miele za ułamek ceny.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25776511">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>Cylinda front — GRATIS <span class="pill w">lekko rostig</span></h3>
-      <p><strong>Bromma (~15 km)</strong>. Działa dobrze ("fungerar fint"), lekka rdza. Programator + przyciski.</p>
-      <p class="mut">Klasyk za darmo. <a href="https://www.blocket.se/recommerce/forsale/item/25986428">blocket.se →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26467344/622c684d-3a7e-4ba8-9ae3-f2e2bfbc5d01" alt="Samsung 8 kg — LEVERANS" loading="lazy">
+      <h3>Samsung 8 kg — LEVERANS</h3>
+      <div class="price-tag">2 000 kr <span class="pill a">DOWÓZ</span></div>
+      <div class="loc">📍 Älvsjö (~20 km)</div>
+      <p class="desc">Świeże (17 min przy sprawdzeniu). „Fint skick” — dowóz możliwy za dopłatą.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26467344">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>FB Spånga — GRATIS <span class="pill w">SPRZEDANE/USUNIĘTE</span></h3>
-      <p class="mut">Ogłoszenie zniknęło z FB Marketplace 09.09 19:00.</p>
-  </div>
-
-  <h3>💰 Tanie &amp; sprawdzone (≤2000 kr)</h3>
-  <div class="grid-2">
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26465827/08f36ce6-6db8-49b9-8faa-fef9ee3bea57" alt="Electrolux Väsby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Electrolux topmatad 7 kg — 1 690 kr <span class="pill g">🎯 UPPLANDS VÄSBY — 7,5 km!</span></h3>
-      <p><strong>19463 Upplands Väsby (7,5 km)</strong>. Świeże (10.09). <em>"Smal toppmatad tvättmaskin, 7 kg, fungerar som den ska"</em> — wąska, ładowana od góry, idealna do małej łazienki.</p>
-      <p class="mut">Najbliższa płatna opcja od dawna — dzwonić szybko. <a href="https://www.blocket.se/recommerce/forsale/item/26465827">blocket.se →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/24182672/5ac7d6f4-b9ca-4408-8445-1a312208b384" alt="Gorenje front — kupiona 07.2025!" loading="lazy">
+      <h3>Gorenje front — kupiona 07.2025!</h3>
+      <div class="price-tag">2 500 kr <span class="pill g">&lt;1 ROK</span></div>
+      <div class="loc">📍 Bagarmossen (~21 km)</div>
+      <p class="desc">Młodsza niż 1 rok — praktycznie nowa pralka w cenie 28% nowej.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/24182672">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <h3>FB: Electrolux EWP1462TIW — 700 kr <span class="pill g">🎯 NYLIGEN — felfritt! (Spånga)</span></h3>
-      <p><strong>FB Marketplace, Spånga (~12 km)</strong>. <em>"Fungerar helt felfritt, aldrig haft några problem. En äldre modell"</em> — sprawdzona, tania, świeżo wrzucona.</p>
-      <p class="mut">700 kr za sprawnego Electroluxa — dzwonić dziś. <a href="https://www.facebook.com/marketplace/item/4579471215656747/">fb marketplace →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26015118/3122b701-bf18-402c-93f6-2a05b61e57de" alt="Electrolux EWF1476GDW 7 kg" loading="lazy">
+      <h3>Electrolux EWF1476GDW 7 kg</h3>
+      <div class="price-tag">1 500 kr</div>
+      <div class="loc">📍 Märsta (~20 km)</div>
+      <p class="desc">Klasa A+++, 1400 rpm, display, bardzo zadbana.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26015118">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26467344/622c684d-3a7e-4ba8-9ae3-f2e2bfbc5d01" alt="Samsung Älvsjö" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Samsung 8 kg — 2 000 kr <span class="pill g">ŚWIEŻE — Älvsjö, dowóz możliwy</span></h3>
-      <p><strong>Älvsjö (~20 km)</strong>. Wrzucone dziś rano. <em>"Fint skick, fungerar som det ska"</em>, 85×59×59 cm, duża okrągła klapa, <strong>leverans mot betalning</strong>.</p>
-      <p class="mut">Świeże + opcja dowozu. <a href="https://www.blocket.se/recommerce/forsale/item/26467344">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25292050/27502d78-0822-4832-9128-b896d7392aff" alt="LG FH6F9BDS2 12 kg — nowa pompa" loading="lazy">
+      <h3>LG FH6F9BDS2 12 kg — nowa pompa</h3>
+      <div class="price-tag">1 500 kr</div>
+      <div class="loc">📍 Stockholm (~20 km)</div>
+      <p class="desc">TurboWash + para, nowa pompa (X 2025). LG Direct Drive = Tier 1.5.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25292050">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26432139/4a1d262f-5c53-4148-9e2c-d194c95d35f2" alt="Bosch Serie 6 2022 + tork" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 9 kg (2022) + suszarka Cylinda TK40 — 2 500 kr <span class="pill w">SPRZEDANE (10.09 09:00, 404)</span></h3>
-      <p><strong>Stockholm</strong>. Pralka WAU28TI9SN kupiona 06.2022. Za 2500 kr DWA urządzenia.</p>
-      <p class="mut">Zniknęło w nocy 09/10.09 — ktoś zwiał z zestawem.</p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25924807/a04d2f3c-4b3e-4575-889b-e36a7944ae43" alt="Bosch Serie 6 8 kg + MONTAŻ" loading="lazy">
+      <h3>Bosch Serie 6 8 kg + MONTAŻ</h3>
+      <div class="price-tag">1 900 kr <span class="pill a">DOWÓZ+MONTAŻ</span></div>
+      <div class="loc">📍 Järfälla (~15 km)</div>
+      <p class="desc">1400 rpm, ren &amp; fräsch. Możliwy dowóz do domu (300-500 kr) i podłączenie.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25924807">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://scontent-arn2-1.xx.fbcdn.net/v/t39.84726-6/772840268_1754831165842192_3369718308464921956_n.jpg" alt="Elektro Helios Odenslunda" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>FB: Elektro Helios pralka + wbudowana suszarka — 300 kr <span class="pill g">🎯 ODENSLUNDA — POD NOSEM!</span></h3>
-      <p><strong>Odenslunda (Väsby, spacer!)</strong>. <em>"Fungerar utan problem"</em> — pralka z funkcją suszenia, stan używany, sprzedaje za grosze.</p>
-      <p class="mut">Najbliżej i najtaniej — dzwonić dziś. <a href="https://www.facebook.com/marketplace/item/2251591295674515/">fb marketplace →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/24911475/d791c80e-7242-4aad-a426-5ae80900ea55" alt="Bosch VarioPerfect 8-serie" loading="lazy">
+      <h3>Bosch VarioPerfect 8-serie</h3>
+      <div class="price-tag">2 500 kr</div>
+      <div class="loc">📍 Vällingby (~13 km)</div>
+      <p class="desc">„Sparsamt använt” — oszczędnie używana.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/24911475">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26455070/a09f3ef1-c071-49e7-b58b-4860f684199a" alt="Siemens Stockholm" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Siemens — 600 kr <span class="pill w">SPRZEDANE (10.09 09:00, 404)</span></h3>
-      <p><strong>Stockholm</strong>. "Felfritt", do zabudowy. Zniknęło w ciągu nocy.</p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26451830/4bf4d465-86e0-417d-bef1-13f4740ac446" alt="Bosch Serie 6 Vällingby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 — 1 400 kr <span class="pill g">ŚWIEŻE</span></h3>
-      <p><strong>Vällingby (~18 km)</strong>. Świeże ogłoszenie, display + programvred, standardowe przyłącza.</p>
-      <p class="mut">Serie 6 w tej cenie szybko znikają. <a href="https://www.blocket.se/recommerce/forsale/item/26451830">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/22379739/76b049f8-2197-461a-a21f-e46bb74e427b" alt="Samsung Vällingby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Samsung 8 kg — 500 kr</h3>
-      <p><strong>Vällingby (~18 km)</strong>. Trumma ze stali nierdzewnej, display, programväljare.</p>
-      <p class="mut">8 kg za 500 kr — warte obejrzenia. <a href="https://www.blocket.se/recommerce/forsale/item/22379739">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/24529989/c811192d-6411-4043-a070-4024baa2fd64" alt="Siemens iQ500 Solna" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Siemens iQ500 — 500 kr <span class="pill w">⚠️ uszczelka drzwi uszkodzona</span></h3>
-      <p><strong>Solna (~15 km)</strong>. <em>"Skada i gummipackningen... fungerar annars felfritt"</em> — uszczelka do wymiany (~kilkaset kr), starszy model.</p>
-      <p class="mut">Dla majsterkowicza — po wymianie uszczelki pełna okazyjka. <a href="https://www.blocket.se/recommerce/forsale/item/24529989">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26454664/10d2ff18-a194-4e1e-9f61-c0b928fb8af1" alt="Bosch WAY283K8SN Norsborg" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch WAY283K8SN — 2 200 kr <span class="pill g">ŚWIEŻE</span></h3>
-      <p><strong>Norsborg (~25 km)</strong>. <em>"Bra skick"</em>, nowszy model Bosch, duża frontowa drzwi.</p>
-      <p class="mut">Świeże, może zejść w cenie. <a href="https://www.blocket.se/recommerce/forsale/item/26454664">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26265007/b584f38c-571a-455b-8f43-00ea3895c3cd" alt="Samsung Sigtuna" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Samsung 7 kg — 2 500 kr</h3>
-      <p><strong>Sigtuna (~10 km)</strong>. Blisko, display + programvred, stan dobry.</p>
-      <p class="mut">Odbiór bez dalekich jazd. <a href="https://www.blocket.se/recommerce/forsale/item/26265007">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25291778/7d9bc7a4-dbde-46f4-acbc-4c3f13d443dd" alt="Bosch Serie 6 Sigtuna" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 VarioPerfect — 850 kr <span class="pill g">🎯 TOP 15 km!</span></h3>
-      <p><strong>Sigtuna (~15 km od Väsby)</strong>. Tydlig display, programväljare, duży bęben, zwykła wtyczka. Świetny model w super cenie pod samym nosem.</p>
-      <p class="mut">Tier 1 za 850 kr w sąsiedztwie. <a href="https://www.blocket.se/recommerce/forsale/item/25291778">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25509905/db170c57-6c91-4e03-94a3-d482ddd7170a" alt="Electrolux FlexCare Vällingby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Electrolux FlexCare 6 kg — 1 600 kr <span class="pill g">🔥 NYSERVAD + GWARANCJA!</span></h3>
-      <p><strong>Vällingby (~15 km)</strong>. <em>"Felfri och välfungerande tvättmaskin (FW32B6120). Nyservad med nya reservdelar &amp; garanti!"</em> — stan jak nowy, po pełnym serwisie.</p>
-      <p class="mut">Spokój ducha: gwarancja serwisowa na używaną pralkę. <a href="https://www.blocket.se/recommerce/forsale/item/25509905">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26427979/5d410d60-8e10-4147-b161-73cdb58fe4c0" alt="Siemens iQ300 Danderyd" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Siemens iQ300 — 500 kr <span class="pill g">🎯 ŚWIEŻE 1h (Danderyd ~12 km)</span></h3>
-      <p><strong>Danderyd (~12 km od Väsby)</strong>. Model WM12E164DN. <em>"Fullt fungerande och i fint och oskadat skick i övrigt. Väl omhändertagen, behöver ny gummibälg"</em>.</p>
-      <p class="mut">Tier 1 Siemens za 500 kr — wystarczy dokupić kołnierz/uszczelkę drzwi (~150-250 kr). <a href="https://www.blocket.se/recommerce/forsale/item/26427979">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25878511/f8d5b3f8-f661-4351-b12e-34986fdc3055" alt="Bosch Serie 6 Vega" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 (WAT283L8SN) — 1 200 kr <span class="pill g">Vega (~8 km od Väsby!)</span></h3>
-      <p><strong>Vega/Sollentuna (~8 km)</strong>. <em>"En bra tvättmaskin till ett bra pris. Funkar felfritt. Rengjord och klar."</em> Tier 1 pod samym nosem.</p>
-      <p class="mut">Czysta, sprawna Serie 6 w odległości 10 min autem. <a href="https://www.blocket.se/recommerce/forsale/item/25878511">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26015118/3122b701-bf18-402c-93f6-2a05b61e57de" alt="Electrolux Märsta" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Electrolux 7 kg (EWF1476GDW) — 1 500 kr <span class="pill g">Märsta (~12 km)</span></h3>
-      <p><strong>Märsta (~12 km od Väsby)</strong>. Klasa A+++, 1400 rpm, display, programator na froncie, bardzo zadbana.</p>
-      <p class="mut">12 km od domu = łatwy transport autem. <a href="https://www.blocket.se/recommerce/forsale/item/26015118">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25776511/7f30f38c-3b8a-4b6e-aa83-f390eadbf880" alt="Miele W1513 Täby" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Miele W1513 — 500 kr <span class="pill g">Täby (~10 km)</span></h3>
-      <p><strong>Täby (~10 km)</strong>. Model z ok. 2006 r., sprawna, dobrze pierze. Miele Tier 1 za 500 kr pod ręką.</p>
-      <p class="mut">Legendarna trwałość Miele za ułamek ceny. <a href="https://www.blocket.se/recommerce/forsale/item/25776511">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <h3>Electrolux PerfectCare 700 kombi 8/4kg — 1 000 kr <span class="pill g">🔥 TOP KOMBI!</span></h3>
-      <p><strong>Enskede (~14 km)</strong>. Pralko-suszarka Wash&amp;Dry, kupiona ~2020, <strong>max 15 prań w 4 lata</strong>, gott skick, w pełni sprawna. Brak wtyczki (kontakt nie pasuje).</p>
-      <p class="mut">Kombi Electrolux za 1000 kr — 1/5 ceny sklepowej. <a href="https://www.blocket.se/recommerce/forsale/item/26414417">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25292050/27502d78-0822-4832-9128-b896d7392aff" alt="LG 12kg" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>LG FH6F9BDS2 12 kg — 1 500 kr <span class="pill g">top pick</span></h3>
-      <p><strong>TurboWash + para, nowa pompa (X 2025!).</strong> LG = Tier 1.5 (Direct Drive). <strong>Sztokholm (~20 km)</strong>.</p>
-      <p class="mut">Dużo pralki za grosze, nowa pompa = posłuży latami. <a href="https://www.blocket.se/recommerce/forsale/item/25292050">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25924807/a04d2f3c-4b3e-4575-889b-e36a7944ae43" alt="Bosch Serie 6 Järfälla" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 8 kg — 1 900 kr <span class="pill g">🚚 DOSTAWA + MONTAŻ!</span></h3>
-      <p><strong>Järfälla (~15 km)</strong>. 1400 rpm, frontmatad, ren &amp; fräsch. <strong>Możliwy dowóz do domu (300-500 kr) i podłączenie!</strong></p>
-      <p class="mut">Opcja bez wysiłku: pralka + transport + instalacja od razu. <a href="https://www.blocket.se/recommerce/forsale/item/25924807">blocket.se →</a></p>
-    </div>
-    <div class="card pick">
-      <h3>Miele 60 cm — 1 000 kr <span class="pill g">FB — som ny!</span></h3>
-      <p><strong>FB Marketplace, Sundbyberg (~17 km)</strong>. <em>"Fullt fungerande tvättmaskin från Miele... Hemkörning med installation går att ordna"</em> — stan "som ny", opcja transportu.</p>
-      <p class="mut">Miele Tier 1 + dostawa z instalacją. <a href="https://www.facebook.com/marketplace/item/1719635116006399/">fb marketplace →</a></p>
-    </div>
-    <div class="card pick">
-      <h3>Samsung 9 kg — 2 500 kr <span class="pill g">5 lat gwarancji!</span></h3>
-      <p><strong>FB Marketplace, Sundbyberg (~17 km)</strong>. Kupiona 2021, <strong>kwitto, 10-letnia gwarancja (5 lat zostało)</strong>, sterowanie z telefonu. Stan "som ny".</p>
-      <p class="mut">Gwarancja fabryczna na używce — super pewniak. <a href="https://www.facebook.com/marketplace/item/1490269806454253/">fb marketplace →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25672697/3ab1b10c-9e41-448b-acdc-b147f02546e2" alt="Samsung EcoBubble Tullinge" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Samsung EcoBubble 7 kg — 1 300 kr <span class="pill g">nyskick</span></h3>
-      <p><strong>Tullinge (~22 km)</strong>. Digital inverter motor, energisnål, tystgående, stan jak nowy.</p>
-      <p class="mut">Cicha i oszczędna. <a href="https://www.blocket.se/recommerce/forsale/item/25672697">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26118814/d8000a34-5bad-47d4-9eb8-ac57e94b7de9" alt="Elvita 8kg Vega" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Elvita 8 kg (CTM7814V) — 1 200 kr</h3>
-      <p><strong>Vega/Sollentuna (~8 km)</strong>. 14 programów, snabbprogram 15 min, 1400 rpm, opóźniony start.</p>
-      <p class="mut">Duży bęben 8 kg blisko Väsby. <a href="https://www.blocket.se/recommerce/forsale/item/26118814">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26393074/b87981de-8209-441a-af21-b039a40c6648" alt="LG Direct Drive" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>LG Direct Drive 7 kg — 1 500 kr</h3>
-      <p><strong>Älvsjö (~17 km)</strong>. <em>"Mycket fint skick, testad och fungerar"</em> — stabilna, silnik bezpaskowy Direct Drive.</p>
-      <p class="mut">Niska awaryjność Direct Drive. <a href="https://www.blocket.se/recommerce/forsale/item/26393074">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26392861/32e899bb-0797-44f0-b7a6-d7a3d54ad75e" alt="Hoover kombi" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Hoover kombi (50 cm!) — 1 500 kr</h3>
-      <p><strong>Kungsängen (~13 km)</strong>. Stan dobry, instrukcja, 50 cm głębokości. Dostępna <strong>Frakt med köpskydd</strong>.</p>
-      <p class="mut">Wąska pralko-suszarka z wysyłką ubezpieczoną. <a href="https://www.blocket.se/recommerce/forsale/item/26392861">blocket.se →</a></p>
-    </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25838084/ea7d920a-6935-4515-85c8-e1c8fd9c2c95" alt="Indesit" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Indesit — 500 kr <span class="pill w">prawie darmo</span></h3>
-      <p><strong>Täby (~10 km)</strong>. <em>"I princip oanvänd"</em> — stan niemal fabryczny za 500 kr w sąsiedniej gminie.</p>
-      <p class="mut">Tania opcja na start. <a href="https://www.blocket.se/recommerce/forsale/item/25838084">blocket.se →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26399011/c4212749-6651-4216-aeb0-d5fb0e4d832d" alt="Cylinda kombi tvätt+tork" loading="lazy">
+      <h3>Cylinda kombi tvätt+tork</h3>
+      <div class="price-tag">2 500 kr</div>
+      <div class="loc">📍 Norsborg (~23 km)</div>
+      <p class="desc">„Värmer bra, fräsch” — pralko-suszarka, ~2020.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26399011">otwórz ogłoszenie →</a></p>
     </div>
   </div>
 
-  <h3>🚚 Z DOSTAWĄ (sprzedawcy z opcją dowozu)</h3>
-  <div class="grid-2">
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/25924807/a04d2f3c-4b3e-4575-889b-e36a7944ae43" alt="Bosch Järfälla" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch Serie 6 8 kg — 1 900 kr (dowóz 300-500 kr)</h3>
-      <p><strong>Järfälla (~15 km)</strong>. Frontmatad, 1400 rpm, dowóz pod drzwi i pomoc w montażu. <a href="https://www.blocket.se/recommerce/forsale/item/25924807">blocket.se →</a></p>
+  <h3 class="ctitle">🆓 Blocket — GRATIS</h3>
+  <p class="hint">↔ 9 ofert</p>
+  <div class="carousel">
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26350436/d25f7d1f-96bf-4787-9ce1-230b257a79f4" alt="Husqvarna — użyta 1 raz" loading="lazy">
+      <h3>Husqvarna — użyta 1 raz</h3>
+      <div class="price-tag">0 kr <span class="pill g">TOP FREEBIE</span></div>
+      <div class="loc">📍 Vällingby (~18 km)</div>
+      <p class="desc">„Fullt fungerande, endast använd en gång” — stała w mieszkaniu. Najlepszy gratis w okolicy.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26350436">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26232285/e927805b-27db-4051-b283-3eecd9edf78e" alt="Bosch i-DOS" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch i-DOS — 2 500 kr (z dostawą)</h3>
-      <p><strong>Vårby (~20 km)</strong>. Automatyczne dozowanie i-DOS. <a href="https://www.blocket.se/recommerce/forsale/item/26232285">blocket.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26161404/87bf9580-0457-4bd6-8444-cb59eff26a44" alt="Bosch pralka + suszarka — ZESTAW" loading="lazy">
+      <h3>Bosch pralka + suszarka — ZESTAW</h3>
+      <div class="price-tag">0 kr <span class="pill g">2 W 1</span></div>
+      <div class="loc">📍 Stockholm</div>
+      <p class="desc">„FULLT FUNGERANDE... bortskänkes pga lägenheten måste tömmas asap. Först till kvarn” — 2 urządzenia za darmo.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26161404">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>Electrolux 37 cm — 2 000 kr (z dostawą!)</h3>
-      <p><strong>FB Marketplace, Sundbyberg (~17 km)</strong>. Fullt fungerande, 37 cm głębokości, <strong>hemkörning z instalacją</strong>.</p>
-      <p class="mut">Idealna do małej łazienki. <a href="https://www.facebook.com/marketplace/item/1801612320850157/">fb marketplace →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26393048/0c283b41-3452-405e-8e13-e342b4b9a37e" alt="Bosch Serie 4 (uszczelka)" loading="lazy">
+      <h3>Bosch Serie 4 (uszczelka)</h3>
+      <div class="price-tag">0 kr <span class="pill g">WRÓCIŁO</span></div>
+      <div class="loc">📍 Rönninge (~29 km)</div>
+      <p class="desc">⚠️ Skada på fönsterbälg — uszczelka ~200-300 kr i masz pralkę za darmo. Wróciło 10.09.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26393048">otwórz ogłoszenie →</a></p>
     </div>
-    <div class="card">
-      <h3>Miele 60 cm — 1 000 kr (z dostawą!)</h3>
-      <p><strong>FB Marketplace, Sundbyberg (~17 km)</strong>. <em>"Hemkörning med installation går att ordna"</em>, stan som ny.</p>
-      <p class="mut">Miele z dowozem. <a href="https://www.facebook.com/marketplace/item/1719635116006399/">fb marketplace →</a></p>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26333558/9c9d74a6-bbbc-4c43-ade8-99c20eda8e61" alt="Electrolux 5 kg (rostig)" loading="lazy">
+      <h3>Electrolux 5 kg (rostig)</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Hägersten (~16 km)</div>
+      <p class="desc">Rdzewieje ale działa — wróciło po jednodniowej przerwie.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26333558">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/26352826/c9ed02b7-b4c5-4d8d-bcac-ff1f711e323d" alt="Kompakt 46 cm" loading="lazy">
+      <h3>Kompakt 46 cm</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Stockholm (~13 km)</div>
+      <p class="desc">Mała kompaktowa pralka 46 cm — do małego mieszkania lub jako druga.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26352826">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <img src="https://images.blocketcdn.se/dynamic/1280w/item/24629337/ad52862d-b151-4002-b694-e017a31c5d1b" alt="Hoover VT D11 (defekt)" loading="lazy">
+      <h3>Hoover VT D11 (defekt)</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Solna (~8 km)</div>
+      <p class="desc">Defekt — startar program... Na naprawę lub części, z instrukcją.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/24629337">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>📦</b></div>
+      <h3>Cylinda FT24 + torkskåp</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Vendelsö (~22 km)</div>
+      <p class="desc">Pralka + szafa susząca Bosch, odbiór jako komplet.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26156088">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>🧺</b></div>
+      <h3>Fungerande Tvättmaskin</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Farsta (~22 km)</div>
+      <p class="desc">„Fungerar fint, låter lite vid full laddning” — w pełni sprawna.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/26308604">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>🧺</b></div>
+      <h3>Cylinda front (lekko rostig)</h3>
+      <div class="price-tag">0 kr</div>
+      <div class="loc">📍 Bromma (~15 km)</div>
+      <p class="desc">Działa dobrze, lekka rdza. Programator + przyciski.</p>
+      <p class="lnk"><a href="https://www.blocket.se/recommerce/forsale/item/25986428">otwórz ogłoszenie →</a></p>
     </div>
   </div>
 
-  <h3>📋 Pozostałe oferty w obrębie 30 km (stan na 10.09, godz. 09:00)</h3>
+  <h3 class="ctitle">📘 FB Marketplace — top oferty</h3>
+  <p class="hint">↔ 10 ofert</p>
+  <div class="carousel">
+    <div class="cslide pick">
+      <img src="https://scontent-arn2-1.xx.fbcdn.net/v/t39.84726-6/772840268_1754831165842192_3369718308464921956_n.jpg" alt="Elektro Helios pralka + wbud. suszarka" loading="lazy">
+      <h3>Elektro Helios pralka + wbud. suszarka</h3>
+      <div class="price-tag">300 kr <span class="pill g">🎯 POD NOSEM</span></div>
+      <div class="loc">📍 Odenslunda (Väsby) — spacer!</div>
+      <p class="desc">„Fungerar utan problem” — pralka z funkcją suszenia za grosze, pod samym nosem.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/2251591295674515/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide pick">
+      <div class="noimg"><b>Electrolux</b></div>
+      <h3>Electrolux EWP1462TIW</h3>
+      <div class="price-tag">700 kr <span class="pill g">FELFRITT</span></div>
+      <div class="loc">📍 Spånga (~12 km)</div>
+      <p class="desc">„Fungerar helt felfritt, aldrig haft några problem” — starszy model, świeżo wrzucone.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/4579471215656747/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide pick">
+      <div class="noimg"><b>Miele</b></div>
+      <h3>Miele 60 cm — som ny</h3>
+      <div class="price-tag">1 000 kr <span class="pill a">DOWÓZ</span></div>
+      <div class="loc">📍 Sundbyberg (~17 km)</div>
+      <p class="desc">„Fullt fungerande från Miele” — hemkörning med installation går att ordna.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1719635116006399/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide pick">
+      <div class="noimg"><b>Samsung</b></div>
+      <h3>Samsung 9 kg — 5 lat gwarancji zostało</h3>
+      <div class="price-tag">2 500 kr <span class="pill g">GWARANCJA</span></div>
+      <div class="loc">📍 Sundbyberg (~17 km)</div>
+      <p class="desc">Kupiona 2021, kwitto, 10-letnia gwarancja (5 lat zostało), sterowanie z telefonu, som ny.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1490269806454253/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Electrolux</b></div>
+      <h3>Electrolux 7 kg</h3>
+      <div class="price-tag">550 kr</div>
+      <div class="loc">📍 Spånga (~12 km)</div>
+      <p class="desc">Tani sprawny Electrolux.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1732543454493000/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Väsby</b></div>
+      <h3>Pralka</h3>
+      <div class="price-tag">500 kr</div>
+      <div class="loc">📍 Väsby — 0 km</div>
+      <p class="desc">W samym Väsby, do odebrania.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/882986727967831/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>37 cm</b></div>
+      <h3>Electrolux 37 cm — HEMKÖRNING</h3>
+      <div class="price-tag">2 000 kr <span class="pill a">DOWÓZ</span></div>
+      <div class="loc">📍 Sundbyberg (~17 km)</div>
+      <p class="desc">Fullt fungerande, tylko 37 cm głębokości — do małej łazienki. Dowóz z instalacją.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1801612320850157/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>2 w 1</b></div>
+      <h3>Tvätt + tork</h3>
+      <div class="price-tag">2 300 kr</div>
+      <div class="loc">📍 Barkarby/Järfälla (~15 km)</div>
+      <p class="desc">Pralka (väl använd) + suszarka (sällan använd) — NOWE 10.09.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/2888178698196744/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Samsung</b></div>
+      <h3>Samsung 5300 9 kg</h3>
+      <div class="price-tag">2 300 kr</div>
+      <div class="loc">📍 Sundbyberg (~17 km)</div>
+      <p class="desc">Samsung seria 5300, 9 kg.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1818168602679118/">otwórz ogłoszenie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Cylinda</b></div>
+      <h3>Cylinda — nästan ny</h3>
+      <div class="price-tag">2 500 kr</div>
+      <div class="loc">📍 Vällingby (~18 km)</div>
+      <p class="desc">Prawie nowa Cylinda.</p>
+      <p class="lnk"><a href="https://www.facebook.com/marketplace/item/1701661671118000/">otwórz ogłoszenie →</a></p>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h3>❌ Sprzedane w nocy 09/10.09 (dla archiwum)</h3>
+    <p>Bosch Serie 6 WAU28TI9SN 9kg (2022) + suszarka Cylinda TK40 — 2500 kr Stockholm (TOP z wczoraj!) · Siemens 600 kr · Electrolux Intuition 6kg 200 kr · Samsung 8kg 2300 kr Älvsjö · FB: Electrolux GRATIS Väsby (łożyska, prawdopodobnie sprzedane).</p>
+  </div>
+
+  <h3>📋 Pełna lista pozostałych ofert w obrębie 30 km (stan 10.09, 09:00)</h3>
   <div class="scroll">
   <table>
   <tr><th>Zdjęcie</th><th>Co</th><th>Cena</th><th>Gdzie</th><th>Link</th></tr>
@@ -771,78 +857,144 @@ strong { color: #fff; }
   <h2 id="deale">🏷️ 10. Deal-e w Sklepach — NOWE pralki dobrych marek (zweryfikowane 10.09, 09:30)</h2>
   <p class="mut">Tylko Tier 1-2.5 wg naszego rankingu (Bosch/Siemens/LG/Electrolux/AEG/Gorenje/Blomberg + Samsung jako akceptowalny). Wykluczone: Hisense, Candy, Hoover, Beko, Vestfrost, Scandomestic. Większość promek kończy się <strong>20.09</strong>.</p>
 
-  <div class="grid-2">
-    <div class="card pick">
-      <h3>🥇 LG F4X5011TKB 9 kg AI Wash — 4 999 kr <span class="pill g">nowy deal (Power)</span></h3>
-      <p>Power.se · <strong>Tier 1.5, Direct Drive, AI Wash™</strong> — LG za cenę budżetowej Gorenje. Była 6990 w NetOnNet (pół pokrewne), w Power <strong>2000 kr taniej</strong>.</p>
-      <p><a href="https://www.power.se/vitvaror/tvatt-och-torkning/frontmatade-tvattmaskiner/lg-f4x5011tkb-tvattmaskin/p-4215500/">power.se →</a></p>
+  <h3 class="ctitle">🏬 Oferty sklepowe — karuzela</h3>
+  <p class="hint">↔ przewijaj w bok · 17 ofert, sortowane od najciekawszych</p>
+  <div class="carousel">
+    <div class="cslide pick">
+      <div class="noimg"><b>LG</b></div>
+      <h3>LG F4X5011TKB 9 kg AI Wash</h3>
+      <div class="price-tag">4 999 kr <span class="pill g">NAJTANIEJ LG</span></div>
+      <div class="loc">🏬 Power.se — 10+ online, 14 varuhus</div>
+      <p class="desc">Tier 1.5, Direct Drive, AI Wash. Najtańsze LG na rynku SE — 2000 kr taniej niż gdzie indziej.</p>
+      <p class="lnk"><a href="https://www.power.se/vitvaror/tvatt-och-torkning/frontmatade-tvattmaskiner/lg-f4x5011tkb-tvattmaskin/p-4215500/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card pick">
-      <img src="https://www.elgiganten.se/image/dv_web_D18000136422052/764458/bosch-serie-6-tvattmaskin-wgg244fesn-9kg.jpg" alt="Bosch Serie 6" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>🥇 Bosch Serie 6 WGG244FESN 9 kg — 6 995 kr <span class="pill g">BEST BUY</span></h3>
-      <p><span class="pill w">-42%</span> (org. 11 995) · Elgiganten · kampanja do <strong>20.09</strong></p>
-      <p>9 kg, 1400 rpm, <strong>Automatisk dosering (i-DOS)</strong>, 4.6/5 (482 opinie), Tier 1 marka. <strong>3 szt. w Häggvik</strong> + 100+ online.</p>
-      <p><a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/bosch-serie-6-tvattmaskin-wgg244fesn-9kg/764458">elgiganten.se →</a></p>
+    <div class="cslide pick">
+      <img src="https://www.elgiganten.se/image/dv_web_D18000136422052/764458/bosch-serie-6-tvattmaskin-wgg244fesn-9kg.jpg" alt="Bosch Serie 6 WGG244FESN 9 kg i-DOS" loading="lazy">
+      <h3>Bosch Serie 6 WGG244FESN 9 kg i-DOS</h3>
+      <div class="price-tag">6 995 kr <span class="pill w">-42%</span></div>
+      <div class="loc">🏬 Elgiganten — 3 szt. Häggvik + 100+ online</div>
+      <p class="desc">-42% (org. 11 995). Automatisk dosering, 4.6/5 (482 opinii), kampanja do 20.09.</p>
+      <p class="lnk"><a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/bosch-serie-6-tvattmaskin-wgg244fesn-9kg/764458">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <h3>💤 Bosch WGG244FESN OUTLET 5 246 — sprzedany (10.09)</h3>
-      <p>Egzemplarz outlet z 09.09 zniknął z rotacji (wyprzedany). Nowy wciąż <strong>6 995</strong> (karta obok). Elgiganten Outlet rotuje codziennie — cron sprawdza. W outlet-cie na dziś: tylko Samsung Bespoke AI 11 kg 8 246 + marki zakazane.</p>
+    <div class="cslide pick">
+      <img src="https://images2.wagcdn.com/500/500/fill/p//pimberly/WG2P84A32_693e1c9cad23e69066cea5dec043bf9e.png" alt="Gorenje WG2P84A32 8 kg 1400" loading="lazy">
+      <h3>Gorenje WG2P84A32 8 kg 1400</h3>
+      <div class="price-tag">4 490 kr <span class="pill g">BUDŻET #1</span></div>
+      <div class="loc">🏬 Tretti — i lager, do 20.09</div>
+      <p class="desc">-50% (org. 8 990). Klasa A, nasz pick #1 w budżecie — najlepszy serwis w SE pośród tanich.</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-wg2p84a32/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card pick">
-      <h3>🆕 Blomberg BW84M50W 8 kg — 5 490 kr <span class="pill g">nowy deal (Whiteaway)</span></h3>
-      <p><span class="pill w">-50%</span> (org. 10 990) · Whiteaway · do 20.09</p>
-      <p>Tier 2.5, <strong>energiklass A</strong> (0.468 kWh/cykl), i lager — skickas 1-3 dni. 4.0/5 (4). <a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/blomberg-bw84m50w/">whiteaway.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>11 kg</b></div>
+      <h3>Samsung WW11DG5B25AEEE 11 kg</h3>
+      <div class="price-tag">4 995 kr <span class="pill w">-50%</span></div>
+      <div class="loc">🏬 Elgiganten — 5 online + 58 butiker</div>
+      <p class="desc">-50% (org. 9 995). 11 kg EcoBubble, kampanja do 20.09.</p>
+      <p class="lnk"><a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/samsung-serie-5000-tvattmaskin-ww11dg5b25aeee-11kg/765842">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card pick">
-      <h3>🆕 Blomberg BW74S50W 7 kg — 4 990 kr <span class="pill g">nowy deal (Tretti)</span></h3>
-      <p><span class="pill w">-50%</span> (org. 9 990) · Tretti · do 20.09</p>
-      <p>7 kg z <strong>ånga (para)</strong> i snabbprogram, i lager — skickas 1-3 dni. 4.0/5 (2). <a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/blomberg-bw74s50w/">tretti.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>Blomberg</b></div>
+      <h3>Blomberg BW74S50W 7 kg ånga</h3>
+      <div class="price-tag">4 990 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Tretti — i lager 1-3 dni</div>
+      <p class="desc">-50% (org. 9 990). Para + snabbprogram. NOWY DEAL 10.09. 4.0/5 (2).</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/blomberg-bw74s50w/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card pick">
-      <h3>🆕 Gorenje WPNEI84A1DS 8 kg — 4 990 kr <span class="pill g">nowy deal (Tretti)</span></h3>
-      <p><span class="pill w">-38%</span> (org. 7 990) · Tretti · do 20.09</p>
-      <p>8 kg, i lager. Trzecia Gorenje w promce Tretti (obok WES84AS i WG2P84A32 za 4 490). <a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-wpnei84a1ds/">tretti.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>Blomberg</b></div>
+      <h3>Blomberg BW84M50W 8 kg</h3>
+      <div class="price-tag">5 490 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Whiteaway — i lager 1-3 dni</div>
+      <p class="desc">-50% (org. 10 990). Energiklass A (0.468 kWh/cykl). NOWY DEAL 10.09. 4.0/5 (4).</p>
+      <p class="lnk"><a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/blomberg-bw84m50w/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card pick">
-      <img src="https://images2.wagcdn.com/500/500/fill/p//pimberly/WG2P84A32_693e1c9cad23e69066cea5dec043bf9e.png" alt="Gorenje" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>🥉 Gorenje WG2P84A32 8 kg — 4 490 kr <span class="pill g">budżet</span></h3>
-      <p><span class="pill w">-50%</span> (org. 8 990) · Tretti · wciąż na stanie ✅</p>
-      <p>Klasa A, 72 dB, Tier 2.5 z najlepszym serwisem w SE pośród tanich (Trustpilot 4.2). Nasz pick #1 w budżecie. <a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-wg2p84a32/">tretti.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>Gorenje</b></div>
+      <h3>Gorenje WPNEI84A1DS 8 kg</h3>
+      <div class="price-tag">4 990 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Tretti — i lager</div>
+      <p class="desc">-38% (org. 7 990). NOWY DEAL 10.09 — trzecia Gorenje w promce Tretti.</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-wpnei84a1ds/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <h3>Siemens iQ300 WM14N08LDN 8 kg — 6 399 kr</h3>
-      <p><span class="pill w">-36%</span> (org. 9 990) · Elgiganten · do 20.09</p>
-      <p>Bliźniak Boscha (ta sama fabryka BSH). <strong>Online od 10.09 — zweryfikowane: Lägg i kundvagn działa, leverans 15.09 → 194 30.</strong> <a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/siemens-iq300-tvattmaskin-wm14n08ldn-8kg/1039608">elgiganten.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>⏰ 13.09</b></div>
+      <h3>Samsung WW11DG5B25TEEE 11 kg EcoBubble</h3>
+      <div class="price-tag">5 490 kr <span class="pill b">3 DNI!</span></div>
+      <div class="loc">🏬 Tretti</div>
+      <p class="desc">Org. 13 990 (-61%). ⏰ Oferta kończy się 13.09 — zostały 3 dni! 4.4/5 (12).</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/samsung-ww11dg5b25teee/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <img src="https://imagecontent.netonnet.com/n0e6ajgmrw5w/3nwmhMggmJL4mdS7DUs1yc/021dd7603222761a1fe67cfeb58894ad/WW90FG3M05TWEE_001_Front_White.jpg" alt="Samsung 9kg" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Samsung WW90FG3M05TWEE 9 kg — 4 790 kr</h3>
-      <p>NetOnNet · 9 kg EcoBubble w cenie pralki 7 kg. Tier 3 marka, ale najpopularniejsza seria. <a href="https://www.netonnet.se/art/vitvaror/tvattmaskin/frontmatad-tvattmaskin/samsung-ww90fg3m05twee/1064475.17968/">netonnet.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>10.5 kg</b></div>
+      <h3>Electrolux EFI743WX4W 10.5 kg</h3>
+      <div class="price-tag">5 990 kr <span class="pill w">-60%</span></div>
+      <div class="loc">🏬 Tretti — i lager</div>
+      <p class="desc">-60% (org. 14 990!). Do 30.09. 4.6/5 (14).</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/electrolux-efi743wx4w/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <img src="https://imagecontent.netonnet.com/n0e6ajgmrw5w/5I8vEP0EDJOscqob9NJu7u/d4122ecd5061a9361080cb40fe652787/23281911_WGE03400SN_STP_def.jpg" alt="Bosch Serie 4" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>Bosch WGE03400SN (Serie 4) — 5 490 kr</h3>
-      <p>NetOnNet · Bosch Tier 1 w cenie Samsunga. <a href="https://www.netonnet.se/art/vitvaror/tvattmaskin/frontmatad-tvattmaskin/bosch-wge03400sn/1066141.17968/">netonnet.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>Electrolux</b></div>
+      <h3>Electrolux EW7F6448W4 8 kg ånga</h3>
+      <div class="price-tag">5 490 kr</div>
+      <div class="loc">🏬 Tretti — utförsäljning</div>
+      <p class="desc">-39% (org. 8 990), dopóki magazyn się nie wyczerpie. 4.8/5 (6).</p>
+      <p class="lnk"><a href="https://www.tretti.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/electrolux-ew7f6448w4/">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <img src="https://images2.wagcdn.com/500/500/fill/p//pimberly/F4A1009NWK_59c2d425d7d9e62f99f47979ece5e7d5.jpeg" alt="LG" style="width:100%;border-radius:10px;margin-bottom:10px">
-      <h3>LG F4A1009NWK 9 kg — 5 790 kr</h3>
-      <p>Whiteaway · <strong>4.6/5 przy 229 opiniach</strong> · Direct Drive (Tier 1.5). Siostra F4Y5VRP6WY za 6 490 (4.7/763). <a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/lg-f4a1009nwk/">whiteaway.se →</a></p>
+    <div class="cslide">
+      <div class="noimg"><b>Siemens</b></div>
+      <h3>Siemens iQ300 WM14N08LDN 8 kg</h3>
+      <div class="price-tag">6 399 kr</div>
+      <div class="loc">🏬 Elgiganten — orderable</div>
+      <p class="desc">-36% (org. 9 990). Bliźniak Boscha (BSH). Online od 10.09 — dostawa 15.09 do 194 30.</p>
+      <p class="lnk"><a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/siemens-iq300-tvattmaskin-wm14n08ldn-8kg/1039608">otwierz w sklepie →</a></p>
     </div>
-
-    <div class="card">
-      <h3>Electrolux 800 EW8T673E1E 7 kg — 6 995 kr</h3>
-      <p><span class="pill w">-36%</span> (org. 10 895) · Elgiganten · 4.6/5 (25) · 1 szt. Barkarby + 100+ online. <a href="https://www.elgiganten.se/product/vitvaror/tvatt-tork/tvattmaskin/electrolux-serie-800-tvattmaskin-ew8t673e1e-7kg/770161">elgiganten.se →</a></p>
+    <div class="cslide">
+      <img src="https://images2.wagcdn.com/500/500/fill/p//pimberly/F4A1009NWK_59c2d425d7d9e62f99f47979ece5e7d5.jpeg" alt="LG F4A1009NWK 9 kg 1400" loading="lazy">
+      <h3>LG F4A1009NWK 9 kg 1400</h3>
+      <div class="price-tag">5 790 kr</div>
+      <div class="loc">🏬 Whiteaway</div>
+      <p class="desc">4.6/5 (229 opinii). Direct Drive (Tier 1.5) + hygien.</p>
+      <p class="lnk"><a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/lg-f4a1009nwk/">otwierz w sklepie →</a></p>
+    </div>
+    <div class="cslide">
+      <img src="https://imagecontent.netonnet.com/n0e6ajgmrw5w/3nwmhMggmJL4mdS7DUs1yc/021dd7603222761a1fe67cfeb58894ad/WW90FG3M05TWEE_001_Front_White.jpg" alt="Samsung WW90FG3M05TWEE 9 kg" loading="lazy">
+      <h3>Samsung WW90FG3M05TWEE 9 kg</h3>
+      <div class="price-tag">4 790 kr</div>
+      <div class="loc">🏬 NetOnNet</div>
+      <p class="desc">9 kg EcoBubble w cenie pralki 7 kg.</p>
+      <p class="lnk"><a href="https://www.netonnet.se/art/vitvaror/tvattmaskin/frontmatad-tvattmaskin/samsung-ww90fg3m05twee/1064475.17968/">otwierz w sklepie →</a></p>
+    </div>
+    <div class="cslide">
+      <img src="https://imagecontent.netonnet.com/n0e6ajgmrw5w/5I8vEP0EDJOscqob9NJu7u/d4122ecd5061a9361080cb40fe652787/23281911_WGE03400SN_STP_def.jpg" alt="Bosch WGE03400SN Serie 4" loading="lazy">
+      <h3>Bosch WGE03400SN Serie 4</h3>
+      <div class="price-tag">5 490 kr</div>
+      <div class="loc">🏬 NetOnNet</div>
+      <p class="desc">Bosch Tier 1 w cenie Samsunga.</p>
+      <p class="lnk"><a href="https://www.netonnet.se/art/vitvaror/tvattmaskin/frontmatad-tvattmaskin/bosch-wge03400sn/1066141.17968/">otwierz w sklepie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Gorenje</b></div>
+      <h3>Gorenje W2G494A11 9 kg 1400</h3>
+      <div class="price-tag">5 990 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Whiteaway</div>
+      <p class="desc">-50% (org. 11 990). NOWY DEAL 10.09.</p>
+      <p class="lnk"><a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-w2g494a11/">otwierz w sklepie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>10 kg</b></div>
+      <h3>Gorenje WPNEI14A2DS 10 kg</h3>
+      <div class="price-tag">5 990 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Whiteaway</div>
+      <p class="desc">10 kg, A-20%. NOWY DEAL 10.09.</p>
+      <p class="lnk"><a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/gorenje-wpnei14a2ds-da/">otwierz w sklepie →</a></p>
+    </div>
+    <div class="cslide">
+      <div class="noimg"><b>Electrolux</b></div>
+      <h3>Electrolux EFE682WX4W 10.5 kg</h3>
+      <div class="price-tag">6 490 kr <span class="pill g">NOWY</span></div>
+      <div class="loc">🏬 Whiteaway</div>
+      <p class="desc">1400 rpm, program 45-min. NOWY DEAL 10.09.</p>
+      <p class="lnk"><a href="https://www.whiteaway.se/vitvaror/tvattmaskin/frontmatad-tvattmaskin/product/electrolux-efe682wx4w/">otwierz w sklepie →</a></p>
     </div>
   </div>
 
@@ -933,7 +1085,7 @@ strong { color: #fff; }
 </section>
 
 <div class="footer">
-  Raport wygenerowany automatycznie przez system Andrzej AI · Projekt DP Media AB / OpenClaw · 2026-09-07<br>
+  Raport wygenerowany automatycznie przez system Andrzej AI · Projekt DP Media AB / OpenClaw · 2026-09-07 · mobile+karuzele: 10.09<br>
   Wszystkie dane źródłowe i logi scraperów zapisane w <code>memory/research/pralki-deep/raw/</code>
 </div>
 

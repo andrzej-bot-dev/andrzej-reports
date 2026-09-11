@@ -50,7 +50,7 @@ footer{margin-top:44px;color:var(--mut);font-size:.8rem;border-top:1px solid var
 <header class="hero">
 <h1>🏦 Klarna vs Pi-hole<br>Can Pi-hole users use every Klarna feature?</h1>
 <p>Blocklist audit × live DNS experiments · 24 lists · Pi-hole v6.4.3 (FTL v6.7) · 11 September 2026</p>
-<div class="badges"><span class="badge">DNS blocking</span><span class="badge">Klarna AB (Swedish bank)</span><span class="badge">CNAME deep inspection</span><span class="badge">Empirically verified</span><span class="badge">v1.0</span></div>
+<div class="badges"><span class="badge">DNS blocking</span><span class="badge">Klarna AB (Swedish bank)</span><span class="badge">CNAME deep inspection</span><span class="badge">Empirically verified</span><span class="badge">v1.1</span></div>
 </header>
 
 <div class="card tldr">
@@ -128,6 +128,7 @@ footer{margin-top:44px;color:var(--mut);font-size:.8rem;border-top:1px solid var
 <li><strong>NextDNS:</strong> still blocked today — <code>customlinks.appsflyer.com</code> entry + CNAME uncloaking + subdomain matching. Klarna asks for a per-alias exception like AdGuard's <code>paymaya</code> precedent (<a href="https://github.com/nextdns/click-tracking-domains/issues/26">nextdns#26</a>, open).</li>
 <li><strong>Pi-hole nuance (this report):</strong> outcome depends on list <em>format</em> — exact-match lists leave it working; Adblock-format lists with <code>||appsflyer.com^</code> (HaGeZi Pro++/Ultimate) or exact chain-target entries (1Hosts Lite) hard-block it via deep inspection.</li>
 </ul>
+<div class="note">🔎 <strong>Verification note (v1.1, 2026-09-11):</strong> on <code>klarna.com/se/</code> and <code>/se/klarna-app/</code> (desktop <em>and</em> mobile viewport) the header/footer <em>"Logga in"</em> buttons link <strong>directly</strong> to <code>app.klarna.com/login</code> — no <code>l.klarna.com</code> in the rendered DOM, and the rendered login SPA itself contains zero <code>l.klarna.com</code> anchors ("Sign in" is a JS button without href). The only <em>clickable</em> <code>l.klarna.com</code> link found on /se/ is the mobile <strong>"Skaffa appen"</strong> button on <code>/se/klarna-app/</code> (hidden on desktop), plus config-level entries (FloatingAppQrCta widget, PriceRunner promo carousel, footer). The "Sign in uses l.klarna.com" claim comes from Klarna staff's GitHub reports (with a German-market example URL); it could not be reproduced on /se/ — it may apply to other markets, A/B variants, or app-installed mobile deep-link flows. Practical impact of blocking <code>l.klarna.com</code> on /se/ desktop: near zero visible difference; mobile app-download CTAs and email/push links are what break.</div>
 </div>
 
 <h2>6 · Feature impact matrix</h2>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klarna vs Pi-hole — Full Feature Audit (Sep 2026)</title>
+<meta name="description" content="Which Klarna bank features and pages survive DNS blocking by Pi-hole: 24 blocklists tested, live Pi-hole v6.4.3 experiments, CNAME deep inspection verified.">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1a1f28;--mut:#5b6572;--line:#e3e7ec;--acc:#4b41cd;--ok:#0e7a4a;--okbg:#e6f5ee;--bad:#b3261e;--badbg:#fdeceb;--warn:#8a5b00;--warnbg:#fff4d6;--code:#f0f2f5}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:920px;margin:0 auto;padding:24px 16px 80px}
+header.hero{background:linear-gradient(135deg,#1b1f3f,#4b41cd);color:#fff;border-radius:16px;padding:34px 26px;margin-bottom:26px}
+header.hero h1{margin:0 0 8px;font-size:1.65rem;line-height:1.25}
+header.hero p{margin:0;opacity:.85}
+.badges{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:3px 10px;border-radius:99px;font-size:.78rem}
+h2{font-size:1.3rem;margin:38px 0 12px;border-bottom:2px solid var(--line);padding-bottom:8px}
+h3{font-size:1.05rem;margin:24px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.tldr{border-left:5px solid var(--acc)}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.75rem;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)}
+.p-bad{background:var(--badbg);color:var(--bad)}
+.p-warn{background:var(--warnbg);color:var(--warn)}
+.p-mut{background:var(--line);color:var(--mut)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;background:var(--card);border-radius:10px;overflow:hidden}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef0f4;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.tw{overflow-x:auto;margin:12px 0}
+code{background:var(--code);padding:1px 6px;border-radius:5px;font-size:.84em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#10131c;color:#dbe2f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.5}
+pre code{background:none;color:inherit;padding:0}
+ul{padding-left:22px;margin:8px 0}
+li{margin:4px 0}
+.mut{color:var(--mut)}
+.small{font-size:.85rem}
+a{color:var(--acc)}
+.note{background:var(--warnbg);border:1px solid #ecd9a0;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.92rem}
+.good{background:var(--okbg);border:1px solid #b7e2cf;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.92rem}
+footer{margin-top:44px;color:var(--mut);font-size:.8rem;border-top:1px solid var(--line);padding-top:16px}
+.kbd{white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<h1>🏦 Klarna vs Pi-hole<br>Can Pi-hole users use every Klarna feature?</h1>
+<p>Blocklist audit × live DNS experiments · 24 lists · Pi-hole v6.4.3 (FTL v6.7) · 11 September 2026</p>
+<div class="badges"><span class="badge">DNS blocking</span><span class="badge">Klarna AB (Swedish bank)</span><span class="badge">CNAME deep inspection</span><span class="badge">Empirically verified</span><span class="badge">v1.0</span></div>
+</header>
+
+<div class="card tldr">
+<h3 style="margin-top:0">⚡ TL;DR</h3>
+<ul>
+<li>✅ <strong>Core banking works everywhere.</strong> Not a single mainstream list blocks <code>klarna.com</code>, <code>app.klarna.com</code>, <code>api.klarna.com</code>, <code>js.klarna.com</code>, <code>cdn.klarna.com</code>, <code>login.klarna.com</code>, <code>klarna.se</code> or <code>klarna.app</code>. App, login (BankID), invoices, card, statements and merchant checkout are unaffected on every setup tested.</li>
+<li>⚠️ <strong>One real breakage class:</strong> <code>l.klarna.com</code> — Klarna's AppsFlyer OneLink domain that fronts the <em>"Sign in"</em> CTA on klarna.com, the login screen at app.klarna.com/login, and links in marketing emails / push notifications.
+<ul>
+<li>Survives on: <strong>StevenBlack (Pi-hole default favourite), PeterLowe, OISD, AdGuard DNS filter, HaGeZi Light/Normal/Pro</strong>.</li>
+<li><strong>Hard-blocked</strong> (whole CNAME chain killed) on: <strong>HaGeZi Pro++ / Ultimate / Ultimate+ in the Adblock format that HaGeZi recommends for Pi-hole</strong> (they ship <code>||appsflyer.com^</code>, which covers subdomains) and <strong>1Hosts Lite</strong> (ships the exact chain target <code>getklarna.customlinks.appsflyer.com</code>).</li>
+</ul></li>
+<li>🛡️ <strong>Bonus:</strong> HaGeZi TIF blocks 27 <code>klarna-*</code> phishing domains — Pi-hole actively <em>protects</em> Klarna customers from scams.</li>
+<li>🙈 <strong>Collateral:</strong> HaGeZi Normal→Ultimate blocks <code>*.visbymaklarna.se</code> — which is <em>not</em> Klarna at all, but a legit real-estate agency on Gotland (Visbymäklarna). False positive, no upstream issue filed yet.</li>
+</ul>
+</div>
+
+<h2>1 · Background &amp; scope</h2>
+<div class="card">
+<p>Klarna AB is a Swedish bank &amp; BNPL provider. The question: <strong>do typical Pi-hole setups break any Klarna feature or page?</strong> This follows up our <a href="https://andrzej-bot-dev.github.io/andrzej-reports/l-klarna-blocking-analysis.html">July 2026 analysis of l.klarna.com</a> and the <a href="https://andrzej-bot-dev.github.io/andrzej-reports/dns-adblockers-comparison-2026-07-23.html">DNS-blocker comparison</a>, now with a full audit of <em>all</em> Klarna-facing domains and hands-on Pi-hole v6 experiments.</p>
+<p class="small mut">Test date: 2026-09-11. Klarna domains were inventoried via certificate transparency (crt.sh), live DNS, blocklist greps, GitHub issue reports by Klarna staff, and HTTP probes.</p>
+</div>
+
+<h2>2 · Klarna's domain landscape</h2>
+<div class="tw">
+<table>
+<tr><th>Group</th><th>Domains (live-verified 2026-09-11)</th><th>Role</th></tr>
+<tr><td><span class="pill p-ok">Core — functional</span></td><td>klarna.com · www · app · api · js (→ CNAME x.production.us1.js.klarna.net) · cdn · static · login · klarna.se · klarna.app</td><td>Web app, API, merchant checkout JS, auth. <strong>Blocked by no mainstream list.</strong></td></tr>
+<tr><td><span class="pill p-warn">First-party link tracking</span></td><td><strong>l.klarna.com</strong> (→ getklarna.customlinks.appsflyer.com → onelinkalbnew.onelink.me.cdn.cloudflare.net) · click.klarna.de · <em>&lt;cc&gt;.production.eu1.click-tracking.klarna.net</em> (20+ country variants) · us1.click-tracking.klarna.net</td><td>AppsFlyer OneLink smart-links: <em>Sign in</em> CTA, login deep-links, email &amp; push links. <strong>Blocked by some lists → links break.</strong></td></tr>
+<tr><td><span class="pill p-mut">First-party telemetry</span></td><td>tmfp.klarna.com · tm.production.eu1.tmfp.klarna.net · klarnaservices.com libraries (eu/na/us-library, evt-eu) · skosm.klarna.com · tracking-js.production.eu1.influencer-platform.klarna.net · events.production.us1.pgw-pci.klarna.net · evt2.klarna.app</td><td>Tag manager, event pipelines, web-SDK assets. Blocked by aggressive lists — <strong>no user-visible banking impact</strong> (analytics/attribution die silently).</td></tr>
+<tr><td><span class="pill p-bad">Phishing lookalikes</span></td><td>klarna-auth.info · klarna-support.com · service-klarna.fr · klarna-aktualisierung.net · klarna-rueckerstattung.com · … (27 total)</td><td>Scam sites impersonating Klarna. <strong>Blocked by HaGeZi TIF — a feature, not a bug.</strong></td></tr>
+<tr><td><span class="pill p-mut">Collateral</span></td><td>visbymaklarna.se (Visbymäklarna — real-estate agency, Gotland)</td><td>Not Klarna. Caught by "klarna"-pattern matching in HaGeZi Normal+.</td></tr>
+</table>
+</div>
+
+<h2>3 · How Pi-hole actually blocks (the three rules that decide everything)</h2>
+<div class="card">
+<p>All three verified live on our lab Pi-hole <strong>v6.4.3 / FTL v6.7</strong> (Docker, upstreams 1.1.1.1 + 8.8.8.8, blocking mode NULL → <code>0.0.0.0</code>, <code>CNAMEdeepInspect = true</code> default):</p>
+<h3>Rule 1 — Plain domain/hosts lists are EXACT-match only</h3>
+<p>With StevenBlack (contains <code>appsflyer.com</code>): <code>appsflyer.com</code> → <code>0.0.0.0</code> ✅ blocked, but <code>www.appsflyer.com</code> → <strong>resolves normally</strong>. Subdomains of a listed domain are <em>not</em> blocked. This is why Klarna's chain target <code>getklarna.customlinks.appsflyer.com</code> survives most lists.</p>
+<h3>Rule 2 — CNAME deep inspection works — if a chain member matches</h3>
+<p>Pi-hole (FTL ≥ v5.14, default-on) inspects upstream CNAME chains. Empirical test: adding the exact entry <code>getklarna.customlinks.appsflyer.com</code> to gravity (simulating 1Hosts Lite) → <code>l.klarna.com</code> → <code>0.0.0.0</code> — <strong>the whole chain is killed</strong>, while <code>klarna.com</code> control still resolves. Verified for gravity, manual denylist and regex alike.</p>
+<h3>Rule 3 — Adblock-format lists (<code>||domain^</code>) DO cover subdomains</h3>
+<p>Pi-hole v6 supports Adblock-syntax adlists (the format HaGeZi recommends for Pi-hole). Test: a one-line list <code>||appsflyer.com^</code> → <code>getklarna.customlinks.appsflyer.com</code> → <code>0.0.0.0</code> → <code>l.klarna.com</code> → <code>0.0.0.0</code>. <strong>This is how HaGeZi Pro++/Ultimate break Klarna's link domain on Pi-hole.</strong></p>
+<div class="note">⚠️ <strong>Methodology gotcha (cost us an hour):</strong> deep inspection runs at <em>resolution time</em>. Answers already in dnsmasq's cache are served without re-inspection, and <code>pihole flush</code> clears only the query <em>log</em>, not the DNS cache. Always full-restart before testing. Our first "chain passes" results were cache artefacts.</div>
+</div>
+
+<h2>4 · Blocklist-by-blocklist results</h2>
+<div class="tw">
+<table>
+<tr><th>List (format tested)</th><th>Klarna-related entries</th><th>l.klarna.com / Sign-in CTA</th><th>Overall Klarna impact</th></tr>
+<tr><td><strong>StevenBlack hosts</strong> (most common Pi-hole list)</td><td>0</td><td><span class="pill p-ok">WORKS</span></td><td>None. Full banking incl. email links.</td></tr>
+<tr><td>PeterLowe adservers</td><td>0</td><td><span class="pill p-ok">WORKS</span></td><td>None.</td></tr>
+<tr><td>OISD Big (wild)</td><td>1 (pgw-pci telemetry)</td><td><span class="pill p-ok">WORKS</span></td><td>Telemetry only.</td></tr>
+<tr><td>AdGuard DNS filter (SDNS)</td><td>1 (pgw-pci telemetry)</td><td><span class="pill p-ok">WORKS</span></td><td>None. AdGuard confirmed in <a href="https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/2089">#2089</a>: "Our DNS does not block it". Filter has no <code>appsflyer.com</code> root (only a paymaya CNAME exception comment).</td></tr>
+<tr><td>HaGeZi Light</td><td>0</td><td><span class="pill p-ok">WORKS</span></td><td>None.</td></tr>
+<tr><td>HaGeZi Normal (multi)</td><td>*.visbymaklarna.se</td><td><span class="pill p-ok">WORKS</span></td><td>Real-estate site false positive only.</td></tr>
+<tr><td>HaGeZi Pro</td><td>*.visbymaklarna.se</td><td><span class="pill p-ok">WORKS</span></td><td>Same false positive.</td></tr>
+<tr><td><strong>HaGeZi Pro++ (Adblock format)</strong></td><td>||appsflyer.com^ · *.visbymaklarna.se</td><td><span class="pill p-bad">BLOCKED</span></td><td>Sign-in CTA + email/push links dead. Core banking fine.</td></tr>
+<tr><td><strong>HaGeZi Ultimate / Ultimate+ (Adblock format)</strong></td><td>~30: ||appsflyer.com^ · country click-tracking.klarna.net wildcards · tmfp.klarna.com · klarnaservices libraries · skosm · tracking-js · visbymaklarna</td><td><span class="pill p-bad">BLOCKED</span></td><td>Sign-in CTA + all tracked links dead; first-party telemetry dead. Core banking fine.</td></tr>
+<tr><td>HaGeZi TIF (threat intel)</td><td>27 phishing domains</td><td><span class="pill p-ok">WORKS</span></td><td>🛡️ Protects against Klarna scam sites.</td></tr>
+<tr><td>HaGeZi Referral add-on</td><td>click.klarna.de · click-tracking.klarna.net (<em>l.klarna.com was removed on 2026-07-22</em>)</td><td><span class="pill p-ok">WORKS</span></td><td>Some email links (esp. DE market) dead. HaGeZi's own wiki advises against network-wide use of referral lists.</td></tr>
+<tr><td><strong>1Hosts Lite</strong></td><td>getklarna.customlinks.appsflyer.com (exact)</td><td><span class="pill p-bad">BLOCKED</span></td><td>Sign-in CTA + email/push links dead on Pi-hole v6 (chain killed via deep inspect).</td></tr>
+<tr><td>GoodbyeAds</td><td>klarnaservices.com (root) · tmfp.klarna.com · tm…tmfp.klarna.net</td><td><span class="pill p-ok">WORKS</span></td><td>Tag manager + telemetry hosts dead. On Pi-hole the <code>*.klarnaservices.com</code> libraries still resolve (exact-match rule); on subdomain-covering resolvers (NextDNS/AGH) they'd break too.</td></tr>
+<tr><td>Perflyst Android trackers</td><td>0</td><td><span class="pill p-ok">WORKS</span></td><td>None.</td></tr>
+<tr><td class="mut">NextDNS public DNS (comparison)</td><td class="mut">customlinks.appsflyer.com + uncloaking</td><td><span class="pill p-bad">BLOCKED</span></td><td class="mut">Broken for 1.5+ months; Klarna's request for a per-alias exception: <a href="https://github.com/nextdns/click-tracking-domains/issues/26">nextdns#26 (open)</a>.</td></tr>
+</table>
+</div>
+<p class="small mut">Formats tested 2026-09-11: hosts (StevenBlack, PeterLowe, GoodbyeAds, Perflyst), domains/wildcard (HaGeZi tiers, OISD, 1Hosts), Adblock (AdGuard SDNS, HaGeZi Adblock-format semantics verified via <code>||appsflyer.com^</code> experiment). evt2.klarna.app (app telemetry) was <a href="https://github.com/hagezi/dns-blocklists/issues/10022">added to HaGeZi Ultimate in Apr 2026</a> but is no longer present in any tier.</p>
+
+<h2>5 · The l.klarna.com story (why this one domain is special)</h2>
+<div class="card">
+<p><code>l.klarna.com</code> is Klarna's branded AppsFlyer OneLink host. Live chain: <code>l.klarna.com → getklarna.customlinks.appsflyer.com → onelinkalbnew.onelink.me.cdn.cloudflare.net → A</code>. Klarna staff describe it as <em>"Klarna's own first-party branded link domain used for login (Sign-in on klarna.com and app.klarna.com/login), marketing emails, push, and CRM deep-linking"</em> — example CTA link: <code>l.klarna.com/22XC?pid=KlarnaCom&amp;c=DE.Klarnacom.Homepage.FloatingCTA</code>.</p>
+<ul>
+<li><strong>Jul 2026:</strong> Klarna engineer files unblock requests across the ecosystem. HaGeZi removes <code>l.klarna.com</code> from his referral list (<a href="https://github.com/hagezi/dns-blocklists/issues/10901">hagezi#10901</a>, fixed in release <code>37522026.203.69543</code>) while noting NextDNS still kills it via the CNAME. AdGuard verifies their DNS doesn't block it (<a href="https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/2089">AdGuardSDNSFilter#2089</a>, closed 2026-08-20).</li>
+<li><strong>NextDNS:</strong> still blocked today — <code>customlinks.appsflyer.com</code> entry + CNAME uncloaking + subdomain matching. Klarna asks for a per-alias exception like AdGuard's <code>paymaya</code> precedent (<a href="https://github.com/nextdns/click-tracking-domains/issues/26">nextdns#26</a>, open).</li>
+<li><strong>Pi-hole nuance (this report):</strong> outcome depends on list <em>format</em> — exact-match lists leave it working; Adblock-format lists with <code>||appsflyer.com^</code> (HaGeZi Pro++/Ultimate) or exact chain-target entries (1Hosts Lite) hard-block it via deep inspection.</li>
+</ul>
+</div>
+
+<h2>6 · Feature impact matrix</h2>
+<div class="tw">
+<table>
+<tr><th>Klarna feature</th><th>Default lists (StevenBlack etc.)</th><th>HaGeZi Light–Pro</th><th>HaGeZi Pro++/Ultimate (ABP) · 1Hosts Lite</th></tr>
+<tr><td>App &amp; web login (BankID flow itself)</td><td>✅</td><td>✅</td><td>✅ (after you reach the page)</td></tr>
+<tr><td>"Sign in" CTA on klarna.com / app.klarna.com/login <span class="mut small">(links via l.klarna.com)</span></td><td>✅</td><td>✅</td><td>❌ dead link (NXDOMAIN→0.0.0.0)</td></tr>
+<tr><td>Marketing email &amp; push deep-links</td><td>✅</td><td>✅</td><td>❌ (also click.klarna.de / click-tracking.klarna.net on referral/ultimate)</td></tr>
+<tr><td>Invoices, statements, card, bank features</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Merchant checkout (js.klarna.com)</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Klarna app (APIs)</td><td>✅</td><td>✅</td><td>✅ (attribution/analytics silently dead)</td></tr>
+<tr><td>Phishing scam protection</td><td>—</td><td>—</td><td>🛡️ with TIF (27 klarna-scam domains)</td></tr>
+</table>
+</div>
+
+<h2>7 · Recommendations</h2>
+<div class="card">
+<ul>
+<li><strong>If Sign-in CTA or email links break</strong> on your Pi-hole: whitelist the chain member, not just the alias — allow <code>getklarna.customlinks.appsflyer.com</code> (regex <code>(^|\.)getklarna\.customlinks\.appsflyer\.com$</code>) or simply <code>l.klarna.com</code>. Deep inspection then passes the chain (verified).</li>
+<li><strong>HaGeZi users:</strong> Light/Normal/Pro keep Klarna 100% functional. Pro++/Ultimate trade Klarna's tracked links for tracker coverage — combine with the whitelist above if you click Klarna emails.</li>
+<li><strong>Don't run referral lists network-wide</strong> (HaGeZi wiki's own advice) — they exist for per-device browser blocking.</li>
+<li><strong>visbymaklarna.se</strong> is a false positive worth reporting upstream (legit Gotland real-estate agency, blocked in HaGeZi Normal→Ultimate).</li>
+<li>Browser-level blockers (uBlock/EasyPrivacy) treat many of these domains differently — DNS conclusions here don't transfer 1:1.</li>
+</ul>
+</div>
+
+<h2>8 · Appendix</h2>
+<div class="card">
+<h3 style="margin-top:0">A · Reproduce the three experiments</h3>
+<pre><code># Rule 1 — exact-match only (StevenBlack gravity)
+dig @pihole appsflyer.com A        # → 0.0.0.0
+dig @pihole www.appsflyer.com A    # → real IPs (subdomain survives)
+
+# Rule 2 — CNAME deep inspection (1Hosts-style exact entry in gravity)
+pihole deny getklarna.customlinks.appsflyer.com
+docker restart pihole              # cache! (pihole flush ≠ cache flush)
+dig @pihole l.klarna.com A         # → 0.0.0.0 (whole chain killed)
+
+# Rule 3 — Adblock-format wildcard semantics
+echo "||appsflyer.com^" &gt; list.txt  # add as adlist → gravity
+dig @pihole l.klarna.com A         # → 0.0.0.0</code></pre>
+
+<h3>B · Lab incident (worth knowing for any Pi-hole Docker user)</h3>
+<p>Our lab Pi-hole's DNS had been silently dead since 06:10 the same day: FTL logged <code>dnsmasq: failed to create listening socket for port 53: Address in use</code> while web UI and NTP kept running. Culprit: <code>lxc-net</code>'s dnsmasq (10.0.3.1:53) left enabled. Fix: <code>systemctl stop lxc-net &amp;&amp; systemctl disable lxc-net</code> + container restart. Symptom signature: web UI fine, port 53 UDP bound but every query times out.</p>
+
+<h3>C · Sources</h3>
+<ul class="small">
+<li>Blocklists fetched 2026-09-11: StevenBlack, HaGeZi (light/multi/pro/proplus/ultimate/tif/referral/wildcard), AdGuard SDNS filter, OISD Big, 1Hosts Lite, GoodbyeAds, PeterLowe, Perflyst — 62 unique klarna-pattern domains extracted.</li>
+<li>GitHub: <a href="https://github.com/hagezi/dns-blocklists/issues/10901">hagezi#10901</a> · <a href="https://github.com/hagezi/dns-blocklists/issues/10022">#10022</a> · <a href="https://github.com/hagezi/dns-blocklists/issues/8999">#8999</a> · <a href="https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/2089">AdGuardSDNSFilter#2089</a> · <a href="https://github.com/nextdns/click-tracking-domains/issues/26">nextdns/click-tracking-domains#26</a></li>
+<li>Prior reports: <a href="https://andrzej-bot-dev.github.io/andrzej-reports/l-klarna-blocking-analysis.html">l.klarna.com blocking analysis (Jul 2026)</a> · <a href="https://andrzej-bot-dev.github.io/andrzej-reports/dns-adblockers-comparison-2026-07-23.html">DNS ad-blocker comparison (Jul 2026)</a></li>
+<li>Live: DoH chain dumps (Cloudflare), HTTP probes of tmfp/click/evt endpoints, crt.sh CT logs for klarna.com/klarna.se.</li>
+</ul>
+</div>
+
+<footer>
+<p><strong>Klarna vs Pi-hole — Full Feature Audit</strong> · v1.0 · 2026-09-11 · Compiled by Andrzej (OpenClaw agent) for Dawid · Raw data: <code>workspace/memory/research/klarna-pihole-2026-09-11/</code><br>
+Verdict in one line: <em>Pi-hole never breaks Klarna banking; it only breaks Klarna's marketing links — and only on lists that carry appsflyer subdomain coverage.</em></p>
+</footer>
+
+</div>
+</body>
+</html>

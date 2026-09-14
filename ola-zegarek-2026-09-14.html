@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartwatch dla Oli — urodziny 15.09 — raport Andrzeja</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a2332; --muted:#5b6779; --line:#e3e8ef;
+    --accent:#0e7c66; --accent2:#c9a227; --danger:#c0392b; --ok:#1e8e3e;
+    --warn:#b45309; --chip:#eef3f1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 64px}
+  header.hero{background:linear-gradient(135deg,#123a33,#0e7c66 60%,#12805f);color:#fff;border-radius:16px;padding:28px 28px 24px;margin-bottom:22px}
+  header.hero h1{margin:0 0 6px;font-size:26px;line-height:1.25}
+  header.hero p{margin:4px 0;color:#d9efe9;font-size:15px}
+  .badges{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:13px}
+  .badge.hot{background:#ffd54d;color:#5c4400;border-color:#ffd54d;font-weight:700}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+  h2{font-size:20px;margin:0 0 12px}
+  h2 .num{display:inline-block;background:var(--accent);color:#fff;border-radius:8px;padding:1px 9px;font-size:15px;margin-right:8px;vertical-align:2px}
+  h3{font-size:16px;margin:18px 0 8px}
+  p{margin:8px 0}
+  .muted{color:var(--muted);font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+  th{background:#f0f4f3;text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:#40515f}
+  td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600}
+  .pill.ok{background:#e3f4e8;color:var(--ok)}
+  .pill.no{background:#fdecea;color:var(--danger)}
+  .pill.warn{background:#fff4e0;color:var(--warn)}
+  .pill.info{background:var(--chip);color:#33544a}
+  .price{font-weight:700;color:var(--accent);white-space:nowrap}
+  .tldr{border:2px solid var(--accent);background:#f2faf7;border-radius:14px;padding:20px 24px;margin-bottom:18px}
+  .tldr h2{color:var(--accent)}
+  .buy{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+  .buy a{background:var(--accent);color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px}
+  .buy a.alt{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+  .note{border-left:4px solid var(--accent2);background:#fdf9ec;padding:12px 16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:14.5px}
+  .note.fix{border-color:var(--danger);background:#fdf1ef}
+  ul{margin:8px 0;padding-left:22px}
+  li{margin:4px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  img.shot{width:100%;border:1px solid var(--line);border-radius:10px;margin:8px 0}
+  .src{color:var(--muted);font-size:12.5px}
+  footer{color:var(--muted);font-size:13px;text-align:center;margin-top:26px}
+  a{color:var(--accent)}
+  code{background:#eef1f4;border-radius:5px;padding:1px 6px;font-size:13.5px}
+  .kicker{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-bottom:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🎁 Smartwatch dla Oli — prezent urodzinowy</h1>
+  <p>Kontekst: urodziny <b>wtorek 15.09.2026</b> · prezent do wręczenia wieczorem (pn) lub rano (wt) · poprzedni zegarek: Garmin (padł)</p>
+  <p>Wymagania: wodoodporność · solidna konstrukcja · bateria ≥ 5 dni · odbieranie połączeń (głośnik + mikrofon) · wersja damska/kobiecy kolor</p>
+  <div class="badges">
+    <span class="badge hot">⚡ Dostępne dziś od 10:00 w 5 sklepach wokół Sztokholmu</span>
+    <span class="badge">Zweryfikowane na żywo: pon 14.09.2026, 09:05–09:20</span>
+    <span class="badge">24 źródła + weryfikacja w sklepie</span>
+  </div>
+</header>
+
+<!-- ============ TL;DR ============ -->
+<div class="tldr">
+  <h2>🥇 Werdykt: HUAWEI WATCH GT 6 41 mm — Vit/Guld — 2 986 kr — Power.se</h2>
+  <p>To dokładnie to, o co prosiłeś: <b>Twój zegarek (GT 6) w wersji 41 mm, biało-złotej</b> — wersja damska.
+  Zweryfikowane dziś rano na Power.se: <b>„Finns i lager”, Click&amp;Collect — odbiór 30 min po rezerwacji</b>, ocena 4,7/5 (43 opinie),
+  1,32″ AMOLED 3000 nit, bateria <b>do 14 dni (7 typowo, 5 z AOD)</b>, rozmowy BT, 5 ATM + <b>płatności Curve Pay z zegarka (NFC)</b>.</p>
+  <div class="buy">
+    <a href="https://www.power.se/mobil-och-foto/smartwatch-och-wearables/smartwatch/huawei-watch-gt-6-41-mm-smartwatch-vit/p-4141658/" target="_blank">Rezerwuj Vit/Guld → Click&amp;Collect (p-4141658)</a>
+    <a class="alt" href="https://www.power.se/mobil-och-foto/smartwatch-och-wearables/smartwatch/huawei-watch-gt-6-41-mm-smartwatch-lila/p-4141660/" target="_blank">Wariant Lila — 2 989 kr</a>
+    <a class="alt" href="https://www.power.se/mobil-och-foto/smartwatch-och-wearables/smartwatch/huawei-watch-gt-6-41-mm-smartwatch-guld/p-4141661/" target="_blank">Wariant Guld — 3 286 kr</a>
+  </div>
+  <p class="muted">Dostępne dziś od 10:00 do odebrania po 30 minutach: <b>Power Barkarby (2 szt.)</b>, <b>Mall of Scandinavia (1)</b>,
+  <b>Täby (1)</b>, <b>Kungsgatan (1)</b>, <b>Nacka (1)</b> + Uppsala (1). Reszta z 18 varuhus — online.</p>
+</div>
+
+<!-- ============ 1. PARAGON ============ -->
+<div class="card">
+  <h2><span class="num">1</span>Paragon Twojego GT 6 (Blikk)</h2>
+  <table>
+    <tr><th>Data</th><th>Miejsce</th><th>Kwota</th><th>Rozliczenie</th></tr>
+    <tr><td><b>08.06.2026</b></td><td>Power Mall of Scandinavia</td><td class="price">1 999 kr</td><td>Privat utlägg</td></tr>
+  </table>
+  <p class="muted">Jedyne wystąpienie zegarka w Blikku — brak wpisu „DevCode”. Twój GT 6 46 mm poszedł w czerwcowej promocji Power za 1 999 kr
+  (cenówka 41 mm damskiej dziś: 2 986 kr — wyższa cena to aktualna cena katalogowa 41 mm, nie przesadzaj z oczekiwaniem „1999 w 41 mm”).</p>
+</div>
+
+<!-- ============ 2. RINGI ============ -->
+<div class="card">
+  <h2><span class="num">2</span>„Kręgi” — Huawei Activity Rings (oficjalnie)</h2>
+  <p>Trzy pierścienie w Huawei Health (na zegarku i w aplikacji). Dzień „zamknięty”, gdy wszystkie trzy pełne.
+  Dokładnie tak, jak rozumiałeś:</p>
+  <table>
+    <tr><th>Pierścień</th><th>Co mierzy</th><th>Domyślny cel</th></tr>
+    <tr><td>🔴 <b>Move</b></td><td>Kalorie spalone w aktywności (trening, obowiązki domowe, ruch w ciągu dnia)</td><td>własny, edytowalny</td></tr>
+    <tr><td>🟢 <b>Exercise</b></td><td>Minuty aktywności o umiarkowanej/wyższej intensywności</td><td><b>30 min</b> / dzień (rekomendacja WHO)</td></tr>
+    <tr><td>⚪ <b>Stand</b></td><td>Godziny, w których byłaś w ruchu / stałaś min. 1 minutę — zmusza do wstawania co godzinę</td><td><b>12 h</b> / dzień</td></tr>
+  </table>
+  <p class="muted">Źródło: Huawei Support — <a href="https://consumer.huawei.com/en/support/content/en-us15956081/" target="_blank">„Huawei Health: Activity rings”</a>
+  (starsze modele/bandy: wariant Steps/Exercise/Stand — cel kroków 10 000).
+  <b>Wszystkie aktualne zegarki Huawei z tego raportu mają te pierścienie</b> — Ola dostanie dokładnie tę samą mechanikę „wypełniania kręgów” co Ty.
+  Na watchface widać postęp 3 kręgów w czasie rzeczywistym + medale/wyzwania w aplikacji.</p>
+</div>
+
+<!-- ============ 3. GDZIE KUPIĆ DZIŚ ============ -->
+<div class="card">
+  <h2><span class="num">3</span>GT 6 41 mm Vit/Guld — stan magazynowy <span style="font-weight:400">(zweryfikowane 09:07)</span></h2>
+  <img class="shot" src="img/ola-zegarek/gt6-vit-lagerstatus.png" alt="Power.se — Lagerstatus GT 6 41 mm vit (modal)">
+  <table>
+    <tr><th>Sklep</th><th>Adres</th><th>Stan</th><th>Odbiór / godziny (pn)</th></tr>
+    <tr><td><b>Power Barkarby</b> — najbliżej Väsby</td><td>Enköpingsvägen 27, Järfälla</td><td><span class="pill ok">2 i lager</span></td><td>po 30 min · 10–20</td></tr>
+    <tr><td><b>Power Mall of Scandinavia</b></td><td>Stjärntorget 2, Solna</td><td><span class="pill ok">1 i lager</span></td><td>po 30 min · 10–21</td></tr>
+    <tr><td><b>Power Täby</b></td><td>Attundafältet 2, Täby</td><td><span class="pill ok">1 i lager</span></td><td>po 30 min · 10–20</td></tr>
+    <tr><td><b>Power Kungsgatan</b> — przy pracy (Östermalm obok)</td><td>Kungsgatan 27, Stockholm</td><td><span class="pill ok">1 i lager</span></td><td>po 30 min · 10–20</td></tr>
+    <tr><td>Power Nacka</td><td>Forumvägen 12, Nacka</td><td><span class="pill ok">1 i lager</span></td><td>po 30 min · 10–20</td></tr>
+    <tr><td>Power Uppsala</td><td>Bolandsgatan 16G</td><td><span class="pill ok">1 i lager</span></td><td>po 30 min · 10–20</td></tr>
+    <tr><td>Power Heron City / Länna / Eskilstuna / Västerås</td><td>—</td><td><span class="pill no">inte i lager</span></td><td>—</td></tr>
+  </table>
+  <p class="muted">Razem „Reservera nu i <b>18 varuhus</b>” w całej Szwecji. Rezerwacja = Click&amp;Collect na stronie produktu (przycisk „Reservera nu”).
+  Odległości na screenie liczone od kodu 163 62 (Spånga). <b>Barkarby to ~10 min autem z Väsby.</b> Model: 55020FTN.</p>
+  <div class="note">💡 Bonus odkryty przy okazji: GT 6 (w tym 41 mm) obsługuje <b>Curve Pay</b> — płatności zbliżeniowe z zegarka przez aplikację Curve,
+  bez fizycznej karty. Dokładny setup 5-krokowy jest na stronie produktu. Twój GT 6 też to ma, gdybyś chciał włączyć.</div>
+</div>
+
+<!-- ============ 4. CENY 41mm ============ -->
+<div class="card">
+  <h2><span class="num">4</span>Ceny damskich wariantów (zweryfikowane, SEK)</h2>
+  <table>
+    <tr><th>Model</th><th>Kolor</th><th>Cena</th><th>Dostępność dziś</th><th>Uwagi</th></tr>
+    <tr><td><b>GT 6 41 mm</b> 🥇</td><td><b>Vit/Guld</b> (biało-złoty)</td><td class="price">2 986</td><td><span class="pill ok">5 sklepów Sztokholm+ / 18 SE</span></td><td>4,7★ (43) · rekomendacja Datormagazin</td></tr>
+    <tr><td>GT 6 41 mm</td><td>Lila</td><td class="price">2 989</td><td><span class="pill info">wg Power: 1 varuhus</span></td><td>Alternatywa kolorystyczna</td></tr>
+    <tr><td>GT 6 41 mm</td><td>Guld (złoty)</td><td class="price">3 286</td><td><span class="pill info">dostępny online</span></td><td>4,4★ (85)</td></tr>
+    <tr><td>GT 5 41 mm (starsza generacja)</td><td>Guld</td><td class="price">2 189 <span class="muted">(przecena)</span></td><td><span class="pill ok">w magazynie</span></td><td>Design j.w. „złoty”, 2 gen. wstecz — opcja oszczędna</td></tr>
+    <tr><td>GT 5 41 mm</td><td>Blå</td><td class="price">3 299</td><td><span class="pill info">online</span></td><td>—</td></tr>
+    <tr><td>GT 7 41 mm (nowość 02.09)</td><td>Rosa / Grå / Blå</td><td class="price">~3 199–3 223</td><td><span class="pill warn">tylko zamówienie (CDON, Klockmagasinet)</span></td><td>Nie zdąży na dziś/jutro z odbiorem; Power/Elgiganten jeszcze nie mają</td></tr>
+    <tr><td>Watch Fit 5 (budżet Huawei)</td><td>Lila / Vit / Svart</td><td class="price">~1 499–1 799</td><td><span class="pill warn">dostawa (huawei.com/sklepy)</span></td><td>27 g, 10 dni baterii, rozmowy BT, NFC — ale kształt „opaska plus”</td></tr>
+  </table>
+  <p class="muted">Ceny GT 6/GT 5 odczytane z meta <code>product:price</code> na stronach Power.se dziś 09:05–09:15. GT 7 41 mm i Fit 5 — wg strony Huawei i pośredników (ceny szacowane).</p>
+</div>
+
+<!-- ============ 5. GAMA HUAWEI ============ -->
+<div class="card">
+  <h2><span class="num">5</span>Gama Huawei vs Twój GT 6 46 mm</h2>
+  <p class="muted">Twój punkt odniesienia: GT 6 46 mm — 1 999 kr, 21/12/7 dni baterii, rozmowy BT, 5 ATM, HarmonyOS (RTOS — długa bateria, bez codziennego ładowania).</p>
+  <table>
+    <tr><th>Model</th><th>Rozmiary</th><th>Bateria (max / typ / AOD)</th><th>Rozmowy BT</th><th>Woda</th><th>Damskie kolory</th><th>Cena SE</th></tr>
+    <tr><td><b>GT 7 Pro</b> (nowość 09.2026)</td><td>46 mm</td><td>21 / 12 / 7 dni</td><td>✅</td><td>5 ATM + IP69 + nurkowanie 40 m</td><td>— (żółty/zielony/czarny)</td><td>~4 999–5 499</td></tr>
+    <tr><td><b>GT 7</b> (nowość 09.2026)</td><td>41 / 46 mm</td><td>41 mm: 14 / 7 / 5 dni</td><td>✅</td><td>5 ATM</td><td>41 mm: <b>Rosa</b>, Grå, Blå</td><td>41 mm ~2 999–3 499</td></tr>
+    <tr><td><b>GT 6</b> — <span class="pill warn">EOL, wyprzedaże</span></td><td>41 / 46 mm</td><td>41 mm: 14 / 7 / 5 dni</td><td>✅</td><td>5 ATM</td><td>41 mm: <b>Vit/Guld</b>, Lila, Guld</td><td>2 986 (Power)</td></tr>
+    <tr><td>Watch 5 (2025)</td><td>42 / 46 mm</td><td>42 mm: 7 / 3 / 2 dni</td><td>✅</td><td>5 ATM + freediving</td><td>42 mm: <b>Beige/Sand Gold</b> (stal 904L); 46 mm: Purpur</td><td>~4 000–5 500</td></tr>
+    <tr><td>Fit 5 Pro</td><td>uni</td><td>10 / 7 / 4 dni</td><td>✅</td><td>5 ATM + freediving 40 m</td><td><b>Vit</b> (efekt ceramiczny)</td><td>~2 499–2 999</td></tr>
+    <tr><td>Fit 5</td><td>uni (27 g)</td><td>10 / 7 / 4 dni</td><td>✅</td><td>5 ATM</td><td><b>Lila</b>, Vit</td><td>~1 499–1 799</td></tr>
+    <tr><td>Fit 4 (poprz. gen.)</td><td>uni</td><td>10 / 7 / 4 dni</td><td>✅</td><td>5 ATM</td><td>Lila</td><td>~1 299–1 499</td></tr>
+    <tr><td>GT Runner 2</td><td>uni</td><td>14 / 7 / 1,5 dnia</td><td>✅</td><td>5 ATM</td><td>— (sportowe kolory)</td><td>~3 499–3 999</td></tr>
+    <tr><td>Watch 6 Pro (premiera 09.2026, globalnie)</td><td>—</td><td>— (krótsza — pełny smartwatch)</td><td>✅</td><td>—</td><td>—</td><td>— (premium, poza kryteriami baterii)</td></tr>
+  </table>
+  <p class="muted">Wszystkie mają Activity Rings, GPS, SpO2, sen, HRV. EKG: GT 7 Pro, Watch 5 (X-TAP), Fit 5 Pro, GT Runner 2. Płatności Curve Pay: potwierdzone dla GT 6; wg Huawei część nowszych też wspiera (Fit 5 line wg danych producenta). Ceny „~” = estymowane z huawei.com/se (premiera GT 7 była 02.09 — sklepy dopiero wprowadzają).</p>
+
+  <h3>Dlaczego GT 6 41 mm zamiast GT 7 41 mm?</h3>
+  <ul>
+    <li><b>Dostępność:</b> GT 7 41 mm nie ma jeszcze na półkach sklepów (premiera 2 tygodnie temu) — zamówienie online nie da odbioru dziś/jutro.</li>
+    <li><b>Specyfikacja niemal identyczna w 41 mm:</b> ta sama przekątna 1,32″ AMOLED 3000 nit, ta sama bateria 14/7/5 dni, rozmowy BT, 5 ATM. GT 7 dodaje głównie tryby narciarskie/G-force i nowszą platformę GPS.</li>
+    <li><b>Kolor „biały-złoty” istnieje tylko w GT 6 41 mm</b> — GT 7 41 mm ma różowy/szary/niebieski. Vit/Guld = dokładnie „bardziej kobiecy” wariant, o który pytałeś.</li>
+    <li>Różnica ceny ~200–500 kr na korzyść GT 6 (i to od ręki).</li>
+  </ul>
+</div>
+
+<!-- ============ 6. INNE MARKI ============ -->
+<div class="card">
+  <h2><span class="num">6</span>Inne marki — czy warto zamiast Huawei?</h2>
+  <table>
+    <tr><th>Model</th><th>Cena SEK</th><th>Bateria realna</th><th>Rozmowy BT</th><th>Woda</th><th>Werdykt</th></tr>
+    <tr><td>Garmin Venu 3S 41 mm (Rose Gold)</td><td>~3 700</td><td>~10–14 dni</td><td>✅ głośnik+mic</td><td>5 ATM</td><td><span class="pill info">Jedyny Garmin z rozmowami w rozmiarze damskim; ładny, ale cena i… poprzedni Garmin Oli padł</span></td></tr>
+    <tr><td>Garmin vívoactive 6</td><td>~3 000</td><td>~11 dni</td><td>❌ <b>BRAK głośnika/mika</b></td><td>5 ATM</td><td><span class="pill no">Odpada — nie odbierzesz połączeń</span></td></tr>
+    <tr><td>Amazfit Active 2 NFC</td><td>~1 800–2 200</td><td>~10 dni</td><td>✅</td><td>5 ATM</td><td><span class="pill warn">Dobra budżetowo, ale w SE głównie wysyłka (Amazon.se) — nie zdąży na dziś</span></td></tr>
+    <tr><td>Xiaomi Watch S5 / S4</td><td>~1 500–2 000</td><td>14+ dni</td><td>✅</td><td>5 ATM</td><td><span class="pill no">Odpada — płatności NFC tylko w Chinach; S5 brak w oficjalnej sprzedaży SE</span></td></tr>
+    <tr><td>Honor Watch</td><td>~1 500–2 000</td><td>~14 dni</td><td>✅</td><td>5 ATM</td><td><span class="pill no">Odpada — Honor wycofany ze Szwecji, brak płatności EU</span></td></tr>
+    <tr><td>OnePlus Watch 3</td><td>~2 500–3 000</td><td>3–5 dni</td><td>✅</td><td>IP68 (nie do pływania)</td><td><span class="pill no">Odpada — bateria i woda poniżej wymagań</span></td></tr>
+    <tr><td>Samsung Galaxy Watch 8</td><td>~2 500–3 500</td><td>1–2 dni</td><td>✅</td><td>5 ATM</td><td><span class="pill no">Odpada — ładowanie codzienne (Wear OS)</span></td></tr>
+    <tr><td>Apple Watch (SE/S10)</td><td>~2 500–4 000</td><td>~1 dzień</td><td>✅</td><td>—</td><td><span class="pill no">Odpada — wymaga iPhone'a + codzienne ładowanie</span></td></tr>
+  </table>
+  <div class="note fix">🔧 <b>Korekta błędu agenta:</b> wstępnie Garmin vívoactive 6 był zgłoszony jako „z rozmowami BT” — to <b>nieprawda</b>.
+  Recenzje (DC Rainmaker, Business Insider) i fora potwierdzają: głośnik i mikrofon ma dopiero seria Venu. Dlatego z Garminów jedyna opcja spełniająca
+  Twoje kryterium rozmów to Venu 3S (~3 700 kr). Wniosek ogólny: <b>ŻADNA konkurencja nie bije GT 6 41 mm w tych kryteriach i tej dostępności „od ręki”.</b></div>
+  <p class="muted">Uwaga o płatnościach: Garmin Pay w SE działa z Nordea/Revolut/Curve (nie Swedbank); Huawei Curve Pay przyjmuje karty Visa/MC przez Curve — niezależnie od banku.</p>
+</div>
+
+<!-- ============ 7. PLAN ============ -->
+<div class="card">
+  <h2><span class="num">7</span>Plan na dziś (checklist)</h2>
+  <ul>
+    <li>☐ <b>~10:00</b> — wejdź na <a href="https://www.power.se/mobil-och-foto/smartwatch-och-wearables/smartwatch/huawei-watch-gt-6-41-mm-smartwatch-vit/p-4141658/" target="_blank">stronę GT 6 41 mm Vit/Guld</a> → „Köp med Click&amp;Collect” → wybierz sklep (Barkarby = najbliżej domu / Kungsgatan = przy pracy) → „Reservera nu”.</li>
+    <li>☐ Po ~30 min odbiór na miejscu (pokazuj SMS/kod rezerwacji). Płatność przy odbiorze: 2 986 kr.</li>
+    <li>☐ Plan B gdyby wirtualny stan „uciekł”: Lila (p-4141660, 2 989 kr) albo zadzwoń do sklepu. GT 7 41 mm tylko na zamówienie — nie łap tej opcji na jutro.</li>
+    <li>☐ Wieczorem/przed wręczeniem: ładuj do ~50–80%, włącz parowanie w Huawei Health (język PL działa), ustaw cele pierścieni (Move np. 300 kcal / Exercise 30 min / Stand 12 h).</li>
+    <li>☐ Opcjonalnie: skonfiguruj Curve Pay na jej karcie (5 minut z aplikacją Curve).</li>
+    <li>☐ Spokojnie: Power ma <b>60 dni otwarcia zakupu</b> — w razie niespodzianki z rozmiarem/kolorem wymiana bez dramatu.</li>
+  </ul>
+</div>
+
+<!-- ============ 8. METODOLOGIA ============ -->
+<div class="card">
+  <h2><span class="num">8</span>Metodologia i źródła</h2>
+  <p>Research 14.09.2026 08:45–09:25 (3 równoległe agenty + weryfikacja w przeglądarce na żywo). Surowe dane:
+  <code>~/.openclaw/workspace/memory/research/ola-zegarek-2026-09-14/raw/</code></p>
+  <ul>
+    <li><b>Zweryfikowane na żywo (przeglądarka, Power.se):</b> istnienie i stany GT 6 41 mm (3 kolory), ceny z meta product:price (2 986/2 989/3 286; GT 5: 2 189/3 299), modal Lagerstatus z liczbą sztuk per sklep, model 55020FTN.</li>
+    <li><b>huawei.com/se:</b> aktualna gama (GT 7 Pro + GT 7 = premiera 02.09.2026; GT 6 wycofany z gridu), kolory 41 mm, Fit 5/Fit 5 Pro/Watch 5 — potwierdzone kodami HTTP 200 stron produktowych; definicja Activity Rings z Huawei Support (en-us15956081, en-us00749518).</li>
+    <li><b>Negatywne wyniki:</b> Kjell, Telia, Telenor, Halebop, Webhallen — brak zegarków Huawei w ofercie; Elgiganten — wyszukiwarka nie zwraca Huawei watch (stan na 09:15, niepotwierdzone); NetOnNet/Komplett/Prisjakt — WAF/SPA (pominięte).</li>
+    <li><b>Korekty:</b> Garmin vívoactive 6 bez głośnika/mikrofonu (DC Rainmaker, Business Insider) — agent zmylił z serią Venu.</li>
+    <li><b>Ceny „~”</b> = estymacje (EU MSRP/Google Shopping cache) — do potwierdzenia przy zakupie; ceny Power.se są twardo zweryfikowane.</li>
+  </ul>
+  <p class="src">Kluczowe linki: <a href="https://www.power.se/mobil-och-foto/smartwatch-och-wearables/smartwatch/huawei-watch-gt-6-41-mm-smartwatch-vit/p-4141658/" target="_blank">GT 6 41 mm Vit/Guld @ Power</a> ·
+  <a href="https://consumer.huawei.com/se/wearables/" target="_blank">huawei.com/se wearables</a> ·
+  <a href="https://consumer.huawei.com/en/support/content/en-us15956081/" target="_blank">Activity Rings (oficjalnie)</a> ·
+  <a href="https://www.dcrainmaker.com/2025/04/garmin-vivoactive-6-details-hands-everything.html" target="_blank">DC Rainmaker — vivoactive 6</a></p>
+</div>
+
+<footer>Przygotował Andrzej 🤖 dla Dawida · 14.09.2026 · dane zweryfikowane 09:05–09:25 · życzymy udanych urodzin dla Oli! 🎂</footer>
+</div>
+</body>
+</html>

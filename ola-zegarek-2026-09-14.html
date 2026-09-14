@@ -322,7 +322,54 @@
   <p class="muted">⚠️ Korekta jednego z agentów: wątpliwości co do płatności Curve Pay w SE są bezpodstawne dla GT 6 — Power.se (sprzedawca SE) opisuje Curve Pay wprost na karcie produktu GT 6 41 mm („Ditt befintliga bankkort fungerar; inget separat Curve-kort behövs”). Zweryfikowane na żywo.</p>
 </div>
 
-<footer>Przygotował Andrzej 🤖 dla Dawida · 14.09.2026 · runda 1: 09:05–09:25 · runda 2 (ceny, wszystkie sklepy): 09:25–09:56 · runda 3 (deep dive konkurencji): 10:35–10:55 · życzymy udanych urodzin dla Oli! 🎂</footer>
+<!-- ============ 11. RUNDA 5 ============ -->
+<div class="card">
+  <h2><span class="num">11</span>Runda 5 — pełny crawl 4 sklepów (<3 001 kr) + weryfikacja shortlisty (11:00–13:45)</h2>
+  <p class="muted">Crawl kategorii smartwatch: <b>Power</b> (434 produkty, 108 &lt;3 001 kr — przez API), <b>NetOnNet</b> (37 modeli <3 001),
+  <b>Inet</b> (85 produktów), <b>Elgiganten</b> (asortyment mapowany przez PDP — ich search jest zepsuty). Plus weryfikacja internetowa każdego kandydata
+  (recenzje TrustedReviews/Notebookcheck/PhoneArena/PCMag + manuale Garmin + Reddit) i transkrypcje 8+ recenzji YouTube (yt-dlp auto-subs).</p>
+
+  <h3>Nowe odkrycia z crawl</h3>
+  <ul>
+    <li><b>GT 5 46 mm — 1 898 kr @ Power</b> (poprzednia generacja, wrzesień 2024): PhoneArena testował rozmowy BT z telefonem nie-Huawei (OnePlus) — działają; Notebookcheck: bateria realnie 7–14 dni; Reddit (r/HuaweiWatchGT): „nie warto upgradować GT 5 → GT 6”. <b>Najlepsza wartość cenowa całego researchu</b>, jeśli rozmiar 46 mm jest OK.</li>
+    <li><b>Watch 5 46 mm LTE — 2 999 kr @ Power:</b> jedyny z rozmowami LTE bez telefonu (standalone), ALE bateria realnie 4,5 dnia — poniżej progu 5 dni.</li>
+    <li><b>GT 5 Pro 46 mm — 2 989 kr @ Power:</b> dopłacasz ~1 100 kr tylko za materiały (szafir+tytan); rozmowy i bateria identyczne jak GT 5; ECG zablokowane regionalnie (nie działa w SE).</li>
+    <li><b>Amazfit Active 3 Premium</b> (~2 700+): jedyna nie-Huawei z rozmowami BT &lt;3 000 kr. UWAGA: standardowa Active 3 (1 990 kr @ Power) <b>NIE MA rozmów</b> — tylko wersja Premium (lista wsparcia Amazfit + Wareable).</li>
+    <li><b>Inet:</b> CMF Watch 3 Pro — 1 290 kr (od ręki w butiku Sveavägen, Sztokholm); Samsung Galaxy Watch8 Classic eSIM 46 mm — 2 990 kr (przecena z 6 490).</li>
+  </ul>
+
+  <h3>Weryfikacja „czarne listy” (każdy punkt z manuałem/recenzją)</h3>
+  <table>
+    <tr><th>Model</th><th>Dlaczego odpada (źródło)</th></tr>
+    <tr><td>Garmin Lily 2 (1 990) i Lily 2 Active (2 769)</td><td>Manual Garmin: „Can I answer calls from Lily 2? <b>No</b>” — tylko caller ID. Bateria ~4-5 dni.</td></tr>
+    <tr><td>Garmin vivoactive 5 / Vivomove / Venu Sq 2</td><td>Garmin support: „does not have the hardware necessary to make/take phone calls”. Głośnik mają tylko Venu 3/4 (+3 984+).</td></tr>
+    <tr><td>Amazfit Active 3 standard (1 990)</td><td>Nie ma głośnika/mika (lista wsparcia rozmów Amazfit zawiera tylko Premium/Max/Active 2).</td></tr>
+    <tr><td>Withings ScanWatch Light (2 599)</td><td>„Deliberate omission of audio components” — zero rozmów (hybryda, 30 dni baterii).</td></tr>
+    <tr><td>Xiaomi Watch S1 (2 690)</td><td>Spełnia technicznie wszystko (rozmowy, 10-12 dni, 5 ATM, szafir), ale to model z grudnia 2021 — za drogo w 2026.</td></tr>
+    <tr><td>Fitbit Versa 4 (2 186) / Sense 2 (2 908)</td><td>Rozmowy tylko przychodzące (incoming); platforma umiera (Google uciął 3rd-party apki); Sense 2 też 12,3 mm grubości.</td></tr>
+    <tr><td>CMF Watch 3 Pro (1 290 Inet/NetOnNet)</td><td>Głośnik OK (mit obalony — 0/8 źródeł), ALE 13,6 mm grubości (+2,7 ponad limit) i IP68 bez pływania.</td></tr>
+  </table>
+
+  <h3>Cytaty z recenzji YouTube (transkrypcje, yt-dlp)</h3>
+  <ul>
+    <li><b>GT 6</b> — Hardware Canucks: <i>„normal usage, you are looking at about 7 to 8 days… you can go more than a week without charging”</i> (vs Apple: ładowanie co noc).</li>
+    <li><b>Garmin Venu 4</b> — recenzent zmierzył: <i>„four to five days”</i> przy AOD/sportach (marketing „12 dni” = light mode).</li>
+    <li><b>Fit 5</b> — <i>„you can even make and receive calls on this bad boy”</i>; alloy build, ceramiczny plecak.</li>
+    <li>Żadna z 8+ recenzji nie krytykuje jakości rozmów w GT 6 / Fit 5 / Venu 4 — brak negatywnych sygnałów.</li>
+  </ul>
+
+  <h3>🏁 FINALNA LISTA TOP (po 5 rundach researchu)</h3>
+  <table>
+    <tr><th>#</th><th>Zegarek</th><th>Cena</th><th>Dla kogo / dlaczego</th></tr>
+    <tr><td>🥇</td><td><b>GT 6 41 mm Vit/Guld</b> (Power, pickup dziś)</td><td class="price">2 986</td><td>Najładniejsza i najbardziej „prezentowa” opcja: biało-złoty damski, bateria 14/7, rozmowy, 5 ATM+IP69, Curve Pay. Wszystko na co czekasz od prezentu.</td></tr>
+    <tr><td>🥈</td><td><b>GT 5 46 mm svart</b> (Power, pickup dziś)</td><td class="price">1 898</td><td><b>Okazja dnia</b> — ten sam rozmiar co Twój GT 6, bateria 7-14 dni (jak u niego!), pełne rozmowy, 5 ATM. 1 088 kr taniej. Jeśli Ola nie musi mieć małej koperty — hard to beat.</td></tr>
+    <tr><td>🥉</td><td><b>Fit 5 Lila / Vit</b> (Power 2 186 / online od 1 809)</td><td class="price">2 186 / 1 809</td><td>Ultralekka (27 g), rozmowy OK, 5-7 dni, NFC hardware. Kompromis: forma opaski, słabsza solidność.</td></tr>
+    <tr><td>4</td><td>GT 6 46 mm svart / silver-grön (Power)</td><td class="price">2 986 / 2 989</td><td>Dokładnie Twój zegarek, bateria 21/12 — gdyby 46 mm pasował i miała mieć „ten sam”.</td></tr>
+    <tr><td>5</td><td>Amazfit Active 3 Premium (dostawa)</td><td>~2 700</td><td>Jedyna nie-Huawei z rozmowami &lt;3 000. Zepp app słabsza, dostawa (nie pickup).</td></tr>
+  </table>
+</div>
+
+<footer>Przygotował Andrzej 🤖 dla Dawida · 14.09.2026 · runda 1: 09:05–09:25 · runda 2 (ceny, wszystkie sklepy): 09:25–09:56 · runda 3 (deep dive konkurencji): 10:35–10:55 · runda 4 (CMF+46mm+Garmin+Amazfit+YouTube): 11:05–11:45 · runda 5 (crawl 4 sklepów + weryfikacja shortlisty): 11:49–13:45 · życzymy udanych urodzin dla Oli! 🎂</footer>
 </div>
 </body>
 </html>

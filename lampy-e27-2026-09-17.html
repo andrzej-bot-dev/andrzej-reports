@@ -23,8 +23,12 @@ section{margin-bottom:8px}
 .card h2{font-size:1.08rem;flex:1;min-width:140px}
 .tag{font-size:.72rem;padding:3px 9px;border-radius:20px;font-weight:600;white-space:nowrap}
 .desc{color:var(--muted);font-size:.92rem;margin:8px 2px}
-.imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.imgs{display:grid;grid-template-columns:2fr 3fr;gap:10px;margin-top:10px;align-items:start}
 .img-wrap{background:#10131a;border-radius:10px;overflow:hidden;border:1px solid #23262e}
+.img-wrap.insp{max-width:78%}
+.img-wrap.insp .img-label{background:#2a2438;color:#b39ddb;text-transform:uppercase;font-weight:700;font-size:.66rem;letter-spacing:.6px;border-bottom:1px solid #3a3350}
+.img-wrap.render .img-label{background:#152b1e;color:#81c784;font-weight:700;font-size:.72rem}
+.img-wrap.insp img{aspect-ratio:16/11;object-fit:cover;object-position:center top}
 .img-label{padding:7px 10px;font-size:.78rem;color:var(--muted);border-bottom:1px solid #23262e}
 .img-label .src{color:#7c9cff}
 .img-wrap img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
@@ -32,7 +36,7 @@ section{margin-bottom:8px}
 .ph{color:#4a5261;padding:24px 10px;font-size:.85rem}
 .ph.pure{color:#7c4dff;text-align:center;line-height:1.6}
 footer{color:#5a6272;font-size:.8rem;padding:20px 8px;text-align:center}
-@media(max-width:640px){.imgs{grid-template-columns:1fr}h1{font-size:1.2rem}}
+@media(max-width:640px){.imgs{grid-template-columns:1fr}.img-wrap.insp{max-width:100%}.img-wrap.insp img{aspect-ratio:16/8;max-height:180px}h1{font-size:1.2rem}}
 </style>
 </head>
 <body>
@@ -45,200 +49,200 @@ footer{color:#5a6272;font-size:.8rem;padding:20px 8px;text-align:center}
 <section><h2 class="group" style="color:#4caf50;border-color:#4caf50">🌱 Botaniczne</h2><article class="card" id="c1">
   <div class="card-head"><span class="num">1</span><h2>Nordic Fir</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Odwrócony stożek jodły, iglaste frondy w spiralnych warstwach, matte biel porcelanowa. Cienie-pasy igieł, skandynawski zimowy las.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2292750-nordic-pinecone-lamp-modular-no-support" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-01.jpg" alt="Nordic Fir — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2292750-nordic-pinecone-lamp-modular-no-support" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-01.jpg" alt="Nordic Fir — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-01.jpg" alt="Nordic Fir — render AI"></div></div>
 </article><article class="card" id="c2">
   <div class="card-head"><span class="num">2</span><h2>Kelp Forest</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Pionowe falujące wstęgi wodorostów wokół żarówki, sylwetka cylindra. Organiczne dryfujące cienie, coastal vibe.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2833476-ocean-pearl-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-02.jpg" alt="Kelp Forest — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2833476-ocean-pearl-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-02.jpg" alt="Kelp Forest — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-02.jpg" alt="Kelp Forest — render AI"></div></div>
 </article><article class="card" id="c3">
   <div class="card-head"><span class="num">3</span><h2>Szyszka Fibonacci</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Łuski w spirali złotego podziału na kuli. Gęsty efekt gobo, bursztynowy translucent PETG.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2825143-pinecone-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-03.jpg" alt="Szyszka Fibonacci — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2825143-pinecone-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-03.jpg" alt="Szyszka Fibonacci — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-03.jpg" alt="Szyszka Fibonacci — render AI"></div></div>
 </article><article class="card" id="c4">
   <div class="card-head"><span class="num">4</span><h2>Kora Brzozy</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Cylinder z nakładających się pasków kory z poziomymi szczelinami (lenticels). Nordycki, ciepłe poziome smugi światła.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2647778-organic-tree-texture-table-lamp-e14" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-04.jpg" alt="Kora Brzozy — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2647778-organic-tree-texture-table-lamp-e14" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-04.jpg" alt="Kora Brzozy — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-04.jpg" alt="Kora Brzozy — render AI"></div></div>
 </article><article class="card" id="c5">
   <div class="card-head"><span class="num">5</span><h2>Grzyb z blaszkami</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Kopuła jak Panthella, ale spód z promienistymi blaszkami (gills). Cienie-wachlarze na stole pod lampą.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">Louis Poulsen Panthella</span></div>
-        <a href="https://makerworld.com/en/models/1709950-mushroom-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-05.jpg" alt="Grzyb z blaszkami — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">Louis Poulsen Panthella</span></div>
+        <a href="https://makerworld.com/en/models/1709950-mushroom-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-05.jpg" alt="Grzyb z blaszkami — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-05.jpg" alt="Grzyb z blaszkami — render AI"></div></div>
 </article><article class="card" id="c6">
   <div class="card-head"><span class="num">6</span><h2>Ginkgo</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Wachlarzowate liście miłorzębu na kopule, złoty PETG. Jesienny seller Q4.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/3194621-ginkgo-tree-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-06.jpg" alt="Ginkgo — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/3194621-ginkgo-tree-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-06.jpg" alt="Ginkgo — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-06.jpg" alt="Ginkgo — render AI"></div></div>
 </article><article class="card" id="c7">
   <div class="card-head"><span class="num">7</span><h2>Dmuchawiec</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Kula z 30-40 delikatnych nasion z pappusem na hubie. Eteryczny boho/scandi.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2860382-spherical-solar-garden-lantern-floral-glow" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-07.jpg" alt="Dmuchawiec — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2860382-spherical-solar-garden-lantern-floral-glow" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-07.jpg" alt="Dmuchawiec — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-07.jpg" alt="Dmuchawiec — render AI"></div></div>
 </article><article class="card" id="c8">
   <div class="card-head"><span class="num">8</span><h2>Fiddlehead Paproć</h2><span class="tag" style="background:#4caf5022;color:#4caf50">Botaniczne</span></div>
   <p class="desc">Zwinięte spiralne młode frondy paproci ustawione pionowo. Wiosenny, botaniczny premium.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/3132235-floraglow-botanical-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-08.jpg" alt="Fiddlehead Paproć — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/3132235-floraglow-botanical-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-08.jpg" alt="Fiddlehead Paproć — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-08.jpg" alt="Fiddlehead Paproć — render AI"></div></div>
 </article></section>
 <section><h2 class="group" style="color:#29b6f6;border-color:#29b6f6">🌊 Morskie</h2><article class="card" id="c9">
   <div class="card-head"><span class="num">9</span><h2>Rozgwiazda</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">5 ramion w gradiencie bursztyn→transparent, gwiaździste cienie na suficie. Domki letniskowe. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-09.jpg" alt="Rozgwiazda — render AI"></div></div>
 </article><article class="card" id="c10">
   <div class="card-head"><span class="num">10</span><h2>Anemon</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">Vase mode kielich z mackami spływającymi w dół, różowy transparent. Sypialnie i łazienki. [QM]</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">Qwen Max</span></div>
-        <a href="https://makerworld.com/en/models/2697655-sea-anemone-inspired-e27-pendant-lampshade" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-10.jpg" alt="Anemon — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">Qwen Max</span></div>
+        <a href="https://makerworld.com/en/models/2697655-sea-anemone-inspired-e27-pendant-lampshade" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-10.jpg" alt="Anemon — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-10.jpg" alt="Anemon — render AI"></div></div>
 </article><article class="card" id="c11">
   <div class="card-head"><span class="num">11</span><h2>Jeżowiec</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">Sferyczna skorupa z setkami kolców, czarny lub miedź. Dramatyczne cienie-kropki, statement loft. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-11.jpg" alt="Jeżowiec — render AI"></div></div>
 </article><article class="card" id="c12">
   <div class="card-head"><span class="num">12</span><h2>Koralowiec</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">6-8 modułowych gałązek skręcanych na hubie w trójwymiarowy krzak. Podwodna rzeźba. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-12.jpg" alt="Koralowiec — render AI"></div></div>
 </article><article class="card" id="c13">
   <div class="card-head"><span class="num">13</span><h2>Manta</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">Poziomo zawieszony falujący płat nad stołem, światło z spodu. Ocean-modern. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-13.jpg" alt="Manta — render AI"></div></div>
 </article><article class="card" id="c14">
   <div class="card-head"><span class="num">14</span><h2>Ammonit</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">Logarytmiczna spirala komorowa, komory świecą gradientem. Fossil-geek + designer.</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-14.jpg" alt="Ammonit — render AI"></div></div>
 </article><article class="card" id="c15">
   <div class="card-head"><span class="num">15</span><h2>Szkielet Wieloryba</h2><span class="tag" style="background:#29b6f622;color:#29b6f6">Morskie</span></div>
   <p class="desc">8-10 łukowatych żeber na podłużnym hubie, biel porcelanowa. Muzealny statement, loft. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-15.jpg" alt="Szkielet Wieloryba — render AI"></div></div>
 </article></section>
 <section><h2 class="group" style="color:#a1887f;border-color:#a1887f">🪺 Organiczne / Naturalne</h2><article class="card" id="c16">
   <div class="card-head"><span class="num">16</span><h2>Kokon</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">3 warstwy nici jedwabnych wokół szkieletu, blask jak przez pergamin. Minimalizm z ciepłem, wygląda drogo. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-16.jpg" alt="Kokon — render AI"></div></div>
 </article><article class="card" id="c17">
   <div class="card-head"><span class="num">17</span><h2>Gniazdo Osy</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Organiczna sfera z nieregularnych komórek, kraft/szary. Rustykalny industrial. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-17.jpg" alt="Gniazdo Osy — render AI"></div></div>
 </article><article class="card" id="c18">
   <div class="card-head"><span class="num">18</span><h2>Kryształ Górski</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Kanciaste słupy różnej wysokości z huba, frost transparent. Natural luxury. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-18.jpg" alt="Kryształ Górski — render AI"></div></div>
 </article><article class="card" id="c19">
   <div class="card-head"><span class="num">19</span><h2>Chmura Nimbus</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Warstwy puszystych chmur, biel. Pokój dziecięcy bestseller.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1682173-coral-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-19.jpg" alt="Chmura Nimbus — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1682173-coral-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-19.jpg" alt="Chmura Nimbus — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-19.jpg" alt="Chmura Nimbus — render AI"></div></div>
 </article><article class="card" id="c20">
   <div class="card-head"><span class="num">20</span><h2>Balon</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Pionowe gore&#x27;i + koszyk-dyfuzor. Nursery, personalizacja imieniem.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1671490-glowloon-hot-air-balloon-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-20.jpg" alt="Balon — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1671490-glowloon-hot-air-balloon-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-20.jpg" alt="Balon — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-20.jpg" alt="Balon — render AI"></div></div>
 </article><article class="card" id="c21">
   <div class="card-head"><span class="num">21</span><h2>Granat</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Skorupa z komorami nasiennymi, burgund. Faceted shadows, kuchnia/wyspa. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-21.jpg" alt="Granat — render AI"></div></div>
 </article><article class="card" id="c22">
   <div class="card-head"><span class="num">22</span><h2>Bambus Japandi</h2><span class="tag" style="background:#a1887f22;color:#a1887f">Organiczne / Naturalne</span></div>
   <p class="desc">Stackowane segmenty z przewężeniami, vase mode. Azjatycki minimalizm. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-22.jpg" alt="Bambus Japandi — render AI"></div></div>
 </article></section>
 <section><h2 class="group" style="color:#ffb300;border-color:#ffb300">🏛 Geometria / Kultura</h2><article class="card" id="c23">
   <div class="card-head"><span class="num">23</span><h2>Kumiko Asanoha</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Japońska krata gwiazdowa, heksagonalny bęben z paneli snap-fit. Siatka cieni zen.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1550472-large-kumiko-lamp-shade-ceiling-light" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-23.jpg" alt="Kumiko Asanoha — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1550472-large-kumiko-lamp-shade-ceiling-light" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-23.jpg" alt="Kumiko Asanoha — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-23.jpg" alt="Kumiko Asanoha — render AI"></div></div>
 </article><article class="card" id="c24">
   <div class="card-head"><span class="num">24</span><h2>Mashrabiya</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Marokańska kopuła z ornamentalnymi wycięciami. Eksplozja cieni na suficie.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1702838-arabic-lantern-led-lamp-tea-light" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-24.jpg" alt="Mashrabiya — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1702838-arabic-lantern-led-lamp-tea-light" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-24.jpg" alt="Mashrabiya — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-24.jpg" alt="Mashrabiya — render AI"></div></div>
 </article><article class="card" id="c25">
   <div class="card-head"><span class="num">25</span><h2>Rozeta Gotycka</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Dysk katedralnej rozety, segmenty z kolorowego PETG jak witraż. Katedralne wiby na suficie.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/424105-rose-stained-glass" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-25.jpg" alt="Rozeta Gotycka — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/424105-rose-stained-glass" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-25.jpg" alt="Rozeta Gotycka — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-25.jpg" alt="Rozeta Gotycka — render AI"></div></div>
 </article><article class="card" id="c26">
   <div class="card-head"><span class="num">26</span><h2>Pagoda</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Stackowane zakrzywione daszki (każdy vase mode ring). Zen japandi.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1180829-japanese-mini-tea-light-lantern" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-26.jpg" alt="Pagoda — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1180829-japanese-mini-tea-light-lantern" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-26.jpg" alt="Pagoda — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-26.jpg" alt="Pagoda — render AI"></div></div>
 </article><article class="card" id="c27">
   <div class="card-head"><span class="num">27</span><h2>Art Deco Wachlarz</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Półsfera z geometrycznymi promieniami, czarny + złoto. Jadalnia glamour. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-27.jpg" alt="Art Deco Wachlarz — render AI"></div></div>
 </article><article class="card" id="c28">
   <div class="card-head"><span class="num">28</span><h2>Armillarium Kinetyczne</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">3-4 koncentryczne pierścienie miedziane, obracają się od ciepła żarówki. Efekt kinetyczny = viral. [QM]</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">✨ Koncept autorski</div><div class="ph pure">Bez pierwowzoru —<br>czysty koncept AI</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-28.jpg" alt="Armillarium Kinetyczne — render AI"></div></div>
 </article><article class="card" id="c29">
   <div class="card-head"><span class="num">29</span><h2>Plaster Miodu</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Klaster heksagonalnych pryzm, miód transparent. Ciepły glow.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1740058-honeycomb-table-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-29.jpg" alt="Plaster Miodu — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1740058-honeycomb-table-lamp" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-29.jpg" alt="Plaster Miodu — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-29.jpg" alt="Plaster Miodu — render AI"></div></div>
 </article><article class="card" id="c30">
   <div class="card-head"><span class="num">30</span><h2>Torus Ripple</h2><span class="tag" style="background:#ffb30022;color:#ffb300">Geometria / Kultura</span></div>
   <p class="desc">Koncentryczne pierścienie z falą sinusoidalną, parametryczne. Spokojne cienie wody.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/2837108-lampe-wavy-design-moderne-ambiance-cosy" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-30.jpg" alt="Torus Ripple — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/2837108-lampe-wavy-design-moderne-ambiance-cosy" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-30.jpg" alt="Torus Ripple — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-30.jpg" alt="Torus Ripple — render AI"></div></div>
 </article></section>
 <section><h2 class="group" style="color:#ec407a;border-color:#ec407a">🛍 Klasyka sklepowa</h2><article class="card" id="c31">
   <div class="card-head"><span class="num">31</span><h2>Rattan Kula</h2><span class="tag" style="background:#ec407a22;color:#ec407a">Klasyka sklepowa</span></div>
   <p class="desc">Plecione paski na dwóch pierścieniach, rattan-color. Rattan = evergreen scandi. [QM]</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">Qwen Max</span></div>
-        <a href="https://makerworld.com/en/models/1980367-rattan-cane-webbing-lamp-pendant-or-standing" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-31.jpg" alt="Rattan Kula — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">Qwen Max</span></div>
+        <a href="https://makerworld.com/en/models/1980367-rattan-cane-webbing-lamp-pendant-or-standing" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-31.jpg" alt="Rattan Kula — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-31.jpg" alt="Rattan Kula — render AI"></div></div>
 </article><article class="card" id="c32">
   <div class="card-head"><span class="num">32</span><h2>Barok Bourgie</h2><span class="tag" style="background:#ec407a22;color:#ec407a">Klasyka sklepowa</span></div>
   <p class="desc">Plisowana gorsetowa sylwetka, złoto. Boudoir/wesele, vibe Kartell Bourgie.</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-32.jpg" alt="Barok Bourgie — render AI"></div></div>
 </article><article class="card" id="c33">
   <div class="card-head"><span class="num">33</span><h2>Noguchi Ribbed</h2><span class="tag" style="background:#ec407a22;color:#ec407a">Klasyka sklepowa</span></div>
   <p class="desc">Organiczny żebrowany elipsoid jak papierowa lampa Akari. Miękki ambient, japandi.</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-33.jpg" alt="Noguchi Ribbed — render AI"></div></div>
 </article><article class="card" id="c34">
   <div class="card-head"><span class="num">34</span><h2>Mapa Gwiazd Custom</h2><span class="tag" style="background:#ec407a22;color:#ec407a">Klasyka sklepowa</span></div>
   <p class="desc">Ciemna sfera z perforacją = prawdziwe konstelacje z wybranej daty. Personalizacja #1 → prezent premium.</p>
-  <div class="imgs"><div class="img-wrap"><div class="img-label">📷 Inspiracja — <span class="src">MakerWorld</span></div>
-        <a href="https://makerworld.com/en/models/1291285-solar-system-lithophane-planet-lamps-150mm" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-34.jpg" alt="Mapa Gwiazd Custom — inspiracja"></a></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap insp"><div class="img-label">📷 INSPIRACJA — źródło: <span class="src">MakerWorld</span></div>
+        <a href="https://makerworld.com/en/models/1291285-solar-system-lithophane-planet-lamps-150mm" target="_blank" rel="noopener"><img loading="lazy" src="lampy-e27-2026-09-17/insp-34.jpg" alt="Mapa Gwiazd Custom — inspiracja"></a></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-34.jpg" alt="Mapa Gwiazd Custom — render AI"></div></div>
 </article><article class="card" id="c35">
   <div class="card-head"><span class="num">35</span><h2>Lithophane Dome</h2><span class="tag" style="background:#ec407a22;color:#ec407a">Klasyka sklepowa</span></div>
   <p class="desc">Kula z płytek lithophane (foto/obraz custom). Personalizacja, najwyższa marża.</p>
-  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap"><div class="img-label">🤖 Koncept AI (Gemini)</div>
+  <div class="imgs"><div class="img-wrap placeholder"><div class="img-label">📷 Inspiracja</div><div class="ph">⏳ szukam źródła…</div></div><div class="img-wrap render"><div class="img-label">🤖 KONCEPT AI (Gemini)</div>
         <img loading="lazy" src="lampy-e27-2026-09-17/render-35.jpg" alt="Lithophane Dome — render AI"></div></div>
 </article></section>
 

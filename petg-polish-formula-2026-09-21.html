@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PETG Mirror Finish — rekonstrukcja kursu „The Formula" ($97) za darmo — 2026-09-21</title>
+<style>
+:root{--bg:#0f1115;--card:#1a1e27;--acc:#4fc3f7;--acc2:#ffd54f;--txt:#e8eaed;--mut:#9aa0a6;--ok:#66bb6a;--bad:#ef5350;--warn:#ffa726}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.65;padding:24px;max-width:980px;margin:0 auto}
+h1{font-size:1.7em;margin:16px 0 4px;color:var(--acc)}
+h2{font-size:1.3em;margin:36px 0 12px;padding-bottom:6px;border-bottom:2px solid #2a2f3a;color:var(--acc2)}
+h3{margin:20px 0 8px;color:var(--acc)}
+p,li{color:var(--txt)}
+.sub{color:var(--mut);font-size:.95em;margin-bottom:20px}
+.card{background:var(--card);border-radius:12px;padding:18px 20px;margin:14px 0;border:1px solid #262c38}
+code,pre{font-family:'SF Mono',Consolas,monospace;background:#12151c;border-radius:6px}
+code{padding:1px 6px;font-size:.9em;color:#f8bbd0}
+pre{padding:14px;overflow-x:auto;margin:10px 0;font-size:.85em;line-height:1.5;color:#c3e88d}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.92em}
+th{background:#232936;color:var(--acc);text-align:left;padding:8px 10px}
+td{padding:7px 10px;border-bottom:1px solid #262c38;color:var(--txt)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+.tag{display:inline-block;background:#232936;border-radius:20px;padding:2px 10px;font-size:.8em;color:var(--mut);margin:2px}
+.flow{background:#12151c;border-left:4px solid var(--acc);padding:14px 16px;border-radius:8px;font-family:monospace;font-size:.88em;white-space:pre;overflow-x:auto}
+.big{font-size:1.15em;font-weight:600}
+a{color:var(--acc)}
+ul{padding-left:22px}
+.step{display:flex;gap:12px;margin:10px 0}
+.step .num{background:var(--acc);color:#000;font-weight:700;border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<h1>PETG Mirror Finish 🪞</h1>
+<p class="sub">Rekonstrukcja kursu <em>„The Formula" by PolishMaster</em> ($97 ≈ 970 kr) z darmowych źródeł · 2026-09-21 · 30+ źródeł (All3DP, Prusa, CoEX, Kingroon, Alliance Chemical, Reddit, Instructables, fora automotive) · subagent research + synteza</p>
+
+<div class="card">
+<span class="big">TL;DR:</span> Cała wiedza z kursu jest darmowa — to standardowy pipeline z automotive detailing przeniesiony na wydruki 3D. Kurs sprzedaje strukturę i porządek, nie tajną wiedzę. Twój koszt materiałów: <span class="ok">~440 kr (budżet Biltema)</span> zamiast 970 kr za kurs + narzędzia i tak musisz kupić sam.
+</div>
+
+<h2>🎯 Dlaczego filmiki PolishMastera wyglądają tak dobrze</h2>
+<div class="card">
+Z analizy klatek TikToka: ujęcia <em>brzydkich</em> wydruków = prawdziwe nagrania; finalne „idealne lustro" = najpewniej AI (roztopione palce w rękawiczce, nienaturalny połysk). Taki sam print nie wygląda identycznie przed i po. Efektu z filmu NIE da się osiągnąć samym szlifowaniem w 2 sekundy — ale realny pipeline daje 90% tego efektu.
+</div>
+
+<h2>1️⃣ ZACZNIJ OD DRUKU (największa dźwignia)</h2>
+<div class="card">
+<p>Kurs ma to jako „print settings that leave a surface ready to finish". Bez tego szlifowanie trwa 3× dłużej:</p>
+<pre>Layer height:        0.16 mm (sweet spot) / 0.12 mm (detale)
+Ściana zewnętrzna:   30 mm/s  ← NAJWAŻNIEJSZY jeden settings
+Ściany wewnętrzne:   60 mm/s
+Flow:                98%
+Temp:                240–250°C (lepsza adhezja warstw = mniej pęknięć przy szlifie)
+Cooling:             0–40% (nigdy >50% dla PETG!)
+Perimetry:           3+ (ściana ≥1.2 mm)
+Retraction:          0.7 mm @ 40 mm/s
+Seam:                BACK / painted (jedna linia, nie random po całym modelu)
+Ironing:             30 mm/s, 95% flow — TYLKO płaskie powierzchnie
+Arachne:             ON
+Variable LH:         0.08→0.16 mm na krzywiznach</pre>
+<p>💡 Spód na szkle/poliwęglanowej płycie = niemal lustro gratis, zero szlifowania.</p>
+</div>
+
+<h2>2️⃣ PIPELINE SZLIFOWANIA (rdzeń kursu)</h2>
+<div class="flow">RAW PRINT → obczyć supports/stringing → umyć wodą z mydłem → odtłuścić IPA
+        │
+        ▼ SZLIF WSTĘPNY (na sucho)
+P180  → zdejmuje layer lines
+P220  → usuwa rysy po 180
+P320  → wygładzenie; PETG: LEKKI docisk (miękki materiał, łatwo o dziury)
+        │
+        ▼ OD 400 NA MOKRO (PETG topi się od tarcia — obowiązkowo!)
+P400 → P600 → P800  (wiadro z wodą, mokra ścierka)
+        │
+        ▼ FILLER (gdy warstwy nadal widać)
+        ├── Szybko: spray filler primer (2–3 cienkie warstwy, schnie 1–2 h, mokro P600)
+        └── Głęboko: epoxy + microballoons / XTC-3D (samo wyrównuje, 24 h, mokro P400→600)
+        │
+        ▼ LAKIER (jeśli chcesz LUSTRO, nie satynę)
+5–8 BARDZO cienkich warstw clear coat (uretan, nie tani akryl)
+24 h utwardzania → mokro P1000 → P1500 → P2000 (usuwa „orange peel")
+        │
+        ▼ POLERKA
+Novus #1 → #2 → #3 (albo 3M Perfect-It / Meguiar's)
+mikrofibra / kulka bawełniana; przy maszynie: buffer &lt;2000 RPM, cały czas w ruchu
+        │
+        ▼ MIRROR ✨</div>
+<div class="card">
+<span class="warn">⚠️ PETG-specific:</span> mokre szlifowanie od 400+ (sucho = gumowaty szlam zapycha papier); Dremel tylko na niskich obrotach i w ciągłym ruchu (pełne obroty = stopiony plastik); polerka &lt;2000 RPM.
+</div>
+
+<h2>3️⃣ RÓWNOLEGŁA DROGA: CHEMIA (PETG ≠ ABS!)</h2>
+<div class="grid">
+<div class="card">
+<h3 class="bad">❌ Nie działa na PETG</h3>
+<ul>
+<li><strong>Acetone vapor</strong> — PETG go praktycznie nie ropuszcza (to działa tylko na ABS/ASA). Najczęstszy dead end.</li>
+<li>IPA, naphtha — zero efektu</li>
+</ul>
+</div>
+<div class="card">
+<h3 class="ok">✅ Rozpuszczalniki, które działają</h3>
+<ul>
+<li><strong>Ethyl acetate</strong> — jedyny polecany dla amatora: mała toksyczność, tani, słaby zapach (jest w zmywaczu do paznokci!). Kąpiel parowa: ręczniki papierowe nasączone w słoju/pojemniku PP, print NIE dotyka cieczy, kilka minut–2 h, kontrolować co chwilę</li>
+<li><strong>MEK</strong> — skuteczny, ale: butylowe rękawice (nitryl NIE chroni!), respirator z filtrem organicznym, tylko na zewnątrz, skrajnie łatwopalny</li>
+<li>THF, DCM, toluen — działają, ale <span class="bad">kancerogenne/regulowane</span> — odpuszczamy</li>
+</ul>
+</div>
+</div>
+<div class="card">
+<span class="warn">Werdykt chemii:</span> ethyl acetate parą = fajny eksperyment za ~50 kr na drobnych częściach. Dla pełnego lustra na większych modelach i tak wygrywa pipeline szlif+lakier. Kurs tego NIE nauczy lepiej — to ta sama wiedza.
+</div>
+
+<h2>4️⃣ ZAKUPY (Szwecja) 🛒</h2>
+<table>
+<tr><th>Pozycja</th><th>Sklep</th><th>Cena</th></tr>
+<tr><td>Papier wodny P200+P400+P800 (sety)</td><td>Biltema</td><td>~150 kr</td></tr>
+<tr><td>Mirka/3M P1200–P2000</td><td>Woodisol/Amazon.se</td><td>~250–400 kr</td></tr>
+<tr><td>Gąbki szlifierskie + klocek</td><td>Biltema/Clas Ohlson</td><td>~140 kr</td></tr>
+<tr><td>Filler primer spray (Rust-Oleum Fill&amp;Sand / Dupli-Color)</td><td>Biltema/Jula</td><td>~100–150 kr</td></tr>
+<tr><td>Clear coat uretanowy (Rust-Oleum Prof.)</td><td>Biltema</td><td>~80–120 kr</td></tr>
+<tr><td>Ethyl acetate (eksperyment)</td><td>apotek/farbhandel</td><td>~50 kr</td></tr>
+<tr><td>Novus #2+#3 <em>lub</em> Meguiar's M105/M205</td><td>Amazon.se</td><td>~250–350 kr</td></tr>
+</table>
+<p class="big">Budżet start (Biltema wszystek, bez past polerskich): <span class="ok">~440 kr</span> · Z pastami do lustra: <span class="ok">~1000–1300 kr</span> (jednorazowo, starcza na setki wydruków)</p>
+<p>💡 Kurs kosztuje 970 kr i <strong>nie zawiera materiałów</strong> — sam wproawdza: „abrasives, compounds and pads are consumables you buy locally". Czyli kurs = 970 kr za kolejność kroków, którą masz wyżej.</p>
+
+<h2>5️⃣ NARZĘDZIA DO WYDRUKOWANIA (darmowe, jak „15+ printable tools" w kursie)</h2>
+<div class="card">
+<ul>
+<li>Printables/Thingiverse: <em>sanding block</em>, <em>sanding stick</em>, contoured sanding pads (szukaj „sanding block 3d print", „contour sanding")</li>
+<li>Zasada: <strong>płaskie powierzchnie = sztywny klocek</strong> (inaczej fale), <strong>krzywizny = elastyczna gąbka</strong></li>
+<li>Własny druk: klocek z łukiem dobranym do promienia twojej części > kupne uniwersalne</li>
+</ul>
+</div>
+
+<h2>6️⃣ FREE zamiast kursu — konkretne źródła</h2>
+<div class="card">
+<ul>
+<li>All3DP: <a href="https://all3dp.com/2/petg-smoothing/">PETG Smoothing: Expert Tips</a> + <a href="https://all3dp.com/2/sanding-3d-prints-guide/">Sanding 3D Prints Guide</a></li>
+<li>CoEX: <a href="https://coex3d.com/blogs/blog/the-best-methods-for-petg-filament-smoothing">Best Methods for PETG Smoothing</a> (producent filamentu, konkret o ethyl acetate)</li>
+<li>Kingroon: <a href="https://kingroon.com/blogs/3d-printing-guides/best-vapor-smoothing-techniques-for-3d-printing">Vapor smoothing — tabela rozpuszczalnik↔materiał</a></li>
+<li>Alliance Chemical: <a href="https://alliancechemical.com/blogs/articles/mek-for-3d-print-finishing-the-pros-alternative">MEK safety (rękawice butylowe!)</a></li>
+<li>YouTube: Maker's Muse „How to make 3D prints look AMAZING", „PETG smoothing" (np. eksperyment suruadam — MEK 24 h)</li>
+<li>Reddit: r/3Dprinting search „sanding glossy mirror finish" (sort:top all time)</li>
+<li>Strona kursu (dla porównania co tam jest): <a href="https://www.polishmaster.co">polishmaster.co</a> — „20 faz", 45 min/partz, printable tools, shopping map. Wszystko powyżej pokryte.</li>
+</ul>
+</div>
+
+<h2>⏱️ Ile czasu naprawdę</h2>
+<table>
+<tr><th>Etap</th><th>Czynna robota</th><th>Czekanie</th></tr>
+<tr><td>Szlif wstępny (10 cm część)</td><td>~45 min</td><td>—</td></tr>
+<tr><td>Filler primer</td><td>~30 min</td><td>1–2 h</td></tr>
+<tr><td>Szlif drobny na mokro</td><td>~1 h</td><td>—</td></tr>
+<tr><td>Clear coat</td><td>~1 h</td><td>24 h+</td></tr>
+<tr><td>Polerka Novus</td><td>~45 min</td><td>—</td></tr>
+<tr><td><strong>RAZEM</strong></td><td><strong>~3–4 h</strong></td><td><strong>2–3 dni kalendarzowo</strong></td></tr>
+</table>
+<p class="sub">Kurs obiecuje „45 minut na sztukę" — realnie to czas dla doświadczonego człowieka na małej części bez clear coatu.</p>
+
+<h2>🧠 Czego kurs NIE mówi</h2>
+<div class="card">
+<ul>
+<li>Efekt „przed/po" z ich marketingu — najpewniej częściowo AI-generated (analiza klatek: artefakty rąk, zmiana geometrii tej samej figury)</li>
+<li>Na PETG acetone vapor NIE działa — ich „method" opiera się na tym samym szlifowaniu co wyżej</li>
+<li>Disclaimer na ich stronie: „Results vary. No specific finish is promised" 😉</li>
+</ul>
+</div>
+
+<p class="sub" style="margin-top:30px">Źródła: 30+ (All3DP, Prusa blog/help, CoEX, Kingroon, Alliance Chemical, 3D Print Beast, MatterHackers/XTC-3D, DyeMansion, PostProcess, Reddit r/3Dprinting + r/functionalprint, Instructables, fora automotive detailing, polishmaster.co, Gumroad) · Pełne destylaty: <code>~/.openclaw/workspace/memory/research/petg-polish/raw/</code> · Andrzej 🤖</p>
+</body>
+</html>

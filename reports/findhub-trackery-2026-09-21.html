@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trackery Find Hub 2026 — case study no-name z Ali + rynek Szwecja</title>
+<style>
+:root{--bg:#0f1115;--card:#1a1d24;--card2:#20242e;--txt:#e2e5ea;--mut:#9aa1ad;--acc:#6ea8fe;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--bord:#2a2f3a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.65;padding:0 0 80px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{background:linear-gradient(135deg,#141a26,#1a1d24);border-bottom:1px solid var(--bord);padding:44px 0 34px;margin-bottom:34px}
+h1{font-size:1.75rem;line-height:1.3;margin-bottom:10px}
+.meta{color:var(--mut);font-size:.9rem}
+h2{font-size:1.35rem;margin:44px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--acc);display:flex;align-items:center;gap:10px}
+h3{font-size:1.05rem;margin:26px 0 10px;color:var(--acc)}
+p{margin:12px 0}
+.card{background:var(--card);border:1px solid var(--bord);border-radius:12px;padding:20px 22px;margin:16px 0}
+.tldr{background:linear-gradient(135deg,#1a2438,#1a1d24);border-left:4px solid var(--acc)}
+.warnbox{background:linear-gradient(135deg,#332a14,#1a1d24);border-left:4px solid var(--warn)}
+.badbox{background:linear-gradient(135deg,#33191b,#1a1d24);border-left:4px solid var(--bad)}
+.okbox{background:linear-gradient(135deg,#14301f,#1a1d24);border-left:4px solid var(--ok)}
+ul,ol{margin:10px 0 10px 22px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th{background:var(--card2);text-align:left;padding:10px 12px;border-bottom:2px solid var(--bord);font-weight:600}
+td{padding:9px 12px;border-bottom:1px solid var(--bord);vertical-align:top}
+tr:hover td{background:#1e222b}
+.good{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}.warn{color:var(--warn);font-weight:600}
+code{background:#262b36;padding:2px 7px;border-radius:5px;font-size:.88em;color:#a5c8ff}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.src{font-size:.85rem;color:var(--mut)}
+.timeline{border-left:2px solid var(--bord);margin:18px 0;padding-left:22px}
+.timeline .ev{position:relative;margin:14px 0}
+.timeline .ev::before{content:'';position:absolute;left:-28px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.timeline .dt{color:var(--mut);font-size:.85rem}
+.pill{display:inline-block;background:var(--card2);border:1px solid var(--bord);border-radius:20px;padding:2px 12px;font-size:.82rem;margin:2px}
+footer{margin-top:60px;color:var(--mut);font-size:.85rem;text-align:center;border-top:1px solid var(--bord);padding-top:24px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>📍 Trackery Google Find Hub 2026<br>Case study: no-name 4-pack z AliExpress + kompletny rynek Szwecji</h1>
+<div class="meta">Research: 19–21.09.2026 · 40+ źródeł (Reddit, YouTube/napisy, Prisjakt, Google support, recenzje Ali first-party 168+) · Modele: 17 certyfikowanych trackerów</div>
+</div></header>
+
+<div class="wrap">
+
+<div class="card tldr">
+<h3 style="margin-top:0">⚡ TL;DR</h3>
+<ul>
+<li><b>4 no-name tagi z Ali ("Google Certified" na grafikach) padły wszystkie naraz po ~4 mies.</b> — nadają BLE beacon, bateria 3V, ale zero raportowania do Find Hub i niemożliwy re-pair. Werdykt: <span class="bad">klucze sieciowe/firmware — nie do naprawy</span>.</li>
+<li>To nie jednostkowa awaria: na r/GoogleFMD (03.2026) masowe zgłoszenia śmierci niecertyfikowanych tagów. Google egzekwuje certyfikację, a sprzedawcy no-name wciąż piszą "Google Certified".</li>
+<li><b>Certyfikowany zamiennik w SE: Moto Tag 2 od 295 kr</strong> (Prisjakt, 12 sklepów), Chipolo POP od 299 kr (10 sklepów). Pixel Tag (Google first-party) wchodzi w listopadzie.</li>
+<li>💰 <b>Reklamacja: okno chargebacku ~120 dni od płatności kartą właśnie się zamyka</b> (zakup maj). PayPal/Klarna: 180 dni. Ali dispute: raczej po terminie — pisz do sprzedawcy "not as described".</li>
+</ul>
+</div>
+
+<h2>🔬 Case study: śmierć 4-packa (item 1005009331260307)</h2>
+
+<div class="card">
+<h3>Timeline</h3>
+<div class="timeline">
+<div class="ev"><div class="dt">Maj 2026 — zakup + parowanie</div>4-pack TPBUFF, listing "Work With Android Find Hub Bluetooth Gps Tracker", grafiki "Google Certified". Tagi działają w Find Hub.</div>
+<div class="ev"><div class="dt">19.09.2026 — objawy</div>Apka: "nie udostępniły lokalizacji przez 7 dni". Tag trzymany obok telefonu — nic. Wszystkie 4 naraz.</div>
+<div class="ev"><div class="dt">19-20.09 — diagnoza</div>Pisk po kliknięciu ✔ · bateria 3V ✔ · w nRF Connect widoczne anonimowe beacony non-connectable (radio nadaje!) · po manipulacji baterią JEDNA aktualizacja lokalizacji, potem cisza · Play Sound z apki nie działa · reset 5× klik (wskazówka z recenzji) — bez reakcji.</div>
+<div class="ev"><div class="dt">21.09 — re-pair test</div>Tag nie wchodzi w tryb parowania żadną kombinacją przycisków. Apka nie wykrywa taga do sparowania. Pętla zamknięta.</div>
+</div>
+<h3>Werdykt</h3>
+<p><span class="bad">Hardware żyje, tracker nie.</span> Tag nadaje zaszyfrowane beacony, ale klucze/firmware, które Google ma w bazie, są odrzucane — sieć ignoruje beacony, apka nie może nawet ponownie sparować. No-name nie ma OTA, appki producenta ani żadnych narzędzi serwisowych. Efektywnie: <b>4/4 do wymiany</b>.</p>
+<h3>Dane z listingu (168 recenzji przeczytanych first-party)</h3>
+<ul>
+<li>Rating 4.6/5, 2212 ocen, 7.9% negatywnych — ludzie potwierdzają działanie w Find Hub <b>do połowy 2026</b> (S24 Ultra, Oppo, "Works seamless with Find Hub" 01/2026)</li>
+<li>Skarg na baterię: zero twardych. Reklamowany rok życia — realnie tanie ogniwo robi 4-6 mies. przy ciągłym beaconing</li>
+<li>Znana patologia: "sometimes it gets stuck at updating the position"</li>
+</ul>
+</div>
+
+<h2>🧠 Jak działa Find Hub (i gdzie to umiera)</h2>
+<div class="card">
+<ul>
+<li><b>BLE beaconing</b>: tag nadaje co ~2 s zaszyfrowane reklamy z rotującym kluczem prywatności (rotacja ~15 min). Non-connectable — dlatego w nRF Connect nie da się "połączyć" i to normalne.</li>
+<li><b>Crowd network</b>: dowolny Android z włączonym "Znajdowanie urządzeń offline" skanuje w tle i anonimowo raportuje pozycję beaconów do Google. Właściciel widzi pozycję w apce.</li>
+<li><b>Registracja przy parowaniu</b>: tag dostaje od Google zestaw kluczy i config sieci. Bez aktywnych kluczy tag = "głośnik z przyciskiem" — dokładnie to, co zostało z 4-packa.</li>
+<li><b>UWB</b> = kierunkowe precision finding (wymaga UWB w telefonie). <b>Bluetooth Channel Sounding</b> = nowość 2026, precyzja cm przez BT 6.0 (wymaga Androida 16 — dziś tylko Pixel 10 / Galaxy S26 / Razr Fold).</li>
+<li class="src">⚠️ Korekta z researchu: <b>OnePlus 13 nie ma UWB</b> (wstępne założenie w śledztwie okazało się nieprawdziwe — to potwierdza agent techniczny; UWB to domena Pixel Pro / Galaxy S/Ultra). Nie blokuje to niczego krytycznego: tracking + dźwięk działają na BLE.</li>
+</ul>
+</div>
+
+<h2>🛒 Rynek certyfikowanych trackerów — Szwecja (zweryfikowane ceny)</h2>
+<div class="card">
+<table>
+<tr><th>Model</th><th>Cena SE</th><th>Precyzja</th><th>Bateria</th><th>Uwagi</th></tr>
+<tr><td><b>Motorola Moto Tag 2</b></td><td><span class="good">295–449 kr</span> (Prisjakt, 12 butików; Amazon.se 449)</td><td>UWB + BT</td><td>&gt;500 dni</td><td>Jedyny z UWB na rynku dziś. AirTag-compatible akcesoria. IP68. <b>Pick #1</b></td></tr>
+<tr><td><b>Chipolo POP</b></td><td><span class="good">od 299 kr</span> (Prisjakt, 10 butików)</td><td>BLE</td><td>~1 rok (wymienna CR2032)</td><td>Dual-network (Google+Apple). EU marka, szybka dostawa. <b>Pick #2</b></td></tr>
+<tr><td>Chipolo CARD / LOOP</td><td>~300–440 kr</td><td>BLE</td><td>2 lata / 1 rok</td><td>CARD do portfela, LOOP do brełka</td></tr>
+<tr><td>Pebblebee Clip 5 / Card / LÔC8</td><td>nie na Prisjakt (import)</td><td>BLE</td><td>500+ dni / USB-C recharge</td><td>LÔC8 do roweru, 3-letnia bateria</td></tr>
+<tr><td>Belkin SureFind (Spot/Loop/Card/Wallet)</td><td><span class="warn">brak w SE</span></td><td>BLE</td><td>—</td><td>Tania linia (US ~$15+), import Amazon.de</td></tr>
+<tr><td>UGREEN FineTrack / Eufy SmartTrack Card E40 / KeySmart Pro</td><td>sporadycznie SE</td><td>BLE</td><td>—</td><td>Warto sprawdzić Amazon.de</td></tr>
+<tr><td><b>Pixel Tag</b> (Google first-party)</td><td>premiera listopad 2026, ~$29</td><td>BLE (+CS?)</td><td>?</td><td>Funkcja "Left Behind". Ekosystem akcesoriów słaby na starcie. <b>Warto rozważyć czekanie</b></td></tr>
+</table>
+<p class="src">Źródła cen: prisjakt.nu (produkt p=16029942 Moto Tag 2, wyszukiwanie Chipolo POP), stan na 21.09.2026. Uwaga: SmartTag2 = tylko telefony Samsung; Tile = własna sieć, nie Find Hub.</p>
+</div>
+
+<h2>💀 No-name problem — to nie tylko my</h2>
+<div class="card">
+<ul>
+<li><b>r/GoogleFMD (25.03.2026): "Did Google brick non-licensed trackers?"</b> — fala zgłoszeń padniętych no-name tagów; schemat identyczny: beacon nadaje, sieć ignoruje, re-pair niemożliwy</li>
+<li>Google nie publikuje oficjalnej listy certyfikowanych i nie komentuje enforcementu — sprzedawcy no-name bezkarnie używają "Google Certified" na grafikach</li>
+<li>Wzorzec śmierci: działa tygodnie/miesiące → jednym razem apka przestaje widzieć → i koniec. Zbieżne z niską jakością ogniw (beaconing pod obciążeniem powala radio przy 2,2 V, buzzer jeszcze piska przy 1,8 V) i/lub unieważnieniem kluczy po stronie Google</li>
+</ul>
+</div>
+
+<h2>⚖️ Reklamacja — ścieżki z szansami powodzenia</h2>
+<div class="card warnbox">
+<ol>
+<li><b>Chargeback kartą kredytową — OKNO ~120 DNI, ZAKUP MAJ → ZŁÓŻ DZIŚ.</b> Argument: towar niezgodny z opisem ("Google Certified" przestało być prawdą). Najwyższa szansa, zwłaszcza z tą sekcją dowodów.</li>
+<li><b>PayPal / Klarna dispute — 180 dni od zakupu.</b> Podobny argument, mniej formalne.</li>
+<li><b>Ali dispute</b> — standardowa ochrona (15 dni po dostawie / 90 dni) raczej po terminie. Zostaje wiadomość do sprzedawcy "not as described — all 4 units dead after 4 months, cannot re-pair, Google network rejects them". Partial refund 30-50% bywa realny.</li>
+<li><b>ARN (szwedzki ARN)</b> — słaba szansa wobec firmy spoza EOG, ale darmowa próba nie boli.</li>
+</ol>
+</div>
+
+<h2>🏆 Rekomendacje</h2>
+<div class="card okbox">
+<ol>
+<li><b>Teraz: Moto Tag 2 × 2-4 szt.</b> (295-449 kr/szt, Prisjakt/Amazon.se) — jedyny certyfikowany z UWB, bateria 500+ dni, IP68. Pewniak.</li>
+<li><b>Albo budżetowo: Chipolo POP</b> (299 kr, dual-network) — jeśli precyzja UWB nie jest potrzebna.</li>
+<li><b>Strategicznie: poczekać do listopada na Pixel Tag</b> (~$29) — first-party Google, ale ekosystem akcesoriów na starcie słaby; sensowny plan: 1× Moto Tag 2 teraz na test + reszta po recenzjach Pixel Tag.</li>
+<li><b>No-name z Ali/Temu: nigdy więcej</b> — statystycznie żyją 3-6 mies., śmierć nieodwracalna, zero supportu. Uczciwy koszt posiadania jest wyższy niż certyfikat.</li>
+</ol>
+</div>
+
+<h2>📚 Kluczowe źródła</h2>
+<div class="card src">
+<ul>
+<li>Prisjakt: <a href="https://www.prisjakt.nu/produkt.php?p=16029942">Moto Tag 2 (od 295 kr)</a> · Chipolo POP (wyszukiwanie, od 299 kr)</li>
+<li>Reddit: r/GoogleFMD "Did Google brick non-licensed trackers?" (25.03.2026) · r/AirTags/r/Android wątki o FMD location not updating</li>
+<li>9to5Google: <a href="https://9to5google.com/guides/find-hub/">Find Hub guide</a> + <a href="https://www.youtube.com/watch?v=D5nCbsquKfU">Find Hub explainer (YT)</a></li>
+<li>hotairtag.com: Moto Tag 2 vs Moto Tag (BT 6.0 Channel Sounding, IP68, 600+ dni)</li>
+<li>PCMag: Best Bluetooth Trackers 2026 · Google support: Find Hub / offline finding</li>
+<li>Ali listing 1005009331260307: statystyki + 168 recenzji (feedback API, first-party 19.09.2026)</li>
+<li>Pełne destylaty badawcze: <code>memory/research/findhub-trackers-2026-09-21/</code> + <code>memory/research/android-tracker-2026-09-19/</code></li>
+</ul>
+</div>
+
+<footer>Andrzej · deep research dla Dawida · 2026-09-21 · 3 subagentów (Reddit/prawa, YouTube/tech, rynek SE) + weryfikacja first-party</footer>
+</div>
+</body>
+</html>

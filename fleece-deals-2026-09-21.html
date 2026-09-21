@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleece dla Dawida — okazje 2026-09-21</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--bg:#0f1115;--card:#171a21;--line:#262b36;--txt:#e8ecf3;--dim:#9aa4b2;--acc:#4da3ff;--xxl:#1e63c8;--stad:#c0642a;--inter:#0f8a5f;--boozt:#7a3fd1;--ali:#e0432f;--trad:#0e7c86;--blk:#4a6a2f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{width:94%;max-width:1560px;margin:0 auto}
+nav{position:sticky;top:0;z-index:900;background:rgba(15,17,21,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);height:54px;display:flex;align-items:center}
+nav .wrap{display:flex;gap:18px;align-items:center;overflow-x:auto;white-space:nowrap}
+nav a{color:var(--dim);text-decoration:none;font-size:14px}
+nav a:hover{color:var(--acc)}
+nav .brand{color:var(--txt);font-weight:700;margin-right:8px}
+header{padding:34px 0 10px}
+h1{margin:0 0 6px;font-size:clamp(26px,3.4vw,40px)}
+.sub{color:var(--dim);margin-bottom:20px}
+.tldr{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0 26px}
+.tl{background:linear-gradient(160deg,#1b2230,#151922);border:1px solid var(--line);border-radius:14px;padding:16px}
+.tl h4{margin:0 0 6px;font-size:15px;color:var(--acc)}
+.tl p{margin:0;font-size:14px;color:#cfd8e3}
+h2{margin:38px 0 4px;font-size:24px}
+h2 .n{color:var(--dim);font-weight:400;font-size:15px}
+.hint{color:var(--dim);font-size:14px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s,border-color .12s}
+.card:hover{transform:translateY(-3px);border-color:#33415a}
+.photo{display:block;aspect-ratio:1/1;background:#0b0d11;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;color:#fff;background:#333}
+.badge.xxl{background:var(--xxl)}.badge.stadium{background:var(--stad)}.badge.inter{background:var(--inter)}
+.badge.boozt{background:var(--boozt)}.badge.ali{background:var(--ali)}.badge.trad{background:var(--trad)}.badge.blk{background:var(--blk)}
+.tag{font-size:12px;color:#ffd479;border:1px solid #6b5620;background:#2a2312;padding:2px 8px;border-radius:999px}
+.stars{color:#ffc94d;font-size:13px}
+h3{margin:2px 0 0;font-size:17px;line-height:1.3}
+.color{color:var(--dim);font-size:13px}
+.price b{font-size:22px}
+.price .sek{color:var(--dim);font-size:14px}
+.was{text-decoration:line-through;color:#7c8697}
+.sizes{font-size:13px;color:#bcd0ea}
+.note{margin:2px 0 8px;font-size:13.5px;color:#b9c3d1}
+.btn{margin-top:auto;text-align:center;text-decoration:none;color:#fff;background:#20304a;border:1px solid #2d4568;padding:9px 12px;border-radius:10px;font-size:14px}
+.btn:hover{background:#28405f}
+#map{height:560px;border-radius:16px;border:1px solid var(--line)}
+.mp-t{font-weight:700;margin-bottom:2px}
+.m-dist{color:#666;font-size:12px;margin-bottom:4px}
+.mp-i{font-size:12.5px;color:#333}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:#1b2130;font-size:13px;color:#cdd6e2}
+td.dim{color:var(--dim);font-size:13px}
+footer{margin:48px 0 40px;color:var(--dim);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+#top{position:fixed;right:18px;bottom:18px;background:#20304a;border:1px solid #2d4568;color:#fff;border-radius:10px;padding:10px 13px;text-decoration:none;z-index:950}
+@media(max-width:700px){#map{height:420px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <span class="brand">🧥 Fleece — okazje</span>
+  <a href="#top3">Top 3</a><a href="#nowe">Nowe (M/L)</a><a href="#mapa">Mapa butików</a><a href="#uzywki">Używki</a><a href="#ali">AliExpress</a><a href="#pokrycie">Co sprawdzone</a>
+</div></nav>
+
+<div class="wrap">
+<header id="top">
+  <h1>🧥 Fleece — ciepły, przewiewny, biurowy</h1>
+  <div class="sub">21 września 2026 · rozmiar M/L · budżet: „jak najtaniej" · poliester, half-zip, bez wielkich logo · 14 sklepów + 3 giełdy używane + AliExpress · ceny: <b>PLN</b> (kurs ~0.385 kr) + SEK</div>
+
+  <div class="tldr" id="top3">
+    <div class="tl"><h4>🥇 Stormberg Hesseng — 99 kr (~38 zł), XXL</h4><p>M/L online po tysiąc sztuk, a w butikach Sztokholmu niemal wszędzie z rezerwacją online. Czerwony filar zestawienia.</p></div>
+    <div class="tl"><h4>🥈 Skjolden Recycled — 25 kr (~10 zł), XXL</h4><p>Absolutny rekord ceny: online wyprzedane, ale L leży w Arninge (rezerwacja), Barkarby, Länna i Uppsala.</p></div>
+    <div class="tl"><h4>🥉 A QUESTION OF Halfway Zip — 218,70 kr (~84 zł), Booztlet</h4><p>−70%, czarny, zero logo — najbardziej „biurowy" half-zip. A jeśli licytujesz: CHAPS za ~50 kr na Traderze (kończy się 27.09).</p></div>
+  </div>
+</header>
+
+<h2 id="nowe">Nowe, z rozmiarami M/L <span class="n">— zweryfikowane stany online</span></h2>
+<p class="hint">Ceny i stany sprawdzone 21.09.2026. „rezerwacja" = XXL pozwala zaklepać online i odebrać w butiku.</p>
+<div class="grid">
+    <article class="card">
+      <a class="photo" href="https://www.xxl.se/stormberg-hesseng-zip-fleece-fleecetroja-svart/p/1235551_1_Style" target="_blank" rel="noopener"><img src="https://cdn.xxl.se/filespin/72d7f8009f384fb39806c8a58268a084?quality=75&bgcolor=efefef&resize=640,640" alt="Stormberg Hesseng Zip Fleece" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge xxl">XXL</span><div class="tag">Najlepszy stosunek cena/jakość</div><div class="stars">★☆☆☆☆</div></div>
+        <h3>Stormberg Hesseng Zip Fleece</h3>
+        <div class="color">Svart</div>
+        <div class="price"><b>38 zł</b> <span class="sek">99.00 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅ online</div>
+        <p class="note">100% poliester „ultrafleece&quot;, pullover z zamkiem. Online: M 1125 szt., L 2116 szt. W butikach: prawie każdy XXL Sthlm — Barkarby L×2, Arninge M×3/L×5 (rezerwacja online).</p>
+        <a class="btn" href="https://www.xxl.se/stormberg-hesseng-zip-fleece-fleecetroja-svart/p/1235551_1_Style" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.xxl.se/stormberg-skjolden-recycled-fleece-sweater-brun/p/1241316_1_Style" target="_blank" rel="noopener"><img src="https://cdn.xxl.se/filespin/2940656e7b2c4f25ab100d2f91923f39?quality=75&bgcolor=efefef&resize=640,640" alt="Stormberg Skjolden Recycled Fleece Sweater" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge xxl">XXL</span><div class="tag">Bomba cenowa — butik</div><div class="stars">★★☆☆☆</div></div>
+        <h3>Stormberg Skjolden Recycled Fleece Sweater</h3>
+        <div class="color">Brun</div>
+        <div class="price"><b>10 zł</b> <span class="sek">25.00 kr</span></div>
+        <div class="sizes">📏 L tylko w butikach</div>
+        <p class="note">25 kr — najtańsza rzecz w całym researchu. Online martwe (M/L), ale L leży w butikach: Arninge ×2 (rezerwacja!), Barkarby, Länna, Uppsala. M: brak wszędzie.</p>
+        <a class="btn" href="https://www.xxl.se/stormberg-skjolden-recycled-fleece-sweater-brun/p/1241316_1_Style" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.xxl.se/stormberg-hesseng-zip-fleece-fleecetroja-morkbla/p/1241294_1_Style" target="_blank" rel="noopener"><img src="https://cdn.xxl.se/filespin/11947ea83b37479d8a689dcb09aa7935?quality=75&bgcolor=efefef&resize=640,640" alt="Stormberg Hesseng Zip Fleece" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge xxl">XXL</span></div>
+        <h3>Stormberg Hesseng Zip Fleece</h3>
+        <div class="color">Mörkblå</div>
+        <div class="price"><b>38 zł</b> <span class="sek">99.00 kr</span></div>
+        <div class="sizes">📏 M/L — butiki</div>
+        <p class="note">M: Barkarby ×1, Bromma ×2 (rez.); L: Bromma ×3, Arninge ×2, City ×2, Sickla ×2 (rez.).</p>
+        <a class="btn" href="https://www.xxl.se/stormberg-hesseng-zip-fleece-fleecetroja-morkbla/p/1241294_1_Style" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.stadiumoutlet.se/utrustning/outdoor/friluftsklader/707846104/cross-sportswear.zip-fleece-jacket-m.black" target="_blank" rel="noopener"><img src="https://cdn-product.stadium.com/eb200337-aa76-4ae2-a7e3-75cfa1116b37/e5f1624d-59da-4b36-8212-06233197edd9/JmD49mnJrVhTNJt4LoxJBDcER/haueodB8jOazkuasNTp7S9BFc.png?w=640&h=640&f=webp" alt="Cross Sportswear Zip Fleece Jacket" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge stadium">Stadium Outlet</span><div class="tag">Twój profil: 150 kr, elegancki</div><div class="stars">★★★☆☆</div></div>
+        <h3>Cross Sportswear Zip Fleece Jacket</h3>
+        <div class="color">4 kolory: czarny / granat / melange / zieleń</div>
+        <div class="price"><b>58 zł</b> <span class="sek"><span class="was">300 kr</span> 150.00 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅ online (wszystkie kolory)</div>
+        <p class="note">100% recyklingowany poliester, full-zip, bez dużych logo. Rek. cena 300 kr → −50%. Stany butików Stadium nieodczytane (Akamai) — najbliżej: Stadium Outlet Infra City (2 km).</p>
+        <a class="btn" href="https://www.stadiumoutlet.se/utrustning/outdoor/friluftsklader/707846104/cross-sportswear.zip-fleece-jacket-m.black" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.stadiumoutlet.se/utrustning/outdoor/friluftsklader/708295103/ski-industries.half-zip-pile-m.dk-navy" target="_blank" rel="noopener"><img src="https://cdn-product.stadium.com/eb200337-aa76-4ae2-a7e3-75cfa1116b37/d7033798-934e-4b5c-bbe0-d53f2d6502cb/pE35WsF8AoriFFECGnUOZNbxa/9zHfGi8gBD4JxFfhTTIviaPtA.png?w=640&h=640&f=webp" alt="SKI INDUSTRIES Half Zip Pile" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge stadium">Stadium Outlet</span><div class="tag">Twój faworyt — sprawdź na miejscu</div></div>
+        <h3>SKI INDUSTRIES Half Zip Pile</h3>
+        <div class="color">Dk Navy</div>
+        <div class="price"><b>58 zł</b> <span class="sek"><span class="was">250 kr</span> 150.00 kr</span></div>
+        <div class="sizes">📏 online tylko XXL ⚠️</div>
+        <p class="note">Ten, który Ci się spodobał. Online dalej tylko XXL — ale M/L może leżeć w butiku: sprawdź Stadium Outlet Infra City (~2 km od Ciebie).</p>
+        <a class="btn" href="https://www.stadiumoutlet.se/utrustning/outdoor/friluftsklader/708295103/ski-industries.half-zip-pile-m.dk-navy" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.intersport.se/products/mckinley-saalbach-half-zip-m-fleecetroja-herr/night-blue-157781806" target="_blank" rel="noopener"><img src="https://cdn.intersport.se/productimages/1080/157781806000_04.jpg" alt="McKinley Saalbach Half-Zip" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge inter">Intersport</span></div>
+        <h3>McKinley Saalbach Half-Zip</h3>
+        <div class="color">Night Blue</div>
+        <div class="price"><b>67 zł</b> <span class="sek">175.00 kr</span></div>
+        <div class="sizes">📏 M ✅ (S: 1 szt.)</div>
+        <p class="note">Half-zip, miękka fleece, wysoka stójka. L/XL wyprzedane online. Wariant Sleet Grey — tylko S.</p>
+        <a class="btn" href="https://www.intersport.se/products/mckinley-saalbach-half-zip-m-fleecetroja-herr/night-blue-157781806" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.intersport.se/products/mckinley-montafon-ii-m-fleecetroja-herr/black-161904501" target="_blank" rel="noopener"><img src="https://cdn.intersport.se/productimages/1080/161904501000_10.jpg" alt="McKinley Montafon II Fleecetröja" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge inter">Intersport</span></div>
+        <h3>McKinley Montafon II Fleecetröja</h3>
+        <div class="color">Black</div>
+        <div class="price"><b>77 zł</b> <span class="sek">199.00 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅</div>
+        <p class="note">Half-zip („halv dragkedja&quot;), alpine midlayer, stonowany look.</p>
+        <a class="btn" href="https://www.intersport.se/products/mckinley-montafon-ii-m-fleecetroja-herr/black-161904501" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.xxl.se/adidas-mt-ess-hz-fl-fleecejacka-herr-morkbla/p/1240048_1_Style" target="_blank" rel="noopener"><img src="https://cdn.xxl.se/filespin/e2e0be1fc26b47b08fbfd30307f36afc?quality=75&bgcolor=efefef&resize=640,640" alt="adidas MT ESS HZ FL" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge xxl">XXL</span></div>
+        <h3>adidas MT ESS HZ FL</h3>
+        <div class="color">Mörkblå</div>
+        <div class="price"><b>69 zł</b> <span class="sek">179.00 kr</span></div>
+        <div class="sizes">📏 L: Arninge, M: Länna</div>
+        <p class="note">Slut online — w butikach: L Arninge ×2 (rezerwacja), M Länna ×2 (rezerwacja). Małe logo.</p>
+        <a class="btn" href="https://www.xxl.se/adidas-mt-ess-hz-fl-fleecejacka-herr-morkbla/p/1240048_1_Style" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.xxl.se/adidas-mt-ess-hz-fl-fleecetroja-herr-morkgron/p/1240057_1_Style" target="_blank" rel="noopener"><img src="https://cdn.xxl.se/filespin/37da86a99fe54144aee295401b2613f5?quality=75&bgcolor=efefef&resize=640,640" alt="adidas MT ESS HZ FL" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge xxl">XXL</span></div>
+        <h3>adidas MT ESS HZ FL</h3>
+        <div class="color">Mörkgrön</div>
+        <div class="price"><b>96 zł</b> <span class="sek">249.00 kr</span></div>
+        <div class="sizes">📏 M ✅ (17) / L ✅ (32) online</div>
+        <p class="note">Half-zip, małe logo — biurowo OK.</p>
+        <a class="btn" href="https://www.xxl.se/adidas-mt-ess-hz-fl-fleecetroja-herr-morkgron/p/1240057_1_Style" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.booztlet.com/se/sv/a-question-of/david-micro-fleece-halfway-zip_33094117/232357344" target="_blank" rel="noopener"><img src="https://image-resizing.booztcdn.com/a-question-of/aqo2006_cblack_10.webp?has_webp=1&size=w400" alt="A QUESTION OF — David Micro Fleece Halfway Zip" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge boozt">Booztlet</span><div class="tag">Najbardziej elegancki</div><div class="stars">★★★★☆</div></div>
+        <h3>A QUESTION OF — David Micro Fleece Halfway Zip</h3>
+        <div class="color">Black</div>
+        <div class="price"><b>84 zł</b> <span class="sek"><span class="was">729 kr</span> 218.70 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅ (S–XXL)</div>
+        <p class="note">−70% z 729 kr. Duńska marka, zero logo, mikrofleece — najbardziej „biurowy&quot; half-zip w zestawieniu. 36 / 13 szt. niedawno sprzedane.</p>
+        <a class="btn" href="https://www.booztlet.com/se/sv/a-question-of/david-micro-fleece-halfway-zip_33094117/232357344" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.booztlet.com/se/sv/a-question-of/david-micro-fleece-zipper_33094127/232357412" target="_blank" rel="noopener"><img src="https://image-resizing.booztcdn.com/a-question-of/aqo2005_cblack_10.webp?has_webp=1&size=w400" alt="A QUESTION OF — David Micro Fleece Zipper" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge boozt">Booztlet</span></div>
+        <h3>A QUESTION OF — David Micro Fleece Zipper</h3>
+        <div class="color">Black</div>
+        <div class="price"><b>84 zł</b> <span class="sek"><span class="was">729 kr</span> 218.70 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅</div>
+        <p class="note">−70%. Ten sam krój co Halfway Zip, pełniejszy zamek.</p>
+        <a class="btn" href="https://www.booztlet.com/se/sv/a-question-of/david-micro-fleece-zipper_33094127/232357412" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.booztlet.com/se/sv/columbia-sportswear/klamath-range-ii-half-zip_26837883/222952488" target="_blank" rel="noopener"><img src="https://image-resizing.booztcdn.com/columbia-sportswear/csr1352472_ccollegiatenavysolid_v466.webp?has_webp=1&size=w400" alt="Columbia Klamath Range II Half Zip" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge boozt">Booztlet</span></div>
+        <h3>Columbia Klamath Range II Half Zip</h3>
+        <div class="color">Navy</div>
+        <div class="price"><b>96 zł</b> <span class="sek"><span class="was">499 kr</span> 249.50 kr</span></div>
+        <div class="sizes">📏 M ✅ / L ✅ (S–XXL)</div>
+        <p class="note">−50%. Klasyk outdoorowy z niewielkim logo, half-zip.</p>
+        <a class="btn" href="https://www.booztlet.com/se/sv/columbia-sportswear/klamath-range-ii-half-zip_26837883/222952488" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article></div>
+
+<h2 id="mapa">Mapa — gdzie co leży <span class="n">— Twoje butiki i dostępne sztuki</span></h2>
+<p class="hint">Niebieskie = XXL, pomarańczowe = Stadium Outlet, czerwony = dom. Współrzędne przybliżone. Kliknij pinezkę po listę sztuk. <b>Stadium Outlet Infra City jest ~2 km od Ciebie</b> — tam sprawdź Ski Industries M/L na żywo (online tylko XXL).</p>
+<div id="map"></div>
+
+<h2 id="uzywki">Używki — najtaniej, z wysyłką <span class="n">— Tradera / Blocket</span></h2>
+<p class="hint">Uwaga: ceny aukcji żyją; podaję cenę „do drzwi" (licytacja + frakt) na moment sprawdzenia.</p>
+<div class="grid">
+    <article class="card">
+      <a class="photo" href="https://www.tradera.com/item/1000656/751402079/chaps-stickad-quarter-zip-troja-i-svart-mork-antracit-" target="_blank" rel="noopener"><img src="http://img.tradera.net/images/982/660747982_7aae29b5-301f-498d-afec-57a23b3d7692.jpg" alt="CHAPS Stickad Quarter Zip Tröja" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge trad">Tradera</span><div class="tag">Najlepszy używkany</div><div class="stars">★★★★★</div></div>
+        <h3>CHAPS Stickad Quarter Zip Tröja</h3>
+        <div class="color">Svart / mörk antracit</div>
+        <div class="price"><b>19 zł</b> <span class="sek">50.00 kr</span></div>
+        <div class="sizes">📏 do sprawdzenia w ogłoszeniu</div>
+        <p class="note">Licytacja 1 kr + 49 kr frakt = ~50 kr. Kup teraz 349 kr. Kończy się 27.09 09:36. Sprzedawca pisze &#x27;ny&#x27; — wygląda na praktycznie nieużywany.</p>
+        <a class="btn" href="https://www.tradera.com/item/1000656/751402079/chaps-stickad-quarter-zip-troja-i-svart-mork-antracit-" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.tradera.com/item/1000657/750156681/columbia-beige-fleece-storlek-l" target="_blank" rel="noopener"><img src="http://img.tradera.net/images/035/659761035_6203a1d1-12dc-495e-9031-f22030229531.jpg" alt="Columbia beige fleece" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge trad">Tradera</span></div>
+        <h3>Columbia beige fleece</h3>
+        <div class="color">Beż</div>
+        <div class="price"><b>22 zł</b> <span class="sek">57.00 kr</span></div>
+        <div class="sizes">📏 L</div>
+        <p class="note">Licytacja 1 kr + 56 kr frakt = ~57 kr. Kończy się 26.09 12:52.</p>
+        <a class="btn" href="https://www.tradera.com/item/1000657/750156681/columbia-beige-fleece-storlek-l" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.tradera.com/item/1000656/750855663/oscar-jacobson-half-zip-tjocktroja-large-herr-golf-" target="_blank" rel="noopener"><img src="http://img.tradera.net/images/046/660326046_753d10ae-3b77-4100-ad83-98c186351085.jpg" alt="Oscar Jacobson Half Zip Tjocktröja (golf)" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge trad">Tradera</span></div>
+        <h3>Oscar Jacobson Half Zip Tjocktröja (golf)</h3>
+        <div class="color">—</div>
+        <div class="price"><b>38 zł</b> <span class="sek">98.00 kr</span></div>
+        <div class="sizes">📏 L</div>
+        <p class="note">49 + 49 kr frakt = ~98 kr. Premium marka szwedzka, half-zip, zero logo — bardzo biurowo. Kończy się 23.09 18:07.</p>
+        <a class="btn" href="https://www.tradera.com/item/1000656/750855663/oscar-jacobson-half-zip-tjocktroja-large-herr-golf-" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.tradera.com/item/1000657/751016796/these-glory-days-vit-half-zip-troja-m" target="_blank" rel="noopener"><img src="http://img.tradera.net/images/426/658917426_58882e2b-85bc-493b-92f2-cb3619969fe4.jpg" alt="THESE GLORY DAYS vit Half-Zip" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge trad">Tradera</span><div class="tag">Kończy się dziś 21:38</div></div>
+        <h3>THESE GLORY DAYS vit Half-Zip</h3>
+        <div class="color">Biały</div>
+        <div class="price"><b>38 zł</b> <span class="sek">99.00 kr</span></div>
+        <div class="sizes">📏 M</div>
+        <p class="note">50 + 49 kr frakt = ~99 kr. Szwedzka marka, czysty minimalizm. ⏰ Kończy się DZIŚ 21:38!</p>
+        <a class="btn" href="https://www.tradera.com/item/1000657/751016796/these-glory-days-vit-half-zip-troja-m" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.tradera.com/item/1000656/750885970/john-lewis-gra-troja-storlek-m" target="_blank" rel="noopener"><img src="http://img.tradera.net/images/925/660347925_80ae2822-254b-442e-84a5-aa1ccaa1c8dd.jpg" alt="John Lewis grå tröja" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge trad">Tradera</span></div>
+        <h3>John Lewis grå tröja</h3>
+        <div class="color">Szary</div>
+        <div class="price"><b>29 zł</b> <span class="sek">76.00 kr</span></div>
+        <div class="sizes">📏 M</div>
+        <p class="note">Aktualnie 27 kr + 49 frakt = ~76 kr (5 licytujących). Kończy się 23.09 20:18.</p>
+        <a class="btn" href="https://www.tradera.com/item/1000656/750885970/john-lewis-gra-troja-storlek-m" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.blocket.se/recommerce/forsale/item/25897518" target="_blank" rel="noopener"><img src="https://images.blocketcdn.se/dynamic/1280w/item/25897518/17ab566b-14a9-4619-9109-a8d29169b10a" alt="Bluewear fleecejacka" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge blk">Blocket</span></div>
+        <h3>Bluewear fleecejacka</h3>
+        <div class="color">Svart</div>
+        <div class="price"><b>19 zł</b> <span class="sek">50.00 kr</span></div>
+        <div class="sizes">📏 XL</div>
+        <p class="note">50 kr, dobry stan, pełny zamek, 2 kieszenie na piersi. Odbiór: Danderyd (~14 km od Ciebie).</p>
+        <a class="btn" href="https://www.blocket.se/recommerce/forsale/item/25897518" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article></div>
+
+<h2 id="ali">AliExpress — najtańsze nowe <span class="n">— z doliczonym VAT i fraktem</span></h2>
+<div class="grid">
+    <article class="card">
+      <a class="photo" href="https://www.aliexpress.com/item/1005013190641766.html" target="_blank" rel="noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6941ca3d8cc84467820daa8fa9f35126W.jpg" alt="Mens Stand Collar Half Zip Pullover Slim" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge ali">AliExpress</span></div>
+        <h3>Mens Stand Collar Half Zip Pullover Slim</h3>
+        <div class="color">—</div>
+        <div class="price"><b>24 zł</b> <span class="sek">63.42 kr</span></div>
+        <div class="sizes">📏 M/L wg tabeli chińskiej (+1–2)</div>
+        <p class="note">Najtańszy na Ali. Realny koszt do drzwi ≈ 119 kr (VAT 25% + ~40 kr frakt). Brak opinii (nowy listing).</p>
+        <a class="btn" href="https://www.aliexpress.com/item/1005013190641766.html" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.aliexpress.com/item/1005013201220168.html" target="_blank" rel="noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S00c0e42f4e694ac9b0af302d56c3ec551.jpg" alt="Mens Solid Color Half Zip Mock Neck Fleece" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge ali">AliExpress</span></div>
+        <h3>Mens Solid Color Half Zip Mock Neck Fleece</h3>
+        <div class="color">—</div>
+        <div class="price"><b>28 zł</b> <span class="sek">73.75 kr</span></div>
+        <div class="sizes">📏 M/L wg tabeli (+1–2)</div>
+        <p class="note">&#x27;Baggy/loose&#x27; krój — mniej biurowy. Realny koszt ≈ 132 kr.</p>
+        <a class="btn" href="https://www.aliexpress.com/item/1005013201220168.html" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article>
+    <article class="card">
+      <a class="photo" href="https://www.aliexpress.com/item/1005011774532069.html" target="_blank" rel="noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S1b861a2756724a89ba1585f01c18ca2eV.jpg" alt="Quarter Zip Waffle Fleece Pullover (grid)" loading="lazy" referrerpolicy="no-referrer"></a>
+      <div class="body">
+        <div class="row"><span class="badge ali">AliExpress</span></div>
+        <h3>Quarter Zip Waffle Fleece Pullover (grid)</h3>
+        <div class="color">Grafit</div>
+        <div class="price"><b>80 zł</b> <span class="sek">206.50 kr</span></div>
+        <div class="sizes">📏 M/L wg tabeli (+1–2)</div>
+        <p class="note">Jedyny z POTWIERDZONĄ kratką grid na zdjęciu (z researchu 17.09) — oddychający jak chce twój brief. Realny koszt ≈ 298 kr. Tylko 5 sprzedanych.</p>
+        <a class="btn" href="https://www.aliexpress.com/item/1005011774532069.html" target="_blank" rel="noopener">Zobacz produkt →</a>
+      </div>
+    </article></div>
+
+<h2 id="pokrycie">Co zostało sprawdzone <span class="n">— pełna lista źródeł</span></h2>
+<table><thead><tr><th>Źródło</th><th>Status</th><th>Uwagi</th></tr></thead><tbody><tr><td>XXL.se</td><td>✅ policzone — kategorie + stany butików (najlepsze źródło)</td><td class="dim"></td></tr><tr><td>Stadium Outlet (stadiumoutlet.se)</td><td>✅ produkty i ceny online</td><td class="dim">stany butików: Akamai 403 (blokada endpointu)</td></tr><tr><td>Stadium (stadium.se)</td><td>✅ produkty i ceny online</td><td class="dim">stany butików: Akamai 403</td></tr><tr><td>Intersport.se</td><td>✅ policzone (ceny + rozmiary online)</td><td class="dim"></td></tr><tr><td>Booztlet.com</td><td>✅ policzone (3 okazje, M/L)</td><td class="dim"></td></tr><tr><td>H&amp;M</td><td>✅ 32 modele 99–249 kr przez publiczne API</td><td class="dim">brak rozmiarów w API (Akamai blokuje PDP)</td></tr><tr><td>Blocket.se</td><td>✅ policzone (6 zapytań, filtr odległości)</td><td class="dim"></td></tr><tr><td>Facebook Marketplace</td><td>✅ policzone (promień Väsby)</td><td class="dim">brak męskich fleece ≤100 kr w okolicy</td></tr><tr><td>Tradera</td><td>✅ policzone (610+ ogłoszeń)</td><td class="dim"></td></tr><tr><td>AliExpress</td><td>✅ policzone (144 oferty → 80 męskich)</td><td class="dim"></td></tr><tr><td>Amazon.se</td><td>✅ policzone</td><td class="dim">floor męski fleece ≈ 233 kr</td></tr><tr><td>KappAhl</td><td>❌ brak męskiego fleece w ofercie (0/55)</td><td class="dim"></td></tr><tr><td>MQ</td><td>❌ najtańsze 999 kr</td><td class="dim"></td></tr><tr><td>Åhléns</td><td>❌ najtańsze 599 kr</td><td class="dim"></td></tr><tr><td>Sportamore</td><td>❌ nic ≤250 kr</td><td class="dim"></td></tr><tr><td>Decathlon</td><td>❌ brak szwedzkiego e‑shopu (redirect do strony korporacyjnej)</td><td class="dim"></td></tr><tr><td>Dressmann</td><td>⛔ Cloudflare (browser headless + PinchTab headed)</td><td class="dim"></td></tr><tr><td>Zalando.se</td><td>⛔ blokada antybotowa</td><td class="dim"></td></tr><tr><td>Uniqlo.se</td><td>⛔ Akamai Access Denied</td><td class="dim"></td></tr><tr><td>Sellpy.se</td><td>⛔ SPA bez publicznego API</td><td class="dim"></td></tr></tbody></table>
+
+<footer class="wrap">
+  <b>Metodyka:</b> subagenci równolegle (kategorie + stany butików), ceny weryfikowane na kartach produktów; zdjęcia produktowe z og:image sklepów; kurs PLN ~0.385 za 1 kr (przybliżony, 21.09.2026).<br>
+  <b>Uczciwie:</b> stany magazynowe Stadium/Stadium Outlet w butikach są zablokowane przez Akamai (403) — nie dało się ich odczytać nawet przez widoczną przeglądarkę. Cross Sportswear i tak masz z M/L online; tylko Ski Industries wymaga sprawdzenia na miejscu.<br>
+  <b>Pliki źródłowe:</b> memory/research/fleece-30kr-2026-09-21/ (blocket/fb, tradera, ali, xxl+stadium store-stock, outlet-deals, api-deals, shops-w3).<br>
+  Nic nie rezerwowałem ani nie kupowałem — linki prowadzą do produktów, decyzja i klik należą do Ciebie.
+</footer>
+</div>
+
+<a id="backtotop" href="#top">↑</a>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const data=[{lat:59.5179,lng:17.9109,type:"home",html:`<div class="mp"><div class="mp-t">🏠 Upplands Väsby (dom)</div><div class="mp-i">—</div></div>`},{lat:59.5246,lng:17.9262,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Infra City</div><div class="m-dist">odległość ~2 km 🎯</div><div class="mp-i">• Cross Sportswear Zip Fleece 150 kr (M/L online też)<br>• Ski Industries Half Zip Pile 150 kr — M/L na miejscu? (online tylko XXL)<br>• Sprayway Storr Micro 250 kr</div></div>`},{lat:59.4235,lng:17.838,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Barkarby</div><div class="m-dist">odległość ~18 km</div><div class="mp-i">• Hesseng svart 99 kr — L×2<br>• Hesseng mörkblå 99 kr — M×1<br>• Skjolden 25 kr — L×1</div></div>`},{lat:59.4229,lng:17.8412,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Barkarby</div><div class="m-dist">odległość ~18 km</div><div class="mp-i">• Cross / Ski Industries — stany do sprawdzenia na miejscu</div></div>`},{lat:59.4895,lng:18.0705,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Arninge (Täby)</div><div class="m-dist">odległość ~15 km</div><div class="mp-i">• Hesseng svart 99 kr — M×3, L×5 ✅<br>• Skjolden 25 kr — L×2 (rezerwacja)<br>• adidas mörkblå 179 kr — L×2 (rezerwacja)</div></div>`},{lat:59.4888,lng:18.0735,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Arninge</div><div class="m-dist">odległość ~15 km</div><div class="mp-i">• stany nieodczytane</div></div>`},{lat:59.3492,lng:17.9345,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Bromma Blocks</div><div class="m-dist">odległość ~25 km</div><div class="mp-i">• Hesseng svart 99 kr — M×4, L×5<br>• Hesseng mörkblå — M×2, L×3<br>• adidas mörkgrön 249 kr — M/L</div></div>`},{lat:59.3327,lng:18.063,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Stockholm City</div><div class="m-dist">odległość ~25 km</div><div class="mp-i">• Hesseng svart 99 kr — M×3, L×2<br>• Hesseng mörkblå — M×1, L×2</div></div>`},{lat:59.3027,lng:18.1322,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Sickla</div><div class="m-dist">odległość ~30 km</div><div class="mp-i">• Hesseng svart 99 kr — M×2, L×3<br>• Hesseng mörkblå — M/L</div></div>`},{lat:59.2757,lng:17.9335,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Kungens Kurva</div><div class="m-dist">odległość ~35 km</div><div class="mp-i">• Hesseng svart 99 kr — M×4, L×3<br>• Hesseng mörkblå — M×1, L×1</div></div>`},{lat:59.2745,lng:17.9305,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Kungens Kurva</div><div class="m-dist">odległość ~35 km</div><div class="mp-i">• stany nieodczytane</div></div>`},{lat:59.1975,lng:17.859,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Länna</div><div class="m-dist">odległość ~40 km</div><div class="mp-i">• Hesseng svart 99 kr — M×4, L×4<br>• Skjolden 25 kr — L×1<br>• adidas mörkblå — M×2 (rezerwacja)</div></div>`},{lat:59.858,lng:17.639,type:"xxl",html:`<div class="mp"><div class="mp-t">XXL — Uppsala</div><div class="m-dist">odległość ~65 km</div><div class="mp-i">• Hesseng svart 99 kr — M×4, L×3<br>• Skjolden 25 kr — L×1</div></div>`},{lat:59.4485,lng:17.9435,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Sollentuna</div><div class="m-dist">odległość ~12 km</div><div class="mp-i">• stany nieodczytane</div></div>`},{lat:59.517,lng:17.548,type:"stadium",html:`<div class="mp"><div class="mp-t">Stadium Outlet — Bro</div><div class="m-dist">odległość ~25 km</div><div class="mp-i">• stany nieodczytane</div></div>`}];
+const map=L.map('map',{scrollWheelZoom:true}).setView([59.45,17.95],10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+const col={home:'#e0432f',xxl:'#1e63c8',stadium:'#c0642a'};
+data.forEach(function(d){
+  const m=L.circleMarker([d.lat,d.lng],{radius:d.type==='home'?11:9,color:'#fff',weight:2,fillColor:col[d.type]||'#666',fillOpacity:.95}).addTo(map);
+  m.bindPopup(d.html,{maxWidth:320});
+});
+</script>
+</body>
+</html>

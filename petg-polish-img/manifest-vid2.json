@@ -1,0 +1,112 @@
+[
+  {
+    "file": "vid2_before_raw_helmet.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "0:04",
+    "phase": "before",
+    "technique": "raw_print_overview",
+    "caption_pl": "Surowy niepomalowany hełm Red Hood po wydruku FDM — na stole widoczne surowe materiały wykończeniowe: Bondo, gąbki szlifierskie, maska."
+  },
+  {
+    "file": "vid2_before_layer_lines.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "1:00",
+    "phase": "before",
+    "technique": "layer_line_closeup",
+    "caption_pl": "Ekstremalne zbliżenie powierzchni wydruku — wyraźne linie warstw charakterystyczne dla technologii FDM, które należy usunąć."
+  },
+  {
+    "file": "vid2_step_coarse_sand.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "1:45",
+    "phase": "step",
+    "technique": "coarse_sanding_block",
+    "caption_pl": "Szlifowanie grubej zaporki blokiem szlifierskim z gruboziarnistym papierem — początkowe wygładzanie powierzchni hełmu."
+  },
+  {
+    "file": "vid2_step_first_primer.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "2:40",
+    "phase": "step",
+    "technique": "primer_application",
+    "caption_pl": "Nakładanie białego podkładu spray'em na hełm na świeżym powietrzu — puszkę podgrzewano w ciepłej wodzie przed użyciem."
+  },
+  {
+    "file": "vid2_step_wet_sand_primed.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "3:15",
+    "phase": "step",
+    "technique": "wet_sanding_primer",
+    "caption_pl": "Szlifowanie na mokro w wannie po pierwszym warstwie podkładu – uzyskanie równiejszej powierzchni i usunięcie nierówności."
+  },
+  {
+    "file": "vid2_step_red_spot_putty.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "4:00",
+    "phase": "step",
+    "technique": "spot_putty_application",
+    "caption_pl": "Nałożenie czerwonego Spot Putty (glazing filler) gumowym spatułką na niedoskonałości i linie warstw hełmu."
+  },
+  {
+    "file": "vid2_step_sand_putty.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "4:30",
+    "phase": "step",
+    "technique": "putty_sanding",
+    "caption_pl": "Osuszony i wyszlifowany czerwony wypełniacz — usunięcie nadmiaru Bondo do poziomu powierzchni hełmu."
+  },
+  {
+    "file": "vid2_step_fine_wet_sand.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "5:00",
+    "phase": "step",
+    "technique": "fine_grit_wet_sand",
+    "caption_pl": "Końcowe szlifowanie wodne gruboziarnistym papierem szklarnym dla lustrzanego wykończenia przed malowaniem."
+  },
+  {
+    "file": "vid2_after_smooth_sanded.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "7:15",
+    "phase": "after",
+    "technique": "smooth_finished_surface",
+    "caption_pl": "Bardzo gładka, mokra powierzchnia po ostatnim szlifowaniu wodnym — gotowa do podkładu i malowania."
+  },
+  {
+    "file": "vid2_after_primed_helmet.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "7:30",
+    "phase": "after",
+    "technique": "fully_prepped_helmet",
+    "caption_pl": "Kompletnie przygotowany hełm — szlifowany, wypełniony i podkładowany, gotowy do etapu malowania."
+  },
+  {
+    "file": "vid2_after_ready_paint.jpg",
+    "video_id": "ZTE9bJyUO_8",
+    "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+    "channel": "3D Printed Props",
+    "timestamp": "8:00",
+    "phase": "after",
+    "technique": "paint_ready_finish",
+    "caption_pl": "Finalny efekt — gładki, jednolity hełm pod malowanie po pełnym procesie szlifowania, wypełniania i podkładowania."
+  }
+]

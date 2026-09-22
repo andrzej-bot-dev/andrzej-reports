@@ -1,0 +1,72 @@
+[
+  {
+    "file": "vid5_before_1.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "01:45",
+    "phase": "before",
+    "technique": "Raw 3D printed handle with visible layer lines",
+    "caption_pl": "Surowy uchwyt szczotki wydrukowany 3D z wyraźnie widocznymi liniami warstw FDM."
+  },
+  {
+    "file": "vid5_before_2.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "02:00",
+    "phase": "before",
+    "technique": "Handle mounted in drill press for sanding",
+    "caption_pl": "Uchwyt zamontowany w imadle wiertarskim – przygotowanie do szlifowania na tokarce."
+  },
+  {
+    "file": "vid5_step_1.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "01:00",
+    "phase": "step",
+    "technique": "Brush handle detail view during processing",
+    "caption_pl": "Szczegół uchwytu podczas obróbki – powierzchnia przygotowywana do polerowania."
+  },
+  {
+    "file": "vid5_step_2.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "01:15",
+    "phase": "step",
+    "technique": "Close-up of raw plastic texture",
+    "caption_pl": "Zbliżenie na surową teksturę plastiku – widoczna chropowatość przed szlifowaniem."
+  },
+  {
+    "file": "vid5_after_1.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "00:00",
+    "phase": "after",
+    "technique": "Polished mirror handle with metallic flakes",
+    "caption_pl": "Lustrzanie wypolerowany uchwyt z efektem metalicznych płatków – zero linii warstw."
+  },
+  {
+    "file": "vid5_after_2.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "00:15",
+    "phase": "after",
+    "technique": "Mirror finish close-up on base",
+    "caption_pl": "Zbliżenie bazy uchwytu – idealnie gładka, lustrzana powierzchnia bez śladów druku 3D."
+  },
+  {
+    "file": "vid5_after_3.jpg",
+    "video_id": "VgIhizroSac",
+    "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+    "channel": "Salveo",
+    "timestamp": "02:15",
+    "phase": "after",
+    "technique": "Finished brush bottom view",
+    "caption_pl": "Końcowy efekt od spodu – równomiernie połyskująca powierzchnia gotowej szczotki."
+  }
+]

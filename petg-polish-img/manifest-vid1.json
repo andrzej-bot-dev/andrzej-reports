@@ -1,0 +1,132 @@
+[
+  {
+    "file": "vid1_before_1.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "0:00",
+    "phase": "before",
+    "technique": "raw_print",
+    "caption_pl": "Surowe zielone części z drukarki 3D od razu po druku — wyraźne linie warstw widoczne na powierzchni."
+  },
+  {
+    "file": "vid1_before_2.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "1:25",
+    "phase": "before",
+    "technique": "support_removal",
+    "caption_pl": "Usuwanie podpór i brimu ze białej części metodą szczypiec i obcinacza."
+  },
+  {
+    "file": "vid1_before_3.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "11:25",
+    "phase": "before",
+    "technique": "raw_assembled_print",
+    "caption_pl": "Zmontowana ciemnoszara część wydrukowana 3D przed rozpoczęciem obróbki powierzchni."
+  },
+  {
+    "file": "vid1_step_detail_sander.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "2:00",
+    "phase": "step",
+    "technique": "detail_sanding_rotary",
+    "caption_pl": "Szlifowanie krawędzi zielonej części małym wiertłem szlifierskim (detail sander) — początek wygładzania lini warstw."
+  },
+  {
+    "file": "vid1_step_bondo_fill.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "5:15",
+    "phase": "step",
+    "technique": "body_filler_application",
+    "caption_pl": "Czerwony filler typu Bondo nałożony na łączenie (spoinę) zielonego elementu — wypełnianie rowków i niedoskonałości."
+  },
+  {
+    "file": "vid1_step_spread_bondo.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "5:30",
+    "phase": "step",
+    "technique": "body_filler_spreading",
+    "caption_pl": "Rozsmarowywanie czerwonego Bondo palcem w rękawiczce na powierzchni spoiny wydruku."
+  },
+  {
+    "file": "vid1_step_primer.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "6:00",
+    "phase": "step",
+    "technique": "filler_primer",
+    "caption_pl": "Nakładanie szarego filler primeru z puszek sprejowej na cylindryczny element — ukazuje teksturu po szlifowaniu."
+  },
+  {
+    "file": "vid1_step_uv_resin.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "7:15",
+    "phase": "step",
+    "technique": "uv_resin_filler",
+    "caption_pl": "Użycie lampy UV do utwardzania żywicy/fillera naniesionego na element — szybkie utwardzanie wypełnienia."
+  },
+  {
+    "file": "vid1_step_wet_sand.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "8:15",
+    "phase": "step",
+    "technique": "wet_sanding",
+    "caption_pl": "Szlifowanie na mokro długiego prętowego elementu gąbką szlifierską po nakładaniu primeru."
+  },
+  {
+    "file": "vid1_step_paint_black.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "10:15",
+    "phase": "step",
+    "technique": "spray_painting",
+    "caption_pl": "Malowanie czarnym spray'em długiego elementu — kolorowa warstwa po podkładzie."
+  },
+  {
+    "file": "vid1_step_fill_sanded.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "12:45",
+    "phase": "step",
+    "technique": "fine_sanding_after_fill",
+    "caption_pl": "Ręczne szlifowanie elementu pokrytego fillerem – usunięcie nierówności po wypełnieniu."
+  },
+  {
+    "file": "vid1_after_gloss_white.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "20:15",
+    "phase": "after",
+    "technique": "final_finish",
+    "caption_pl": "Gotowa biała zakrzywiona część z połyskującym, gładkim wykończeniem – efekt pełnego procesu wygładzania."
+  },
+  {
+    "file": "vid1_after_metallic_hammer.jpg",
+    "video_id": "P5-jtvYlA1c",
+    "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+    "channel": "M.M's Prop Shop",
+    "timestamp": "21:30",
+    "phase": "after",
+    "technique": "metallic_finish_display",
+    "caption_pl": "Końcowy wygląd metalicznego młota prop — zamontowany na ścianie, błyszcząca powierzchnia po lakierze i polerowaniu."
+  }
+]

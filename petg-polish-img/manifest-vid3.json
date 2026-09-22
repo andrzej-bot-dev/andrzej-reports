@@ -1,0 +1,118 @@
+[
+  {
+    "file": "vid3_before_layer_lines.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "0:15",
+    "phase": "before",
+    "technique": "raw_print_closeup",
+    "caption_pl": "Czerwona kopuła z druku 3D na drewnianym stole — wyraźne, grube linie warstw widoczne na powierzchni."
+  },
+  {
+    "file": "vid3_step_80_grit_coarse.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "1:45",
+    "phase": "step",
+    "file": "vid3_before_raw_dome.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "0:10",
+    "phase": "before",
+    "technique": "raw_print_overview",
+    "caption_pl": "Czerwona kopuła z druku 3D trzymaná w ręku — wyraźne linie warstw charakterystyczne dla FDM przed rozpoczęciem szlifowania."
+  },
+  {
+    "file": "vid3_step_80_grit_coarse.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "1:45",
+    "phase": "step",
+    "technique": "coarse_sanding_80grit",
+    "caption_pl": "Wygląd części po gruboziarnistym szlifowaniu (ok. 80 grit) — matowa powierzchnia, widoczne ślady papieru, linie warstw spłaszczone."
+  },
+  {
+    "file": "vid3_step_180_wet_sand.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "3:30",
+    "phase": "step",
+    "technique": "medium_wet_sanding",
+    "caption_pl": "Szlifowanie na mokro niebieskim papierem Hercules (220 grit) w rękawiczkach i masce — przechodzenie na wyższe ziarnistości."
+  },
+  {
+    "file": "vid3_step_800_grit.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "5:15",
+    "phase": "step",
+    "technique": "fine_sanding_800grit",
+    "caption_pl": "Zaawansowana fazа szlifowania gruboziarnistym papierem oznaczonym 800 grit — powierzchnia staje się coraz bardziej jednolita."
+  },
+  {
+    "file": "vid3_step_1500_grit.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "6:00",
+    "phase": "step",
+    "technique": "very_fine_sanding_1500grit",
+    "caption_pl": "Papier szklarniowy o granulacji 1500 grit — bardzo drobna ziarnistość zbliżająca się do połysku bez użycia lakieru."
+  },
+  {
+    "file": "vid3_step_2000_grit_wet.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "6:30",
+    "phase": "step",
+    "technique": "polishing_wet_sanding_2000plus",
+    "caption_pl": "Końcowe szlifowanie na mokro ultra-gruboziarnistym papierem (2000+ grit) w masce — polerowanie do lustrzanego połysku wyłącznie mechanicznie."
+  },
+  {
+    "file": "vid3_after_matt_vs_gloss.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "4:00",
+    "phase": "after",
+    "technique": "progress_comparison",
+    "caption_pl": "Porównanie dwóch kopeł: lewa matowa (po niższych gradach), prawa ciemniejsza i błyszcząca (po wysokich gradach) — efekt progresji ziarnistości bez wypełniaczy."
+  },
+  {
+    "file": "vid3_after_glossy_finish.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "7:30",
+    "phase": "after",
+    "technique": "final_glossy_polish",
+    "caption_pl": "Bardzo błyszczące wykończenie czerwonej kopuły osiągnięte wyłącznie poprzez sekwencyjne szlifowanie od 80 do 2000+ grit — zero fillerów, zero lakierów."
+  },
+  {
+    "file": "vid3_after_comparison.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "9:00",
+    "phase": "after",
+    "technique": "multi_piece_comparison",
+    "caption_pl": "Prezentator trzyma dwie czerwone kopuły obok siebie pokazując różnicę między surowym wydrukiem a finiszem z szlifowania."
+  },
+  {
+    "file": "vid3_after_three_pieces.jpg",
+    "video_id": "eWcl-IgPdWg",
+    "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+    "channel": "JustGee3D",
+    "timestamp": "9:30",
+    "phase": "after",
+    "technique": "final_results_display",
+    "caption_pl": "Trzy czerwone kopuły na stole — porównanie różnych etapów szlifowania: od surowej przez częściowo wygładzoną do lustrzanej powierzchni."
+  }
+]

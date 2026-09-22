@@ -1,0 +1,754 @@
+{
+ "vid1": [
+  {
+   "file": "vid1_before_1.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "0:00",
+   "phase": "before",
+   "technique": "raw_print",
+   "caption_pl": "Surowe zielone części z drukarki 3D od razu po druku — wyraźne linie warstw widoczne na powierzchni."
+  },
+  {
+   "file": "vid1_before_2.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "1:25",
+   "phase": "before",
+   "technique": "support_removal",
+   "caption_pl": "Usuwanie podpór i brimu ze białej części metodą szczypiec i obcinacza."
+  },
+  {
+   "file": "vid1_before_3.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "11:25",
+   "phase": "before",
+   "technique": "raw_assembled_print",
+   "caption_pl": "Zmontowana ciemnoszara część wydrukowana 3D przed rozpoczęciem obróbki powierzchni."
+  },
+  {
+   "file": "vid1_step_detail_sander.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "2:00",
+   "phase": "step",
+   "technique": "detail_sanding_rotary",
+   "caption_pl": "Szlifowanie krawędzi zielonej części małym wiertłem szlifierskim (detail sander) — początek wygładzania lini warstw."
+  },
+  {
+   "file": "vid1_step_bondo_fill.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "5:15",
+   "phase": "step",
+   "technique": "body_filler_application",
+   "caption_pl": "Czerwony filler typu Bondo nałożony na łączenie (spoinę) zielonego elementu — wypełnianie rowków i niedoskonałości."
+  },
+  {
+   "file": "vid1_step_spread_bondo.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "5:30",
+   "phase": "step",
+   "technique": "body_filler_spreading",
+   "caption_pl": "Rozsmarowywanie czerwonego Bondo palcem w rękawiczce na powierzchni spoiny wydruku."
+  },
+  {
+   "file": "vid1_step_primer.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "6:00",
+   "phase": "step",
+   "technique": "filler_primer",
+   "caption_pl": "Nakładanie szarego filler primeru z puszek sprejowej na cylindryczny element — ukazuje teksturu po szlifowaniu."
+  },
+  {
+   "file": "vid1_step_uv_resin.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "7:15",
+   "phase": "step",
+   "technique": "uv_resin_filler",
+   "caption_pl": "Użycie lampy UV do utwardzania żywicy/fillera naniesionego na element — szybkie utwardzanie wypełnienia."
+  },
+  {
+   "file": "vid1_step_wet_sand.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "8:15",
+   "phase": "step",
+   "technique": "wet_sanding",
+   "caption_pl": "Szlifowanie na mokro długiego prętowego elementu gąbką szlifierską po nakładaniu primeru."
+  },
+  {
+   "file": "vid1_step_paint_black.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "10:15",
+   "phase": "step",
+   "technique": "spray_painting",
+   "caption_pl": "Malowanie czarnym spray'em długiego elementu — kolorowa warstwa po podkładzie."
+  },
+  {
+   "file": "vid1_step_fill_sanded.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "12:45",
+   "phase": "step",
+   "technique": "fine_sanding_after_fill",
+   "caption_pl": "Ręczne szlifowanie elementu pokrytego fillerem – usunięcie nierówności po wypełnieniu."
+  },
+  {
+   "file": "vid1_after_gloss_white.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "20:15",
+   "phase": "after",
+   "technique": "final_finish",
+   "caption_pl": "Gotowa biała zakrzywiona część z połyskującym, gładkim wykończeniem – efekt pełnego procesu wygładzania."
+  },
+  {
+   "file": "vid1_after_metallic_hammer.jpg",
+   "video_id": "P5-jtvYlA1c",
+   "video_title": "The Ultimate Guide to Smoothing & Finishing Your 3D Prints",
+   "channel": "M.M's Prop Shop",
+   "timestamp": "21:30",
+   "phase": "after",
+   "technique": "metallic_finish_display",
+   "caption_pl": "Końcowy wygląd metalicznego młota prop — zamontowany na ścianie, błyszcząca powierzchnia po lakierze i polerowaniu."
+  }
+ ],
+ "vid2": [
+  {
+   "file": "vid2_before_raw_helmet.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "0:04",
+   "phase": "before",
+   "technique": "raw_print_overview",
+   "caption_pl": "Surowy niepomalowany hełm Red Hood po wydruku FDM — na stole widoczne surowe materiały wykończeniowe: Bondo, gąbki szlifierskie, maska."
+  },
+  {
+   "file": "vid2_before_layer_lines.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "1:00",
+   "phase": "before",
+   "technique": "layer_line_closeup",
+   "caption_pl": "Ekstremalne zbliżenie powierzchni wydruku — wyraźne linie warstw charakterystyczne dla technologii FDM, które należy usunąć."
+  },
+  {
+   "file": "vid2_step_coarse_sand.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "1:45",
+   "phase": "step",
+   "technique": "coarse_sanding_block",
+   "caption_pl": "Szlifowanie grubej zaporki blokiem szlifierskim z gruboziarnistym papierem — początkowe wygładzanie powierzchni hełmu."
+  },
+  {
+   "file": "vid2_step_first_primer.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "2:40",
+   "phase": "step",
+   "technique": "primer_application",
+   "caption_pl": "Nakładanie białego podkładu spray'em na hełm na świeżym powietrzu — puszkę podgrzewano w ciepłej wodzie przed użyciem."
+  },
+  {
+   "file": "vid2_step_wet_sand_primed.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "3:15",
+   "phase": "step",
+   "technique": "wet_sanding_primer",
+   "caption_pl": "Szlifowanie na mokro w wannie po pierwszym warstwie podkładu – uzyskanie równiejszej powierzchni i usunięcie nierówności."
+  },
+  {
+   "file": "vid2_step_red_spot_putty.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "4:00",
+   "phase": "step",
+   "technique": "spot_putty_application",
+   "caption_pl": "Nałożenie czerwonego Spot Putty (glazing filler) gumowym spatułką na niedoskonałości i linie warstw hełmu."
+  },
+  {
+   "file": "vid2_step_sand_putty.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "4:30",
+   "phase": "step",
+   "technique": "putty_sanding",
+   "caption_pl": "Osuszony i wyszlifowany czerwony wypełniacz — usunięcie nadmiaru Bondo do poziomu powierzchni hełmu."
+  },
+  {
+   "file": "vid2_step_fine_wet_sand.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "5:00",
+   "phase": "step",
+   "technique": "fine_grit_wet_sand",
+   "caption_pl": "Końcowe szlifowanie wodne gruboziarnistym papierem szklarnym dla lustrzanego wykończenia przed malowaniem."
+  },
+  {
+   "file": "vid2_after_smooth_sanded.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "7:15",
+   "phase": "after",
+   "technique": "smooth_finished_surface",
+   "caption_pl": "Bardzo gładka, mokra powierzchnia po ostatnim szlifowaniu wodnym — gotowa do podkładu i malowania."
+  },
+  {
+   "file": "vid2_after_primed_helmet.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "7:30",
+   "phase": "after",
+   "technique": "fully_prepped_helmet",
+   "caption_pl": "Kompletnie przygotowany hełm — szlifowany, wypełniony i podkładowany, gotowy do etapu malowania."
+  },
+  {
+   "file": "vid2_after_ready_paint.jpg",
+   "video_id": "ZTE9bJyUO_8",
+   "video_title": "Finishing 3D Prints: How to Sand, Fill and Prime 3D Printed Parts",
+   "channel": "3D Printed Props",
+   "timestamp": "8:00",
+   "phase": "after",
+   "technique": "paint_ready_finish",
+   "caption_pl": "Finalny efekt — gładki, jednolity hełm pod malowanie po pełnym procesie szlifowania, wypełniania i podkładowania."
+  }
+ ],
+ "vid3": [
+  {
+   "file": "vid3_before_layer_lines.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "0:15",
+   "phase": "before",
+   "technique": "raw_print_closeup",
+   "caption_pl": "Czerwona kopuła z druku 3D na drewnianym stole — wyraźne, grube linie warstw widoczne na powierzchni."
+  },
+  {
+   "file": "vid3_before_raw_dome.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "0:10",
+   "phase": "before",
+   "technique": "raw_print_overview",
+   "caption_pl": "Czerwona kopuła z druku 3D trzymaná w ręku — wyraźne linie warstw charakterystyczne dla FDM przed rozpoczęciem szlifowania."
+  },
+  {
+   "file": "vid3_step_80_grit_coarse.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "1:45",
+   "phase": "step",
+   "technique": "coarse_sanding_80grit",
+   "caption_pl": "Wygląd części po gruboziarnistym szlifowaniu (ok. 80 grit) — matowa powierzchnia, widoczne ślady papieru, linie warstw spłaszczone."
+  },
+  {
+   "file": "vid3_step_180_wet_sand.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "3:30",
+   "phase": "step",
+   "technique": "medium_wet_sanding",
+   "caption_pl": "Szlifowanie na mokro niebieskim papierem Hercules (220 grit) w rękawiczkach i masce — przechodzenie na wyższe ziarnistości."
+  },
+  {
+   "file": "vid3_step_800_grit.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "5:15",
+   "phase": "step",
+   "technique": "fine_sanding_800grit",
+   "caption_pl": "Zaawansowana fazа szlifowania gruboziarnistym papierem oznaczonym 800 grit — powierzchnia staje się coraz bardziej jednolita."
+  },
+  {
+   "file": "vid3_step_1500_grit.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "6:00",
+   "phase": "step",
+   "technique": "very_fine_sanding_1500grit",
+   "caption_pl": "Papier szklarniowy o granulacji 1500 grit — bardzo drobna ziarnistość zbliżająca się do połysku bez użycia lakieru."
+  },
+  {
+   "file": "vid3_step_2000_grit_wet.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "6:30",
+   "phase": "step",
+   "technique": "polishing_wet_sanding_2000plus",
+   "caption_pl": "Końcowe szlifowanie na mokro ultra-gruboziarnistym papierem (2000+ grit) w masce — polerowanie do lustrzanego połysku wyłącznie mechanicznie."
+  },
+  {
+   "file": "vid3_after_matt_vs_gloss.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "4:00",
+   "phase": "after",
+   "technique": "progress_comparison",
+   "caption_pl": "Porównanie dwóch kopeł: lewa matowa (po niższych gradach), prawa ciemniejsza i błyszcząca (po wysokich gradach) — efekt progresji ziarnistości bez wypełniaczy."
+  },
+  {
+   "file": "vid3_after_glossy_finish.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "7:30",
+   "phase": "after",
+   "technique": "final_glossy_polish",
+   "caption_pl": "Bardzo błyszczące wykończenie czerwonej kopuły osiągnięte wyłącznie poprzez sekwencyjne szlifowanie od 80 do 2000+ grit — zero fillerów, zero lakierów."
+  },
+  {
+   "file": "vid3_after_comparison.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "9:00",
+   "phase": "after",
+   "technique": "multi_piece_comparison",
+   "caption_pl": "Prezentator trzyma dwie czerwone kopuły obok siebie pokazując różnicę między surowym wydrukiem a finiszem z szlifowania."
+  },
+  {
+   "file": "vid3_after_three_pieces.jpg",
+   "video_id": "eWcl-IgPdWg",
+   "video_title": "Get Amazingly Smooth 3D Prints Using ONLY Sandpaper!",
+   "channel": "JustGee3D",
+   "timestamp": "9:30",
+   "phase": "after",
+   "technique": "final_results_display",
+   "caption_pl": "Trzy czerwone kopuły na stole — porównanie różnych etapów szlifowania: od surowej przez częściowo wygładzoną do lustrzanej powierzchni."
+  }
+ ],
+ "vid4": [
+  {
+   "file": "vid4_before_1.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "01:30",
+   "phase": "before",
+   "technique": "Raw printed part inspection",
+   "caption_pl": "Surowa, niepolerowana część drukarki 3D z widocznymi liniami warstw – stan przed obróbką."
+  },
+  {
+   "file": "vid4_before_2.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "18:45",
+   "phase": "before",
+   "technique": "Painted part before final polish",
+   "caption_pl": "Malowana części o matowej powierzchni – przed ostatecznym polerowaniem."
+  },
+  {
+   "file": "vid4_before_3.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "19:15",
+   "phase": "before",
+   "technique": "Flashlight inspection revealing marks",
+   "caption_pl": "Oględziny pod mocnym światłem, pokazujące ślady szlifowania do usunięcia."
+  },
+  {
+   "file": "vid4_step_1.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "08:30",
+   "phase": "step",
+   "technique": "Hand wet sanding with soapy water",
+   "caption_pl": "Ręczny szlif na mokro z mydlaną wodą jako smarowadłem – technika wstępnego wygładzania."
+  },
+  {
+   "file": "vid4_step_2.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "09:45",
+   "phase": "step",
+   "technique": "Wet sanding close-up",
+   "caption_pl": "Szlifowanie na mokro zbliżone z użyciem papieru ściernego i wody."
+  },
+  {
+   "file": "vid4_step_3.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "10:30",
+   "phase": "step",
+   "technique": "Sandpaper materials laid out (3000-grit Trizact)",
+   "caption_pl": "Materiały ścierne – papier 3000-grit Trizact i compoundy polerskie przygotowane do pracy."
+  },
+  {
+   "file": "vid4_step_4.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "11:15",
+   "phase": "step",
+   "technique": "Applying polish compound",
+   "caption_pl": "Nałożenie pasty polerskiej na powierzchnię przed polerowaniem wiertarką."
+  },
+  {
+   "file": "vid4_step_5.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "12:45",
+   "phase": "step",
+   "technique": "Drill buffing with yellow pad",
+   "caption_pl": "Polerowanie wiertarką z żółtym dyskiem polerskim – nacieranie pasty na powierzchnię."
+  },
+  {
+   "file": "vid4_step_6.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "13:30",
+   "phase": "step",
+   "technique": "Switching to fluffy bluish-purple pad",
+   "caption_pl": "Zmiana dysku na puszysty, fioletowy – kolejna faza polerowania dla gładszego błysku."
+  },
+  {
+   "file": "vid4_step_7.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "16:15",
+   "phase": "step",
+   "technique": "Flashlight inspection of surface marks",
+   "caption_pl": "Inspekcja pod silnym światłem latarki, ujawniająca pozostałe oznaczenia po szlifowaniu."
+  },
+  {
+   "file": "vid4_step_8.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "16:45",
+   "phase": "step",
+   "technique": "Rotary tool on intricate areas",
+   "caption_pl": "Polerowanie precyzyjnych obszarów przyrządem obrotowym (grawurka/Dremel)."
+  },
+  {
+   "file": "vid4_step_9.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "20:15",
+   "phase": "step",
+   "technique": "Drill buffing showing reflection developing",
+   "caption_pl": "Polerowanie wiertarką – na powierzchni pojawia się już wyraźne odbicie, znak postępu."
+  },
+  {
+   "file": "vid4_step_10.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "23:15",
+   "phase": "step",
+   "technique": "Microfiber cloth wipe/checking progress",
+   "caption_pl": "Wytrzećie mikrofibrową szmatką i kontrola postępu polerowania."
+  },
+  {
+   "file": "vid4_after_1.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "15:15",
+   "phase": "after",
+   "technique": "Glossy front piece after polishing",
+   "caption_pl": "Polersowany element przedni hełmu z wyraźnym błyskiem – końcowy efekt polerowania."
+  },
+  {
+   "file": "vid4_after_2.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "20:00",
+   "phase": "after",
+   "technique": "High-gloss mirror dome finish",
+   "caption_pl": "Hełm z lustrzanym wykończeniem – głęboki, zwierciadlany połysk bez widocznych linii warstw."
+  },
+  {
+   "file": "vid4_after_3.jpg",
+   "video_id": "QLzkd8zKcIE",
+   "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+   "channel": "Darkwing Dad",
+   "timestamp": "21:00",
+   "phase": "after",
+   "technique": "Finished helmet with tools shown",
+   "caption_pl": "Gotowy hełm obok użytych narzędzi (wiertarka, grawerka) – pełny sukces procesu polerowania."
+  }
+ ],
+ "vid5": [
+  {
+   "file": "vid5_before_1.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "01:45",
+   "phase": "before",
+   "technique": "Raw 3D printed handle with visible layer lines",
+   "caption_pl": "Surowy uchwyt szczotki wydrukowany 3D z wyraźnie widocznymi liniami warstw FDM."
+  },
+  {
+   "file": "vid5_before_2.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "02:00",
+   "phase": "before",
+   "technique": "Handle mounted in drill press for sanding",
+   "caption_pl": "Uchwyt zamontowany w imadle wiertarskim – przygotowanie do szlifowania na tokarce."
+  },
+  {
+   "file": "vid5_step_1.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "01:00",
+   "phase": "step",
+   "technique": "Brush handle detail view during processing",
+   "caption_pl": "Szczegół uchwytu podczas obróbki – powierzchnia przygotowywana do polerowania."
+  },
+  {
+   "file": "vid5_step_2.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "01:15",
+   "phase": "step",
+   "technique": "Close-up of raw plastic texture",
+   "caption_pl": "Zbliżenie na surową teksturę plastiku – widoczna chropowatość przed szlifowaniem."
+  },
+  {
+   "file": "vid5_after_1.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "00:00",
+   "phase": "after",
+   "technique": "Polished mirror handle with metallic flakes",
+   "caption_pl": "Lustrzanie wypolerowany uchwyt z efektem metalicznych płatków – zero linii warstw."
+  },
+  {
+   "file": "vid5_after_2.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "00:15",
+   "phase": "after",
+   "technique": "Mirror finish close-up on base",
+   "caption_pl": "Zbliżenie bazy uchwytu – idealnie gładka, lustrzana powierzchnia bez śladów druku 3D."
+  },
+  {
+   "file": "vid5_after_3.jpg",
+   "video_id": "VgIhizroSac",
+   "video_title": "MIRROR POLISHING PLA Until It Doesn't Even Look 3D PRINTED Anymore",
+   "channel": "Salveo",
+   "timestamp": "02:15",
+   "phase": "after",
+   "technique": "Finished brush bottom view",
+   "caption_pl": "Końcowy efekt od spodu – równomiernie połyskująca powierzchnia gotowej szczotki."
+  }
+ ],
+ "vid6": [
+  {
+   "file": "vid6_before_1.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "01:00",
+   "phase": "before",
+   "technique": "Raw red mushroom cap with visible layer lines",
+   "caption_pl": "Surowy czerwony kapelusz grzyba wydrukowany 3D – wyraźnie widoczne linie warstw FDM."
+  },
+  {
+   "file": "vid6_before_2.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "00:15",
+   "phase": "before",
+   "technique": "Red dome shown before any processing",
+   "caption_pl": "Czerwona domka/przedmiot przed jakimikolwiek zabiegami wygładzającymi."
+  },
+  {
+   "file": "vid6_step_1.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "00:00",
+   "phase": "step",
+   "technique": "Pouring baby powder into cup for mixture",
+   "caption_pl": "Wsypywanie mączki dziecinnej do kubka – pierwszy składnik mieszanki wygładzającej."
+  },
+  {
+   "file": "vid6_step_2.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "01:45",
+   "phase": "step",
+   "technique": "Pouring UV resin into cup",
+   "caption_pl": "Dozowanie żywicy UV do kubka – drugi składnik mieszaniny z mączką dziecinną."
+  },
+  {
+   "file": "vid6_step_3.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "02:00",
+   "phase": "step",
+   "technique": "Mixing baby powder + UV resin paste with wooden stick",
+   "caption_pl": "Staranne mieszanie pasty z mączki dziecinnej i żywicy UV patykiem – konsystencja gotowa do malowania."
+  },
+  {
+   "file": "vid6_step_4.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "02:30",
+   "phase": "step",
+   "technique": "Painting mixture onto 3D print surface with foam brush",
+   "caption_pl": "Nakładanie mieszanki piankowym pędzelkiem na powierzchnię wydruku – zasypianie linii warstw."
+  },
+  {
+   "file": "vid6_step_5.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "02:45",
+   "phase": "step",
+   "technique": "Cleaning recessed details with toothpick",
+   "caption_pl": "Oczyszczanie wgłębień patyczkiem do uszu – zachowanie detali przed utwardzeniem."
+  },
+  {
+   "file": "vid6_step_6.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "03:00",
+   "phase": "step",
+   "technique": "UV curing chamber with purple light",
+   "caption_pl": "Utwardzanie promieniami UV w komorze – fioletowe światło utwardza żywicę w ciągu minut."
+  },
+  {
+   "file": "vid6_step_7.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "01:30",
+   "phase": "step",
+   "technique": "Sanding coated dome after curing",
+   "caption_pl": "Szlifowanie utwardzonej powłoki – wyrównanie powierzchni po utwardzeniu mieszanki."
+  },
+  {
+   "file": "vid6_step_8.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "02:15",
+   "phase": "step",
+   "technique": "Rust-Oleum Filler Primer can preparation",
+   "caption_pl": "Grunt wypełniający Rust-Oleum – kolejny krok wyrównywania powierzchni przed farbowaniem."
+  },
+  {
+   "file": "vid6_step_9.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "01:30",
+   "phase": "step",
+   "technique": "Spraying filler primer onto primed dome",
+   "caption_pl": "Natrysk gruntu wypełniającego na podświetloną powierzchnię – ostatnie wyrównanie przed lakierem."
+  },
+  {
+   "file": "vid6_step_10.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "00:45",
+   "phase": "step",
+   "technique": "Mixing concoction in red cup",
+   "caption_pl": "Mieszanie składników w czerwonym kubku – kluczowy moment tworzenia pasty wygładzającej."
+  },
+  {
+   "file": "vid6_after_1.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "03:30",
+   "phase": "after",
+   "technique": "Smooth highly glossy finished result",
+   "caption_pl": "Ostateczny efekt – całkowicie gładka, mocno błyszcząca powierzchnia bez śladów druku 3D."
+  },
+  {
+   "file": "vid6_after_2.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "08:15",
+   "phase": "after",
+   "technique": "Blue metallic paint application via airbrush",
+   "caption_pl": "Aplikacja niebieskiego metalicznego lakieru aerografem – kolor i połysk na idealnie gładkim podłożu."
+  },
+  {
+   "file": "vid6_after_3.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "09:15",
+   "phase": "after",
+   "technique": "Extreme close-up glass-like metallic finish",
+   "caption_pl": "Skrajne zbliżenie – szklisty, metaliczny połysk perfekcyjnie gładkiej powierzchni pomalowanej."
+  },
+  {
+   "file": "vid6_after_4.jpg",
+   "video_id": "KVf0mbBCygQ",
+   "video_title": "Hide 3D print layer lines with Baby Powder and UV resin",
+   "channel": "DaveRig Design",
+   "timestamp": "10:15",
+   "phase": "after",
+   "technique": "Before & After comparison split-screen",
+   "caption_pl": "Porównanie przed i po – lewa strona surowy wydruk z liniami, prawa strona idealnie wygładzony rezultatem techniki z mączką i żywicą."
+  }
+ ]
+}

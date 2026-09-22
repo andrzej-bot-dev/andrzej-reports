@@ -1,0 +1,162 @@
+[
+  {
+    "file": "vid4_before_1.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "01:30",
+    "phase": "before",
+    "technique": "Raw printed part inspection",
+    "caption_pl": "Surowa, niepolerowana część drukarki 3D z widocznymi liniami warstw – stan przed obróbką."
+  },
+  {
+    "file": "vid4_before_2.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "18:45",
+    "phase": "before",
+    "technique": "Painted part before final polish",
+    "caption_pl": "Malowana części o matowej powierzchni – przed ostatecznym polerowaniem."
+  },
+  {
+    "file": "vid4_before_3.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "19:15",
+    "phase": "before",
+    "technique": "Flashlight inspection revealing marks",
+    "caption_pl": "Oględziny pod mocnym światłem, pokazujące ślady szlifowania do usunięcia."
+  },
+  {
+    "file": "vid4_step_1.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "08:30",
+    "phase": "step",
+    "technique": "Hand wet sanding with soapy water",
+    "caption_pl": "Ręczny szlif na mokro z mydlaną wodą jako smarowadłem – technika wstępnego wygładzania."
+  },
+  {
+    "file": "vid4_step_2.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "09:45",
+    "phase": "step",
+    "technique": "Wet sanding close-up",
+    "caption_pl": "Szlifowanie na mokro zbliżone z użyciem papieru ściernego i wody."
+  },
+  {
+    "file": "vid4_step_3.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "10:30",
+    "phase": "step",
+    "technique": "Sandpaper materials laid out (3000-grit Trizact)",
+    "caption_pl": "Materiały ścierne – papier 3000-grit Trizact i compoundy polerskie przygotowane do pracy."
+  },
+  {
+    "file": "vid4_step_4.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "11:15",
+    "phase": "step",
+    "technique": "Applying polish compound",
+    "caption_pl": "Nałożenie pasty polerskiej na powierzchnię przed polerowaniem wiertarką."
+  },
+  {
+    "file": "vid4_step_5.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "12:45",
+    "phase": "step",
+    "technique": "Drill buffing with yellow pad",
+    "caption_pl": "Polerowanie wiertarką z żółtym dyskiem polerskim – nacieranie pasty na powierzchnię."
+  },
+  {
+    "file": "vid4_step_6.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "13:30",
+    "phase": "step",
+    "technique": "Switching to fluffy bluish-purple pad",
+    "caption_pl": "Zmiana dysku na puszysty, fioletowy – kolejna faza polerowania dla gładszego błysku."
+  },
+  {
+    "file": "vid4_step_7.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "16:15",
+    "phase": "step",
+    "technique": "Flashlight inspection of surface marks",
+    "caption_pl": "Inspekcja pod silnym światłem latarki, ujawniająca pozostałe oznaczenia po szlifowaniu."
+  },
+  {
+    "file": "vid4_step_8.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "16:45",
+    "phase": "step",
+    "technique": "Rotary tool on intricate areas",
+    "caption_pl": "Polerowanie precyzyjnych obszarów przyrządem obrotowym (grawurka/Dremel)."
+  },
+  {
+    "file": "vid4_step_9.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "20:15",
+    "phase": "step",
+    "technique": "Drill buffing showing reflection developing",
+    "caption_pl": "Polerowanie wiertarką – na powierzchni pojawia się już wyraźne odbicie, znak postępu."
+  },
+  {
+    "file": "vid4_step_10.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "23:15",
+    "phase": "step",
+    "technique": "Microfiber cloth wipe/checking progress",
+    "caption_pl": "Wytrzećie mikrofibrową szmatką i kontrola postępu polerowania."
+  },
+  {
+    "file": "vid4_after_1.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "15:15",
+    "phase": "after",
+    "technique": "Glossy front piece after polishing",
+    "caption_pl": "Polersowany element przedni hełmu z wyraźnym błyskiem – końcowy efekt polerowania."
+  },
+  {
+    "file": "vid4_after_2.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "20:00",
+    "phase": "after",
+    "technique": "High-gloss mirror dome finish",
+    "caption_pl": "Hełm z lustrzanym wykończeniem – głęboki, zwierciadlany połysk bez widocznych linii warstw."
+  },
+  {
+    "file": "vid4_after_3.jpg",
+    "video_id": "QLzkd8zKcIE",
+    "video_title": "Wetsanding Tips & tricks - Polishing 3D prints",
+    "channel": "Darkwing Dad",
+    "timestamp": "21:00",
+    "phase": "after",
+    "technique": "Finished helmet with tools shown",
+    "caption_pl": "Gotowy hełm obok użytych narzędzi (wiertarka, grawerka) – pełny sukces procesu polerowania."
+  }
+]

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grudka po wyciśniętym pryszczu, która się nie goi — research</title>
+<style>
+  :root{--bg:#0f1115;--card:#181b22;--card2:#1e222b;--txt:#e8eaf0;--mut:#9aa3b2;--acc:#4da3ff;--ok:#3fb96f;--warn:#e6b450;--bad:#e05d5d;--bd:#2a2f3a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font:15px/1.6 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:0 12px 90px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{padding:26px 0 10px}
+  h1{font-size:26px;line-height:1.25;margin:6px 0 4px}
+  .badge{display:inline-block;background:var(--card2);border:1px solid var(--bd);border-radius:20px;padding:3px 12px;font-size:12.5px;color:var(--mut);margin-right:6px}
+  .meta{color:var(--mut);font-size:13px;margin-top:6px}
+  .disclaimer{background:#2a1f1f;border:1px solid #5a3232;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:13.5px;color:#f0c9c9}
+  nav.sticky{position:sticky;top:0;z-index:50;background:rgba(15,17,21,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--bd);padding:8px 0;margin:0 -12px 8px;height:auto;min-height:0}
+  nav.sticky .wrap{display:flex;gap:6px;flex-wrap:wrap}
+  nav.sticky a{color:var(--acc);text-decoration:none;font-size:13px;padding:4px 10px;border-radius:16px;background:var(--card);border:1px solid var(--bd);white-space:nowrap}
+  h2{font-size:20px;margin:28px 0 12px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--acc)}
+  p{margin:8px 0}
+  .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .tldr{background:linear-gradient(135deg,#16233a,#181b22);border:1px solid #2b4a75}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--bd);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--card2);position:sticky}
+  tr:nth-child(even) td{background:#151820}
+  .cov td:first-child{max-width:340px}
+  .ok{color:var(--ok);font-weight:600}.warn{color:var(--warn)}.bad{color:var(--bad)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px;margin:14px 0}
+  .pcard{background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .pcard img{width:100%;height:210px;object-fit:cover;object-position:center;background:linear-gradient(135deg,#1e222b,#262c38);display:block}
+  .pcard .body{padding:12px 14px;font-size:13px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .pcard .t{font-weight:700;font-size:13.5px}
+  .pcard .desc{color:var(--mut)}
+  .pcard a{color:var(--acc);text-decoration:none;font-size:12.5px;margin-top:auto}
+  .tag{display:inline-block;font-size:11px;border-radius:10px;padding:1px 8px;margin-right:4px;border:1px solid var(--bd);background:var(--card2);color:var(--mut)}
+  .flag{border-left:4px solid var(--bad);padding:10px 14px;background:#241518;border-radius:0 10px 10px 0;margin:10px 0;font-size:14px}
+  .note{border-left:4px solid var(--warn);padding:10px 14px;background:#241f14;border-radius:0 10px 10px 0;margin:10px 0;font-size:14px}
+  ul{margin:8px 0 8px 22px}
+  li{margin:4px 0}
+  .q{background:var(--card2);border:1px dashed #3a4252;border-radius:10px;padding:12px 16px;margin:10px 0}
+  footer{margin-top:36px;color:var(--mut);font-size:12.5px;border-top:1px solid var(--bd);padding-top:14px}
+  footer a{color:var(--acc);word-break:break-all}
+  #totop{position:fixed;right:18px;bottom:18px;background:var(--acc);color:#001;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:20px;box-shadow:0 4px 14px rgba(0,0,0,.5);z-index:99}
+  @media(max-width:640px){.grid{grid-template-columns:1fr 1fr}.pcard img{height:150px}h1{font-size:21px}}
+  @media(max-width:420px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="sticky"><div class="wrap">
+  <a href="#tldr">⚡ TL;DR</a><a href="#roznicowanie">🔍 Co to może być</a><a href="#zdjecia">🖼️ Zdjęcia do porównania</a><a href="#dom">🏠 Co robić samemu</a><a href="#derm">🩺 Co zrobi lekarz</a><a href="#flagi">🚩 Czerwone flagi</a><a href="#pytania">❓ Doprecyzujmy</a><a href="#zrodla">📚 Źródła</a>
+</div></nav>
+<div class="wrap">
+<header>
+  <span class="badge">📚 Knowledge / medyczny</span><span class="badge">Reddit + DermNet + Mayo</span><span class="badge">2026-09-30</span>
+  <h1>Grudka po wyciśniętym pryszczu, która się łuszczy i nie znika — co to może być?</h1>
+  <div class="meta">12 wątków Reddit (ze zdjęciami) · 5 źródeł dermatologicznych · synteza + galeria porównawcza</div>
+  <div class="disclaimer">⚠️ <b>To nie jest diagnoza.</b> Zmian skórnych nie da się rozpoznać przez internet — poniżej najczęstsze możliwości przy Twoim opisie (wyciskanie → twarda grudka → łuszczy się naskórek → nic nie wychodzi → maść nie pomaga) + zdjęcia podobnych przypadków z Reddita, żebyś mógł porównać. Jeśli coś wątpisz → dermatolog/weterynarz nie, dermatolog tak 😉.</div>
+</header>
+
+<h2 id="tldr">⚡ TL;DR — 3 najbardziej prawdopodobne</h2>
+<div class="card tldr">
+<p>Przy opisie „wycisnąłem pryszcza → został syf, który nie wychodzi → skóra się łuszczy → maść nic nie daje" spectrum wygląda tak:</p>
+<ul>
+<li><b>1. Zaskórnik zamknięty / czop keratynowy</b> (closed comedone, „keratin plug") — jeśli grudka jest <b>mała (1–4 mm)</b>, twarda, biało-żółtawa. Wycisnąłeś zawartość częściowo, ale <b>rdzeń z keratyny siedzi głęboko</b> i nie da się go wycisnąć — dlatego „nic nie idzie". Łuszczenie = podrażnione ujście mieszka. <span class="tag">najczęstsze</span></li>
+<li><b>2. Mała torbiel epidermoidalna</b> (epidermoid cyst, „torbiel naskórkowa") — jeśli grudka jest <b>3–8 mm</b>, kopułkowata, a zwłaszcza jeśli widać na środku <b>ciemny punkcik (punctum)</b>. Mayo Clinic wprost pisze, że powstają przez <b>uraz/podrażnienie mieszka włosowego — czyli dokładnie przez wyciskanie</b>. Wyciskanie usuwa treść, ale nie torebkę → wraca w kółko. <span class="tag">klasyk po wyciskaniu</span></li>
+<li><b>3. Utrwalona grudka zapalno-bliznowata</b> (fibrotic papule / zgrubienie po głębokim stanie zapalnym) — jeśli grudka jest <b>twarda, skórno-różowa, „gumowa"</b>. To już nie treść do wyciśnięcia, tylko <b>tkanka</b> — dlatego nic nie wychodzi i maści przeciwtrądzikowe nie działają. Może wisieć miesiącami, czasem latami (na Reddicie ludzie piszą o 5 latach). <span class="tag">„blizna, nie pryszcz"</span></li>
+</ul>
+<p><b>Dlaczego „syfo" maść nie działa:</b> maści seboregulujące/przeciwtrądzikowe celują w sebum i bakterie, a tu problemem jest <b>keratyna (czop/torebka)</b> albo <b>tkanka łączna</b>. Na keratynę działają inne rzeczy: kwasy (BHA/salicylowy) i retinoidy; na torbiel i bliznę — tylko zabieg.</p>
+<p><b>Szybka akcja:</b> przestań wyciskać i podrzebywać (to podtrzymuje cykl łuszczenia — każdy Reddit-thread to potwierdza), zaobserwuj czy jest punkcik na środku, ewentualnie BHA 2% / adapalen. Jak po ~8 tygodniach nic → dermatolog (ekstrakcja/wycięcie to 15 minut).</p>
+</div>
+
+<h2 id="roznicowanie">🔍 Jak rozróżnić — tabela</h2>
+<table>
+<tr><th>Cecha</th><th>Zaskórnik / czop keratynowy</th><th>Torbiel epidermoidalna</th><th>Grudka bliznowata</th><th>Dermatofibroma</th><th>Łojotokowe rozroście (SH)</th></tr>
+<tr><td><b>Wielkość</b></td><td>1–4 mm</td><td>3–8+ mm (wolno rośnie)</td><td>2–6 mm, stabilna</td><td>5–10 mm</td><td>2–3 mm</td></tr>
+<tr><td><b>Kolor</b></td><td>białawy/żółtawy, skórny</td><td>skórny/żółtawy</td><td>różowy/czerwonawy → skórny</td><td>brązowawy/różowy</td><td>żółtawy</td></tr>
+<tr><td><b>Powierzchnia</b></td><td>gładka, czasem czubek</td><td>kopułka, <b>ciemny punkcik (punctum)</b></td><td>gładka lub łuszcząca się</td><td>twarda, „przyklejona"</td><td>dołeczek na środku</td></tr>
+<tr><td><b>Czy coś wychodzi?</b></td><td>czop głęboko — nie da się</td><td>serowata treść + smród, ale wraca</td><td><b>nic — to tkanka</b></td><td>nic</td><td>nic</td></tr>
+<tr><td><b>Powstaje po wyciskaniu?</b></td><td>tak — rdzeń został</td><td><b>tak, klasycznie</b> (uraz mieszka)</td><td>tak — po głębokim stanie zapalnym</td><td>po urazach różnego typu</td><td>nie, wiek 40+</td></tr>
+<tr><td><b>Łuszczenie na wierzchu</b></td><td>częste (drażnione ujście)</td><td>przy punkciku</td><td>częste przy przewlekłym drażnieniu</td><td>rzadkie</td><td>rzadkie</td></tr>
+<tr><td><b>Co działa</b></td><td>BHA, retinoid, ekstrakcja u profesjonalisty</td><td><b>tylko wycięcie z torebką</b></td><td>czas, retinoid; zastrzyk sterydowy u derma</td><td>nic konieczne; wycięcie kosmetycznie</td><td>elektrokauteryzacja/laser</td></tr>
+</table>
+<p class="meta">Źródła: DermNet (epidermoid cyst, comedonal acne, dermatofibroma, sebaceous hyperplasia), Mayo Clinic. <b>Dimple sign</b> (ściskasz bok — zmiana się zapada) = dermatofibroma; <b>punctum</b> = torbiel; <b>twardy biały czubek bez otworu</b> = comedone.</p>
+
+<h2 id="zdjecia">🖼️ Zdjęcia z Reddita do porównania</h2>
+<p>Zbierałem wątki ludzi z niemal identycznym scenariuszem („wycisnąłem, został twardy syf, nic nie wychodzi, skóra się łuszczy"). Kliknij kartę → oryginalny wątek (zdjęcia + komentarze). Opisy pod zdjęciami: co widać i co powiedzieli komentatorzy.</p>
+
+<div class="grid">
+  <div class="pcard">
+    <img src="https://i.redd.it/3i5hxmf3uee91.jpg" alt="2mm hard bumps after popping chest" loading="lazy">
+    <div class="body">
+      <div class="t">Twarde grudki 2 mm po wyciśnięciu 2 pryszczy (klatka)</div>
+      <div class="desc">"Wycisnąłem 2 pryszcze, po 1-2 dniach twarde grudki, rozmiar się nie zmienia, skórne, bez czubka, nic nie wychodzi" - niemal 1:1 Twój scenariusz. Komentarze: zapalne guzki podskórne, bakteria głęboko, ma nie robić nic + benzoyl peroxide, kontrola po 2 miesiącach.</div>
+      <a href="https://www.reddit.com/r/DermatologyQuestions/comments/warfg5/annoying_bumps_that_wont_go_away/" target="_blank">→ wątek r/DermatologyQuestions</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://i.redd.it/gdxwr15s4yn81.jpg" alt="hard nodule cystic acne cheek" loading="lazy">
+    <div class="body">
+      <div class="t">Twardy guzek bez „głowy" (policzek)</div>
+      <div class="desc">„Zaczyna twardo, przy wyciskaniu zero treści, czasem płyn — nie spłaszcza się". Komentarze: trądzik guzkowaty/cystic; radzą: nie ruszać, ciepłe kompresy, maści siarkowe/BP, ew. zastrzyk sterydowy u derma.</div>
+      <a href="https://www.reddit.com/r/acne/comments/tgaayz/not_sure_what_this_bump_is_it_starts_hard_when/" target="_blank">→ wątek r/acne</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://i.redd.it/ohg2whuhjwsb1.jpg" alt="keratin plug extracted" loading="lazy">
+    <div class="body">
+      <div class="t">Wyciągnięty „rdzeń" — czyli TEN syf, o który chodzi</div>
+      <div class="desc">Zdjęcie wyciągniętego czopa keratynowego (1–2 mm, żółtawo-biały, zwarty). Komentarze rozpoznają: „to jest keratin plug — martwe komórki + sebum + keratyna". Tak wygląda rdzeń, który u Ciebie został w skórze i którego nie da się wycisnąć.</div>
+      <a href="https://www.reddit.com/r/IndianSkincareAddicts/comments/172pk84/i_popped_a_pimple_on_my_cheek_and_this_came_out/" target="_blank">→ wątek r/IndianSkincareAddicts</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://i.imgur.com/Fj1EGNR.jpg" alt="hard painless bump after pimple" loading="lazy">
+    <div class="body">
+      <div class="t">„Pryszcz zamienił się w twardy bezbolesny bąbel" — klasyczny wątek</div>
+      <div class="desc">„Ponad miesiąc, BHA i benzoyl peroxide nie działają, wypukły bąbel bez głowy, nie da się wycisnąć". Komentarze: część osób — znikło po 3–4 miesiącach samo; część — siedzi latami; pomagały AHA/glikol regularnie stosowane.</div>
+      <a href="https://www.reddit.com/r/SkincareAddiction/comments/5t8d2e/acne_pimple_turned_into_hard_painless_bump_that/" target="_blank">→ wątek r/SkincareAddiction</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://i.redd.it/9ytxr95fyl3d1.jpeg" alt="spot that wont go away scab cycle" loading="lazy">
+    <div class="body">
+      <div class="t">Cykl: pryszcz → wyciskanie → strupek → łuszczenie (udo)</div>
+      <div class="desc">„Zaczęło jak ukąszenie/pryszcz, wycisnąłem, zrobił się strup, skóra ciągle się łuszczy, nic nie wychodzi" — dokładnie Twój pattern łuszczenia. Uwaga: w tym wątku zmiana wyglądała „angry" — komentatorzy odesłali do derma (rozeznaniu podlega dermatofibroma i inne).</div>
+      <a href="https://www.reddit.com/r/DermatologyQuestions/comments/1d4azn1/spotbump_that_wont_go_away/" target="_blank">→ wątek r/DermatologyQuestions</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://b.thumbs.redditmedia.com/nQdiDX8oh--fDrbwn7t5SPD5FoVp4Z79lgtYCmQ49bU.jpg" alt="epidermoid cyst aftermath" loading="lazy" onerror="this.outerHTML='<div style=\'height:210px;display:flex;align-items:center;justify-content:center;color:#9aa3b2;font-size:13px\'>🖼️ Zdjęcie w wątku — kliknij ↓</div>'">
+    <div class="body">
+      <div class="t">Po pęknięciu torbieli epidermoidalnej — jak wygląda zawartość</div>
+      <div class="desc">r/popping: rezultat pęknięcia torbieli — keratynowa, serowata masa (u jednego z komentatorów torbiel „wycięta punchem 2× i znowu wróciła" — bo torebka została). To jest ta „torbielowa" końcówka spectrum.</div>
+      <a href="https://www.reddit.com/r/popping/comments/1czaly5/aftermath_of_epidermoid_cyst_popping/" target="_blank">→ wątek r/popping</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://b.thumbs.redditmedia.com/jZQ62Vi1W0HkSzrrcBHqBmUbZjw4WgaxxYzddbVUhtA.jpg" alt="large cyst face urgent" loading="lazy">
+    <div class="body">
+      <div class="t">Kontrast: kiedy NIE czekać — duży stan zapalny w strefie T</div>
+      <div class="desc">„2 tygodnie, rośnie, nie widzę otworu, czuć przy ruchu brwi" — 864↑ „To jest cyst. Idź do lekarza". Zgrzyt: strefa T = ryzyko przy infekcji; rada: ciepłe kompresy, nie wyciskać, drenaż u lekarza.</div>
+      <a href="https://www.reddit.com/r/Skincare_Addiction/comments/10783u6/ive_had_this_for_like_2_weeks_now_and_it_had_went/" target="_blank">→ wątek r/Skincare_Addiction</a>
+    </div>
+  </div>
+  <div class="pcard">
+    <img src="https://b.thumbs.redditmedia.com/FcNlWvvEd5Rat0gCq8KKTf37DyIVpvdIFbstgJmMoiI.jpg" alt="nose bump scab cycle red flag" loading="lazy">
+    <div class="body">
+      <div class="t">🚩 Czerwona flaga: grudka z cyklem strupowym (nos)</div>
+      <div class="desc">„Kilka miesięcy, drapię → krwawi bez końca → wraca strup, nic nie wychodzi". Komentarze: (bez diagnozy) wzorzec „łuszczy się + krwawi + wraca" = pokazać dermatologowi i rozważyć biopsję. Nie panikuj — to jeden z wielu możliwych przypadków — ale ten wzorzec NIE wolno ignorować latami.</div>
+      <a href="https://www.reddit.com/r/DermatologyQuestions/comments/1ij9acr/what_is_this_on_my_nose_it_wont_go_away/" target="_blank">→ wątek r/DermatologyQuestions</a>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+<h3>Bonus — „pryszcz wraca w to samo miejsce"</h3>
+<p>Jeśli któryś z Twoich 2–3 miejsc to cykl „pojawia się → wyciskam → znika na tydzień → wraca w ten sam punkt", zobacz wątek 47-letniej kobiety: <a href="https://www.reddit.com/r/30PlusSkinCare/comments/1p5bx0v/this_pimple_keeps_coming_back/" target="_blank">r/30PlusSkinCare „This pimple keeps coming back"</a>. Najwyżej oceniony komentarz (1392↑): „u mnie tak samo — okazało się rakiem podstawnokomórkowym, sprawdź u derma" + drugi (787↑): „wracanie w dokładnie to samo miejsce to zły znak, pokaż komuś". Przy wracaniu w tym samym punkcie — dermatolog, bez szaleń, ale bez zwłoki.</p>
+</div>
+
+<h2 id="dom">🏠 Co możesz zrobić sam (bezpieczne)</h2>
+<div class="card">
+<ul>
+<li><b>Przestań wyciskać i zdrapywać łuskę.</b> Serio — to jest mechanizm podtrzymujący: wyciskanie → mikrouraz → strupek/rogowacenie → łuszczenie → znowu wyciskanie. W każdym wątku ludzie piszą to samo: „jak przestałem ruszać, w końcu się goiło".</li>
+<li><b>Znajdź 10 minut i obejrzyj w dobrym świetle + zdjęcie makro telefonem.</b> Szukasz: (a) ciemnego punkcika na środku → torbiel, (b) białawego czubka/czopu → comedone, (c) nic, tylko twarda skórna grudka → blizna/grudka włóknista.</li>
+<li><b>Kwas salicylowy (BHA) 2%</b> — punktowo 1–2×/dzień na comedone (rozpuszcza keratynę, wnika w tłuszcz). Efekt po 4–8 tygodniach, nie po 2 dniach.</li>
+<li><b>Adapalen 0,1%</b> (Differin) — retinoid, najskuteczniejszy OTC/Rx na zaskórniki; wieczorem na punkty. W Szwecji na receptę — czytaj: 1177/vårdcentral albo zapytaj w apotek co mają bez recepty (salicylsyra, nadtlenek benzoilu 2,5–5%).</li>
+<li><b>Ciepły kompres 10–15 min/dzień</b> — tylko jeśli okolica jest tkliwa/zapalna (przyspiesza dojrzewanie ew. stanu zapalnego). Przy czystym comedone/torbieli — neutralne.</li>
+<li><b>Plastry hydrokoloidowe</b> — jeśli masz skłonność do drapania nocą: fizyczna osłona + absorpcja wydzieliny. Na zamkniętą grudkę nic „nie wyciągną" (potwierdzone w wątkach), ale chronią przed cyklem pick→scab.</li>
+<li><b>Czego NIE robić:</b> nie rozdrapywać łuski na siłę, nie wkłuwać igłą głęboko, nie smarować w kółko „syfo” maścią bez efektu — po 8 tygodniach bez zmiany ma sens dopiero zabieg, nie kolejna maść.</li>
+</ul>
+</div>
+
+<h2 id="derm">🩺 Co zrobi dermatolog (gdybyś poszedł)</h2>
+<div class="card">
+<ul>
+<li><b>Comedone:</b> ekstrakcja (komedoekstrakcja/igła+łyczek) — 5–15 min, natychmiastowy efekt. Przewlekłe/macrocomedone: elektrokauteryzacja/krioterapia.</li>
+<li><b>Torbiel epidermoidalna:</b> wycięcie z całą torebką (jeśli niezapalna) — jedyna metoda „na zawsze". Wyciśnięta/nacięta bez torebki = wraca. Jeśli akurat zapalna — najpierw uspokojenie (czasem zastrzyk sterydowy), potem wycięcie.</li>
+<li><b>Grudka bliznowata:</b> zastrzyk kortykosteroidu (kenalog) spłaszcza w 1–2 wizyty; opcjonalnie laser/silicon żel.</li>
+<li>W Szwecji: start = vårdcentral (1177.se) → remiss do dermatologa; prywatnie bez remisji ~1500-2500 SEK i szybciej.</li>
+</ul>
+</div>
+
+<h2 id="flagi">🚩 Czerwone flagi — kiedy do lekarza szybciej niż „kiedyś"</h2>
+<div class="flag">
+<ul>
+<li>Grudka <b>rośnie</b>, mimo że nic nie robisz.</li>
+<li><b>Krwawi bez powodu</b> albo cykl „strup → łuszczenie → strup" w tym samym miejscu trwa <b>&gt;6–8 tygodni</b> i nie goi się do końca.</li>
+<li>Wraca <b>przy identycznym punkcie</b> wielokrotnie.</li>
+<li>Boli, jest ciepła, czerwona, pulsuje (stan zapalny/ropień — drenaż, antybiotyk).</li>
+<li>Pojawia się gorączka przy zmianie skórnej — meldunek tego samego dnia.</li>
+</ul>
+To nie po to, żeby Cię straszyć (po urazie pryszczem u młodej osoby niemal zawsze jest coś łagodnego), ale bo dokładnie te wzorce na Reddicie kończyły się poleceniem „pokaż dermatologowi / biopsja" — i czasem miały to głębsze podłoże (BCC/SCC zmiany wyglądają banalnie miesiącami).</div>
+
+<h2 id="pytania">❓ Doprecyzujmy (2 min odpowiedzi = zawężę do 1 diagnozy)</h2>
+<div class="q">
+<ol>
+<li><b>Gdzie</b> to siedzi (twarz? policzek/skroni? klatka? plecy)?</li>
+<li><b>Rozmiar</b> — mniej więcej ile mm?</li>
+<li>Czy na środku widać <b>ciemny punkcik/otworek</b>?</li>
+<li>Jaki <b>kolor</b> — biało-żółty, skórny, czerwono-fioletowy?</li>
+<li>Jak <b>długo</b> już to masz (tygodnie/miesiące)?</li>
+<li>Co to było na starcie — zwykły pryszcz z treścią, czy „ślepy" twardy?</li>
+<li>Co dokładnie za maść „syfo" stosowałeś (nazwa)?</li>
+</ol>
+Możesz też rzucić <b>zdjęcie makro</b> tutaj — opiszę, co widzę, i przygotuję do tego plan.</div>
+
+<h2 id="zrodla">📚 Źródła i pokrycie</h2>
+<table class="cov">
+<tr><th>Źródło</th><th>Status</th><th>Co z niego</th></tr>
+<tr><td>DermNet NZ — Epidermoid cyst</td><td class="ok">✅ COVERED</td><td>definicja, punctum, nawroty po niepełnym wycięciu, różnicowanie</td></tr>
+<tr><td>DermNet NZ — Comedonal acne</td><td class="ok">✅ COVERED</td><td>zaskórniki zamknięte/macrocomedones, <b>„pęknięcie mieszka przez wyciskanie" jako przyczyna</b>, leczenie topowe</td></tr>
+<tr><td>Mayo Clinic — Epidermoid cysts</td><td class="ok">✅ COVERED</td><td>„powstają przez podrażnienie/uraz mieszka", objawy, kiedy do lekarza</td></tr>
+<tr><td>DermNet NZ — Dermatofibroma</td><td class="ok">✅ COVERED</td><td>dimple sign, po urazie</td></tr>
+<tr><td>DermNet NZ — Sebaceous hyperplasia</td><td class="ok">✅ COVERED</td><td>żółte grudki z dołeczkiem, wiek 40+</td></tr>
+<tr><td>Reddit — 12 wątków (r/DermatologyQuestions, r/acne, r/SkincareAddiction, r/popping, r/30PlusSkinCare, r/IndianSkincareAddicts)</td><td class="ok">✅ COVERED</td><td>zdjęcia do porównania + doświadczenia/komentarze (API: pullpush)</td></tr>
+<tr><td>NCBI StatPearls (epidermal inclusion cyst)</td><td class="bad">❌ reCAPTCHA</td><td>niepotrzebne — DermNet cytuje to samo źródło; 2 szczeble wypróbowane</td></tr>
+<tr><td>Verywell Health — „big pimple that won't go away"</td><td class="bad">❌ 402 (bot-wall)</td><td>pomijalne vs. DermNet/Mayo; nie wpływa na wnioski</td></tr>
+</table>
+<p class="meta"><b>Metodologia:</b> 2 języki (PL/EN), 3 silniki (DDG web → captcha; Bing RSS → śmieci; Mojeek → 403 → eskalacja do Chrome/DDG w przeglądarce = skuteczne), Reddit przez JSON/pullpush API (bezpośredni dostęp = login wall). Zdjęcia zweryfikowane HTTP 200 + opisane przez model wizyjny (co widać na każdym). Wszystkie wątki klikane i czytane, nie tylko tytuły.</p>
+
+<footer>
+  <p><b>Pełne linki źródłowe:</b></p>
+  <p>
+    <a href="https://dermnetnz.org/topics/epidermoid-cyst" target="_blank">dermnetnz.org/topics/epidermoid-cyst</a> ·
+    <a href="https://dermnetnz.org/topics/comedonal-acne" target="_blank">dermnetnz.org/topics/comedonal-acne</a> ·
+    <a href="https://dermnetnz.org/topics/dermatofibroma" target="_blank">dermnetnz.org/topics/dermatofibroma</a> ·
+    <a href="https://dermnetnz.org/topics/sebaceous-hyperplasia" target="_blank">dermnetnz.org/topics/sebaceous-hyperplasia</a> ·
+    <a href="https://www.mayoclinic.org/diseases-conditions/epidermoid-cysts/symptoms-causes/syc-20352701" target="_blank">mayoclinic.org — epidermoid cysts</a>
+  </p>
+  <p>Wygenerował Andrzej 🤖 · 2026-09-30 · wcześniejsze wersje: brak (v1)</p>
+</footer>
+</div>
+<a href="#" id="totop" aria-label="Do góry">↑</a>
+</body>
+</html>

@@ -39,6 +39,25 @@ a:hover{text-decoration:underline}
 .okbox{background:#152418;border:1px solid #2b5c34;border-radius:10px;padding:14px 16px;margin:10px 0}
 footer{margin-top:40px;color:var(--mut);font-size:12px;border-top:1px solid #2a3040;padding-top:12px}
 @media(max-width:720px){body{padding:10px}table{font-size:12px}td,th{padding:5px 6px}}
+
+#cards{display:none}
+@media(max-width:760px){
+ #t{display:none}
+ #cards{display:grid;gap:10px}
+ .pcard{background:var(--card);border:1px solid #262c3a;border-radius:12px;padding:12px}
+ .pcard.okcard{border-color:#2b5c34}
+ .pc-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+ .pc-top a{color:var(--txt);font-weight:700;text-decoration:none;font-size:14.5px;line-height:1.35}
+ .pc-badge{white-space:nowrap;font-size:12px;color:var(--ok);font-weight:700}
+ .pcard:not(.okcard) .pc-badge{color:var(--mut)}
+ .pc-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
+ .chip{background:var(--card2);border-radius:14px;padding:3px 10px;font-size:12.5px}
+ .chip-p{color:var(--ok);font-weight:700}
+ .chip-v{color:var(--acc2);font-weight:600}
+ .pc-meta{font-size:12px;color:var(--mut)}
+ .pc-x{margin-top:6px}
+ th{position:static}
+}
 </style>
 </head>
 <body><div class="wrap">
@@ -97,6 +116,7 @@ footer{margin-top:40px;color:var(--mut);font-size:12px;border-top:1px solid #2a3
 <table id="t"><thead><tr>
 <th data-k="ok">⚡65W</th><th data-k="n">Model</th><th data-k="s">Sklep</th><th data-k="m">🇸🇪/🇵🇱</th><th data-k="mah" data-n=1>mAh</th><th data-k="w" data-n=1>W out</th><th data-k="c">Cena</th><th data-k="sek" data-n=1>≈SEK</th><th data-k="krpm" data-n=1>kr/1000mAh</th><th data-k="r">Ocena/opinie</th><th>Notka</th>
 </tr></thead><tbody></tbody></table>
+<div id="cards"></div>
 <p class="small">≈SEK: PLN×2,58 (NBP 25.09) · USED = ceny ofertowe, negocjowalne · kliknij nagłówek = sortuj (ponownie = odwróć) · „⚡65W" = zasili lutownicę PD 65W (20V/3,25A na porcie)</p>
 <style>
 .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
@@ -121,6 +141,7 @@ function render(){
  const col={'ok':'ok','n':'n','s':'s','m':'m','mah':'mah','w':'w','c':'c','sek':'sek','krpm':'krpm','r':'r'}[sortK];
  rows.sort((a,b)=>{const x=a[col],y=b[col];const nx=parseFloat(x),ny=parseFloat(y);if(!isNaN(nx)&&!isNaN(ny))return(nx-ny)*sortD;return String(x).localeCompare(String(y),'pl')*sortD});
  document.querySelector('#t tbody').innerHTML=rows.map(r=>`<tr class="${r.ok==='✅'?'okrow':'norow'}"><td>${r.ok}</td><td><b>${r.u?`<a href="${r.u}" target="_blank" rel="noopener">${r.n} 🔗</a>`:r.n}</b></td><td>${r.s}</td><td>${r.m}</td><td class="num">${r.mah}</td><td class="num">${r.w}</td><td class="num">${r.c}</td><td class="num">${r.sek}</td><td class="num"><b>${r.krpm}</b></td><td>${r.r}</td><td class="small">${r.x}</td></tr>`).join('')||'<tr><td colspan="11" style="text-align:center;color:var(--mut)">Brak wyników — poluzuj filtry ↺</td></tr>';
+document.getElementById('cards').innerHTML=rows.length?rows.map(r=>`<div class="pcard ${r.ok==='✅'?'okcard':''}"><div class="pc-top"><a href="${r.u||'#'}" target="_blank" rel="noopener">${r.n} 🔗</a><span class="pc-badge">${r.ok==='✅'?'⚡65W':'—'}</span></div><div class="pc-chips"><span class="chip">${r.m} ${r.mah} mAh</span><span class="chip">${r.w}W</span><span class="chip chip-p">${r.c}</span><span class="chip">≈${r.sek} kr</span><span class="chip chip-v">${r.krpm} kr/1k mAh</span></div><div class="pc-meta">${r.s}${r.r&&r.r!=='—'?' · '+r.r:''}</div>${r.x?`<div class="small pc-x">${r.x}</div>`:''}</div>`).join(''):'<div class="pcard" style="text-align:center;color:var(--mut)">Brak wyników — poluzuj filtry ↺</div>';
  document.getElementById('cnt').textContent=rows.length+' / '+DATA.length+' produktów';
 }
 function resetF(){['fq','fmah','fw','fsek'].forEach(i=>document.getElementById(i).value='');document.getElementById('fm').value='';document.getElementById('fo').value='';render()}

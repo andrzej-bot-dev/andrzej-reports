@@ -149,7 +149,7 @@ const DATA=[{"n": "Baseus Blade2 65W", "s": "Proshop", "m": "SE", "mah": 12000, 
 let sortK='krpm',sortD=1;
 function krpm(d){return d.mah>0?d.sek/(d.mah/1000):99999}
 function fmt(d){return {
- ok:d.ok?'✅':'—',n:d.n,s:d.s,m:d.m=='SE'?'🇸🇪':(d.m=='PL'?'🇵🇱':'🔁'),mah:d.mah||'?',w:d.w||'?',c:d.c,sek:d.sek,krpm:krpm(d)<999?krpm(d).toFixed(1):'?',r:d.r||'—',x:d.x||''}}
+ ok:d.ok?'✅':'—',n:d.n,s:d.s,m:d.m=='SE'?'🇸🇪':(d.m=='PL'?'🇵🇱':'🔁'),mah:d.mah||'?',w:d.w||'?',c:d.c,sek:d.sek,krpm:krpm(d)<999?krpm(d).toFixed(1):'?',r:d.r||'—',x:d.x||'',u:d.u||''}}
 function render(){
  const q=(document.getElementById('fq').value||'').toLowerCase(),m=document.getElementById('fm').value,o=document.getElementById('fo').value,
  mah=+document.getElementById('fmah').value||0,w=+document.getElementById('fw').value||0,sek=+document.getElementById('fsek').value||1e9;

@@ -58,6 +58,14 @@ footer{margin-top:40px;color:var(--mut);font-size:12px;border-top:1px solid #2a3
  .pc-x{margin-top:6px}
  th{position:static}
 }
+
+#msort{display:none}
+@media(max-width:760px){
+ #msort{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px}
+ #msort button{background:var(--card2);border:1px solid #2a3242;color:var(--txt);border-radius:16px;padding:5px 12px;font-size:12.5px;cursor:pointer}
+ #msort button.on{border-color:var(--acc2);color:var(--acc2);font-weight:700}
+ .ms-l{font-size:12px;color:var(--mut)}
+}
 </style>
 </head>
 <body><div class="wrap">
@@ -113,6 +121,14 @@ footer{margin-top:40px;color:var(--mut);font-size:12px;border-top:1px solid #2a3
   <button onclick="resetF()" class="rst">↺ Reset</button>
   <span id="cnt" class="small"></span>
 </div>
+<div id="msort">
+  <span class="ms-l">↕ sortuj:</span>
+  <button data-k="krpm">kr/1k mAh</button>
+  <button data-k="sek">≈SEK</button>
+  <button data-k="mah">mAh</button>
+  <button data-k="w">W out</button>
+  <button data-k="n">nazwa</button>
+</div>
 <table id="t"><thead><tr>
 <th data-k="ok">⚡65W</th><th data-k="n">Model</th><th data-k="s">Sklep</th><th data-k="m">🇸🇪/🇵🇱</th><th data-k="mah" data-n=1>mAh</th><th data-k="w" data-n=1>W out</th><th data-k="c">Cena</th><th data-k="sek" data-n=1>≈SEK</th><th data-k="krpm" data-n=1>kr/1000mAh</th><th data-k="r">Ocena/opinie</th><th>Notka</th>
 </tr></thead><tbody></tbody></table>
@@ -143,8 +159,12 @@ function render(){
  document.querySelector('#t tbody').innerHTML=rows.map(r=>`<tr class="${r.ok==='✅'?'okrow':'norow'}"><td>${r.ok}</td><td><b>${r.u?`<a href="${r.u}" target="_blank" rel="noopener">${r.n} 🔗</a>`:r.n}</b></td><td>${r.s}</td><td>${r.m}</td><td class="num">${r.mah}</td><td class="num">${r.w}</td><td class="num">${r.c}</td><td class="num">${r.sek}</td><td class="num"><b>${r.krpm}</b></td><td>${r.r}</td><td class="small">${r.x}</td></tr>`).join('')||'<tr><td colspan="11" style="text-align:center;color:var(--mut)">Brak wyników — poluzuj filtry ↺</td></tr>';
 document.getElementById('cards').innerHTML=rows.length?rows.map(r=>`<div class="pcard ${r.ok==='✅'?'okcard':''}"><div class="pc-top"><a href="${r.u||'#'}" target="_blank" rel="noopener">${r.n} 🔗</a><span class="pc-badge">${r.ok==='✅'?'⚡65W':'—'}</span></div><div class="pc-chips"><span class="chip">${r.m} ${r.mah} mAh</span><span class="chip">${r.w}W</span><span class="chip chip-p">${r.c}</span><span class="chip">≈${r.sek} kr</span><span class="chip chip-v">${r.krpm} kr/1k mAh</span></div><div class="pc-meta">${r.s}${r.r&&r.r!=='—'?' · '+r.r:''}</div>${r.x?`<div class="small pc-x">${r.x}</div>`:''}</div>`).join(''):'<div class="pcard" style="text-align:center;color:var(--mut)">Brak wyników — poluzuj filtry ↺</div>';
  document.getElementById('cnt').textContent=rows.length+' / '+DATA.length+' produktów';
+paintMS();
 }
 function resetF(){['fq','fmah','fw','fsek'].forEach(i=>document.getElementById(i).value='');document.getElementById('fm').value='';document.getElementById('fo').value='';render()}
+document.querySelectorAll('#msort button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;sortD=(sortK===k)?-sortD:1;sortK=k;render()});
+const MS={krpm:'kr/1k mAh',sek:'≈SEK',mah:'mAh',w:'W out',n:'nazwa'};
+function paintMS(){document.querySelectorAll('#msort button').forEach(b=>{b.className=(b.dataset.k===sortK)?'on':'';b.textContent=MS[b.dataset.k]+(b.dataset.k===sortK?(sortD>0?' ▲':' ▼'):'')})}
 document.querySelectorAll('#t th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(!k)return;sortD=(sortK===k)?-sortD:1;sortK=k;document.querySelectorAll('#t th').forEach(x=>x.classList.remove('sorted'));th.classList.add('sorted');render()});
 render();
 </script>

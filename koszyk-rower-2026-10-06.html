@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koszyk przedni na e-bike (40 km/h) — research 2026-10-06</title>
+<style>
+:root{--bg:#0f1117;--card:#1a1d27;--card2:#20242f;--txt:#e8eaf0;--mut:#9aa0b0;--acc:#4ade80;--warn:#fbbf24;--bad:#f87171;--blue:#60a5fa;--brd:#2b3040}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;padding-bottom:80px}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1a2233,#141822);border-bottom:2px solid var(--acc);padding:28px 16px 20px}
+h1{font-size:1.7em;margin-bottom:6px}
+.meta{color:var(--mut);font-size:.9em}
+.badge{display:inline-block;background:#2d3a2d;color:var(--acc);border:1px solid var(--acc);border-radius:20px;padding:2px 12px;font-size:.8em;margin-right:6px}
+nav{position:sticky;top:0;background:rgba(15,17,23,.95);backdrop-filter:blur(6px);z-index:50;border-bottom:1px solid var(--brd);padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;max-height:60px;overflow-y:auto}
+nav a{color:var(--txt);text-decoration:none;background:var(--card2);border:1px solid var(--brd);border-radius:16px;padding:3px 12px;font-size:.85em}
+nav a:hover{border-color:var(--acc);color:var(--acc)}
+h2{font-size:1.35em;margin:28px 0 12px;border-left:4px solid var(--acc);padding-left:10px}
+h3{font-size:1.1em;margin:18px 0 8px;color:var(--blue)}
+p,li{margin:6px 0}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th{background:var(--card2);text-align:left;padding:8px;border-bottom:2px solid var(--brd);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--brd);vertical-align:top}
+tr:hover td{background:#1e2230}
+.ok{color:var(--acc);font-weight:600}.warn{color:var(--warn);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.imgrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:10px 0}
+.imgcard{background:var(--card2);border:1px solid var(--brd);border-radius:10px;overflow:hidden}
+.imgcard img{width:100%;height:200px;object-fit:cover;display:block}
+.imgcard .cap{padding:6px 8px;font-size:.78em;color:var(--mut)}
+.quote{border-left:3px solid var(--blue);padding:4px 12px;margin:8px 0;color:#cdd3e0;font-style:italic;background:#181c26;border-radius:0 8px 8px 0}
+.quote .src{display:block;font-size:.78em;color:var(--mut);font-style:normal}
+a{color:var(--blue)}
+.tag{display:inline-block;border-radius:4px;padding:1px 8px;font-size:.78em;font-weight:600}
+.tag-ok{background:#14321f;color:var(--acc)}.tag-w{background:#3a3114;color:var(--warn)}.tag-no{background:#3a1a1a;color:var(--bad)}
+.totop{position:fixed;right:18px;bottom:18px;background:var(--acc);color:#000;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:60}
+.price{color:var(--acc);font-weight:700;white-space:nowrap}
+.small{font-size:.85em;color:var(--mut)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.imgrow{grid-template-columns:repeat(2,1fr)}h1{font-size:1.3em}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>🚲 Koszyk przedni na e-bike (jazda do 40 km/h)</h1>
+<div class="meta">
+<span class="badge">🛒 Product research</span><span class="badge">2026-10-06</span><br>
+Źródła: <b>26</b> AliExpress · <b>18</b> Amazon.se · <b>30</b> DIY 3D print · <b>37</b> fora/Reddit/YouTube/artykuły · <b>28</b> zdjęć vision-pass · 100+ fraz wyszukiwania (EN/PL/SV/CN)<br>
+Fokus: wibracje, wyboje, <b>uniwersalne mocowania</b>, budżet ≤200 kr (flex ≤400-700 kr)
+</div>
+</div></header>
+
+<nav>
+<a href="#tldr">TL;DR</a><a href="#co-odpada">Co odpada</a><a href="#picks">TOP polecane</a><a href="#ali">AliExpress</a><a href="#amazon">Amazon.se</a><a href="#diy">DIY 3D print</a><a href="#mounting">Poradnik mocowania</a><a href="#youtube">YouTube/fora</a><a href="#coverage">Coverage</a>
+</nav>
+
+<div class="wrap">
+
+<div class="card" id="tldr">
+<h2 style="margin-top:0;border:none;padding:0">⚡ TL;DR</h2>
+<p><b>Najważniejszy wniosek z całego researchu:</b> przy 40 km/h i wybojach <b>NIE kupuj koszyka na kierownicę z quick-release</b>. Recenzje wprost mówią "mounting brackets are a joke", "endeble y puede llegar a desarmarse", listing SGZIOO wprost: <i>"not suitable for e-bikes"</i>. Na wibracjach pęka plastik, luzują się obezmy, a obluzowany rack potrafi <b>zablokować przednie koło → lot przez kierownicę</b> (opisane na r/bikepacking po awarii Surly 8-pack rack).</p>
+<p><b>Jedyne sensowne rozwiązanie w tym budżecie: kosz/bagażnik mocowany do WIDEŁEK (fork crown + obejmy na golenie), stal lub aluminium 6061.</b></p>
+<h3>🥇 TOP 3 kupne</h3>
+<table>
+<tr><th>#</th><th>Produkt</th><th>Cena</th><th>Dlaczego</th></tr>
+<tr><td>1</td><td><a href="https://www.amazon.se/dp/B0F47ZBTPY">CXWXC kosz + przedni bagażnik (fork-mount, alu 6061-T6, 10 kg)</a></td><td class="price">720 kr</td><td>4,5★/77 op. — "Äußerst stabil", montaż na fatbike, najmocniejszy social proof na Amazon</td></tr>
+<tr><td>2</td><td><a href="https://www.aliexpress.com/item/1005009940267639.html">Stable Front Bike Rack stalowy (AliExpress, fork-mount, zestaw kompletny)</a></td><td class="price">456 kr</td><td>4,7★/23 — "fits very securely", działa na amortyzowanej goleni 29". Plus: dolicz dowolny kosz zip-ties 50-140 kr</td></tr>
+<tr><td>3</td><td><a href="https://www.aliexpress.com/item/1005012235314213.html">SucceBuy stalowy kosz przedni (20 lbs, non-foldable, wysyłka z CZ)</a></td><td class="price">225 kr</td><td>Najtaniej w profilu "stal+sztywno", CE — ale <span class="warn">0 opinii = loteria</span></td></tr>
+</table>
+<h3>🥈 Budżet absolutny (~150-200 kr)</h3>
+<p>Szczerze: <b>nic ≤200 kr nie jest dowiedziono-trwałe przy 40 km/h</b> — wszystko ≤200 kr to handlebar quick-release lub plastik. Najrozsądniej: alu kosz uniwersalny <a href="https://www.aliexpress.com/item/1005008830747061.html">"Easy Install" 140 kr</a> (recenzje: solidny kosz, ale mocowanie wymaga mocnego dokręcenia) dokręcony max siłą + zabezpieczony linką, albo SucceBuy 225 kr.</p>
+<h3>🖨️ DIY 3D print — da się, ale...</h3>
+<p>PLA odpada (kruche + mięknie w słońcu), PETG z <b>4-6 ścianami i 30-50% infill</b> działa do ~30 km/h, przy 40 km/h realnie: <b>nylon/PA-CF lub hybryda</b> — wydrukowany adapter + metalowy kosz. Najlepsze gotowe projekty: <a href="https://makerworld.com/en/models/1790798">B-RAIL container (PETG, 2.2k downl, 5.0★)</a>, <a href="https://www.printables.com/model/877219">cargo cage na widełki 64mm</a>, darmowy <a href="https://cults3d.com/en/3d-model/tool/e-bike-basket-adapter-plate-gepacktrager-korb-adapter">adapter kosza na bagażnik e-bike (Cults3D, FREE)</a>.</p>
+</div>
+
+<div class="card" id="co-odpada">
+<h2 style="margin-top:0">❌ Co ODPADA przy 40 km/h (z recenzji + forów + vision)</h2>
+<table>
+<tr><th>Typ</th><th>Dowód</th></tr>
+<tr><td><b>Plastikowe koszyki foldable / PC / PP</b> (WEST BIKING, SGZIOO, PC-with-lid)</td><td>REC MX: <i>"sólo para terrenos amables... en donde es endeble y puede llegar a desarmarse"</i>; listing SGZIOO: "not suitable for e-bikes"</td></tr>
+<tr><td><b>Quick-release na kierownicę</b></td><td>US recenzja: <i>"the mounting brackets are a joke"</i>; CyclingUK: <i>"most basket supports are utter rubbish"</i>; uchwyty na kierownicy też <b>niszczą kierownicę</b> tarciem</td></tr>
+<tr><td><b>Plastikowy klik-system (Relaxdays click)</b></td><td>Vision: plastikowy klik = słabe ogniwo, telepi się i może się wypiąć na wybojach</td></tr>
+<tr><td><b>Luźne paski Voile/rzepy</b></td><td>r/xbiking: <i>"it rattles a lot"</i> → pewne = zip-ties min. 6 pkt lub stalowe opaski z gumą</td></tr>
+<tr><td><b>Basil Portland</b></td><td>r/xbiking: powłoka schodzi "white powdery mess" po latach wilgoci → lepsze Pelago stainless / Soma Tanaka</td></tr>
+<tr><td><b>Obciążenie >~7-9 kg z przodu</b></td><td>r/xbiking (Wald): 10 lbs OK, 20 lbs swaying, ~18 kg "super sketchy" + wheel flop</td></tr>
+<tr><td><b>Uchwyty Wald P-clip na środku goleni</b></td><td>r/xbiking: "rickety" — lepiej platforma rack + kosz zip-ties</td></tr>
+</table>
+</div>
+
+<h2 id="picks">🏆 TOP polecane — szczegóły i zdjęcia</h2>
+<div class="grid">
+
+<div class="card">
+<h3>1. CXWXC Basket + Front Rack <span class="tag tag-ok">OK do e-bike</span></h3>
+<p class="price">kr 720,38 · 4,5★ (77 op.) · Amazon</p>
+<p>Aluminium 6061-T6, ładowność 10 kg, montaż: fork crown + regulowane ramiona 28-39 cm. Kosz w komplecie — zero kombinowania.</p>
+<div class="imgrow">
+<div class="imgcard"><img loading="lazy" src="https://m.media-amazon.com/images/I/41YuIHIZYdL._SL1500_.jpg" alt="CXWXC 1"><div class="cap">CXWXC — kosz z ramionami, fork crown</div></div>
+<div class="imgcard"><img loading="lazy" src="https://m.media-amazon.com/images/I/51ImO+NnimL._SL1500_.jpg" alt="CXWXC 2"><div class="cap">CXWXC — widok montażu</div></div>
+</div>
+<div class="quote">"Il metallo del cesto è di grande spessore ed estremamente solido" <span class="src">— recenzja 5★, Amazon</span></div>
+<div class="quote">"Je l'ai monté sur Fatbike sans soucis" <span class="src">— recenzja 5★, Amazon</span></div>
+<p class="small">⚠️ Producent: dokręcać śruby regularnie, przeciążenie pogarsza kierowanie. <a href="https://www.amazon.se/dp/B0F47ZBTPY">→ link</a></p>
+</div>
+
+<div class="card">
+<h3>2. Stable Front Bike Rack (stal, AliExpress) <span class="tag tag-ok">OK do e-bike</span></h3>
+<p class="price">kr 455,65 · 4,7★ (23 op.)</p>
+<p>Stalowy przedni bagażnik fork-crown + obejmy na golenie — kupujesz rack i do niego zip-ties-ujesz dowolny kosz (najtańszy sensowny: <a href="https://www.aliexpress.com/item/1005008830747061.html">alu "Easy Install" 140 kr</a> bez jego słabego mocowania, tylko sam kosz). Działa też na <b>amortyzowanej goleni 29"</b>.</p>
+<div class="imgrow">
+<div class="imgcard"><img loading="lazy" src="https://ae-pic-a1.aliexpress-media.com/kf/Sf076c7fd95164e9e9af2dfa4c0346049q.jpg" alt="rack 1"><div class="cap">Stable Front Rack — fork crown + obejmy</div></div>
+<div class="imgcard"><img loading="lazy" src="https://ae-pic-a1.aliexpress-media.com/kf/S70e6ae524c634a9b9e6dc7a8f5c99a9bk.jpg" alt="rack 2"><div class="cap">Boczne usztywnienia, grube rurki</div></div>
+</div>
+<div class="quote">"Very robust and strong. Fits very securely to the bike." <span class="src">— recenzja AU</span></div>
+<div class="quote">"Passt perfekt, trotz 29" und Federgabel. Hält echt super. Kaufempfehlung!" <span class="src">— recenzja AT</span></div>
+<p class="small">⚠️ Jedna recenzja 2★: przyszedł pogięty ("arrived bent") — sprawdź po dostawie. <a href="https://www.aliexpress.com/item/1005009940267639.html">→ link</a></p>
+</div>
+
+<div class="card">
+<h3>3. SucceBuy stalowy kosz przedni <span class="tag tag-w">brak opinii = loteria</span></h3>
+<p class="price">kr 225,35 · 0 opinii · AliExpress (wysyłka z Czech!)</p>
+<p>Solid steel, 0,85 kg, non-foldable ("prevents deformation... secure platform on uneven terrain"), CE. Najtańszy w profilu "stal+sztywno" i szybka wysyłka EU.</p>
+<div class="imgrow">
+<div class="imgcard"><img loading="lazy" src="https://ae-pic-a1.aliexpress-media.com/kf/S9e92ba31a042487684e9a6cc5c98728aD.jpg" alt="SucceBuy"><div class="cap">SucceBuy — konstrukcja rurowa</div></div>
+<div class="imgcard"><img loading="lazy" src="https://ae-pic-a1.aliexpress-media.com/kf/S14df47d8c1fe472ab3eba3cee41c3a4f4.jpg" alt="SucceBuy 2"><div class="cap">Zestaw: podpórki + śruby + siatka</div></div>
+</div>
+<p class="small">⚠️ Vision widział na zdjęciach też forMount-rack — zweryfikuj wariant na PDP przed zakupem. <a href="https://www.aliexpress.com/item/1005012235314213.html">→ link</a></p>
+</div>
+
+<div class="card">
+<h3>4. WLDOCA przedni bagażnik alu (15 kg) <span class="tag tag-w">uwaga na grube golenie</span></h3>
+<p class="price">kr 399,99 · 4,7★ (13) · Amazon</p>
+<p>Alu porteur rack 550 g, clamp 33-42 mm lub śruby. Solidny, ale recenzja 3★: dolna obezma <b>nie pasuje na grubsze amortyzowane golenie</b> — sprawdź średnicę swojej goleni.</p>
+<div class="imgrow">
+<div class="imgcard"><img loading="lazy" src="https://m.media-amazon.com/images/I/41saOF5m-HL._SL1500_.jpg" alt="WLDOCA"><div class="cap">WLDOCA — porteur rack</div></div>
+<div class="imgcard"><img loading="lazy" src="https://m.media-amazon.com/images/I/51fKgAxTdeL._SL1500_.jpg" alt="WLDOCA 2"><div class="cap">Uchwyty boczne chronią przed tarciem koła</div></div>
+</div>
+<p class="small"><a href="https://www.amazon.se/dp/B0CXSXWJZS">→ link</a></p>
+</div>
+
+<div class="card">
+<h3>5. B-RAIL Container (3D print, PETG) <span class="tag tag-w">max ~30 km/h</span></h3>
+<p class="price">FREE STL · MakerWorld · 2.2k downloadów, 5.0★ (84 oceny, 161 recenzji)</p>
+<p>Pojemnik cargo na rurę ramy — PETG, 4 ściany, 30% infill, Gen2 bezhardware'owy z latch. Najlepiej oceniany drukowany "koszyk-cargo" w researchu.</p>
+<div class="quote">"PETG, 0.2 mm, 4 walls, 30% infill — 161 recenzji, ocena 5.0" <span class="src">— MakerWorld</span></div>
+<p class="small"><a href="https://makerworld.com/en/models/1790798">→ link MakerWorld</a></p>
+</div>
+
+<div class="card">
+<h3>6. Adapter kosza na bagażnik e-bike (FREE) <span class="tag tag-ok">sensowna hybryda</span></h3>
+<p class="price">FREE · Cults3D</p>
+<p>Jeśli Twój e-bike ma tylny/przedni bagażnik: wydrukuj adapter i załóż zwykły metalowy kosz — metal robi robotę, druk tylko łączy. Wzorzec potwierdzony przez Printables "Lectric Basket Liner" (metalowa rama + drukowana wkładka = niskie ryzyko).</p>
+<p class="small"><a href="https://cults3d.com/en/3d-model/tool/e-bike-basket-adapter-plate-gepacktrager-korb-adapter">→ link Cults3D</a> · <a href="https://www.printables.com/model/806394">Lectric liner (Printables)</a></p>
+</div>
+</div>
+
+<h2 id="ali">🛒 AliExpress — pełne wyniki (26 produktów)</h2>
+<p class="small">Ceny SEK z sesji. Pełne dane z recenzjami: <code>memory/research/koszyk-rower-2026-10-06/raw/aliexpress.md</code></p>
+<table>
+<tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Mocowanie</th><th>Verdict</th></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005009940267639.html">Stable Front Bike Rack stal</a></td><td class="price">456 kr</td><td>4,7★/23</td><td>fork + golenie</td><td class="ok">✅ TOP</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012235314213.html">SucceBuy stal 20 lbs, z CZ</a></td><td class="price">225 kr</td><td>—</td><td>handlebar (non-fold)</td><td class="warn">⚠️ 0 opinii</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005008830747061.html">"Stainless" (de facto alu) uniwersalny</a></td><td class="price">140 kr</td><td>4,9★/7</td><td>handlebar</td><td class="warn">⚠️ sam kosz OK</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005013133582615.html">Żelazo QR "Large Black Iron"</a></td><td class="price">140 kr</td><td>—</td><td>handlebar QR</td><td class="warn">⚠️ 0 opinii</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012756035973.html">Alu fork-mount kosz (pet carrier)</a></td><td class="price">?</td><td>1,0★/1</td><td>fork mount</td><td class="bad">❌ 1★</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005011692940670.html">Quick Release metal large</a></td><td class="price">530 kr</td><td>4,5★/2</td><td>handlebar QR</td><td class="warn">⚠️ n=2</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005013246903797.html">Relaxdays mesh click</a></td><td class="price">493 kr</td><td>—</td><td>click QR</td><td class="bad">❌ plastikowy klik</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005008721745334.html">PC kosz z pokrywą "dla e-bike"</a></td><td class="price">221 kr</td><td>4,9★/144</td><td>handlebar</td><td class="bad">❌ "brackets are a joke"</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012691841709.html">WEST BIKING foldable PP</a></td><td class="price">393 kr</td><td>4,9★/69</td><td>handlebar fold</td><td class="bad">❌ "endeble"</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012010903990.html">Kolorowy removable</a></td><td class="price">88 kr</td><td>4,9★/46</td><td>handlebar</td><td class="bad">❌ plastik</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005007500683358.html">Najtańszy waterproof</a></td><td class="price">38 kr</td><td>4,7★/286</td><td>handlebar</td><td class="bad">❌ plastik</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005007298966857.html">Rattan bestseller (2000+)</a></td><td class="price">82 kr</td><td>4,7★</td><td>handlebar</td><td class="bad">❌ ozdobny</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005013190744978.html">Reinforced metal rack</a></td><td class="price">134 kr</td><td>—</td><td>metal</td><td class="warn">⚠️ 0 opinii</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005004617806765.html">Front rack 20" e-bike</a></td><td class="price">220 kr</td><td>—</td><td>front rack</td><td class="warn">⚠️ 0 opinii</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005009568434164.html">Wire dog carrier fr/rear</a></td><td class="price">130 kr</td><td>5,0★/2</td><td>hanging</td><td class="warn">⚠️ n=2</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005010760026775.html">Sturdy cargo rack premium</a></td><td class="price">873 kr</td><td>5,0★/1</td><td>metal rack</td><td class="warn">⚠️ n=1, drogo</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005008849415772.html">Iron net QR</a></td><td class="price">479 kr</td><td>5,0★/5</td><td>QR</td><td class="warn">⚠️ drogi</td></tr>
+</table>
+<p class="small">+9 kolejnych listingów niskiego priorytetu w destylatach (wszystkie handlebar/plastik/kids).</p>
+
+<h2 id="amazon">📦 Amazon.se — pełne wyniki</h2>
+<table>
+<tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Verdict</th></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0F47ZBTPY">CXWXC kosz+rack alu 6061</a></td><td class="price">720 kr</td><td>4,5★/77</td><td class="ok">✅ TOP</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0CXSXWJZS">WLDOCA rack alu 15 kg</a></td><td class="price">400 kr</td><td>4,7★/13</td><td class="warn">⚠️ grube golenie</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0D3FGZHLP">Retrospec Tote e-bike</a></td><td class="price">3 400 kr</td><td>4,0★/44</td><td class="bad">❌ pękające spawy, cena absurdalna</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0GC5RP4JX">SGZIOO foldable</a></td><td class="price">282 kr</td><td>4,6★/18</td><td class="bad">❌ "not suitable for e-bikes"</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0C32TXYNV">Foldable dog/cargo QR</a></td><td class="price">350 kr</td><td>4,3★</td><td class="bad">❌ handlebar QR</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B01DX3WRJ2">Cytec alu bottle basket</a></td><td class="price">47 kr</td><td>—</td><td class="warn">⚠️ dostępny za 6-7 mies.</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0HHRZFW7C">EfforPrac canvas QR</a></td><td class="price">68 kr</td><td>0 op.</td><td class="bad">❌ miękka torba</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B09ZL1SC1J">Avasta Willow rattan</a></td><td class="price">253 kr</td><td>4,6★/534</td><td class="bad">❌ rattan, kids</td></tr>
+</table>
+<p class="small">+ akcesoria montażowe 54-62 kr (korgstödfäste, remy) — przydatne do wzmocnienia istniejącego kosza. ROCKBROS na Amazon = tylko dzwonki/torby (nie koszyki!).</p>
+
+<h2 id="diy">🖨️ DIY 3D print — 30 projektów przejrzanych</h2>
+<div class="card">
+<h3>Materiał to NIE detal</h3>
+<table>
+<tr><th>Filament</th><th>Przy 40 km/h</th></tr>
+<tr><td>PLA</td><td class="bad">❌ kruche, miękną ~55-60°C w słońcu, pęka zmęczeniowo</td></tr>
+<tr><td>PETG (4-6 ścian, 30-50% infill)</td><td class="warn">⚠️ działa do ~30 km/h (autor carbon-PETG: "no failures")</td></tr>
+<tr><td>ASA/ABS</td><td class="warn">⚠️ lepsze na UV/upał, trudniejszy druk</td></tr>
+<tr><td>Nylon / PA-CF</td><td class="ok">✅ najlepsza udarność i zmęczenie — ale dla mocowań, nie kosza</td></tr>
+</table>
+<p><b>Najlepsza strategia DIY przy 40 km/h: hybryda</b> — metalowy kosz + wydrukowany adapter/uchwyt (albo druk na istniejące otwory widełek: cargo cage 64 mm).</p>
+<h3>Najciekawsze projekty</h3>
+<div class="imgrow">
+<div class="imgcard"><img loading="lazy" src="https://media.printables.com/media/prints/418962/images/3473984_f254fe9a-04a9-4ddf-953e-c6d273c5a18d/img_2883.jpg" alt="bikepacking rack"><div class="cap"><a href="https://www.printables.com/model/418962">Bikepacking front rack</a> — PETG 6 ścian, 40% grid, M5 śruby</div></div>
+<div class="imgcard"><img loading="lazy" src="https://media.printables.com/media/prints/286100/images/2524535_a0bae08b-d07d-4e4d-98a2-bb0fee2aae3a/img20220930194310.jpg" alt="cargo cage"><div class="cap"><a href="https://www.printables.com/model/286100">Cargo cage CF-PETG 50%</a> — "no failures so far"</div></div>
+<div class="imgcard"><img loading="lazy" src="https://media.printables.com/media/prints/806394/images/6239035_a686b72f-0c49-4b70-a021-5bf2959c30ec_40649dc4-0c49-4e7f-8e7b-29ea31757e3b/img_6846.jpg" alt="liner"><div class="cap"><a href="https://www.printables.com/model/806394">Lectric e-bike liner</a> — hybryda: metal rama + druk</div></div>
+</div>
+<p class="small">Więcej: <a href="https://www.printables.com/model/1387665">Universal e-bike handle mount (PETG, 599 dl)</a> · <a href="https://makerworld.com/en/models/1790798">B-RAIL (2.2k dl, 5.0★)</a> · <a href="https://cults3d.com/en/3d-model/tool/e-bike-basket-adapter-plate-gepacktrager-korb-adapter">e-bike adapter (FREE)</a> · pełna lista 30 projektów w destylacie.</p>
+</div>
+
+<h2 id="mounting">🔧 Poradnik mocowania (z forów + Reddit — 18 wątków)</h2>
+<div class="card">
+<ol>
+<li><b>Mocuj do widełek/ramy, NIE do kierownicy.</b> Kierownica: tarcie niszczy bar, kosz pęka bez ostrzeżenia (Evo Brooklyn), sterowanie "sluggish". <span class="quote">"Frame mounted racks/baskets are generally superior... it is more stable, because it is." — r/ebikes</span></li>
+<li><b>Kosz do racka: zip-ties min. 6 punktów</b> lub stalowe opaski (worm-drive hose clamps) z gumą między — albo kawał starej dętki jako izolacja anty-rattle.</li>
+<li><b>⚠️ FAILSAFE (najważniejsza lekcja researchu):</b> obluzowany fork-crown rack może wypaść i <b>zablokować przednie koło → lot przez kierownicę</b> (Surly 8-pack, 221 pkt na r/bikepacking). Rozwiązanie: <b>linka/strap od kosza do kierownicy</b> — "very cheap and effective insurance". Plus Loctite + kontrola śrub przed jazdą.</li>
+<li><b>Środek ciężkości nisko i blisko steru</b> — ciężar daleko od przodu = "floppy real quick". Limit ~5-7 kg komfortowo.</li>
+<li><b>Przenieś światło</b> na rack/kosz (mniej drgań lampy na kierownicy).</li>
+<li>Death wobble (speed wobble) przy obciążonym przodzie: nie przyspieszać, pochylić się do przodu (niższy środek ciężkości); headset Hellbender 70 jako upgrade.</li>
+<li>Wheel flop na parkingu: stabilizator przedniego koła + dwunożna podpórka.</li>
+</ol>
+</div>
+
+<h2 id="youtube">📺 YouTube / fora — co obejrzeć</h2>
+<div class="card">
+<ul>
+<li><a href="https://youtu.be/A1NgPFiBu_k">What's best: front or back basket? — Shifter</a> (porównanie balansu)</li>
+<li><a href="https://youtu.be/1wXdtYtl1IU">Przenoszenie: koszyki vs racki vs cargo — garys.projects</a></li>
+<li><a href="https://youtu.be/1AgxmEuAOII">Wald 137 review — Bicycle Network</a></li>
+<li><a href="https://youtu.be/wMtReaFo6PM">Quick Release Wald Basket hack — Path Less Pedaled</a></li>
+<li><a href="https://youtu.be/6LuB9v_BzEU">Jack the Bike Rack review</a> (dobry na amortyzowane widelce)</li>
+<li><a href="https://youtu.be/Ue_Tz7e0DmE">Aerodynamics przedniego bagażu — CYCLINGABOUT</a> (40 km/h = opór aero realnie czuć)</li>
+</ul>
+<p class="small">Fora: CyclingUK forum (phpBB) ✅ przejrzane; bikeforums.net ❌ 403; happyride.se ❌ login-wall; rowery.org.pl ❌ brak publicznego searcha. TikTok ❌ captcha wall (2 metody) — notowany jako FAILED w coverage.</p>
+</div>
+
+<h2 id="coverage">📋 Coverage table</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Szczeble</th><th>Wynik</th></tr>
+<tr><td>AliExpress (skrypt czysty HTTP)</td><td class="ok">✅ COVERED</td><td>1</td><td>26 produktów, recenzje 6 top</td></tr>
+<tr><td>Amazon.se (Lightpanda CDP + curl SSR)</td><td class="ok">✅ COVERED</td><td>2</td><td>18 produktów + 6 akcesoriów</td></tr>
+<tr><td>Printables (GraphQL API)</td><td class="ok">✅ COVERED</td><td>1</td><td>13 projektów pełnymi danymi</td></tr>
+<tr><td>Thingiverse / MakerWorld / Cults3D (DOM)</td><td class="ok">✅ COVERED</td><td>2</td><td>17 projektów</td></tr>
+<tr><td>Reddit (browser fetch z origin)</td><td class="ok">✅ COVERED</td><td>3 (curl 403 → redlib wall → browser)</td><td>18 wątków</td></tr>
+<tr><td>YouTube (curl + ytInitialData)</td><td class="ok">✅ COVERED</td><td>1</td><td>40+ filmów, 12 w raporcie</td></tr>
+<tr><td>CyclingUK forum</td><td class="ok">✅ COVERED</td><td>1</td><td>3 wątki kluczowe</td></tr>
+<tr><td>TikTok</td><td class="bad">❌ FAILED</td><td>2 (search page captcha, /api bez podpisu)</td><td>captcha wall — pokryte YouTube/Redditem</td></tr>
+<tr><td>bikeforums.net / happyride.se / rowery.org.pl / wirecutter / road.cc</td><td class="bad">❌ FAILED</td><td>2-3 (403 / login / 404)</td><td>alternatywy pokryte (CyclingUK, Reddit)</td></tr>
+</table>
+
+<div class="card">
+<h2 style="margin-top:0;border:none;padding:0">🧾 Metodologia</h2>
+<p class="small">4 scraper-subagenty (DeepSeek V4.1 Flash) + vision pass (28 zdjęć, 19 produktów ocenionych OK/Wątpliwy/NIE) + synteza. Frazy: 24+ na AliExpress, 10 na Amazon.se, ~10 na platformach 3D, ~20 na Reddit/YouTube/forach (EN/PL/SV/CN). Wszystkie destylaty: <code>memory/research/koszyk-rower-2026-10-06/raw/</code>. Ceny live z 2026-10-06 — mogą się zmienić. ⚠️ Uwaga bezpieczeństwa: przy 40 km/h każdy przedni kosz zmienia zachowanie roweru — jeźdź testowo z lekkim ładunkiem, linka-antypivot obowiązkowa.</p>
+</div>
+
+</div>
+<a href="#" class="totop" title="Do góry">↑</a>
+</body>
+</html>

@@ -77,7 +77,7 @@
 <tr><th>Źródło</th><th>Status</th><th>Metody (eskalacja)</th><th>Uwagi</th></tr>
 <tr><td>AliExpress (2 agenty: 28BYJ + NEMA)</td><td><span class="pill pill-ok">✅ COVERED</span></td><td>skrypt SSR curl → Bright Data (country=se → SEK)</td><td>skrypt dostał antybot <code>_____tmd_____/punish</code> po 1. zapytaniu; PDP przez BD</td></tr>
 <tr><td>Amazon.se</td><td><span class="pill pill-ok">✅ COVERED</span></td><td>lightpanda CDP (210 listingów, dedupe po ASIN)</td><td><code>amazon_search_url.mjs</code> zwrócił pusto → fallback HTML+parser</td></tr>
-<tr><td>Allegro.pl</td><td><span class="pill pill-no">❌ FAILED</span></td><td>(1) curl = DataDome 403 [znane od 09.2026], (2) oficjalne API martwe [GH allegro-api #13855], (3) Bright Data = <b>saldo 0</b></td><td><b>Decyzja po stronie Dawida</b>: doładowanie BD ($5-10) albo odpuszczenie</td></tr>
+<tr><td>Allegro.pl</td><td><span class="pill pill-no">❌ FAILED</span></td><td>(1) curl = DataDome 403 [znane od 09.2026], (2) oficjalne API martwe [GH allegro-api #13855], (3) Bright Data = <b>saldo 0</b></td><td>**Decyzja Dawida (2026-10-12): odpuszczamy** — pokrycie z 12 innych źródeł wystarczające; ewentualne doładowanie BD otworzy w przyszłości</td></tr>
 <tr><td>Botland (PL)</td><td><span class="pill pill-ok">✅ COVERED</span></td><td>XHR JSON search API (nagłówek <code>X-Requested-With</code>)</td><td>najbogatszy PL asortyment</td></tr>
 <tr><td>Kamami (PL)</td><td><span class="pill pill-ok">✅ COVERED</span></td><td>PrestaShop SSR curl</td><td>NEMA 11 brak</td></tr>
 <tr><td>Nettigo (PL)</td><td><span class="pill pill-ok">✅ COVERED</span></td><td>Rails HTML curl</td><td>tylko 2× NEMA 17</td></tr>

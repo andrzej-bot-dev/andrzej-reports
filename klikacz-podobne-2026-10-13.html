@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klikacz XY — czy ktoś to już zrobił? Deep Research 2026-10-13</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--card2:#1d212b;--txt:#e6e9ef;--mut:#9aa3b2;--acc:#4fd1c5;--acc2:#f6ad55;--bad:#fc8181;--ok:#68d391;--line:#2a2f3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 -apple-system,'Segoe UI',Roboto,sans-serif}
+.wrap{max-width:1400px;margin:0 auto;padding:24px 20px 80px}
+header{padding:28px 0 8px}
+h1{font-size:1.9rem;margin:0 0 6px}
+.badge{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:3px 12px;font-size:.8rem;margin-right:6px;color:var(--acc)}
+.meta{color:var(--mut);font-size:.85rem;margin-top:8px}
+h2{font-size:1.35rem;margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:1.05rem;margin:20px 0 8px;color:var(--acc2)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.tldr{border-left:4px solid var(--acc);background:var(--card);padding:16px 18px;border-radius:0 12px 12px 0;margin:16px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+th{background:var(--card2);text-align:left;padding:8px 10px;border:1px solid var(--line);font-weight:600}
+td{padding:8px 10px;border:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#141822}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--acc2);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+nav.sticky{position:sticky;top:0;z-index:10;background:var(--bg);padding:10px 0;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);max-height:60px;overflow:hidden}
+nav.sticky a{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:3px 12px;font-size:.8rem}
+.topbtn{position:fixed;bottom:24px;right:24px;background:var(--acc);color:#0f1115;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.5);z-index:20}
+.small{font-size:.8rem;color:var(--mut)}
+.tag{font-size:.72rem;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:1px 8px;margin-left:6px;color:var(--mut)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+ul{margin:6px 0}
+li{margin:4px 0}
+.conf-h{color:var(--ok)}
+.conf-m{color:var(--acc2)}
+.conf-l{color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div><span class="badge">🔧 Technical</span><span class="badge">📚 Knowledge</span></div>
+<h1>🤖 Klikacz XY — czy ktoś już to zrobił?</h1>
+<div class="meta">Deep research 13.10.2026 · ~230 stron/API/serpów przez 12 agentów (R1×8 + R2×4) · 12 destylatów w <code>memory/research/klikacz-podobne-2026-10/raw/</code> · Języki: EN/PL/DE/JA/KO/ES/SE</div>
+</header>
+
+<nav class="sticky">
+<a href="#tldr">TL;DR</a><a href="#top">TOP 5</a><a href="#open">Open source</a><a href="#diy">DIY buildy</a><a href="#komercja">Komercja</a><a href="#akademia">Akademia/przemysł</a><a href="#inż">Wnioski inżynierskie</a><a href="#pokrycie">Pokrycie źródeł</a>
+</nav>
+
+<div class="tldr" id="tldr">
+<h2 style="border:none;margin:0 0 8px">🎯 TL;DR — werdykt</h2>
+<p><b>Tak, ludzie to robili — ale Twój dokładny zestaw (stepper-gantry + serwo-rysik + kamera/OCR, open source, tanio) NIKT nie zbudował i nie opublikował.</b> Najbliżej są dwa projekty, które <b>niezależnie powstały w ostatnich 5 tygodniach</b> — czyli idea "dogania" Cię:</p>
+<ul>
+<li><b>tkleisas/androidtester</b> (09.2026) — CoreXY + przewodzący rysik + ArUco/OCR, pełny BOM <b>€418</b>, dokumentacja klasy A + bliźniak cyfrowy w MuJoCo — ALE: tylko projekt, zero dowodów zbudowania (repo ma 5 dni, 0★, brak zdjęć) <a href="https://github.com/tkleisas/androidtester">[repo]</a></li>
+<li><b>mchdeore/iPhone-Ian</b> (09-10.2026, aktywny wczoraj) — CoreXY tapujący iPhone'a, lokalny model wizyjny na GTX 1080, realny log zakupów ~<b>C$325</b> <a href="https://github.com/mchdeore/iPhone-Ian">[repo]</a></li>
+</ul>
+<p>Komercyjnie robią to <b>Tapster 3</b> (żywy produkt, delta, tkaninowo-pojemnościowa końcówka + kamera 16MP, GRBL) i <b>Adapta MATT</b> (przemysłowy, quote-only). Najtańszy sprzedawany klon Tapstera: <b>TestDevLab "Tappy" za €70</b> z pełnym build logiem. Nisza "klika i czyta" jest potwierdzona z obu stron — software'owe farmy (1.7k★ iOS-farm, WDA/ADB) nie klikają fizycznie, fizyczne klikery z Ali ($3-25) nie widzą ekranu. <b>Klikacz XY siedzi dokładnie w tej dziurze.</b></p>
+</div>
+
+<h2 id="top">🏆 TOP 5 najbliższych odpowiedników</h2>
+<table>
+<tr><th>#</th><th>Projekt</th><th>Rok</th><th>Mechanika</th><th>Klik</th><th>Czyta ekran?</th><th>Skala / status</th><th>URL</th></tr>
+<tr><td>1</td><td><b>androidtester</b> (tkleisas)</td><td>2026-09</td><td>CoreXY gantry + tool-Z (T8) + sprężyna 1,5-6 N</td><td>przewodzący rysik Ø8 + 2 serwo-plungery na przyciski boczne</td><td>✅ 2× webcam, ArUco homografia + pluggable OCR + template</td><td>BOM €418, OpenSCAD+Klipper+YAML framework, bliźniak MuJoCo; <b>niezbudowany</b></td><td><a href="https://github.com/tkleisas/androidtester">GitHub</a></td></tr>
+<tr><td>2</td><td><b>iPhone-Ian</b> (mchdeore)</td><td>2026-10</td><td>CoreXY, MKS DLC32 + FluidNC, MGN9H</td><td>ugruntowany sprężynowy rysik (GND → kontroler)</td><td>✅ USB capture + homografia + lokalny vision model (GTX 1080)</td><td>build w trakcie, realne zamówienia ~C$325</td><td><a href="https://github.com/mchdeore/iPhone-Ian">GitHub</a></td></tr>
+<tr><td>3</td><td><b>Tapster 3 / Valet</b> (Jason Huggins, twórca Selenium/Appium)</td><td>2013→dziś</td><td>delta ±0,6 mm, GRBL firmware</td><td>tkaninowo-pojemnościowa końcówka, tap+swipe</td><td>✅ wbudowana kamera 16MP USB (CV)</td><td>żywy produkt (quote), Valet = następca na RPi; repo MIT/BSD</td><td><a href="https://tapster.io/tapster-robotics-product-page">tapster.io</a></td></tr>
+<tr><td>4</td><td><b>TestDevLab "Tappy"</b> (Łotwa)</td><td>~2016</td><td>delta 3D-print (Zortrax), serwa Hitec</td><td>stylus na sprężynie + <b>przewód masy Arduino→stylus</b></td><td>— (executor Appium; kalibracja przeglądarkowa przez websocket)</td><td><b>€70</b> DIY clone z NAJPEWNIEJSZYM build logiem w necie</td><td><a href="https://www.testdevlab.com/blog/how-we-built-a-robot-for-automated-manual-mobile-testing">blog</a> · <a href="https://github.com/guntiss/tappy">repo</a></td></tr>
+<tr><td>5</td><td><b>Wordle-bot na drukarce 3D</b> (atomic14)</td><td>2022</td><td>drukarka cartesian jako gantry, stylus zamiast głowicy</td><td>docisk osi Z drukarki</td><td>✅ Pi camera + OpenCV <b>auto-detekcja ekranu i pozycji telefonu</b></td><td>open source (Duet RRF), "działa u mnie"</td><td><a href="https://github.com/atomic14/wordle_robot">GitHub</a></td></tr>
+</table>
+
+<h2 id="open">📦 Open source — repozytoria (13 zbadanych)</h2>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">androidtester — wzorzec projektowy <span class="tag">BOM €418</span></h3>
+<ul>
+<li>CoreXY na 2020 + MGN12H, NEMA17×3 + TMC2209, BTT SKR Pico (RP2040) + RPi 4B, Meanwell LRS-150-24</li>
+<li><b>Kluczowy trik: siła tapu ze sprężyny</b> (k≈0,5 N/mm → 3-12 mm spręż = 1,5-6 N), Z nigdy nie miażdży ekranu; tool-Z homuje W GÓRĘ</li>
+<li>Hacki Klippera do skopiowania: gniazdo E0 (extruder STEP/DIR) jako serwa + dummy stepper_z (Klipper wymusza Z przy corexy)</li>
+<li>Framework: YAML scenariusze → kalibracja ArUco (RMS&lt;0,5mm) → tap/swipe/enter_pin → assert_text (OCR + template fallback); 80 testów; zasada "test musi przejść z wyjętym USB" = czarnoskrzynkowość</li>
+<li>Limitacje: 5 dni od publish, 0★, brak zdjęć/prototypu — traktuj jako <b>projekt dokumentacji, nie dowód działania</b></li>
+</ul></div>
+<div class="card"><h3 style="margin-top:0">huweibot — pętla LLM-planner <span class="tag">software-first</span></h3>
+<ul>
+<li>Kamera → 4-punktowa homografia → OCR/ekstrakcja elementów → <b>LLM dostaje TYLKO tekstowe podsumowanie</b> (nie obraz!) → akcja → weryfikacja z kolejnej klatki (TEXT_PRESENT / ELEMENT_CHANGED / INPUT_VERIFIED) + retry</li>
+<li>IR czujnik odległości gatinguje niebezpieczne tapy; ograniczona siatka 200×100; OSK-only typing</li>
+<li>Hardware słabo udokumentowany (XY stage + GRBL, bez BOM/CAD); może być warstwą "mózgu" dla Klikacza</li>
+</ul></div>
+</div>
+<div class="card"><h3>Inne istotne repo</h3>
+<ul>
+<li><b>JulietteDrupt/Using-smartphones-with-a-robot-arm</b> (2019) — DOBOT Magician + stylus + FLIR Flea3, OpenCV: segmentacja przycisków, screen-diff, generowanie scenariuszy ze screenshotów. Klasyk "arm + stylus + vision" z kodem <a href="https://github.com/JulietteDrupt/Using-smartphones-with-a-robot-arm">[repo]</a></li>
+<li><b>Lochan1245/Robotic-Touch-Automation</b> (2026-08) — solenoid 12V + IRLZ44N + flyback (gotowy blok wiringu do tap-aktuatora) + EfficientNet-B0 klasyfikujący stan ekranu (OFF/LOCKED/UNLOCKED) z webcam <a href="https://github.com/Lochan1245/Robotic-Touch-Automation-for-Mobile-Testing">[repo]</a></li>
+<li><b>24Eng/PhoneRobotMKI</b> — 2 serwa + auto-clicker; <b>amanketebo/auto-screen-tapper</b> — 2 relay touch boardy (Switch Science) łapiące bloki Amazon Flex; <b>justincaseof/touchcontrol</b> — pojedyncze serwo-palec</li>
+<li><b>Farmy software-only</b> (kontrast): prod-FARM-IOS-Core 1.7k★ (WDA + OCR, TikTok farmy), Kevs-IOS-Agents 84★, telefon-ciftligi (ADB), Evelin (scrcpy) — cała popycha software injection, zero mechaniki</li>
+<li><b>ES-factory/DigiCombo</b> (GPLv3) — ATtiny85 + V-USB emuluje <b>ekran dotykowy USB-HID</b> dla Androida: tap/swipe/pinch/unlock bez mechaniki <a href="https://github.com/ES-factory/DigiCombo">[repo]</a> — realna alternatywa dla rysika, o ile telefon nie wykrywa injection</li>
+</ul></div>
+
+<h2 id="diy">🔨 DIY buildy — co zbudowali i czego się nauczyli</h2>
+<table>
+<tr><th>Projekt</th><th>Mechanika</th><th>Screen reading</th><th>Lekcja dla Klikacza</th><th>URL</th></tr>
+<tr><td>MasterGinger (2017)</td><td>płaski gantry: X = NEMA17+lead screw+2 szyny 8mm, Y = pasek zębaty, tap = serwo na mini-belcie</td><td>brak (ślepo)</td><td><b>Najbliższa mechanika 1:1.</b> Układ polarny odrzucony (niestabilny); stylus BEZ masy nie działa — potwierdzone w Q&A</td><td><a href="https://www.instructables.com/Screen-Tapping-Robot/">Instructables</a></td></tr>
+<tr><td>Zombuster (2015-16, TKJ Electronics)</td><td>telefon w flex docku + 2 solenoidy (IRF3205) + Pi camera</td><td>✅ pełny własny pipeline OpenCV: HSV → morfologia → moment Hu + Euler number → state machine</td><td>kompletny schemat+kod+raport PDF; solenoidy <b>wolne</b> — limit rozgrywki; głośny klang = trzpień o lock-ring, nie tip o ekran</td><td><a href="http://blog.tkjelectronics.dk/2016/08/raspberry-pi-playing-zombuster/">blog TKJ</a></td></tr>
+<tr><td>Junya Sakamoto — Puzzle&Dragons (2016)</td><td><b>stylus sunie po ekranie (drag) + telefon jeździ przód-tył</b> = XY wektorowo; Gertbot na RPi</td><td>✅ laptop analizuje planszę i liczy optymalne combo</td><td>alternatywa: ruchomy telefon zamiast drugiej osi; drag zamiast tap upraszcza Z</td><td><a href="https://hackaday.com/2016/02/10/pi-powered-robot-plays-puzzle-dragons/">Hackaday</a></td></tr>
+<tr><td>Piano Tiles 2 Robot (2016, 136M views!)</td><td>4 serwa + conductive-foam pads na drążkach mosiężnych</td><td>✅ iPhone 6+ nad ekranem <b>120 fps</b>, timing przez <b>MIDI-over-USB</b> do Teensy 3.2 (step/dir)</td><td>latencja: 120fps kamera + przewodowy kanał MIDI &gt; Wi-Fi/serial; foam = tani "palec"; rekord 21 079</td><td><a href="https://www.youtube.com/watch?v=fqOW84ZTL7k">YouTube</a></td></tr>
+<tr><td>Flappy Bird bot — Cloud Tea (2014)</td><td>HDD <b>voice coil</b> + touch pen (serwa za wolne!)</td><td>✅ webcam + OpenCV</td><td><b>open-loop + wolna kamera = narastający dryf</b> (wprost z ich strony, odzyskane z Wayback); rekord 147</td><td><a href="http://web.archive.org/web/20141220065657/http://cloudteastudio.com:80/bird.html">Wayback</a></td></tr>
+<tr><td>Anykey — uArm + MemoryCheat (2021)</td><td>uArm Swift Pro + stylus (tap = zanurzenie ramienia)</td><td>✅ iPad HDMI→Camlink→OpenCV (capture card, nie kamera!)</td><td>capture card &gt; webcam (zero perspektywy/światła); użyty do udowodnienia, że gra My Singing Monsters jest "poskręcana" (100+ prób)</td><td><a href="https://hackaday.com/2021/11/28/automating-mobile-games-with-a-robot-arm/">Hackaday</a></td></tr>
+<tr><td>Wordle na drukarce 3D (2022)</td><td>cartesian printer + stylus w głowicy</td><td>✅ Pi camera, auto-detekcja ekranu na zdjęciu</td><td>kalibracja wizualna &gt; hardcode współrzędnych; modułowa architektura kodu (camera/printer_control/main)</td><td><a href="https://github.com/atomic14/wordle_robot">GitHub</a></td></tr>
+<tr><td>MonkeyBot (2017)</td><td>Y = "yoke" (bez drugiego prowadnika), X = rail z aluminium + rowek w desce do krojenia (PP)</td><td>brak</td><td>tani material-boks wystarcza; <b>trik gwoździa + drucika = pojemność bez GND</b></td><td><a href="https://www.youtube.com/watch?v=6ZJ5rViVc_Y">YouTube</a></td></tr>
+<tr><td>Uli Kilian LEGO (2014) + RobB foil (2012)</td><td>LEGO toczy iPada / folia przyklejona do ekranu</td><td>brak</td><td><b>folia ściągnięta do GND = tap</b> (pin floating→ground); wystarczy GPIO pull-down</td><td><a href="https://hackaday.com/2012/05/04/reaching-out-to-a-touch-screen-with-a-microcontroller/">Hackaday</a></td></tr>
+<tr><td>Tinder-o-matic (2014)</td><td>servo + 3D-printed przegubowy palec ze styloem</td><td>brak</td><td>~900 like'ów/h; proste mechaniczne palce działają latami</td><td><a href="https://hackaday.com/2014/09/03/tricking-tinder-with-a-3d-printed-finger/">Hackaday</a></td></tr>
+<tr><td>TestDevLab Tappy (Łotwa)</td><td>delta + stylus na sprężynie + ground cable</td><td>Appium executor (REST)</td><td><b>najlepszy build log:</b> CNC odrzucili (kalibracja), manipulator odrzucili (precyzja) → delta; kalibracja przez przeglądarkę/websocket — zero instalacji</td><td><a href="https://www.testdevlab.com/blog/how-we-built-a-robot-for-automated-manual-mobile-testing">blog</a></td></tr>
+<tr><td>Instructables ES (2021) 🇪🇸</td><td><b>M8 + A4988 + 2×SG90 + drawer slide + rynna</b></td><td>badanie ground-via-headphone-jack</td><td>materiałowo NAJBLIŻY Twojemu Klikaczowi (M8+A4988+SG90!); bateria na końcówce jako masa</td><td><a href="https://www.instructables.com/Robot-De-Testeo-Para-Pantalla-Touchscreen/">Instructables</a></td></tr>
+</table>
+
+<h2 id="komercja">💰 Komercja — rynek i ceny</h2>
+<table>
+<tr><th>Produkt</th><th>Cena</th><th>Co to jest</th><th>URL</th></tr>
+<tr><td>Adapta Robotics MATT (RO)</td><td>quote-only (Zebra, Hager Group w referencjach)</td><td>delta ±0,05mm, 1 m/s, <b>3-palcowy programowalny efektor pojemnościowy</b> (tap/press/pinch/rotate), AI vision, popup/captcha, 72h+ continuous</td><td><a href="https://www.adaptarobotics.com/matt/">adaptarobotics.com</a></td></tr>
+<tr><td>Tapster 3 / Valet (US)</td><td>quote (dawny Tindie retired; dawniej ~$1800-2600)</td><td>delta, fabric-capacitive effector, tap+swipe, 16MP kamera, GRBL, HTTP/JSON API; Valet = RPi box z USB OTG HID</td><td><a href="https://tapster.io/tapster-robotics-product-page">tapster.io</a></td></tr>
+<tr><td>T-Mobile "Tappy" (in-house, 2012-14)</td><td>nie na sprzedaż</td><td>rubber-tipped arm, QA operatora; Huawei próbował go wynieść (DOJ indictment 2019) — mechanika = wycena przemysłowa ~$100k/szt przy zamówieniu Mercedesa</td><td><a href="https://www.npr.org/2019/01/29/689663720/">NPR</a></td></tr>
+<tr><td>Chińskie clickery 1-punktowe (Ali)</td><td><b>SEK 37-230</b> ($3-25)</td><td>klips + silniczek + "palec", ślepo, 3000+ sold na bestsellerze</td><td><a href="https://www.aliexpress.com/item/1005010679242180.html">przykład</a></td></tr>
+<tr><td>Multi-head Arduino clicker (Ali)</td><td>SEK 877 (~$85)</td><td>programowalny, wiele głów — najbliższy gotowy "klikacz"</td><td><a href="https://www.aliexpress.com/item/1005005269037101.html">AliExpress</a></td></tr>
+<tr><td>Fingerbot/Tuya (Ali)</td><td>SEK 76-381</td><td>serwo-palec z BT/Zigbee, część marketingowana WPROST do ekranów dotykowych</td><td><a href="https://www.aliexpress.com/item/1005008041799062.html">przykład</a></td></tr>
+<tr><td>Phone-farm boxy (Ali)</td><td>SEK 579 - 45 661</td><td>USB-hub farmy 20-60 telefonów, sterowanie software — pełne maszyny 14-46k SEK</td><td><a href="https://www.aliexpress.com/item/1005010358012881.html">przykład</a></td></tr>
+<tr><td>Allegro PL</td><td><b>34,28 zł</b></td><td>"automatyczny kliker robot palec" — import chiński, ślepo</td><td><a href="https://allegro.pl/produkt/uniwersalny-kliker-do-telefonu-do-ciaglego-naciskania-i-grania-3fa21a91-08f9-4cf9-a998-7b55338a851a">Allegro</a></td></tr>
+</table>
+<p class="small">Wniosek rynkowy: drabinka cenowa $3 (klips) → $85 (multi-head) → €70 (DIY Tappy) → $1800+ (Tapster) → $100k (MATT/przemysł). <b>Nikt nie sprzedaje taniego XY-gantry z wizją</b> — dziura jest między $85 a $1800.</p>
+
+<h2 id="akademia">🎓 Akademia i przemysł</h2>
+<ul>
+<li><b>MDPI Appl. Sci. 2020 (Wistron+NTOU)</b> — 5-DOF arm (Dynamixel MX-28T) + stylus + webcam: <b>OCR padał na znaki (40-50%) → SVM+HOG 70% → +geometric matching = 90%</b>. Najlepszy dowód, że OCR słabo, template/HOG dobrze <a href="https://www.mdpi.com/2076-3417/10/23/8339">[paper]</a></li>
+<li><b>ACM 2026 "Multi-Modal Robotic Framework for Physical GUI Interaction Testing"</b> — dziedzina dopiero się rodzi (DOI potwierdzone, pełny tekst 403) <a href="https://doi.org/10.1145/3774748.3787623">[DOI]</a></li>
+<li><b>PreyTouch (bioRxiv 2024)</b> — rig do badań na jaszczurkach: YOLO5 real-time + DeepLabCut, web-UI, scheduler, alerty, TTL sync, 167h unattended — <b>wzorzec inżynierski 1:1 dla Klikacza</b> <a href="https://www.biorxiv.org/content/10.1101/2024.06.16.599188v1.full">[preprint]</a></li>
+<li><b>Sawyer cobot (ROS)</b> — jedyny publiczny projekt z fizycznym <b>SWIPE i PINCH</b>: równoległy gripper + 2 drukowane palce + capacitive tips + <b>druty masy z opuszek</b>; paper IEEE + CAD <a href="https://github.com/sebtona/sawyer-mobile-device-interaction">[repo]</a></li>
+<li><b>Fake-finger materiały</b>: przewodząca tkanina/guma to standard — Textile Res. J. 2012 <a href="https://doi.org/10.1177/0040517512464298">[DOI]</a>, magnetoactive elastomery APL 2026 <a href="https://doi.org/10.1063/9.0001025">[DOI]</a>; 2 potwierdzenia komercyjne (Tapster "fabric-tipped", Tappy "rubber-tipped")</li>
+<li><b>OptoFidelity TOUCH</b> (FI) — żyje: automatyczne testy dotyku, sequencer, scripting API <a href="https://www.optofidelity.com/touch">[strona]</a></li>
+<li><b>Patent WO2017051263A3</b> — "robot arm for testing touchscreen applications" obejmuje gestures — przestrzeń IP istnieje <a href="https://patents.google.com/patent/WO2017051263A3/en">[patent]</a></li>
+<li><b>Negative findings</b>: Open Device Labs nigdy nie używały fizycznych tapperów; Firebase Test Lab / AWS Device Farm / Android Monkey = software only; "ARTIC" i "Teng" = nazwy nieistniejące (dowody negatywne w logu)</li>
+</ul>
+
+<h2 id="inż">🛠️ Wnioski inżynierskie dla Twojego Klikacza XY</h2>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">✅ Co potwierdzone wielokrotnie</h3>
+<ul>
+<li><b>Rysik musi mieć masę</b> — GND przez drut (MasterGinger Q&A, TestDevLab, Sawyer, Reddit 1gujose, iPhone-Ian, NATA-10 KO). 6 niezależnych potwierdzeń. Alternatywy: gąbka w metalowej siatce, gwóźdź+drucik (MonkeyBot), bateria jako masa (ES), headphone-jack ground (ES)</li>
+<li><b>Siła ze sprężyny, nie z Z</b> — androidtester (1,5-6N) i TestDevLab (spring-loaded) — ekran przetrwa, kalibracja prostsza</li>
+<li><b>Kalibracja wizualna</b> — auto-detekcja ekranu na obrazie (Wordle-bot, huweibot homografia, androidtester ArUco) &gt; hardcode pikseli; ArUco w rogach telefonu = RMS &lt;0,5mm</li>
+<li><b>.closed-loop &gt; open-loop</b> — Flappy-bot 2014 udokumentował dryf open-loopu; huweibot weryfikuje każdą akcję z kolejnej klatki</li>
+</ul></div>
+<div class="card"><h3 style="margin-top:0">⚠️ Pułapki</h3>
+<ul>
+<li><b>SG90 za wolne do dynamicznych gier</b> — drabinka: solenoid &lt; SG90 &lt; Teensy step/dir &lt; voice coil HDD (jedyny na reakcje sub-100ms). Do checkboxów/testów SG90 wystarcza</li>
+<li><b>Rozmiar kontaktu krytyczny</b> — Cornell: moneta na GPIO — za mały nie rejestruje, za duży = double-tap; celuj ~8-10mm</li>
+<li><b>Webcam ≈ 133ms latencji</b> (Stack Overflow pomiar); capture card USB2 + DirectShow fix (1 linijka w OpenCV); dla dynamicznych gier: kamera 120fps + przewodowy kanał (Piano Tiles)</li>
+<li><b>OCR słabo na ikonach/CJK</b> — 40-50% (MDPI); template matching/HOG = 90%. Tesseract tylko na łacinę+cyfry</li>
+<li><b>CNC trudna kalibracja</b> — TestDevLab odrzuciło CNC na rzecz delty; ale androidtester/iPhone-Ian (2026) pokazują, że CoreXY+ArUco rozwiązuje ten problem w 2026</li>
+</ul></div>
+</div>
+<div class="card"><h3>🎯 Pozycjonowanie Twojego projektu</h3>
+<p>Twoja architektura (NEMA17+28BYJ-48, nić+kabestan na Y, rack&pinion na X, SG90-rysik grawitacyjny, C920 + OpenCV/OCR) jest <b>tańsza niż androidtester BOM (€418 → u Ciebie ~połowa, bo 28BYJ-48 za grosze i brak MGN12H)</b>, a jedyna publiczna polska/nordycka próba w ogóle nie istnieje. Jedyne co robi androidtester, a nie masz Ty: ArUco-marker w rogach, sprężyna na rysiku, scenario-YAML, bliźniak cyfrowy. Wszystkie 4 da się dorobić w weekend. <b>Termin: dwa niezależne buildy ruszyły we wrzesniu 2026 — jeśli chcesz być "pierwszy w necie" z działającym rigiem, okno jest teraz.</b></p></div>
+
+<h2 id="pokrycie">📋 Pokrycie źródeł (Source Coverage)</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Szczeble</th><th>Uwagi</th></tr>
+<tr><td>GitHub (API + search + README ×13 repo)</td><td class="ok">✅ COVERED</td><td>API → raw</td><td>27 query</td></tr>
+<tr><td>Hackaday / Hackster / blogi</td><td class="ok">✅ COVERED</td><td>site-search → artykuły</td><td>DDG/Bing/Mojeek/searx zablokowane → Hackaday site search działa</td></tr>
+<tr><td>Reddit</td><td class="ok">✅ COVERED</td><td>PullPush API</td><td>reddit.com/jina = 403 → PullPush JSON zadziałał</td></tr>
+<tr><td>YouTube</td><td class="ok">✅ COVERED</td><td>jina → watch pages</td><td>43 wpisy</td></tr>
+<tr><td>AliExpress / Allegro / Empik / Amazon</td><td class="ok">✅ COVERED</td><td>własny skrypt aliexpress</td><td>ceny live w SEK</td></tr>
+<tr><td>Komercja (Tapster, MATT, OptoFidelity, T-Mobile)</td><td class="ok">✅ COVERED</td><td>direct + Wayback + HN API</td><td>tapsterbot.com dead, tapster.io żyje (korekta R1)</td></tr>
+<tr><td>Akademia (Crossref/Scholar/bioRxiv/MDPI)</td><td class="ok">✅ COVERED</td><td>Crossref API ×9</td><td>ACM 2026 = 403 Cloudflare (metadane potwierdzone)</td></tr>
+<tr><td>Języki DE/JA/KO/ES/SE</td><td class="ok">✅ COVERED</td><td>DDG via jina</td><td>Ja: ekosystem 100-yen 連打機; SE: negative; ES: Instructables hit</td></tr>
+<tr><td>PL (elektroda, wykop, forbot, Allegro)</td><td class="ok">✅ COVERED</td><td>DDG+jina</td><td>nisza PL pusta — potwierdzone</td></tr>
+<tr><td>Printables / Thingiverse / Brno thesis / ACM PDF</td><td class="warn">⚠️ PARTIAL</td><td>Cloudflare/429 po 2-3 podejściach</td><td> modele 151326/241435/419626 niezweryfikowane; do dogrania z przeglądarki</td></tr>
+</table>
+<p class="small">Metodologia: 12 subagentów (R1×8 broad sweep + R2×4 deep dive), ~230 odwiedzonych stron/API, destylaty z URL-ami przy każdym fakcie w <code>memory/research/klikacz-podobne-2026-10/raw/</code>. Search engines masowo bot-gated (DDG captcha 202, Mojeek 403) → praca przez Hackaday site-search, PullPush API, GitHub API, Crossref API, jina proxy — każdy blocker miał fallback.</p>
+
+<p class="small" style="margin-top:40px">Wygenerował Andrzej 🤖 · 13.10.2026 · pełne destylaty z URL-ami: repo <code>memory/research/klikacz-podobne-2026-10/</code></p>
+</div>
+<a class="topbtn" href="#tldr">↑</a>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outdoor bouldering &amp; lekparki ze wspinaniem — 25 km od Väsby (2026-10-14)</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1a2332;--mut:#5b6779;--acc:#e8590c;--acc2:#1971c2;--ok:#2f9e44;--warn:#e8a20c;--bad:#d64545;--line:#e3e7ee}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:1500px;margin:0 auto;padding:16px}
+header.hero{background:linear-gradient(135deg,#12263f,#1f4e79);color:#fff;padding:28px 20px;border-radius:0 0 18px 18px}
+header.hero h1{font-size:1.65rem;margin-bottom:6px}
+header.hero p{opacity:.92;max-width:1100px}
+.badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:2px 12px;font-size:.8rem;margin:10px 6px 0 0}
+nav.sticky{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 6px rgba(20,40,80,.06)}
+nav.sticky .in{max-width:1500px;margin:0 auto;display:flex;gap:6px;align-items:center;overflow-x:auto;padding:8px 12px;height:52px}
+nav.sticky a{white-space:nowrap;font-size:.85rem;font-weight:600;color:var(--acc2);text-decoration:none;padding:6px 12px;border-radius:8px;background:#eef4fb}
+nav.sticky a:hover{background:#dcebf9}
+section{margin:26px 0}
+h2{font-size:1.3rem;margin-bottom:4px}
+.sub{color:var(--mut);font-size:.92rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:210px;object-fit:cover;display:block;background:#dde3ea}
+.card .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:1.05rem}
+.dist{color:var(--acc);font-weight:700;font-size:.88rem}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 4px}
+.tag{font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:12px;background:#eef2f7;color:#41506b}
+.tag.kids{background:#e7f5ea;color:#1e7c33}
+.tag.lite{background:#fff3e0;color:#a05a00}
+.tag.parkour{background:#ede7f6;color:#5b3fa8}
+.tag.rock{background:#e3f2fd;color:#1565c0}
+.meta{font-size:.85rem;color:var(--mut)}
+.meta b{color:var(--ink)}
+.btns{margin-top:auto;display:flex;gap:8px;padding-top:8px}
+.btn{font-size:.8rem;font-weight:700;text-decoration:none;padding:7px 12px;border-radius:8px;background:#eef4fb;color:var(--acc2)}
+.btn.orange{background:#fff1e6;color:var(--acc)}
+.tldr{background:#fff;border:2px solid #ffd8a8;border-radius:14px;padding:18px 20px}
+.tldr ol{margin:10px 0 0 20px}
+.tldr li{margin:7px 0}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;font-size:.88rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eef2f7;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:#41506b}
+tr:last-child td{border-bottom:none}
+.tblwrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+.cover-ok{color:var(--ok);font-weight:700}
+.cover-warn{color:var(--warn);font-weight:700}
+.note{background:#fff8e6;border:1px solid #ffe3a3;border-radius:12px;padding:12px 16px;font-size:.9rem;margin:12px 0}
+.src{font-size:.78rem;color:var(--mut);word-break:break-all}
+.src a{color:var(--acc2)}
+iframe.map{width:100%;height:230px;border:0}
+.car{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin:10px 0}
+.car img{width:100%;height:180px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+#top-btn{position:fixed;right:18px;bottom:18px;background:var(--acc);color:#fff;border-radius:50%;width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;text-decoration:none;box-shadow:0 4px 14px rgba(232,89,12,.4);z-index:99}
+footer{color:var(--mut);font-size:.85rem;margin:34px 0 60px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.card img{height:180px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap" style="padding:0">
+    <h1>🧗 Outdoor bouldering &amp; „lekparki ze wspinaniem" — promień 25 km od Upplands Väsby</h1>
+    <p>Deep research: darmowe miejsca do wspinania poza halą — ścianki na placach zabaw dla dzieci, naturalne granitowe skały boulderingowe i parkourparki. Pod kątem: wieczór / wcześnie rano (mało ludzi). 4 agentów, ~80 źródeł, 60+ miejsc — po deduplikacji ~50 unikatowych.</p>
+    <span class="badge">✈️ Travel/Knowledge</span><span class="badge">📅 14.10.2026</span><span class="badge">📍 centrum: Väsby station (59.5176, 17.9213)</span><span class="badge">💰 wszystko gratis (poza 1 wyjątkiem oznaczonym)</span>
+  </div>
+</header>
+
+<nav class="sticky"><div class="in">
+  <a href="#tldr">⭐ TOP wybory</a><a href="#lekplatsy">🧒 Ścianki dla dzieci</a><a href="#skaly">🪨 Skały boulderingowe</a><a href="#parkour">🤸 Parkourparki</a><a href="#praktyka">🎒 Praktycznie</a><a href="#coverage">📋 Coverage</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="tldr">
+  <h2>⭐ TL;DR — gdzie iść jako pierwszy raz</h2>
+  <div class="tldr">
+    <ol>
+      <li><b>Vilundaparken (Väsby centrum, 5 min pieszo)</b> — prawdziwa 4-metrowa sztuczna skała wspinaczkowa w aktywnym parku ze skateparkiem i pumptrackiem. Otwarta publicznie 24/7, obok boiska oświetlone <b>wieczorem do 23:00 (pn-pt) / 22:00 (weekend)</b>. Idealny „lekpark" z wersją dla dzieci — dokładnie to, czego szukałeś.</li>
+      <li><b>Runby boulders (1,9 km)</b> — prawdziwy bouldering na granicie prawie pod domem: 6 problemów w łagodnych gradacjach (g4–g6). Na pierwszy raz na skałach — idealny.</li>
+      <li><b>Ad's Pad (2,3 km)</b> — 19 problemów, dużo łatwych (g4–g6), darmowy parking. Większy „movenik" niż Runby.</li>
+      <li><b>Snuggtaskeberg / Törnskogen (6,9 km)</b> — ogromny rejon: <b>147 problemów</b>, z tego 38 w g4 i 51 w g5 (najwięcej łatwych w okolicy). Naturreservat z parkingiem przy Turebergs klubbstuga.</li>
+      <li><b>Sollentuna Parkour Park — Edsberg (8,6 km)</b> — parkour w skraju lasu przy boiskach: klättern + calisthenics + „ninja". Świetne z dziećmi, 24/7, bez rezerwacji.</li>
+    </ol>
+    <p style="margin-top:10px">💡 <b>Wieczorem:</b> oświetlone są obiekty komunalne (Vilunda-boiska do 23:00; w Märsta Kanonkulleparken i Sätunaparken mają własne oświetlenie; Kyrksjön ma elljusspår przy skałach). <b>Na skałach</b> po zmroku ciemno — czołówka/latarka; <b>ranek</b> = wszędzie pusto, nawet kultowe rejony (Haga, Bromma) są puste przed 8:00.</p>
+  </div>
+</section>
+
+<section id="lekplatsy">
+  <h2>🧒 Ścianki i wspinanie dla dzieci (lekplatsy / parki)</h2>
+  <p class="sub">Plac zabaw + element wspinaczkowy — wchodzisz w butach sportowych, dziecko w trampkach. Wszystko 24/7 (wyjątki opisane).</p>
+  <div class="grid">
+
+    <div class="card">
+      <iframe class="map" loading="lazy" src="https://maps.google.com/maps?q=59.5161761,17.9200596&z=16&output=embed"></iframe>
+      <div class="body">
+        <h3>Vilundaparken — Aktivitetsparken</h3>
+        <div class="dist">📍 Upplands Väsby, centrum (Hotellvägen) — 0,2 km od dworca</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">klätterklippa 4 m</span><span class="tag lite">oświetlone boiska do 22–23</span><span class="tag">skate + pumptrack</span></div>
+        <div class="meta"><b>Co jest:</b> „fyra meter hög klätterklippa där du kan testa dina färdigheter" — oficjalna ścianka gminy; 800 m² skatepark, pierwszy platsbyggd pumptrack w regionie, parkour-owa strefa aktywności. Park niebookowany = otwarty dla wszystkich. <b>Godziny:</b> ścianka/skate 24/7; sąsiednie allvädersbanor oświetlane automatycznie do 23:00 (pn–pt) i 22:00 (sob–niedz).</div>
+        <div class="src">Źródło: <a href="https://www.upplandsvasby.se/uppleva-och-gora/idrott-motion-och-friluftsliv/vilundaparken">upplandsvasby.se/vilundaparken</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.5161761,17.9200596">📍 Google Maps</a><a class="btn" href="https://www.upplandsvasby.se/uppleva-och-gora/idrott-motion-och-friluftsliv/vilundaparken">Strona gminy</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Barnens Wäsby Verkstäder (temalekplats)</h3>
+        <div class="dist">📍 Väsby, Husarvägen (obok Vilundaparken) — 0,2 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak (main target)</span><span class="tag">temat: warsztaty</span></div>
+        <div class="meta">Fantastyczna templatka (proj. Tor Svae): ścianki do wspinania w zabawie, zjeżdżalnie, „kamera" do wchodzenia. <b>⚠️ Godziny 07:30–19:00</b> — na wieczór odpada, na rano idealna.</div>
+        <div class="src">Źródło: <a href="https://www.upplandsvasby.se/trafik-och-resor/torg-och-allmanna-platser/lekplatser/barnens-wasby-verkstader">upplandsvasby.se</a> · ⚠️</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.5184068,17.9197363">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>OCR-hinderbanan, Runbyspåret</h3>
+        <div class="dist">📍 Väsby, Runby (za Runby skolan) — 1,9 km</div>
+        <div class="tags"><span class="tag kids">starsze dzieci + dorośli</span><span class="tag parkour">11 przeszkód OCR</span></div>
+        <div class="meta">Nätvägg (ścianka z siatki), repstege (drabinka linowa), snevägg, A-frame, „Stairway to heaven"… wspinanie i pokonywanie przeszkód, „på egen risk". Zimą priorytet mają biegówki.</div>
+        <div class="src">Źródło: <a href="https://www.upplandsvasby.se/uppleva-och-gora/idrott-motion-och-friluftsliv/hinderbana">upplandsvasby.se/hinderbana</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.5207342,17.8887800">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://oxswsjht1wzsmtqq.public.blob.vercel-storage.com/images/streetview-upptack-klattervaggens-lekplats-i-sollentuna-cmi6bntuo02c4yc1merhf7w4p.jpg" alt="Klattervaggens lekplats">
+      <div class="body">
+        <h3>Klattervaggens lekplats</h3>
+        <div class="dist">📍 Sollentuna, Rotebro/Skillinge (Sidensvansvägen) — 6,0 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak (3–10 l.)</span><span class="tag">ścianka wspinaczkowa</span></div>
+        <div class="meta">Plac zabaw z dedykowaną klättervägg — nazwa wzięta od ścianki. Ocena 3/5 na lekplatskarta (nie gwiazdki roku, ale ścianka jest).</div>
+        <div class="src">Źródło: <a href="https://www.lekplatskarta.com/stockholms-lan/sollentuna/upptack-klattervaggens-lekplats-i-sollentuna-1040">lekplatskarta.com</a> · ⚠️</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.4644,17.9072">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Bagarbyparken</h3>
+        <div class="dist">📍 Sollentuna, Tureberg (Bagarbyvägen 44–46) — 10,2 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak (starsze też)</span><span class="tag">klätterställningar</span><span class="tag">balans po pniach/kamieniach</span></div>
+        <div class="meta">Jeden z największych placów Sollentuny: „för både yngre och äldre barn som vill ha lite mer utmanande lek" — kilka konstrukcji wspinaczkowych (z zjeżdżalnią, ze zjazdem po skarpie), hamaki, grill.</div>
+        <div class="src">Źródło: <a href="https://www.sollentuna.se/uppleva--gora/idrott-motion-och-friluftsliv/lekplatser/lekplatser-i-tureberg-och-sollentuna-centrum/">sollentuna.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.4264660,17.9430842">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Skogsparken</h3>
+        <div class="dist">📍 Sollentuna, Sjöberg/Kärrdal (Lomvägen) — 10,4 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">klätterpyramid 🌀</span></div>
+        <div class="meta">Największy plac Sjöbergu: piramida do wspinania, klätterställningar, mosty balansowe, zjeżdżalnie, huśtawki.</div>
+        <div class="src">Źródło: <a href="https://www.sollentuna.se/uppleva--gora/idrott-motion-och-friluftsliv/lekplatser/lekplatser-i-sjoberg/">sollentuna.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.4338623,17.9974103">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Lasseparken</h3>
+        <div class="dist">📍 Vallentuna, Ormsta — 9,3 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">klätterlek + hinderbana</span><span class="tag">trampoliny</span></div>
+        <div class="meta">Klätterlek, tor przeszkód, trampoliny, lekdjur, karuzela. Duży multisport przy gc-banach.</div>
+        <div class="src">Źródło: <a href="https://www.vallentuna.se/uppleva-och-gora/lekplatser-och-parker/lasseparken">vallentuna.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.5351988,18.0855754">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Kanonkulleparken <span class="tag lite">oświetlony</span></h3>
+        <div class="dist">📍 Märsta, Kanonkullen — 13,4 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">naturklätterbana</span><span class="tag lite">„Lekplatsen är upplyst"</span></div>
+        <div class="meta">Naturalny tor wspinaczkowy + karuzela, huśtawki, 2 zjeżdżalnie, boiska. <b>Jeden z nielicznych z potwierdzonym oświetleniem wieczornym</b> — robi za wieczorną opcję z dziećmi.</div>
+        <div class="src">Źródło: <a href="https://www.sigtuna.se/uppleva-och-gora/bada-simma-och-leka/lekplatser/kanonkulleparken.html">sigtuna.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.6316150,17.8528125">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Sätunaparken <span class="tag lite">oświetlony</span></h3>
+        <div class="dist">📍 Märsta — 12,7 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">klätterställning + nätlabyrint</span><span class="tag">utegym hinderbana</span><span class="tag lite">oświetlony</span></div>
+        <div class="meta">Klätterställning ze zjeżdżalnią, labirynt z siatek, tor przeszkód na utegymie, boisko. Drugi oświetlony plac w Märście.</div>
+        <div class="src">Źródło: <a href="https://www.sigtuna.se/uppleva-och-gora/bada-simma-och-leka/lekplatser/satunaparken.html">sigtuna.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.6256098,17.8554226">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Kallhällsparken</h3>
+        <div class="dist">📍 Järfälla, Kallhäll — ok. 10 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak (też specjalne potrzeby)</span><span class="tag">BLÅ = klätterlek</span></div>
+        <div class="meta">Każda aktywność ma kolor: GUL=sandlek, GRÖN=balans, BLÅ=<b>klätterlek</b>, RÖD=huśtawki. Zaprojektowany inkluzywnie (dla dzieci ze specjalnymi potrzebami). Piffl-box 10 kr/h (zabawki).</div>
+        <div class="src">Źródło: <a href="https://www.jarfalla.se/fritidochkultur/barnochunga/lekplatser.4.7649a918158917b879e24dc.html">jarfalla.se</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=Kallh%C3%A4llsparken+J%C3%A4rf%C3%A4lla">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Rissne ängars klätterlek</h3>
+        <div class="dist">📍 Sundbyberg, Rissne — ok. 17,6 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">stor klätterlek</span><span class="tag">linbana + studsmatta</span></div>
+        <div class="meta">„Lekutmaningar för små och stora barn": duży tor wspinaczkowy, wyciąg linowy, zjeżdżalnie, trampolina, huśtawki, tor kucyków.</div>
+        <div class="src">Źródło: <a href="https://www.sundbyberg.se/uppleva-och-gora/idrott-motion-och-friluftsliv/friluftsliv-och-motion/lekplatser">sundbyberg.se</a> · ⚠️ (GPS przybliżony)</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=Rissne+%C3%A4ngar+lekplats+Sundbyberg">📍 Google Maps (nazwa)</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Mulle Meck-parken (Järvastaden, Solna)</h3>
+        <div class="dist">📍 Solna, Järvastaden — ok. 16 km</div>
+        <div class="tags"><span class="tag kids">DZIECI: tak</span><span class="tag">temat: warsztat Mulle Meck</span></div>
+        <div class="meta">Słynny tematyczny plac (samolot, warsztat) — dużo konstrukcji do wspinania się w zabawie. Obok Järvastadens skogslekplats (naturalne wspinanie w lesie).</div>
+        <div class="src">Źródło: <a href="https://www.solna.se/uppleva--gora/for-barn-och-unga/lekplatser-i-solna">solna.se</a> · ⚠️ (elementy wspinaczkowe do potwierdzenia na miejscu)</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=Mulle+Meck-parken+Solna">📍 Google Maps (nazwa)</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">📎 <b>Więcej klätterlekplatsów</b> (bez oświetlenia/GPS — z list komunalnych, do dobrania pod trasę): Tennisparken (Rotebro, zren. 2025, klätterställning), Flygplansparken (Rotebro — samolot do wspinania), Malmparken (Tureberg, klätternät), Lundens (Sollentuna), Åbyholmsparken i Vikingalekplatsen (Vallentuna — wiking), Dinosaurielekplatsen (Vallentuna — wulkan ze zjeżdżalnią), Haga naturlekplats (Vallentuna), Strandparken (Sigtuna, naturinspirerad), Fågelparken/Orionparken/Vattentornsparken/Rosersbergsparken (Märsta/Rosersberg), Ängsjö friluftsområde (Järfälla — fort + linbana), Riddarparken (Jakobsberg — <b>smok do wspinania</b>), Tuvanparken (Sundbyberg — lek+skate+parkour). Wszystkie darmowe, 24/7.</div>
+</section>
+
+<section id="skaly">
+  <h2>🪨 Naturalne skały boulderingowe (granit sztokholmski)</h2>
+  <p class="sub">Dane z bazy thetopo.com (dawne 27crags). Gradacje: <b>g4 ≈ pierwsze kroki (dzieci/nowicjusz), g5 ≈ łatwe, g6 ≈ średnie, g7 ≈ trudne</b>. Wszystkie 24/7, gratis. Na skały: buty wspinaczkowe + crash pad (materac) — bezpieczeństwo przede wszystkim.</p>
+
+  <h3 style="margin:14px 0 8px">Najbliżej domu (do 7 km)</h3>
+  <div class="grid">
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/258/258479/p1120q40-fb8c36214c43f39afde5630e31f97f34.jpg" alt="Runby boulders">
+      <div class="body">
+        <h3>Runby boulders</h3>
+        <div class="dist">📍 Väsby, Runby — 1,9 km 🚲</div>
+        <div class="tags"><span class="tag rock">6 problemów</span><span class="tag kids">g4=1 · g5=4 · g6=1</span></div>
+        <div class="meta">Sektory Fortet i Piratkungen. Małe granitowe bloki w lesie za Runby. Zero barier — wchodzisz i próbujesz.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/runby-boulders">thetopo.com/crags/runby-boulders</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.527143,17.892553">📍 Google Maps</a><a class="btn" href="https://thetopo.com/crags/runby-boulders">Topo + drogi</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/407/407793/p1120q40-8fcc1543048122ed6d7c2741c6cfa140.jpg" alt="Ad's Pad">
+      <div class="body">
+        <h3>Ad's Pad</h3>
+        <div class="dist">📍 Väsby (strona wsch.) — 2,3 km</div>
+        <div class="tags"><span class="tag rock">19 problemów</span><span class="tag kids">g4=1 · g5=9 · g6=9</span></div>
+        <div class="meta">Sektor Sunnyside. Teren publiczny, wspinanie dozwolone (blisko zabudowań — bez krzyku). Parking: 3 miejsca, darmowy.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/ad-s-pad">thetopo.com/crags/ad-s-pad</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.535465,17.943093">📍 Google Maps</a><a class="btn" href="https://thetopo.com/crags/ad-s-pad">Topo</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/073/73954/p1120q40-062a65269c2a1a6a5ac8801f9d098614.jpg" alt="Cashväggen">
+      <div class="body">
+        <h3>Cashväggen</h3>
+        <div class="dist">📍 Väsby (strona zach.) — 2,1 km</div>
+        <div class="tags"><span class="tag rock">6 problemów</span><span class="tag">g5=3 · g6=2</span></div>
+        <div class="meta">Pojedyncza ściana („Vägg"). Krótka sesja „po drodze". Dla dzieci średnio (minimum g5).</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/cashvaggen">thetopo.com/crags/cashvaggen</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.517951,17.883382">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/205/205435/p1120q40-da6081a3dd46ab1744cfc2a069812a83.jpg" alt="Fornboda">
+      <div class="body">
+        <h3>Fornboda</h3>
+        <div class="dist">📍 przy Norra Törnskogen — 4,3 km</div>
+        <div class="tags"><span class="tag rock">16 problemów</span><span class="tag kids">g4=7 · g5=3 · g6=6</span></div>
+        <div class="meta">Höga i Låga väggen — obie poza naturreservatem (wspinanie OK). Dwie duże ściany, dużo łatwych.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/fornboda">thetopo.com/crags/fornboda</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.485516,17.964813">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/311/311296/p1120q40-1c8ac305e5399b5695c691a33e07405e.jpg" alt="Snuggtaskeberg">
+      <div class="body">
+        <h3>Snuggtaskeberg (Törnskogen) ⭐ najwięcej łatwych</h3>
+        <div class="dist">📍 Sollentuna — 6,9 km</div>
+        <div class="tags"><span class="tag rock">147 problemów!</span><span class="tag kids">g4=38 · g5=51 · g6=48 · g7=9</span></div>
+        <div class="meta">15 sektorów (Koreaväggen, Solväggen, Miniväggen, Parkeringsstenen…). Naturreservat — trzymaj się zasad. Dojazd: Gammelvägen → parking przy Turebergs klubbstuga (2 parkingu), bus Gustavsbergsleden + 10 min pieszo.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/snuggtaskeberg">thetopo.com/crags/snuggtaskeberg</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.45801,17.955844">📍 Google Maps</a><a class="btn" href="https://thetopo.com/crags/snuggtaskeberg">Topo</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Törnskogsklippan</h3>
+        <div class="dist">📍 Sollentuna, Törnskogen — 7,1 km</div>
+        <div class="tags"><span class="tag rock">crag linowy + boulder</span></div>
+        <div class="meta">Większa klifowa ściana w tym samym rezerwacie (drugi obok Snuggtaskeberg) — raczej na linę na przyszłość.</div>
+        <div class="src">Źródło: <a href="https://www.thecrag.com/en/climbing/sweden/stockholm/route/2792534991">thecrag.com</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.4561,17.9419">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/258/258228/p1120q40-cc54a199113a919c8e3d97bc2026d476.jpg" alt="Kettils Grotta">
+      <div class="body">
+        <h3>Kettils Grotta</h3>
+        <div class="dist">📍 przy Rosersbergs slott (Sigtuna) — 8,2 km</div>
+        <div class="tags"><span class="tag rock">34 problemy</span><span class="tag kids">g4=6 · g5=12 · g6=11</span></div>
+        <div class="meta">6 sektorów (Block, Grottan, Nifelheim, Odin…). Parking przy Rosersbergs slott + 15 min spacerem. Ładny „wypadowy" klimat przy zamku.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/kettils-grotta">thetopo.com/crags/kettils-grotta</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.573887,17.827555">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Vallatorp Boulder</h3>
+        <div class="dist">📍 Täby — 8,8 km</div>
+        <div class="tags"><span class="tag rock">12 problemów</span><span class="tag kids">g4=4 · g5=2 · g6=4</span></div>
+        <div class="meta">Kompaktowy blok w Täby, przyjemne łatwe drogi.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/vallatorp-boulder">thetopo.com/crags/vallatorp-boulder</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.467482,18.042398">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h3 style="margin:20px 0 8px">Dalsze klasyki (10–25 km)</h3>
+  <div class="grid">
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/244/244307/p1120q40-988eb8008e4efe813cc37a61c393280f.jpg" alt="Rigablocket barn">
+      <div class="body">
+        <h3>Rigablocket + Rigablocket barn</h3>
+        <div class="dist">📍 Täby — 11 km</div>
+        <div class="tags"><span class="tag rock">19 + 13 problemów</span><span class="tag kids">BARN: 13× g4!</span></div>
+        <div class="meta">Osobna strefa <b>dla dzieci</b> (Lilla stenen, Stora stenen — same g4). Idealny „rodzinny" crag.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/rigablocket-barn">thetopo.com/crags/rigablocket-barn</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.447779,18.058147">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/299/299009/p1120q40-e5583b86c3d5df1d14cdde3f21b4bd0d.jpg" alt="Tegelhagen">
+      <div class="body">
+        <h3>Tegelhagen</h3>
+        <div class="dist">📍 Sollentuna — 12,9 km</div>
+        <div class="tags"><span class="tag rock">45 problemów</span><span class="tag kids">g4=4 · g5=9 · g6=24</span></div>
+        <div class="meta">Naturreservat Tegelhagen z darmowym parkingiem i miejscem na ognisko (darmowe drewno!).</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/tegelhagen">thetopo.com/crags/tegelhagen</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.407487,17.993317">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/220/220541/p1120q40-2e910b89f17ade430c964e7c5be471f2.jpg" alt="Skavlöten">
+      <div class="body">
+        <h3>Skavlöten</h3>
+        <div class="dist">📍 Täby — 12,4 km</div>
+        <div class="tags"><span class="tag rock">43 problemy</span><span class="tag kids">g4=3 · g5=4 · g6=23</span></div>
+        <div class="meta">10 sektorów przy jeziorze (Fornborg, Svampblocket…). Dojazd 2021+: Arningevägen → znaki Skavlöten naturreservat, duży parking nad jeziorem.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/skavloten">thetopo.com/crags/skavloten</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.460915,18.111112">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/367/367675/p1120q40-75b0f48c9f6f41c5376070e8d13eedb1.jpg" alt="Brommablocken">
+      <div class="body">
+        <h3>Brommablocken — klasyk</h3>
+        <div class="dist">📍 Bromma (Brommaplan) — 19,8 km</div>
+        <div class="tags"><span class="tag rock">155 problemów!</span><span class="tag kids">g4=20 · g5=34 · g6=73</span></div>
+        <div class="meta">Największy zbiór bloków „w mieście" — 21 sektorów rozrzuconych wokół Brommaplan (El Toro, Slaporama, Obelisken…). Kultowy after-work spot.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/brommablocken">thetopo.com/crags/brommablocken</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.339668,17.939451">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/062/62744/p1120q40-e20e7d848a9fcbf0dbd0bed4dacc9213.jpg" alt="Kyrksjön">
+      <div class="body">
+        <h3>Kyrksjön <span class="tag lite">elljusspår = wieczorem OK</span></h3>
+        <div class="dist">📍 Bromma — 19,0 km</div>
+        <div class="tags"><span class="tag rock">67 problemów</span><span class="tag kids">g4=9 · g5=15 · g6=38</span></div>
+        <div class="meta">Bloki wzdłuż oświetlonej pętli biegowej (elljusspår) — <b>jedno z nielicznych miejsc na skałach sensownych po zmroku</b>. 8 sektorów.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/kyrksjon">thetopo.com/crags/kyrksjon</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.346993,17.919538">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/175/175906/p1120q40-79152a615d815156c8d3e0959c932ed8.jpg" alt="Hagaparken">
+      <div class="body">
+        <h3>Hagaparken + Haga Central</h3>
+        <div class="dist">📍 Solna — 18,2–18,8 km</div>
+        <div class="tags"><span class="tag rock">38 + 15 problemów</span><span class="tag kids">g4=5+4, dużo g5-g6</span></div>
+        <div class="meta">Bloki w klimacie parkowym (Fornblocket, Turkiska kiosken, Grottkanten) — dojazd pociągiem z Väsby + spacer. Rano bajecznie pusto.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/hagaparken">thetopo.com/crags/hagaparken</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.359096,18.037114">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/104/104861/p1120q40-dc81ee0c2e7640ddfc9da09c57cae3ae.jpg" alt="Djurgårdsblocken">
+      <div class="body">
+        <h3>Djurgårdsblocken</h3>
+        <div class="dist">📍 Djurgården — 23,1 km</div>
+        <div class="tags"><span class="tag rock">72 problemy</span><span class="tag kids">g4=2 · g5=12 · g6=46</span></div>
+        <div class="meta">Bloki tuż przy żwirowych ścieżkach za Kaknäs (Nasdaq, Meatball, Lock n Load…). 100% access-friendly, parking po drugiej stronie Lindarängsvägen.</div>
+        <div class="src">Źródło: <a href="https://thetopo.com/crags/djurgardsblocken">thetopo.com/crags/djurgardsblocken</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.337851,18.125982">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://storage.e5gc6.upcloudobjects.com/photos/000/087/87687/p1120q40-3b437b16a2537c4aca1df3fa1301ca5e.jpg" alt="Ängbyplan">
+      <div class="body">
+        <h3>Ängbyplan / Judarskogen (+ Nockeby)</h3>
+        <div class="dist">📍 Bromma — 19,9–20,5 km</div>
+        <div class="tags"><span class="tag rock">48 + ~30 problemów</span><span class="tag kids">mieszane gradacje</span></div>
+        <div class="meta">Trzy sąsiednie rejony: Ängbyplan (Medelhavsstenarna), Judarskogen (naturreservat) i Nockeby po obu stronach Drottningholmsvägen — „estetiskt tilltalande, flera graderingar".</div>
+        <div class="src">Źródła: <a href="https://thetopo.com/crags/angbyplan">thetopo</a>, <a href="https://www.addnature.com/sv/info/hooked/2024/03/12/stockholms-basta-boulderingstallen">addnature</a> · ✅/⚠️ GPS</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.339106,17.911309">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">📋 <b>Pozostałe skały w 25 km (w tabeli skrótem):</b></div>
+  <div class="tblwrap"><table>
+    <tr><th>Crag</th><th>Km</th><th>Problemy</th><th>Łatwe (g4–g5)</th><th>GPS</th><th>Uwagi</th></tr>
+    <tr><td>Kärrdal</td><td>10,2</td><td>14</td><td>g4=3, g5=3</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.433898,17.994902">map</a></td><td>4 sektory</td></tr>
+    <tr><td>Rösjöbadet</td><td>10,2</td><td>4</td><td>brak (od g7)</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.436598,18.005644">map</a></td><td>twardziel</td></tr>
+    <tr><td>Järvabadet</td><td>13,4</td><td>5</td><td>g4=1, g6=4</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.3974,17.9152">map</a></td><td>naturreservat Järva</td></tr>
+    <tr><td>Bellevue</td><td>19,6</td><td>6</td><td>g4=1, g5=3</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.354132,18.049009">map</a></td><td>miasto, Roslagstull</td></tr>
+    <tr><td>Lappkärrsberget</td><td>18,2</td><td>15</td><td>g5=2, g6=7</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.371435,18.066384">map</a></td><td>główna ściana</td></tr>
+    <tr><td>Grimsta</td><td>18,2</td><td>23</td><td>g4=14 (!)</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.357168,17.854448">map</a></td><td>rezerwat — nie szczotkować nowych</td></tr>
+    <tr><td>Beverly Hills (Fredhäll)</td><td>21,3</td><td>4</td><td>g5=1</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.329738,17.998433">map</a></td><td>nad wodą</td></tr>
+    <tr><td>Orminge lätta</td><td>26,7 — poza</td><td>19</td><td>g4=5, g5=12</td><td><a href="https://www.google.com/maps/search/?api=1&query=59.333508,18.225018">map</a></td><td>tylko dla porządku</td></tr>
+  </table></div>
+</section>
+
+<section id="parkour">
+  <h2>🤸 Parkourparki (wspinanie + skakanie, świetne z dziećmi)</h2>
+  <p class="sub">Wszystkie darmowe, bez rezerwacji. Oświetlenie potwierdzone tylko dla Axelsberg (23,7 km — na granicy) — reszta „prawdopodobnie tak, jak większość parków miejskich", ale niesprawdzone.</p>
+  <div class="grid">
+
+    <div class="card">
+      <img loading="lazy" src="https://motionera.stockholm/optimized/serviceunitspage/filer/hitta/b5d61663-6a73-4abf-9173-ff96b04a4162.jpeg" alt="Tensta parkour">
+      <div class="body">
+        <h3>Tensta parkour ⭐ pierwszy publiczny w Sztokholmie</h3>
+        <div class="dist">📍 Tensta, Nydalsparken — 13,8 km</div>
+        <div class="tags"><span class="tag parkour">parkour</span><span class="tag kids">DZIECI: tak (beton na gumie)</span><span class="tag">24/7</span></div>
+        <div class="meta">„Platsbyggda kraftiga betongmurar i skiftande höjd + stor stålställning" na miękkim gumowym podłożu. Różne wysokości murów = dobre na start.</div>
+        <div class="src">Źródła: <a href="https://motionera.stockholm/hitta-skatepark-och-parkourpark/parkourpark/tensta-parkour/">motionera.stockholm</a>, <a href="https://www.visitstockholm.com/o/tensta-parkour/">visitstockholm</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.39703,17.90577">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://media.calisthenics-parks.com/attachments/ezsCmIayvkhsc4ghv0HICZVyuufzwDD2evB7wHHG_100_square.jpg" alt="Sollentuna Parkour Park">
+      <div class="body">
+        <h3>Sollentuna Parkour Park (Edsbergs sportfält)</h3>
+        <div class="dist">📍 Edsberg, przy Edsbergsvägen 3 — 8,6 km</div>
+        <div class="tags"><span class="tag parkour">parkour</span><span class="tag kids">DZIECI: tak</span><span class="tag">„ninja warrior"</span><span class="tag">utegym</span></div>
+        <div class="meta">„Parkourbana i skogskanten nära fotbollsplanerna" — tor w lesie przy boiskach: klättern, calisthenics, outdoor fitness, ninja-warrior elementy. Bez rezerwacji, 24/7.</div>
+        <div class="src">Źródła: <a href="https://www.sollentuna.se/uppleva--gora/idrott-motion-och-friluftsliv/spontanidrottsplatser/">sollentuna.se</a>, <a href="https://calisthenics-parks.com/spots/25751-de-street-workout-park-sollentuna-parkour-park-sollentuna">calisthenics-parks</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.4425,17.9572">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Megaparken — parkour + skate</h3>
+        <div class="dist">📍 Vallentuna/Täby (Bällstaberg) — 9,1 km</div>
+        <div class="tags"><span class="tag parkour">parkour + skate</span><span class="tag kids">DZIECI: tak</span></div>
+        <div class="meta">Duży „Mega" park: parkourbana + skate. GPS pewny; gmina kwestionowana (pusslet: Täby, Vallentuna: Vallentuna) — i tak 9 min autem.</div>
+        <div class="src">Źródła: <a href="https://www.pusslet.se/aktiviteter/plats/megaparken-parkourbana-taby">pusslet</a>, <a href="https://vallentunanya.se/nyheter/saa-blir-nya-mega-parken-i-vallentuna/152">vallentunanya</a> · ⚠️</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.5325,18.0808">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Nälsta parkourpark + lekplats</h3>
+        <div class="dist">📍 Spånga/Vällingby (Trolle-bondes gata 21) — 16,8 km</div>
+        <div class="tags"><span class="tag parkour">„enkel parkour" — łatwa</span><span class="tag kids">DZIECI: idealna dla nich</span><span class="tag">Google 4,1★ (117)</span></div>
+        <div class="meta">„Redskap för dig som vill träna enkel parkour" — prosty poziom, wciśnięty w lekplats. Najbardziej „dziecięcy" parkour w okolicy.</div>
+        <div class="src">Źródła: <a href="https://motionera.stockholm/hitta-skatepark-och-parkourpark/parkourpark/nalsta-parkourpark/">motionera</a>, <a href="https://parker.stockholm/hitta-lekplatser-parklekar-plaskdammar/lekplats/nalsta-parkourpark-och-lekplats">parker.stockholm</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=N%C3%A4lsta+parkourpark+och+lekplats">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img loading="lazy" src="https://motionera.stockholm/optimized/serviceunitspage/filer/hitta/073edad8-4d91-4d2b-9282-ca5ae74133eb.jpeg" alt="Gasverkets parkour">
+      <div class="body">
+        <h3>Gasverkets parkour</h3>
+        <div class="dist">📍 Norra Djurgårdsstaden (Hjorthagen) — 20,1 km</div>
+        <div class="tags"><span class="tag parkour">belki + poręcze</span><span class="tag kids">DZIECI: młodzież/dorośli</span><span class="tag">sztuczna murawa</span></div>
+        <div class="meta">„Balkar och räcken att hoppa och klättra på". Obok basketplan i… Klätterverket Gasverket (hala, na przyszłość).</div>
+        <div class="src">Źródło: <a href="https://motionera.stockholm/hitta-skatepark-och-parkourpark/parkourpark/gasverkets-parkour/">motionera.stockholm</a> · ✅</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.35802,18.09279">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <h3>Skytteholmsparken (Solna) + reszta</h3>
+        <div class="dist">📍 Solna centrum — 17,8 km</div>
+        <div class="tags"><span class="tag parkour">parkourställning</span><span class="tag">24/7 „när som helst"</span></div>
+        <div class="meta">Parkourställning w parku, obok bollplan. Solna deklaruje rozbudowę spontanidrott (więcej parkour/skate/utegym).</div>
+        <div class="src">Źródło: <a href="https://www.solna.se/uppleva--gora/idrott-och-anlaggningar/spontanidrottsplatser">solna.se</a> · ⚠️</div>
+        <div class="btns"><a class="btn orange" href="https://www.google.com/maps/search/?api=1&query=59.3583,17.9931">📍 Google Maps</a></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="note">🏅 <b>Street Mentality</b> (Stora Ursvik, Sundbyberg — 14,7 km): „Sveriges största och äldsta parkourklubb" — klub z outdoor-spotem (drop-in/open gym; <a href="https://streetmentality.se">streetmentality.se</a> · ⚠️ lokalizacja outdoor niepewna). <b>Axelsbergs parkourpark</b> (23,7 km, Hägersten): jedyny z oficjalnie potwierdzonym oświetleniem wieczornym („Anläggningen har belysning") — na samej granicy promienia. <b>Upzone Sollentuna</b> (Edsberg): komercyjny klätterpark w drzewach — płatny, tylko po to, żebyś wiedział że jest (<a href="https://upzone.se/vara-parker/upzone-sollentuna/">upzone.se</a>).</div>
+</section>
+
+<section id="praktyka">
+  <h2>🎒 Praktycznie — pierwszy raz na skałach</h2>
+  <div class="grid">
+    <div class="card"><div class="body">
+      <h3>Co zabrać</h3>
+      <div class="meta">🪨 <b>Skały:</b> buty wspinaczkowe (wynajem ~50–80 kr w halach: Klättercentret Solna, Klätterverket — najpierw przymiarka w hali), <b>crash pad (boulder-materac) obowiązkowy</b> — nawet „łatwe" g4 potrafi przyprzyć o ziemię; chalk (magnezja) w woreczku. 🧒 <b>Lekplatsy/parkour:</b> zwykłe buty sportowe wystarczą — ścianki mają bezpieczne powierzchnie, spotter = dorosły obok.</div>
+    </div></div>
+    <div class="card"><div class="body">
+      <h3>Gradacje — jak czytać</h3>
+      <div class="meta">thetopo używa skali g4–g7: <b>g4</b> = drabinka/pochylnik (dzieci i ty w trampkach), <b>g5</b> = łatwy bouldering (tu zaczyna się frajda), <b>g6</b> = średnie (wymaga już techniki), <b>g7</b> = mocne. Jako nowicjusz celuj w g4–g5; po kilku wyjazdach g6. W halach ta sama filozofia = kolorowe taśmy.</div>
+    </div></div>
+    <div class="card"><div class="body">
+      <h3>Kiedy iść (wieczór / rano)</h3>
+      <div class="meta">🌅 <b>Rano</b> — skały i parki są puste do ~9:00 wszędzie; plus mgła nad Törnskogen. 🌆 <b>Wieczór</b> — oświetlone: boiska Vilunda (do 23:00/22:00), Kanonkulleparken + Sätunaparken (Märsta), Kyrksjön (elljusspår przy blokach). Same skały w lesie = po zmroku czołówka. Axelsberg (23,7 km) = potwierdzone światła na parkour.</div>
+    </div></div>
+    <div class="card"><div class="body">
+      <h3>Zasady i bezpieczeństwo</h3>
+      <div class="meta">Naturreservat (Törnskogen, Tegelhagen, Skavlöten, Grimsta, Judarskogen): trzymaj się ścieżek, nie ruszaj mchu/przyrody, <b>nie szczotkuj nowych problemów</b> (Grimsta — zakaz). Zjazd z bloku: nogi first, nie wyprostowane ręce. Z dziećmi: ty jako spotter od strony upadku, pad zawsze pod linią. Allemansrätten = nie zostawiaj śladów.</div>
+    </div></div>
+  </div>
+</section>
+
+<section id="coverage">
+  <h2>📋 Coverage — źródła i status</h2>
+  <div class="tblwrap"><table>
+    <tr><th>Źródło</th><th>Status</th><th>Notka</th></tr>
+    <tr><td>Strony komunalne: upplandsvasby.se, sollentuna.se, vallentuna.se, sigtuna.se, solna.se, sundbyberg.se, jarfalla.se, stockholm.se (motionera/parker)</td><td class="cover-ok">✅ COVERED</td><td>Opisy obiektów, godziny, oświetlenie — bezpośrednio z gmin</td></tr>
+    <tr><td>thetopo.com (dawne 27crags) — API cragów</td><td class="cover-ok">✅ COVERED</td><td>26 cragów: GPS, liczba problemów, gradacje, zdjęcia, access</td></tr>
+    <tr><td>thecrag.com + MadBoulder + Addnature (guide)</td><td class="cover-ok">✅ COVERED</td><td>Krzywa weryfikacja cragów + cytaty o Nockeby/Orhem/Farsta</td></tr>
+    <tr><td>OSM Overpass API</td><td class="cover-warn">⚠️ CZĘŚCIOWO</td><td>Agent A: endpointy padły (406/timeout); Agent D: zapytania przeszły (parkour/klätterlek). Wynik: dane z 2 przebiegów</td></tr>
+    <tr><td>Wyszukiwarki DDG/Bing/Brave/curl-Google</td><td class="cover-warn">⚠️ RATE-LIMIT</td><td>Część zapytań zablokowana; obejścia: r.jina.ai, Google w przeglądarce, bezpośrednie strony gmin</td></tr>
+    <tr><td>calisthenics-parks.com, pusslet.se, lekplatskarta.com, visitstockholm, streetmentality.se, upzone.se</td><td class="cover-ok">✅ COVERED</td><td>Zdjęcia i oceny parkour/lekplatsów</td></tr>
+    <tr><td>Indoor hale (Klätterverket, Skip, BLX, Upzone…)</td><td class="cover-ok">✅ CELIWNIE WYKLUCZONE</td><td>Za zadaniem: „nie na hali" — tylko outdoor (Upzone wspomniany jako płatny wyjątek)</td></tr>
+  </table></div>
+  <p class="sub" style="margin-top:10px"><b>Metodyka:</b> 4 równoległe agenty-scrapery (DeepSeek V4.1 Flash): (A) lekplatsy Väsby/Sollentuna/Vallentuna/Sigtuna — 21 miejsc, (B) Solna/Sundbyberg/Järfälla/Bro/NW-Stockholm — 11, (C) natursten z bazy topo — 26 cragów, (D) parkourparker — 14. Razem ~70 rekordów → deduplikacja (Snuggtaskeberg/Brommablocken/Tensta/Nälsta/Ängbyplan duplikowane między agentami) → ~50 unikatowych w 25 km. Odległości: haversine od centrum Väsby. Wszystkie oceny „dla dzieci" i oświetlenie = z opisów gmin/źródeł, nie z powietrza; niesprawdzone oznaczone ⚠️.</p>
+  <p class="sub"><b>Co mogło umknąć:</b> oświetlenie większości parkourparker nieudokumentowane na stronach gmin (sprawdź na miejscu); GPS 5 lekplatsów tylko przybliżony (Tennisparken, Malmparken, Lundens, Flygplansparken, Vikingalekplatsen); niezweryfikowano na żywo aktualnego stanu ścianek (sztuczna skała Vilunda opisana przez gminę jako aktywna).</p>
+</section>
+
+<footer>
+  <p>Research: Andrzej · 14.10.2026 · 4 subagentów · ~80 źródeł/stron · kompletny data dump: <span class="src">workspace/memory/research/bouldering-lekpark-2026-10-14/raw/</span></p>
+  <p>Wszystkie miejsca darmowe i outdoor. Climb safe! 🧗</p>
+</footer>
+
+</div>
+<a id="top-btn" href="#tldr">⬆️</a>
+</body>
+</html>

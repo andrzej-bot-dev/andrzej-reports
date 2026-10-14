@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domowe roboty: pranie / zmywarka / śmieci — kto co zbudował (2026-10-14)</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--card2:#1d212b;--tx:#e8eaf0;--mut:#9aa3b5;--ac:#4fc3f7;--ok:#66bb6a;--bad:#ef5350;--warn:#ffb74d;--bd:#2a2f3c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.55 -apple-system,'Segoe UI',Roboto,sans-serif;padding-bottom:60px}
+.wrap{max-width:1200px;margin:0 auto;padding:18px}
+header{padding:26px 0 10px}
+h1{font-size:26px;line-height:1.25}
+.meta{color:var(--mut);font-size:13px;margin-top:8px}
+.nav{position:sticky;top:0;z-index:9;background:var(--bg);border-bottom:1px solid var(--bd);display:flex;gap:8px;padding:10px 0;flex-wrap:wrap;max-height:60px;align-items:center}
+.nav a{background:var(--card2);color:var(--tx);text-decoration:none;padding:6px 12px;border-radius:8px;font-size:13px;border:1px solid var(--bd)}
+.nav a:hover{border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;margin:14px 0}
+h2{font-size:20px;margin-bottom:10px}
+h3{font-size:16px;margin:16px 0 6px}
+.tldr{border-left:4px solid var(--ac)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+th,td{padding:8px 10px;border:1px solid var(--bd);text-align:left;vertical-align:top}
+th{background:var(--card2);color:var(--mut);font-weight:600}
+.pill{display:inline-block;padding:1px 9px;border-radius:10px;font-size:12px;white-space:nowrap}
+.ok{background:#1b3a24;color:var(--ok)}.bad{background:#3a1b1b;color:var(--bad)}.warn{background:#3a2f1b;color:var(--warn)}.info{background:#1b2a3a;color:var(--ac)}
+ul{padding-left:20px;margin:8px 0}
+li{margin:4px 0}
+a{color:var(--ac)}
+.mut{color:var(--mut);font-size:13px}
+.top{position:fixed;right:18px;bottom:18px;background:var(--card2);border:1px solid var(--bd);color:var(--tx);border-radius:50%;width:42px;height:42px;text-align:center;line-height:42px;text-decoration:none;font-size:18px}
+.big{font-size:15px}
+@media(max-width:700px){h1{font-size:21px}th,td{padding:6px 7px;font-size:12.5px}}
+</style>
+</head>
+<body>
+<div class="nav wrap"><b style="margin-right:6px">🤖</b>
+<a href="#tldr">TL;DR</a><a href="#pranie">🧺 Pranie</a><a href="#zmywarka">🍽️ Zmywarka</a><a href="#smieci">🗑️ Śmieci</a><a href="#wzorzec">Wzorce</a><a href="#zrodla">Źródła</a>
+</div>
+<div class="wrap">
+<header>
+<h1>Domowe roboty: pranie / zmywarka / śmieci<br>czy ktoś to zbudował?</h1>
+<div class="meta">📚 Knowledge research · 2026-10-14 · 3 subagenty (DeepSeek Flash) · ~25 projektów/attemptów · 35+ otwartych stron · GitHub API + Hackaday + Instructables + YouTube + vendor/news pages · EN + PL</div>
+</header>
+
+<div class="card tldr" id="tldr">
+<h2>TL;DR</h2>
+<ul>
+<li class="big"><b>Żaden z trzech zadań nie jest rozwiązany — w żadnej kategorii nie istnieje tani, pewny domowy robot.</b> Twoje wnioski z dyskusji potwierdzone całą historią branży.</li>
+<li><b>Pranie:</b> jedyny na świecie robot washer→dryer to <a href="https://tokinishikawa.github.io/ella.html">ELLA</a> (student, wózek + pazur + jazda po kolorowej taśmie). Jeden jedyny, wysłany do domów robot składający pranie (<a href="https://www.weaverobotics.com/isaac-0">Weave Isaac 0</a>, $7,999 + abonament) <b>potrzebuje teleoperacji</b> — człowiek koryguje na żywo.</li>
+<li><b>Zmywarka:</b> zero (0!) porządnych buildów DIY na świecie. Jedyny prawdziwie autonomiczny ładowacz/rozładowywacz to humanoid <a href="https://www.figure.ai/news/helix-loads-the-dishwasher">Figure z modelem Helix</a>. Startup Dishcraft padł mimo ~$25M i magnesów w talerzach.</li>
+<li><b>Śmieci:</b> nikt nie wysłał robota wnoszącego zawiązany worek do kontenera. Jedyna działająca masowa "automatyzacja śmieci" = dock samoodkurzający odkurzacza. Kosz samozawijający Townew: PCMag <b>2/5</b>.</li>
+<li><b>Wzorzec zwycięski:</b> sztywna mechanika + ograniczony świat (deski składające, magnesy, taśma nawigacyjna, RFID). <b>Wzorzec padający:</b> swobodna percepcja + manipulacja.</li>
+</ul>
+</div>
+
+<div class="card" id="pranie">
+<h2>🧺 Pranie — transfer, ładowanie, składanie</h2>
+<table>
+<tr><th>Projekt</th><th>Kto/kiedy</th><th>Status</th><th>Co robi / technika</th></tr>
+<tr><td><a href="https://tokinishikawa.github.io/ella.html">ELLA</a></td><td>student, mentor Samsung Research, ~2023-24</td><td><span class="pill ok">DZIAŁA (proto)</span></td><td><b>Jedyny robot washer→dryer na świecie.</b> Wózek omnikółowy + pazur na prowadnicy śrubowej, nawigacja po kolorowej taśmie na podłodze, czujnik prądu.</td></tr>
+<tr><td><a href="https://www.weaverobotics.com/isaac-0">Weave Isaac 0</a></td><td>startup, SF, wysyłka 02.2026</td><td><span class="pill warn">WYSŁANY + teleop</span></td><td>Składa pranie w domach: $7,999 + abonament, 30-90 min/zład. Autonomia + <b>zdalni operatorzy korygujący 5-10 s</b>. Dowód, że zadanie wciąż nie jest rozwiązane.</td></tr>
+<tr><td>Laundroid</td><td>Seven Dreamers + Panasonic, 2015-19</td><td><span class="pill bad">BANKRUCTWO 2019</span></td><td>Składał 1 rzecz 3-10 min (nocą cały zład). ~$95M wchłonięte. <a href="https://en.wikipedia.org/wiki/Laundroid">wiki</a> · <a href="https://techcrunch.com/2019/04/23/the-company-behind-laundroid-files-for-bankruptcy/">TechCrunch</a></td></tr>
+<tr><td>FoldiMate</td><td>startup, 2012-19</td><td><span class="pill bad">VAPORWARE</span></td><td>Nigdy nie wysłany; zaliczki ~$980. Domena przejęta przez Miele; <b>marka przejęta przez strony scam</b>.</td></tr>
+<tr><td><a href="https://github.com/NathanBuildsDIY/FoldimusPrimev1">FoldimusPrime v1</a></td><td>DIY NathanBuildsDIY, ~2025</td><td><span class="pill ok">DZIAŁA</span></td><td>Składarka z wizją: Pi 5 + OpenCV + TFLite + serwa; pełne schematy/3D. <a href="https://www.youtube.com/watch?v=D-1n0gip9N8">video</a></td></tr>
+<tr><td><a href="https://www.buildair.ai/projects/cloth-folding-robot/">Fabrica</a></td><td>DIY open-source, ~2025-26</td><td><span class="pill ok">DZIAŁA</span></td><td>Pi Pico 2W + 16 modułowych paneli serwo, w pełni drukowalna 3D. Klasyczna deska składająca.</td></tr>
+<tr><td><a href="https://github.com/LarsvanDorp/laundry_folding_robot">ETH Zürich SO-101 folding</a></td><td>kurs ETH, ~2026</td><td><span class="pill ok">DZIAŁA</span></td><td>Jedno ramię SO-101 + kamera na nadgarstku, policy DiT w LeRobot, <b>1500+ epizodów teleop</b> — złożyła 8 niewidzianych ręczników pod rząd.</td></tr>
+<tr><td>π0</td><td>Physical Intelligence, 2024</td><td><span class="pill info">DEMO/open</span></td><td>VLA model "złóż pranie"; model otwarty (LeRobot). <a href="https://www.pi.website/blog/pi0">pi.website</a> · <a href="https://arxiv.org/html/2410.24164v1">arXiv</a></td></tr>
+<tr><td>Berkeley PR2 / BLUE</td><td>UC Berkeley, 2010 / 2020-22</td><td><span class="pill info">DEMO</span></td><td>Landmark: ręczniki na PR2 (2010); BLUE = tani research arm. <a href="https://rll.berkeley.edu/blue/">rll.berkeley.edu</a></td></tr>
+<tr><td>RFID linen (CPCON, LinenTech)</td><td>przemysł hotelarski</td><td><span class="pill ok">DOJRZAŁE</span></td><td>UHF RFID szyte w pościel, sortowanie/inwentaryzacja — <b>twój pomysł RFID działa, ale tylko do identyfikacji</b>. <a href="https://cpcongroup.com/rfid-laundry-management-system/">cpcon</a></td></tr>
+</table>
+<p class="mut"><b>Scarcity finding:</b> ZERO publicznych DIY robotów ładujących pralkę. Jedyny transfer washer→dryer = ELLA. Board-foldery to jedyny niezawodny wzorzec domowy; wizyjne składanie = nadal rzadkie i kruche. Fala małych repo LeRobot 2025-26 — składanie to "hello world" robot learningu.</p>
+</div>
+
+<div class="card" id="zmywarka">
+<h2>🍽️ Zmywarka — ładowanie / rozładowanie</h2>
+<table>
+<tr><th>Projekt</th><th>Kto/kiedy</th><th>Status</th><th>Co robi / technika</th></tr>
+<tr><td><a href="https://www.figure.ai/news/helix-loads-the-dishwasher">Figure 02/03 (Helix)</a></td><td>Figure AI, 2025</td><td><span class="pill ok">AUTONOMICZNIE</span></td><td><b>Jedyny prawdziwy autonomiczny</b> ładowacz+rozładowywacz zmywarki: singluje talerze ze stosu, przekłada szklankę z ręki do ręki, recover z misgrasp. VLA model, humanoid. <a href="https://www.youtube.com/watch?v=tZKhck9vgk8">video</a></td></tr>
+<tr><td>Dishcraft Robotics</td><td>startup, ~2019-21</td><td><span class="pill bad">MARTWE</span></td><td>~$25M; pranie naczyń jako usługa. Ramie + <b>magnesy wklejane w naczynia</b> + CV inspekcja czystości. Padło mimo pełnej kontroli nad talerzami. <a href="https://spectrum.ieee.org/dishcraft-robotics-takes-over-dishwashing-from-humans">IEEE Spectrum</a></td></tr>
+<tr><td>Samsung Bot Handy</td><td>CES 2021</td><td><span class="pill bad">VAPORWARE</span></td><td>Kinowy demo: pakuje zmywarkę, nalewa wino. Nigdy nie wysłany. <a href="https://futurism.com/the-byte/samsung-bot-handy-dishwasher">Futurism</a></td></tr>
+<tr><td>1X NEO</td><td>1X, 2025-26</td><td><span class="pill warn">TELEOP</span></td><td>Domowy humanoid w przedsprzedaży; recenzje: działa przez teleoperację, "rozładowuje zmywarkę" = marketing.</td></tr>
+<tr><td><a href="https://www.repository.cam.ac.uk/items/90e44054-009d-47ce-b0c7-184de0387402">Cambridge cluttered-tray</a></td><td>Cambridge, 2020</td><td><span class="pill info">PAPER+repo</span></td><td><b>Najbliższe DIY:</b> wykrywanie + pick&place talerzy z zaśmieconych tac do zmywarki — zwykła kamera RGB + pinch gripper + gotowy detektor. "Benchmark problem in robotics".</td></tr>
+<tr><td>TUM James / Willow PR2</td><td>~2009-2014</td><td><span class="pill info">DEMO</span></td><td>Era PR2: roboty "współlokatorzy" — śniadanie, sprzątanie stołów, era-ROS.</td></tr>
+<tr><td><a href="https://github.com/MDU-C2/Dishwasher-Robot-HT26">MDU Dishwasher-Robot HT26</a></td><td>studenci Mälardalen (SE), 2026</td><td><span class="pill warn">W TOKU</span></td><td>Szwedzki kurs robotyki — dokładnie ten cel, repo ruszone 09.2026. Do obserwacji.</td></tr>
+<tr><td>Sunday Memo / Nori L2</td><td>YC startupy, 2026</td><td><span class="pill bad">PRE-LAUNCH</span></td><td>Obiecują "ładowanie zmywarki" w domu; nic nie wysłane (Memo: "beta late 2026").</td></tr>
+</table>
+<p class="mut"><b>Scarcity finding:</b> rozległe szukanie EN+PL ("robot pakujący zmywarkę DIY"...) = <b>zero maker-buildów</b> (Hackaday/Instructables/GitHub). Wyniki to odkurzacze, marketing humanoidalny i repo studenckie/symulacje (PAPRAS dual-arm, YOLOv8+GRConvNet w simie).</p>
+</div>
+
+<div class="card" id="smieci">
+<h2>🗑️ Śmieci — wynoszenie / wymiana worków</h2>
+<table>
+<tr><th>Projekt</th><th>Kto/kiedy</th><th>Status</th><th>Co robi / technika</th></tr>
+<tr><td>Roomba Clean Base i podobne</td><td>iRobot + wszyscy, 2018-</td><td><span class="pill ok">MASOWY, DZIAŁA</span></td><td><b>Jedyna masowa automatyzacja śmieci, która działa:</b> dock wysysa kosz robota do szczelnego worka. Człowiek dalej wymienia worek w docu.</td></tr>
+<tr><td><a href="https://www.pcmag.com/reviews/townew-trash-can">Townew T1/T1S</a></td><td>Chiny, 2017-</td><td><span class="pill warn">WYSŁANY, słaby</span></td><td>Kosz samozawijający worek (thermal seal) + automatyczna wymiana z kartridża. PCMag <b>2/5</b>: czasem zamyka PUSTY worek; drogie refille.</td></tr>
+<tr><td><a href="https://www.airdeertech.com/products/self-sealing-smart-trash-can-a1">Airdeer A1</a></td><td>~2023-</td><td><span class="pill warn">WYSŁANY</span></td><td>Ten sam patent: ring folii + seal + próżniowe rozciąganie. ~20 dni/ring.</td></tr>
+<tr><td>Rezzi SmartCan</td><td>startup MA, 2019</td><td><span class="pill bad">VAPORWARE</span></td><td><b>Dokładnie sen "robot wozi kubeł na krawężnik"</b>: motorowe koła retrofit + nauka trasy. Zginął w fazie development.</td></tr>
+<tr><td><a href="https://trashpilot.com/">Trashpilot</a></td><td>Australia, 2026</td><td><span class="pill warn">SELF-CLAIM</span></td><td>DriveBase na własny kubeł 240L, LiDAR+GPS, "shipping Q3 2026" — tylko deklaracje vendora, zero weryfikacji.</td></tr>
+<tr><td>Oshkosh HARR-E</td><td>CES 2025</td><td><span class="pill info">DEMO</span></td><td>"Uber for trash" dla osiedli planowych: robot jedzie po kubeł na telefon, wozi do hubu.</td></tr>
+<tr><td><a href="https://irobota.com/meet-binbot-9000-the-robotic-trash-can-that-follows-you-around-making-bin-day-a-breeze/">Binbot 9000</a></td><td>James Bruton, 2024</td><td><span class="pill ok">DZIAŁA (DIY)</span></td><td><b>Jedyny działający DIY "robot śmieciowy":</b> kosz-followme — Arduino Mega + Jetson Nano + kamera, śledzi wydrukowane targety, klapka na serwo. W 100% odtwarzalny na twojej półce.</td></tr>
+<tr><td>ESP32 garbage line-followers</td><td>GitHub/hobby, 2020-26</td><td><span class="pill info">zabawki</span></td><td>Dziesiątki repo: roboty zbierające paperki po linii — nic nie niesie zawiązanego worka.</td></tr>
+<tr><td>BeachBot / SeaClear</td><td>TU Delft, 2019-24</td><td><span class="pill info">DEMO</span></td><td>Pickup śmieci z plaż/dna morskiego — dowód, że nawet ograniczony litter-picking wymagał zespołu i lat.</td></tr>
+</table>
+<p class="mut"><b>KEY FINDING:</b> żaden hobbyista ani startup nie wysłał domowego robota, który podnosi zawiązany worek i niesie go do kontenera. Ta nieobecność JEST wynikiem. PL: "robot wyrzucający śmieci" = tylko rankingi odkurzaczy.</p>
+</div>
+
+<div class="card" id="wzorzec">
+<h2>🧭 Wzorce z cmentarzyska (co z tego wynika dla twojego v0)</h2>
+<ul>
+<li><b>Działa:</b> sztywna mechanika + skonstruowany świat. Deski składające (Fabrica, FoldimusPrime), magnesy w talerzach (Dishcraft — technicznie działało, ekonomicznie nie), taśma kolorowa (ELLA), ring folii (Townew), fiducial/rack zamiast percepcji (twój pomysł z kropkami — dokładnie ta szkoła).</li>
+<li><b>Nie domyka się:</b> swobodna percepcja + manipulacja w nieustalonym świecie. Nawet z $95M (Laundroid) albo $25M (Dishcraft), albo z VLA na humanoidzie (Figure — działa, ale cena kosmiczna), albo z człowiekiem na teleopie (Weave, 1X).</li>
+<li><b>Dwie ścieżki hobbysty, które mają pokrycie w znaleziskach:</b> (1) składowarka-deska jak FoldimusPrime/Fabrica — najtańszy "wow" na półce ESP32/Pi; (2) twój v0 rozpakowywarki: identyczne talerze + rack-dok + gantry z kropkami — najbliższy analog w literaturze to paper z Cambridge (RGB + pinch gripper), a ELLA pokazuje, że transfer-wózek też ma sens.</li>
+<li><b>RFID do prania:</b> potwierdzone w przemyśle (UHF tagi szyte w pościel) — do sortowania po suszeniu: tak; do wyciągania z kosza: bezużyteczne bez ramienia.</li>
+</ul>
+</div>
+
+<div class="card" id="zrodla">
+<h2>Źródła — coverage</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Uwagi</th></tr>
+<tr><td>DuckDuckGo / Bing / Mojeek (search chain)</td><td><span class="pill ok">✅</span></td><td>DDG bezpośrednio = bot-challenge; przejście przez r.jina.ai proxy</td></tr>
+<tr><td>GitHub API (repo search)</td><td><span class="pill ok">✅</span></td><td>kilkanaście zapytań, repo zweryfikowane</td></tr>
+<tr><td>Hackaday / Instructables</td><td><span class="pill ok">✅</span></td><td>tagi folding-laundry, howto search</td></tr>
+<tr><td>YouTube (przez jina)</td><td><span class="pill ok">✅</span></td><td>tytuły/kanaly/filmy zidentyfikowane</td></tr>
+<tr><td>Vendor/news pages</td><td><span class="pill ok">✅</span></td><td>IEEE Spectrum, TechCrunch, Verge, PCMag, Smithsonian, figure.ai, weaverobotics.com itd.</td></tr>
+<tr><td>Reddit (JSON API)</td><td><span class="pill bad">❌ 403</span></td><td>curl z UA zablokowany; treść przez search chain + cytaty w prasie</td></tr>
+</table>
+<p class="mut">Metodyka: 3 subagent-scrapery (EN + PL frazy), ~40 zapytań, 35+ otwartych stron, destylaty: <code>memory/research/home-robots-2026-10/raw/</code> (13 plików). Klasyfikacja: ✅ zweryfikowana strona / ⚠️ pojedyncze źródło. Wszystkie statusy z datą 2026-10-14.</p>
+</div>
+
+<div class="wrap mut" style="text-align:center;padding:20px 0">Andrzej research · 2026-10-14 · wygenerowano z destylatów subagentów</div>
+</div>
+<a class="top" href="#tldr">↑</a>
+</body>
+</html>

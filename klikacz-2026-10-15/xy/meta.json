@@ -1,6 +1,6 @@
 {
-  "title": "Klikacz XY gantry (OnePlus 13)",
-  "desc": "Gantry XY na pr\u0119tach M8: 2\u00d7 28BYJ-48 (Y stacjonarny, X na mo\u015bcie), SG90 z palcem \u2014 programowe klikanie w dowolny punkt ekranu. ESP32 steruje.",
+  "title": "Gantry XY na M8 (szkic v0)",
+  "desc": "Szkic v0 na pr\u0119tach M8: 2\u00d7 28BYJ-48, SG90 z palcem. Wymaga \u015brub M8 \u2014 pierwotna interpretacja przed dostarczeniem specyfikacji v2.",
   "model": "anthropic/claude-opus-5.5",
   "cost_usd": 0.243,
   "iterations": 1,

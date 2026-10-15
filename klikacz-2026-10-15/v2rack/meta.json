@@ -1,0 +1,175 @@
+{
+  "title": "Klikacz v2 \u2014 rack & pinion (TW\u00d3J projekt)",
+  "desc": "Wg klikacz_opis.md: 3\u00d7 szyna U-kana\u0142 z 625zz + z\u0119batka, 3\u00d7 28BYJ-48 (2\u00d7Y + X), SG90 na Z z rysikiem na spr\u0119\u017cynie, taca OnePlus 13 + mast C930e. Rail w 3 wariantach kana\u0142u: 5.3/5.5/5.7.",
+  "model": "anthropic/claude-opus-5.5",
+  "cost_usd": 0.445,
+  "iterations": 2,
+  "has_assembly": true,
+  "parts": [
+    {
+      "name": "bearing_comb",
+      "bounds": [
+        24.5,
+        40.0,
+        12.0
+      ],
+      "tris": 60,
+      "watertight": true,
+      "volume_mm3": 5166.6
+    },
+    {
+      "name": "c930e_cradle",
+      "bounds": [
+        86.8,
+        69.8,
+        30.0
+      ],
+      "tris": 1112,
+      "watertight": true,
+      "volume_mm3": 27362.6
+    },
+    {
+      "name": "camera_mast",
+      "bounds": [
+        50.0,
+        40.0,
+        150.0
+      ],
+      "tris": 2116,
+      "watertight": true,
+      "volume_mm3": 49503.6
+    },
+    {
+      "name": "end_frame_a",
+      "bounds": [
+        14.0,
+        141.0,
+        96.0
+      ],
+      "tris": 4276,
+      "watertight": true,
+      "volume_mm3": 34786.9
+    },
+    {
+      "name": "end_frame_b",
+      "bounds": [
+        14.0,
+        141.0,
+        96.0
+      ],
+      "tris": 4276,
+      "watertight": true,
+      "volume_mm3": 34786.9
+    },
+    {
+      "name": "phone_tray",
+      "bounds": [
+        203.0,
+        95.0,
+        10.0
+      ],
+      "tris": 2252,
+      "watertight": true,
+      "volume_mm3": 77839.3
+    },
+    {
+      "name": "pinion",
+      "bounds": [
+        14.0,
+        14.0,
+        12.0
+      ],
+      "tris": 2074,
+      "watertight": true,
+      "volume_mm3": 1087.1
+    },
+    {
+      "name": "rail_x",
+      "bounds": [
+        12.0,
+        140.0,
+        18.2
+      ],
+      "tris": 716,
+      "watertight": true,
+      "volume_mm3": 20795.5
+    },
+    {
+      "name": "rail_y_c53",
+      "bounds": [
+        12.0,
+        240.0,
+        18.2
+      ],
+      "tris": 1228,
+      "watertight": true,
+      "volume_mm3": 36177.0
+    },
+    {
+      "name": "rail_y_c55",
+      "bounds": [
+        12.0,
+        240.0,
+        18.2
+      ],
+      "tris": 1228,
+      "watertight": true,
+      "volume_mm3": 35697.5
+    },
+    {
+      "name": "rail_y_c57",
+      "bounds": [
+        12.0,
+        240.0,
+        18.2
+      ],
+      "tris": 1228,
+      "watertight": true,
+      "volume_mm3": 35217.9
+    },
+    {
+      "name": "stylus_collar",
+      "bounds": [
+        16.0,
+        22.0,
+        10.0
+      ],
+      "tris": 2464,
+      "watertight": true,
+      "volume_mm3": 1731.5
+    },
+    {
+      "name": "x_carriage",
+      "bounds": [
+        78.8,
+        50.0,
+        51.2
+      ],
+      "tris": 5940,
+      "watertight": true,
+      "volume_mm3": 28046.2
+    },
+    {
+      "name": "y_carriage",
+      "bounds": [
+        78.8,
+        50.0,
+        51.2
+      ],
+      "tris": 4488,
+      "watertight": true,
+      "volume_mm3": 28147.4
+    },
+    {
+      "name": "z_tower",
+      "bounds": [
+        30.3,
+        34.0,
+        110.0
+      ],
+      "tris": 4984,
+      "watertight": true,
+      "volume_mm3": 28802.5
+    }
+  ]
+}

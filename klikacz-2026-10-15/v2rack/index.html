@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Klikacz</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#0d1117;color:#e6edf3}
+header{padding:14px 22px;border-bottom:1px solid #21262d;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1{margin:0;font-size:17px}
+.back{color:#58a6ff;text-decoration:none;font-size:13px}
+.meta{color:#8b949e;font-size:12px;width:100%}
+#stage{height:58vh;border-bottom:1px solid #21262d;position:relative}
+#label{position:absolute;top:10px;left:12px;background:#161b22cc;padding:4px 10px;border-radius:6px;font-size:13px}
+#hint{position:absolute;bottom:8px;right:12px;color:#8b949e;font-size:11px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 22px;border-bottom:1px solid #21262d}
+.pill{background:#161b22;border:1px solid #30363d;border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer}
+.pill.sel{border-color:#58a6ff;color:#58a6ff}
+.pill.warn::after{content:" ⚠";color:#d29922}
+.cards{display:flex;flex-wrap:wrap;gap:12px;padding:14px 22px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:10px;width:250px;cursor:pointer}
+.card img{width:100%;border-radius:6px;background:#fff}
+.card b{display:block;margin:6px 0 2px;font-size:14px}
+.card span{color:#8b949e;font-size:12px}
+.ok{color:#3fb950}.warn{color:#d29922}
+</style></head><body>
+<header>
+  <a class="back" href="../">← projekty</a>
+  <h1 id="title"></h1>
+  <div class="meta" id="meta"></div>
+</header>
+<div id="stage"><div id="label"></div><div id="hint">przeciągnij = obrót · scroll = zoom</div></div>
+<div class="nav" id="nav"></div>
+<div class="cards" id="cards"></div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three'; import {STLLoader} from 'three/addons/loaders/STLLoader.js'; import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const meta = {"title": "Klikacz v2 \u2014 rack & pinion (TW\u00d3J projekt)", "desc": "Wg klikacz_opis.md: 3\u00d7 szyna U-kana\u0142 z 625zz + z\u0119batka, 3\u00d7 28BYJ-48 (2\u00d7Y + X), SG90 na Z z rysikiem na spr\u0119\u017cynie, taca OnePlus 13 + mast C930e. Rail w 3 wariantach kana\u0142u: 5.3/5.5/5.7.", "model": "anthropic/claude-opus-5.5", "cost_usd": 0.445, "iterations": 2, "has_assembly": true, "parts": [{"name": "bearing_comb", "bounds": [24.5, 40.0, 12.0], "tris": 60, "watertight": true, "volume_mm3": 5166.6}, {"name": "c930e_cradle", "bounds": [86.8, 69.8, 30.0], "tris": 1112, "watertight": true, "volume_mm3": 27362.6}, {"name": "camera_mast", "bounds": [50.0, 40.0, 150.0], "tris": 2116, "watertight": true, "volume_mm3": 49503.6}, {"name": "end_frame_a", "bounds": [14.0, 141.0, 96.0], "tris": 4276, "watertight": true, "volume_mm3": 34786.9}, {"name": "end_frame_b", "bounds": [14.0, 141.0, 96.0], "tris": 4276, "watertight": true, "volume_mm3": 34786.9}, {"name": "phone_tray", "bounds": [203.0, 95.0, 10.0], "tris": 2252, "watertight": true, "volume_mm3": 77839.3}, {"name": "pinion", "bounds": [14.0, 14.0, 12.0], "tris": 2074, "watertight": true, "volume_mm3": 1087.1}, {"name": "rail_x", "bounds": [12.0, 140.0, 18.2], "tris": 716, "watertight": true, "volume_mm3": 20795.5}, {"name": "rail_y_c53", "bounds": [12.0, 240.0, 18.2], "tris": 1228, "watertight": true, "volume_mm3": 36177.0}, {"name": "rail_y_c55", "bounds": [12.0, 240.0, 18.2], "tris": 1228, "watertight": true, "volume_mm3": 35697.5}, {"name": "rail_y_c57", "bounds": [12.0, 240.0, 18.2], "tris": 1228, "watertight": true, "volume_mm3": 35217.9}, {"name": "stylus_collar", "bounds": [16.0, 22.0, 10.0], "tris": 2464, "watertight": true, "volume_mm3": 1731.5}, {"name": "x_carriage", "bounds": [78.8, 50.0, 51.2], "tris": 5940, "watertight": true, "volume_mm3": 28046.2}, {"name": "y_carriage", "bounds": [78.8, 50.0, 51.2], "tris": 4488, "watertight": true, "volume_mm3": 28147.4}, {"name": "z_tower", "bounds": [30.3, 34.0, 110.0], "tris": 4984, "watertight": true, "volume_mm3": 28802.5}]};
+document.getElementById('title').textContent = meta.title;
+document.getElementById('meta').textContent = `${meta.desc} · model: ${meta.model} · koszt generacji: $${meta.cost_usd} · iteracje: ${meta.iterations}`;
+const stage = document.getElementById('stage');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0d1117);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 5000);
+const renderer = new THREE.WebGLRenderer({antialias:true}); stage.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.15));
+const dl = new THREE.DirectionalLight(0xffffff, 1.3); dl.position.set(1, 2, 3); scene.add(dl);
+function load(file, label){ document.getElementById('label').textContent = label;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('sel', p.dataset.file===file));
+  scene.children.filter(o=>o.isMesh).forEach(o=>scene.remove(o));
+  new STLLoader().load(file, g=>{ g.computeVertexNormals();
+    const mesh = new THREE.Mesh(g, new THREE.MeshStandardMaterial({color:0x7fb2d9, metalness:0.12, roughness:0.6}));
+    mesh.material.side = THREE.DoubleSide; scene.add(mesh);
+    const box = new THREE.Box3().setFromObject(mesh); const s = box.getBoundingSphere(new THREE.Sphere());
+    controls.target.copy(s.center);
+    camera.position.set(s.center.x + s.radius*1.9, s.center.y + s.radius*1.7, s.center.z + s.radius*2.3); }); }
+const nav = document.getElementById('nav'); const cards = document.getElementById('cards');
+function pill(file, label, warn){ const p = document.createElement('div'); p.className='pill'+(warn?' warn':'');
+  p.dataset.file = file; p.textContent = label; p.onclick = ()=>load(file, label); nav.appendChild(p); return p; }
+if (meta.has_assembly) pill('assembly.stl', '⚙ Złożone (assembly)');
+for (const part of meta.parts){
+  pill(part.name + '.stl', part.name, !part.watertight);
+  const c = document.createElement('div'); c.className='card';
+  c.innerHTML = `<img src="${part.name}.png"><b>${part.name}</b><span>${part.bounds.join(' × ')} mm · ${part.tris} trójkątów · <span class="${part.watertight?'ok':'warn'}">${part.watertight?'szczelna ✓':'do naprawy w slicerze ⚠'}</span></span>`;
+  c.onclick = ()=>load(part.name + '.stl', part.name); cards.appendChild(c);
+}
+function resize(){ const w=stage.clientWidth,h=stage.clientHeight; renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+load(meta.has_assembly ? 'assembly.stl' : meta.parts[0]?.name + '.stl', meta.has_assembly ? '⚙ Złożone (assembly)' : meta.parts[0]?.name);
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
+</script></body></html>

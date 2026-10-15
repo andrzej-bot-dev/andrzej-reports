@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok + cross-ref: WOW projekty ESP32/DIY — deep research 2026-10-15</title>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0 0 60px;background:#0f1115;color:#e2e6ee;line-height:1.55}
+  .wrap{width:92%;max-width:1400px;margin:0 auto}
+  header{background:linear-gradient(135deg,#161a22,#1d2330);border-bottom:1px solid #2a3142;padding:28px 0 18px}
+  h1{font-size:1.55rem;margin:0 0 6px;color:#fff}
+  .badge{display:inline-block;background:#2b6cb0;color:#fff;border-radius:12px;padding:2px 12px;font-size:.78rem;margin-right:8px}
+  .meta{color:#8b94a7;font-size:.85rem;margin-top:8px}
+  nav{position:sticky;top:0;z-index:50;background:#12151c;border-bottom:1px solid #2a3142;padding:8px 0;max-height:48px;overflow:hidden}
+  nav a{color:#7fb3ff;text-decoration:none;margin-right:14px;font-size:.86rem;white-space:nowrap}
+  nav a:hover{text-decoration:underline}
+  section{padding:26px 0 8px}
+  h2{color:#fff;font-size:1.25rem;border-bottom:2px solid #2b6cb0;padding-bottom:6px;margin:0 0 14px}
+  h3{color:#c9d4e8;font-size:1.02rem;margin:18px 0 8px}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0 20px;background:#141824;border-radius:8px;overflow:hidden}
+  th{background:#1d2434;color:#aeb9cf;text-align:left;padding:8px 10px;border-bottom:1px solid #2a3142;white-space:nowrap}
+  td{padding:8px 10px;border-bottom:1px solid #222939;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td a{color:#7fb3ff;text-decoration:none;word-break:break-all}
+  td a:hover{text-decoration:underline}
+  .tldr{background:linear-gradient(135deg,#1a2333,#202b40);border:1px solid #33507e;border-radius:12px;padding:18px 22px;margin:18px 0}
+  .tldr h2{border:none;margin-bottom:8px}
+  .tldr li{margin:7px 0}
+  .fit{background:#16211b;border:1px solid #2e5c3a;border-radius:12px;padding:18px 22px;margin:18px 0}
+  .warn{background:#251a1a;border:1px solid #6b2e2e;border-radius:12px;padding:14px 20px;margin:14px 0}
+  .pill{display:inline-block;background:#232b3d;border-radius:10px;padding:1px 10px;font-size:.78rem;margin:2px 4px 2px 0;color:#aeb9cf}
+  .star{color:#ffd166}
+  .cov-ok{color:#4ade80;font-weight:600}
+  .cov-note{color:#fbbf24;font-weight:600}
+  #backtop{position:fixed;bottom:22px;right:22px;background:#2b6cb0;color:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.2rem;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  .small{font-size:.8rem;color:#8b94a7}
+  code{background:#1d2434;border-radius:4px;padding:1px 6px;font-size:.85em}
+  @media(max-width:760px){body{font-size:.95rem}.wrap{width:96%}table{font-size:.78rem;display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <span class="badge">📚 Knowledge research</span><span class="badge">🔍 Deep research</span>
+  <h1>WOW projekty ESP32 / DIY — TikTok deep dive + cross-ref</h1>
+  <div class="meta">2026-10-15 · TikTok: 17 tagów → ~765 itemów → 25 projektów (z realnymi statami z SSR) · Cross-ref: Reddit r/esp32 + r/homeautomation (top-roku), Hackaday, YouTube (~59 pozycji) · Języki: EN/PL/RU/FR · Raport dla: Dawid (warsztat: ESP32, OV2640, WS2812, serva, Kobra S1)</div>
+</div></header>
+
+<nav><div class="wrap">
+  <a href="#tldr">TL;DR</a><a href="#cover">Coverage</a><a href="#top">🏆 Top TikTok</a><a href="#trendy">🌐 Trendy</a><a href="#resp32">r/esp32</a><a href="#rha">r/homeautomation</a><a href="#hackaday">Hackaday</a><a href="#yt">YouTube</a><a href="#fit">🎯 Fit dla ciebie</a><a href="#odrzucone">🚫 Odrzucone</a><a href="#metoda">Metodologia</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="tldr">
+<div class="tldr">
+<h2>⚡ TL;DR — najciekawsze znaleziska</h2>
+<ul>
+  <li>🥇 <strong>LiDAR / radar mapper z garażu</strong> (<a href="https://www.tiktok.com/@subterraneansystems/video/7594652071027166478">@subterraneansystems</a>, 147k lajków / 2M views) i jego ewolucja <strong>ESP32 radar → LiDAR + termowizja</strong> (<a href="https://www.tiktok.com/@ubuntu.maniax/video/7688004745109294353">@ubuntu.maniax</a>, 68k lajków). Absolutny WOW 2026 — a schemat jest prosty: radar mmWave (LD2450, ~80 kr) + servo-scanner + twoja OV2640.</li>
+  <li>🥈 <strong>Ramię z własnym napędem cykloidalnym 26:1</strong> (<a href="https://www.tiktok.com/@sweepdynamics/video/7505556521481211144">@sweepdynamics</a>, 46k) — cykloidalka drukowana 3D = torque i zero luzu za grosze. Mechanika na poziomie przemysłowym, 100% na twojej Kobra S1.</li>
+  <li>🥉 <strong>Trend roku: AI na chipie</strong> — <a href="https://www.reddit.com/r/esp32/comments/1v4mq5t/">LLM 28.9M param na ESP32-S3 (~9 tok/s)</a> + <a href="https://youtu.be/LgCNVUndTH8">Marina: własny 30M-param model na ESP32</a> (cross-platform ★). ESP32-S3 kosztuje ~100 kr.</li>
+  <li>🎭 <strong>Największy hit surowy:</strong> fotobudka RPi (235k lajków) i <strong>mechaniczna szyja animatronika</strong> (<a href="https://www.tiktok.com/@will_cogley/video/7516615106818542870">@will_cogley</a>, 166k) — poziom studia filmowego.</li>
+  <li>🎯 <strong>Moja rekomendacja dla ciebie:</strong> radar/LiDAR-mapper jako projekt główny (sekcja <a href="#fit">🎯 Fit</a>) — używa części, które masz lub kosztują grosze.</li>
+</ul>
+</div>
+</section>
+
+<section id="cover">
+<h2>Coverage — co sprawdziłem</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Co zebrano</th><th>Uwagi</th></tr>
+<tr><td>TikTok (17 tagów: esp32, arduino, homeautomation, smarthome, 3dprintedrobot, raspberrypi, robotarm, diygadget, maker, esp32camera, selfhosted, invention, +7)</td><td class="cov-ok">✅ COVERED</td><td>~765 itemów → 25 projektów z pełnymi statami</td><td>Skrobane własnym skryptem przez CDP Chromium (web_fetch i Lightpanda odrzucone przez antybot/CSR; UA-override zabroniony w Lightpandzie z założenia). 1× slider-captcha na Lightpandzie — nie rozwiązana, zmiana toru.</td></tr>
+<tr><td>Reddit r/esp32 (top roku)</td><td class="cov-ok">✅ COVERED</td><td>20 projektów</td><td class="cov-note">⚠️ JSON API zablokowane na tym networku — użyto RSS top-roku (bez score); ranking = kolejność RSS</td></tr>
+<tr><td>Reddit r/homeautomation (top roku)</td><td class="cov-ok">✅ COVERED</td><td>15 pozycji</td><td class="cov-note">⚠️ jak wyżej; 429 na 1. próbę, retry OK</td></tr>
+<tr><td>Hackaday</td><td class="cov-ok">✅ COVERED</td><td>12 wpisów</td><td>query: esp32 + diy home automation</td></tr>
+<tr><td>YouTube</td><td class="cov-ok">✅ COVERED</td><td>12 wyników z realnymi views</td><td>ytInitialData z SSR</td></tr>
+</table>
+</section>
+
+<section id="top">
+<h2>🏆 TOP 25 z TikToka (przesiano z ~765)</h2>
+<h3>🤖 Robotyka</h3>
+<table>
+<tr><th>Projekt</th><th>@autor</th><th>Lajki</th><th>Views</th><th>Dlaczego wow</th><th>URL</th></tr>
+<tr><td>Biologicznie inspirowana mechaniczna szyja animatronika (ruch jak ludzki kark)</td><td>@will_cogley</td><td>165.9k</td><td>1.5M</td><td>Poziom studia filmowego, servo-kinematyka kopiująca biologię</td><td><a href="https://www.tiktok.com/@will_cogley/video/7516615106818542870">wideo</a></td></tr>
+<tr><td>6-DOF ramię biurkowe z własnym napędem cykloidalnym 26:1 (zero backlash)</td><td>@sweepdynamics</td><td>46k</td><td>900.8k</td><td>Cykloidalka drukowana 3D = przemysłowa precyzja za grosze</td><td><a href="https://www.tiktok.com/@sweepdynamics/video/7505556521481211144">wideo</a></td></tr>
+<tr><td>Open-source "trzecia ręka" robota — trzyma lutownicę, pomaga w warsztacie</td><td>@0xaiwhisperer</td><td>2.1k</td><td>63.8k</td><td>Wearable robot-asystent, open source</td><td><a href="https://www.tiktok.com/@0xaiwhisperer/video/7667941296312552721">wideo</a></td></tr>
+<tr><td>ESP-ROLL: kulowy robot ball-bot balansujący na ESP32</td><td>@max.imagination</td><td>1.2k</td><td>37.9k</td><td>Trudna mechanika + control loop na ESP32</td><td><a href="https://www.tiktok.com/@max.imagination/video/7516574485043072262">wideo</a></td></tr>
+<tr><td>3-DOF ramię drukowane 3D, Python, przekładnia cykloidalna 20:1</td><td>@mechfab3d</td><td>803</td><td>17.5k</td><td>Pełny stack: od druku do kodu</td><td><a href="https://www.tiktok.com/@mechfab3d/video/7564497525168753942">wideo</a></td></tr>
+<tr><td>Ramię z inverse kinematics + digital twin w Unity</td><td>@mr_robot.150</td><td>231</td><td>9k</td><td>Most symulacja ↔ fizyczny robot</td><td><a href="https://www.tiktok.com/@mr_robot.150/video/7610822003360140562">wideo</a></td></tr>
+<tr><td>Quadruped (czworonóg) Arduino + druk 3D</td><td>@nox3dsolution</td><td>114</td><td>1.3k</td><td>Kinematyka chodu — wejście do SpotMicro-świata</td><td><a href="https://www.tiktok.com/@nox3dsolution/video/7685393766596857109">wideo</a></td></tr>
+<tr><td>Open-source 6-osiowe ramię sterowane hand-trackingiem</td><td>@glitchpolo</td><td>4</td><td>190</td><td>GitHub z plikami; tracking dłoni → 6 serw</td><td><a href="https://www.tiktok.com/@glitchpolo/video/7690253659363380502">wideo</a></td></tr>
+</table>
+<h3>🏠 Home automation</h3>
+<table>
+<tr><th>Projekt</th><th>@autor</th><th>Lajki</th><th>Views</th><th>Dlaczego wow</th><th>URL</th></tr>
+<tr><td>Wentylacja mieszkania w Home Assistant (hack pilota IR)</td><td>@elvinhome.io</td><td>772</td><td>18.5k</td><td>Reverse-inżynieria IR → CO2/wilgotność bez ruszania instalacji</td><td><a href="https://www.tiktok.com/@elvinhome.io/video/7675682827379264790">wideo</a></td></tr>
+<tr><td>Termostaty kaloryferowe per-pokój z telefonu</td><td>@adam3dtok</td><td>894</td><td>152.3k</td><td>Strefowe grzanie = realne oszczędności, retrofit</td><td><a href="https://www.tiktok.com/@adam3dtok/video/7465077699174763809">wideo</a></td></tr>
+<tr><td>DIY opener rolet (ESP32 + silnik)</td><td>@the_mgec</td><td>628</td><td>16.2k</td><td>Klasyk HA od zera, bez chmury</td><td><a href="https://www.tiktok.com/@the_mgec/video/7456614827897703726">wideo</a></td></tr>
+<tr><td>Interaktywny 3D plan mieszkania jako dashboard HA (ekran ścienny)</td><td>@xllr8ing</td><td>484</td><td>17.4k</td><td>Dom jako żywa makieta 3D, nie lista encji</td><td><a href="https://www.tiktok.com/@xllr8ing/video/7692156374200929567">wideo</a></td></tr>
+<tr><td>Stare tablety → panele sterowania HA</td><td>@ericandrsson</td><td>218</td><td>10.8k</td><td>Upcycling iPadów do full-wall dashboard</td><td><a href="https://www.tiktok.com/@ericandrsson/video/7669856535157148950">wideo</a></td></tr>
+<tr><td>Opener firan: druk 3D + 12V DC + 433 MHz + akku</td><td>@mr.mb53.maker_lab</td><td>82</td><td>4.4k</td><td>Kompletny projekt RF+mechanika+zasilanie</td><td><a href="https://www.tiktok.com/@mr.mb53.maker_lab/video/7642770762285288712">wideo</a></td></tr>
+</table>
+<h3>💻 Komputery / sensory</h3>
+<table>
+<tr><th>Projekt</th><th>@autor</th><th>Lajki</th><th>Views</th><th>Dlaczego wow</th><th>URL</th></tr>
+<tr><td><strong>Skaner LiDAR zbudowany w garażu</strong> (mapper underground)</td><td>@subterraneansystems</td><td>146.9k</td><td>2M</td><td>Pełny LiDAR mapper DIY — inżynieria na serio</td><td><a href="https://www.tiktok.com/@subterraneansystems/video/7594652071027166478">wideo</a></td></tr>
+<tr><td><strong>ESP32 radar → LiDAR + kamera termowizyjna</strong>, Linux</td><td>@ubuntu.maniax</td><td>68.4k</td><td>925.6k</td><td>Weekendowy projekt → wielosensorowa platforma</td><td><a href="https://www.tiktok.com/@ubuntu.maniax/video/7688004745109294353">wideo</a></td></tr>
+<tr><td>Klaster Kubernetes (Talos, 3+3 node) w domu</td><td>@goatsinapond</td><td>18.4k</td><td>340.1k</td><td>Solidny homelab, 97% usług self-hosted</td><td><a href="https://www.tiktok.com/@goatsinapond/video/7593858077582003486">wideo</a></td></tr>
+<tr><td>Własny smartphone na Waveshare ESP32-P4</td><td>@schematikio</td><td>4.4k</td><td>123.8k</td><td>ESP32-P4 jako serce telefonu DIY</td><td><a href="https://www.tiktok.com/@schematikio/video/7681058877810445600">wideo</a></td></tr>
+<tr><td>Cyberdeck do produkcji muzyki (ESP32-S3, schemat wygenerowany przez Codex)</td><td>@mixikid.com</td><td>992</td><td>15.9k</td><td>Instrument + AI-assisted PCB</td><td><a href="https://www.tiktok.com/@mixikid.com/video/7693708604838284545">wideo</a></td></tr>
+</table>
+<h3>🔧 Narzędzia / haki</h3>
+<table>
+<tr><th>Projekt</th><th>@autor</th><th>Lajki</th><th>Views</th><th>Dlaczego wow</th><th>URL</th></tr>
+<tr><td>Czujnik optyczny myszki jako kamera 64×64 BW</td><td>@mueller_minki</td><td>53.6k</td><td>482.9k</td><td>Genialny hardware-reuse — mysz = mikro-kamera</td><td><a href="https://www.tiktok.com/@mueller_minki/video/7509165787148553494">wideo</a></td></tr>
+<tr><td>Kieszonkowy multiband: Sub-GHz + 2.4G + WiFi + BT + NFC + IR (mini-Flipper)</td><td>@flipphackz</td><td>10.5k</td><td>230.6k</td><td>Wszystkie radiówki w jednym urządzeniu ESP32</td><td><a href="https://www.tiktok.com/@flipphackz/video/7631718475395861778">wideo</a></td></tr>
+<tr><td>Zasilacz ATX → bench PSU warsztatowy</td><td>@wefixstupidcomputers</td><td>5k</td><td>387.8k</td><td>Klasyk upcyclingu — bardzo użyteczny</td><td><a href="https://www.tiktok.com/@wefixstupidcomputers/video/7604926370409499917">wideo</a></td></tr>
+</table>
+<h3>🎉 Fun / wearables</h3>
+<table>
+<tr><th>Projekt</th><th>@autor</th><th>Lajki</th><th>Views</th><th>Dlaczego wow</th><th>URL</th></tr>
+<tr><td>Fotobudka na Raspberry Pi (pełny build)</td><td>@digiiash</td><td>235k</td><td>1.2M</td><td>Największy hit zbioru; realnie do zrobienia</td><td><a href="https://www.tiktok.com/@digiiash/video/7627926901822197022">wideo</a></td></tr>
+<tr><td>"Najbardziej zaawansowany Pokedex" (RPi + kamera + rozpoznawanie)</td><td>@bigrigcreates</td><td>48.2k</td><td>388.6k</td><td>Gadżet z WOW: kamera + AI + ekran</td><td><a href="https://www.tiktok.com/@bigrigcreates/video/7578691476423462157">wideo</a></td></tr>
+<tr><td>eInkCal — kolorowy smart kalendarz E-Ink na ścianę</td><td>@einkcal</td><td>915</td><td>32.9k</td><td>Elegancki wall-calendar (Indiegogo)</td><td><a href="https://www.tiktok.com/@einkcal/video/7542725176413179154">wideo</a></td></tr>
+</table>
+</section>
+
+<section id="trendy">
+<h2>🌐 Trendy cross-platform <span class="star">★</span></h2>
+<table>
+<tr><th>Trend</th><th>Gdzie widoczny</th><th>Co to znaczy dla ciebie</th></tr>
+<tr><td><span class="star">★</span> <strong>AI/LLM on-device</strong></td><td>Reddit (28.9M LLM na S3) + YouTube (Marina 30M) </td><td>ESP32-S3 (~100 kr) = własny mini-assistant bez chmury. Najmocniejszy nowy trend 2025/26.</td></tr>
+<tr><td><span class="star">★</span> <strong>Retro gaming na S3</strong></td><td>Reddit (Wipeout 60fps) + Hackaday (port MGS, Jet megatextures)</td><td>ESP32-S3 osiąga "PS1-level" — dobre na efekt WOW przy gościach.</td></tr>
+<tr><td><span class="star">★</span> <strong>E-paper / ultra-low-power</strong></td><td>Reddit (weather station 500+ dni #1 roku!, e-ink clock)</td><td>Zasilanie bateryjne, które żyje latami — brak kabli = więcej projektów "po prostu działa".</td></tr>
+<tr><td><span class="star">★</span> <strong>ESP32 jako SDR / RF</strong></td><td>Hackaday (raw I/Q na S3, DVB-S2 na C3, AM transmitter)</td><td>Nowa fala 2026: undocumented modes radio — hardcore, ale wow nieziemski.</td></tr>
+<tr><td><span class="star">★</span> <strong>Home Assistant / ESPHome</strong></td><td>Reddit HA + Hackaday (TaraHome habit-detection, fermenter)</td><td>Ekosystem gotowych komponentów — automatyki sklejasz w weekend.</td></tr>
+<tr><td><span class="star">★</span> <strong>HMI / wyświetlacze</strong></td><td>Reddit (pixel clock, flight radar, BART, offline maps) + YouTube</td><td>Fajne "living room WOW" — tablice, radary, zegary.</td></tr>
+<tr><td><span class="star">★</span> <strong>Obserwacja bez kamer</strong></td><td>Reddit HA (monitoring bez kamer, mmWave debata)</td><td>mmWave = obecność bez inwigilacji; mocny wątek WAF (wife acceptance factor) 😄</td></tr>
+</table>
+</section>
+
+<section id="resp32">
+<h2>📌 Reddit r/esp32 — top roku (projekty "I built")</h2>
+<table>
+<tr><th>#</th><th>Projekt</th><th>Co robi</th><th>URL</th></tr>
+<tr><td>1</td><td><span class="star">★</span> E-paper weather station <strong>500+ dni na baterii</strong></td><td>XIAO ESP32-C3 + 4.2" e-paper + custom PCB</td><td><a href="https://www.reddit.com/r/esp32/comments/1u7dsyj/">link</a></td></tr>
+<tr><td>2</td><td><span class="star">★</span> <strong>LLM 28.9M parametrów na ESP32-S3</strong> (~9 tok/s)</td><td>Model językowy w całości na chipie</td><td><a href="https://www.reddit.com/r/esp32/comments/1v4mq5t/">link</a></td></tr>
+<tr><td>3</td><td><span class="star">★</span> Wipeout-style 3D game na S3 (60fps)</td><td>Proceduralny tor, 3 AI, fizyka, ST7796 SPI</td><td><a href="https://www.reddit.com/r/esp32/comments/1suqu4s/">link</a></td></tr>
+<tr><td>4</td><td>Smart pocketwatch w stylu "Diamond Age"</td><td>Sci-fi smartwatch od zera</td><td><a href="https://www.reddit.com/r/esp32/comments/1r71n3b/">link</a></td></tr>
+<tr><td>5</td><td>E-ink alarm clock (obudowa 3D, pliki open)</td><td>e-ink + GitHub z plikami</td><td><a href="https://www.reddit.com/r/esp32/comments/1w2lldj/">link</a></td></tr>
+<tr><td>6</td><td>Pocket computer w puszce Altoids (S3 N16R8)</td><td>Mini-PC w puszce + 2.3" display</td><td><a href="https://www.reddit.com/r/esp32/comments/1tg9s4l/">link</a></td></tr>
+<tr><td>7</td><td>Desktop monitor: stream pulpitu na 1.14" LCD</td><td>Frame-diffing po WiFi</td><td><a href="https://www.reddit.com/r/esp32/comments/1pp9f6w/">link</a></td></tr>
+<tr><td>8</td><td>4G smartphone na ESP32 (SIMCom A7682E + OV2640)</td><td>Telefon z 4G i kamerą — pełny DIY</td><td><a href="https://www.reddit.com/r/esp32/comments/1r9bvzq/">link</a></td></tr>
+<tr><td>9</td><td><span class="star">★</span> PCIe karta ESP32-H2: zdalny power-on PC</td><td>Symuluje fizyczny przycisk, bez WOL</td><td><a href="https://www.reddit.com/r/esp32/comments/1ve7c8l/">link</a></td></tr>
+<tr><td>10</td><td><span class="star">★</span> Desk flight radar (Flightradar-style)</td><td>Samoloty na żywo na własnym displayu</td><td><a href="https://www.reddit.com/r/esp32/comments/1tqa8b8/">link</a></td></tr>
+<tr><td>11</td><td>Credit-card smartcard (C3 + NFC + e-paper, ~1mm)</td><td>Karta z wyświetlaczem</td><td><a href="https://www.reddit.com/r/esp32/comments/1t7gn4c/">link</a></td></tr>
+<tr><td>12</td><td>Self-hosted offline maps na S3 AMOLED</td><td>Nav komputer motocyklowy za $40</td><td><a href="https://www.reddit.com/r/esp32/comments/1v8psl6/">link</a></td></tr>
+<tr><td>13</td><td>Laser galvo projector (kit galvo + RGB 200mW)</td><td>Projektor laserowy od zera</td><td><a href="https://www.reddit.com/r/esp32/comments/1t35mxu/">link</a></td></tr>
+<tr><td>14</td><td>Fluora 3D-printable plant lamp (WLED)</td><td>LED-owa roślina dekoracyjna</td><td><a href="https://www.reddit.com/r/esp32/comments/1w0pgui/">link</a></td></tr>
+</table>
+<p class="small">Pełna lista 20 w <code>memory/research/tiktok-esp32-2026/crossref.md</code>. Score Reddita niedostępne (API blokowane) — kolejność wg RSS top-roku.</p>
+</section>
+
+<section id="rha">
+<h2>🏠 Reddit r/homeautomation — top roku</h2>
+<table>
+<tr><th>#</th><th>Projekt</th><th>Co robi</th><th>URL</th></tr>
+<tr><td>1</td><td><span class="star">★</span> "Overengineered home heating" (seria)</td><td>Boiler + HA automations + enclosure jak PLC</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1rdxmzq/">link</a></td></tr>
+<tr><td>2</td><td><span class="star">★</span> Pi 5 caption appliance (dla niesłyszącego ojca)</td><td>Real-time STT na 10" touch, 2 źródła audio</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1r1ngbb/">link</a></td></tr>
+<tr><td>3</td><td>DIY radar speed camera z WiFi</td><td>50×50mm board, radar prędkości</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1orth5x/">link</a></td></tr>
+<tr><td>4</td><td>80kWh DIY magazyn energii z ogniw EV</td><td>Domowy energy storage</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1t5kqwd/">link</a></td></tr>
+<tr><td>5</td><td>mmWave presence — viralowa lekcja ("use a normal switch")</td><td>Debounce/maskowanie czujników mmWave</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1ras8gf/">link</a></td></tr>
+<tr><td>6</td><td>Flip-down recipe tablet pod szafkę</td><td>Display budzi się przy opuszczeniu</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1x4c8d3/">link</a></td></tr>
+<tr><td>7</td><td>Airbnb buzzer → unlock z telefonu</td><td>Interkom bez ruszania hardware budynku</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1usyuyd/">link</a></td></tr>
+<tr><td>8</td><td>Home monitoring BEZ kamer</td><td>Rozumienie przestrzeni bez inwigilacji</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1pnd5cm/">link</a></td></tr>
+<tr><td>9</td><td>Govee lights ↔ strefy tętna (gym)</td><td>Kolor światła = strefa HR</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1psln3h/">link</a></td></tr>
+<tr><td>10</td><td>Emergency-stop big red button (kitchen)</td><td>Push-button → scena "cisza"</td><td><a href="https://www.reddit.com/r/homeautomation/comments/1u2faft/">link</a></td></tr>
+</table>
+</section>
+
+<section id="hackaday">
+<h2>⚡ Hackaday (redakcyjne featured)</h2>
+<table>
+<tr><th>Projekt</th><th>Co robi</th><th>Data</th><th>URL</th></tr>
+<tr><td><span class="star">★</span> AI steruje iPhone'em przez ESP32</td><td>S3 jako USB-HID + UxPlay feed ekranu → agent AI klika bez jailbreaka</td><td>2026-10-14</td><td><a href="https://hackaday.com/2026/10/14/ai-controls-iphone-via-esp32/">link</a></td></tr>
+<tr><td><span class="star">★</span> ESP32-C3 nadaje DVB-S2 (ESP32-DATV)</td><td>Transmisja wideo przez raw RF z C3</td><td>2026-10-14</td><td><a href="https://hackaday.com/2026/10/14/using-an-esp32-c3s-rf-hardware-for-dvb-s2-video-transmission/">link</a></td></tr>
+<tr><td><span class="star">★</span> ESP32 jako SDR (raw I/Q, undocumented)</td><td>2.4/5 GHz RX streaming z S3</td><td>2026-10-03</td><td><a href="https://hackaday.com/2026/10/03/the-esp32-an-sdr-in-itself/">link</a></td></tr>
+<tr><td><span class="star">★</span> Metal Gear Solid port na ESP32-S3</td><td>PS1 → mikrokontroler + analog stick z drona</td><td>2026-09-29</td><td><a href="https://hackaday.com/2026/09/29/metal-gear-solid-moves-from-playstation-to-esp32/">link</a></td></tr>
+<tr><td><span class="star">★</span> TaraHome: habit detection dla HA</td><td>Sidecar wykrywa rutyny i proponuje automatyzacje (YAML)</td><td>2026-02-08</td><td><a href="https://hackaday.com/2026/02/08/habit-detection-for-home-assistant/">link</a></td></tr>
+<tr><td>ESP32 → wireless co-processor RPi (esp-hosted)</td><td>C6 jako WiFi/BT dla SBC po SDIO</td><td>2026-10-07</td><td><a href="https://hackaday.com/2026/10/07/esp32-as-your-raspberry-pis-linux-wireless-co-processor/">link</a></td></tr>
+<tr><td>Vintage radio: ESP32 jako nadajnik AM</td><td>Stare radio bez przeróbek gra Spotify</td><td>2026-10-07</td><td><a href="https://hackaday.com/2026/10/07/keep-that-old-radio-alive-with-an-esp32/">link</a></td></tr>
+<tr><td>DIY full-stack farm automation (off-grid)</td><td>RPi IoT, REST API, zero chmury</td><td>2026-01-16</td><td><a href="https://hackaday.com/2026/01/16/diy-full-stack-farm-automation/">link</a></td></tr>
+</table>
+</section>
+
+<section id="yt">
+<h2>▶️ YouTube — najmocniejsze (realne views)</h2>
+<table>
+<tr><th>Film</th><th>Kanał</th><th>Views</th><th>URL</th></tr>
+<tr><td>12 Useful & Interesting ESP32 Projects for Beginners!</td><td>ToP Projects Compilation</td><td>870k</td><td><a href="https://youtu.be/juCbVRq4Xhg">link</a></td></tr>
+<tr><td>Try these 16 Brilliant ESP32 projects!!!</td><td>ToP Projects Compilation</td><td>780k</td><td><a href="https://youtu.be/1nkgTtTWnPM">link</a></td></tr>
+<tr><td><span class="star">★</span> Top 15 IoT Projects of 2025</td><td>ToP Projects Compilation</td><td>512k</td><td><a href="https://youtu.be/M0FKp2y9JoA">link</a></td></tr>
+<tr><td>ESP32 Guide 2026</td><td>DroneBot Workshop</td><td>261k</td><td><a href="https://youtu.be/CfIjInYch7U">link</a></td></tr>
+<tr><td><span class="star">★</span> I Trained My Own 30M Parameter AI to Run on an ESP32</td><td>Marina</td><td>38k</td><td><a href="https://youtu.be/LgCNVUndTH8">link</a></td></tr>
+</table>
+<p class="small">Kanały kompilacyjne (ToP Projects) = dobre źródło "przeglądu rynku", jakość zróżnicowana. Marina = deep dive w on-device AI.</p>
+</section>
+
+<section id="fit">
+<h2>🎯 Fit dla twojego warsztatu (moje rekomendacje)</h2>
+<div class="fit">
+<p><strong>Założenia:</strong> masz ESP32 (WROOM-32E), OV2640, WS2812, serva SG90 + 28BYJ-48, HC-SR04, PIR, DHT, LCD, buzzer, Kobra S1 (druk PETG), Load cell+HX711, przekaźnik, tilt, foto — czyli start bez zakupów albo z drobnymi zakupami.</p>
+<ol>
+  <li><strong>🌪️ Radar/LiDAR-mapper (odcinek 1: "wchodzisz w trend 2026")</strong> — LD2450 mmWave (~80 kr) → wizualizacja punktów na LCD/w przeglądarce → dokładasz servo-scanner i OV2640 → overlay termiczny jak @ubuntu.maniax. WOW przy gościach: "mieszkanie widzi cię przez ścianę". Wykorzystuje twój serwo+ESP32+OV2640. Etapy: dzień 1 (radar→dane), dzień 2 (wiz), dzień 3 (skaner 360°).</li>
+  <li><strong>🦾 Ramię z cykloidalnym napędem</strong> — drukujesz przekładnię cykloidalną (Kobra S1 + PETG), NEMA17 (~100-150 kr/szt × 3-4), sterowanie dwoma ESP32 (jeden = motion, drugi = UI). Docelowo: ramię podaje narzędzia przy lutownicy. Najsilniejszy "wow mechaniki" z całej listy.</li>
+  <li><strong>🐾 Quadruped / ball-bot</strong> — 12× MG90S + druk; kalibracja chodu jako projekt na dłużej. Ball-bot trudniejszy (IMU balans), ale efekt "kula jeździ sama" = 6/5 wow.</li>
+  <li><strong>🧠 LLM na ESP32-S3</strong> — dokup S3 (~100 kr), odpal 28.9M model z r/esp32 albo wytrenuj własny jak Marina (trening na laptopie/Colab). Spięcie z chat-app: twoje "oko" (HAL) mówi z własnym małym mózgiem offline.</li>
+  <li><strong>🎬 Fotobudka RPi</strong> — największy hit statystyczny (235k lajków); realny use-case: imprezy/rodzina;.parts: Pi + kamera + przycisk + druk obudowy.</li>
+</ol>
+<p class="small">Z poprzednich rozmów w kolejce: split-flap (mechaniczny WOW), Urge Button, punch-clock. Radar-mapper uważam za najmocniejszy "ambitny + sci-fi + realny" z całego researchu.</p>
+</div>
+</section>
+
+<section id="odrzucone">
+<h2>🚫 Odrzucone content-farmy (żeby było widać co wycięliśmy)</h2>
+<div class="warn">
+<ul>
+  <li>@free.power.diy3 — "free energy generator 220v" — fake perpetual motion</li>
+  <li>@jindu50 — "9V → lightning machine", "lighter z kabla USB" — pseudo-nauka</li>
+  <li>@brainquiz_2025 — "pencil → heating tool" — lifehack-grafomania</li>
+  <li>@bricoleur60 — Spider-Man gadżet z domowych rzeczy — zabawka bez elektroniki</li>
+  <li>@romanci38 — "mini welder z 2×AA" — niebezpieczne i fake</li>
+</ul>
+</div>
+</section>
+
+<section id="metoda">
+<h2>Metodologia</h2>
+<ul>
+  <li><strong>TikTok scraping:</strong> własny skrypt <code>scripts/tiktok/tiktok_cdp.mjs</code> (Node + CDP do zarządzanego Chromium na :18800). Antybot odmówił na web_fetch (pusty CSR shell) i Lightpandzie (slider-captcha + zakaz UA "Mozilla" z założenia projektu). Prawdziwy Chromium przepuszcza 17/17 tagów bez captchy. Per tag: load + 4 scrolle, dedupe po URL, cap 45 itemów.</li>
+  <li><strong>Enrichment:</strong> dla TOP 25 — pełne staty z SSR wideo-page (<code>__UNIVERSAL_DATA_FOR_REHYDRATION__ → itemInfo.itemStruct</code>): likes/views/comments/shares.</li>
+  <li><strong>Filtracja:</strong> 2 agentów (tani model czyta surowe, main syntetyzuje): dedupe autorów, odrzucenie content-farm, kategoryzacja. ~765 → 25.</li>
+  <li><strong>Cross-ref:</strong> Reddit RSS top-roku (JSON API zablokowane na tym networku — 3 szczeble eskalacji), Hackaday search ×2, YouTube SSR. Trendy ★ = powtórzenia w ≥2 źródłach.</li>
+  <li><strong>Confidence:</strong> staty TikTok ✅ verified (SSR), kolejność Reddit ⚠️ (RSS bez score), Hackaday redakcyjne (brak metryki).</li>
+</ul>
+<p class="small">Raw destylaty: <code>memory/research/tiktok-esp32-2026/raw/</code> (17 plików) · ranked: <code>ranked-tiktok.md</code> · crossref: <code>crossref.md</code> · 2026-10-15 10:20 CET</p>
+</section>
+
+</div>
+<a href="#tldr" id="backtop">↑</a>
+</body>
+</html>

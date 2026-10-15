@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Klikacz</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#0d1117;color:#e6edf3}
+header{padding:14px 22px;border-bottom:1px solid #21262d;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1{margin:0;font-size:17px}
+.back{color:#58a6ff;text-decoration:none;font-size:13px}
+.meta{color:#8b949e;font-size:12px;width:100%}
+#stage{height:58vh;border-bottom:1px solid #21262d;position:relative}
+#label{position:absolute;top:10px;left:12px;background:#161b22cc;padding:4px 10px;border-radius:6px;font-size:13px}
+#hint{position:absolute;bottom:8px;right:12px;color:#8b949e;font-size:11px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 22px;border-bottom:1px solid #21262d}
+.pill{background:#161b22;border:1px solid #30363d;border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer}
+.pill.sel{border-color:#58a6ff;color:#58a6ff}
+.pill.warn::after{content:" ⚠";color:#d29922}
+.cards{display:flex;flex-wrap:wrap;gap:12px;padding:14px 22px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:10px;width:250px;cursor:pointer}
+.card img{width:100%;border-radius:6px;background:#fff}
+.card b{display:block;margin:6px 0 2px;font-size:14px}
+.card span{color:#8b949e;font-size:12px}
+.ok{color:#3fb950}.warn{color:#d29922}
+</style></head><body>
+<header>
+  <a class="back" href="../">← projekty</a>
+  <h1 id="title"></h1>
+  <div class="meta" id="meta"></div>
+</header>
+<div id="stage"><div id="label"></div><div id="hint">przeciągnij = obrót · scroll = zoom</div></div>
+<div class="nav" id="nav"></div>
+<div class="cards" id="cards"></div>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three'; import {STLLoader} from 'three/addons/loaders/STLLoader.js'; import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const meta = {"title": "Klikacz XY gantry (OnePlus 13)", "desc": "Gantry XY na pr\u0119tach M8: 2\u00d7 28BYJ-48 (Y stacjonarny, X na mo\u015bcie), SG90 z palcem \u2014 programowe klikanie w dowolny punkt ekranu. ESP32 steruje.", "model": "anthropic/claude-opus-5.5", "cost_usd": 0.243, "iterations": 1, "has_assembly": true, "parts": [{"name": "coupler", "bounds": [24.0, 24.0, 28.0], "tris": 3314, "watertight": true, "volume_mm3": 7471.7}, {"name": "esp32_plate", "bounds": [60.0, 45.0, 3.0], "tris": 2084, "watertight": true, "volume_mm3": 7811.1}, {"name": "horn_finger", "bounds": [45.4, 10.4, 14.0], "tris": 1762, "watertight": true, "volume_mm3": 1516.4}, {"name": "phone_tray", "bounds": [215.0, 125.0, 13.0], "tris": 3288, "watertight": true, "volume_mm3": 92985.3}, {"name": "tower_a", "bounds": [44.0, 44.0, 82.0], "tris": 4628, "watertight": true, "volume_mm3": 27204.6}, {"name": "tower_b", "bounds": [22.0, 40.0, 68.0], "tris": 4850, "watertight": true, "volume_mm3": 21169.0}, {"name": "wire_clip", "bounds": [21.0, 8.0, 11.8], "tris": 1192, "watertight": true, "volume_mm3": 631.1}, {"name": "x_bridge", "bounds": [213.0, 48.0, 40.0], "tris": 8606, "watertight": false, "volume_mm3": 36254.7}, {"name": "x_carriage", "bounds": [40.5, 34.0, 40.5], "tris": 2844, "watertight": true, "volume_mm3": 23422.9}, {"name": "y_carriage", "bounds": [24.0, 26.0, 22.0], "tris": 4214, "watertight": true, "volume_mm3": 11107.4}]};
+document.getElementById('title').textContent = meta.title;
+document.getElementById('meta').textContent = `${meta.desc} · model: ${meta.model} · koszt generacji: $${meta.cost_usd} · iteracje: ${meta.iterations}`;
+const stage = document.getElementById('stage');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0d1117);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 5000);
+const renderer = new THREE.WebGLRenderer({antialias:true}); stage.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.15));
+const dl = new THREE.DirectionalLight(0xffffff, 1.3); dl.position.set(1, 2, 3); scene.add(dl);
+function load(file, label){ document.getElementById('label').textContent = label;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('sel', p.dataset.file===file));
+  scene.children.filter(o=>o.isMesh).forEach(o=>scene.remove(o));
+  new STLLoader().load(file, g=>{ g.computeVertexNormals();
+    const mesh = new THREE.Mesh(g, new THREE.MeshStandardMaterial({color:0x7fb2d9, metalness:0.12, roughness:0.6}));
+    mesh.material.side = THREE.DoubleSide; scene.add(mesh);
+    const box = new THREE.Box3().setFromObject(mesh); const s = box.getBoundingSphere(new THREE.Sphere());
+    controls.target.copy(s.center);
+    camera.position.set(s.center.x + s.radius*1.9, s.center.y + s.radius*1.7, s.center.z + s.radius*2.3); }); }
+const nav = document.getElementById('nav'); const cards = document.getElementById('cards');
+function pill(file, label, warn){ const p = document.createElement('div'); p.className='pill'+(warn?' warn':'');
+  p.dataset.file = file; p.textContent = label; p.onclick = ()=>load(file, label); nav.appendChild(p); return p; }
+if (meta.has_assembly) pill('assembly.stl', '⚙ Złożone (assembly)');
+for (const part of meta.parts){
+  pill(part.name + '.stl', part.name, !part.watertight);
+  const c = document.createElement('div'); c.className='card';
+  c.innerHTML = `<img src="${part.name}.png"><b>${part.name}</b><span>${part.bounds.join(' × ')} mm · ${part.tris} trójkątów · <span class="${part.watertight?'ok':'warn'}">${part.watertight?'szczelna ✓':'do naprawy w slicerze ⚠'}</span></span>`;
+  c.onclick = ()=>load(part.name + '.stl', part.name); cards.appendChild(c);
+}
+function resize(){ const w=stage.clientWidth,h=stage.clientHeight; renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+load(meta.has_assembly ? 'assembly.stl' : meta.parts[0]?.name + '.stl', meta.has_assembly ? '⚙ Złożone (assembly)' : meta.parts[0]?.name);
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
+</script></body></html>

@@ -1,0 +1,87 @@
+{
+  "title": "Delta na 3\u00d7 28BYJ-48 (Tapster-style)",
+  "desc": "Ten sam delta, ale na krokowakach 28BYJ-48 (D-wa\u0142 \u00d83 + pinch). Wolniejszy, trzyma pozycj\u0119 bez zasilania. Neutral: forearm 38\u00b0 od pionu, tip 16.5 mm nad tac\u0105.",
+  "model": "anthropic/claude-opus-5.5",
+  "cost_usd": 0.99,
+  "iterations": 2,
+  "has_assembly": true,
+  "parts": [
+    {
+      "name": "base_ring",
+      "bounds": [
+        197.0,
+        178.8,
+        43.0
+      ],
+      "tris": 3284,
+      "watertight": true,
+      "volume_mm3": 57370.7
+    },
+    {
+      "name": "drive_arm",
+      "bounds": [
+        16.0,
+        63.0,
+        10.0
+      ],
+      "tris": 3410,
+      "watertight": true,
+      "volume_mm3": 4297.3
+    },
+    {
+      "name": "effector",
+      "bounds": [
+        72.7,
+        65.3,
+        19.0
+      ],
+      "tris": 7348,
+      "watertight": true,
+      "volume_mm3": 16866.6
+    },
+    {
+      "name": "forearm_link",
+      "bounds": [
+        121.0,
+        16.0,
+        10.0
+      ],
+      "tris": 4752,
+      "watertight": true,
+      "volume_mm3": 5362.1
+    },
+    {
+      "name": "leg",
+      "bounds": [
+        26.0,
+        10.9,
+        95.0
+      ],
+      "tris": 1116,
+      "watertight": true,
+      "volume_mm3": 9784.0
+    },
+    {
+      "name": "phone_tray",
+      "bounds": [
+        175.0,
+        95.0,
+        7.0
+      ],
+      "tris": 1660,
+      "watertight": true,
+      "volume_mm3": 69028.1
+    },
+    {
+      "name": "stylus_collar",
+      "bounds": [
+        26.0,
+        20.0,
+        10.0
+      ],
+      "tris": 1252,
+      "watertight": true,
+      "volume_mm3": 3127.6
+    }
+  ]
+}

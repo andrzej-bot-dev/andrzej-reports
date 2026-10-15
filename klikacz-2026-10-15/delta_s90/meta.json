@@ -1,0 +1,87 @@
+{
+  "title": "Delta na 3\u00d7 SG90 (Tapster-style)",
+  "desc": "Delta robot a la Tapster 3: 3\u00d7 SG90 w pier\u015bcieniu bazowym (120\u00b0), ramiona 48 mm + linki 105 mm z kulkami M3-nut, efektor z rysikiem \u00d88 nad OnePlus 13. Neutral pose policzony w komentarzach.",
+  "model": "anthropic/claude-opus-5.5",
+  "cost_usd": 0.402,
+  "iterations": 1,
+  "has_assembly": true,
+  "parts": [
+    {
+      "name": "base_ring",
+      "bounds": [
+        194.7,
+        208.0,
+        28.0
+      ],
+      "tris": 3552,
+      "watertight": true,
+      "volume_mm3": 164194.2
+    },
+    {
+      "name": "drive_arm",
+      "bounds": [
+        60.0,
+        20.0,
+        12.0
+      ],
+      "tris": 3026,
+      "watertight": true,
+      "volume_mm3": 5385.6
+    },
+    {
+      "name": "effector",
+      "bounds": [
+        91.7,
+        92.0,
+        30.0
+      ],
+      "tris": 2054,
+      "watertight": true,
+      "volume_mm3": 43722.1
+    },
+    {
+      "name": "forearm_link",
+      "bounds": [
+        108.0,
+        16.0,
+        12.0
+      ],
+      "tris": 4110,
+      "watertight": true,
+      "volume_mm3": 6759.6
+    },
+    {
+      "name": "leg",
+      "bounds": [
+        37.0,
+        36.0,
+        209.5
+      ],
+      "tris": 1124,
+      "watertight": true,
+      "volume_mm3": 49889.0
+    },
+    {
+      "name": "phone_tray",
+      "bounds": [
+        175.0,
+        95.0,
+        7.0
+      ],
+      "tris": 1588,
+      "watertight": true,
+      "volume_mm3": 76659.6
+    },
+    {
+      "name": "stylus_collar",
+      "bounds": [
+        24.0,
+        18.0,
+        10.0
+      ],
+      "tris": 1228,
+      "watertight": true,
+      "volume_mm3": 2287.6
+    }
+  ]
+}

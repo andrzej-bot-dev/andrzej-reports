@@ -1,0 +1,76 @@
+{
+  "title": "Klikacz SG90 (serwo)",
+  "desc": "Serwo SG90 + r\u00f3g 25T + d\u017awignia-kleszcze. Gumka wraca. Regulacja wysoko\u015bci slotem M3.",
+  "model": "anthropic/claude-opus-5.5",
+  "cost_usd": 0.0,
+  "iterations": 1,
+  "has_assembly": true,
+  "parts": [
+    {
+      "name": "base",
+      "bounds": [
+        110.0,
+        76.0,
+        16.0
+      ],
+      "tris": 6916,
+      "watertight": true,
+      "volume_mm3": 45821.4
+    },
+    {
+      "name": "horn",
+      "bounds": [
+        42.0,
+        14.0,
+        5.0
+      ],
+      "tris": 2364,
+      "watertight": true,
+      "volume_mm3": 1342.9
+    },
+    {
+      "name": "lever_a",
+      "bounds": [
+        59.0,
+        16.0,
+        7.0
+      ],
+      "tris": 2724,
+      "watertight": false,
+      "volume_mm3": 3111.9
+    },
+    {
+      "name": "lever_b",
+      "bounds": [
+        59.0,
+        16.0,
+        9.0
+      ],
+      "tris": 2570,
+      "watertight": false,
+      "volume_mm3": 2244.5
+    },
+    {
+      "name": "servo_bracket",
+      "bounds": [
+        52.0,
+        30.0,
+        47.3
+      ],
+      "tris": 2668,
+      "watertight": true,
+      "volume_mm3": 21454.8
+    },
+    {
+      "name": "servo_strap",
+      "bounds": [
+        50.5,
+        10.0,
+        4.0
+      ],
+      "tris": 1620,
+      "watertight": true,
+      "volume_mm3": 1377.6
+    }
+  ]
+}

@@ -1,49 +1,18 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Klikacz CAD — anthropic/claude-opus-5.5</title>
+<title>Klikacze — CAD by Claude Opus 5.5</title>
 <style>
 body{font-family:system-ui,sans-serif;margin:0;background:#0d1117;color:#e6edf3}
-header{padding:20px 24px;border-bottom:1px solid #21262d}
-h1{margin:0 0 6px;font-size:20px} .meta{color:#8b949e;font-size:13px}
-#stage{height:62vh;border-bottom:1px solid #21262d} canvas{display:block}
-.parts{display:flex;flex-wrap:wrap;gap:14px;padding:18px 24px}
-.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px;width:270px;cursor:pointer;transition:border-color .15s}
-.card:hover,.card.sel{border-color:#58a6ff}
-.card img{width:100%;border-radius:6px;background:#fff}
-.card b{display:block;margin:8px 0 2px;font-size:15px}
-.card span{color:#8b949e;font-size:12px}
-.ok{color:#3fb950} .warn{color:#d29922}
+header{padding:22px;border-bottom:1px solid #21262d}
+h1{margin:0 0 4px;font-size:20px}.meta{color:#8b949e;font-size:13px}
+.cards{display:flex;flex-wrap:wrap;gap:16px;padding:22px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:14px;width:340px;color:inherit;text-decoration:none;transition:border-color .15s}
+.card:hover{border-color:#58a6ff}
+.card img{width:100%;border-radius:8px;background:#fff}
+.card b{display:block;margin:10px 0 4px;font-size:16px}
+.card span{color:#8b949e;font-size:13px}
 </style></head><body>
-<header><h1>🔧 Klikacz — parametric CAD by <code>anthropic/claude-opus-5.5</code></h1>
-<div class="meta">cost $0.21 · 1 iteration · 0 in / 0 out tokens · click a part to view in 3D · drag=rotate, scroll=zoom</div></header>
-<div id="stage"></div>
-<div class="parts" id="parts"></div>
-<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
-<script type="module">
-import * as THREE from 'three'; import {STLLoader} from 'three/addons/loaders/STLLoader.js'; import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-const meta = {"model": "anthropic/claude-opus-5.5", "cost_usd": 0.0, "iterations": 1, "input_tokens": 0, "output_tokens": 0, "parts": [{"name": "base", "stl": "base.stl", "tris": 6916, "bounds": [110.0, 76.0, 16.0], "watertight": true, "volume_mm3": 45821.4}, {"name": "horn", "stl": "horn.stl", "tris": 2364, "bounds": [42.0, 14.0, 5.0], "watertight": true, "volume_mm3": 1342.9}, {"name": "lever_a", "stl": "lever_a.stl", "tris": 2724, "bounds": [59.0, 16.0, 7.0], "watertight": false, "volume_mm3": 3111.9}, {"name": "lever_b", "stl": "lever_b.stl", "tris": 2570, "bounds": [59.0, 16.0, 9.0], "watertight": false, "volume_mm3": 2244.5}, {"name": "servo_bracket", "stl": "servo_bracket.stl", "tris": 2668, "bounds": [52.0, 30.0, 47.3], "watertight": true, "volume_mm3": 21454.8}, {"name": "servo_strap", "stl": "servo_strap.stl", "tris": 1620, "bounds": [50.5, 10.0, 4.0], "watertight": true, "volume_mm3": 1377.6}]};
-const stage = document.getElementById('stage');
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0d1117);
-const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
-const renderer = new THREE.WebGLRenderer({antialias:true}); stage.appendChild(renderer.domElement);
-const controls = new OrbitControls(camera, renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.1));
-const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(1,2,3); scene.add(dl);
-function fit(obj){ const box = new THREE.Box3().setFromObject(obj); const s = box.getBoundingSphere(new THREE.Sphere());
-  controls.target.copy(s.center); camera.position.set(s.center.x + s.radius*1.8, s.center.y + s.radius*1.6, s.center.z + s.radius*2.2); }
-function load(name){ document.querySelectorAll('.card').forEach(c=>c.classList.toggle('sel', c.dataset.name===name));
-  scene.children.filter(o=>o.isMesh).forEach(o=>scene.remove(o));
-  new STLLoader().load(name + '.stl', g=>{ g.computeVertexNormals();
-    const mesh = new THREE.Mesh(g, new THREE.MeshStandardMaterial({color:0x7fb2d9, metalness:0.15, roughness:0.65}));
-    mesh.material.side = THREE.DoubleSide; scene.add(mesh); fit(mesh); }); }
-const partsEl = document.getElementById('parts');
-for (const p of meta.parts) {
-  const card = document.createElement('div'); card.className='card'; card.dataset.name=p.name;
-  card.innerHTML = `<img src="${p.name}.png"><b>${p.name}</b><span>${p.bounds.join(' × ')} mm · ${p.tris} tris · <span class="${p.watertight?'ok':'warn'}">${p.watertight?'watertight ✓':'NOT watertight'}</span></span>`;
-  card.onclick = ()=>load(p.name); partsEl.appendChild(card);
-}
-function resize(){ const w=stage.clientWidth,h=stage.clientHeight; renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix(); }
-addEventListener('resize', resize); resize();
-if (meta.parts.length) load(meta.parts[0].name);
-(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
-</script></body></html>
+<header><h1>🔧 Klikacze — parametryczny CAD</h1>
+<div class="meta">wygenerowane przez Claude Opus 5.5 (CadQuery) · PETG + M3 + nakrętki · kliknij projekt</div></header>
+<div class="cards"><a class="card" href="byj48/"><img src="byj48/assembly.png"><b>Klikacz 28BYJ-48 (krokowy + krzywka)</b><span>Silnik krokowy 28BYJ-48 obraca ekscentryczną krzywkę; popychacz z gumką wraca. Pokrętło = klik ręczny.</span><br><span>5 części + assembly</span></a></div>
+</body></html>

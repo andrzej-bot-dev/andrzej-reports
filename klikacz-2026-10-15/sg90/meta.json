@@ -1,6 +1,6 @@
 {
-  "title": "Klikacz SG90 (serwo)",
-  "desc": "Serwo SG90 + r\u00f3g 25T + d\u017awignia-kleszcze. Gumka wraca. Regulacja wysoko\u015bci slotem M3.",
+  "title": "Klikacz SG90 (serwo, 1 pozycja)",
+  "desc": "Prosty stabilny klikacz: serwo SG90 + r\u00f3g 25T + d\u017awignia-kleszcze. Gumka wraca. Klika w JEDEN punkt (regulacja r\u0119czna slotem M3).",
   "model": "anthropic/claude-opus-5.5",
   "cost_usd": 0.0,
   "iterations": 1,

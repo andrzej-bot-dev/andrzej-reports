@@ -1,6 +1,6 @@
 {
-  "title": "Klikacz 28BYJ-48 (krokowy + krzywka)",
-  "desc": "Silnik krokowy 28BYJ-48 obraca ekscentryczn\u0105 krzywk\u0119; popychacz z gumk\u0105 wraca. Pokr\u0119t\u0142o = klik r\u0119czny.",
+  "title": "Klikacz 28BYJ-48 (krokowy + krzywka, 1 pozycja)",
+  "desc": "Silnik krokowy 28BYJ-48 obraca ekscentryczn\u0105 krzywk\u0119; popychacz z gumk\u0105 wraca. Pokr\u0119t\u0142o = klik r\u0119czny. Klika w JEDEN punkt.",
   "model": "anthropic/claude-opus-5.5",
   "cost_usd": 0.125,
   "iterations": 1,

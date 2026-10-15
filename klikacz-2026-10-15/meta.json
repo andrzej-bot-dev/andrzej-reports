@@ -1,0 +1,82 @@
+{
+  "model": "anthropic/claude-opus-5.5",
+  "cost_usd": 0.21,
+  "iterations": 1,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "parts": [
+    {
+      "name": "base",
+      "stl": "base.stl",
+      "tris": 6916,
+      "bounds": [
+        110.0,
+        76.0,
+        16.0
+      ],
+      "watertight": true,
+      "volume_mm3": 45821.4
+    },
+    {
+      "name": "horn",
+      "stl": "horn.stl",
+      "tris": 2364,
+      "bounds": [
+        42.0,
+        14.0,
+        5.0
+      ],
+      "watertight": true,
+      "volume_mm3": 1342.9
+    },
+    {
+      "name": "lever_a",
+      "stl": "lever_a.stl",
+      "tris": 2724,
+      "bounds": [
+        59.0,
+        16.0,
+        7.0
+      ],
+      "watertight": false,
+      "volume_mm3": 3111.9
+    },
+    {
+      "name": "lever_b",
+      "stl": "lever_b.stl",
+      "tris": 2570,
+      "bounds": [
+        59.0,
+        16.0,
+        9.0
+      ],
+      "watertight": false,
+      "volume_mm3": 2244.5
+    },
+    {
+      "name": "servo_bracket",
+      "stl": "servo_bracket.stl",
+      "tris": 2668,
+      "bounds": [
+        52.0,
+        30.0,
+        47.3
+      ],
+      "watertight": true,
+      "volume_mm3": 21454.8
+    },
+    {
+      "name": "servo_strap",
+      "stl": "servo_strap.stl",
+      "tris": 1620,
+      "bounds": [
+        50.5,
+        10.0,
+        4.0
+      ],
+      "watertight": true,
+      "volume_mm3": 1377.6
+    }
+  ],
+  "note": "Generation cost $0.21 (24k-token call, effort:low). Total incl. debugging attempts ~$1.0."
+}

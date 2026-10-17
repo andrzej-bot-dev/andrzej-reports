@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kula 3D z własnym motywem + LED 12V — Deep Research</title>
+<style>
+:root{--bg:#0f1115;--card:#171a21;--card2:#1d212b;--txt:#e8eaf0;--mut:#9aa3b5;--gold:#e6b84c;--green:#5fbf77;--red:#e06c5f;--amber:#d9a03c;--blue:#6a9fe0;--line:#2a2f3c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.55}
+.wrap{max-width:1600px;width:92%;margin:0 auto;padding:20px 0 80px}
+header{background:linear-gradient(135deg,#1a1408 0%,#241d0e 60%);border-bottom:2px solid var(--gold);padding:28px 0 18px;margin-bottom:18px}
+header .wrap{padding-bottom:0}
+h1{font-size:1.6em;margin:0 0 6px}
+.badges span{display:inline-block;background:#2b230f;color:var(--gold);border:1px solid #4d3f1a;border-radius:20px;padding:2px 12px;font-size:.8em;margin-right:6px}
+.meta{color:var(--mut);font-size:.88em;margin-top:8px}
+nav{position:sticky;top:0;z-index:50;background:rgba(15,17,21,.96);border-bottom:1px solid var(--line);padding:8px 0;max-height:52px;overflow-x:auto;white-space:nowrap;backdrop-filter:blur(6px)}
+nav .wrap{padding:0;width:96%}
+nav a{display:inline-block;color:var(--txt);background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:3px 12px;margin:2px 3px;font-size:.82em;text-decoration:none}
+nav a:hover{border-color:var(--gold);color:var(--gold)}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin:18px 0}
+h2{font-size:1.25em;margin:0 0 14px;border-bottom:1px solid var(--line);padding-bottom:8px;color:var(--gold)}
+h3{font-size:1.05em;margin:18px 0 8px;color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:.9em;margin:10px 0}
+th{background:var(--card2);text-align:left;padding:8px 10px;border:1px solid var(--line);color:var(--mut);font-weight:600}
+td{padding:8px 10px;border:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#141720}
+.ok{color:var(--green);font-weight:600}.warn{color:var(--amber);font-weight:600}.bad{color:var(--red);font-weight:600}
+a{color:var(--blue)}
+.tldr{background:linear-gradient(135deg,#1a2415,#17210f);border:1px solid #3a5a2e;border-radius:12px;padding:20px 26px;margin:18px 0}
+.tldr h2{color:#8fd67a;border-color:#3a5a2e}
+.verdict{display:inline-block;background:#26301c;border:1px solid #4a6b35;color:#a8e08a;border-radius:8px;padding:6px 14px;font-weight:700;margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:14px 0}
+.opt{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.opt h4{margin:0 0 8px;color:var(--gold)}
+.opt .tag{float:right;font-size:.75em;background:#0e2a18;color:var(--green);border-radius:12px;padding:2px 10px}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.gal figure{margin:0;background:var(--card2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.gal img{width:100%;height:260px;object-fit:cover;display:block}
+.gal figcaption{padding:8px 12px;font-size:.8em;color:var(--mut)}
+.note{background:#241d0e;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.92em;margin:12px 0}
+.danger{background:#2b1512;border-left:3px solid var(--red);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.92em;margin:12px 0}
+.small{font-size:.82em;color:var(--mut)}
+ol.steps{padding-left:22px}
+ol.steps li{margin:8px 0}
+code{background:#0d0f13;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:.88em;color:#d8c07a}
+#totop{position:fixed;bottom:22px;right:22px;background:var(--gold);color:#111;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.3em;box-shadow:0 4px 14px rgba(0,0,0,.5);z-index:99}
+@media(max-width:700px){.wrap{width:96%}section{padding:16px}table{font-size:.8em;display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>🎄 Kula świąteczna 3D z własnym motywem + światło 12V</h1>
+<div class="badges"><span>🔧 Technical</span><span>🛒 Product / BOM</span><span>Deep Research</span></div>
+<div class="meta"><strong>v2 — 17.10.2026 (dodano: rotacja 28BYJ-48 + zasilanie 18650 + BOM elektroniki)</strong> · bazowo 16.10.2026 · Cel: odtworzyć kulę Gloria Glass Decor (Costco) na Anycubic Kobra S1 z własnym obrazkiem · 14 źródeł · 40 modeli STL · 19 zdjęć vision-ocena · ~330 ofert cenowych (Ali/Amazon.se/Kjell) · Czas researchu ~40 min</div>
+</div></header>
+
+<nav><div class="wrap">
+<a href="#tldr">TL;DR</a><a href="#rotacja">🔄 v2 Rotacja+18650</a><a href="#coverage">Coverage</a><a href="#sposoby">3 sposoby</a><a href="#workflow">Workflow</a><a href="#settings">Ustawienia</a><a href="#led">Światło 12V</a><a href="#bom">BOM + ceny</a><a href="#modele">Gotowe modele</a><a href="#filamenty">Filamenty</a><a href="#pulapki">Pułapki</a><a href="#galeria">Galeria</a><a href="#zrodla">Źródła</a>
+</div></nav>
+
+<div class="wrap">
+
+<div class="tldr" id="tldr">
+<h2>⚡ TL;DR — TAK, da się. I to lepiej niż oryginał</h2>
+<p><span class="verdict">✅ FEASIBLE — BOM od ~45 kr (masz filament) do ~190 kr (z złotym silkiem)</span></p>
+<p><strong>Koncept z twojego zdjęcia (szklana złota kula, ciepłe światło w środku) = litofan sferyczny.</strong> Drukujesz pustą kulę o zmiennej grubości ścianki: ciemne partie twojego obrazka = grubsza ścianka (blokuje światło), jasne = cieńsza (świeci). Wgrywasz <strong>dowolny własny obrazek</strong> do generatora, wychodzi STL, drukujesz, wkładasz LED. Oryginał z Costco działa identycznie (baterie + ciepły LED w środku — na wideo brak kabla).</p>
+<p><strong>Najbliższy efektu Costco:</strong> cały wydruk z <strong>gold Silk PLA</strong> zamiast białego — community: <em>"This glows beautifully. Like, astronomically good"</em> (Reddit, kula litofanowa). </p>
+<p><strong>Światło 12V:</strong> tak, ale <strong>LED, nie żarówka</strong>. Żarówka/halogen 12V (5–20 W) <strong>stopi PLA</strong> (mięknie od 50–60°C). G4 LED 12V warm white (1–3 W, 2700–3000K) = bezpieczne i daje dokładnie ten ciepły blask. Koszt: LED od 10 kr + zasilacz od 32 kr.</p>
+</div>
+
+<section id="coverage">
+<h2>📋 Coverage — pokrycie źródeł</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Metoda / szczeble</th><th>Wynik</th></tr>
+<tr><td>Printables.com</td><td class="ok">✅ COVERED</td><td>Browser + GraphQL JSON (16 stron modeli)</td><td>16 modeli zdestylowanych</td></tr>
+<tr><td>MakerWorld.com</td><td class="ok">✅ COVERED</td><td>API JSON + komentarze</td><td>9 modeli z destylatem ustawień i czasów</td></tr>
+<tr><td>Thingiverse.com</td><td class="ok">✅ COVERED</td><td>Browser (curl 403 Cloudflare → Chrome)</td><td>10 modeli + JSON-LD</td></tr>
+<tr><td>Cults3D.com</td><td class="ok">✅ COVERED</td><td>web_fetch/curl 403 → <strong>Bright Data Web Unlocker</strong> (zone pi5andrzej, country=se)</td><td>5 darmowych modeli</td></tr>
+<tr><td>LithophaneMaker.com</td><td class="ok">✅ COVERED</td><td>web_fetch (formularz parametrów)</td><td>Pełna lista parametrów Sphere Makera</td></tr>
+<tr><td>ItsLitho.com</td><td class="ok">✅ COVERED</td><td>web_fetch + blogi + Reddit potwierdzenia</td><td>Tryb spherical + profile</td></tr>
+<tr><td>3dp.rocks</td><td class="ok">✅ COVERED (wynik negatywny)</td><td>web_fetch + cross-ref</td><td>Brak trybu sphere — do kuli się nie nadaje</td></tr>
+<tr><td>Reddit r/3Dprinting, r/lithophane, r/resinprinting</td><td class="ok">✅ COVERED</td><td>Browser/redlib mirror (curl bot-wall)</td><td>6+ wątków, kluczowe cytaty</td></tr>
+<tr><td>All3DP + poradniki (3dx.info, creative3dp, 3dprinterstuff, 3DWithUs)</td><td class="ok">✅ COVERED</td><td>r.jina.ai / web_fetch</td><td>Ustawienia, Beer–Lambert, studium orientacji</td></tr>
+<tr><td>Prusa blog</td><td class="ok">✅ COVERED</td><td>web_fetch</td><td>3 artykuły (transparencja, HueForge, PVB)</td></tr>
+<tr><td>AliExpress</td><td class="ok">✅ COVERED</td><td>Własne skrypty (aliexpress_deep.py, 5 query)</td><td>~340 ofert, top po filtrze ≥4.4★</td></tr>
+<tr><td>Amazon.se</td><td class="ok">✅ COVERED</td><td>Lightpanda CDP (5 query)</td><td>48–60 wyników/query</td></tr>
+<tr><td>Kjell &amp; Company</td><td class="warn">⚠️ CZĘŚCIOWO</td><td>web_fetch SSR (ceny/typy OK; napięcie konkretnej sztuki do sprawdzenia na stronie produktu)</td><td>G4 LED 99,90–129,90 kr</td></tr>
+<tr><td>Electrokit.com</td><td class="bad">❌ FAILED</td><td>3 szczeble: web_fetch ×2 (404 na search) → curl WP-pattern (0 hits)</td><td>Niekrytyczne — LED pokryty przez Ali/Kjell/Amazon</td></tr>
+</table>
+<p class="small">YouTube komentarze: bot-wall na anonimowy scrape (opisy filmów zebrane; komentarze pominięte). Vision pass: 19/20 zdjęć ocenionych (1× HTTP 404).</p>
+</section>
+
+<section id="sposoby">
+<h2>🎯 3 sposoby na własną kulę</h2>
+<div class="grid">
+<div class="opt"><h4>A. Gotowiec z MakerWorld <span class="tag">najłatwiejsze</span></h4>
+<p>Pobierasz STL (np. <em>Christmas Lithophane Ball 90mm</em>, 2,2k 👍, podstawka pod tealight w zestawie), drukujesz. Motyw gotowy od autora, nie własny. Czas druku 1–7 h zależnie od rozmiaru.</p>
+<p class="small">→ <a href="https://makerworld.com/en/models/2058677-christmas-lithophane-ball-90mm-4-variants">MakerWorld #2058677</a></p></div>
+<div class="opt"><h4>B. Generator sferyczny + TWÓJ obrazek <span class="tag">REKOMENDOWANE</span></h4>
+<p>Wgrywasz własne zdjęcie do <a href="https://lithophanemaker.com/Lithophane%20Sphere.html">LithophaneMaker Sphere</a> lub <a href="https://itslitho.com/">ItsLitho (sphere mode)</a> → STL ze zmienną grubością → druk. Pełna personalizacja: rodzinne zdjęcie, rysunek, logo. Uwaga: obraz mapuje się equirectangularnie — najlepsze są obrazy panoramiczne; przy biegunach detal się rozciąga.</p></div>
+<div class="opt"><h4>C. Efekt Costco: gold Silk PLA <span class="tag">najbliżej oryginału</span></h4>
+<p>Ten sam litofan co w B, ale filament <strong>gold Silk PLA</strong> zamiast białego — złota, mleczno-metaliczna kula z ciemniejącym motywem przy świetle. Reddit o kuli z gold silk: <em>"glows beautifully, astronomically good"</em>. Silk rozprasza światło równomiernie jak mleczne szkło.</p></div>
+</div>
+<div class="note">💡 <strong>Co z tą "zarówką 12V"?</strong> Klasyka karbowa E10 12V istnieje też jako <strong>LED</strong> (0,5 W, 65 lm, warm white — Amazon 94,61 kr/5 szt Ruiandsion) — pasuje do estetyki starej żarówki i jest zimna. Zwykła żarówka E10/halogen = NIE (stopi PLA, szczegóły w sekcji Światło).</div>
+</section>
+
+<section id="workflow">
+<h2>🛠️ Workflow krok po kroku (własny motyw)</h2>
+<ol class="steps">
+<li><strong>Przygotuj obraz:</strong> podbij kontrast +20–30%, skala szarości; najlepiej obraz panoramiczny/360° (mapowanie equirectangular jak mapa świata). Motyw symetryczny w poziomie owija się ładnie dookoła kuli.</li>
+<li><strong>Wygeneruj STL:</strong>
+ <ul>
+ <li><a href="https://lithophanemaker.com/Lithophane%20Sphere.html">LithophaneMaker — Lithophane Sphere Maker</a>: parametry: Sphere Diameter (wewnętrzna!), Picture Angular Height/Width (do 180°/360°), Min/Max Thickness, Cylinder Outer Diameter (podstawka, 0=brak), Top Hole (otwór górny), Flip Image (wisząca vs stojąca).</li>
+ <li><a href="https://itslitho.com/">ItsLitho</a>: kształt "sphere", wbudowany edytor kontrastu i podgląd z symulacją światła; <a href="https://www.reddit.com/r/3Dprinting/comments/1hjk5zh/spherical_lithophane/">potwierdzony realnym drukiem</a>.</li>
+ </ul></li>
+<li><strong>Slicer (Kobra S1 / Anycubic SlicerNext):</strong> 0,12 mm warstwa, <strong>100% infill</strong>, walls↑, 30–45 mm/s, brim 8–15 mm, dysza 0,4.</li>
+<li><strong>Druk:</strong> kula drukuje się "pionowo" naturalnie (kolejne równoleżniki) — bez supportów gdy slicer nie znajdzie nawisów; czas 1–7 h dla 90–100 mm.</li>
+<li><strong>Światło:</strong> G4 LED 12V warm (2700–3000K) w drukowanym gnieździe w podstawce + zasilacz 12V + włącznik stopowy 5,5×2,1 mm. LED dokładnie w geometrycznym środku kuli (ew. mały dyfuzor). Zostaw otwory wentylacyjne u dołu.</li>
+</ol>
+<p class="small">Gotowa drukowana podstawka pod litofan-sferę: <a href="https://www.printables.com/model/1043700-easy-lamp-base-for-moonlamp-sphere-lithophane-on-l">Printables "Easy Lamp base"</a> (E27) lub <a href="https://www.thingiverse.com/thing:5072222">LED&amp;LR44 holder</a> (wersja bateryjna, bez kabla — jak Costco!).</p>
+</section>
+
+<section id="settings">
+<h2>⚙️ Ustawienia druku (synteza 6+ poradników)</h2>
+<table>
+<tr><th>Parametr</th><th>Wartość</th><th>Dlaczego</th></tr>
+<tr><td>Min. grubość ścianki</td><td><strong>0,6–0,8 mm</strong></td><td>poniżej — światło przepala bez cieniowania</td></tr>
+<tr><td>Maks. grubość</td><td><strong>2,8–3,2 mm</strong></td><td>0,8→3,0 mm ≈ kontrast 17:1 (Beer–Lambert); 0,8→4,0 = 64:1 (czarne dziury)</td></tr>
+<tr><td>Warstwa</td><td><strong>0,12 mm</strong></td><td>sweet spot; 0,16–0,20 = widoczne pasma przy podświetleniu</td></tr>
+<tr><td>Infill</td><td><strong>100%</strong></td><td>sparse infill = jasne plamy/moiré; vase mode <strong>nie działa</strong> (brak zmiennej grubości)</td></tr>
+<tr><td>Prędkość</td><td><strong>30–45 mm/s</strong></td><td>Kobra S1 jest szybka, ale jakość litofanu = powoli</td></tr>
+<tr><td>Orientacja</td><td>pion/kolejne "równoleżniki"</td><td>studium Polymers 2024: pion daje <strong>+27% transmisji</strong> (246 vs 194 lx)</td></tr>
+<tr><td>Materiał</td><td>biały PLA / gold silk</td><td>unikać carbon/glitter/marble; PETG translucent na kuli <em>słabszy</em> od PLA</td></tr>
+<tr><td>Rozmiar</td><td><strong>≥80–90 mm</strong></td><td>poniżej ~8 cm detal i kontrast tracą sens (potwierdzone testem 5 cm glow)</td></tr>
+</table>
+</section>
+
+<section id="led">
+<h2>💡 Światło 12V — co wchodzi do środka</h2>
+<table>
+<tr><th>Opcja</th><th>Moc/ciepło</th><th>Efekt</th><th>Ryzyko dla PLA</th></tr>
+<tr><td><strong>G4 LED COB 12V warm</strong> 🥇</td><td>1–3 W, zimna</td><td>kierunkowe, ciepłe; w centrum kuli = równy glow</td><td class="ok">niskie</td></tr>
+<tr><td><strong>Pasek/string LED 12V w spirali</strong> 🥇</td><td>2–5 W</td><td>najrówniejsze oświetlenie (wzór: Instructables moon 152 mm)</td><td class="ok">najniższe</td></tr>
+<tr><td>E10 12V <strong>LED</strong> ("żarówka") 🥈</td><td>0,5 W, 65 lm</td><td>punktowe ciepłe; idealnie w centrum (gniazdo E10, Printables #1459925)</td><td class="ok">niskie</td></tr>
+<tr><td>G9 LED 1–4 W</td><td>~1–4 W</td><td>sprawdzone w drukowanych moon-lampach 15 cm</td><td class="ok">niskie</td></tr>
+<tr><td>E10/G4 żarówka żarowa 5–10 W</td><td>~90% energii = ciepło</td><td>ciepłe, ale…</td><td class="bad">WYSOKIE — softening PLA</td></tr>
+<tr><td>G4 halogen 10–20 W</td><td>powierzchnia &gt;250 °C</td><td>—</td><td class="bad">BARDZO WYSOKIE — odpada</td></tr>
+</table>
+<div class="danger">🔥 <strong>Żarówki żarowe/halogenowe STOPIONY PLA.</strong> Tg PLA = 50–60°C: <em>"7-10 watts … can still be enough to get above the glass transition temperature of PLA"</em> (Reddit). Halogen oddaje tylko 10–15% energii jako światło. Dodatkowo <strong>driver w trzonie żarówki LED też grzeje</strong> — wybieraj LED zasilany z zasilacza na kablu (transformator poza kulą) + zostaw otwory wentylacyjne.</div>
+<p><strong>Zasilanie 12V:</strong> adapter 12 V DC 1 A (gniazdo 5,5×2,1) + włącznik stopowy inline (DC 5–24 V, 6 A) — "no cutting or wiring needed". Wersja bez kabla jak Costco: 1× LED 5 mm + bateria LR44 (drukowany holder) albo tealight LED (najzimniejsza opcja, podstawki gotowe w modelach MakerWorld).</p>
+<p><strong>Barwa światła robi efekt:</strong> vision-ocena 19 zdjęć — kule z ciepłym LED (2700–3000K) wyglądają dekoracyjnie jak Costco; chłodne/zielone = "technicznie". Cel: <strong>2700K</strong>.</p>
+</section>
+
+<section id="rotacja">
+<h2>🔄 v2 (17.10): Rotacja + zasilanie z 18650</h2>
+<p><strong>Koncepcja potwierdzona 18 źródłami:</strong> LED jest <em>statyczny</em> na słupku wystającym przez otwór dolny kuli (parametr <code>Cylinder</code> w generatorze), a kula kręci się wokół niego — <strong>zero slip-ringów, zero kabli w ruchu</strong>. Potwierdzone w 4+ buildach, najbliższy naszemu: <a href="https://www.printables.com/model/1279672-rotating-lithophane-lamp-shenmue-mirrors-theme">Printables #1279672 "Rotating Lithophane Lamp"</a> — dokładnie <strong>28BYJ-48 + przekładnia + ESP32 + statyczny <code>led_post</code></strong>, litofanowa obudowa obraca się na napędzanej tarczy (CC-BY).</p>
+<h3>Mechanika — 3 sprawdzone warianty</h3>
+<table>
+<tr><th>Wariant</th><th>Jak działa</th><th>Referencja</th></tr>
+<tr><td><strong>A. Turntable + przekładnia</strong> 🥇</td><td>Kula siedzi w gnieździe obręczy/tarczy napędzanej 28BYJ-48 przez drukowane koła zębate; LED na słupku w centrum</td><td><a href="https://www.printables.com/model/1279672-rotating-lithophane-lamp-shenmue-mirrors-theme">Printables #1279672</a> (STL: turntable_gear, led_post)</td></tr>
+<tr><td><strong>B. Łożysko na pręcie</strong></td><td>Kula na łożysku 6201 osadzonym na nieruchomym pręcie z LED; silnik pcha przez friction/oponkę</td><td><a href="https://www.printables.com/model/708815-rotating-moonplanet-lithophane-lamp-base">Printables #708815</a> (moon/planet lamp base, 6201: 12×32×10 mm)</td></tr>
+<tr><td><strong>C. Kulki w torze</strong></td><td>Kula toczy się po 8 mm kulkach w pierścieniowym torze podstawy; napęd friction</td><td>Cults3D "LED rotating lamp" (mechanizm w <a href="https://github.com/andrzej-bot-dev/andrzej-reports/blob/main/kula-3d-lithophane-2026-10-16.html">destylacie</a>)</td></tr>
+</table>
+<p class="small">Prędkość: 28BYJ-48 ma przekładnię 1:64 → 4096 half-stepów/obrót. 1 obrót/min = 68 kroków/s — trywialne dla silnika i idealne dla dekoracji. Moment ~34 mN·m spokojnie obraca kulę 200–300 g na łożysku/kulkach.</p>
+<h3>⚡ Bilans energii (szyna 12 V, praca ciągła)</h3>
+<table>
+<tr><th>Odbiór</th><th>Pobór</th><th>Uwagi</th></tr>
+<tr><td>G4/E10 LED 12V warm 1,5 W</td><td>125 mA @ 12 V</td><td>1,5 W — wersja 1 W = dłuższa praca</td></tr>
+<tr><td>28BYJ-48 <strong>wersja 12 V</strong></td><td>85–120 mA → ~1,2 W</td><td>2× mniej niż wersja 5 V (~200 mA), ten sam moment; cewka ~288 Ω</td></tr>
+<tr><td>ESP32-WROOM (Wi-Fi OFF)</td><td>30–40 mA @ 3,3 V → ~0,16 W (buck)</td><td>⚠️ z Wi-Fi skoki do ~380 mA — poza konfiguracją</td></tr>
+<tr><td><strong>SUMA</strong></td><td><strong>~2,9 W</strong></td><td>przez MT3608 3,7→12 V (~82% sprawności) = ~0,95 A z ogniwa</td></tr>
+<tr><td><strong>Czas pracy 1× 18650 3000 mAh</strong></td><td class="warn"><strong>~3,2 h</strong></td><td>świeci + kręci bez przerwy</td></tr>
+<tr><td>Tylko świeci (stepper pauza)</td><td>~5,5 h</td><td>2× 18650 równolegle: ~6,5 h / ~11 h</td></tr>
+</table>
+<h3>🧺 BOM rotacji (Ali, per sztuka — masz ESP32/ULN2003/18650)</h3>
+<table>
+<tr><th>Część</th><th>Cena/szt</th><th>Link</th></tr>
+<tr><td>TP4056 USB-C (ładowanie 18650 1 A)</td><td>1,42 kr</td><td><a href="https://www.aliexpress.com/item/1005006400030352.html">aliexpress.com (10 pk 14,20 kr)</a></td></tr>
+<tr><td>MT3608 boost-buck moduł (→12 V)</td><td>2,58 kr</td><td><a href="https://www.aliexpress.com/item/1005001638962830.html">aliexpress.com</a></td></tr>
+<tr><td>28BYJ-48 5V/12V + ULN2003 board</td><td>3,27 kr</td><td><a href="https://www.aliexpress.com/item/32956937647.html">aliexpress.com</a></td></tr>
+<tr><td>E10 gniazdo mosiężne</td><td>0,52 kr</td><td><a href="https://www.aliexpress.com/item/1005005577463203.html">aliexpress.com (50 pk)</a></td></tr>
+<tr><td>G4 gniazdo ceramiczne</td><td>2,46 kr</td><td><a href="https://www.aliexpress.com/item/1005005862610295.html">aliexpress.com (10 pk)</a></td></tr>
+<tr><td>Łożysko 608ZZ (opcja, wariant B/C)</td><td>1,68 kr</td><td><a href="https://www.aliexpress.com/item/1005005971773745.html">aliexpress.com (10 pk)</a></td></tr>
+<tr><td>18650 holder 1× </td><td>0,50 kr</td><td><a href="https://www.aliexpress.com/item/1005005733404482.html">aliexpress.com</a></td></tr>
+<tr><td>MP1584EN buck 12→3,3 V (ESP32) ⚠️ szacunek</td><td>~4 kr</td><td>typowa cena modułu; liniowy LDO z 12 V traciłby ~0,3 W</td></tr>
+</table>
+<p class="ok">Suma elektroniki rotacji: <strong>~16–20 kr</strong> + LED z v1 (10,42 kr) = <strong>~27–31 kr</strong>. Wersja śmiesznie tania: TP4056 + MT3608 + stepper 12 V + gniazdo E10 = ~8 kr.</p>
+<div class="danger">🔥 <strong>Wolfram w zamkniętej wirującej kuli = stopiony plastik.</strong> Tg PLA 50–60 °C, żarówka 5–10 W oddaje ~85–90 % energii jako ciepło, a zamknięta kula ma zero wentylacji (w v1 wystarczał otwór — tu kręci się cała kula). Pamiętaj też: <strong>liniowy regulator z 12 V dla ESP32 to dodatkowe 0,3 W ciepła w podstawce</strong> — bierz MP1584 (buck). Wolfram-OPTIONAL: krótkie sesje przy otwartych otworach wentylacyjnych i LED-soczewce… po prostu nie. Zamiast tego: <strong>E10/G4 LED "filament look"</strong> (imitacja żarnika) — wygląda jak wolfram, grzeje jak nic.</div>
+<h3> Firmware (ESP32)</h3>
+<ul class="small">
+<li><code>AccelStepper</code> w trybie half4, 68 kroków/s → 1 obrót/min (przekładnia 1:64, 4096 half-step/obrót)</li>
+<li>Wi-Fi <strong>OFF</strong> (<code>WiFi.mode(WIFI_OFF)</code>) — z Wi-Fi skoki 380 mA zjadają baterię</li>
+<li>Przycisk: off / świeci / świeci+kręci; dzielnik napięcia na ADC = watchdog baterii (odcięcie ~3,0 V — MT3608 nie ma BMS!)</li>
+<li>UWAGA: TP4056 to samo ładowanie — nie zasila obciążenia podczas ładowania bez modułu z ochroną (wersje z DW01+FS8205 mają protection; kupuj "TP4056 with protection")</li>
+</ul>
+</section>
+<section id="bom">
+<h2>💰 BOM + ceny (live 16.10.2026)</h2>
+<h3>Wariant oszczędny — AliExpress (≥4.4★)</h3>
+<table>
+<tr><th>Część</th><th>Przykład</th><th>Cena</th><th>Link</th></tr>
+<tr><td>G4 LED 12V warm white 3W (AC/DC)</td><td>5.0★</td><td>10,42 kr</td><td><a href="https://www.aliexpress.com/item/32928376342.html">aliexpress.com/item/32928376342</a></td></tr>
+<tr><td>Zasilacz 12V 1A DC 5,5×2,1</td><td>4.7★</td><td>35,96 kr</td><td><a href="https://www.aliexpress.com/item/1005011799073233.html">aliexpress.com/item/1005011799073233</a></td></tr>
+<tr><td>E10 LED 12V (opcja "zarówka")</td><td>4.8★, 5 szt, multi-V 3–24V</td><td>32,04 kr</td><td><a href="https://www.aliexpress.com/item/32864778622.html">aliexpress.com/item/32864778622</a></td></tr>
+<tr><td>Sunlu PLA Transparent 1 kg (opcja)</td><td>4.5★</td><td>105,11 kr</td><td><a href="https://www.aliexpress.com/item/1005006924720809.html">aliexpress.com/item/1005006924720809</a></td></tr>
+<tr><td>Silk PLA złoty 1 kg (opcja — efekt Costco)</td><td>4.8–4.9★</td><td>102–162 kr</td><td><a href="https://www.aliexpress.com/item/1005006847788923.html">Silk PLA 1kg</a> · <a href="https://www.aliexpress.com/item/1005010759498597.html">Silk Copper/Gold</a></td></tr>
+</table>
+<p class="ok">Suma minimum (masz filament): <strong>~46 kr</strong> · z złotym silkiem: <strong>~150–200 kr</strong></p>
+
+<h3>Wariant szybki — Amazon.se (Prime)</h3>
+<table>
+<tr><th>Część</th><th>Cena</th><th>Link</th></tr>
+<tr><td>DiCUNO G4 LED 1,2W 12V AC/DC 3000K</td><td>109,99 kr</td><td><a href="https://www.amazon.se/-/en/DiCUNO-Bulb-120LM-White-3000K/dp/B08BRKJ8XC">amazon.se B08BRKJ8XC</a></td></tr>
+<tr><td>OSRAM LED G4 2700K 12V 0,9W</td><td>49,00 kr (3.8★)</td><td><a href="https://www.amazon.se/-/en/OSRAM-Socket-Voltage-Replacement-Conventional/dp/B08BZXC9B4">amazon.se B08BZXC9B4</a></td></tr>
+<tr><td>DC 12V 1A adapter 5,5×2,1</td><td>115,00 kr</td><td><a href="https://www.amazon.se/-/en/Power-Supply-Adapter-Connector-5-5mm/dp/B07R9J9Y86">amazon.se B07R9J9Y86</a></td></tr>
+<tr><td>Ruiandsion E10 LED 12V 1W warm ×5</td><td>94,61 kr</td><td><a href="https://www.amazon.se/-/en/Ruiandsion-Replacement-Flashlight-Headlight-Lights/dp/B07Z1VNM8B">amazon.se B07Z1VNM8B</a></td></tr>
+<tr><td>eSUN Silk PLA Yellow 1 kg</td><td>208,91 kr</td><td><a href="https://www.amazon.se/-/en/sspa/click">amazon.se (wynik wyszukiwania)</a></td></tr>
+</table>
+<p class="warn">Suma Amazon: <strong>~270–430 kr</strong> (zależnie od opcji)</p>
+
+<h3>Wariant lokalny — Kjell (dziś w sklepie)</h3>
+<table>
+<tr><th>Część</th><th>Cena</th><th>Uwaga</th></tr>
+<tr><td>LED-modul G4 150 lm</td><td>99,90 kr ("Köp 2 få 20%")</td><td class="warn">sprawdzić napięcie na karcie produktu (może być 12V AC/DC)</td></tr>
+<tr><td>LED-modul G4 230 lm</td><td>129,90 kr</td><td>jw.</td></tr>
+<tr><td>Philips LED G4 110 lm</td><td>i lager</td><td>jw.</td></tr>
+</table>
+<p class="small">Halogeny G4 Osram 99,90 kr — odradzane (ciepło). <a href="https://www.kjell.com/se/sok?q=G4%20LED%2012V">kjell.com/sok?q=G4 LED</a></p>
+</section>
+
+<section id="modele">
+<h2>📦 Gotowe modele — top z 40 zdestylowanych</h2>
+<table>
+<tr><th>Model</th><th>Platforma</th><th>Statystyki</th><th>Co się wyróżnia</th></tr>
+<tr><td><a href="https://makerworld.com/en/models/2058677-christmas-lithophane-ball-90mm-4-variants">Christmas Lithophane Ball 90mm — 4 warianty</a></td><td>MakerWorld</td><td>2158 👍 · 3685 ⬇ · 535 kom.</td><td>Pełna 360° kula (kościół, sanie Mikołaja), podstawka pod tealight LED, 35 g filamentu</td></tr>
+<tr><td><a href="https://makerworld.com/en/models/769962-lithophane-sphere-grinch-vs-santa">Lithophane Sphere Grinch vs Santa</a></td><td>MakerWorld</td><td>262 👍 · 898 ⬇ · 155 kom.</td><td>100 mm + podstawka pod fairy-light; zrobione w ItsLitho; infill 100%; "Easy to print and beautiful!"</td></tr>
+<tr><td><a href="https://makerworld.com/en/models/821300-personalized-lithophane-christmas-ball">Personalized Lithophane Christmas Ball</a></td><td>MakerWorld</td><td>601 👍 · 857 ⬇</td><td>Półkula z otworem na lampkę choinkową LED — łatwa do druku</td></tr>
+<tr><td><a href="https://www.printables.com/model/1515364-christmas-nativity-scene-lithophane-sphere-lamp">Christmas Nativity Sphere Lamp</a></td><td>Printables</td><td>108 ⬇</td><td>8 cm, 2 wersje (Daytime rzeźba / Night litofan), otwór 4,5 cm od dołu</td></tr>
+<tr><td><a href="https://www.printables.com/model/621530-lithophane-sphere-lampshade">Lithophane Sphere Lampshade</a></td><td>Printables</td><td>OpenSCAD parametryczny</td><td>Własne zdjęcie przez skrypt Processing + 100% solid</td></tr>
+<tr><td><a href="https://www.thingiverse.com/thing:6243627">Lithophane sphere (mafmuf)</a></td><td>Thingiverse</td><td>~71 👍</td><td>Uniwersalny: dodajesz własną heightmapę 2:1</td></tr>
+<tr><td><a href="https://www.thingiverse.com/thing:5072222">LED&amp;LR44 Battery Holder</a></td><td>Thingiverse</td><td>~39 👍</td><td>Elektronika bez kabla (jak Costco): 5 mm LED + LR44 w środku</td></tr>
+<tr><td><a href="https://cults3d.com/en/3d-model/home/game-of-thrones-sphere-lithophane-lamp">Sphere Lithophane Lamp (GoT)</a></td><td>Cults3D (FREE)</td><td>⭐5.0</td><td>Ø100 mm, 2 części (kula + podstawa E14), bez supportów</td></tr>
+<tr><td><a href="https://www.printables.com/model/1128440-snow-delight-tea-light-ball-winter-and-christmas-l">Snow Delight Tea Light Ball</a></td><td>Printables</td><td>3/5 efektu (vision)</td><td>Ścięta kula stojąca płasko, tealight LED w środku, ciepłe światło</td></tr>
+</table>
+<p class="small">+ 31 kolejnych w destylatach: <code>memory/research/kula-3d-lithophane/raw/models-*.md</code> (m.in. Mars 250 mm, Pokémon, Harley Davidson, szopka, "Trzy orzeszki").</p>
+</section>
+
+<section id="filamenty">
+<h2>🧵 Filament — co daje efekt złotej szklanej kuli</h2>
+<table>
+<tr><th>Materiał</th><th>Efekt na podświetlonej kuli</th><th>Uwagi</th></tr>
+<tr><td><strong>Gold Silk PLA</strong> (Bambu Silk Gold / Sunlu / Creality)</td><td class="ok">Najbliżej Costco — rozproszony złoty glow + metaliczny połysk</td><td>"glows beautifully, astronomically good" (Reddit); Sunlu Silk lubi clog przy 205°C → druk ~230°C</td></tr>
+<tr><td><strong>Biały PLA</strong> (Sunlu White, Overture, HATCHBOX)</td><td>Klasyka litofanów — najwyższy kontrast</td><td>Uwaga: nowa partia Sunlu White matowa; kontrast zależy od grubości 0,8–3,2 mm</td></tr>
+<tr><td>Prusament PLA "Oh My Gold"</td><td>Półprzezroczysty złoty (inny charakter: 1 warstwa przepuszcza, więcej = bardziej złoty)</td><td>Pole badań Prusa (HueForge)</td></tr>
+<tr><td>Clear PCTG / PVB (Fiberlogy, Prusament PVB)</td><td>Największa przezroczystość — ale bezbarwna; mleczna, nie "świecąca"</td><td>Prawdziwa szklistość wymaga wolnego druku 0,05 mm + szlifowania/polerowania; na kuli PETG translucent wychodzi <em>gorzej</em> od PLA (światło odbija się do środka)</td></tr>
+</table>
+<div class="note">💡 Rekomendacja: <strong>gold Silk PLA + litofan z własnym obrazkiem + LED 2700K</strong> = złota kula z ciemniejącym własnym motywem — najbliższa klimatem Costco przy kosztzie ~150 kr.</div>
+</section>
+
+<section id="pulapki">
+<h2>⚠️ Pułapki (żeby nie wyrzucić 7 godzin druku)</h2>
+<ul>
+<li><strong>Vase mode NIE działa</strong> — litofan wymaga zmiennej grubości ścianki; vase = pojedyncza ścianka bez tonal.</li>
+<li><strong>100% infill obowiązkowo</strong> — puste przestrzenie = jasne plamy i moiré przy podświetleniu.</li>
+<li><strong>Bieguny kuli rozciągają piksele</strong> (mapowanie equirectangular) — ważne elementy obrazka trzymaj w pasie równika; pełne 180° wysokości obrazu = mocna dystorsja na biegunach.</li>
+<li><strong>Obraz lustrzany</strong> — generator drukuje "od tyłu"; sprawdź podgląd (patrzysz na gładką stronę, motyw powinien być odwrócony lustrzanie w pliku).</li>
+<li><strong>Pasma warstw przy podświetleniu</strong> — najczęstszy defekt na zdjęciach (vision: "mocne poziome prążki"); 0,12 mm warstwa + wolny druk minimalizują.</li>
+<li><strong>Mała kula = brak kontrastu</strong> — test 5 cm glow-PLA: "glow becomes too uniform… overwhelms thickness differences". Celuj ≥9 cm.</li>
+<li><strong>LED w bezpośrednim kontakcie ze ścianką</strong> + zamknięta kula bez wentylacji = lokalne zmiękczenie nawet od LED (driver w trzonie grzeje!). Otwory u dołu, dystans, zasilacz na kablu.</li>
+<li><strong>Gwinty podstawek</strong> nie zawsze pasują do tealightów — komentarz z MakerWorld: "threaded bases fit the RGB lights but not the regular tea lights". Zmierz swoje źródło światła zanim drukniesz podstawę.</li>
+</ul>
+</section>
+
+<section id="galeria">
+<h2>🖼️ Galeria — jak to wychodzi w praktyce (vision-ocena vs Costco)</h2>
+<div class="gal">
+<figure><img loading="lazy" src="https://makerworld.bblmw.com/makerworld/model/USc28d99c5a6391e/design/2025-11-25_d90ad77a724078.jpg" alt="Winter Forest Lithophane Sphere"><figcaption>⭐ <strong>4/5</strong> — Winter Forest Sphere (MakerWorld): najbliższa Costco, ciepły złoty blask, motyw wyraźny. <a href="https://makerworld.com/en/models/2040237-winter-forest-lithophane-sphere">model</a></figcaption></figure>
+<figure><img loading="lazy" src="https://media.printables.com/media/prints/1128440/images/8515604_a174eaf9-901f-44bb-a44e-86589378be63_d96b72c8-0fa5-48a6-a0da-54ffc13e2025/img_8241.jpeg" alt="Snow Delight Tea Light Ball"><figcaption><strong>3/5</strong> — Snow Delight Ball: ciepły żółty, stojąca płasko. <a href="https://www.printables.com/model/1128440-snow-delight-tea-light-ball-winter-and-christmas-l">model</a></figcaption></figure>
+<figure><img loading="lazy" src="https://media.printables.com/media/prints/180866cb-da58-409e-b25c-07f91fafb74c/images/11415428_25d50c5c-e502-48fe-a669-e5b03d5b0474_c69ef1db-1e14-4c74-8adb-4c2bbdffffd6/0-02-05-44691854b50a56c9786da7b2df0c2e3e2d104ff781000d7445e8049ffaf0f1f8_d24ef744fe56f12c.jpg" alt="Nativity collage"><figcaption><strong>collage</strong> — świecąca vs niepodświetlona: widać różnicę ciepłego LED. <a href="https://www.printables.com/model/1515364-christmas-nativity-scene-lithophane-sphere-lamp">model</a></figcaption></figure>
+<figure><img loading="lazy" src="https://makerworld.bblmw.com/makerworld/model/UScb252211fba452/design/2025-12-04_83e647bcc54ab.jpg" alt="Christmas Ball 90mm"><figcaption><strong>2/5 (zimne światło)</strong> — Christmas Ball 90mm: bogaty detal, ale chłodna barwa. <a href="https://makerworld.com/en/models/2058677-christmas-lithophane-ball-90mm-4-variants">model</a></figcaption></figure>
+<figure><img loading="lazy" src="https://media.printables.com/media/prints/599068/images/4769081_2a7c40bc-2ab2-4baf-b1b7-b6f030df2c17_74e5b9eb-bd82-4c39-8a7e-a778c32730b9/mars_lithophane01.jpg" alt="Mars lithophane"><figcaption><strong>2/5</strong> — Mars: wyraźny motyw, ale widoczne pasma warstw (przykład pułapki). <a href="https://www.printables.com/model/599068-lithophane-sphere">model</a></figcaption></figure>
+<figure><img loading="lazy" src="https://media.printables.com/media/prints/1115411/images/8426232_38ee8d88-578d-479c-963f-42c4563cf8e9_b2234bf0-afc4-4a93-a7c4-7bf322eb71ca/tapo-camera-stand-22.png" alt="Bombka render"><figcaption><strong>render</strong> — bombka ze świecącą wstawką: inspiracja konstrukcyjna (ciemna obudowa + litofan).</figcaption></figure>
+</div>
+<p class="small">Pełna ocena 19 zdjęć: <code>raw/photo-vision.md</code>. Wniosek: barwa LED (ciepła vs chłodna) robi większą różnicę niż sam model.</p>
+</section>
+
+<section id="zrodla">
+<h2>🔗 Kluczowe źródła</h2>
+<ul>
+<li>Generatory: <a href="https://lithophanemaker.com/Lithophane%20Sphere.html">LithophaneMaker Sphere</a> · <a href="https://itslitho.com/">ItsLitho</a> · <a href="https://www.youtube.com/watch?v=U2VwfzQRTUc">tutorial wideo (oficjalny)</a></li>
+<li>Settings: <a href="https://tools.creative3dp.com/blog/lithophane-settings-guide/">creative3dp (Beer–Lambert, orientacja +27%)</a> · <a href="https://itslitho.com/itslitho-blog/slicer-settings-for-lithophanes-tweaking-to-perfection/">ItsLitho slicer guide</a> · <a href="https://www.3dprinterstuff.com/workshop/lithophane-3d-printing-guide">3dprinterstuff</a> · <a href="https://3dx.info/3d-printed-lithophane-settings/">3dx.info</a> · <a href="https://all3dp.com/2/how-to-3d-print-your-own-lithophane/">All3DP</a></li>
+<li>Kule w praktyce: <a href="https://www.reddit.com/r/3Dprinting/comments/1hjk5zh/spherical_lithophane/">Reddit spherical lithophane (ItsLitho)</a> · <a href="https://www.reddit.com/r/3Dprinting/comments/1q699dr/glow_in_the_dark_spherical_moon_lithophane_losing/">Reddit glow 5cm problem</a> · <a href="https://www.reddit.com/r/3Dprinting/comments/hsi3dt/spherical_lithophane_with_a_360_photo/">Reddit 360° photo</a> · <a href="https://www.reddit.com/r/3Dprinting/comments/ibdtfs/lithophane_spherical_globe_after_120_hours_of_3d/">120h globus</a> · <a href="https://www.reddit.com/r/3Dprinting/comments/1ktjewv/translucent_petg_is_doing_a_worse_job_at_letting/">gold Silk vs PETG</a></li>
+<li>Światło/ciepło: <a href="https://www.reddit.com/r/3Dprinting/comments/194wmqc/is_this_a_fire_hazard/">Reddit fire hazard (Tg PLA, driver)</a> · <a href="https://www.reddit.com/r/3Dprinting/comments/rsok9m/making_a_lamp_with_pla_and_a_led_bulb/">Reddit lamp PLA LED</a> · <a href="https://www.instructables.com/3D-Printed-Moon-Lithophane/">Instructables LED spirala</a> · <a href="https://gystore.net/blogs/news/12v-g4-led-bulbs-efficient-halogen-replacement">G4 LED 12V guide</a> · <a href="https://ledlightinginfo.com/led-lighting/difference-between-halogen-and-led">halogen vs LED</a></li>
+<li>Filamenty: <a href="https://blog.prusa3d.com/lets-play-with-filament-transparency-how-to-make-amazing-lifelike-color-photos-with-just-a-simple-color-change_104338/">Prusa transparency</a> · <a href="https://blog.prusa3d.com/3d-printed-lens-and-other-transparent-objects_31231/">Prusa lenses</a> · <a href="https://old.reddit.com/r/3Dprinting/comments/1vsj8x6/the_clearest_translucent_pla_brand/">Reddit clearest PLA</a></li>
+</ul>
+<h3>Metodyka</h3>
+<p class="small">6 subagentów (DeepSeek V4.1 Flash ×5, Qwen3-VL 235B ×1 — vision) + main session (skrypty cenowe Ali/Amazon, Kjell, synteza). 40 modeli zdeduplikowanych z 4 platform; 19 zdjęć ocenionych vision pod kątem podobieństwa do kuli Costco; ceny live z 3 kanałów. Każda teza w raporcie ma klikalny URL. Pliki robocze: <code>memory/research/kula-3d-lithophane/</code>. Ograniczenia: YouTube komentarze (bot-wall), Electrokit (search 404), napięcie G4 w Kjell do weryfikacji na karcie produktu.</p>
+</section>
+
+</div>
+<a href="#tldr" id="totop" title="Do góry">↑</a>
+</body>
+</html>

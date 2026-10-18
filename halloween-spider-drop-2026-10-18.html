@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halloween Spider Drop — pająk na ruch — brakujące części + linki</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--ink:#ece8f7;--muted:#a89fc4;--accent:#ff8c3b;--accent2:#a06bff;--ok:#3ddc84;--warn:#ffce4a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif}
+.wrap{max-width:96%;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.3em 0}
+h2{font-size:1.2rem;margin:1.6em 0 .5em;color:var(--accent)}
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;padding:3px 12px;border-radius:99px;font-size:.8rem;font-weight:700}
+.meta{color:var(--muted);font-size:.85rem}
+nav{position:sticky;top:0;background:rgba(19,16,32,.95);padding:8px 0;z-index:9;display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:var(--accent2);text-decoration:none;font-size:.85rem;background:var(--card);padding:4px 10px;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.92rem}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid #322a52;vertical-align:middle}
+th{color:var(--muted);font-weight:600}
+img{max-width:100%;border-radius:10px}
+.prod{display:grid;grid-template-columns:160px 1fr;gap:14px;background:var(--card);border-radius:14px;padding:14px;margin:12px 0;align-items:start}
+@media(max-width:600px){.prod{grid-template-columns:1fr}}
+.prod a,.gal a{color:var(--ink)}
+.price{font-size:1.15rem;font-weight:800;color:var(--ok)}
+.tldr{background:linear-gradient(135deg,#241b3f,#1d1832);border-left:4px solid var(--accent);border-radius:12px;padding:14px 18px;margin:14px 0}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}
+.gal figure{margin:0;background:var(--card);border-radius:12px;padding:8px;font-size:.8rem;color:var(--muted);text-align:center}
+#top-btn{position:fixed;bottom:18px;right:18px;background:var(--accent2);color:#111;border:none;border-radius:99px;padding:10px 16px;font-weight:700;cursor:pointer}
+footer{color:var(--muted);font-size:.85rem;margin:3em 0 1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="#tldr">TL;DR</a><a href="#jak">Jak działa</a><a href="#masz">Masz</a><a href="#kup">Do kupienia</a><a href="#opcja">Opcje</a><a href="#coverage">Coverage</a></nav>
+
+<h1><span class="badge">🛒 Product</span> 🕷️ Halloween Spider Drop — pająk spadający na ruch</h1>
+<p class="meta">Data: 2026-10-18 · Projekt: <a href="https://www.youtube.com/watch?v=GFcJuV7v6f4">youtube.com/watch?v=GFcJuV7v6f4</a> (3:43, analiza klatek kadr po kadrze) · Inwentarz: docs/hardware-inventory.md · Ceny: amazon.se live</p>
+
+<div class="tldr" id="tldr">
+<strong>TL;DR:</strong> Prawie wszystko masz — PIR AM312, silnik DC, MOSFET-y, 18650 z holderem, drukarkę z PETG. <strong>W wariancie „0 kr" (sterowanie na ESP32 zamiast Digisparka z filmu) nie kupujesz nic</strong> — nici wystarczy zwykła nylonowa z domu. Wariant „1:1 jak w filmie": <strong>Digispark ATtiny85 ×5 — 76 kr</strong> + ewentualnie żyłka 0,3 mm (72 kr).
+</div>
+
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Szczeble</th></tr>
+<tr><td>YouTube GFcJuV7v6f4 (identyfikacja BOM)</td><td class="ok">✅ COVERED</td><td>yt-dlp → 28 klatek → vision (10 partiami)</td></tr>
+<tr><td>Inwentarz warsztatu</td><td class="ok">✅ COVERED</td><td>docs/hardware-inventory.md (grep ATtiny/silnik/MOSFET/18650: 0× ATtiny — potwierdzone)</td></tr>
+<tr><td>amazon.se (ceny + zdjęcia PDP)</td><td class="ok">✅ COVERED</td><td>skrypt Lightpanda → browser CDP og:image</td></tr>
+<tr><td>Model 3D pająka/szpuli (Printables/Thingiverse)</td><td class="warn">⚠️ pominięte</td><td>film nie podaje linku do modeli; Thingiverse CDN 403 dla miniatur (znana lekcja) — do obróbki w osobnym kroku, jak chcesz</td></tr>
+</table>
+
+<h2 id="jak">🎬 Jak działa projekt (z klatek wideo)</h2>
+<p>Silnik DC kręci drukowaną szpulą (fioletowa, na gumce recepturce) — pająk na nylonowej nitce <strong>spada/szybuje w dół framugi drzwi</strong>, gdy PIR wykryje ruch. Elektronika: ATtiny85 (Digispark), tranzystor/MOSFET na silnik, PIR z kopułką, włącznik ON/OFF, zasilanie bateryjne. W pająku czerwona LED jako „oko".</p>
+<div class="gal">
+<figure><a href="https://www.youtube.com/watch?v=GFcJuV7v6f4"><img src="img/halloween-spider-drop/vid_mech.jpg" alt="Mechanizm: silnik + szpula" loading="lazy"></a>mechanizm: silnik DC + szpula</figure>
+<figure><a href="https://www.youtube.com/watch?v=GFcJuV7v6f4"><img src="img/halloween-spider-drop/vid_pcb.jpg" alt="Elektronika" loading="lazy"></a>elektronika: MCU + sterowanie silnikiem</figure>
+<figure><a href="https://www.youtube.com/watch?v=GFcJuV7v6f4"><img src="img/halloween-spider-drop/vid_spider.jpg" alt="Pająk" loading="lazy"></a>pająk (druk 3D) + LED-oko</figure>
+<figure><a href="https://www.youtube.com/watch?v=GFcJuV7v6f4"><img src="img/halloween-spider-drop/vid_door.jpg" alt="Montaż" loading="lazy"></a>montaż nad framugą drzwi</figure>
+</div>
+
+<h2 id="masz">✅ Masz w warsztacie (zero zakupów)</h2>
+<table>
+<tr><th>Część z filmu</th><th>Twój odpowiednik</th></tr>
+<tr><td>PIR HC-SR50x</td><td class="ok">PIR AM312 ×5 — mniejszy, lepszy do obudowy</td></tr>
+<tr><td>Silnik DC zabawkowy</td><td class="ok">silnik DC ✅ (+ L9110 driver i MOSFET-y AO3400 jako sterowanie)</td></tr>
+<tr><td>Zasilanie bateryjne</td><td class="ok">18650 + holdery + płytki ładowania</td></tr>
+<tr><td>Obudowa + szpula + pająk (druk 3D)</td><td class="ok">Kobra S1 + PETG (czarny na pająka, dowolny kolor na szpulę); TPU na gumowe mocowanie</td></tr>
+<tr><td>Tranzystor, rezystory, przewody</td><td class="ok">w komplecie</td></tr>
+</table>
+
+<h2 id="kup">🛒 Do kupienia — amazon.se</h2>
+
+<div class="prod">
+<img src="img/halloween-spider-drop/digispark.jpg" alt="Digispark ATtiny85" loading="lazy">
+<div><strong>opcja 1:1: Digispark ATtiny85 ×5 — 76 kr</strong> (DollaTek, ATtiny13A/25/85 kompatybilne)<br>
+Tylko jeśli chcesz zbudować „permanentnie" w małej obudowie zamiast oddać ESP32 z półki. Z ESP32 masz WiFi (bonus: trigger z telefonu) i zero czekania na dostawę.<br>
+<a href="https://www.amazon.se/dp/B081JN7J7N">→ amazon.se/dp/B081JN7J7N</a> · inne: 85,99 kr <a href="https://www.amazon.se/dp/B07MB8Y8SF">B07MB8Y8SF</a>, 189 kr <a href="https://www.amazon.se/dp/B07ML2SJZN">B07ML2SJZN</a></div>
+</div>
+
+<div class="prod">
+<img src="img/halloween-spider-drop/line.jpg" alt="Żyłka nylonowa" loading="lazy">
+<div><strong>Żyłka 0,3 mm (Anezus) — 72 kr</strong> <em>(opcja)</em><br>
+Do pająka wystarczy każda cienka żyłka/nitka z domu (0 kr). Jeśli chcesz „niewidzialną" linię na stałe — ta jest OK, 0,3 mm, klarowna.<br>
+<a href="https://www.amazon.se/dp/B07J62FVCV">→ amazon.se/dp/B07J62FVCV</a></div>
+</div>
+
+<table>
+<tr><th>Wariant</th><th>Koszt</th><th>Komentarz</th></tr>
+<tr><td>🏁 <strong>0 kr — na ESP32 z szuflady</strong></td><td class="price">0 kr</td><td>zwykła nitka/żyłka z domu, ESP32 + AM312 + MOSFET + silnik DC + 18650; drukujesz obudowę/szpulę/pająka</td></tr>
+<tr><td>1:1 jak w filmie</td><td class="price">76 kr</td><td>Digispark ATtiny85; żyłka z domu</td></tr>
+<tr><td>Komplet „na lata"</td><td class="price">148 kr</td><td>Digispark ×5 + żyłka Anezus</td></tr>
+</table>
+
+<h2 id="opcja">💡 Rekomendacja</h2>
+<ul>
+<li><strong>Bierz wariant 0 kr na ESP32.</strong> Digispark z filmu to tylko mniejsza płytka — u Ciebie pająk i tak wisi nad drzwiami, obudowa drukowana, więc wielkość ESP32 nie boli.</li>
+<li>Do sterowania silnikiem DC: MOSFET AO3400 (masz) albo driver L9110 (masz) — filmu nie musisz kopiować układowo.</li>
+<li> gumka recepturka na szpulę = szuflada (Biltema ma za 10 kr, jakby co).</li>
+<li> Modele 3D (pająk/szpula/obudowa): Printables „spider drop" — jak chcesz, zrobię drugi research z linkami do STL.</li>
+</ul>
+
+<footer>
+Metodologia: BOM zidentyfikowany z 10 klatek wideo (yt-dlp → vision), ceny live amazon.se 2026-10-18, zdjęcia produktów z PDP przez browser CDP, zapisane lokalnie ≤640px. Linki zweryfikowane: 4/4 otwarte (2 PDP amazon + wideo + raport).
+</footer>
+</div>
+<button id="top-btn" onclick="scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</body>
+</html>

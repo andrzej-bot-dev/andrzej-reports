@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🪛 Elektryczny śrubokręt do ESP32 + druku 3D — deep research 2026-10-18</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#251f40;--ink:#ece8f7;--muted:#a79fc4;--acc:#ff9f43;--acc2:#8b5cf6;--good:#34d399;--bad:#f87171;--line:#332a55}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.55;font-size:15.5px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{width:92%;max-width:1400px;margin:0 auto;padding:18px 0 90px}
+header{padding:26px 0 8px}
+.badge{display:inline-block;background:var(--acc2);color:#fff;font-size:12.5px;font-weight:700;padding:3px 12px;border-radius:99px;letter-spacing:.5px}
+h1{font-size:clamp(22px,3.4vw,34px);margin:12px 0 6px;line-height:1.2}
+.meta{color:var(--muted);font-size:13.5px}
+h2{font-size:clamp(19px,2.4vw,26px);margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+h2 .n{color:var(--acc)}
+h3{font-size:17px;margin:0 0 6px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.box.warn{border-left:4px solid var(--bad)}
+.box.good{border-left:4px solid var(--good)}
+.box.info{border-left:4px solid var(--acc2)}
+nav.sticky{position:sticky;top:0;z-index:50;background:rgba(19,16,32,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:10px 0}
+nav.sticky .wrap{padding:0;width:95%}
+nav a{display:inline-block;font-size:12.8px;background:var(--card2);color:var(--ink);padding:5px 11px;border-radius:99px;margin:2px 3px 2px 0;border:1px solid var(--line)}
+nav a:hover{background:var(--acc2);text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th{background:var(--card2);text-align:left;padding:9px 10px;border:1px solid var(--line);font-size:12.8px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+td{padding:8px 10px;border:1px solid var(--line);vertical-align:middle}
+tr:nth-child(even) td{background:rgba(255,255,255,.018)}
+.tblwrap{overflow-x:auto}
+.coverage td:first-child{font-weight:600}
+.st{font-weight:700}.st.ok{color:var(--good)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:14px 0}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card .imgw{position:relative;background:#0d0b18;display:flex;align-items:center;justify-content:center;height:210px}
+.card .imgw img{max-width:100%;max-height:210px;object-fit:contain}
+.price{position:absolute;top:10px;right:10px;background:var(--acc);color:#1a1206;font-weight:800;padding:4px 12px;border-radius:10px;font-size:16px}
+.src{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;background:rgba(139,92,246,.9);color:#fff}
+.src.amz{background:rgba(255,159,67,.92)}.src.az{background:rgba(255,159,67,.92)}.src.nordic{background:rgba(52,211,153,.85);color:#08281a}
+.card .body{padding:13px 15px 15px}
+.card .tit{font-size:15.5px;font-weight:700}
+.card .tit a{color:var(--ink)}
+.rate{color:var(--acc);font-size:13px;margin:2px 0 8px}
+.rate span{color:var(--muted)}
+.pc{font-size:13.2px;margin:6px 0}
+.pc b{font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+.pc .pro{color:var(--good)}.pc .con{color:var(--bad)}
+.pc q{color:var(--muted);font-style:italic}
+.torque{font-size:12.6px;background:var(--card2);border-radius:8px;padding:5px 9px;margin-top:8px;color:var(--muted)}
+.torque b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:800px){.cols{grid-template-columns:1fr}}
+ul.tight{margin:6px 0 6px 20px}ul.tight li{margin:4px 0}
+.quote{border-left:3px solid var(--acc2);padding:6px 12px;margin:8px 0;background:rgba(139,92,246,.07);border-radius:0 8px 8px 0;font-size:13.5px}
+.quote .who{color:var(--muted);font-size:12px}
+#top-btn{position:fixed;bottom:22px;right:22px;background:var(--acc2);color:#fff;border:none;border-radius:50%;width:46px;height:46px;font-size:20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);z-index:60}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;margin:0 3px 3px 0;background:var(--card2);border:1px solid var(--line)}
+.pill.b{border-color:var(--bad);color:var(--bad)}.pill.g{border-color:var(--good);color:var(--good)}.pill.o{border-color:var(--acc);color:var(--acc)}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.8px}
+</style>
+</head>
+<body>
+<nav class="sticky"><div class="wrap">
+<a href="#tldr">TL;DR</a><a href="#tabela">Top 11</a><a href="#jak-wybrac">Jak wybrać</a><a href="#ali">AliExpress</a><a href="#amazon">Amazon.se</a><a href="#nordic">Sklepy nordyckie</a><a href="#spolecznosc">Społeczność</a><a href="#uzywane">Używane</a><a href="#koszty">Ukryte koszty</a><a href="#coverage">Źródła</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+<span class="badge">🛒 PRODUCT RESEARCH</span>
+<h1>🪛 Elektryczny śrubokręt do ESP32 + druku 3D</h1>
+<div class="meta">18.10.2026 · Deep research · 13 źródeł · ~180 pozycji przejrzanych, 24 PDP + recenzje · Waluta: SEK · Pytanie: „na Amazonie i Ali wychodzi ~300 kr — Amazon szybszy, ale może na Ali lepsze/taniejsze? Czy te z Amazona do dupy?”</div>
+</header>
+
+<!-- ============ TL;DR ============ -->
+<h2 id="tldr">TL;DR — odpowiedzi i rekomendacje</h2>
+<div class="box good">
+<h3>Odpowiedzi na Twoje 3 pytania:</h3>
+<ul class="tight">
+<li><b>1. Czy na Ali są te „o wiele tańsze”, których nie zauważyłeś?</b> — <b style="color:var(--good)">TAK</b>. Mini wkrętaki USB-C za <b>108 kr</b> (4.5★, 426 zamówień) i <b>144 kr</b> z 6 Nm (mocne jak Amazon za 268-295 kr), a klasyk „62-in-1” za <b>201 kr</b> to bestseller z <b>10 000+ zamówień</b> i 4.7★. Twoje ~300 kr to było średnie pudło — półka taniej jest głębsza niż myślałeś.</li>
+<li><b>2. Czy te na Amazonie do dupy?</b> — <b>Nie wszystkie</b>. Rój no-name „72-in-1” (Ainiv, KUNLUN, Workpro, MOWETOO) = loteria: dużo bitów, słaby moment, powtarzalne zgłoszenia awarii. Ale <b>Xiaomi Mi Cordless 393 kr (4.7★/812 opinii)</b> to najlepszy value w całym teście, MQFORU 281 kr ma 5 nastaw momentu, a Bosch GO 3 (939 kr) to klasa premium ze sprzęgłem.</li>
+<li><b>3. Czemu na Amazonie widziałeś tylko ~300 kr?</b> — Bo <b>Hoto, Wowstick i Fanttik w ogóle nie występują na amazon.se</b> (sprawdzone 4 frazami, ~45 leadów). Wowstick jest na Ali za 258 kr, Hoto w Kjell (ale 599-799 kr — przepłacasz za design).</li>
+</ul>
+</div>
+
+<div class="cols">
+<div class="box info">
+<h3>🎯 Rekomendacje wg zastosowania</h3>
+<ul class="tight">
+<li><b>Elektronika (ESP32, M2-M3):</b> <a href="https://www.amazon.se/-/en/dp/B0D5CJY1H8">MQFORU 72-in-1 — 281 kr</a> (5 nastaw momentu, 64 bity S2, wyświetlacz, LED) albo taniej <a href="https://www.aliexpress.com/item/1005005799847927.html">Ali 62-in-1 — 201 kr</a> (10k+ zamówień)</li>
+<li><b>Druk 3D / obudowy / meble:</b> <a href="https://www.amazon.se/-/en/dp/B09DGQW3QC">Xiaomi Mi Cordless — 393 kr</a> (4.7★, najwyżej oceniany w kategorii, ~5 Nm)</li>
+<li><b>Budżet absolutny:</b> <a href="https://www.aliexpress.com/item/1005007861650690.html">Ali mini USB-C — 108 kr</a> (bez kontroli momentu — tylko lekkie śruby!)</li>
+<li><b>Lokalnie, dziś:</b> <a href="https://www.jula.se/catalog/verktyg-och-maskiner/elverktyg-och-maskiner/skruvdragare/batteridrivna-skruvdragare/miniskruvdragare-med-vinklingsbart-handtag-016876/">Jula Meec mini — 99,90 kr</a> / IKEA TRIXIG — 149 kr / Kjell Luxorparts — 99 kr</li>
+<li><b>Premium (jak budżet urośnie):</b> <a href="https://www.amazon.se/-/en/dp/B0D6RK261X">Bosch GO 3 — 939 kr</a> — sprzęgło 7-nastawowe = nie przekręcisz niczego w plastiku</li>
+</ul>
+</div>
+<div class="box warn">
+<h3>⚠️ Heatsety — ważne dla druku 3D</h3>
+<p>Wkrętak <b>nie służy do wklejania insertów</b> — te wciska się <b>lutownicą (Pinecil)</b> z odpowiednią końcówką. Wkrętak tylko wkręca śrubę w gotowy insert, a <b>finalne dokręcenie rób ręcznie</b> — unikniesz zerwania gwintu w mosiężnej wkładce. Najczęstsza przyczyna zniszczonych gwintów to cross-threading, nie za mocne dokręcenie.</p>
+<p style="margin-top:6px">Granice momentu: M2/laptop ≤ <b>0.4 Nm</b> · elektronika 0.2-0.75 Nm · obudowy/drzewo 3-6 Nm. <a href="#spolecznost-wiecej">Szczegóły ↓</a></p>
+</div>
+</div>
+
+<!-- ============ TABELA ============ -->
+<h2 id="tabela">Top 11 — porównanie z miniaturami</h2>
+<div class="tblwrap">
+<table>
+<tr><th>Zdjęcie</th><th>Model</th><th>Sklep</th><th>Cena</th><th>Ocena</th><th>Moment / kontrola</th><th>Do czego</th></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005007861650690.html"><img src="img/srubokret-1018/ali-mini108.jpg" loading="lazy" alt="Ali mini 108 kr" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.aliexpress.com/item/1005007861650690.html">Mini wkrętak USB-C (Choice)</a></td><td>AliExpress</td><td><b>108 kr</b></td><td>4.5★ (58, 426 zam.)</td><td>~3.6-4.2V / <span style="color:var(--bad)">brak kontroli</span></td><td>lekkie śruby, budżet min.</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005007091448550.html"><img src="img/srubokret-1018/ali-144.jpg" loading="lazy" alt="Ali 6Nm 144 kr" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.aliexpress.com/item/1005007091448550.html">4.2V / 6 Nm / 1300 mAh / 250 rpm</a></td><td>AliExpress</td><td><b>144 kr</b></td><td>4.0★ (22)</td><td>6 Nm / <span style="color:var(--bad)">brak kontroli</span></td><td>mocny budżet (plastik)</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005005799847927.html"><img src="img/srubokret-1018/ali-201.jpg" loading="lazy" alt="Ali 62-in-1 201 kr" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.aliexpress.com/item/1005005799847927.html">62/6-in-1 (N20, latarka) — BESTSELLER</a></td><td>AliExpress</td><td><b>201 kr</b></td><td>4.7★ (1867, <b>10k+ zam.</b>)</td><td>precision / <span style="color:var(--bad)">brak kontroli</span></td><td>elektronika budżetowo ⭐</td></tr>
+<tr><td><a href="https://www.aliexpress.com/item/1005012716598182.html"><img src="img/srubokret-1018/wowstick.jpg" loading="lazy" alt="Wowstick 1F Pro" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.aliexpress.com/item/1005012716598182.html">Wowstick 1F Pro 64-in-1</a></td><td>AliExpress</td><td><b>258 kr</b></td><td>marka, bez opinii (oficjalny)</td><td>precision / <span style="color:var(--bad)">brak (typowe minusem)</span></td><td>elektronika, design</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B07RGK11RY"><img src="img/srubokret-1018/hychika.jpg" loading="lazy" alt="HYCHIKA SD-4C" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B07RGK11RY">HYCHIKA SD-4C 3.6V, 36 acc</a></td><td>Amazon.se</td><td><b>268 kr</b></td><td>4.4★ (13 226!)</td><td>6 Nm / 1 prędkość</td><td>uniwersalny budżet</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B0D5CJY1H8"><img src="img/srubokret-1018/mqforu.jpg" loading="lazy" alt="MQFORU 72-in-1" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B0D5CJY1H8">MQFORU Mini 72-in-1, S2</a></td><td>Amazon.se</td><td><b>281 kr</b></td><td>4.4★ (627)</td><td>0.2-0.75 Nm / <span style="color:var(--good)">5 nastaw + wyświetlacz</span></td><td>elektronika ESP32 ⭐</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B09PHTWN6B"><img src="img/srubokret-1018/ab-skil.jpg" loading="lazy" alt="Amazon Basics SKIL" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B09PHTWN6B">Amazon Basics by SKIL 3.6V</a></td><td>Amazon.se</td><td><b>295 kr</b></td><td>4.5★ (927)</td><td>5 Nm / <span style="color:var(--good)">3 nastawy</span>, USB-C</td><td>uniwersalny budżet+</td></tr>
+<tr><td><a href="https://www.jula.se/catalog/verktyg-och-maskiner/elverktyg-och-maskiner/skruvdragare/batteridrivna-skruvdragare/miniskruvdragare-med-vinklingsbart-handtag-016876/"><img src="img/srubokret-1018/jula-mini.jpg" loading="lazy" alt="Jula Meec mini" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.jula.se/catalog/verktyg-och-maskiner/elverktyg-och-maskiner/skruvdragare/batteridrivna-skruvdragare/miniskruvdragare-med-vinklingsbart-handtag-016876/">Jula Meec mini 3.6V (978 rec.)</a></td><td>Jula 🇸🇪</td><td><b>99,90 kr</b></td><td>zobacz recenzje na stronie</td><td>3.5 Nm / składany uchwyt</td><td>lokalnie dziś, awaryjnie</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B09DGQW3QC"><img src="img/srubokret-1018/xiaomi-cordless.jpg" loading="lazy" alt="Xiaomi Mi Cordless" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B09DGQW3QC">Xiaomi Mi Cordless Screwdriver</a></td><td>Amazon.se</td><td><b>393 kr</b></td><td>4.7★ (812) — najwyżej!</td><td>~5 Nm / bez sprzęgła</td><td>obudowy / drukarka / meble ⭐</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B09KY4ZZXP"><img src="img/srubokret-1018/xiaomi-precision.jpg" loading="lazy" alt="Xiaomi Precision Kit" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B09KY4ZZXP">Xiaomi Mi Precision Kit (24 bity)</a></td><td>Amazon.se</td><td><b>445 kr</b></td><td>4.5★ (1763)</td><td>low / słabe magnesy bitów</td><td>elektronika + etui</td></tr>
+<tr><td><a href="https://www.amazon.se/-/en/dp/B0D6RK261X"><img src="img/srubokret-1018/bosch-go3.jpg" loading="lazy" alt="Bosch GO 3" style="max-width:86px;max-height:64px;object-fit:contain;border-radius:6px"></a></td><td><a href="https://www.amazon.se/-/en/dp/B0D6RK261X">Bosch Professional GO 3</a></td><td>Amazon.se</td><td><b>939 kr</b></td><td>4.4★ (2479)</td><td><span style="color:var(--good)">sprzęgło 7 nastaw</span>, USB-C</td><td>premium: nic nie przekręcisz</td></tr>
+</table>
+</div>
+
+<!-- ============ JAK WYBRAC ============ -->
+<h2 id="jak-wybrac">Zanim kupisz: moment a zastosowanie</h2>
+<div class="box info">
+<p>Kluczowy parametr to <b>N·m</b> i <b>sposób jego ograniczania</b> — nie liczba bitów w zestawie:</p>
+<ul class="tight">
+<li><b>0.2-0.75 N·m</b> (precision pen-style) — PCB, telefony, M2-M3. Idealne do elektroniki ESP32.</li>
+<li><b>3-6 N·m</b> (kompaktowe 3.6V) — obudowy, profile drukarki, meble, M4-M5.</li>
+<li><b>Kontrola momentu</b> (nastawy/sprzęgło) = nie przekręcisz śruby w plastiku i nie zerwiesz gwintu w heatsecie. Za to płacisz: sprzęgło Bosch GO 3 (939 kr), 5 nastaw MQFORU (281 kr), 3 nastawy AB/SKIL (295 kr). Bez kontroli = tanie Ali (108-201 kr) — trzymaj kciuk na triggerze.</li>
+</ul>
+</div>
+
+<!-- ============ ALIEXPRESS ============ -->
+<h2 id="ali">AliExpress — te tańsze, których nie widziałeś <span class="n">(5 zapytań search, 65-87 uniq każde, 9× PDP, recenzje top 3)</span></h2>
+<div class="cards">
+
+<div class="card"><div class="imgw"><span class="src az">AliExpress · Choice</span><span class="price">108 kr</span><a href="https://www.aliexpress.com/item/1005007861650690.html"><img src="img/srubokret-1018/ali-mini108.jpg" loading="lazy" alt="Mini wkrętak USB-C 108 kr"></a></div>
+<div class="body"><div class="tit"><a href="https://www.aliexpress.com/item/1005007861650690.html">Cordless Mini Electric Screwdriver + 2 bity</a></div>
+<div class="rate">4.5★ <span>(58 opinii · 426 zamówień) · ID 1005007861650690</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>great value for money with plenty of torque</q>, działa ze wszystkimi bitami</p>
+<p class="pc"><b class="con">CON:</b> ładuje się TYLKO kablem USB-A→C (C-to-C nie działa); tylko 2 bity w zestawie</p>
+<div class="torque">Torque: <b>~3.6-4.2V, brak kontroli momentu</b> — tylko lekkie śruby M2-M3 w plastiku</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src az">AliExpress</span><span class="price">144 kr</span><a href="https://www.aliexpress.com/item/1005007091448550.html"><img src="img/srubokret-1018/ali-144.jpg" loading="lazy" alt="4.2V 6Nm 144 kr"></a></div>
+<div class="body"><div class="tit"><a href="https://www.aliexpress.com/item/1005007091448550.html">4.2V / 6 Nm / 1300 mAh / 250 rpm + zestaw 12/45 szt.</a></div>
+<div class="rate">4.0★ <span>(22 opinie · 92 zamówienia) · ID 1005007091448550</span></div>
+<p class="pc"><b class="pro">PRO:</b> PL kupujący: <q>wygląda, że ma 6 Nm, podwójna pozycja uchwytu</q> — moment jak Amazon za 268-295 kr, o połowę taniej</p>
+<p class="pc"><b class="con">CON:</b> <q>całkowicie plastikowy</q>; jedno zgłoszenie braku bitów w paczce; ocena 4.0 = jakość loteryjna</p>
+<div class="torque">Torque: <b>6 N·m</b> deklarowane / brak kontroli — do obudów, nie do mikro-śrub</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src az">AliExpress · Choice · #1</span><span class="price">201 kr</span><a href="https://www.aliexpress.com/item/1005005799847927.html"><img src="img/srubokret-1018/ali-201.jpg" loading="lazy" alt="62-in-1 bestseller"></a></div>
+<div class="body"><div class="tit"><a href="https://www.aliexpress.com/item/1005005799847927.html">62/6-in-1 Electric Screwdriver (uchwyt N20) — BESTSELLER</a></div>
+<div class="rate">4.7★ <span>(1867 opinii · <b>10 000+ zamówień</b>) · ID 1005005799847927</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>perfect for fixing electronics, iPhones, game consoles</q>; latarka; można dokręcać ręcznie bezpośrednio przez uchwyt</p>
+<p class="pc"><b class="con">CON:</b> <q>prędkość mogłaby być regulowana</q>; końcówki przeciętne przy intensywnym użyciu</p>
+<div class="torque">Klasa precision / <b>brak kontroli momentu</b> — najprostszy stosunek popularność/cena do elektroniki</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src az">AliExpress</span><span class="price">258 kr</span><a href="https://www.aliexpress.com/item/1005012716598182.html"><img src="img/srubokret-1018/wowstick.jpg" loading="lazy" alt="Wowstick 1F Pro"></a></div>
+<div class="body"><div class="tit"><a href="https://www.aliexpress.com/item/1005012716598182.html">Wowstick 1F Pro / 1F+ 64-in-1</a></div>
+<div class="rate">oficjalny sklep Youpin-for-Youpin <span>· ID 1005012716598182</span></div>
+<p class="pc"><b class="pro">PRO:</b> najpopularniejszy „designerski” wkrętak — na Ali najtaniej (na Amazonie go w ogóle nie ma)</p>
+<p class="pc"><b class="con">CON:</b> społeczność: <q>too weak for properly screwing M3 screws</q>; ładowanie tylko USB-A→C; EEVblog: <q>meh stick</q> — ładny, ale moment poniżej klasy</p>
+<div class="torque">Kup <b>tylko dla designu</b> — MQFORU (281 kr Amazon) jest lepszy technicznie w tej cenie</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src az">AliExpress</span><span class="price">259 kr</span><a href="https://www.aliexpress.com/item/1005007047493812.html"><img src="img/srubokret-1018/ali-prec119.jpg" loading="lazy" alt="TK-S001H zestaw"></a></div>
+<div class="body"><div class="tit"><a href="https://www.aliexpress.com/item/1005007047493812.html">Precision Power Tool Kit TK-S001H/C (3.6V)</a></div>
+<div class="rate">4.8★ <span>(1250 opinii · 5000+ zamówień) · ID 1005007047493812</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>at first I was doubtful… doesn't look powerful but works</q> — dużo 5★, rodzeństwo (4.9★/8000 zam.) za 297 kr</p>
+<p class="pc"><b class="con">CON:</b> brak wyraźnych powtarzalnych minusów w próbie</p>
+<div class="torque">Precision 3.6V — alternatywa dla 62-in-1 jeśli wolisz klasyczny kształt „pilnika”</div></div></div>
+</div>
+
+<div class="box">
+<b>Marki premium na Ali (dla porządku, poza budżetem):</b>
+<span class="pill">Worx WX242 — 632 kr (5★, regulacja momentu)</span>
+<span class="pill">Sequre ES666 OLED — 452 kr</span>
+<span class="pill">ARROWMAX M1/M1 Plus — 1275-1865 kr (drogą przez resellerów)</span>
+<span class="pill">Bosch GO 3 / IXO 7 — ~1000 kr</span>
+<p style="margin-top:8px;color:var(--muted);font-size:13px">Miniware ES121 (kultowy) — na sesji szwedzkiej Ali: ES120/ES121 ~1820 kr, ES15S 314-1440 kr (część ofert bez opinii = ryzyko). Nie opłaca się vs EU/Bosch — szczegóły w sekcji społeczności.</p>
+</div>
+
+<!-- ============ AMAZON ============ -->
+<h2 id="amazon">Amazon.se — co jest dobre, czego unikać <span class="n">(6 listingów ×~50 wyników, 10× PDP + recenzje)</span></h2>
+<div class="box warn">
+<b>⚠️ Uwaga strukturalna:</b> Hoto, Wowstick i Fanttik <b>nie występują</b> na amazon.se (4 frazy, ~45 pozycji — zero ofert). Stąd wrażenie „wszystko ~300 kr i żadnych znanych marek precision”. No-name „72-in-1” (Ainiv, KUNLUN, Workpro, MOWETOO) = unikać: powtarzalny wzorzec „dużo bitów, słaby moment”. SHALL 127-elementów — pojedyncze zgłoszenia awarii przycisku po kilku użyciach.
+</div>
+<div class="cards">
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">393 kr</span><a href="https://www.amazon.se/-/en/dp/B09DGQW3QC"><img src="img/srubokret-1018/xiaomi-cordless.jpg" loading="lazy" alt="Xiaomi Mi Cordless Screwdriver"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B09DGQW3QC">Xiaomi Mi Cordless Screwdriver 3.6V</a></div>
+<div class="rate">4.7★ <span>(812 opinii — najwyższa ocena w kategorii) · B09DGQW3QC</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>great in all ways. Long battery and strong for its size</q>; ludzie motoryzują nim stoły IKEA — obudowy i profile drukarki bez problemu</p>
+<p class="pc"><b class="con">CON:</b> <q>saknar friktion men det ok i allafall</q> (brak sprzęgła); mało bitów w podstawowym secie</p>
+<div class="torque"><b>~5 N·m</b> / bez sprzęgła — <b>najlepszy do druku 3D i obudów</b> w całym teście</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">281 kr</span><a href="https://www.amazon.se/-/en/dp/B0D5CJY1H8"><img src="img/srubokret-1018/mqforu.jpg" loading="lazy" alt="MQFORU 72-in-1"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B0D5CJY1H8">MQFORU Mini Electric 72-in-1 (64 bity S2)</a></div>
+<div class="rate">4.4★ <span>(627 opinii) · B0D5CJY1H8</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>5 different torque settings are helpful</q>; wyświetlacz, 4× LED, magnetyzer, mata — <q>praktycznie perfekcyjny do drobnych prac</q></p>
+<p class="pc"><b class="con">CON:</b> pojedyncze narzekanie na domknięcie etui — mało ostrych negatywów</p>
+<div class="torque"><b>0.2-0.75 N·m, 5 nastaw</b> — najlepszy do elektroniki ESP32 w tej cenie (i szybsza dostawa niż Ali)</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">295 kr</span><a href="https://www.amazon.se/-/en/dp/B09PHTWN6B"><img src="img/srubokret-1018/ab-skil.jpg" loading="lazy" alt="Amazon Basics by SKIL"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B09PHTWN6B">Amazon Basics by SKIL 3.6V (5 Nm, 3 biegi momentu)</a></div>
+<div class="rate">4.5★ <span>(927 opinii) · B09PHTWN6B</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>surprisingly powerful with great battery life</q>; 3 nastawy Low/Med/High + USB-C; składany uchwyt</p>
+<p class="pc"><b class="con">CON:</b> tylko 10 bitów w zestawie (dokupisz za grosze)</p>
+<div class="torque"><b>5 N·m / 3 nastawy</b> — budżetowy „uniwersalny” z kontrolą momentu</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">268 kr</span><a href="https://www.amazon.se/-/en/dp/B07RGK11RY"><img src="img/srubokret-1018/hychika.jpg" loading="lazy" alt="HYCHIKA SD-4C"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B07RGK11RY">HYCHIKA SD-4C 3.6V 6 Nm (36 akcesoriów)</a></div>
+<div class="rate">4.4★ <span>(13 226 opinii — najwięcej w kategorii) · B07RGK11RY</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>prisvärd! Känns rejäl och funktionell</q>; <q>I use it daily</q>; ratchet w zestawie, LED</p>
+<p class="pc"><b class="con">CON:</b> <q>relativt svag, bara en hastighet</q>, <q>plastig kvalitetskänsla</q>; wolny (200 rpm)</p>
+<div class="torque"><b>6 N·m</b> / 1 prędkość — masa akcesoriów za grosze; sprawdź aktualną cenę, potrafi skakać</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">445 kr</span><a href="https://www.amazon.se/-/en/dp/B09KY4ZZXP"><img src="img/srubokret-1018/xiaomi-precision.jpg" loading="lazy" alt="Xiaomi Precision Kit"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B09KY4ZZXP">Xiaomi Mi Precision Screwdriver Kit</a></div>
+<div class="rate">4.5★ <span>(1763 opinie) · B09KY4ZZXP</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>awesome tool if you work with electronics a lot — a wristsaver</q>; premium etui</p>
+<p class="pc"><b class="con">CON:</b> <q>very poor magnet… almost no power</q> (3★); brak ładowania w etui; za słaby do M3 w druku</p>
+<div class="torque">Tylko precision — <b>do elektroniki tak, do drukarki nie</b></div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">499 kr</span><a href="https://www.amazon.se/-/en/dp/B0BCH64SVG"><img src="img/srubokret-1018/bosch-ixo7.jpg" loading="lazy" alt="Bosch IXO 7"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B0BCH64SVG">Bosch IXO 7. generacji (3.6V)</a></div>
+<div class="rate">4.6★ <span>(3044 opinie) · B0BCH64SVG</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>troligtvis den bästa lilla skruvdragare som finns</q>; bezszczotkowy, +20% momentu, ekosystem akcesoriów; w Clas Ohlson z 10 bitami za 499 kr klubbpris</p>
+<p class="pc"><b class="con">CON:</b> <q>barnleksak — kan inte ens skruva i tunn plast</q> (1★ — za mały moment do twardych śrub); ładowanie ~2h</p>
+<div class="torque"><b>~3-5.5 N·m</b> bez sprzęgła — klasyk do mebli/obudów; do mikro-śrub kup bity precision</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">939 kr</span><a href="https://www.amazon.se/-/en/dp/B0D6RK261X"><img src="img/srubokret-1018/bosch-go3.jpg" loading="lazy" alt="Bosch GO 3"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B0D6RK261X">Bosch Professional GO 3 (sprzęgło 7-nastawowe)</a></div>
+<div class="rate">4.4★ <span>(2479 opinii) · B0D6RK261X · top pick ZDNET 2026</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>perfekt — maszyna, którą powinno się kupić dawno temu</q>; sprzęgło = idealne do delikatnego plastiku i heatsetów; Push&Go, E-clutch, USB-C</p>
+<p class="pc"><b class="con">CON:</b> <q>går för snabbt, stannar inte direkt när man släpper</q>; ergonomia przełącznika; cena 3× Xiaomi</p>
+<div class="torque"><b>Sprzęgło mechaniczne 7 nastaw</b> — jedyny w teście, którego naprawdę nie da się „przekręcić” w plastiku</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">267 kr</span><a href="https://www.amazon.se/-/en/dp/B0DLWY7T9S"><img src="img/srubokret-1018/meister.jpg" loading="lazy" alt="Meister 3.6V"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B0DLWY7T9S">Meister 3.6V MAS36 2Ah</a></div>
+<div class="rate">4.4★ <span>(82 opinie — mała próba) · B0DLWY7T9S</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>liegt gut in der Hand und erscheint recht robust… klaglos überstanden</q>; 2Ah = duża bateria</p>
+<p class="pc"><b class="con">CON:</b> <q>za słaby do mocniejszych śrub</q> (2★)</p>
+<div class="torque">Solidna niemiecka marka budżetowa; mało opinii — średni confidence</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src amz">Amazon.se</span><span class="price">299 kr</span><a href="https://www.amazon.se/-/en/dp/B0C23BM3FR"><img src="img/srubokret-1018/efaith.jpg" loading="lazy" alt="EFaith 66-in-1"></a></div>
+<div class="body"><div class="tit"><a href="https://www.amazon.se/-/en/dp/B0C23BM3FR">EFaith Electric 66-in-1</a></div>
+<div class="rate">4.6★ <span>(395 opinii) · B0C23BM3FR</span></div>
+<p class="pc"><b class="pro">PRO:</b> <q>en smidig elskruvmejsel med många tillbehör, fungerar perfekt</q></p>
+<p class="pc"><b class="con">CON:</b> <q>too weak torque — on a lot of screws it's just too weak</q> — <b>słaby moment powtarza się wielokrotnie</b></p>
+<div class="torque">Wygląda dobrze na kartach, ale wady momentu nie są przypadkiem — <b>pomijam w rekomendacjach</b></div></div></div>
+</div>
+
+<!-- ============ NORDYCKIE ============ -->
+<h2 id="nordic">Sklepy nordyckie — dostępne dziś, bez czekania <span class="n">(Biltema, Jula, Clas Ohlson, Kjell, IKEA, Proshop)</span></h2>
+<div class="cards">
+
+<div class="card"><div class="imgw"><span class="src nordic">Jula 🇸🇪</span><span class="price">99,90 kr</span><a href="https://www.jula.se/catalog/verktyg-och-maskiner/elverktyg-och-maskiner/skruvdragare/batteridrivna-skruvdragare/miniskruvdragare-med-vinklingsbart-handtag-016876/"><img src="img/srubokret-1018/jula-mini.jpg" loading="lazy" alt="Jula Meec miniskruvdragare"></a></div>
+<div class="body"><div class="tit"><a href="https://www.jula.se/catalog/verktyg-och-maskiner/elverktyg-och-maskiner/skruvdragare/batteridrivna-skruvdragare/miniskruvdragare-med-vinklingsbart-handtag-016876/">Meec Miniskruvdragare 3.6V, 3.5 Nm</a></div>
+<div class="rate">978 recenzji na stronie <span>· art. 016876</span></div>
+<p class="pc">Najtańszy sensowny wkrętek w Szwecji: składany uchwyt (pistol/pilnik), LED, magnetyczny uchwyt, USB. Direct konkurent IKEA TRIXIG — o 49 kr taniej.</p>
+<div class="torque"><b>3.5 N·m</b> — do obudów i drobnego montażu; wystarczy na start</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">IKEA 🇸🇪</span><span class="price">149 kr</span><a href="https://www.ikea.com/se/sv/p/trixig-skruvdragare-li-jon-30546909/"><img src="img/srubokret-1018/ikea-trixig.jpg" loading="lazy" alt="IKEA TRIXIG"></a></div>
+<div class="body"><div class="tit"><a href="https://www.ikea.com/se/sv/p/trixig-skruvdragare-li-jon-30546909/">IKEA TRIXIG skruvdragare 3.6V</a></div>
+<div class="rate">3.8★ <span>(240 recenzji) · art. 305.469.09</span></div>
+<p class="pc"><b>Korekta:</b> legendarny „FIXA za 99 kr” <b>już nie istnieje</b> — został TRIXIG za 149 kr. Ocena 3.8 = najniższa w tej grupie (zwykły, bez fajerwerków).</p>
+<div class="torque">OK awaryjnie, ale Jula 99,90 wygrywa ceną i ocenami</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">Kjell 🇸🇪</span><span class="price">99 kr</span><a href="https://www.kjell.com/se/produkter/el-verktyg/verktyg/batteridrivna-elverktyg/luxorparts-uppladdningsbar-skruvdragare-gra-p40800"><img src="img/srubokret-1018/kjell-luxorparts.jpg" loading="lazy" alt="Luxorparts Kjell"></a></div>
+<div class="body"><div class="tit"><a href="https://www.kjell.com/se/produkter/el-verktyg/verktyg/batteridrivna-elverktyg/luxorparts-uppladdningsbar-skruvdragare-gra-p40800">Luxorparts Uppladdningsbar skruvdragare</a></div>
+<div class="rate">4.5★ <span>(70 recenzji) · P40800</span></div>
+<p class="pc">Własna marka Kjell — mini z uchwytem bitów, USB. Trzecia opcja „idź dziś do sklepu i kup za 100”.</p>
+<div class="torque">Klasa Jula/IKEA — wybieraj po lokalizacji sklepu</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">Kjell 🇸🇪</span><span class="price">599 kr</span><a href="https://www.kjell.com/se/produkter/el-verktyg/verktyg/batteridrivna-elverktyg/hoto-elektrisk-skruvmejsel-36-v-med-25-bitar-p47276"><img src="img/srubokret-1018/kjell-hoto.jpg" loading="lazy" alt="HOTO w Kjell"></a></div>
+<div class="body"><div class="tit"><a href="https://www.kjell.com/se/produkter/el-verktyg/verktyg/batteridrivna-elverktyg/hoto-elektrisk-skruvmejsel-36-v-med-25-bitar-p47276">HOTO 3.6V + 25 bitów (i PixelDrive 799 kr)</a></div>
+<div class="rate">jedyna fizyczna możliwość zobaczenia HOTO <span>· P47276 / P47277</span></div>
+<p class="pc">Jedyne miejsce z HOTO w SE. Design 10/10, ale 599-799 kr to przepłacenie vs Xiaomi 393 kr. Społeczność: <q>wouldn't spend money unless on sale</q>; bateria niewymienna, były zgłoszenia awarii.</p>
+<div class="torque">Hoto PixelDrive: 0.5-6 Nm, 6 ustawień — ale <b>min 0.5 Nm za dużo na M2</b></div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">Clas Ohlson 🇸🇪</span><span class="price">199,90 kr</span><a href="https://www.clasohlson.com/se/Liten-skruvdragare-3,6-V-med-bitsfaste-och-LED/p/40-9710-1"><img src="img/srubokret-1018/co-liten.jpg" loading="lazy" alt="Clas Ohlson Liten"></a></div>
+<div class="body"><div class="tit"><a href="https://www.clasohlson.com/se/Liten-skruvdragare-3,6-V-med-bitsfaste-och-LED/p/40-9710-1">Clas Ohlson Liten skruvdragare 3.6V</a></div>
+<div class="rate">art. 40-9710-1</div>
+<p class="pc">Odpowiednik Jula/IKEA, ale 2× drożej niż Jula. Bonus: Bosch IXO 7 z 10 bitami za <b>499 kr klubbpris</b> (normalnie 699) — jeśli chcesz Boscha, to najtańsza droga.</p>
+<div class="torque">Sam w sobie: przepłacony vs Jula</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">Biltema 🇸🇪</span><span class="price">299 kr</span><a href="https://www.biltema.se/verktyg/elverktyg/skruvdragare/skruvdragare-dd-108-2000046665"><img src="img/srubokret-1018/biltema-dd108.jpg" loading="lazy" alt="Biltema DD 10.8"></a></div>
+<div class="body"><div class="tit"><a href="https://www.biltema.se/verktyg/elverktyg/skruvdragare/skruvdragare-dd-108-2000046665">Biltema Skruvdragare DD 10.8V</a> + <a href="https://www.biltema.se/verktyg/elverktyg/borrmaskiner/borr-skruvdragare-12-v-2000043741">B&S 12V — 299 kr</a></div>
+<div class="rate">większa klasa narzędziowa <span>· art. 18-393 / 17-335</span></div>
+<p class="pc">To już nie „śrubokręt do elektroniki” tylko prawdziwa wkrętarka 10.8-12V — jeśli w przyszłości przyda się wiercenie w obudowach, 12V za 299 kr to bardzo tania opcja.</p>
+<div class="torque">Poza precyzją — jako drugie, „mocne” narzędzie</div></div></div>
+
+<div class="card"><div class="imgw"><span class="src nordic">Proshop 🇸🇪</span><span class="price">289 kr</span><a href="https://www.proshop.se/SkruvBorrmaskine/Einhell-Skruvdragare-36-V-13-Ah-med-6-bits-TC-SD-36-Li/2968790"><img src="img/srubokret-1018/proshop-einhell.jpg" loading="lazy" alt="Einhell Proshop"></a></div>
+<div class="body"><div class="tit"><a href="https://www.proshop.se/SkruvBorrmaskine/Einhell-Skruvdragare-36-V-13-Ah-med-6-bits-TC-SD-36-Li/2968790">Einhell TC-SD 3.6V (6 bitów)</a></div>
+<div class="rate">najtańszy mini w Proshop</div>
+<p class="pc">3× drożej niż Jula/IKEA/Kjell mini — <b>Proshop odpada</b> w tej kategorii (reszta to Makita/Einhell 18V solo 448-2437 kr).</p>
+<div class="torque">Odrzucone — odnotowane dla pełnego pokrycia</div></div></div>
+</div>
+
+<!-- ============ SPOLECZNOSC ============ -->
+<h2 id="spolecznosc">Co mówi społeczność (Reddit / YouTube / testy) <span class="n">— czy Amazonowe „do dupy”?</span></h2>
+<div class="tblwrap">
+<table>
+<tr><th>Model</th><th>Werdykt społeczności</th><th>Cytat + źródło</th></tr>
+<tr><td><b>Miniware ES121/ES120</b></td><td>Kultowy do elektroniki: kontrola momentu (4 tryby), motion control, OLED. ALE: ES121 ma ~25% mniej momentu niż ES120; 2 awarie u jednego użytkownika; w SE bardzo drogi (Ali-SE ~1820 kr) → <b style="color:var(--bad)">nieopłacalny w SE</b></td><td><div class="quote"><q>M2 screw shouldn't be torqued more than like 0.4nm</q> — u/MaIakai, <a href="https://www.reddit.com/r/Tools/comments/13oq61h/">r/Tools</a><div class="who">+ <a href="https://www.reddit.com/r/MINIWARE/comments/eihjyv/">r/MINIWARE</a> (awarie), <a href="https://notenoughtech.com/review/a-precision-screwdriver-in-power-armour-minidso-es121/">NotEnoughTECH</a></div></div></td></tr>
+<tr><td><b>Fanttik E1 Max / E2 Ultra</b></td><td>Polecane na r/3Dprinting do składania modeli/drukarek; <b>nie ma ich na amazon.se</b> — import z fanttik.com (EU) ~350-450 kr. Masa płatnych promocji = uważać na hype</td><td><div class="quote"><q>wish it offered a little more torque, but for its size and price quite capable — you can hand-tighten beyond the motor's limit</q> — u/Panama__Red, <a href="https://www.reddit.com/r/3Dprinting/comments/1mts5u1/">r/3Dprinting</a></div></td></tr>
+<tr><td><b>Bosch Go / GO 3</b></td><td>Sprzęgło chwalone jako top do „fragile plastic”; wytrzymałość (3.5 roku codziennego używania); realnie ~2.5 Nm</td><td><div class="quote"><q>you can adjust it so you can use it for fine screws for fragile plastic electronic devices</q> — u/jhgzjggjjhz, <a href="https://www.reddit.com/r/Tools/comments/18tn6dk/">r/Tools</a></div></td></tr>
+<tr><td><b>Wowstick</b></td><td>Ładny, ale <b>za słaby do M3</b>; ładowanie tylko A→C; <q>meh stick</q> (EEVblog)</td><td><div class="quote"><q>I have a wow stick, it's too weak for properly screwing M3 screws</q> — u/Adorable_Ad802, <a href="https://www.reddit.com/r/3Dprinting/comments/r0ftb1/">r/3Dprinting</a></div></td></tr>
+<tr><td><b>Xiaomi Precision</b></td><td>Za słaby moment — użytkownicy odkładają w szufladę</td><td><div class="quote"><q>rarely use for the lack of torque</q> — u/LucasTheShep, <a href="https://www.reddit.com/r/computertechs/comments/ri3gq7/">r/computertechs</a></div></td></tr>
+<tr><td><b>ArrowMax SES/M1</b></td><td>Najbardziej „smart” (żyroskop, OLED, motion control) — ZDNET <q>smartest precision screwdriver I've ever tested</q>; ale 1275+ kr na Ali-SE</td><td><div class="quote"><q>It's awesome!</q> — u/Direct-Librarian9876 po rekomendacji, <a href="https://www.reddit.com/r/computertechs/comments/ri3gq7/">r/computertechs</a> · <a href="https://www.zdnet.com/article/this-is-the-smartest-electronic-precision-screwdriver-ive-ever-tested/">ZDNET</a></div></td></tr>
+<tr><td><b>Dremel Go</b></td><td><q>proper torque for small screws and threading plastic</q></td><td><div class="quote">u/n0wh4ch1ng, <a href="https://www.reddit.com/r/3Dprinting/comments/r0ftb1/">r/3Dprinting</a></div></td></tr>
+<tr><td><b>CreationSpace CS0802</b></td><td><q>BEST VALUE OVERALL PRECISION SCREWDRIVER</q> w teście 10 modeli (Cheap&Cheerful EP1, 162k views) — ale dostępność w UE słaba</td><td><div class="quote"><a href="https://youtu.be/DfiWH-6eoxU">YouTube: I tested 10 Electric Screwdrivers</a> · <a href="https://cheerful.cheap/video/10-precision-electric-screwdrivers-and-rotary-tools-reviewed-episode-1/">cheerful.cheap</a></div></td></tr>
+</table>
+</div>
+
+<h3 id="spolecznost-wiecej" style="margin-top:18px">Heatsety i praktyka (r/3Dprinting)</h3>
+<div class="box info">
+<ul class="tight">
+<li>Inserty wklejasz <b>Pincilem/lutownicą</b> z końcówką do insertów (temp = temp druku +10-20°C) — <a href="https://www.reddit.com/r/3Dprinting/comments/17vk21y/">wątek</a>, <a href="https://www.reddit.com/r/3Dprinting/comments/10r1zf9/">wątek 2</a></li>
+<li>Śrubę w insert: wkrętak precision (0.2-0.75 Nm) OK do wstępnego, <b>finalne dokręcenie ręcznie</b></li>
+<li><q>I think most don't use electronic screwdrivers [w PC] because they're not torque spec</q> — u/billythygoat, <a href="https://www.reddit.com/r/Tools/comments/13oq61h/">r/Tools</a> — stąd nastawy momentu (MQFORU 5×, AB/SKIL 3×, Bosch GO 7×) są realnie przydatne, a nie marketingiem</li>
+<li>Testy warte obejrzenia: <a href="https://youtu.be/DfiWH-6eoxU">Cheap&Cheerful EP1 (10 modeli)</a>, <a href="https://youtu.be/7_-AU0AtXqE">EP2 (ArrowMax/Miniware/CreationSpace)</a>, <a href="https://youtu.be/_2bRZEk6nzU">Project Farm (830k views)</a>, <a href="https://youtu.be/d6UuzBxWC4A">Tools Tested cz.3</a></li>
+</ul>
+</div>
+
+<!-- ============ UZYWANE ============ -->
+<h2 id="uzywane">Rynek wtórny (Blocket / Tradera)</h2>
+<div class="box">
+Sprawdzone skryptami dziś (2 frazy × 2 platformy): <b>nic wartościowego dla tego zastosowania</b>. Dominują duże wkrętarki 14-18V (Meec 225 kr, Hilti 800 kr). Wisienka: <a href="https://www.blocket.se/recommerce/forsale/item/27513476">używana Jula mini na Blockecie za 300 kr</a> — czyli 3× cena nowej (99,90 kr). Rynek wtórny = pomijamy.
+</div>
+
+<!-- ============ UKRYTE KOSZTY ============ -->
+<h2 id="koszty">Ukryte koszty i logistyka</h2>
+<div class="cols">
+<div class="box">
+<b>AliExpress</b>
+<ul class="tight">
+<li>Ceny SEK zawierają VAT (IOSS) — bez niespodzianek w moms</li>
+<li>Dostawa 1-3 tyg (Choice szybciej, zwykle 1-2 tyg); zwroty = punkt przekazu, bywa czekanie na refund</li>
+<li>Warianty SKU (kolor/zestaw) mają różne ceny — kliknij wariant przed oceną</li>
+<li>Bity: szukaj „S2 steel” — zwykłe CR-V ślizgają się przy PH1/PH0</li>
+</ul>
+</div>
+<div class="box">
+<b>Amazon.se / sklepy lokalne</b>
+<ul class="tight">
+<li>Amazon: dostawa 1-3 dni, zwrot bezproblemowy; ceny się zmieniają (HYCHIKA skakała 204↔268 kr w dniu researchu)</li>
+<li>Jula/IKEA/Kjell: kupisz dziś, zwrot do sklepu — przy 99-149 kr niskie ryzyko</li>
+<li>Ładowarka: wszystkie nowsze mają USB-C, ale sprawdź (Wowstick i Ali-mini = tylko kabel A→C!)</li>
+</ul>
+</div>
+</div>
+
+<!-- ============ COVERAGE ============ -->
+<h2 id="coverage">Pokrycie źródeł</h2>
+<div class="tblwrap">
+<table class="coverage">
+<tr><th>Źródło</th><th>Status</th><th>Metoda / rungi</th><th>Wynik</th></tr>
+<tr><td>Amazon.se</td><td class="st ok">✅ COVERED</td><td>Lightpanda CDP search ×6 + 10× PDP + recenzje (managed Chromium CDP)</td><td>~45 pozycji, 10 deep</td></tr>
+<tr><td>AliExpress</td><td class="st ok">✅ COVERED</td><td>deep v2 scripts (HTTP+fallback chain), 5 zapytań + 9× PDP + recenzje top 3</td><td>65-87 uniq/zapytanie, 12 deep</td></tr>
+<tr><td>Biltema.se</td><td class="st ok">✅ COVERED</td><td>browser (SPA, curl=pusty shell)</td><td>7 pozycji</td></tr>
+<tr><td>Jula.se</td><td class="st ok">✅ COVERED</td><td>browser (curl 403)</td><td>6 pozycji, mini 99,90 kr</td></tr>
+<tr><td>Clasohlson.com</td><td class="st ok">✅ COVERED</td><td>browser (search API 406 → kategoria)</td><td>7 pozycji</td></tr>
+<tr><td>Kjell.com</td><td class="st ok">✅ COVERED</td><td>browser (kategoria)</td><td>7 pozycji + HOTO</td></tr>
+<tr><td>IKEA.se</td><td class="st ok">✅ COVERED</td><td>browser (search + PDP)</td><td>2 TRIXIG (FIXA 99 nie istnieje)</td></tr>
+<tr><td>Proshop.se</td><td class="st ok">✅ COVERED</td><td>browser</td><td>odrzucone (289 kr min., reszta pro-tools)</td></tr>
+<tr><td>Reddit (r/Tools, r/3Dprinting, r/MINIWARE, r/computertechs…)</td><td class="st ok">✅ COVERED</td><td>DDG HTML + Arctic Shift API (reddit.com/old/redlib zablokowane — 403/Anubis)</td><td>8 wątków deep, cytaty z linkami</td></tr>
+<tr><td>YouTube</td><td class="st ok">✅ COVERED</td><td>curl ytInitialData + watch-page descriptions</td><td>10 wyników, 4 deep</td></tr>
+<tr><td>Artykuły/testy</td><td class="st ok">✅ COVERED</td><td>web_fetch: NerdTechy, ZDNET ×3, ToolGuyd, CNN Underscored</td><td>parametry N·m, rankingi 2026</td></tr>
+<tr><td>Blocket</td><td class="st ok">✅ COVERED</td><td>blocket_search.py ×2</td><td>nic wartościowego</td></tr>
+<tr><td>Tradera</td><td class="st ok">✅ COVERED</td><td>tradera_search.py ×2</td><td>nic wartościowego</td></tr>
+</table>
+</div>
+
+<footer>
+<b>Metodologia:</b> 4 równoległe subagenty (DeepSeek V4.1 Flash) + synteza GLM; 13/13 źródeł pokrytych (0 ❌); ceny zweryfikowane na PDP dzień researchu; wszystkie twierdzenia z klikalnym źródłem. Zdjęcia: lokalne miniatury ≤640px z CDN sklepów (klik → oferta).
+<b>Confidence:</b> ceny ✅ zweryfikowane dziś; oceny społeczności ⚠️ subiektywne; Ali-SKU ⚠️ ceny wariantów potrafią się różnić.
+<br><br>🤖 Wygenerowane przez Andrzeja · 2026-10-18 · surowe destylaty: <code>workspace/memory/research/elektryczny-srubokret-2026-10-18/</code>
+</footer>
+</div>
+<button id="top-btn" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+</body>
+</html>

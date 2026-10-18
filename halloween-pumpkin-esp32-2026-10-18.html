@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halloween Screaming Pumpkin — ESP32 — zakupy lokalne (amazon.se)</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--ink:#ece8f7;--muted:#a89fc4;--accent:#ff8c3b;--accent2:#a06bff;--ok:#3ddc84;--warn:#ffce4a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif}
+.wrap{max-width:96%;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.3em 0}
+h2{font-size:1.2rem;margin:1.6em 0 .5em;color:var(--accent)}
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111;padding:3px 12px;border-radius:99px;font-size:.8rem;font-weight:700}
+.meta{color:var(--muted);font-size:.85rem}
+nav{position:sticky;top:0;background:rgba(19,16,32,.95);padding:8px 0;z-index:9;display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:var(--accent2);text-decoration:none;font-size:.85rem;background:var(--card);padding:4px 10px;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.92rem}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid #322a52;vertical-align:middle}
+th{color:var(--muted);font-weight:600}
+img{max-width:100%;border-radius:10px}
+.prod{display:grid;grid-template-columns:150px 1fr;gap:14px;background:var(--card);border-radius:14px;padding:14px;margin:12px 0;align-items:start}
+@media(max-width:600px){.prod{grid-template-columns:1fr}}
+.prod a{color:var(--ink)}
+.price{font-size:1.15rem;font-weight:800;color:var(--ok)}
+.tldr{background:linear-gradient(135deg,#241b3f,#1d1832);border-left:4px solid var(--accent);border-radius:12px;padding:14px 18px;margin:14px 0}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+#top-btn{position:fixed;bottom:18px;right:18px;background:var(--accent2);color:#111;border:none;border-radius:99px;padding:10px 16px;font-weight:700;cursor:pointer}
+footer{color:var(--muted);font-size:.85rem;margin:3em 0 1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="#tldr">TL;DR</a><a href="#koszyk">Koszyk</a><a href="#pozycje">Pozycje</a><a href="#gotch">Gotch'e</a><a href="#coverage">Coverage</a></nav>
+
+<h1><span class="badge">🛒 Product</span> 🎃 Halloween Screaming Pumpkin (ESP32) — czego brakuje i ile kosztuje lokalnie</h1>
+<p class="meta">Data: 2026-10-18 · Źródła: YouTube (projekt referencyjny), amazon.se (live ceny) · Inwentarz warsztatu: docs/hardware-inventory.md</p>
+
+<div class="tldr" id="tldr">
+<strong>TL;DR:</strong> Z warsztatu masz już ESP32, pasek WS2812, 5× PIR AM312 i zasilanie — brakuje tylko <strong>wzmacniacza I2S</strong> i <strong>głośnika 8 Ω / 3 W</strong>. Cały koszyk z amazon.se: <strong>179 kr</strong> (z opcjonalnym DFPlayerem: 284 kr). Dostawy 22–28.10 → wygodnie przed Halloween 31.10.
+</div>
+
+<table>
+<tr><th>Źródło / źródło danych</th><th>Status</th><th>Szczeble</th></tr>
+<tr><td>amazon.se (wyszukiwarka + PDP)</td><td class="ok">✅ COVERED</td><td>skrypt Lightpanda → browser CDP (og:image)</td></tr>
+<tr><td>Inwentarz warsztatu (docs/hardware-inventory.md)</td><td class="ok">✅ COVERED</td><td>lokalny plik</td></tr>
+<tr><td>Projekt referencyjny (YouTube VfbikvNPwM0)</td><td class="ok">✅ COVERED</td><td>transkrypcja summarize</td></tr>
+<tr><td>Biltema / Kjell (moduły elektroniczne)</td><td class="warn">⚠️ pominięte</td><td>nie prowadzą modułów ESP32/audio DIY — amazon.se jest jedynym sensownym lokalnym źródłem</td></tr>
+</table>
+
+<h2 id="koszyk">📋 Koszyk</h2>
+<table>
+<tr><th></th><th>Pozycja</th><th>Cena</th><th>Link</th></tr>
+<tr><td><img src="img/halloween-pumpkin-esp32/amp.jpg" alt="MAX98357A" loading="lazy" width="90"></td><td>Wzmacniacz MAX98357A I2S 3W ×3 (HENGBIRD)</td><td class="price">89 kr</td><td><a href="https://www.amazon.se/dp/B0GY479Y14">amazon.se</a></td></tr>
+<tr><td><img src="img/halloween-pumpkin-esp32/speaker.jpg" alt="Głośnik 8 ohm 3W" loading="lazy" width="90"></td><td>Głośnik 8 Ω 3 W z JST-PH2.0 ×4</td><td class="price">90 kr</td><td><a href="https://www.amazon.se/dp/B0FQBRNC68">amazon.se</a></td></tr>
+<tr><td><img src="img/halloween-pumpkin-esp32/dfplayer.jpg" alt="DFPlayer Mini" loading="lazy" width="90"></td><td>DFPlayer Mini MP3 ×5 <em>(opcja — playback z SD zamiast flash)</em></td><td class="price">105 kr</td><td><a href="https://www.amazon.se/dp/B0DGPW88GF">amazon.se</a></td></tr>
+<tr><td colspan="2"><strong>Minimum (bez DFPlayera)</strong></td><td class="price">179 kr</td><td></td></tr>
+<tr><td colspan="2"><strong>Pełny zestaw</strong></td><td class="price">284 kr</td><td></td></tr>
+</table>
+
+<h2 id="pozycje">🔍 Pozycje w szczegółach</h2>
+
+<div class="prod">
+<img src="img/halloween-pumpkin-esp32/amp.jpg" alt="MAX98357A" loading="lazy">
+<div><strong>MAX98357A I2S 3 W — HENGBIRD ×3, 89 kr</strong> ⭐ rekomendacja<br>
+Ten sam chip co w droższych listingach (Adafruit 195 kr <a href="https://www.amazon.se/dp/B01K5GCFA6">B01K5GCFA6</a>, 3-pack 111 kr <a href="https://www.amazon.se/dp/B0F21T7Q3P">B0F21T7Q3P</a>). ESP32 ma I2S natywnie — cyfrowe wejście, zero szumu, omija problem znaleziony w filmie (wzmacniacz analogowy padł na 5 V + kondensator blokował boot).<br>
+<a href="https://www.amazon.se/dp/B0GY479Y14">→ amazon.se/dp/B0GY479Y14</a> · dostawa ~28.10</div>
+</div>
+
+<div class="prod">
+<img src="img/halloween-pumpkin-esp32/speaker.jpg" alt="Głośniki" loading="lazy">
+<div><strong>Głośnik 8 Ω 3 W, złącze JST-PH2.0 ×4, 90 kr</strong><br>
+Podpinasz na klik do wzmacniacza; 4 szt. = zapas na kolejne projekty. Wystarczy 1 do dyni, reszta schowana.<br>
+<a href="https://www.amazon.se/dp/B0FQBRNC68">→ amazon.se/dp/B0FQBRNC68</a></div>
+</div>
+
+<div class="prod">
+<img src="img/halloween-pumpkin-esp32/dfplayer.jpg" alt="DFPlayer" loading="lazy">
+<div><strong>DFPlayer Mini ×5, 105 kr</strong> — <em>opcja</em><br>
+Tylko jeśli wolisz playback z microSD zamiast WAV-a w flashu (SPIFFS/LittleFS). Przy ESP32 i MAX98357A można pominąć — kod i tak jest prosty.<br>
+<a href="https://www.amazon.se/dp/B0DGPW88GF">→ amazon.se/dp/B0DGPW88GF</a> · dostawa ~22.10</div>
+</div>
+
+<h2>✅ Co już masz (zero zakupów)</h2>
+<ul>
+<li><strong>ESP32 WROOM-32E</strong> — serce projektu</li>
+<li><strong>WS2812 pasek</strong> — animowane oczy (film użył 10 LED-ów — limit USB ~500 mA)</li>
+<li><strong>PIR ×5 AM312</strong> — lepszy do dyni niż HC-SR501 z filmu (mały, 2,7–12 V); celować przez wyciętą „gębę"</li>
+<li>Zasilanie USB / powerbank, kable, rezystory</li>
+<li>Dynia 🎃 — ICA/Willys, 30–50 kr (nietrwała pozycja BOM)</li>
+</ul>
+
+<h2 id="gotch">⚠️ Gotch'e z filmu (na skórze wzięte)</h2>
+<ul>
+<li>Kondensator na wejściu analogowego wzmacniacza <strong>blokował boot ESP32</strong> → ręczny reset; przy MAX98357A problem znika</li>
+<li><strong>Max 10–15 LED-ów</strong> WS2812 z zasilania USB</li>
+<li>Pierwszy wzmacniacz filmowca <strong>padł na 5 V</strong> — dlatego I2S zamiast analogu</li>
+</ul>
+
+<h2>🎬 Projekt referencyjny</h2>
+<div class="prod">
+<img src="img/halloween-pumpkin-esp32/video.jpg" alt="Wideo: screaming pumpkin" loading="lazy">
+<div>„Screaming pumpkin — 3-hour DIY" (7:02): spokojna animacja LED → PIR wykrywa ruch → błysk + krzyk.<br>
+<a href="https://www.youtube.com/watch?v=VfbikvNPwM0">→ youtube.com/watch?v=VfbikvNPwM0</a></div>
+</div>
+
+<footer>
+Metodologia: ceny live z amazon.se 2026-10-18 (skrypt Lightpanda + browser CDP dla PDP/og:image); zdjęcia pobrane lokalnie i przeskalowane ≤640px. Biltema/Kjell pominięte jako źródło modułów (brak asortymentu DIY-audio). Wszystkie linki klikalne i zweryfikowane (4/4 PDP otwarte).
+</footer>
+</div>
+<button id="top-btn" onclick="scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</body>
+</html>

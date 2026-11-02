@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+            
+        <!-- START email detection/removal script -->
+        <script>
+            !function(){"use strict";function e(e){const t=e.match(/((?=([a-z0-9._!#$%+^&*()[\]<>-]+))@[a-z0-9._-]+\.[a-z0-9._-]+)/gi);return t?t[0]:""}function t(t){return e(a(t.toLowerCase()))}function a(e){return e.replace(/\s/g,"")}async function n(e){const t={sha256Hash:"",sha1Hash:""};if(!("msCrypto"in window)&&"https:"===location.protocol&&"crypto"in window&&"TextEncoder"in window){const a=(new TextEncoder).encode(e),[n,c]=await Promise.all([s("SHA-256",a),s("SHA-1",a)]);t.sha256Hash=n,t.sha1Hash=c}return t}async function s(e,t){const a=await crypto.subtle.digest(e,t);return Array.from(new Uint8Array(a)).map(e=>("00"+e.toString(16)).slice(-2)).join("")}function c(e){let t=!0;return Object.keys(e).forEach(a=>{0===e[a].length&&(t=!1)}),t}function i(e,t,a){e.splice(t,1);const n="?"+e.join("&")+a.hash;history.replaceState(null,"",n)}var o={checkEmail:e,validateEmail:t,trimInput:a,hashEmail:n,hasHashes:c,removeEmailAndReplaceHistory:i,detectEmails:async function(){const e=new URL(window.location.href),a=Array.from(e.searchParams.entries()).map(e=>`=`);let s,o;const r=["adt_eih","sh_kit"];if(a.forEach((e,t)=>{const a=decodeURIComponent(e),[n,c]=a.split("=");if("adt_ei"===n&&(s={value:c,index:t,emsrc:"url"}),r.includes(n)){o={value:c,index:t,emsrc:"sh_kit"===n?"urlhck":"urlh"}}}),s)t(s.value)&&n(s.value).then(e=>{if(c(e)){const t={value:e,created:Date.now()};localStorage.setItem("adt_ei",JSON.stringify(t)),localStorage.setItem("adt_emsrc",s.emsrc)}});else if(o){const e={value:{sha256Hash:o.value,sha1Hash:""},created:Date.now()};localStorage.setItem("adt_ei",JSON.stringify(e)),localStorage.setItem("adt_emsrc",o.emsrc)}s&&i(a,s.index,e),o&&i(a,o.index,e)},cb:"adthrive"};const{detectEmails:r,cb:l}=o;r()}();
+        </script>
+        <!-- END email detection/removal script -->
+        <!-- AdThrive Head Tag Manual -->
+        <script data-no-optimize="1" data-cfasync="false">
+            (function(w, d) {
+                w.adthrive = w.adthrive || {};
+                w.adthrive.cmd = w.
+                    adthrive.cmd || [];
+                w.adthrive.plugin = 'adthrive-ads-manual';
+                w.adthrive.host = 'ads.adthrive.com';var s = d.createElement('script');
+                s.async = true;
+                s.referrerpolicy='no-referrer-when-downgrade';
+                s.src = 'https://' + w.adthrive.host + '/sites/6806bd2b8512ca488c4ce126/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                var n = d.getElementsByTagName('script')[0];
+                n.parentNode.insertBefore(s, n);
+            })(window, document);
+        </script>
+        <!-- End of AdThrive Head Tag -->
+        <script async preferred-sources-control="manual" src="https://news.google.com/swg/js/v1/publisher.js"></script>            <link rel="preload" href="/wp-content/themes/unified/css/home.mashed.min.css?design=3&v=1792688283" as="style">
+<link class="preloadFont" rel="preload" href="https://www.mashed.com/font/adelle-sans-bold.woff2" as="font" crossorigin>
+<link class="preloadFont" rel="preload" href="https://www.mashed.com/font/adelle-sans-regular.woff2" as="font" crossorigin>
+<link class="preloadFont" rel="preload" href="https://www.mashed.com/font/adelle-bold.woff2" as="font" crossorigin>
+
+        <link rel="stylesheet" type="text/css" href="/wp-content/themes/unified/css/home.mashed.min.css?design=3&v=1792688283" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
+        <meta http-equiv="X-UA-Compatible" content="IE=10" />
+        
+        
+        
+        <title>Mashed | Fast Food, Celebrity Chefs, Grocery, Reviews</title>
+        <meta name='description' content="The latest news on grocery chains, celebrity chefs, and fast food - plus reviews, cooking tips and advice, recipes, and more." />
+        
+        
+                <meta property="og:site_name" content="Mashed" />
+        <meta property="og:title" content="Mashed | Fast Food, Celebrity Chefs, Grocery, Reviews">
+        <meta property="og:image" content="https://www.mashed.com/img/mashed-meta-image-1280x720.png" />
+        <meta property="og:description" content="The latest news on grocery chains, celebrity chefs, and fast food - plus reviews, cooking tips and advice, recipes, and more.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.mashed.com/">
+                <meta name="twitter:title" content="Mashed | Fast Food, Celebrity Chefs, Grocery, Reviews">
+        <meta name="twitter:description" content="The latest news on grocery chains, celebrity chefs, and fast food - plus reviews, cooking tips and advice, recipes, and more.">
+        <meta name="twitter:site" content="@MashedHQ">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:image" content="https://www.mashed.com/img/mashed-meta-image-1280x720.png">
+        
+        
+        <link rel="shortcut icon" href="https://www.mashed.com/img/mashed-favicon-448x448.png">
+        <link rel="icon" href="https://www.mashed.com/img/mashed-favicon-448x448.png">
+        <link rel="canonical" href="https://www.mashed.com/"/>
+        <link rel="alternate" type="application/rss+xml" title="News - Mashed" href="https://www.mashed.com/category/news/feed/" />
+
+        
+        <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","address":{"@type":"PostalAddress","streetAddress":"11787 Lantern Road #201","addressLocality":"Fishers","addressRegion":"IN","postalCode":"46038","addressCountry":"US"},"contactPoint":{"@type":"ContactPoint","telephone":"(908) 514-8038","contactType":"customer support","email":"staff@mashed.com"},"publishingPrinciples":"https:\/\/www.mashed.com\/policies\/","@id":"https:\/\/www.mashed.com\/","name":"Mashed","url":"https:\/\/www.mashed.com\/","logo":{"@type":"ImageObject","url":"https:\/\/www.mashed.com\/img\/mashed-meta-image-1280x720.png","caption":"Mashed Logo"},"description":"The latest news on grocery chains, celebrity chefs, and fast food - plus reviews, cooking tips and advice, recipes, and more.","sameAs":["https:\/\/www.facebook.com\/MashedFood","https:\/\/www.youtube.com\/c\/MashedFood","https:\/\/x.com\/MashedHQ","https:\/\/www.instagram.com\/mashedfood","https:\/\/www.pinterest.com\/mashedfood\/","https:\/\/flipboard.com\/@Mashed","https:\/\/profile.google.com\/@mashedfood","https:\/\/subscribe.mashed.com\/newsletter"]}</script>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://www.mashed.com/feed/" />                </head>
+<body>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5ZFTZ7RV');</script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZFTZ7RV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="wrapper">
+    <div class="page-wrap">
+        <header id="header" class="index">
+            <div class="nav-drop">
+                <div class="jcf-scrollable">
+                    <div class="aside-holder">
+                                    <nav id="aside-nav">
+                <div class="nav-top">
+                    <div class="logo">
+                        <a href="/" class="logo-holder">
+                            <img src="https://www.mashed.com/img/mashed_logo_color_2.svg" alt="Mashed" width="136" height="34">
+                        </a>
+                        <a href="#" class="nav-opener close"></a>
+                    </div>
+                </div>
+                            <div class="search-bar">
+                <input type="search" class="search-box-nav" placeholder="Search recipes">
+                <a href="/search" class="search-button search-button-nav"><svg><use xlink:href="#search"></use></svg></a>
+            </div>
+                <ul class="main-nav"><li class="navlink navlink-recipes"><a href="/category/recipes/">RECIPES</a><input type="checkbox" id="subnav-button-recipes"><label for="subnav-button-recipes"></label><ul class="main-nav"><li class="subnavlink navlink-course"><a href="/category/course/">Course</a></li><li class="subnavlink navlink-dish-type"><a href="/category/dish-type/">Dish Type</a></li><li class="subnavlink navlink-main-ingredients"><a href="/category/main-ingredients/">Main Ingredients</a></li><li class="subnavlink navlink-drink-recipes"><a href="/category/drink-recipes/">Drink Recipes</a></li><li class="subnavlink navlink-baking-recipes"><a href="/category/baking-recipes/">Baking Recipes</a></li><li class="subnavlink navlink-dietary-considerations"><a href="/category/dietary-considerations/">Dietary Considerations</a></li><li class="subnavlink navlink-preparation"><a href="/category/preparation/">Preparation</a></li><li class="subnavlink navlink-cuisine"><a href="/category/cuisine/">Cuisine</a></li><li class="subnavlink navlink-copycat-recipes"><a href="/category/copycat-recipes/">Copycat Recipes</a></li></ul></li><li class="navlink navlink-exclusives"><a href="/category/exclusives/">EXCLUSIVES</a><input type="checkbox" id="subnav-button-exclusives"><label for="subnav-button-exclusives"></label><ul class="main-nav"><li class="subnavlink navlink-exclusives-interviews"><a href="/category/exclusives-interviews/">Interviews</a></li><li class="subnavlink navlink-opinion"><a href="/category/opinion/">Opinion</a></li><li class="subnavlink navlink-exclusives-reviews"><a href="/category/exclusives-reviews/">Reviews</a></li></ul></li><li class="navlink navlink-news"><a href="/category/news/">NEWS</a></li><li class="navlink navlink-entertainment"><a href="/category/entertainment/">ENTERTAINMENT</a><input type="checkbox" id="subnav-button-entertainment"><label for="subnav-button-entertainment"></label><ul class="main-nav"><li class="subnavlink navlink-celebs"><a href="/category/celebs/">Celebs</a></li><li class="subnavlink navlink-tv-and-movies"><a href="/category/tv-and-movies/">TV and Movies</a></li></ul></li><li class="navlink navlink-kitchen"><a href="/category/kitchen/">KITCHEN</a><input type="checkbox" id="subnav-button-kitchen"><label for="subnav-button-kitchen"></label><ul class="main-nav"><li class="subnavlink navlink-tips-cooking"><a href="/category/tips-cooking/">Tips</a></li><li class="subnavlink navlink-how-to"><a href="/category/how-to/">How-To</a></li><li class="subnavlink navlink-kitchen-tools"><a href="/category/kitchen-tools/">Kitchen Tools</a></li><li class="subnavlink navlink-storage-and-preservation"><a href="/category/storage-and-preservation/">Storage and Preservation</a></li><li class="subnavlink navlink-cleaning-cooking"><a href="/category/cleaning-cooking/">Cleaning</a></li><li class="subnavlink navlink-grilling-and-smoking"><a href="/category/grilling-and-smoking/">Grilling and Smoking</a></li><li class="subnavlink navlink-baking"><a href="/category/baking/">Baking</a></li><li class="subnavlink navlink-cooking"><a href="/category/cooking/">Cooking</a></li><li class="subnavlink navlink-cookbooks"><a href="/category/cookbooks/">Cookbooks</a></li><li class="subnavlink navlink-beverages"><a href="/category/beverages/">Beverages</a></li></ul></li><li class="navlink navlink-grocery"><a href="/category/grocery/">GROCERY</a><input type="checkbox" id="subnav-button-grocery"><label for="subnav-button-grocery"></label><ul class="main-nav"><li class="subnavlink navlink-shopping-tips"><a href="/category/shopping-tips/">Shopping Tips</a></li><li class="subnavlink navlink-stores-and-chains"><a href="/category/stores-and-chains/">Stores and Chains</a></li><li class="subnavlink navlink-gas-stations"><a href="/category/gas-stations/">Gas Stations</a></li></ul></li><li class="navlink navlink-restaurants"><a href="/category/restaurants/">RESTAURANTS</a><input type="checkbox" id="subnav-button-restaurants"><label for="subnav-button-restaurants"></label><ul class="main-nav"><li class="subnavlink navlink-fast-food"><a href="/category/fast-food/">Fast Food</a></li><li class="subnavlink navlink-casual-dining"><a href="/category/casual-dining/">Casual Dining</a></li><li class="subnavlink navlink-pizzerias"><a href="/category/pizzerias/">Pizzerias</a></li><li class="subnavlink navlink-coffee-shops"><a href="/category/coffee-shops/">Coffee Shops</a></li></ul></li><li class="navlink navlink-facts"><a href="/category/facts/">FACTS</a></li><li class="navlink navlink-holidays"><a href="/category/holidays/">HOLIDAYS</a><input type="checkbox" id="subnav-button-holidays"><label for="subnav-button-holidays"></label><ul class="main-nav"><li class="subnavlink navlink-christmas"><a href="/category/christmas/">Christmas</a></li><li class="subnavlink navlink-new-years"><a href="/category/new-years/">New Year's</a></li><li class="subnavlink navlink-easter"><a href="/category/easter/">Easter</a></li><li class="subnavlink navlink-thanksgiving"><a href="/category/thanksgiving/">Thanksgiving</a></li><li class="subnavlink navlink-halloween"><a href="/category/halloween/">Halloween</a></li><li class="subnavlink navlink-st-patricks-day"><a href="/category/st-patricks-day/">St. Patrick's Day</a></li><li class="subnavlink navlink-valentines-day"><a href="/category/valentines-day/">Valentine's Day</a></li><li class="subnavlink navlink-mothers-day"><a href="/category/mothers-day/">Mother's Day</a></li></ul></li><li class="navlink navlink-features"><a href="/category/features/">FEATURES</a></li></ul>        <ul class="social-buttons">
+            <li><a href="https://www.facebook.com/MashedFood" target="_blank" title="Facebook" aria-label="Facebook"><svg class="icon"><use xlink:href="#facebook"></use></svg></a></li><li><a href="https://www.youtube.com/c/MashedFood" target="_blank" title="YouTube" aria-label="YouTube"><svg class="icon"><use xlink:href="#youtube"></use></svg></a></li><li><a href="https://x.com/MashedHQ" target="_blank" title="Twitter" aria-label="Twitter"><svg class="icon"><use xlink:href="#twitter"></use></svg></a></li><li><a href="https://www.instagram.com/mashedfood" target="_blank" title="Instagram" aria-label="Instagram"><svg class="icon"><use xlink:href="#instagram"></use></svg></a></li><li><a href="https://www.pinterest.com/mashedfood/" target="_blank" title="Pinterest" aria-label="Pinterest"><svg class="icon"><use xlink:href="#pinterest"></use></svg></a></li><li><a href="https://flipboard.com/@Mashed" target="_blank" title="Flipboard" aria-label="Flipboard"><svg class="icon"><use xlink:href="#flipboard"></use></svg></a></li><li><a href="https://profile.google.com/@mashedfood" target="_blank" title="Google" aria-label="Google"><svg class="icon"><use xlink:href="#google"></use></svg></a></li><li><a href="/feed/" target="_blank" title="RSS" aria-label="RSS"><svg class="icon"><use xlink:href="#rss"></use></svg></a></li>
+            
+            <li class="menu-btn newsletter-btn"><a href="https://subscribe.mashed.com/newsletter?utm_source=mashed&utm_medium=side-nav" target="_blank" title="Newsletter" aria-label="Newsletter"><svg class="icon"><use xlink:href="#revue"></use></svg>Newsletter</a></li>
+        </ul>            <ul class="info-links">
+                <li class="info-link first-info-link"><a href="/about/">About</a></li>
+                <li class="info-link"><a href="/policies/">Editorial Policies</a></li>
+                <li class="info-link"><a href="/ai-policy/">No-AI Writing Policy</a></li>
+                
+                <li class="info-link"><a href="/our-experts/">Our Experts</a></li>
+                
+                <li class="info-link"><a href="/sitemap/">Archive</a></li>
+                <li class="info-link"><a href="https://www.static.com/mashed-privacy-policy" target="_blank">Privacy Policy</a></a></li>
+                <li class="info-link"><a href="https://www.static.com/terms" target="_blank">Terms of Use</a></li>
+            </ul>
+            </nav>                        <div class="nav-bottom">
+                            <span class="copyright-info">&copy; 2026                                <a href="https://www.static.com/" target="_blank">Static Media</a>. All Rights Reserved
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bg"></div>
+         
+            <div id="header-container">
+                <div id="hamburger-holder">
+                    <div class="hamburger nav-opener"></div>
+                </div>
+
+                    <h1 id="logo" class="top-nav-standard">
+        <a href="/"><img src="https://www.mashed.com/img/mashed_logo_color_2.svg" alt="Mashed" width="136" height="34"></a>
+    </h1>
+                <div id="logo-icon" class="top-nav-scrolled">
+                    <a href="/" >
+                        <img src="https://www.mashed.com/img/mashed_icon_color.svg" alt="Mashed" width="34" height="23">                    </a>
+                </div>
+
+                <div id="top-nav-title" class="top-nav-scrolled">Mashed | Fast Food, Celebrity Chefs, Grocery, Reviews</div>
+
+                            <div id="top-nav" class="top-nav-standard">
+                <nav id="top-nav-holder">
+                    
+                    <a href="/category/recipes/" class="navlink-recipes">RECIPES</a>
+<a href="/category/exclusives/" class="navlink-exclusives">EXCLUSIVES</a>
+<a href="/category/news/" class="navlink-news">NEWS</a>
+<a href="/category/entertainment/" class="navlink-entertainment">ENTERTAINMENT</a>
+<a href="/category/kitchen/" class="navlink-kitchen">KITCHEN</a>
+<a href="/category/grocery/" class="navlink-grocery">GROCERY</a>
+<a href="/category/restaurants/" class="navlink-restaurants">RESTAURANTS</a>
+<a href="/category/facts/" class="navlink-facts">FACTS</a>
+<a href="/category/holidays/" class="navlink-holidays">HOLIDAYS</a>
+<a href="/category/features/" class="navlink-features">FEATURES</a>
+
+                </nav>
+            </div>                <svg width="0" height="0" class="hidden">
+            <symbol version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="rss">
+    <path d="M2.13 11.733c-1.175 0-2.13 0.958-2.13 2.126 0 1.174 0.955 2.122 2.13 2.122 1.179 0 2.133-0.948 2.133-2.122-0-1.168-0.954-2.126-2.133-2.126zM0.002 5.436v3.067c1.997 0 3.874 0.781 5.288 2.196 1.412 1.411 2.192 3.297 2.192 5.302h3.080c-0-5.825-4.739-10.564-10.56-10.564zM0.006 0v3.068c7.122 0 12.918 5.802 12.918 12.932h3.076c0-8.82-7.176-16-15.994-16z"></path>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="twitter">
+    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="facebook">
+    <path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="flipboard">
+    <path d="m 6.9999999,0.99982 5.9993001,0 0,1.99835 0,1.99357 -1.993367,0 -1.9980673,0 -0.014998,1.99357 -0.01,1.99835 -1.9980669,0.01 -1.9933674,0.0146 -0.014998,1.99835 -0.01,1.99357 -1.9834686,0 -1.9836686,0 0,-6.00006 0,-5.99994 5.9992001,0 z"></path>
+</symbol>
+        <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="instagram">
+    <path d="M17.3183118,0.0772036939 C18.5358869,0.132773211 19.3775594,0.311686093 20.156489,0.614412318 C20.9357539,0.917263935 21.5259307,1.30117806 22.1124276,1.88767349 C22.6988355,2.47414659 23.0827129,3.06422396 23.3856819,3.84361655 C23.688357,4.62263666 23.8672302,5.46418415 23.9227984,6.68172489 C23.9916356,8.19170553 24,8.72394829 24,11.9999742 C24,15.2760524 23.9916355,15.808302 23.9227954,17.3182896 C23.8672306,18.5358038 23.6883589,19.3773584 23.3855877,20.1566258 C23.0826716,20.9358162 22.6987642,21.5259396 22.1124276,22.1122749 C21.5259871,22.6987804 20.9357958,23.0827198 20.1563742,23.3856323 C19.3772192,23.6883583 18.5357324,23.8672318 17.3183209,23.9227442 C15.8086874,23.9916325 15.2765626,24 12,24 C8.72343739,24 8.19131258,23.9916325 6.68172382,23.9227463 C5.46426077,23.8672314 4.62270711,23.6883498 3.84342369,23.3855738 C3.0641689,23.0827004 2.47399369,22.6987612 1.88762592,22.1123283 C1.30117312,21.525877 0.91721975,20.9357071 0.614318116,20.1563835 C0.311643016,19.3773633 0.132769821,18.5358159 0.0772038909,17.3183251 C0.0083529426,15.8092887 0,15.2774634 0,11.9999742 C0,8.7225328 0.00835296697,8.19071076 0.0772047368,6.68165632 C0.132769821,5.46418415 0.311643016,4.62263666 0.614362729,3.84350174 C0.91719061,3.06430165 1.30113536,2.4741608 1.88757245,1.88772514 C2.47399369,1.30123879 3.0641689,0.917299613 3.84345255,0.614414972 C4.62236201,0.311696581 5.46409415,0.132773979 6.68163888,0.0772035898 C8.19074867,0.00835221992 8.72252573,0 12,0 C15.2774788,0 15.8092594,0.00835235053 17.3183118,0.0772036939 Z M12,2.66666667 C8.75959504,2.66666667 8.26400713,2.67445049 6.80319929,2.74109814 C5.87614637,2.78341009 5.31952221,2.90172878 4.80947575,3.09995521 C4.37397765,3.26922052 4.09725505,3.44924273 3.77324172,3.77329203 C3.44916209,4.09737087 3.26913181,4.37408574 3.09996253,4.80937168 C2.90169965,5.31965737 2.78340891,5.87618164 2.74109927,6.80321713 C2.67445122,8.26397158 2.66666667,8.75960374 2.66666667,11.9999742 C2.66666667,15.2403924 2.67445121,15.7360281 2.74109842,17.1967643 C2.78340891,18.1238184 2.90169965,18.6803426 3.09990404,19.1904778 C3.26914133,19.6259017 3.44919889,19.9026659 3.77329519,20.2267614 C4.09725505,20.5507573 4.37397765,20.7307795 4.80932525,20.8999863 C5.31971515,21.0982887 5.87621193,21.2165784 6.80323907,21.2588497 C8.26460439,21.3255353 8.76051223,21.3333333 12,21.3333333 C15.2394878,21.3333333 15.7353956,21.3255353 17.1968056,21.2588476 C18.123775,21.216579 18.6802056,21.0982995 19.1905083,20.9000309 C19.6260288,20.7307713 19.9027426,20.5507596 20.2267583,20.226708 C20.5507492,19.9027179 20.7308046,19.6259456 20.9000375,19.1906283 C21.0983009,18.6803412 21.2165908,18.1238118 21.2588986,17.196779 C21.3255376,15.7350718 21.3333333,15.2390126 21.3333333,11.9999742 C21.3333333,8.76098665 21.3255376,8.26493375 21.2589016,6.80323567 C21.2165911,5.87618164 21.0983004,5.31965737 20.9001178,4.80957831 C20.7308131,4.37403932 20.550774,4.09729207 20.2267583,3.77324038 C19.9027658,3.44924868 19.6260264,3.26922777 19.1905015,3.09996643 C18.6803988,2.90171817 18.1238378,2.78341062 17.1967608,2.74109868 C15.7359966,2.67445057 15.2404012,2.66666667 12,2.66666667 Z M12,18.2222222 C8.56356156,18.2222222 5.77777778,15.4364384 5.77777778,12 C5.77777778,8.56356156 8.56356156,5.77777778 12,5.77777778 C15.4364384,5.77777778 18.2222222,8.56356156 18.2222222,12 C18.2222222,15.4364384 15.4364384,18.2222222 12,18.2222222 Z M12,15.5555556 C13.9636791,15.5555556 15.5555556,13.9636791 15.5555556,12 C15.5555556,10.0363209 13.9636791,8.44444444 12,8.44444444 C10.0363209,8.44444444 8.44444444,10.0363209 8.44444444,12 C8.44444444,13.9636791 10.0363209,15.5555556 12,15.5555556 Z M18.2222222,7.11111111 C17.4858426,7.11111111 16.8888889,6.51415744 16.8888889,5.77777778 C16.8888889,5.04139811 17.4858426,4.44444444 18.2222222,4.44444444 C18.9586019,4.44444444 19.5555556,5.04139811 19.5555556,5.77777778 C19.5555556,6.51415744 18.9586019,7.11111111 18.2222222,7.11111111 Z"/>
+</symbol>
+         <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" id="linkedin">
+    <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240.1 113.49" id="muckrack">
+    <path class="b" d="M223.2,73.59c11.2-7.6,16.8-20.3,16.9-33.3C240.1,20.39,226.8.09,199.4.09c-8.35-.1-18.27-.1-28.14-.07-9.86.02-19.66.07-27.76.07v113.4h29.6v-35h17l17.1,35h30.6l.8-5-18.7-33.4c2.5-.8,3.3-1.5,3.3-1.5ZM199,54.29h-25.8v-29.7h25.8c8.4,0,12.3,7.4,12.3,14.6s-4.1,15.1-12.3,15.1Z"/><polygon class="b" points="0 .14 10.9 .14 64.5 49.24 117.9 .14 129.3 .14 129.3 113.34 99.7 113.34 99.7 54.24 66.1 83.74 62.7 83.74 29.6 54.24 29.6 113.34 0 113.34 0 .14"/>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="7 2 2 12" id="youtube">
+    <path d="M15.841 4.8c0 0-0.156-1.103-0.637-1.587-0.609-0.637-1.291-0.641-1.603-0.678-2.237-0.163-5.597-0.163-5.597-0.163h-0.006c0 0-3.359 0-5.597 0.163-0.313 0.038-0.994 0.041-1.603 0.678-0.481 0.484-0.634 1.587-0.634 1.587s-0.159 1.294-0.159 2.591v1.213c0 1.294 0.159 2.591 0.159 2.591s0.156 1.103 0.634 1.588c0.609 0.637 1.409 0.616 1.766 0.684 1.281 0.122 5.441 0.159 5.441 0.159s3.363-0.006 5.6-0.166c0.313-0.037 0.994-0.041 1.603-0.678 0.481-0.484 0.637-1.588 0.637-1.588s0.159-1.294 0.159-2.591v-1.213c-0.003-1.294-0.162-2.591-0.162-2.591zM6.347 10.075v-4.497l4.322 2.256-4.322 2.241z"></path>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="pinterest">
+    <g>
+    <path d="M220.646,338.475C207.223,408.825,190.842,476.269,142.3,511.5
+            c-14.996-106.33,21.994-186.188,39.173-270.971c-29.293-49.292,3.518-148.498,65.285-124.059
+            c76.001,30.066-65.809,183.279,29.38,202.417c99.405,19.974,139.989-172.476,78.359-235.054
+            C265.434-6.539,95.253,81.775,116.175,211.161c5.09,31.626,37.765,41.22,13.062,84.884c-57.001-12.65-74.005-57.6-71.822-117.533
+            c3.53-98.108,88.141-166.787,173.024-176.293c107.34-12.014,208.081,39.398,221.991,140.376
+            c15.67,113.978-48.442,237.412-163.23,228.529C258.085,368.704,245.023,353.283,220.646,338.475z">
+    </path>
+    </g>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="tiktok">
+    <path d="M 22.472559,-3.8146973e-6 C 23.000559,4.5408962 25.535059,7.2481962 29.941559,7.5361962 v 5.1073998 c -2.5536,0.2496 -4.7905,-0.5856 -7.3922,-2.1601 v 9.5523 c 0,12.1348 -13.2292004,15.927 -18.5478004,7.2291 -3.4177,-5.597 -1.3248,-15.4181 9.6387004,-15.8117 v 5.3857 c -0.8352,0.1344 -1.728,0.3456 -2.5441,0.6241 -2.4384004,0.8256 -3.8209004,2.3712 -3.4369004,5.0977 0.7392,5.2226 10.3204004,6.7682 9.5235004,-3.4369 V 0.00959619 h 5.2898 z" />
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="twitch">
+    <path d="M3 0l-3 5v23h8v4h4l4-4h5l9-9v-19h-27zM26 17l-5 5h-5l-4 4v-4h-6v-18h20v13z"></path><path d="M19 8h3v8h-3v-8z"></path><path d="M13 8h3v8h-3v-8z"></path>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.016 512.016" id="snapchat" >
+    <g>
+        <g>
+            <path d="M500.459,375.368c-64.521-10.633-93.918-75.887-97.058-83.294c-0.06-0.145-0.307-0.666-0.375-0.819
+                c-3.234-6.571-4.036-11.904-2.347-15.838c3.388-8.013,17.741-12.553,26.931-15.462c2.586-0.836,5.009-1.604,6.938-2.372
+                c18.586-7.339,27.913-16.717,27.716-27.895c-0.179-8.866-7.134-17.007-17.434-20.651c-3.55-1.485-7.774-2.295-11.887-2.295
+                c-2.842,0-7.066,0.401-11.102,2.287c-7.868,3.678-14.865,5.658-20.156,5.888c-2.355-0.094-4.139-0.486-5.427-0.922
+                c0.162-2.79,0.35-5.658,0.529-8.585l0.094-1.493c2.193-34.807,4.915-78.123-6.673-104.081
+                c-34.27-76.834-106.999-82.807-128.478-82.807l-10.018,0.094c-21.436,0-94.029,5.965-128.265,82.756
+                c-11.614,26.018-8.866,69.316-6.664,104.115c0.213,3.422,0.427,6.758,0.614,10.01c-1.468,0.503-3.584,0.947-6.46,0.947
+                c-6.161,0-13.542-1.997-21.931-5.922c-12.126-5.683-34.295,1.911-37.291,17.647c-1.63,8.516,1.801,20.796,27.383,30.908
+                c1.988,0.785,4.489,1.587,7.561,2.56c8.576,2.722,22.929,7.27,26.325,15.266c1.681,3.951,0.879,9.284-2.662,16.512
+                c-1.263,2.944-31.65,72.124-98.765,83.174c-6.963,1.143-11.93,7.322-11.537,14.353c0.111,1.954,0.563,3.917,1.399,5.897
+                c5.641,13.193,27.119,22.349,67.55,28.766c0.887,2.295,1.92,7.006,2.509,9.737c0.853,3.9,1.749,7.927,2.97,12.1
+                c1.229,4.224,4.881,11.307,15.445,11.307c3.575,0,7.714-0.811,12.211-1.681c6.468-1.271,15.309-2.995,26.274-2.995
+                c6.084,0,12.416,0.546,18.825,1.604c12.092,2.005,22.699,9.506,35.004,18.202c18.116,12.809,34.586,22.605,67.524,22.605
+                c0.87,0,1.732-0.026,2.577-0.085c1.22,0.06,2.449,0.085,3.695,0.085c28.851,0,54.246-7.62,75.494-22.63
+                c11.742-8.311,22.835-16.162,34.935-18.176c6.426-1.058,12.766-1.604,18.85-1.604c10.513,0,18.901,1.348,26.385,2.816
+                c5.06,0.998,9.02,1.476,12.672,1.476c7.373,0,12.8-4.053,14.874-11.127c1.195-4.113,2.091-8.021,2.961-12.015
+                c0.461-2.125,1.57-7.211,2.509-9.66c39.851-6.34,60.203-15.138,65.835-28.297c0.845-1.894,1.34-3.9,1.476-6.033
+                C512.372,382.707,507.422,376.529,500.459,375.368z"/>
+        </g>
+    </g>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" id="threads">
+    <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881 72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932 64.1366 115.961 68.814C118.893 72.2193 120.854 76.925 121.825 82.8638C114.511 81.6207 106.601 81.2385 98.145 81.7233C74.3247 83.0954 59.0111 96.9879 60.0396 116.292C60.5615 126.084 65.4397 134.508 73.775 140.011C80.8224 144.663 89.899 146.938 99.3323 146.423C111.79 145.74 121.563 140.987 128.381 132.296C133.559 125.696 136.834 117.143 138.28 106.366C144.217 109.949 148.617 114.664 151.047 120.332C155.179 129.967 155.42 145.8 142.501 158.708C131.182 170.016 117.576 174.908 97.0135 175.059C74.2042 174.89 56.9538 167.575 45.7381 153.317C35.2355 139.966 29.8077 120.682 29.6052 96C29.8077 71.3178 35.2355 52.0336 45.7381 38.6827C56.9538 24.4249 74.2039 17.11 97.0132 16.9405C119.988 17.1113 137.539 24.4614 149.184 38.788C154.894 45.8136 159.199 54.6488 162.037 64.9503L178.184 60.6422C174.744 47.9622 169.331 37.0357 161.965 27.974C147.036 9.60668 125.202 0.195148 97.0695 0H96.9569C68.8816 0.19447 47.2921 9.6418 32.7883 28.0793C19.8819 44.4864 13.2244 67.3157 13.0007 95.9325L13 96L13.0007 96.0675C13.2244 124.684 19.8819 147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081 151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544 125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106 98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z" />
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="bluesky">
+    <path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"/>
+</symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="google">
+    <path d="M500 261.8C500 403.3 403.1 504 260 504 122.8 504 12 393.2 12 256S122.8 8 260 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9c-88.3-85.2-252.5-21.2-252.5 118.2 0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9l-140.8 0 0-85.3 236.1 0c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+</symbol>
+        <symbol id="website" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.91041 1.47245C3.56879 -0.185927 6.25755 -0.185927 7.91592 1.47245L10.9186 4.47521C12.577 6.13361 12.577 8.82231 10.9186 10.4807C10.5041 10.8954 9.83185 10.8954 9.41728 10.4807C9.00271 10.0661 9.00271 9.39389 9.41728 8.97932C10.2465 8.15019 10.2465 6.80573 9.41728 5.97659L6.41454 2.97383C5.58535 2.14465 4.24097 2.14465 3.41178 2.97383C2.58261 3.80302 2.58261 5.1474 3.41178 5.97659L4.16248 6.72728C4.57708 7.14185 4.57707 7.81407 4.16248 8.22864C3.74789 8.64321 3.07569 8.64321 2.6611 8.22864L1.91041 7.47796C0.252031 5.81959 0.252031 3.13083 1.91041 1.47245ZM7.91592 5.9766C8.33049 6.39116 8.33049 7.06339 7.91592 7.47796C7.08678 8.3072 7.08678 9.65155 7.91592 10.4807L10.9186 13.4835C11.7479 14.3127 13.0922 14.3127 13.9215 13.4835C14.7506 12.6543 14.7506 11.3099 13.9215 10.4807L13.1708 9.73C12.7561 9.31544 12.7561 8.64321 13.1708 8.22864C13.5854 7.81407 14.2575 7.81407 14.6722 8.22864L15.4228 8.97932C17.0812 10.6377 17.0812 13.3265 15.4228 14.9849C13.7645 16.6433 11.0757 16.6433 9.41728 14.9849L6.41455 11.9822C4.75618 10.3238 4.75618 7.63498 6.41455 5.9766C6.82912 5.562 7.50135 5.562 7.91592 5.9766Z"/>
+</symbol>
+            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="revue">
+        <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+    </symbol>
+        
+        
+        
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="advertise">
+            <g clip-path="url(#clip0_1911_5435)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.40497L2.26973 4.27073L0 2.34144V12.6558L2.26967 10.7271L3.84476 11.191V14.1933C3.84529 15.229 4.55813 16.067 5.43904 16.0676H9.23405C9.67247 16.0682 10.0745 15.8571 10.3609 15.5183C10.6488 15.1814 10.8284 14.709 10.8278 14.1932V13.2478L12 13.593V1.40497ZM5.09306 14.5997C5.00434 14.4935 4.95039 14.3537 4.94986 14.1932V11.5168L9.72281 12.9219V14.1932C9.72227 14.3537 9.66885 14.4935 9.5796 14.5997C9.48985 14.7047 9.37052 14.7676 9.23409 14.7676H5.4391C5.30214 14.7676 5.18281 14.7047 5.09306 14.5997Z" />
+            <path d="M13 1.11045L17 -0.067627V15.0654L13 13.8875V1.11045Z" />
+            </g>
+            <defs>
+            <clipPath id="clip0_1911_5435">
+            <rect width="16" height="16" fill="white"/>
+            </clipPath>
+            </defs>
+        </symbol>            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="search">
+                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+            </symbol>
+    
+</svg>                    <nav id="social-nav-holder" class="top-nav-standard">
+        <ul class="social-buttons">
+            <li><a href="https://www.facebook.com/MashedFood" target="_blank" title="Facebook" aria-label="Facebook"><svg class="icon"><use xlink:href="#facebook"></use></svg></a></li><li><a href="https://www.youtube.com/c/MashedFood" target="_blank" title="YouTube" aria-label="YouTube"><svg class="icon"><use xlink:href="#youtube"></use></svg></a></li><li><a href="https://x.com/MashedHQ" target="_blank" title="Twitter" aria-label="Twitter"><svg class="icon"><use xlink:href="#twitter"></use></svg></a></li><li><a href="https://www.instagram.com/mashedfood" target="_blank" title="Instagram" aria-label="Instagram"><svg class="icon"><use xlink:href="#instagram"></use></svg></a></li><li><a href="https://www.pinterest.com/mashedfood/" target="_blank" title="Pinterest" aria-label="Pinterest"><svg class="icon"><use xlink:href="#pinterest"></use></svg></a></li><li><a href="https://flipboard.com/@Mashed" target="_blank" title="Flipboard" aria-label="Flipboard"><svg class="icon"><use xlink:href="#flipboard"></use></svg></a></li><li><a href="https://profile.google.com/@mashedfood" target="_blank" title="Google" aria-label="Google"><svg class="icon"><use xlink:href="#google"></use></svg></a></li><li><a href="/feed/" target="_blank" title="RSS" aria-label="RSS"><svg class="icon"><use xlink:href="#rss"></use></svg></a></li>
+            
+            <li class="menu-btn newsletter-btn"><a href="https://subscribe.mashed.com/newsletter?utm_source=mashed&utm_medium=top-nav" target="_blank" title="Newsletter" aria-label="Newsletter"><svg class="icon"><use xlink:href="#revue"></use></svg>Newsletter</a></li>
+        </ul>
+    </nav>
+                            </div>
+            <div id="is-tablet"></div>
+            <div id="is-mobile"></div>
+        </header>
+    <main id="index" class="mashed">
+        <ul id="featured"><li class="article-item primary">
+    <article class="article-block">
+        <div class="image-holder">
+            <a href="/2297636/best-frozen-meals-you-can-buy-from-trader-joes-consumer-reports/">
+                <picture>
+                    <source
+                        srcset="https://www.mashed.com/img/gallery/consumer-reports-says-these-are-the-best-frozen-meals-you-can-buy-from-trader-joes/intro-1793045582.webp"
+                        type="image/webp">
+                    <img src="https://www.mashed.com/img/gallery/consumer-reports-says-these-are-the-best-frozen-meals-you-can-buy-from-trader-joes/intro-1793045582.jpg" width="426" height="240" alt="Trader Joe's checkout">
+                </picture>
+            </a>
+            <div class="category-label label-trader-joes parent-grocery"><a href="/category/trader-joes/">Trader Joe's</a></div>
+        </div>
+        <div class="article-description">
+            <h1>
+                <a href="/2297636/best-frozen-meals-you-can-buy-from-trader-joes-consumer-reports/">Consumer Reports Says These Are The Best Frozen Meals You Can Buy From Trader Joe's</a>
+            </h1>
+            <p class="article-excerpt">Consumer Reports rated the frozen meals across many American store brands on taste and nutritional value and crowned these three as the best from Trader Joe's.</p>
+            <span class="author"><span class="by">By&nbsp;</span>Brittany Skyler</span>
+            <span class="read-more"><a href="/2297636/best-frozen-meals-you-can-buy-from-trader-joes-consumer-reports/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="secondary-index"><ul>        <li class="article-item secondary">
+            <article class="article-block">
+                <div class="image-holder">
+                    <a href="/2299972/best-hot-sandwich-heating-method/">
+                        <picture>
+                            <source
+                                srcset="https://www.mashed.com/img/gallery/toasted-griddled-or-broiled-which-method-makes-the-best-hot-sandwich/intro-1793207598.webp"
+                                type="image/webp">
+                            <img src="https://www.mashed.com/img/gallery/toasted-griddled-or-broiled-which-method-makes-the-best-hot-sandwich/intro-1793207598.jpg" width="426" height="240" alt="Three Reuben sandwiches on dark rye bread, all cut in half and opened to reveal their fillings, sit on a white place on a stovetop">
+                        </picture>
+                    </a>
+                    <div class="category-label label-exclusives-reviews parent-exclusives"><a href="/category/exclusives-reviews/">Reviews</a></div>
+                </div>
+                <div class="article-description">
+                    <h3>
+                        <a href="/2299972/best-hot-sandwich-heating-method/">Toasted, Griddled, Or Broiled: Which Method Makes The Best Hot Sandwich?</a>
+                    </h3>
+                    <p class="article-excerpt">You want your hot sandwiches to boast toasty bread, gooey cheese, and thoroughly cooked innards. We tested which kitchen method guarantees the best results.</p>
+                    <span class="author"><span class="by">By&nbsp;</span>Jessica Santina</span>
+                    <span class="read-more"><a href="/2299972/best-hot-sandwich-heating-method/">Read More</a></span>
+                </div>
+            </article>
+        </li>        <li class="article-item secondary">
+            <article class="article-block">
+                <div class="image-holder">
+                    <a href="/2297659/whiskey-brand-cheap-versatile-experts-recommend-bushmills/">
+                        <picture>
+                            <source
+                                srcset="https://www.mashed.com/img/gallery/this-400-year-old-whiskey-brand-is-a-cheap-versatile-pick-whiskey-experts-recommend/intro-1793046538.webp"
+                                type="image/webp">
+                            <img src="https://www.mashed.com/img/gallery/this-400-year-old-whiskey-brand-is-a-cheap-versatile-pick-whiskey-experts-recommend/intro-1793046538.jpg" width="426" height="240" alt="Whiskey pouring from bottle into glass surrounded by ice.">
+                        </picture>
+                    </a>
+                    <div class="category-label label-shopping-tips parent-grocery"><a href="/category/shopping-tips/">Shopping Tips</a></div>
+                </div>
+                <div class="article-description">
+                    <h3>
+                        <a href="/2297659/whiskey-brand-cheap-versatile-experts-recommend-bushmills/">This 400-Year-Old Whiskey Brand Is A Cheap, Versatile Pick Whiskey Experts Recommend</a>
+                    </h3>
+                    <p class="article-excerpt">High-quality whiskey doesn't have to cost an arm and a leg. When we asked experts to recommend a cheap, versatile whiskey, they named this bottle.</p>
+                    <span class="author"><span class="by">By&nbsp;</span>Amy Browne</span>
+                    <span class="read-more"><a href="/2297659/whiskey-brand-cheap-versatile-experts-recommend-bushmills/">Read More</a></span>
+                </div>
+            </article>
+        </li></ul></li></ul>        <div id="index-table">
+            <section id="features">
+                <h2 class="section-header">More Stories</h2><ul id="article-container" class="article-index article-holder"><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2302700/garlic-herb-sausage-pinewheels-recipe/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/easy-garlic-and-herb-sausage-pinwheels-recipe/intro-1793297909.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/easy-garlic-and-herb-sausage-pinwheels-recipe/intro-1793297909.jpg" width="426" height="240" alt="Garlic and herb sausage pinwheels on plate with dipping sauce">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-appetizer-recipes parent-recipes"><a href="/category/appetizer-recipes/">Appetizer Recipes</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Jessica Morone</span> <span class="timestamp">12 min ago</span>
+            </div>
+            <h3><a href="/2302700/garlic-herb-sausage-pinewheels-recipe/">Easy Garlic And Herb Sausage Pinwheels Recipe</a></h3>
+            <p class="article-excerpt">Pork sausage adds just the right rich, savory note to complement creamy, garlicky Boursin, and a crescent dough sheet makes these pinwheels a breeze.</p>
+            <span class="read-more"><a href="/2302700/garlic-herb-sausage-pinewheels-recipe/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2303855/best-ipa-2026-american-owned-brand/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/one-of-the-best-ipas-in-2026-comes-from-an-american-brand/intro-1793632992.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/one-of-the-best-ipas-in-2026-comes-from-an-american-brand/intro-1793632992.jpg" width="426" height="240" alt="A glass of cold India Pale Ale in the sunlight, served alongside hops on a wooden table.">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-shopping-tips parent-grocery"><a href="/category/shopping-tips/">Shopping Tips</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Marco Sumayao</span> <span class="timestamp">2 hours ago</span>
+            </div>
+            <h3><a href="/2303855/best-ipa-2026-american-owned-brand/">One Of The Best IPAs In 2026 Comes From An American Brand</a></h3>
+            <p class="article-excerpt">IPAs are now an American standard, and one of the best of 2026 comes from an American brand that played a big role in its flavor development.</p>
+            <span class="read-more"><a href="/2303855/best-ipa-2026-american-owned-brand/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297610/difference-between-wendys-culvers-beef-patties/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/the-difference-between-culvers-and-wendys-beef-patties/intro-1793044947.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/the-difference-between-culvers-and-wendys-beef-patties/intro-1793044947.jpg" width="426" height="240" alt="A cheeseburger sits on a foil wrapper">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-wendys parent-restaurants"><a href="/category/wendys/">Wendy's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Crysta Coburn</span> <span class="timestamp">3 hours ago</span>
+            </div>
+            <h3><a href="/2297610/difference-between-wendys-culvers-beef-patties/">The Difference Between Culver's And Wendy's Beef Patties</a></h3>
+            <p class="article-excerpt">While Wendy's and Culver's may both top the fast food charts, there's a lot that's different between each of their iconic burgers — and not just in their shape.</p>
+            <span class="read-more"><a href="/2297610/difference-between-wendys-culvers-beef-patties/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2299918/chain-restaurants-serve-highest-quality-steaks/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/chain-restaurants-with-the-highest-quality-steaks/intro-1793206043.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/chain-restaurants-with-the-highest-quality-steaks/intro-1793206043.jpg" width="426" height="240" alt="Steak with garnish">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-restaurants"><a href="/category/restaurants/">Restaurants</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Shirin Mehrotra</span> <span class="timestamp">4 hours ago</span>
+            </div>
+            <h3><a href="/2299918/chain-restaurants-serve-highest-quality-steaks/">Chain Restaurants With The Highest Quality Steaks</a></h3>
+            <p class="article-excerpt">Americans have a wide variety of chains to choose from when it comes to a good steak, and these chains are known for some of the best cuts around.</p>
+            <span class="read-more"><a href="/2299918/chain-restaurants-serve-highest-quality-steaks/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2294788/hands-down-worst-popular-chocolate-candy-bar-hersheys/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/this-is-hands-down-the-worst-chocolate-candy-bar/intro-1792699917.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/this-is-hands-down-the-worst-chocolate-candy-bar/intro-1792699917.jpg" width="426" height="240" alt="Chocolate bars on table">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-shopping-tips parent-grocery"><a href="/category/shopping-tips/">Shopping Tips</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Haley McNamara</span> <span class="timestamp">4 hours ago</span>
+            </div>
+            <h3><a href="/2294788/hands-down-worst-popular-chocolate-candy-bar-hersheys/">This Is Hands Down The Worst Chocolate Candy Bar</a></h3>
+            <p class="article-excerpt">When Mashed recently reviewed popular chocolate bars, we found that this iconic brand was actually the worst, and it all comes down to its "cheesy" flavor.</p>
+            <span class="read-more"><a href="/2294788/hands-down-worst-popular-chocolate-candy-bar-hersheys/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2296929/consumer-reports-lowest-rated-breakfast-item-mcdonalds-sausage-burrito/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/consumer-reports-tried-breakfast-items-from-6-popular-chains-this-mcdonalds-item-was-the-lowest-rated/intro-1793036178.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/consumer-reports-tried-breakfast-items-from-6-popular-chains-this-mcdonalds-item-was-the-lowest-rated/intro-1793036178.jpg" width="426" height="240" alt="McDonald's coffee and large bag of food">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mcdonalds-fast-food parent-restaurants"><a href="/category/mcdonalds-fast-food/">McDonald's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Taryn Pire</span> <span class="timestamp">5 hours ago</span>
+            </div>
+            <h3><a href="/2296929/consumer-reports-lowest-rated-breakfast-item-mcdonalds-sausage-burrito/">Consumer Reports Tried Breakfast Foods From 6 Popular Chains. This McDonald's Item Was The Lowest-Rated</a></h3>
+            <p class="article-excerpt">The "M" in "McDonald's" could also stand for "morning" based on how famous certain breakfast items are. However, this menu option could be deemed an utter dud.</p>
+            <span class="read-more"><a href="/2296929/consumer-reports-lowest-rated-breakfast-item-mcdonalds-sausage-burrito/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2301080/main-difference-between-lobster-crawfish/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/whats-the-main-difference-between-lobster-and-crawfish/intro-1793289700.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/whats-the-main-difference-between-lobster-and-crawfish/intro-1793289700.jpg" width="426" height="240" alt="A lobster tail on top of a steak, plated with vegetables">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-facts"><a href="/category/facts/">Facts</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Jessica Riggio</span> <span class="timestamp">8 hours ago</span>
+            </div>
+            <h3><a href="/2301080/main-difference-between-lobster-crawfish/">What's The Main Difference Between Lobster And Crawfish?</a></h3>
+            <p class="article-excerpt">While some restaurants may swap in crawfish for certain lobster recipes without anyone noticing, there are distinct differences between the two crustaceans.</p>
+            <span class="read-more"><a href="/2301080/main-difference-between-lobster-crawfish/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297043/classic-items-kevin-harts-taco-bell-order/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/kevin-harts-typical-taco-bell-order-includes-some-classics/intro-1793038933.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/kevin-harts-typical-taco-bell-order-includes-some-classics/intro-1793038933.jpg" width="426" height="240" alt="Kevin Hart">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-celebs parent-entertainment"><a href="/category/celebs/">Celebs</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Kirsty McCormack</span> <span class="timestamp">14 hours ago</span>
+            </div>
+            <h3><a href="/2297043/classic-items-kevin-harts-taco-bell-order/">Kevin Hart's Typical Taco Bell Order Includes Some Classics</a></h3>
+            <p class="article-excerpt">Want to try out a Taco Bell meal loved by stars like Kevin Hart? Check out the actor and comedian's iconic fast food order whenever he hits the drive-thru.</p>
+            <span class="read-more"><a href="/2297043/classic-items-kevin-harts-taco-bell-order/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2298398/consumer-reports-lowest-rated-bread-classic-american-brand-pepperidge-farm/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/consumer-reports-lowest-rated-bread-comes-from-a-classic-american-brand/intro-1793116985.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/consumer-reports-lowest-rated-bread-comes-from-a-classic-american-brand/intro-1793116985.jpg" width="426" height="240" alt="Popular brands of bread loaves on grocery store shelves">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-shopping-tips parent-grocery"><a href="/category/shopping-tips/">Shopping Tips</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Haley McNamara</span> <span class="timestamp">15 hours ago</span>
+            </div>
+            <h3><a href="/2298398/consumer-reports-lowest-rated-bread-classic-american-brand-pepperidge-farm/">Consumer Reports' Lowest-Rated Bread Comes From A Classic American Brand</a></h3>
+            <p class="article-excerpt">Consumer Reports took a look at dozens of popular store-bought breads and ranked them according to their nutritional profile, and this one ranked lowest.</p>
+            <span class="read-more"><a href="/2298398/consumer-reports-lowest-rated-bread-classic-american-brand-pepperidge-farm/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2296930/difference-between-east-west-coast-ipa-beer-america/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/whats-the-difference-between-east-west-coast-ipas-in-america/intro-1793036534.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/whats-the-difference-between-east-west-coast-ipas-in-america/intro-1793036534.jpg" width="426" height="240" alt="Flight of IPA beers">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-facts"><a href="/category/facts/">Facts</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Moriah House</span> <span class="timestamp">16 hours ago</span>
+            </div>
+            <h3><a href="/2296930/difference-between-east-west-coast-ipa-beer-america/">What's The Difference Between East & West Coast IPAs In America?</a></h3>
+            <p class="article-excerpt">West and East Coast IPAs aren't as different as night and day, but their appearance and flavor profiles set them apart in several key respects.</p>
+            <span class="read-more"><a href="/2296930/difference-between-east-west-coast-ipa-beer-america/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2298320/biscuits-and-gravy-zesty-flavor-boost-tabasco-sauce/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/add-a-splash-of-this-sauce-to-biscuits-and-gravy-for-a-zesty-flavor-boost/intro-1793114187.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/add-a-splash-of-this-sauce-to-biscuits-and-gravy-for-a-zesty-flavor-boost/intro-1793114187.jpg" width="426" height="240" alt="Biscuits and gravy with potatoes on wood plate and fork">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-tips-cooking parent-kitchen"><a href="/category/tips-cooking/">Tips</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Erica Martinez</span> <span class="timestamp">17 hours ago</span>
+            </div>
+            <h3><a href="/2298320/biscuits-and-gravy-zesty-flavor-boost-tabasco-sauce/">Add A Splash Of This Sauce To Biscuits And Gravy For A Zesty Flavor Boost</a></h3>
+            <p class="article-excerpt">If your biscuits and gravy recipe is looking a little worse for wear, consider adding a couple drops of this condiment. You may even already have it on hand.</p>
+            <span class="read-more"><a href="/2298320/biscuits-and-gravy-zesty-flavor-boost-tabasco-sauce/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2291803/best-breakfast-pastry-sams-club-bakery-members-mark-tart-sweet-apple-turnover/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/one-of-the-best-breakfast-pastries-from-the-sams-club-bakery-is-perfect-for-fall-mornings/intro-1792696797.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/one-of-the-best-breakfast-pastries-from-the-sams-club-bakery-is-perfect-for-fall-mornings/intro-1792696797.jpg" width="426" height="240" alt="A selection of baked goods with fall colors and leaves in the surrounding shot">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-sams-club parent-grocery"><a href="/category/sams-club/">Sam’s Club</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Jessica Riggio</span> <span class="timestamp">18 hours ago</span>
+            </div>
+            <h3><a href="/2291803/best-breakfast-pastry-sams-club-bakery-members-mark-tart-sweet-apple-turnover/">One Of The Best Breakfast Pastries From The Sam's Club Bakery Is Perfect For Fall Mornings</a></h3>
+            <p class="article-excerpt">Fall mornings typically have a chill in the air, and a comforting breakfast is just the thing to get you going. Look to these pastries from Sam's Club.</p>
+            <span class="read-more"><a href="/2291803/best-breakfast-pastry-sams-club-bakery-members-mark-tart-sweet-apple-turnover/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2296953/discontinued-mcdonalds-dessert-from-80s-deserves-comeback/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/the-discontinued-mcdonalds-dessert-from-the-80s-that-deserves-a-comeback/intro-1793038510.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/the-discontinued-mcdonalds-dessert-from-the-80s-that-deserves-a-comeback/intro-1793038510.jpg" width="426" height="240" alt="4 people eating at McDonald's restaurant in the late 1980s">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mcdonalds-fast-food parent-restaurants"><a href="/category/mcdonalds-fast-food/">McDonald's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Erica Martinez</span> <span class="timestamp">19 hours ago</span>
+            </div>
+            <h3><a href="/2296953/discontinued-mcdonalds-dessert-from-80s-deserves-comeback/">The Discontinued McDonald's Dessert From The '80s That Deserves A Comeback</a></h3>
+            <p class="article-excerpt">One of the sweet treats McDonald's no longer serves is a flaky, nutty creation of an esteemed chef, and it would make a great winter or fall seasonal offering.</p>
+            <span class="read-more"><a href="/2296953/discontinued-mcdonalds-dessert-from-80s-deserves-comeback/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2295299/owners-flag-issues-with-air-fryers/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/owners-flag-5-issues-with-air-fryers/intro-1792766016.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/owners-flag-5-issues-with-air-fryers/intro-1792766016.jpg" width="426" height="240" alt="Air fryer machine in the kitchen with baked potatoes.">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-kitchen-tools parent-kitchen"><a href="/category/kitchen-tools/">Kitchen Tools</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Reagan Payne</span> <span class="timestamp">20 hours ago</span>
+            </div>
+            <h3><a href="/2295299/owners-flag-issues-with-air-fryers/">Owners Flag 5 Issues With Air Fryers</a></h3>
+            <p class="article-excerpt">Air fryers are practically the pinnacle of kitchen convenience, but these superstar appliances still have downsides. Here are some to look out for!</p>
+            <span class="read-more"><a href="/2295299/owners-flag-issues-with-air-fryers/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2299663/chick-fil-a-most-underrated-items/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/the-10-most-underrated-chick-fil-a-items-you-need-to-try/intro-1793202546.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/the-10-most-underrated-chick-fil-a-items-you-need-to-try/intro-1793202546.jpg" width="426" height="240" alt="Chick-fil-A food sits on a wooden table.">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-chick-fil-a parent-restaurants"><a href="/category/chick-fil-a/">Chick-fil-A</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Isabella Kostolni</span> <span class="timestamp">21 hours ago</span>
+            </div>
+            <h3><a href="/2299663/chick-fil-a-most-underrated-items/">The 10 Most Underrated Chick-Fil-A Items You Need To Try</a></h3>
+            <p class="article-excerpt">When it comes to chicken, there are a number of chains offering delicious sandwiches, tenders, and more. Few are as popular or beloved as Chick-fil-A.</p>
+            <span class="read-more"><a href="/2299663/chick-fil-a-most-underrated-items/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2296868/kirkland-signature-item-deserves-more-attention-praline-pecans/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/this-kirkland-signature-item-in-costcos-snack-aisle-deserves-more-attention/intro-1793037521.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/this-kirkland-signature-item-in-costcos-snack-aisle-deserves-more-attention/intro-1793037521.jpg" width="426" height="240" alt="Costco snack aisle">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-costco parent-grocery"><a href="/category/costco/">Costco</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Haley McNamara</span> <span class="timestamp">21 hours ago</span>
+            </div>
+            <h3><a href="/2296868/kirkland-signature-item-deserves-more-attention-praline-pecans/">This Kirkland Signature Item In Costco's Snack Aisle Deserves More Attention</a></h3>
+            <p class="article-excerpt">This Kirkland Signature-brand snack from Costco flies under the radar for many shoppers, but it's time for the underrated snack to come into its own.</p>
+            <span class="read-more"><a href="/2296868/kirkland-signature-item-deserves-more-attention-praline-pecans/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297493/mcdonalds-burgers-biggest-changes/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/4-of-the-biggest-changes-mcdonalds-has-ever-made-to-its-burgers/intro-1793042216.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/4-of-the-biggest-changes-mcdonalds-has-ever-made-to-its-burgers/intro-1793042216.jpg" width="426" height="240" alt="McDonald's Big Mac burgers in boxes.">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mcdonalds-fast-food parent-restaurants"><a href="/category/mcdonalds-fast-food/">McDonald's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Andrea Carlo</span> <span class="timestamp">22 hours ago</span>
+            </div>
+            <h3><a href="/2297493/mcdonalds-burgers-biggest-changes/">4 Of The Biggest Changes McDonald's Has Ever Made To Its Burgers</a></h3>
+            <p class="article-excerpt">From quietly upgrading key ingredients to changing the beef patties themselves, McDonald's has made some major updates to its burgers over the years.</p>
+            <span class="read-more"><a href="/2297493/mcdonalds-burgers-biggest-changes/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2299811/mcdonalds-breakfast-sandwich-upgrades-to-know/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/9-mcdonalds-breakfast-sandwich-upgrades-to-know-before-your-next-visit/intro-1793204527.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/9-mcdonalds-breakfast-sandwich-upgrades-to-know-before-your-next-visit/intro-1793204527.jpg" width="426" height="240" alt="exterior of McDonald's">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mcdonalds-fast-food parent-restaurants"><a href="/category/mcdonalds-fast-food/">McDonald's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Michelle Washmuth</span> <span class="timestamp">23 hours ago</span>
+            </div>
+            <h3><a href="/2299811/mcdonalds-breakfast-sandwich-upgrades-to-know/">9 McDonald's Breakfast Sandwich Upgrades To Know Before Your Next Visit</a></h3>
+            <p class="article-excerpt">From swapping out proteins to adding fun condiments or creating a new sandwich, there are many creative ways to branch out on your McDonald's breakfast.</p>
+            <span class="read-more"><a href="/2299811/mcdonalds-breakfast-sandwich-upgrades-to-know/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297476/lindsay-lohan-unique-mac-and-cheese-addition-corn/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/lindsay-lohans-favorite-mac-and-cheese-recipe-includes-an-unusual-addition/intro-1793041763.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/lindsay-lohans-favorite-mac-and-cheese-recipe-includes-an-unusual-addition/intro-1793041763.jpg" width="426" height="240" alt="Lindsay Lohan in a lavender dress with a rich purple background">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-celebs parent-entertainment"><a href="/category/celebs/">Celebs</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Brittany Skyler</span> <span class="timestamp">23 hours ago</span>
+            </div>
+            <h3><a href="/2297476/lindsay-lohan-unique-mac-and-cheese-addition-corn/">Lindsay Lohan's Favorite Mac And Cheese Recipe Includes An Unusual Addition</a></h3>
+            <p class="article-excerpt">There are plenty of easy ways to upgrade a simple dish of mac and cheese. For starters, try out this unexpected but delicious ingredient Lindsay Lohan adds.</p>
+            <span class="read-more"><a href="/2297476/lindsay-lohan-unique-mac-and-cheese-addition-corn/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297472/underrated-benefit-of-having-a-sams-club-membership/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/one-underrated-benefit-of-having-a-sams-club-membership/intro-1793041437.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/one-underrated-benefit-of-having-a-sams-club-membership/intro-1793041437.jpg" width="426" height="240" alt="Sam's Club card in a wallet">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-sams-club parent-grocery"><a href="/category/sams-club/">Sam’s Club</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Crysta Coburn</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2297472/underrated-benefit-of-having-a-sams-club-membership/">One Underrated Benefit Of Having A Sam's Club Membership</a></h3>
+            <p class="article-excerpt">A membership with Sam's Club offers a variety of discounts, and one of the best is a small savings that really adds up over the course of a year.</p>
+            <span class="read-more"><a href="/2297472/underrated-benefit-of-having-a-sams-club-membership/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2299689/best-whiskey-cocktails-for-the-holidays/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/11-best-whiskey-cocktails-for-the-holidays/intro-1793203264.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/11-best-whiskey-cocktails-for-the-holidays/intro-1793203264.jpg" width="426" height="240" alt="Cocktail surrounded by festive spices">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mixology-and-techniques parent-kitchen"><a href="/category/mixology-and-techniques/">Mixology And Techniques</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Lauren Corona</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2299689/best-whiskey-cocktails-for-the-holidays/">11 Best Whiskey Cocktails For The Holidays</a></h3>
+            <p class="article-excerpt">From warming classics to tipples that put a festive spin on an old classic, these whiskey cocktails can only make your holidays even more merry.</p>
+            <span class="read-more"><a href="/2299689/best-whiskey-cocktails-for-the-holidays/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297186/request-extra-patty-better-mcdonalds-burger/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/how-to-get-a-more-filling-mcdonalds-burger-for-cheap/intro-1793034832.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/how-to-get-a-more-filling-mcdonalds-burger-for-cheap/intro-1793034832.jpg" width="426" height="240" alt="A McDonald's burger in a box">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-mcdonalds-fast-food parent-restaurants"><a href="/category/mcdonalds-fast-food/">McDonald's</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Kirsty McCormack</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2297186/request-extra-patty-better-mcdonalds-burger/">How To Get A More Filling McDonald's Burger For Cheap</a></h3>
+            <p class="article-excerpt">With the rising cost of beef and fast food prices, getting a little extra for your money is always a plus. Here's how you may be able to get more at McDonald's.</p>
+            <span class="read-more"><a href="/2297186/request-extra-patty-better-mcdonalds-burger/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297458/induction-vs-gas-stoves-water-boiling-time-difference/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/the-difference-in-how-fast-induction-and-gas-stoves-boil-water/intro-1793545163.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/the-difference-in-how-fast-induction-and-gas-stoves-boil-water/intro-1793545163.jpg" width="426" height="240" alt="Kettle sits on stovetop with gas and induction burners">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-facts"><a href="/category/facts/">Facts</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Crysta Coburn</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2297458/induction-vs-gas-stoves-water-boiling-time-difference/">The Difference In How Fast Induction And Gas Stoves Boil Water</a></h3>
+            <p class="article-excerpt">Gas and induction stoves each have their strengths and weaknesses. One straightforward way to compare them is to see how quickly they can boil a pot of water.</p>
+            <span class="read-more"><a href="/2297458/induction-vs-gas-stoves-water-boiling-time-difference/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2297437/costco-kirkland-parmigiano-reggiano-luxury-bargain/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/is-kirkland-signature-parmigiano-reggiano-actually-a-luxury-bargain/intro-1793040770.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/is-kirkland-signature-parmigiano-reggiano-actually-a-luxury-bargain/intro-1793040770.jpg" width="426" height="240" alt="Person's hand holding wedge of Kirkland Signature Parmigiano Reggiano">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-costco parent-grocery"><a href="/category/costco/">Costco</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Haley McNamara</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2297437/costco-kirkland-parmigiano-reggiano-luxury-bargain/">Is Kirkland Signature Parmigiano Reggiano Actually A Luxury Bargain?</a></h3>
+            <p class="article-excerpt">Parmigiano Reggiano is a well-liked luxury, topping high-end pastas and dishes everywhere. However, is Costco's version authentic and actually worth the price?</p>
+            <span class="read-more"><a href="/2297437/costco-kirkland-parmigiano-reggiano-luxury-bargain/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2299460/pizza-chains-changed-dough-cheese-recipes/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/pizza-chains-that-changed-their-dough-and-cheese-formulas/intro-1793194806.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/pizza-chains-that-changed-their-dough-and-cheese-formulas/intro-1793194806.jpg" width="426" height="240" alt="A chef sprinkles cheese on an uncooked pizza resting on a wooden tray.">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-pizzerias parent-restaurants"><a href="/category/pizzerias/">Pizzerias</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Julia Lauzon</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2299460/pizza-chains-changed-dough-cheese-recipes/">Pizza Chains That Changed Their Dough And Cheese Formulas</a></h3>
+            <p class="article-excerpt">Whether to switch to fresher, better-quality ingredients or to improve on customer feedback, these popular pizza chains revamped recipes for tastier pie.</p>
+            <span class="read-more"><a href="/2299460/pizza-chains-changed-dough-cheese-recipes/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2288858/culvers-fish-sandwich-upgrades-ten-times-the-flavor-pickles/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/ask-for-this-topping-addition-if-you-want-a-culvers-fish-sandwich-with-10x-the-flavor/intro-1792685967.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/ask-for-this-topping-addition-if-you-want-a-culvers-fish-sandwich-with-10x-the-flavor/intro-1792685967.jpg" width="426" height="240" alt="Culver's fish sandwich with a breaded filet in front of it">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-fast-food parent-restaurants"><a href="/category/fast-food/">Fast Food</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Alba Caraceni</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2288858/culvers-fish-sandwich-upgrades-ten-times-the-flavor-pickles/">Ask For This Topping Addition If You Want A Culver's Fish Sandwich With 10x The Flavor</a></h3>
+            <p class="article-excerpt">Give your Culver's fish sandwich a tangy boost by adding one ingredient. It will enhance the flavor tenfold and have you wondering why you didn't do it sooner.</p>
+            <span class="read-more"><a href="/2288858/culvers-fish-sandwich-upgrades-ten-times-the-flavor-pickles/">Read More</a></span>
+        </div>
+    </article>
+</li><li class="article-item">
+    <article class="article-block">
+        <div class="image-holder">
+                        <a href="/2296971/disadvantages-cooking-steak-blackstone-griddles/">
+                <picture>
+                    <source srcset="https://www.mashed.com/img/gallery/5-disadvantages-of-cooking-steak-on-a-blackstone/intro-1793037948.sm.webp" type="image/webp"><img src="https://www.mashed.com/img/gallery/5-disadvantages-of-cooking-steak-on-a-blackstone/intro-1793037948.jpg" width="426" height="240" alt="Peppers, beef, and fries on a flat-top grill, steam rising">
+                </picture>
+            </a>
+        </div>
+        <div class="article-description">
+            <div class="more-article-info">
+                            <span class="category label-cooking parent-kitchen"><a href="/category/cooking/">Cooking</a></span>
+                <span class="author"><span class="by">By&nbsp;</span>Andrea Carlo</span> <span class="timestamp">1 day ago</span>
+            </div>
+            <h3><a href="/2296971/disadvantages-cooking-steak-blackstone-griddles/">5 Disadvantages Of Cooking Steak On A Blackstone</a></h3>
+            <p class="article-excerpt">Blackstone griddles can be a great advantage when cooking outdoors — however, when it comes to steak, there are some things to consider before you toss it on.</p>
+            <span class="read-more"><a href="/2296971/disadvantages-cooking-steak-blackstone-griddles/">Read More</a></span>
+        </div>
+    </article>
+</li></ul>            </section>
+                    </div>
+
+        <div class="loading-more">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255, 0); display: block; shape-rendering: auto;" width="40px" height="40px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+    <g transform="translate(80,50)">
+    <g transform="rotate(0)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="1">
+    <animateTransform attributeName="transform" type="scale" begin="-0.7s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.7s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(71.21320343559643,71.21320343559643)">
+    <g transform="rotate(45)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.875">
+    <animateTransform attributeName="transform" type="scale" begin="-0.6s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.6s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(50,80)">
+    <g transform="rotate(90)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.75">
+    <animateTransform attributeName="transform" type="scale" begin="-0.5s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.5s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(28.786796564403577,71.21320343559643)">
+    <g transform="rotate(135)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.625">
+    <animateTransform attributeName="transform" type="scale" begin="-0.4s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.4s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(20,50.00000000000001)">
+    <g transform="rotate(180)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.5">
+    <animateTransform attributeName="transform" type="scale" begin="-0.3s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.3s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(28.78679656440357,28.786796564403577)">
+    <g transform="rotate(225)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.375">
+    <animateTransform attributeName="transform" type="scale" begin="-0.2s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.2s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(49.99999999999999,20)">
+    <g transform="rotate(270)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.25">
+    <animateTransform attributeName="transform" type="scale" begin="-0.1s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="-0.1s"></animate>
+    </circle>
+    </g>
+    </g><g transform="translate(71.21320343559643,28.78679656440357)">
+    <g transform="rotate(315)">
+    <circle cx="0" cy="0" r="6" fill="#ff9a1b" fill-opacity="0.125">
+    <animateTransform attributeName="transform" type="scale" begin="0s" values="1.5 1.5;1 1" keyTimes="0;1" dur="0.8s" repeatCount="indefinite"></animateTransform>
+    <animate attributeName="fill-opacity" keyTimes="0;1" dur="0.8s" repeatCount="indefinite" values="1;0" begin="0s"></animate>
+    </circle>
+    </g>
+    </g>
+    </svg>
+</div>    </main>
+
+            <footer id="footer">
+            <div class="mobile-ad-placeholder footer-ad" data-ad-height="any" data-ad-width="any" data-ad-pos="footer"></div>
+            <div class="holder">
+                <div id="footer-bottom">
+                    <div id="footer-link-container">
+                        <span><a href="/about/">About</a></span>
+                        <span><a href="/sitemap/">Archive</a></span>
+                        <span> <a href="https://www.static.com/mashed-privacy-policy" target="_blank">Privacy Policy</a></span>
+                    </div>
+                    <div id="footer-detail-container">
+                        <span class="copyright-text">&copy; 2026 <a href="https://www.static.com/" target="_blank">Static Media</a><sup>&reg;</sup></span>
+                        <span class="site-domain-name">Mashed.com</span>
+                        <span class="rights-text">All Rights Reserved</span>
+                        <div class="more-label">More From Static Media</div>
+                        <div class="brand-links"><a href='https://www.engadget.com/' target='_blank'>Engadget</a><span></span><a href='https://www.jalopnik.com/' target='_blank'>Jalopnik</a><span></span><a href='https://www.tvline.com/' target='_blank'>TVLine</a><span></span><a href='https://www.chowhound.com/' target='_blank'>Chowhound</a><span></span><a href='https://www.foodie.com/' target='_blank'>Foodie</a><span></span><a href='https://www.foodrepublic.com/' target='_blank'>Food Republic</a><span></span><a href='https://www.tastingtable.com/' target='_blank'>Tasting Table</a><span></span><a href='https://www.thedailymeal.com/' target='_blank'>The Daily Meal</a><span></span><a href='https://www.thetakeout.com/' target='_blank'>The Takeout</a></div>
+                    </div>
+                    <img src="https://www.mashed.com/img/mashed_icon_color.svg" alt="Mashed" width="57" height="38" />
+                </div>
+            </div>
+        </footer></div>
+</div>
+
+            
+            <script>
+    window.LooperConfig = window.LooperConfig || {};
+    window.dataLayer = window.dataLayer || [];
+    window.LooperConfig.ga4tag = "G-KKXN5GEYWD";
+    window.LooperConfig.ga4data = {"post_id":"Homepage","trello_board":""};
+    window.LooperReady = function(){
+        LooperConfig.params = false;
+        try {
+            LooperConfig.params = (new URL(document.location)).searchParams;
+        } catch( e ) {
+            //do nothing
+        }
+        
+        var validZSource = {"newsletter":"newsletter","flipboard":"flipboard","smartnews":"smartnews","smartnews_sponsored":"smartnews_sponsored","msnsyndicated":"msnsyndicated","newsbreakapp":"newsbreakapp","topbuzz":"topbuzz","zinf_abtest":"zinf_abtest","nexthighlights":"nexthighlights","fb":"fb","fb_ios":"fb_ios","fb_android":"fb_android","gemini":"gemini","facebook_organic":"facebook_organic","gdiscover_sponsored":"gdiscover_sponsored","googlenewsapp":"googlenewsapp","snapchat":"snapchat","dt_app":"dt_app","youtube":"youtube"};
+
+        if (window.location.href.indexOf("zsource") !== -1) {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value.toLowerCase();
+            });
+        }
+
+        if (typeof( LooperConfig['zsource'] ) !== "undefined") {
+            LooperConfig['ga4data']["zsource"] = LooperConfig['zsource'];
+        }
+
+        LooperConfig['ga4data']['view_type'] = this.viewType;
+        LooperConfig['ga4data']['last_id'] = this.lastID;
+        LooperConfig['ga4data']['last_url'] = this.lastURL;
+        LooperConfig['ga4data']['infinite_position'] = 0;
+        
+        let is_config = Object.assign({},LooperConfig.ga4data);
+        is_config['event'] = "looper_page_view_ready";
+        is_config['ga4tag'] = LooperConfig.ga4tag;
+        
+        window.dataLayer.push(is_config);
+    };
+</script>        <script type="text/javascript" src="/wp-content/themes/unified/js/loopin.min.js?v=1791925653"></script>
+        <script>
+        (function(){
+            window.Looper = new LoopIn({
+                selector: "#article-container",
+                featuredFound: null,
+                
+                ready: window.LooperReady || function(){}
+            });
+        })();
+        </script>
+        <script type="text/javascript" async src="https://btloader.com/tag?o=5698917485248512&upapi=true&domain=mashed.com"></script>
+
+<script>!function(){"use strict";var e;e=document,function(){var t,n;function r(){var t=e.createElement("script");t.src="https://cafemedia-com.videoplayerhub.com/galleryplayer.js",e.head.appendChild(t)}function a(){var t=e.cookie.match("(^|[^;]+)\s*__adblocker\s*=\s*([^;]+)");return t&&t.pop()}function c(){clearInterval(n)}return{init:function(){var e;"true"===(t=a())?r():(e=0,n=setInterval((function(){100!==e&&"false" !== t || c(), "true" === t && (r(), c()), t = a(), e++}), 50))}}}().init()}();
+</script>
+        
+        
+            <script>
+    window.LooperConfig = window.LooperConfig || {};
+    window.LooperConfig.clip = {"readmore":{"text":"Read More: "},"followus":{"text":"Follow Us: ","enabled":0},"visitus":{"text":"Visit Us At: ","enabled":0}};
+    
+    (self.PREFERRED_SOURCE = self.PREFERRED_SOURCE || []).push(function(preferredSource) {
+        preferredSource.init({
+        theme: 'light',
+        lang: 'en'
+    });
+const button = document.querySelector('#preferred-source');
+button.addEventListener('click', () => {
+        preferredSource.addPreferredSource();
+    });
+});
+</script>
+</body>
+</html>

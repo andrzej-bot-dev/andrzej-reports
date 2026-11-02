@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Amazon.se Ett oväntat fel har inträffat.</title>
+    <style>html, body {
+        padding: 0;
+        margin: 0
+    }
+
+    img {
+        border: 0
+    }
+
+    #a, #b {
+        background: #232f3e;
+        padding: 11px;
+        height: 35px
+    }
+
+    #c {
+        position: absolute;
+        left: 22px;
+        top: 12px;
+        float:left;
+        z-index: 1;
+        background-image: url(https://images-eu.ssl-images-amazon.com/images/G/46/gno/sprites/nav-sprite-global_bluebeacon-2x_optimized_layout1._CB419918432_.png);
+        background-size: 350px;
+        background-position: -5px -50px;
+        width: 105px;
+        height: 30px;
+    }
+
+    #e {
+        position: relative;
+        max-width: 800px;
+        padding: 0 40px 0 171px
+    }
+
+    #f, #g {
+        height: 35px;
+        border: 0;
+        font-size: 1em
+    }
+
+    #f {
+        width: 100%;
+        margin: 0;
+        padding: 0 10px;
+        border-radius: 4px 0 0 4px
+    }
+
+    #g {
+        cursor: pointer;
+        background: #febd69;
+        font-weight: bold;
+        border-radius: 0 4px 4px 0;
+        -webkit-appearance: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 12px
+    }
+
+    #h {
+        text-align: center;
+        margin: 30px 0
+    }
+
+    #h img {
+        max-width: 90%
+    }
+
+    #d {
+        display: none
+    }
+
+    #d[src] {
+        display: inline
+    }
+    .nav-logo-locale{
+        float: left;
+        margin: 7px 0 0 1px;
+        font-size: 13.5px;
+        color: #fff;
+        line-height: 14px;
+        font-family: "Amazon Ember",Arial,sans-serif;
+        position: absolute;
+        left:125px;
+    }
+    .nav-logo-link{
+        cursor: pointer;
+        height: 50px;
+        width: 100%;
+    }
+
+    @media (max-width: 500px) {
+        #e {
+            padding-left: 0
+        }
+
+        #b {
+            padding: 55px 10px 10px
+        }
+
+        #c {
+            left: 6px
+        }
+        .nav-logo-locale{
+            position: absolute;
+            top: 13px;
+            left: 110px;
+            margin:5px 0 0 0px
+        }
+    }
+
+    </style>
+</head>
+<body>
+<form id="b" accept-charset="utf-8" action="/s" method="GET" role="search">
+    <a href="https://www.amazon.se" class="nav-logo-link" aria-label="Amazon" tabindex="6">
+        <div id="c"></div>
+        <span class="nav-logo-locale">.se</span>
+    </a>
+    <div id="e"><input id="f" name="field-keywords" placeholder="Sök"><input id="g" type="submit" value="Kör"></div>
+</form>
+<div id="h">
+    <div><a href="https://www.amazon.se"><img src="https://images-na.ssl-images-amazon.com/images/G/46/error/title-sv._TTD_.jpg"
+                                              alt="Ett fel inträffade när du försökte visa den här sidan"></a>
+    </div>
+    <a href="https://www.amazon.se"><img id="d" alt="Hundar från Amazon">
+        <script>document.getElementById("d").src = "https://images-na.ssl-images-amazon.com/images/G/46/error/dog-" + (Math.floor(Math.random() * 5) + 1) + "._TTD_.jpg";</script>
+    </a></div>
+</body>
+</html>

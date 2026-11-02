@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Młynek do przypraw/kawy dla Oli — research 2026-11-02</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#251e3e;--ink:#ece8f7;--mut:#a99fc7;--acc:#ff9f43;--acc2:#8b5cf6;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--line:#372f57}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55;font-size:15.5px}
+.wrap{max-width:1280px;margin:0 auto;padding:18px}
+header{padding:26px 0 10px}
+h1{font-size:1.7em;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.badge{display:inline-block;background:var(--acc2);color:#fff;border-radius:20px;padding:2px 12px;font-size:.8em;font-weight:600;margin-bottom:8px}
+.meta{color:var(--mut);font-size:.9em;margin-top:6px}
+nav{position:sticky;top:0;z-index:50;background:rgba(19,16,32,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 0;display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;background:var(--card);padding:4px 12px;border-radius:16px;font-size:.82em;border:1px solid var(--line)}
+nav a:hover{border-color:var(--acc)}
+h2{font-size:1.25em;margin:26px 0 12px;color:var(--acc)}
+h3{font-size:1.02em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em}
+th{background:var(--card2);color:var(--acc);text-align:left;padding:8px;border:1px solid var(--line)}
+td{padding:7px 8px;border:1px solid var(--line);vertical-align:middle}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+a{color:#9db8ff;text-decoration:none}a:hover{text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pcard img{width:100%;height:190px;object-fit:contain;background:#fff;padding:8px;cursor:pointer}
+.pbody{padding:10px 12px 12px;flex:1;display:flex;flex-direction:column}
+.pbody .nm{font-weight:600;font-size:.95em}
+.pbody .pr{color:var(--acc);font-weight:700;font-size:1.05em;margin:4px 0}
+.pbody .rt{color:var(--warn);font-size:.85em}
+.pbody .ds{color:var(--mut);font-size:.85em;margin-top:6px;flex:1}
+.pbody a.btn{display:inline-block;margin-top:8px;background:var(--acc2);color:#fff;text-align:center;padding:6px;border-radius:8px;font-size:.85em;font-weight:600}
+.medal{font-size:1.2em}
+.tldr{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--acc2);border-radius:14px;padding:16px;margin:14px 0}
+.tldr h2{margin-top:0}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.75em;font-weight:700;margin-left:6px}
+.pill.ok{background:rgba(52,211,153,.15);color:var(--ok)}
+.pill.warn{background:rgba(251,191,36,.15);color:var(--warn)}
+.pill.bad{background:rgba(248,113,113,.15);color:var(--bad)}
+.coverage td:nth-child(2){font-weight:700}
+#top{position:fixed;bottom:18px;right:18px;background:var(--acc);color:#131020;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3em;text-decoration:none;font-weight:700;z-index:60;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+footer{margin:40px 0 20px;color:var(--mut);font-size:.85em;border-top:1px solid var(--line);padding-top:14px}
+ul{margin:6px 0 6px 22px}
+@media(max-width:640px){.grid{grid-template-columns:1fr 1fr}.pcard img{height:130px}body{font-size:14.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<span class="badge">🛒 Product research</span>
+<h1>🌀 Młynek do przypraw/kawy dla Oli — Szwecja</h1>
+<div class="meta">2026-11-02 · budżet ~150–800 kr · priorytet: <b>szbka dostawa (Amazon Prime / odbiór lokalny)</b> · kawa drugorzędnie (Magnifica S ma własny młynek) · 16 źródeł · 400+ ofert przejrzanych</div>
+</header>
+<nav>
+<a href="#tldr">TL;DR</a><a href="#amazon">Amazon Prime</a><a href="#lokalne">Lokalne SE</a><a href="#uzywane">Używane</a><a href="#testy">Testy</a><a href="#koszty">Koszty</a><a href="#coverage">Coverage</a>
+</nav>
+
+<div class="tldr" id="tldr">
+<h2>⚡ TL;DR — co kupić</h2>
+<table>
+<tr><th></th><th>Pick</th><th>Cena</th><th>Dlaczego</th><th>Kiedy</th></tr>
+<tr><td class="medal">🥇</td><td><b>Bosch TSM6A013B</b> (blade, 180 W) — <a href="https://www.amazon.se/dp/B07J6JLW11">Amazon.se</a></td><td><b>207 kr</b> Prime<br><span style="color:var(--mut);font-size:.85em">Clas Ohlson: 329 kr</span></td><td>Najlepszy budżetowy blade: <b>4,5★ / 25 100 opinii</b>, „bästa budget" w <a href="https://www.test.se/kaffekvarn/">Test.se</a>. Idealny na przyprawy (konsensus r/spices), kawę też zmieli.</td><td>Najtaniej i najszybciej — jutro w drzwiach</td></tr>
+<tr><td class="medal">🥈</td><td><b>Odbiór dziś bez Prime:</b> <a href="https://www.jula.se/catalog/hem-och-hushall/koksmaskiner/apparater-for-drycker/kaffekvarnar/kaffekvarn-003137/">Jula Menuett 180 W</a> (199 kr, 4,7★/215) lub <a href="https://www.clasohlson.com/se/Kaffekvarn-elektrisk-150-W/p/44-5838">Clas Ohlson 150 W</a> (199 kr, 4,5★/230)</td><td><b>199 kr</b></td><td>Blade klasy Bosch za te same pieniądze, odbiór Rotebro/Infra City — zero czekania na kuriera.</td><td>Gdy dziś/wieczorem ma być w kuchni</td></tr>
+<tr><td class="medal">🥉</td><td><b>Dla kawy (opcja):</b> <a href="https://www.amazon.se/dp/B0CMPXHCNC">KINGrinder P0</a> (ręczny burr, 4,7★/173)</td><td><b>333,50 kr</b> Prime</td><td>Do przypraw blade, do kawy burr — nie łącz (olejki przypraw zapychają żarna). Razem z Boschem ~540 kr, w budżecie.</td><td>Gdy Ola zacznie palić własną kawę</td></tr>
+</table>
+<p style="margin-top:8px">♻️ <b>Używki na dziś</b> (gdyby wolała tańsze): <a href="https://www.blocket.se/annons/27364499">Rubicson NOWY 75 kr</a> (Saltsjö-Boo) · <a href="https://www.facebook.com/marketplace/item/1136504202668626/">Bodum Bistro Burr 200 kr</a> (FB MP, nowy ~600) · <a href="https://www.tradera.com/item/301740/758473122/skeppshult-kryddkvarn-i-gjutjarn">Skeppshult żeliwo, aukcja od 90 kr</a> (nowy 595, kończy się 8.11).</p>
+</div>
+
+<h2 id="amazon">📦 Amazon.se — TOP (wszystkie Prime-eligible)</h2>
+<div class="grid">
+<div class="pcard"><a href="https://www.amazon.se/dp/B07J6JLW11"><img src="img/mlynek-2026-11-02/bosch.jpg" alt="Bosch TSM6A013B" loading="lazy"></a><div class="pbody"><div class="nm">Bosch TSM6A013B — blade 180 W <span class="medal">🥇</span></div><div class="pr">207 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,5 · 25 100 opinii · bestseller kategorii · sprzedawca: Amazon</div><div class="ds">„Bästa budget" wg Test.se. Miska 75 g, stalowy nóż, bezpiecznik pokrywy. Kolory: biały 207 kr, czerwony 219, krem 220.</div><a class="btn" href="https://www.amazon.se/dp/B07J6JLW11">Zobacz na Amazon.se →</a></div></div>
+<div class="pcard"><a href="https://www.amazon.se/dp/B0CMPXHCNC"><img src="img/mlynek-2026-11-02/p0.jpg" alt="Kingrinder P0" loading="lazy"></a><div class="pbody"><div class="nm">KINGrinder P0 — ręczny burr</div><div class="pr">333,50 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,7 · 173 opinie (cena potwierdzona na PDP)</div><div class="ds">Młynek żarnowy do kawy za grosze — równomierne mielenie, legendarna marka manuali. Do przypraw NIE (olejki w żarnach).</div><a class="btn" href="https://www.amazon.se/dp/B0CMPXHCNC">Zobacz na Amazon.se →</a></div></div>
+<div class="pcard"><a href="https://www.amazon.se/dp/B0BP1J3R9B"><img src="img/mlynek-2026-11-02/wancle.jpg" alt="Wancle" loading="lazy"></a><div class="pbody"><div class="nm">Wancle elektrisk — blade „bönor &amp; kryddor"</div><div class="pr">202 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,5 · 1 853 opinie</div><div class="ds">Cichy, wprost opisany do kawy I przypraw. Drugi najtańszy sensowny blade po gołym no-name.</div><a class="btn" href="https://www.amazon.se/dp/B0BP1J3R9B">Zobacz na Amazon.se →</a></div></div>
+<div class="pcard"><a href="https://www.amazon.se/dp/B07N95RRJ7"><img src="img/mlynek-2026-11-02/severin.jpg" alt="Severin KM 3879" loading="lazy"></a><div class="pbody"><div class="nm">Severin KM 3879 — blade</div><div class="pr">271 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,3 · 333 opinie</div><div class="ds">Niemiecka klasa, metalowa obudowa, mniej plastiku niż no-name.</div><a class="btn" href="https://www.amazon.se/dp/B07N95RRJ7">Zobacz na Amazon.se →</a></div></div>
+<div class="pcard"><a href="https://www.amazon.se/dp/B01MYWNJWO"><img src="img/mlynek-2026-11-02/caso.jpg" alt="CASO Smak" loading="lazy"></a><div class="pbody"><div class="nm">CASO Coffee &amp; Kitchen Smak</div><div class="pr">405 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,3 · 875 opinii</div><div class="ds">W pełni stalowa miska — łatwe czyszczenie po przyprawach, łączy kawę i przyprawy.</div><a class="btn" href="https://www.amazon.se/dp/B01MYWNJWO">Zobacz na Amazon.se →</a></div></div>
+<div class="pcard"><a href="https://www.amazon.se/dp/B0GHY3GH2K"><img src="img/mlynek-2026-11-02/k2.jpg" alt="Kingrinder K2" loading="lazy"></a><div class="pbody"><div class="nm">KINGrinder K2 — ręczny burr (wyższy)</div><div class="pr">793,50 kr <span class="pill ok">PRIME</span></div><div class="rt">★ 4,8 · 373 opinie</div><div class="ds">Górna półka manuali w budżecie — espresso-grade. Tylko jeśli kawa ma priorytet.</div><a class="btn" href="https://www.amazon.se/dp/B0GHY3GH2K">Zobacz na Amazon.se →</a></div></div>
+</div>
+<h3>Pozostałe sensowne na Amazonie (≤800 kr, Prime):</h3>
+<table>
+<tr><th>Produkt</th><th>Cena</th><th>Ocena</th><th>Uwagi</th></tr>
+<tr><td><a href="https://www.amazon.se/dp/B015NDLLJ2">Aigostar Breath One-Touch</a></td><td>250 kr</td><td>★ 4,3 (6 001)</td><td>Klasyk budżetowy blade</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B07J4VP572">Black+Decker BXCG150E</a></td><td>252 kr</td><td>★ 4,6 (4 032)</td><td>150 W, dobra do twardych przypraw</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B00004SPEU">Krups 1500813248</a></td><td>640 kr</td><td>★ 4,4 (68 129!)</td><td>Legenda blade, dekady na rynku</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0H2HZRCRF">MERTTURM USB burr</a></td><td>298 kr</td><td>★ 4,4 (45)</td><td>Keramiczny konus — tani burr, mało opinii</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0CK27GXKR">Retoo elektrisk</a></td><td>167 kr</td><td>★ 4,2 (322)</td><td>Najtańszy sensowny blade Prime</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B07M5BMJV1">SILBERTHAL manuell burr</a></td><td>678 kr</td><td>★ 4,5 (2 697)</td><td>Manual do kawy, stal</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B0CJNHT3WY">Bialetti manuell</a></td><td>469 kr</td><td>★ 4,1 (237)</td><td>Znana marka, młynek do kawy</td></tr>
+<tr><td><a href="https://www.amazon.se/dp/B07NHN8XGF">CASO Barista Crema</a></td><td>497 kr</td><td>★ 4,0 (472)</td><td>Elektryczny burr „testvinnare" — jedyny burr-elektryk w budżecie</td></tr>
+</table>
+
+<h2 id="lokalne">🏬 Lokalne sklepy SE (odbiór dziś/jutro)</h2>
+<div class="grid">
+<div class="pcard"><a href="https://www.jula.se/catalog/hem-och-hushall/koksmaskiner/apparater-for-drycker/kaffekvarnar/kaffekvarn-003137/"><img src="img/mlynek-2026-11-02/jula.jpg" alt="Jula Menuett" loading="lazy"></a><div class="pbody"><div class="nm">Jula Menuett Kaffekvarn 180 W</div><div class="pr">199 kr <span class="pill ok">InStock</span></div><div class="rt">★ 4,7 · 215 opinii</div><div class="ds">Blade. Sklepy: Rotebro/Sollentuna, Barkarby. Jula ma też 5 kryddkvarn (79,90–349 kr, 1× tylko InStore).</div><a class="btn" href="https://www.jula.se/catalog/hem-och-hushall/koksmaskiner/apparater-for-drycker/kaffekvarnar/kaffekvarn-003137/">Zobacz w Jula →</a></div></div>
+<div class="pcard"><a href="https://www.kjell.com/se/produkter/hem-fritid/kok-matsal/kaffebryggare-tillbehor/rubicson-kaffe-och-kryddkvarn-p47025"><img src="img/mlynek-2026-11-02/kjell-rubicson.jpg" alt="Kjell Rubicson" loading="lazy"></a><div class="pbody"><div class="nm">Kjell Rubicson kaffe- och kryddkvarn</div><div class="pr">199,90 kr <span class="pill ok">online</span></div><div class="rt">blade 150 W · 55 g</div><div class="ds">Wprost „kaffe och kryddkvarn" — jeden sprzęt do obu celów, stalowy nóż.</div><a class="btn" href="https://www.kjell.com/se/produkter/hem-fritid/kok-matsal/kaffebryggare-tillbehor/rubicson-kaffe-och-kryddkvarn-p47025">Zobacz w Kjell →</a></div></div>
+<div class="pcard"><a href="https://www.ikea.com/se/sv/p/intressant-kryddkvarn-akacia-30590525/"><img src="img/mlynek-2026-11-02/ikea-intressant.jpg" alt="IKEA INTRESSANT" loading="lazy"></a><div class="pbody"><div class="nm">IKEA INTRESSANT kryddkvarn (akacja)</div><div class="pr">149 kr</div><div class="rt">ręczny, ceramiczne żarno</div><div class="ds">IKEA NIE MA młynków do kawy (0 wyników w API). Do przypraw: INTRESSANT 149, SPJUTLILJA 129 (2-pk), HALVTOM 99, CITRONHAJ 59.</div><a class="btn" href="https://www.ikea.com/se/sv/search/?q=kryddkvarn">IKEA kryddkvarn →</a></div></div>
+<div class="pcard"><a href="https://www.clasohlson.com/se/Kaffekvarn-elektrisk-150-W/p/44-5838"><img src="https://www.clasohlson.com/medias/sys_master/h3d/h4f/68910678573086.png" alt="Clas Ohlson kaffekvarn" loading="lazy" onerror="this.style.display='none'"></a><div class="pbody"><div class="nm">Clas Ohlson Kaffekvarn elektrisk 150 W</div><div class="pr">199 kr <span class="pill ok">InStock</span></div><div class="rt">★ 4,5 · 230 opinii</div><div class="ds">Blade, miska 55 g. Butik m.in. Infra City. (Miniatura z CDN CO może się nie załadować — hotlink-protection; zdjęcie na stronie sklepu.)</div><a class="btn" href="https://www.clasohlson.com/se/Kaffekvarn-elektrisk-150-W/p/44-5838">Zobacz w Clas Ohlson →</a></div></div>
+</div>
+<h3>Pozostałe lokalne (wybór):</h3>
+<table>
+<tr><th>Sklep</th><th>Co mają</th><th>Cena</th><th>Link</th></tr>
+<tr><td>Clas Ohlson</td><td><b>Bosch TSM6A013B</b> (ten sam co 🥇, ale drożej!) · CO manuell burr · Wilfa Zense</td><td>329 / 479 / 1 399</td><td><a href="https://www.clasohlson.com/se/search?q=kaffekvarn">szukaj</a></td></tr>
+<tr><td>Elgiganten (33 szt. ≤800 kr)</td><td>Melitta Amigo 449 · Russell Hobbs 509 · Wilfa Daily 749 · Adler 180–</td><td>180–800</td><td><a href="https://www.elgiganten.se/search?query=kaffekvarn">szukaj</a></td></tr>
+<tr><td>Cervera (51 młynków)</td><td>EMERIO 259 · Cuisinart DCG20 399 · RIG-TIG 399–599 · Bodum C-Mill 509 · FinaMill 799</td><td>259–799</td><td><a href="https://www.cervera.se/sok?q=kaffekvarn">szukaj</a></td></tr>
+<tr><td>Teknikmagasinet</td><td>2× elektryczne sol/pastorkvarn (LED, USB)</td><td>249 / 349</td><td><a href="https://www.teknikmagasinet.se/sv-se/search?q=kryddkvarn">szukaj</a></td></tr>
+<tr><td>Granit</td><td>tylko kryddkvarn ADD:WISE (4 warianty)</td><td>129–159</td><td><a href="https://www.granit.com/se/catalogsearch/result/?q=kryddkvarn">szukaj</a></td></tr>
+<tr><td>IKEA</td><td>0 młynków do kawy (potwierdzone API); 4 kryddkvarn 59–149</td><td>59–149</td><td><a href="https://www.ikea.com/se/sv/search/?q=kaffekvarn">szukaj</a></td></tr>
+<tr><td>Rusta / Åhléns</td><td>0 / 0 — brak asortymentu</td><td>—</td><td>—</td></tr>
+</table>
+
+<h2 id="uzywane">♻️ Rynek używany (Blocket / FB Marketplace / Tradera)</h2>
+<div class="grid">
+<div class="pcard"><a href="https://www.blocket.se/annons/27364499"><img src="img/mlynek-2026-11-02/rubicson-used.jpg" alt="Rubicson Blocket" loading="lazy"></a><div class="pbody"><div class="nm">Rubicson elektryczny — NOWY <span class="pill warn">używane</span></div><div class="pr">75 kr</div><div class="rt">Saltsjö-Boo · nieużywany</div><div class="ds">Nowy ~200–300 kr. Najtańsza sprawna opcja blisko Sztokholmu.</div><a class="btn" href="https://www.blocket.se/annons/27364499">Blocket →</a></div></div>
+<div class="pcard"><a href="https://www.tradera.com/item/301740/758473122/skeppshult-kryddkvarn-i-gjutjarn"><img src="img/mlynek-2026-11-02/skeppshult.jpg" alt="Skeppshult" loading="lazy"></a><div class="pbody"><div class="nm">Skeppshult kryddkvarn — żeliwo <span class="pill warn">aukcja</span></div><div class="pr">od 90 kr (1 bid)</div><div class="rt">NOWY w kartonie · nowa cena 595 kr · kończy się 8.11</div><div class="ds">Szwedzki klasyk design (G. Gotemark), ręczny, regulacja. Piękny prezent — jeśli Ola lubi żeliwo i design.</div><a class="btn" href="https://www.tradera.com/item/301740/758473122/skeppshult-kryddkvarn-i-gjutjarn">Tradera →</a></div></div>
+<div class="pcard"><a href="https://www.blocket.se/annons/27436506"><img src="img/mlynek-2026-11-02/wilfa-wscg2.jpg" alt="Wilfa WSCG-2" loading="lazy"></a><div class="pbody"><div class="nm">Wilfa Svart Nymalt WSCG-2 (burr) <span class="pill warn">używane</span></div><div class="pr">299 kr</div><div class="rt">NOWY stan · Stockholm</div><div class="ds">Dobry elektryczny burr do kawy, nowy ~600–800 kr. Tylko do kawy — do przypraw osobno blade.</div><a class="btn" href="https://www.blocket.se/annons/27436506">Blocket →</a></div></div>
+<div class="pcard"><a href="https://www.tradera.com/item/301930/759144127/silvercrest-elektrisk-kaffekvarn-150w-helt-ny-oanvand-"><img src="img/mlynek-2026-11-02/silvercrest.jpg" alt="SilverCrest" loading="lazy"></a><div class="pbody"><div class="nm">SilverCrest 150 W — NOWY <span class="pill warn">kup teraz</span></div><div class="pr">250 kr</div><div class="rt">nieużywany w kartonie · do 16.11</div><div class="ds">Lidl-klasyka, stalowy nóż, 50 g.</div><a class="btn" href="https://www.tradera.com/item/301930/759144127/silvercrest-elektrisk-kaffekvarn-150w-helt-ny-oanvand-">Tradera →</a></div></div>
+</div>
+<p style="color:var(--mut);font-size:.9em">Więcej używek (bez zdjęć w destylacie): <a href="https://www.facebook.com/marketplace/item/1136504202668626/">Bodum Bistro Burr 200 kr</a> (Norrtuna) · <a href="https://www.facebook.com/marketplace/item/945605785269623/">Baratza Encore + 2×Hario 800 kr</a> (Vasastan, nowy ~2 000 — dla kawoszy) · <a href="https://www.facebook.com/marketplace/item/1049471354361645/">Preethi/Butterfly masala 100 kr</a> (Solna — indyjski młynek stricte do przypraw) · <a href="https://www.tradera.com/item/301930/756023677/rubicsons-elektriska-kryddkvarnar">2× Rubicson elektryczne 110 kr</a> (Tradera).</p>
+
+<h2 id="testy">🧠 Co mówią testy i doświadczenia (13 źródeł, EN+SV)</h2>
+<div class="card">
+<ul>
+<li><b>Do przypraw = tani blade, nie burr.</b> Konsensus <a href="https://www.reddit.com/r/spices/">r/spices</a> (~80 komentarzy): „inexpensive blade coffee grinders are ideal for this". Burr zapycha się olejkami i jest trudniejszy w czyszczeniu. <span class="pill ok">główne użycie</span></li>
+<li><b>Bosch TSM6A013B = „bästa budget"</b> w <a href="https://www.test.se/kaffekvarn/">Test.se</a> (szwedzki test). „Bäst i test" ogólnie: <b>Melitta Molino</b> (burr, 17 stopni) — ale 899 kr, poza budżetem.</li>
+<li><b>Strategia dwóch młynków</b> — osobno przyprawy (blade) i kawa (burr): standard w r/spices (kumin w kawie = nie). U was kawę mieli Magnifica S → <b>wystarczy sam blade na przyprawy</b>, burr dopiero jak Ola zacznie parzyć własną.</li>
+<li><b>Manualne burr do kawy:</b> KINGrinder P0/K2 i Timemore C2 to najczęściej polecane budżetówki (<a href="https://coffeechronicler.com/timemore-c2-review/">Coffee Chronicler</a>, r/espresso). Do przypraw wolne — Blade wygrywa.</li>
+<li><b>Eksploatacja:</b> mieli krótkimi pulsami (blade grzeje ziarno — <a href="https://en.wikipedia.org/wiki/Burr_mill">Wikipedia</a>); do twardych przypraw szczypta soli; czyszczenie po kuminie: „wypalić" ryżem/solą; wyjmowana miska = łatwe mycie (CASO Smak ma pełną stalową).</li>
+<li><b>Unikaj:</b> najtańszych no-name (zapach plastiku), burra do oleistych przypraw (sumak, świeżo prażone — klei się).</li>
+</ul>
+</div>
+
+<h2 id="koszty">💰 Koszty ukryte / logistyka</h2>
+<div class="card"><ul>
+<li><b>Amazon Prime:</b> 207 kr = cena końcowa przy Prime (Bosch sprzedawany przez Amazon). Bez Prime frakt od ~39 kr.</li>
+<li><b>Jula / Clas Ohlson:</b> odbiór w sklepie 0 kr (Jula InStock online ≠ gwarancja półki — sprawdzić lagersaldo per butik przy rezerwacji). Clas Ohlson Infra City = 15 min od Väsby.</li>
+<li><b>Używki:</b> Blocket/FB = płatność Swish na miejscu (Rubicson Saltsjö-Boo ~20 min autem); Tradera = frakt ~49–79 kr przy wysyłce.</li>
+<li><b>Stainless steel misa</b> (CASO 405) = mniej wchłania zapachów niż plastikowa — jeśli przyprawy będą częste, warta dopłaty.</li>
+</ul></div>
+
+<h2 id="coverage">🗺️ Coverage — 16 źródeł</h2>
+<table class="coverage">
+<tr><th>Źródło</th><th>Status</th><th>Metoda / rungi</th><th>Wynik</th></tr>
+<tr><td>Amazon.se</td><td style="color:var(--ok)">✅ COVERED</td><td>curl SSR ×4 query + agent PDP ×20 (lightpanda: „oväntat fel" → eskalacja curl)</td><td>230 raw → 99 ≤800 kr → 59 Prime</td></tr>
+<tr><td>Clas Ohlson</td><td style="color:var(--ok)">✅ COVERED</td><td>hidden API (Googlebot-UA) + PDP curl + lightpanda og:image (3 rungi; CDN blokuje miniatury)</td><td>7 kaffekvarn + 5 kryddkvarn</td></tr>
+<tr><td>Jula</td><td style="color:var(--ok)">✅ COVERED</td><td>Lightpanda CDP + JSON-LD PDP</td><td>1 kaffekvarn + 5 kryddkvarn</td></tr>
+<tr><td>Rusta</td><td style="color:var(--ok)">✅ COVERED</td><td>SSR (window.CURRENT_PAGE)</td><td>0 / 0 (dowód URL w destylacie)</td></tr>
+<tr><td>IKEA</td><td style="color:var(--ok)">✅ COVERED</td><td>API search</td><td>0 kaffekvarn, 4 kryddkvarn</td></tr>
+<tr><td>Elgiganten</td><td style="color:var(--ok)">✅ COVERED</td><td>API + stealth Chromium (og:image ✗ — Vercel checkpoint)</td><td>33 młynki ≤800 kr</td></tr>
+<tr><td>Åhléns</td><td style="color:var(--ok)">✅ COVERED</td><td>SSR search</td><td>0 / 0</td></tr>
+<tr><td>Cervera</td><td style="color:var(--ok)">✅ COVERED</td><td>Apptus eSales v3 API (reverse-eng.)</td><td>51 kaffekvarn + 67 kryddkvarn</td></tr>
+<tr><td>Kjell &amp; Company</td><td style="color:var(--ok)">✅ COVERED</td><td>ld+json PDP</td><td>Rubicson kaffe+krydd 199,90</td></tr>
+<tr><td>Granit</td><td style="color:var(--ok)">✅ COVERED</td><td>Magento SSR</td><td>0 kaffekvarn; 4 kryddkvarn</td></tr>
+<tr><td>Teknikmagasinet</td><td style="color:var(--ok)">✅ COVERED</td><td>sitemap + ld+json</td><td>0 kaffekvarn; 2 kryddkvarn</td></tr>
+<tr><td>Kitch'n (kitchn.se)</td><td style="color:var(--bad)">❌ FAILED</td><td>curl + DNS — domena NXDOMAIN (nie istnieje w SE)</td><td>—</td></tr>
+<tr><td>Blocket</td><td style="color:var(--ok)">✅ COVERED</td><td>własny skrypt SSR (blocket_search.py)</td><td>~35 trafień + detale</td></tr>
+<tr><td>FB Marketplace</td><td style="color:var(--ok)">✅ COVERED</td><td>GraphQL API (fb_mp_search.mjs)</td><td>49 trafień („kryddkvarn" = 0 wyników)</td></tr>
+<tr><td>Tradera</td><td style="color:var(--ok)">✅ COVERED</td><td>RSC SSR (tradera_search.py)</td><td>249 wyników, 4 frazy + detale</td></tr>
+<tr><td>Testy/wiedza</td><td style="color:var(--ok)">✅ COVERED</td><td>13 źródeł: Test.se, Råd &amp; Rön, Testfakta, Reddit (arctic-shift), Wikipedia, Coffee Chronicler, TechGearLab…</td><td>8 wniosków zakupowych</td></tr>
+</table>
+
+<footer>
+<b>Metodologia:</b> 7 równoległych agentów scraperów + główna synteza; 2 fale (broad sweep → PDP deep-dive z weryfikacją cen 2026-11-02 19:00–19:15). Wszystkie ceny z URL-ami; Prime oznaczony facetem <code>rh=p_n_free_shipping_eligible</code> i potwierdzony na PDP. Lightpanda padł na Amazonie tego dnia („Ett oväntat fel") — dane z curl SSR (pełny HTML, 62–59 wyników/query). Miniatury lokalne ≤640 px; Clas Ohlson CDN hotlink-protected (rangi: curl → hidden API → lightpanda — miniatura z CDN, awaryjnie link).
+<br>Pełne destylaty: <code>memory/research/mlynek-2026-11-02/raw/</code> (9 plików). Raport: Andrzej 🤖 dla Dawida — 2026-11-02.
+</footer>
+</div>
+<a href="#" id="top">↑</a>
+</body>
+</html>

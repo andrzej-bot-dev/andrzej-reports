@@ -1,0 +1,2446 @@
+<!DOCTYPE html><html lang="en"> <head><script>window.__edge={automated:false,country:"SE"}</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/x-icon" href="https://www.leaf.tv/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="https://www.leaf.tv/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="https://www.leaf.tv/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="https://www.leaf.tv/favicon-96x96.png"><link rel="icon" type="image/png" sizes="192x192" href="https://www.leaf.tv/favicon-192x192.png"><link rel="preconnect" href="https://capi.connatix.com" crossorigin=""><link rel="preconnect" href="https://cd.connatix.com" crossorigin=""><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="preconnect" href="https://cmp.inmobi.com"><link rel="preload" as="image" fetchpriority="high" href="https://www.leaf.tv/astrostatic/f062e407/_image/?href=%2F_astro%2Fleaftv-nav._E359bVF.png&w=113&h=108&f=webp"><link rel="preload" href="https://cmp.inmobi.com/choice/vPn77x7pBG57Y/leaf.tv/choice.js?tag_version=V3" as="script" data-no-early-hint=""><script async type="text/javascript" src="https://cmp.inmobi.com/choice/vPn77x7pBG57Y/leaf.tv/choice.js?tag_version=V3"></script><script>(function(){const url = "https://cmp.inmobi.com/choice/vPn77x7pBG57Y/leaf.tv/choice.js?tag_version=V3";
+const iabVendorsUrl = "https://cmp.inmobi.com/GVL-v3/vendor-list.json";
+const googleAtpUrl = "https://cmp.inmobi.com/tcfv2/google-atp-list.json";
+
+(function() {
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        if(args[0] === 'init' && typeof args[3] === 'object') {
+          args[3] = Object.assign(args[3], { tag_version: 'V3' });
+        }
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            if (event && event.source && event.source.postMessage) {
+              event.source.postMessage(returnMsg, '*');
+            }
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  makeStub();
+
+  function makeGppStub() {
+    const CMP_ID = 10;
+    const SUPPORTED_APIS = [
+      '2:tcfeuv2',
+      '6:uspv1',
+      '7:usnatv1',
+      '8:usca',
+      '9:usvav1',
+      '10:uscov1',
+      '11:usutv1',
+      '12:usctv1'
+    ];
+
+    window.__gpp_addFrame = function (n) {
+      if (!window.frames[n]) {
+        if (document.body) {
+          var i = document.createElement("iframe");
+          i.style.cssText = "display:none";
+          i.name = n;
+          document.body.appendChild(i);
+        } else {
+          window.setTimeout(window.__gpp_addFrame, 10, n);
+        }
+      }
+    };
+    window.__gpp_stub = function () {
+      var b = arguments;
+      __gpp.queue = __gpp.queue || [];
+      __gpp.events = __gpp.events || [];
+
+      if (!b.length || (b.length == 1 && b[0] == "queue")) {
+        return __gpp.queue;
+      }
+
+      if (b.length == 1 && b[0] == "events") {
+        return __gpp.events;
+      }
+
+      var cmd = b[0];
+      var clb = b.length > 1 ? b[1] : null;
+      var par = b.length > 2 ? b[2] : null;
+      if (cmd === "ping") {
+        clb(
+          {
+            gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+            cmpStatus: "stub", // possible values: stub, loading, loaded, error
+            cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+            signalStatus: "not ready", // possible values: not ready, ready
+            supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+            cmpId: CMP_ID, // IAB assigned CMP ID, may be 0 during stub/loading
+            sectionList: [],
+            applicableSections: [-1],
+            gppString: "",
+            parsedSections: {},
+          },
+          true
+        );
+      } else if (cmd === "addEventListener") {
+        if (!("lastId" in __gpp)) {
+          __gpp.lastId = 0;
+        }
+        __gpp.lastId++;
+        var lnr = __gpp.lastId;
+        __gpp.events.push({
+          id: lnr,
+          callback: clb,
+          parameter: par,
+        });
+        clb(
+          {
+            eventName: "listenerRegistered",
+            listenerId: lnr, // Registered ID of the listener
+            data: true, // positive signal
+            pingData: {
+              gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+              cmpStatus: "stub", // possible values: stub, loading, loaded, error
+              cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+              signalStatus: "not ready", // possible values: not ready, ready
+              supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+              cmpId: CMP_ID, // list of supported APIs
+              sectionList: [],
+              applicableSections: [-1],
+              gppString: "",
+              parsedSections: {},
+            },
+          },
+          true
+        );
+      } else if (cmd === "removeEventListener") {
+        var success = false;
+        for (var i = 0; i < __gpp.events.length; i++) {
+          if (__gpp.events[i].id == par) {
+            __gpp.events.splice(i, 1);
+            success = true;
+            break;
+          }
+        }
+        clb(
+          {
+            eventName: "listenerRemoved",
+            listenerId: par, // Registered ID of the listener
+            data: success, // status info
+            pingData: {
+              gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+              cmpStatus: "stub", // possible values: stub, loading, loaded, error
+              cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+              signalStatus: "not ready", // possible values: not ready, ready
+              supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+              cmpId: CMP_ID, // CMP ID
+              sectionList: [],
+              applicableSections: [-1],
+              gppString: "",
+              parsedSections: {},
+            },
+          },
+          true
+        );
+      } else if (cmd === "hasSection") {
+        clb(false, true);
+      } else if (cmd === "getSection" || cmd === "getField") {
+        clb(null, true);
+      }
+      //queue all other commands
+      else {
+        __gpp.queue.push([].slice.apply(b));
+      }
+    };
+    window.__gpp_msghandler = function (event) {
+      var msgIsString = typeof event.data === "string";
+      try {
+        var json = msgIsString ? JSON.parse(event.data) : event.data;
+      } catch (e) {
+        var json = null;
+      }
+      if (typeof json === "object" && json !== null && "__gppCall" in json) {
+        var i = json.__gppCall;
+        window.__gpp(
+          i.command,
+          function (retValue, success) {
+            var returnMsg = {
+              __gppReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: i.callId,
+              },
+            };
+            event.source.postMessage(msgIsString ? JSON.stringify(returnMsg) : returnMsg, "*");
+          },
+          "parameter" in i ? i.parameter : null,
+          "version" in i ? i.version : "1.1"
+        );
+      }
+    };
+    if (!("__gpp" in window) || typeof window.__gpp !== "function") {
+      window.__gpp = window.__gpp_stub;
+      window.addEventListener("message", window.__gpp_msghandler, false);
+      window.__gpp_addFrame("__gppLocator");
+    }
+  };
+
+  makeGppStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+
+  /**
+   * DataLayer Push & CCPA Support
+   *
+   * Version 2.0.7
+   */
+  (async function () {
+    //URLs need to be externalized based on environments, during build update.
+    var get_iab_vendors_url = iabVendorsUrl;
+    var get_google_atp_url = googleAtpUrl;
+    var iab_vendors, iab_vendor_ids, iab_vendor_names;
+    var google_vendors, google_vendor_ids, google_vendor_names;
+    var google_vendors_arr = [],
+        google_vendor_ids_arr = [],
+        google_vendor_names_arr = [];
+    var iab_vendors_arr = [],
+        iab_vendor_ids_arr = [],
+        iab_vendor_names_arr = [];
+    var non_iab_vendors, non_iab_vendor_ids, non_iab_vendor_names;
+    var non_iab_vendors_arr = [],
+        non_iab_vendor_ids_arr = [],
+        non_iab_vendor_names_arr = [];
+    var publisher_consents, publisher_legitimate_interests;
+    var purpose_consents, purpose_legitimate_interests;
+
+    function resultToList(a) {
+      var b = ",";
+      if (a && typeof a === 'object') {
+        for (var i in a) {
+          if (a[i]) {
+            b += i + ",";
+          }
+        }
+      }
+      return b;
+    }
+
+    /**
+     * Get a full list of Non-IAB Vendors, specific to the Quantcast Universal Tag ID, using tcfapi
+     */
+    function vendors_getNonIABVendorList() {
+      window.__tcfapi("getConfig", 2, function (retObj) {
+        if (retObj && retObj.hasOwnProperty("nonIabVendorsInfo")) {
+          if (
+            retObj.nonIabVendorsInfo && retObj.nonIabVendorsInfo.hasOwnProperty(
+              "nonIabVendorList",
+            )
+          ) {
+            non_iab_vendors =
+              retObj.nonIabVendorsInfo.nonIabVendorList;
+            // Dont assume array key = vendor id, set key as vendor id with iab_vendors[i].id
+            Object.keys(non_iab_vendors).forEach(function (i) {
+              non_iab_vendors_arr[non_iab_vendors[i].vendorId] =
+                non_iab_vendors[i].name;
+            });
+          }
+        }
+      });
+    }
+
+    /**
+     * Get a full list of IAB Vendors.
+     */
+    function vendors_getIABVendorList() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var res = JSON.parse(this.responseText);
+          if (res && res.hasOwnProperty("vendors")) {
+            iab_vendors = res.vendors;
+
+            // Dont assume array key = vendor id, set key as vendor id with iab_vendors[i].id
+            Object.keys(iab_vendors).forEach(function (i) {
+              iab_vendors_arr[iab_vendors[i].id] =
+                iab_vendors[i].name;
+            });
+          }
+        }
+      };
+      xhttp.open("GET", get_iab_vendors_url, true);
+      xhttp.send();
+    }
+
+    /**
+     * Get a full list of google atp list
+     */
+    function vendors_getGoogleVendorList() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          google_vendors = JSON.parse(this.responseText);
+          google_vendors.forEach(function (vendor) {
+            google_vendors_arr[vendor.provider_id] =
+              vendor.provider_name;
+          });
+        }
+      };
+      xhttp.open("GET", get_google_atp_url, true);
+      xhttp.send();
+    }
+
+    /**
+     * CMP Loaded.
+     *
+     * Push __cmpLoaded event to the data layer.
+     */
+    function dlSend_tcLoaded(tcData) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "__cmpLoaded",
+        __cmpLoaded: true,
+        gdpr: tcData ? tcData.gdprApplies : false,
+      });
+    }
+
+    /**
+     * IAB Vendors.
+     *
+     * Push __cmpIABConsents event to the datalayer, along with iab vendor consent ids.
+     */
+    function dlSend_consentData(tcData) {
+      window.dataLayer = window.dataLayer || [];
+      iab_vendor_names_arr = [];
+      iab_vendor_ids_arr = [];
+      non_iab_vendor_names_arr = [];
+      non_iab_vendor_ids_arr = [];
+      google_vendor_names_arr = [];
+      google_vendor_ids_arr = [];
+
+      if (tcData && tcData.hasOwnProperty("publisher")) {
+        if (tcData.publisher && tcData.publisher.hasOwnProperty("consents")) {
+          publisher_consents = resultToList(
+            tcData.publisher ? tcData.publisher.consents : null,
+          );
+        }
+        publisher_legitimate_interests = resultToList(
+          tcData.publisher ? tcData.publisher.legitimateInterests : null,
+        );
+      }
+
+      if (tcData && tcData.hasOwnProperty("purpose")) {
+        if (tcData.purpose && tcData.purpose.hasOwnProperty("consents")) {
+          purpose_consents = resultToList(tcData.purpose ? tcData.purpose.consents : null);
+        }
+        purpose_legitimate_interests = resultToList(
+          tcData.purpose ? tcData.purpose.legitimateInterests : null,
+        );
+      }
+
+      // Run this in an interval (every 0.1s) just in case we are still waiting
+      // on the return with our iab_vendors list calls, bail after 10 seconds
+      var cnt = 0;
+      var interval = setInterval(function () {
+        cnt += 1;
+
+        if (cnt === 100) {
+          clearInterval(interval);
+        }
+
+        if (iab_vendors) {
+          clearInterval(interval);
+
+          if (tcData ? tcData.gdprApplies : false) {
+            // Create name & id arrays of iab vendors with consent.
+            if (tcData && tcData.hasOwnProperty("vendor") && tcData.vendor && tcData.vendor.consents) {
+              Object.keys(tcData.vendor.consents).forEach(
+                function (vendorId) {
+                  if (
+                    (tcData.vendor && tcData.vendor.consents ? tcData.vendor.consents[vendorId] : false) ||
+                    !tcData.gdprApplies
+                  ) {
+                    iab_vendor_names_arr[vendorId] =
+                      iab_vendors_arr[vendorId];
+                    iab_vendor_ids_arr[vendorId] = vendorId;
+                  }
+                },
+              );
+            }
+          } else {
+            // GDPR does not apply, add all vendor names/ids
+            iab_vendor_names_arr = iab_vendors_arr;
+            iab_vendors_arr.forEach(
+              function (vendorName, vendorId) {
+                iab_vendor_ids_arr[vendorId] = vendorId;
+              },
+            );
+          }
+
+          if (tcData && tcData.addtlConsent && google_vendors_arr) {
+            // Create name and id arrays of google vendors with consent.
+            // addtlConsent: "1~39.43.46.55.61.
+            // 1~ is the version and the rest are the decoded ids
+            var addtlConsentParts = (tcData.addtlConsent || "").split("1~");
+            if (addtlConsentParts.length > 1) {
+              google_vendor_ids_arr = addtlConsentParts[1].split(".");
+            }
+            google_vendor_ids_arr &&
+              google_vendor_ids_arr.forEach(function (google_id) {
+                google_vendor_names_arr.push(
+                  google_vendors_arr[google_id],
+                );
+              });
+          }
+
+          // Non IAB Vendors
+          window.__tcfapi(
+            "getNonIABVendorConsents",
+            2,
+            function (nonIabConsent, nonIabSuccess) {
+              if (nonIabSuccess) {
+                if (nonIabConsent.gdprApplies) {
+                  // Create name & id arrays of non iab vendors with consent.
+                  nonIabConsent.nonIabVendorConsents &&
+                    Object.keys(
+                      nonIabConsent.nonIabVendorConsents,
+                    ).forEach(function (vendorId) {
+                      if (
+                        nonIabConsent
+                          .nonIabVendorConsents[
+                          vendorId
+                        ] ||
+                        !nonIabConsent.gdprApplies
+                      ) {
+                        non_iab_vendor_names_arr[
+                          vendorId
+                        ] =
+                          non_iab_vendors_arr[
+                            vendorId
+                          ];
+                        non_iab_vendor_ids_arr[
+                          vendorId
+                        ] = vendorId;
+                      }
+                    });
+                } else {
+                  // GDPR does not apply, add all non iab vendor names/ids
+                  non_iab_vendor_names_arr =
+                    non_iab_vendors_arr;
+                  non_iab_vendors_arr.forEach(
+                    function (vendorName, vendorId) {
+                      non_iab_vendor_ids_arr[vendorId] =
+                        vendorId;
+                    },
+                  );
+                }
+              }
+
+              // Join our array values, skipping empty items and joing them with a delimiter
+              iab_vendor_names = iab_vendor_names_arr
+                .filter(Boolean)
+                .join("|");
+              iab_vendor_ids = iab_vendor_ids_arr
+                .filter(Boolean)
+                .join(",");
+              google_vendor_names = google_vendor_names_arr
+                .filter(Boolean)
+                .join("|");
+              google_vendor_ids = google_vendor_ids_arr
+                .filter(Boolean)
+                .join("|");
+              non_iab_vendor_names = non_iab_vendor_names_arr
+                .filter(Boolean)
+                .join("|");
+              non_iab_vendor_ids = non_iab_vendor_ids_arr
+                .filter(Boolean)
+                .join(",");
+
+              // Push __cmpIABConsents signals to the data layer.
+              window.dataLayer.push({
+                event: "__cmpConsents",
+                __cmpConsents: {
+                  iabVendorConsentIds: iab_vendor_ids,
+                  iabVendorsWithConsent: iab_vendor_names,
+                  nonIABVendorConsentIds: non_iab_vendor_ids,
+                  nonIABVendorsWithConsent:
+                    non_iab_vendor_names,
+                  googleVendorConsentIds: google_vendor_ids,
+                  googleVendorsWithConsent:
+                    google_vendor_names,
+                  gdpr: tcData ? tcData.gdprApplies : false,
+                  publisherConsents: publisher_consents,
+                  publisherLegitimateInterests:
+                    publisher_legitimate_interests,
+                  purposeConsents: purpose_consents,
+                  purposeLegitimateInterests:
+                    purpose_legitimate_interests,
+                },
+              });
+            },
+          );
+        }
+      }, 100);
+    }
+
+    /**
+     * CCPA footer message.
+     */
+    function ccpa_footerMsg(tcData) {
+      window.__uspapi("uspPing", 1, function (obj, status) {
+        var footer_msg = document.getElementById("choice-footer-msg"); // get the footer container for our CCPA message
+
+        if (status && obj.mode.includes("USP") && footer_msg !== null) {
+          footer_msg.innerHTML =
+            footer_msg.innerHTML +
+            "We use cookies" +
+            " and other data collection technologies" +
+            " to provide the best experience for our customers. You may request" +
+            " that your data not be shared with third parties here: " +
+            '<a href="#" onclick="window.__uspapi(\'displayUspUi\');"' +
+            ">Do Not Sell My Data</a>" +
+            ".";
+
+          // Add the 'ccpa-msg-added' class to the container for post message add styling.
+          footer_msg.classList.add("ccpa-msg-added");
+
+          window.__uspapi("setUspDftData", 1, function (obj, status) {
+            if (!status) {
+              console.log("Error: USP string not updated!");
+            }
+          });
+        }
+      });
+    }
+
+    // Only get the IAB and Non-IAB vendor lists if the the Data layer push functionality
+    // is enabled, otherwise we do not need the vendor lists.
+    window.__tcfapi(
+      "addEventListener",
+      2,
+      function (getConfig, listenerSuccess) {
+        vendors_getIABVendorList(); // Get global IAB vendor list
+        vendors_getGoogleVendorList(); // Get google vendor list
+        vendors_getNonIABVendorList(); // Get UTID specific Non-IAB vendors
+      },
+    );
+
+    // CCPA
+    ccpa_footerMsg();
+
+    // Add our main listener.
+    window.__tcfapi(
+      "addEventListener",
+      2,
+      function (tcData, listenerSuccess) {
+        if (listenerSuccess) {
+          /**
+           * User Visits:
+           * 1st visit/no cookie = 'cmpuishown' called and then 'useractioncomplete' after user make their selection
+           * Repeat visit/has cookie = only 'tcloaded' is called as the UI does not show unless the user clicks to show
+           */
+
+          switch (tcData ? tcData.eventStatus : null) {
+            case "cmpuishown":
+              // Data Layer
+              dlSend_tcLoaded(tcData);
+              break;
+
+            case "tcloaded":
+              // Data Layer
+              if (tcData ? tcData.gdprApplies : false) {
+                dlSend_tcLoaded(tcData);
+                dlSend_consentData(tcData);
+              }
+              break;
+
+            case "useractioncomplete":
+              // Data Layer
+              dlSend_consentData(tcData);
+              break;
+          }
+        }
+      },
+    );
+  })();
+})();
+})();</script>    <link rel="apple-touch-icon" sizes="180x180" href="https://www.leaf.tv/apple-touch-icon.png">     <link rel="manifest" href="https://www.leaf.tv/site.webmanifest">     <link rel="alternate" type="application/atom+xml" title="LEAFtv » Feed" href="https://www.leaf.tv/feed/"><style>
+    @layer properties, theme, base, components, utilities;
+</style><style>/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6rfjptAgt5VM-kVkqdyU8n1ioStkdvp-8_FtFg95o.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6rfjptAgt5VM-kVkqdyU8n1ioStkdmp-8_FtFg95o.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6rfjptAgt5VM-kVkqdyU8n1ioStkdtp-8_FtFg95o.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6rfjptAgt5VM-kVkqdyU8n1ioStkdsp-8_FtFg95o.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6rfjptAgt5VM-kVkqdyU8n1ioStkdip-8_FtFg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSGlZ1jcoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSGlZ1hMoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSGlZ1j8oQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSGlZ1jsoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSGlZ1gMoQPttozw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1hMoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1j8oQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jsoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoQPttozw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1ioa2HdgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1ioa0XdgregdFOFh.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1ioa2ndgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSJlR1jcoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSJlR1hMoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSJlR1j8oQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSJlR1jsoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSJlR1gMoQPttozw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jcoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1hMoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1j8oQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jsoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoQPttozw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1jcoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1hMoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1j8oQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1jsoQPttoz6Pz.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6sfjptAgt5VM-kVkqdyU8n1ioSblJ1gMoQPttozw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n3kwa2HdgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n3kwa0XdgregdFOFh.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n3kwa2ndgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n3kwa23dgregdFOFh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6pfjptAgt5VM-kVkqdyU8n3kwa1XdgregdFA.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3uALwl1FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3uALwlRFgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3uALwl9FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3uALwl5FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3uALwlBFgsAXHNk.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl1FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlRFgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl9FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl5FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFgsAXHNk.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3twJwl1FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3twJwlRFgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3twJwl9FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl1FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlRFgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl9FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl5FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgsAXHNk.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl1FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlRFgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl9FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl5FgsAXHNlYzg.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgsAXHNk.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYnYAKRjdNS7Iw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYDYAKRjdNS7Iw.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYfYAKRjdNS7Iw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYvYAKRjdNS7Iw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYrYAKRjdNS7Iw.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: italic;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXxKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbGYTYAKRjdNQ.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbSB4ZhRNU.woff2)
+        format("woff2");
+    unicode-range:
+        U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbSB4ZhRNU.woff2)
+        format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbSB4ZhRNU.woff2)
+        format("woff2");
+    unicode-range:
+        U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbSB4ZhRNU.woff2)
+        format("woff2");
+    unicode-range:
+        U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+        U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329,
+        U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbSB4ZhRNU.woff2)
+        format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+        U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 100 700;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/ibmplexsans/v22/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYbSB4Zh.woff2)
+        format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style><style>:root {
+    --theme-primary: #4e97df;
+    --theme-secondary: #2e2e30;
+    --theme-tertiary: #f3f3f3;
+    --theme-primary-foreground: #ffffff;
+    --theme-secondary-foreground: #ffffff;
+    --theme-tertiary-foreground: #2e2e30;
+    --theme-surface: #ffffff;
+    --theme-surface-raised: #ffffff;
+    --theme-surface-sunken: #fafafa;
+    --theme-surface-inverse: #18181b;
+    --theme-foreground: #000000;
+    --theme-ink: #000000;
+    --theme-ink-muted: #71717a;
+    --theme-ink-subtle: #a1a1aa;
+    --theme-ink-inverse: #ffffff;
+    --theme-line: #e4e4e7;
+    --theme-line-strong: #d4d4d8;
+    --theme-font-sans: "IBM Plex Sans", sans-serif;
+    --theme-font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --theme-font-mono: "IBM Plex Mono", monospace;
+    --theme-font-display: "IBM Plex Sans", sans-serif;
+    --theme-text-xs: 0.75em;
+    --theme-text-sm: 0.9em;
+    --theme-text-base: 14px;
+    --theme-text-lg: 1.5em;
+    --theme-text-xl: 1.8em;
+    --theme-text-2xl: 3em;
+    --theme-radius: 0.25rem;
+    --theme-radius-xs: 0.125rem;
+    --theme-radius-sm: 0.25rem;
+    --theme-radius-md: 0.375rem;
+    --theme-radius-lg: 0.5rem;
+    --theme-radius-xl: 0.75rem;
+    --theme-radius-2xl: 1rem;
+    --theme-radius-3xl: 1.5rem;
+    --theme-heading-family: inherit;
+    --theme-heading-weight: 600;
+    --theme-heading-transform: uppercase;
+    --theme-heading-tracking: inherit;
+    --theme-heading-color: var(--color-secondary);
+    --theme-h1-size: 36px;
+    --theme-h1-leading: 40px;
+    --theme-h2-size: 30px;
+    --theme-h2-leading: 36px;
+    --theme-h3-size: 26px;
+    --theme-h3-leading: 32px;
+    --theme-h4-size: 20px;
+    --theme-h4-leading: 28px;
+    --theme-h5-size: 18px;
+    --theme-h5-leading: 24px;
+    --theme-h6-size: 16px;
+    --theme-h6-leading: 24px;
+    --theme-nav-family: inherit;
+    --theme-nav-color: var(--color-secondary);
+    --theme-nav-size: 14px;
+    --theme-nav-leading: 24px;
+    --theme-nav-weight: 500;
+    --theme-nav-tracking: 0.7px;
+    --theme-nav-transform: uppercase;
+    --theme-nav-padding: 0.5rem;
+    --theme-nav-radius: 0;
+    --theme-nav-hover-bg: var(--color-primary);
+    --theme-nav-hover-fg: var(--color-primary-foreground);
+    --theme-nav-active-color: var(--theme-nav-color);
+    --theme-nav-active-weight: var(--theme-nav-weight);
+    --theme-nav-active-border-width: 0px;
+    --theme-nav-active-border-color: transparent;
+    --theme-nav-panel-bg: #fff;
+    --theme-nav-panel-border-top: 4px;
+    --theme-nav-panel-border-top-color: var(--color-primary);
+    --theme-nav-panel-border-bottom: 1px;
+    --theme-nav-panel-border-bottom-color: var(--color-primary);
+    --theme-nav-panel-column-line: transparent;
+    --theme-nav-panel-radius: 0;
+    --theme-nav-panel-shadow: none;
+    --theme-nav-panel-min-height: 300px;
+    --theme-nav-panel-label-family: inherit;
+    --theme-nav-panel-label-size: 18px;
+    --theme-nav-panel-label-leading: 40px;
+    --theme-nav-panel-label-weight: 700;
+    --theme-nav-panel-label-tracking: 1.25px;
+    --theme-nav-panel-label-transform: uppercase;
+    --theme-nav-panel-label-color: var(--color-secondary);
+    --theme-nav-panel-link-size: 16px;
+    --theme-nav-panel-link-leading: 24px;
+    --theme-nav-panel-link-weight: 600;
+    --theme-nav-panel-link-color: var(--color-secondary);
+    --theme-nav-panel-link-padding: 0.5rem;
+    --theme-nav-panel-link-radius: 0.25rem;
+    --theme-nav-panel-link-hover-bg: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    --theme-nav-panel-link-hover-fg: var(--color-secondary);
+    --theme-nav-more-color: #000;
+    --theme-nav-more-padding: 0.5rem;
+    --theme-nav-more-radius: 0.25rem;
+    --theme-nav-more-hover-bg: var(--color-primary);
+    --theme-nav-more-hover-fg: var(--color-primary-foreground);
+    --theme-nav-card-bg: transparent;
+    --theme-nav-card-border-width: 0;
+    --theme-nav-card-border-color: transparent;
+    --theme-nav-card-radius: 0;
+    --theme-nav-card-padding: 0.5rem;
+    --theme-nav-card-hover-bg: var(--color-zinc-100);
+    --theme-nav-card-hover-border-color: transparent;
+    --theme-nav-card-columns: 1fr;
+    --theme-nav-card-columns-wide: repeat(2, minmax(0, 1fr));
+    --theme-nav-icon-size: auto;
+    --theme-nav-icon-radius: 0;
+    --theme-nav-icon-border: 0;
+    --theme-nav-icon-border-color: transparent;
+    --theme-nav-icon-bg: transparent;
+    --theme-nav-icon-color: inherit;
+    --theme-nav-icon-hover-bg: transparent;
+    --theme-nav-icon-hover-color: var(--color-primary);
+    --theme-nav-search-panel-bg: color-mix(in oklab, var(--color-primary) 10%, #fff);
+    --theme-nav-search-panel-border: 0 0 1px 1px;
+    --theme-nav-search-panel-border-color: var(--color-zinc-300);
+    --theme-nav-search-panel-radius: 0;
+    --theme-nav-search-panel-shadow: none;
+    --theme-nav-search-input-bg: #fff;
+    --theme-nav-search-input-border: 1px;
+    --theme-nav-search-input-border-color: #e1e1e1;
+    --theme-nav-search-input-radius: 9999px;
+    --theme-nav-search-input-color: inherit;
+    --theme-nav-search-input-placeholder: color-mix(in oklab, currentcolor 50%, transparent);
+    --theme-nav-search-input-size: inherit;
+    --theme-nav-search-input-padding: 0 1.5rem;
+    --theme-nav-search-submit-bg: var(--color-primary);
+    --theme-nav-search-submit-fg: var(--color-primary-foreground);
+    --theme-nav-account-panel-bg: #fff;
+    --theme-nav-account-panel-border: 1px;
+    --theme-nav-account-panel-border-color: var(--color-gray-200);
+    --theme-nav-account-panel-radius: 0.75rem;
+    --theme-nav-account-panel-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    --theme-nav-account-item-color: #000e2a;
+    --theme-nav-account-item-hover-bg: var(--color-gray-50);
+    --theme-nav-account-item-hover-color: #086bdb;
+    --theme-nav-account-divider: var(--color-gray-100);
+    --theme-nav-account-avatar-bg: linear-gradient(to bottom right, #086bdb, #0a4a96);
+    --theme-nav-account-avatar-color: #fff;
+    --theme-nav-account-focus: #086bdb;
+    --theme-nav-account-trigger-bg: transparent;
+    --theme-nav-account-trigger-border: 1.5px;
+    --theme-nav-account-trigger-border-color: var(--color-gray-300);
+    --theme-nav-account-trigger-radius: 9999px;
+    --theme-nav-account-name-color: #000e2a;
+    --theme-nav-drawer-top: 79px;
+    --theme-nav-drawer-bg: #fff;
+    --theme-nav-drawer-color: inherit;
+    --theme-nav-drawer-item-family: inherit;
+    --theme-nav-drawer-item-size: 21px;
+    --theme-nav-drawer-item-leading: 1.5;
+    --theme-nav-drawer-item-weight: 700;
+    --theme-nav-drawer-item-tracking: normal;
+    --theme-nav-drawer-item-transform: none;
+    --theme-nav-drawer-item-color: var(--color-secondary);
+    --theme-nav-drawer-item-justify: flex-start;
+    --theme-nav-drawer-item-bg: transparent;
+    --theme-nav-drawer-item-active-bg: transparent;
+    --theme-nav-drawer-item-radius: 0;
+    --theme-nav-drawer-item-padding: 0.5rem 0;
+    --theme-nav-drawer-item-border-width: 0;
+    --theme-nav-drawer-item-border-color: transparent;
+    --theme-nav-drawer-item-active-color: var(--color-primary);
+    --theme-nav-drawer-toggle-size: 22px;
+    --theme-nav-drawer-toggle-color: currentColor;
+    --theme-nav-drawer-divider-width: 0;
+    --theme-nav-drawer-divider: transparent;
+    --theme-nav-drawer-link-size: 16px;
+    --theme-nav-drawer-link-color: inherit;
+    --theme-prose-family: var(--theme-font-sans);
+    --theme-prose-size: 18px;
+    --theme-prose-leading: 28px;
+    --theme-prose-color: #565656;
+    --theme-prose-heading-family: var(--theme-font-sans);
+    --theme-prose-heading-color: var(--color-secondary);
+    --theme-prose-heading-transform: none;
+    --theme-prose-container-heading-family: var(--theme-font-mono);
+    --theme-prose-container-heading-color: var(--color-primary);
+    --theme-prose-container-heading-transform: uppercase;
+    --theme-archive-family: var(--theme-font-mono);
+    --theme-archive-color: var(--color-primary);
+    --theme-archive-transform: uppercase;
+    --theme-section-family: inherit;
+    --theme-section-size: 20px;
+    --theme-section-leading: 28px;
+    --theme-section-weight: 700;
+    --theme-section-tracking: 1.4px;
+    --theme-section-transform: uppercase;
+    --theme-section-color: var(--color-secondary);
+    --theme-section-border: 2px;
+    --theme-section-border-color: var(--color-secondary);
+    --theme-container: min(100%, 1200px);
+    --theme-border-width: 1px;
+    --theme-shadow: 0 0 12px rgba(114, 114, 119, 0.4);
+}
+.color-scope {
+    --theme-heading-color: var(--color-secondary);
+    --theme-nav-color: var(--color-secondary);
+    --theme-nav-hover-bg: var(--color-primary);
+    --theme-nav-hover-fg: var(--color-primary-foreground);
+    --theme-nav-panel-border-top-color: var(--color-primary);
+    --theme-nav-panel-border-bottom-color: var(--color-primary);
+    --theme-nav-panel-label-color: var(--color-secondary);
+    --theme-nav-panel-link-color: var(--color-secondary);
+    --theme-nav-panel-link-hover-bg: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    --theme-nav-panel-link-hover-fg: var(--color-secondary);
+    --theme-nav-more-hover-bg: var(--color-primary);
+    --theme-nav-more-hover-fg: var(--color-primary-foreground);
+    --theme-nav-card-hover-bg: var(--color-zinc-100);
+    --theme-nav-icon-hover-color: var(--color-primary);
+    --theme-nav-search-panel-bg: color-mix(in oklab, var(--color-primary) 10%, #fff);
+    --theme-nav-search-panel-border-color: var(--color-zinc-300);
+    --theme-nav-search-submit-bg: var(--color-primary);
+    --theme-nav-search-submit-fg: var(--color-primary-foreground);
+    --theme-nav-account-panel-border-color: var(--color-gray-200);
+    --theme-nav-account-item-hover-bg: var(--color-gray-50);
+    --theme-nav-account-divider: var(--color-gray-100);
+    --theme-nav-account-trigger-border-color: var(--color-gray-300);
+    --theme-nav-drawer-item-color: var(--color-secondary);
+    --theme-nav-drawer-item-active-color: var(--color-primary);
+    --theme-prose-heading-color: var(--color-secondary);
+    --theme-prose-container-heading-color: var(--color-primary);
+    --theme-archive-color: var(--color-primary);
+    --theme-section-color: var(--color-secondary);
+    --theme-section-border-color: var(--color-secondary);
+}</style> <script>window.__authProviders={"facebook":false,"linkedin":false}</script> <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.leaf.tv/#website","url":"https://www.leaf.tv/","name":"LEAFtv","description":"LEAFtv is your destination for food, beauty, style and feel-good living, with how-tos and inspiration for everyday life.","publisher":{"@id":"https://www.leaf.tv/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.leaf.tv/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.leaf.tv/#organization","name":"LEAFtv","url":"https://www.leaf.tv/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.leaf.tv/#/schema/logo/image/","url":"https://www.leaf.tv/astrostatic/f062e407/_astro/leaftv.Cp4ajmdI.png","contentUrl":"https://www.leaf.tv/astrostatic/f062e407/_astro/leaftv.Cp4ajmdI.png","width":300,"height":200,"caption":"LEAFtv"},"image":{"@id":"https://www.leaf.tv/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/LEAFtv-202292389783837/","https://x.com/leaftv","https://www.pinterest.com/leaftv/","https://www.youtube.com/user/leaftv"],"parentOrganization":{"@type":"Organization","name":"TechnologyAdvice","url":"https://technologyadvice.com/"}}]}</script><script>(function(){const targeting = {"env":"prod","stage":"prod","url":"www.leaf.tv/404","hostname":"www.leaf.tv","cid":"404","path":"404"};
+
+    if (window.__edge?.country) {
+        targeting.edge_country = window.__edge.country
+    }
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push(
+        Object.fromEntries(
+            Object.entries(targeting).map(([k, v]) => [`ad_${k}`, v]),
+        ),
+    )
+})();</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2603947642260127" crossorigin="anonymous"></script><script>(function(){const sampleRate = 1;
+const debug = false;
+const targeting = {"env":"prod","stage":"prod","url":"www.leaf.tv/404","hostname":"www.leaf.tv","cid":"404","path":"404"};
+
+        (() => {
+            // Same-origin, site-aware base (mirrors getSiteAwarePath): dev/preview
+            // serve sites under /sites/{domain}/…; prod serves each on its own host.
+            let base = "/api/ado";
+            if (location.pathname.startsWith("/sites/")) {
+                const p = location.pathname.split("/");
+                if (p.length >= 3) base = "/sites/" + p[2] + base;
+            }
+
+            const uuid = () =>
+                (crypto.randomUUID && crypto.randomUUID()) ||
+                String(Date.now()) + Math.random().toString(16).slice(2);
+
+            // Reuse the experiments Worker's pageview id so ad events join to experiments.served on pv.
+            const pageviewId = (window.__xp && window.__xp.pv) || uuid();
+            let sessionId;
+            try {
+                sessionId = sessionStorage.getItem("ado_sid");
+                if (!sessionId) {
+                    sessionId = uuid();
+                    sessionStorage.setItem("ado_sid", sessionId);
+                }
+            } catch (_) {
+                sessionId = "";
+            }
+
+            // --- Unified transport: buffer typed events, flush one batch. ---
+            // Trailing debounce: each event (re)arms a short idle timer, so a
+            // burst of N events coalesces into ONE sendBeacon fired shortly after
+            // the burst ends (e.g. 10 events over 5s → 1 request). A max-age cap
+            // guarantees a continuous stream still flushes at least every
+            // FLUSH_MAX_MS, a size cap guards the sendBeacon payload limit, and
+            // the buffer is always flushed on tab-hide/unload so nothing is lost.
+            const FLUSH_IDLE_MS = 1000; // flush this long after the last event
+            const FLUSH_MAX_MS = 5000; // never hold a buffered event longer
+            const MAX_BATCH = 20;
+            let buffer = [];
+            let timer = null;
+            let firstAt = 0;
+            const flush = () => {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+                firstAt = 0;
+                if (!buffer.length) return;
+                const events = buffer;
+                buffer = [];
+                try {
+                    const body = new Blob([JSON.stringify({ events })], {
+                        type: "text/plain",
+                    });
+                    navigator.sendBeacon(base + "/collect/", body);
+                    if (debug) console.log("[ado] flush", events);
+                } catch (e) {
+                    if (debug) console.warn("[ado] flush failed", e);
+                }
+            };
+            const push = (event) => {
+                buffer.push(event);
+                if (buffer.length >= MAX_BATCH) {
+                    flush();
+                    return;
+                }
+                const now = Date.now();
+                if (!firstAt) firstAt = now;
+                // Idle debounce, clamped so total hold never exceeds FLUSH_MAX_MS.
+                const delay = Math.max(
+                    0,
+                    Math.min(FLUSH_IDLE_MS, FLUSH_MAX_MS - (now - firstAt)),
+                );
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(flush, delay);
+            };
+
+            window._ado = {
+                pageview_id: pageviewId,
+                session_id: sessionId,
+                push,
+                flush,
+            };
+
+            addEventListener("visibilitychange", () => {
+                if (document.visibilityState === "hidden") flush();
+            });
+            addEventListener("pagehide", flush);
+
+            const canonical =
+                document.querySelector('link[rel="canonical"]')?.href ||
+                location.href;
+
+            // --- Framing detection -------------------------------------------
+            // Who, if anyone, has this page in an iframe — used to spot third
+            // parties embedding our content.
+            //
+            // `location.ancestorOrigins` is the browser's own list of ancestor
+            // frame origins (parent first, outermost last; Chromium + Safari).
+            // Unlike `document.referrer` it can't be blanked by the framer's
+            // Referrer-Policy and it does NOT drift to our own previous URL when
+            // the framed page navigates inside the frame. The referrer is only
+            // used to add path detail on top of an origin the ancestor list has
+            // already confirmed, or as the sole signal on Firefox, which has no
+            // ancestorOrigins. Sandboxed/opaque ancestors report "null".
+            let iframeReferrer = "";
+            try {
+                if (window.top !== window.self) {
+                    const ancestors = location.ancestorOrigins;
+                    const outermost =
+                        ancestors && ancestors.length
+                            ? ancestors[ancestors.length - 1]
+                            : "";
+                    const referrerOrigin = document.referrer
+                        ? new URL(document.referrer).origin
+                        : "";
+                    if (outermost && outermost !== "null") {
+                        iframeReferrer =
+                            referrerOrigin === outermost
+                                ? document.referrer
+                                : outermost;
+                    } else if (
+                        referrerOrigin &&
+                        referrerOrigin !== location.origin
+                    ) {
+                        // A same-origin referrer inside a frame is our own
+                        // previous page, not an embedder — never report it.
+                        iframeReferrer = document.referrer;
+                    }
+                    // Our own frames (self-embeds, previews) aren't embedding.
+                    if (iframeReferrer.indexOf(location.origin) === 0) {
+                        iframeReferrer = "";
+                    }
+                }
+            } catch (_) {
+                iframeReferrer = "";
+            }
+
+            // Same `window.__edge` country ScriptEdgeTargeting sends to GPT as
+            // `edge_country` → keeps the event stream aligned with GAM.
+            const adoCountry = window.__edge?.country ?? "";
+
+            const ctx = {
+                site: (window._vars && window._vars.domain) || location.hostname,
+                hostname: location.hostname,
+                path: location.pathname,
+                canonical_url: canonical,
+                post_id: String(targeting.post_id || ""),
+                category: String(targeting.category || ""),
+                country: adoCountry,
+            };
+
+            // Pageview (always sent).
+            push({
+                type: "pageview",
+                client_event_ts: Date.now(),
+                pageview_id: pageviewId,
+                session_id: sessionId,
+                page_type: String(targeting.ptype || ""),
+                referrer: document.referrer || "",
+                iframe_referrer: iframeReferrer,
+                ...ctx,
+            });
+
+            // Per-slot refresh counter.
+            const refreshCount = Object.create(null);
+
+            const adEvent = (eventType, event) => {
+                if (sampleRate < 1 && Math.random() >= sampleRate) return;
+                const slot = event.slot;
+                const elId = slot.getSlotElementId();
+                const size = Array.isArray(event.size)
+                    ? event.size.join("x")
+                    : event.size != null
+                      ? String(event.size)
+                      : "";
+                const resp = slot.getResponseInformation
+                    ? slot.getResponseInformation()
+                    : null;
+                const idx =
+                    eventType === "slot_render_ended"
+                        ? (refreshCount[elId] = (refreshCount[elId] || 0) + 1) - 1
+                        : refreshCount[elId]
+                          ? refreshCount[elId] - 1
+                          : 0;
+
+                push({
+                    type: "ad_event",
+                    event_type: eventType,
+                    client_event_ts: Date.now(),
+                    pageview_id: pageviewId,
+                    session_id: sessionId,
+                    ad_unit_path: slot.getAdUnitPath(),
+                    slot_element_id: elId,
+                    slot_size: size,
+                    is_empty: !!event.isEmpty,
+                    refresh_index: idx,
+                    line_item_id: resp ? String(resp.lineItemId ?? "") : "",
+                    creative_id: resp ? String(resp.creativeId ?? "") : "",
+                    advertiser_id: resp ? String(resp.advertiserId ?? "") : "",
+                    campaign_id: resp ? String(resp.campaignId ?? "") : "",
+                    ...ctx,
+                });
+            };
+
+            window.googletag = window.googletag || { cmd: [] };
+            window.googletag.cmd.push(() => {
+                window.googletag
+                    .pubads()
+                    .addEventListener("slotRenderEnded", (e) =>
+                        adEvent("slot_render_ended", e),
+                    );
+                window.googletag
+                    .pubads()
+                    .addEventListener("impressionViewable", (e) =>
+                        adEvent("impression_viewable", e),
+                    );
+            });
+        })();
+    })();</script> <script>(function(){const heartbeatMs = 5000;
+const idleMs = 30000;
+const snapshotMs = 20000;
+const targeting = {"env":"prod","stage":"prod","url":"www.leaf.tv/404","hostname":"www.leaf.tv","cid":"404","path":"404"};
+const debug = false;
+
+        (() => {
+            // Don't instrument headless/automation traffic.
+            if (navigator.webdriver) return;
+            // Requires the beacon's transport (same observability gate).
+            const ado = window._ado;
+            if (!ado || typeof ado.push !== "function") return;
+
+            const pageviewId = ado.pageview_id;
+            const sessionId = ado.session_id;
+            const uuid = () =>
+                (crypto.randomUUID && crypto.randomUUID()) ||
+                String(Date.now()) + Math.random().toString(16).slice(2);
+            const str = (v) => (v == null ? "" : String(v));
+
+            // --- Page context (stable for the pageview; per-segment path/post_id
+            // are tracked separately since they swap on infinite-scroll). ---
+            const canonical =
+                document.querySelector('link[rel="canonical"]')?.href ||
+                location.href;
+            const country = window.__edge?.country ?? "";
+            const ctx = {
+                site: (window._vars && window._vars.domain) || location.hostname,
+                hostname: location.hostname,
+                canonical_url: canonical,
+                category: str(targeting.category),
+                country,
+            };
+            const referrer = document.referrer || "";
+
+            // --- Loyalty: durable, consent-gated visitor id. Respect Global
+            // Privacy Control; fall back to session-only when storage is blocked.
+            // (Wire to the site CMP here for finer-grained consent.) ---
+            let visitorId = "";
+            let isNewVisitor = 0;
+            try {
+                if (navigator.globalPrivacyControl !== true) {
+                    visitorId = localStorage.getItem("ado_vid") || "";
+                    if (!visitorId) {
+                        visitorId = uuid();
+                        localStorage.setItem("ado_vid", visitorId);
+                        isNewVisitor = 1;
+                    }
+                }
+            } catch (_) {
+                visitorId = "";
+            }
+
+            // --- Per-post segments. segment_id = `${pageview_id}:${post_id}`, so
+            // scrolling back into an earlier article RESUMES its segment. ---
+            const segments = new Map();
+            let activeSeg = null;
+            let activeSince = null; // ms timestamp while accruing, else null
+            let lastActivity = Date.now();
+            let sinceSnapshot = 0;
+
+            const accruing = () =>
+                document.visibilityState === "visible" &&
+                Date.now() - lastActivity < idleMs;
+
+            function flushAccrual() {
+                if (activeSince !== null && activeSeg) {
+                    const now = Date.now();
+                    activeSeg.engagedSeconds += (now - activeSince) / 1000;
+                    activeSince = now;
+                }
+            }
+            function setAccruing(on) {
+                flushAccrual();
+                activeSince = on ? Date.now() : null;
+            }
+
+            function segFor(pid, category, path) {
+                let seg = segments.get(pid);
+                if (!seg) {
+                    seg = {
+                        post_id: pid,
+                        segment_id: pageviewId + ":" + pid,
+                        category: str(category) || ctx.category,
+                        path: str(path) || location.pathname,
+                        engagedSeconds: 0,
+                        maxScrollPct: 0,
+                        reachedEnd: 0,
+                        seq: 0,
+                    };
+                    segments.set(pid, seg);
+                } else {
+                    if (category != null && str(category)) seg.category = str(category);
+                    if (path != null && str(path)) seg.path = str(path);
+                }
+                return seg;
+            }
+
+            // Deepest scroll into the active article + end detection, reusing the
+            // h1[infiniscroll-id] / [data-type='infiniscroll-break'] geometry.
+            function measureActive() {
+                if (!activeSeg) return;
+                const headers = Array.prototype.slice.call(
+                    document.querySelectorAll("h1[infiniscroll-id]"),
+                );
+                const header =
+                    document.querySelector(
+                        'h1[infiniscroll-id="' + activeSeg.post_id + '"]',
+                    ) || headers[0];
+                if (!header) return;
+                const y = window.scrollY;
+                const toY = (el) => el.getBoundingClientRect().top + y;
+                const idx = headers.indexOf(header);
+                const breaks = document.querySelectorAll(
+                    "[data-type='infiniscroll-break']",
+                );
+                const bottomEl = breaks[idx] || headers[idx + 1];
+                const top = toY(header);
+                const bottom = bottomEl
+                    ? toY(bottomEl)
+                    : document.documentElement.scrollHeight;
+                let pct;
+                if (bottom - top <= window.innerHeight) {
+                    // Article fits the viewport → readable without scrolling.
+                    pct = 100;
+                } else {
+                    pct = Math.round(
+                        Math.min(Math.max((y - top) / (bottom - top), 0), 1) * 100,
+                    );
+                }
+                if (pct > activeSeg.maxScrollPct) activeSeg.maxScrollPct = pct;
+                // End reached when the article's bottom boundary enters the viewport.
+                if (bottom <= y + window.innerHeight + 4) activeSeg.reachedEnd = 1;
+            }
+
+            function snapshot(seg) {
+                if (!seg) return;
+                seg.seq += 1;
+                ado.push({
+                    type: "engagement",
+                    client_event_ts: Date.now(),
+                    pageview_id: pageviewId,
+                    session_id: sessionId,
+                    segment_id: seg.segment_id,
+                    post_id: seg.post_id,
+                    site: ctx.site,
+                    hostname: ctx.hostname,
+                    path: seg.path,
+                    canonical_url: ctx.canonical_url,
+                    category: seg.category,
+                    country: ctx.country,
+                    referrer: referrer,
+                    visitor_id: visitorId,
+                    is_new_visitor: isNewVisitor,
+                    engaged_seconds: Math.round(seg.engagedSeconds),
+                    max_scroll_pct: seg.maxScrollPct,
+                    reached_end: seg.reachedEnd,
+                    seq: seg.seq,
+                });
+                if (debug) console.log("[ado] engagement", seg.segment_id, seg);
+            }
+
+            function switchTo(pid, category, path) {
+                if (!pid) return;
+                if (activeSeg && activeSeg.post_id === pid) {
+                    segFor(pid, category, path); // refresh path/category
+                    return;
+                }
+                setAccruing(false); // bank time to the leaving segment
+                if (activeSeg) snapshot(activeSeg); // flush leaving segment state
+                activeSeg = segFor(pid, category, path);
+                lastActivity = Date.now(); // a transition counts as activity
+                setAccruing(accruing());
+                measureActive();
+            }
+
+            // Authoritative active-article signal from InfiniScroll transitions.
+            document.addEventListener("ado:article", (e) => {
+                const d = (e && e.detail) || {};
+                switchTo(str(d.post_id), d.category, d.path);
+            });
+
+            // Activity + scroll.
+            const bump = () => {
+                const wasAccruing = activeSince !== null;
+                lastActivity = Date.now();
+                if (!wasAccruing && document.visibilityState === "visible") {
+                    setAccruing(true);
+                }
+            };
+            let scrollThrottled = false;
+            const onScroll = () => {
+                bump();
+                if (scrollThrottled) return;
+                scrollThrottled = true;
+                setTimeout(() => {
+                    scrollThrottled = false;
+                    measureActive();
+                }, 200);
+            };
+            addEventListener("scroll", onScroll, { passive: true });
+            ["pointermove", "keydown", "touchstart", "click"].forEach((ev) =>
+                addEventListener(ev, bump, { passive: true }),
+            );
+
+            // Visibility + bfcache lifecycle. Beacon also flushes on hide; we push
+            // the final engagement snapshot then force a flush so it isn't stranded.
+            function finalizeAndFlush() {
+                setAccruing(false);
+                if (activeSeg) snapshot(activeSeg);
+                if (typeof ado.flush === "function") ado.flush();
+            }
+            addEventListener("visibilitychange", () => {
+                if (document.visibilityState === "hidden") {
+                    finalizeAndFlush();
+                } else {
+                    lastActivity = Date.now();
+                    setAccruing(accruing());
+                }
+            });
+            addEventListener("pagehide", finalizeAndFlush);
+            addEventListener("pageshow", (e) => {
+                if (e.persisted) {
+                    lastActivity = Date.now();
+                    setAccruing(accruing());
+                }
+            });
+
+            // Heartbeat: re-evaluate idle, remeasure, and drop an insurance
+            // snapshot so long single-article reads / crashes aren't lost.
+            setInterval(() => {
+                setAccruing(accruing());
+                measureActive();
+                sinceSnapshot += heartbeatMs;
+                if (sinceSnapshot >= snapshotMs && activeSeg) {
+                    sinceSnapshot = 0;
+                    flushAccrual();
+                    snapshot(activeSeg);
+                }
+            }, heartbeatMs);
+
+            // Seed the landing article's segment (post pages only).
+            const landingPid = str(targeting.post_id);
+            if (landingPid) {
+                switchTo(landingPid, ctx.category, location.pathname);
+            }
+        })();
+    })();</script>  <title>Page not found | LEAFtv</title><meta name="title" content="Page not found | LEAFtv"><meta name="robots" content="noindex, follow"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="Page not found | LEAFtv"><meta property="og:url" content="https://www.leaf.tv/404/"><meta property="og:site_name" content="LEAFtv"><link rel="canonical" href="https://www.leaf.tv/404/">  <link rel="stylesheet" href="https://www.leaf.tv/astrostatic/f062e407/_astro/index.sq98geff.css">
+<style>body>.wrapper:last-of-type>svg{display:none}
+.ad-fluid iframe[id^=google_ads_iframe]{display:block;margin-inline:auto}
+</style>
+<style>.slide-right-enter-active[data-v-0c8284e0],.slide-right-leave-active[data-v-0c8284e0]{transition:all .3s}.slide-right-enter-from[data-v-0c8284e0],.slide-right-leave-to[data-v-0c8284e0]{transform:translate(-100vw);opacity:0}.slide-left-enter-active[data-v-0c8284e0],.slide-left-leave-active[data-v-0c8284e0]{transition:all .3s}.slide-left-enter-from[data-v-0c8284e0],.slide-left-leave-to[data-v-0c8284e0]{transform:translate(100vw);opacity:0}.submenu-content [data-submenu][data-v-0c8284e0]{display:none}.submenu-content [data-submenu].active[data-v-0c8284e0]{display:block}#site-navigation:not([data-nav-computed]){visibility:hidden;animation:nav-fallback 0s 1.5s forwards}@keyframes nav-fallback{to{visibility:visible}}.slide-enter-active[data-v-14b806f0],.slide-leave-active[data-v-14b806f0]{transition:all .3s}.slide-enter-from[data-v-14b806f0],.slide-leave-to[data-v-14b806f0]{transform:translateY(20px);opacity:0}:root{--skybox-reserve: 18.75vw}@media(min-width:768px){:root{--skybox-reserve: 90px}}[data-ad-slot=skybox]{min-height:var(--skybox-reserve)}[data-ad-slot=skybox][data-loaded],[data-ad-slot=skybox][data-empty]{min-height:0}[data-ad-slot=skybox]:not([data-empty])~#main-navigation{top:var(--skybox-reserve)}.animate-ping-once[data-v-788e3fe6]{animation:ping-once-788e3fe6 .35s ease-out forwards}@keyframes ping-once-788e3fe6{0%{transform:scale(1)}40%{transform:scale(1.2)}70%{transform:scale(.95)}to{transform:scale(1)}}/*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-outline-style:solid;--tw-content:"";--tw-border-style:solid;--tw-font-weight:initial;--tw-leading:initial}}}a[data-astro-cid-tdou77qi]:hover,a[data-astro-cid-tdou77qi]:focus{color:#2a6496;text-decoration-line:underline}a[data-astro-cid-tdou77qi]:active,a[data-astro-cid-tdou77qi]:hover{outline-style:var(--tw-outline-style);outline-width:0}#ftl-footer[data-astro-cid-tdou77qi]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:Helvetica Neue,Helvetica,Arial,sans-serif!important}@media(min-width:768px){.container1[data-astro-cid-tdou77qi]{width:750px}}@media(min-width:992px){.container1[data-astro-cid-tdou77qi]{width:970px}}@media(min-width:1200px){.container1[data-astro-cid-tdou77qi]{width:1170px}}.container1[data-astro-cid-tdou77qi]:before{--tw-content:"";content:var(--tw-content);display:table}.container1[data-astro-cid-tdou77qi],.container-fluid[data-astro-cid-tdou77qi]{margin-inline:auto;padding-inline:15px}.container-fluid[data-astro-cid-tdou77qi]:before,.row[data-astro-cid-tdou77qi]:before{--tw-content:"";content:var(--tw-content);display:table}.container-fluid[data-astro-cid-tdou77qi]:after,.row[data-astro-cid-tdou77qi]:after{clear:both;--tw-content:"";content:var(--tw-content);display:table}.col-xs-12[data-astro-cid-tdou77qi]{float:left;width:100%}@media(min-width:768px){.col-sm-5[data-astro-cid-tdou77qi]{float:left;width:41.6667%}.col-sm-6[data-astro-cid-tdou77qi]{float:left;width:50%}.col-sm-7[data-astro-cid-tdou77qi]{float:left;width:58.3333%}}.col-xs-12[data-astro-cid-tdou77qi],.col-sm-6[data-astro-cid-tdou77qi],.col-sm-7[data-astro-cid-tdou77qi],.col-md-12[data-astro-cid-tdou77qi]{min-height:1px;padding-inline:15px;position:relative}@media(min-width:992px){.col-md-12[data-astro-cid-tdou77qi]{float:left;width:100%}}#ftl-footer[data-astro-cid-tdou77qi]{width:100%;overflow-x:hidden}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi]{margin-inline:-15px}#ftl-footer[data-astro-cid-tdou77qi] .footerContainer[data-astro-cid-tdou77qi]{max-width:1230px;padding-top:25px;padding-bottom:20px}#ftl-footer[data-astro-cid-tdou77qi] .footerWidget[data-astro-cid-tdou77qi]{margin-left:calc(var(--spacing,.25rem) * 0);width:100%}#ftl-footer[data-astro-cid-tdou77qi] .footerOuter[data-astro-cid-tdou77qi]{border-top-style:var(--tw-border-style);background-color:#292b31;border-top-width:0}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .left[data-astro-cid-tdou77qi]{padding-left:calc(var(--spacing,.25rem) * 0)}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .top-section[data-astro-cid-tdou77qi]{padding-left:calc(var(--spacing,.25rem) * 0);margin-bottom:10px}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .top-section[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi],#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .bottom-section[data-astro-cid-tdou77qi],#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .bottom-section[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi]{padding-left:calc(var(--spacing,.25rem) * 0)}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi] .section-header[data-astro-cid-tdou77qi]{margin-bottom:calc(var(--spacing,.25rem) * 0);--tw-font-weight:var(--font-weight-semibold,600);font-size:14px;font-weight:var(--font-weight-semibold,600);color:#737981;text-transform:none}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi] ul[data-astro-cid-tdou77qi]{padding-left:calc(var(--spacing,.25rem) * 0);--tw-leading:1.5em;--tw-font-weight:var(--font-weight-semibold,600);font-size:13px;line-height:1.5em;font-weight:var(--font-weight-semibold,600);color:#e9ebee;list-style-type:none}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi] ul[data-astro-cid-tdou77qi] li[data-astro-cid-tdou77qi] a[data-astro-cid-tdou77qi]{color:#e9ebee!important}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] div[data-astro-cid-tdou77qi] .bottom-top-list[data-astro-cid-tdou77qi]{margin-bottom:20px}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .social-media-icons[data-astro-cid-tdou77qi]{float:left;width:auto;padding:calc(var(--spacing,.25rem) * 0);margin-top:-10px;margin-left:-4px;display:none}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .social-media-icons[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi]{background-color:#0000;padding-block:20px;padding-inline:5px}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .social-media-icons[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] li[data-astro-cid-tdou77qi]{margin-right:3px}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .social-media-icons[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] li[data-astro-cid-tdou77qi]:last-of-type{margin-right:calc(var(--spacing,.25rem) * 0)}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .right[data-astro-cid-tdou77qi]{padding-inline:calc(var(--spacing,.25rem) * 0)}#ftl-footer[data-astro-cid-tdou77qi] .row[data-astro-cid-tdou77qi] .connect-text[data-astro-cid-tdou77qi]{float:left;--tw-font-weight:var(--font-weight-semibold,600);font-size:18px;font-weight:var(--font-weight-semibold,600);color:#29a8ff;text-transform:none;margin-right:10px;padding-top:10px;display:inline}#ftl-footer[data-astro-cid-tdou77qi] .footer-mobile[data-astro-cid-tdou77qi]{display:none!important}#ftl-footer[data-astro-cid-tdou77qi] .footer-wide[data-astro-cid-tdou77qi]{display:block!important}#ftl-footer[data-astro-cid-tdou77qi] .footer[data-astro-cid-tdou77qi]{border-top-style:var(--tw-border-style)!important;background-color:#292b31!important;border-top-width:0!important}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi]{margin:calc(var(--spacing,.25rem) * 0);cursor:pointer;padding-inline:5px;padding-block:calc(var(--spacing,.25rem) * 0);display:inline-block;position:relative}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] li[data-astro-cid-tdou77qi]{text-align:center;--tw-leading:1.75;width:30px;height:30px;color:var(--color-white,#fff);border-radius:3.40282e38px;font-size:18px;line-height:1.75;list-style-type:none;display:inline-block}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] .rss-icon[data-astro-cid-tdou77qi]{background-color:#f60}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] .rss-icon[data-astro-cid-tdou77qi] a[data-astro-cid-tdou77qi]{color:var(--color-white,#fff)}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] .twitter-icon[data-astro-cid-tdou77qi]{background-color:#00acec!important}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] .facebook-icon[data-astro-cid-tdou77qi]{background-color:#3b5998!important}#ftl-footer[data-astro-cid-tdou77qi] .icons-only[data-astro-cid-tdou77qi] .linkedin-icon[data-astro-cid-tdou77qi]{background-color:#007bb5}@media screen and (max-width:400px){#ftl-footer[data-astro-cid-tdou77qi] .footer-mobile[data-astro-cid-tdou77qi]{display:block!important}#ftl-footer[data-astro-cid-tdou77qi] .footer-wide[data-astro-cid-tdou77qi]{display:none!important}#ftl-footer[data-astro-cid-tdou77qi] .social-media-icons[data-astro-cid-tdou77qi]{margin-bottom:20px}#ftl-footer[data-astro-cid-tdou77qi] .left[data-astro-cid-tdou77qi]{padding:calc(var(--spacing,.25rem) * 0)}}@media screen and (max-width:767px){#ftl-footer[data-astro-cid-tdou77qi] .connect-text[data-astro-cid-tdou77qi]{display:none!important}#ftl-footer[data-astro-cid-tdou77qi] .footerContainer[data-astro-cid-tdou77qi] .link-group[data-astro-cid-tdou77qi] li[data-astro-cid-tdou77qi]{margin-block:10px}}@property --tw-outline-style{syntax:"*";inherits:false;initial-value:solid}@property --tw-content{syntax:"*";inherits:false;initial-value:""}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid}@property --tw-font-weight{syntax:"*";inherits:false}@property --tw-leading{syntax:"*";inherits:false}[data-ad-slot=top]{min-height:var(--skybox-reserve)}[data-ad-slot=top][data-loaded],[data-ad-slot=top][data-empty]{min-height:0}#main-navigation[data-astro-cid-sj5ssvhz]{transition:transform .3s ease-in-out,background-color .3s ease-in-out}[data-astro-cid-sj5ssvhz][data-rac-overlay] [data-astro-cid-sj5ssvhz]::-webkit-scrollbar{width:6px}[data-astro-cid-sj5ssvhz][data-rac-overlay] [data-astro-cid-sj5ssvhz]::-webkit-scrollbar-track{background:transparent}[data-astro-cid-sj5ssvhz][data-rac-overlay] [data-astro-cid-sj5ssvhz]::-webkit-scrollbar-thumb{background:#fff3;border-radius:3px}[data-astro-cid-sj5ssvhz][data-rac-overlay] [data-astro-cid-sj5ssvhz]::-webkit-scrollbar-thumb:hover{background:#fff6}[data-astro-cid-sj5ssvhz][data-rac-overlay]{scrollbar-color:rgba(255,255,255,.2) transparent;scrollbar-width:thin}#choice-footer-msg a:hover{text-decoration:underline}.raconteur-net button,.raconteur-net button.rounded-none{border-radius:0}.raconteur-net button.rounded-sm{border-radius:var(--radius-sm, .125rem)}.raconteur-net button.rounded{border-radius:var(--radius, .25rem)}.raconteur-net button.rounded-md{border-radius:var(--radius-md, .375rem)}.raconteur-net button.rounded-lg{border-radius:var(--radius-lg, .5rem)}.raconteur-net button.rounded-xl{border-radius:var(--radius-xl, .75rem)}.raconteur-net button.rounded-2xl{border-radius:var(--radius-2xl, 1rem)}.raconteur-net button.rounded-3xl{border-radius:var(--radius-3xl, 1.5rem)}.raconteur-net button.rounded-full{border-radius:9999px}.ta-subpanel[data-astro-cid-s7hm7h62]{opacity:0;pointer-events:none}.ta-subnav[data-astro-cid-s7hm7h62]:not(:has(>li:hover>.ta-subpanel)):not(:has(>li:focus-within>.ta-subpanel))>li[data-astro-cid-s7hm7h62]:first-child>.ta-subpanel[data-astro-cid-s7hm7h62]{opacity:1;pointer-events:auto}.ta-subnav[data-astro-cid-s7hm7h62]>li[data-astro-cid-s7hm7h62]:hover>.ta-subpanel[data-astro-cid-s7hm7h62],.ta-subnav[data-astro-cid-s7hm7h62]>li[data-astro-cid-s7hm7h62]:focus-within>.ta-subpanel[data-astro-cid-s7hm7h62]{opacity:1;pointer-events:auto}.nav-cards[data-astro-cid-75u2l675] .nav-panel-articles{grid-template-columns:repeat(1,minmax(0,1fr));gap:.75rem;padding-block:0}@media(min-width:768px){.nav-cards[data-astro-cid-75u2l675] .nav-panel-articles{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(min-width:1280px){.nav-cards[data-astro-cid-75u2l675] .nav-panel-articles{grid-template-columns:repeat(3,minmax(0,1fr))}}.nav-cards[data-astro-cid-75u2l675] .nav-panel-articles img{border-radius:.625rem}.desk-slip[data-astro-cid-wtop3wsk],.desk-facts[data-astro-cid-wtop3wsk]{border-color:color-mix(in oklab,var(--color-primary) 16%,var(--color-surface-sunken))}.wrapper>.desk-band[data-astro-cid-kyhmplve]:first-child{margin-top:calc(var(--spacing) * -5)}.wrapper>.sticker-band[data-astro-cid-k3z3juqf]:first-child{margin-top:calc(var(--spacing) * -5)}@media(prefers-reduced-motion:no-preference){.sheet-sticker[data-astro-cid-fxetvfvl] a,.sheet-sticker[data-astro-cid-fxetvfvl]>span[data-astro-cid-fxetvfvl]{animation:slap .48s cubic-bezier(.2,1.5,.4,1) backwards;animation-delay:calc(.12s + var(--i) * 55ms)}}@keyframes slap{0%{opacity:0;scale:1.35;rotate:calc(var(--tilt) * -1.5)}to{opacity:1;scale:1;rotate:var(--tilt)}}
+</style>
+<style>.promo-banner[data-astro-cid-lroifm73]{background:linear-gradient(to right,#fdf3e7,#fbe3d4 50%,#fdf3e7)}@keyframes bell-ring{0%,to{transform:rotate(0)}8%{transform:rotate(14deg)}16%{transform:rotate(-12deg)}24%{transform:rotate(10deg)}32%{transform:rotate(-8deg)}40%{transform:rotate(4deg)}48%{transform:rotate(0)}}@keyframes push-ping{0%{transform:scale(1);opacity:.6}75%,to{transform:scale(2.2);opacity:0}}@media(any-pointer:coarse){#push-close-btn[data-astro-cid-w7xjyvkx]{display:none}}@media(prefers-reduced-motion:reduce){#push-notification-prompt[data-astro-cid-w7xjyvkx],#push-notification-prompt[data-astro-cid-w7xjyvkx] [data-astro-cid-w7xjyvkx]{animation:none!important;transition:none!important}}
+.ticker-text[data-v-34ac2891]{transition:transform .2s ease}.ticker-text.ticker-scrolling[data-v-34ac2891]{animation:ticker-scroll-34ac2891 .4s ease-in-out;animation-fill-mode:forwards}@keyframes ticker-scroll-34ac2891{0%{transform:translate(0)}to{transform:translate(var(--scroll-distance, 0))}}
+.checkbox input{margin-right:.75rem;cursor:pointer;-webkit-appearance:none;appearance:none;background-color:#fff;margin:2px;font:inherit;color:currentColor;width:1.5rem;height:1.5rem;min-width:1.5rem;min-height:1.5rem;border-radius:.4em;transform:translateY(-.075em);display:grid;place-content:center}.checkbox input:before{content:"";width:.65em;height:.65em;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);transform:scale(0);transform-origin:bottom left;transition:.12s transform ease-in-out;box-shadow:inset 1em 1em var(--color-primary);background-color:CanvasText}.checkbox input:checked:before{transform:scale(1)}.checkbox input:focus{outline:max(2px,.15em) solid var(--color-primary);outline-offset:max(2px,.15em)}.expand-enter-active,.expand-leave-active{transition:all .3s ease-in-out;max-height:200px}.expand-enter-from,.expand-leave-to{max-height:0;padding-top:0;padding-bottom:0;opacity:0}.expand-enter-to,.expand-leave-from{max-height:200px;opacity:1}
+/*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */@layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){[data-v-38667ae2],[data-v-38667ae2]:before,[data-v-38667ae2]:after,[data-v-38667ae2]::backdrop{--tw-font-weight:initial}}}a[data-v-38667ae2]{--tw-font-weight:var(--font-weight-semibold,600);font-weight:var(--font-weight-semibold,600)}a[data-v-38667ae2]:hover{text-decoration-line:underline}@property --tw-font-weight{syntax:"*";inherits:false}
+.animate-ping-once[data-v-788e3fe6]{animation:ping-once-788e3fe6 .35s ease-out forwards}@keyframes ping-once-788e3fe6{0%{transform:scale(1)}40%{transform:scale(1.2)}70%{transform:scale(.95)}to{transform:scale(1)}}.slide-enter-active[data-v-14b806f0],.slide-leave-active[data-v-14b806f0]{transition:all .3s}.slide-enter-from[data-v-14b806f0],.slide-leave-to[data-v-14b806f0]{transform:translateY(20px);opacity:0}.slide-right-enter-active[data-v-0c8284e0],.slide-right-leave-active[data-v-0c8284e0]{transition:all .3s}.slide-right-enter-from[data-v-0c8284e0],.slide-right-leave-to[data-v-0c8284e0]{transform:translate(-100vw);opacity:0}.slide-left-enter-active[data-v-0c8284e0],.slide-left-leave-active[data-v-0c8284e0]{transition:all .3s}.slide-left-enter-from[data-v-0c8284e0],.slide-left-leave-to[data-v-0c8284e0]{transform:translate(100vw);opacity:0}.submenu-content [data-submenu][data-v-0c8284e0]{display:none}.submenu-content [data-submenu].active[data-v-0c8284e0]{display:block}
+.debug-bar[data-v-45cc7c08] ::-webkit-scrollbar{width:4px}.debug-bar[data-v-45cc7c08] ::-webkit-scrollbar-track{background:#374151}.debug-bar[data-v-45cc7c08] ::-webkit-scrollbar-thumb{background:#6b7280;border-radius:2px}.debug-bar[data-v-45cc7c08] ::-webkit-scrollbar-thumb:hover{background:#9ca3af}
+</style><style>astro-island,astro-slot,astro-static-slot{display:contents}</style></head> <body class="skybox-auto-collapse">  <script>(()=>{var a=(s,i,o)=>{let r=async()=>{await(await s())()},t=typeof i.value=="object"?i.value:void 0,c={rootMargin:t==null?void 0:t.rootMargin},n=new IntersectionObserver(e=>{for(let l of e)if(l.isIntersecting){n.disconnect(),r();break}},c);for(let e of o.children)n.observe(e)};(self.Astro||(self.Astro={})).visible=a;window.dispatchEvent(new Event("astro:visible"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><script type="module">function o(e){e.dataset.imageLoaded===void 0&&(e.dataset.imageLoaded="",window.requestAnimationFrame(()=>{e.style.opacity="1";const a=e.closest("[data-lazyimage]")?.querySelector("[data-blur]");a&&(a.style.opacity="0")}))}function t(e){if(e.dataset.imageLoaded!==void 0)return;(typeof e.decode=="function"?e.decode().catch(()=>{}):Promise.resolve()).finally(()=>o(e))}function d(e){!(e instanceof HTMLImageElement)||!e.matches("[data-image]")||t(e)}document.addEventListener("load",e=>d(e.target),!0);document.addEventListener("error",e=>d(e.target),!0);document.querySelectorAll("[data-lazyimage] [data-image]").forEach(e=>{e.complete&&t(e)});</script><script>(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value=="object"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};"requestIdleCallback"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event("astro:idle"));})();</script><script type="module">let c=[],r=0,l=!1;const g=()=>{const e=document.getElementById("main-navigation");e&&(e.style.top=`${r}px`)},a=()=>{const e=document.getElementById("main-navigation");if(!e)return;let t=r;l||(t+=e.offsetHeight),document.body.style.setProperty("--header-height",`${t}px`)},u=()=>{const e=document.getElementById("site-navigation");if(!e)return;const t=Array.from(e.querySelectorAll('[data-nav-type="category-posts"], [data-nav-type="category-subcategories"], [data-nav-type="static-category-posts"], [data-nav-type="static-posts"][data-nav-href], [data-nav-type="static"][data-collapsible="true"]'));t.forEach(o=>{o.style.display=""}),c=[];const n=e.querySelector("[data-nav-more-button]");n?.parentElement&&(n.parentElement.style.display="");const s=n?.closest("li"),d=e.getBoundingClientRect();for(let o=t.length-1;o>=0;o--){const m=t[0].getBoundingClientRect(),i=t[o].getBoundingClientRect(),h=s&&o<t.length-1?s.getBoundingClientRect().right:-1/0;if(m.left>=d.left-1&&Math.max(i.right,h)<=d.right+1)break;t[o].style.display="none",c.unshift(t[o])}e.setAttribute("data-nav-computed",""),v()},v=()=>{const e=document.getElementById("hidden-nav-items");if(!e)return;e.innerHTML="",c.slice().reverse().forEach(n=>{const s=n.querySelector("a.more-dropdown-link");if(s instanceof HTMLAnchorElement){const d=s.cloneNode(!0);e.appendChild(d)}});const t=document.querySelector("[data-nav-more-button]");t&&t.parentElement&&(c.length>0?t.parentElement.style.display="":t.parentElement.style.display="none")};requestAnimationFrame(()=>{u(),a()});document.fonts?.ready.then(()=>{u(),a()});window.addEventListener("resize",()=>{u(),a()});document.addEventListener("navigation-content-loaded",()=>{setTimeout(()=>{u()},100)});const E=e=>{r=e.detail?.height||0,g(),a()},b=e=>{r=e.detail?.height||0,g(),a()},H=()=>{r=0,g(),a()},S=()=>{const e=document.getElementById("main-navigation");if(!e){console.error("Navigation element not found");return}let t=0,n=!1;const s=10,d=()=>{const i=document.documentElement.scrollTop;if(i<0||document.querySelector("[data-search-open='true']")||document.querySelector("[data-dropdown-open='true']")||Math.abs(i-t)<s)return;const f=i>t;if(f&&i>100&&!n){const p=-(e.offsetHeight+r);e.style.transform=`translateY(${p}px)`,n=!0,l=!0,a()}else(!f&&n||i<=100&&n)&&(e.style.transform="translateY(0)",n=!1,l=!1,a());t=i};let o=!1;const m=()=>{o||(requestAnimationFrame(()=>{d(),o=!1}),o=!0)};document.addEventListener("scroll",m),d(),a()};document.addEventListener("skybox-ad-ready",E);document.addEventListener("skybox-ad-height-changed",b);document.addEventListener("skybox-ad-hidden",H);document.addEventListener("DOMContentLoaded",S);</script><script type="module">document.addEventListener("click",t=>{const e=t.target;e instanceof Element&&e.closest("[data-newsletter-trigger]")&&(t.preventDefault(),window.dispatchEvent(new CustomEvent("open-newsletter-modal")))});</script>   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR3XXWX8" height="0" width="0" style="display:none;visibility:hidden" title="Google tag manageer noscript tag"></iframe></noscript><script>(function(){const gtmId = "GTM-NR3XXWX8";
+
+    // Patched vs the stock GTM snippet: the gtm.js script-tag injection is
+    // pulled out of the IIFE and deferred to idle. window.dataLayer and gtm.start
+    // event are still created synchronously, so every dataLayer.push between
+    // now and load queues on the plain array and GTM drains it on boot —
+    // no events are lost, they arrive later.
+    //
+    // Why: gtm.js is ~177KB and lands mid-load alongside the ad stack, where it
+    // costs main thread we need for INP and competes with the LCP image for
+    // bandwidth. Nothing in the ad path depends on it (GPT is loaded by the
+    // Assertive Yield manager, not GTM).
+    ;(function (w, d, s, l, i) {
+        w[l] = w[l] || []
+        w[l].push({
+            "gtm.start": new Date().getTime(),
+            event: "gtm.js",
+        })
+
+        const load = function () {
+            const f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != "dataLayer" ? "&l=" + l : ""
+            j.async = true
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl
+            f.parentNode.insertBefore(j, f)
+        }
+
+        // Cap the wait: ad-heavy pages can stay busy for many seconds and may
+        // never hit a true idle period.
+        if ("requestIdleCallback" in w) {
+            w.requestIdleCallback(load, { timeout: 4000 })
+        } else {
+            w.setTimeout(load, 2000)
+        }
+    })(window, document, "script", "dataLayer", gtmId)
+})();</script><div class="fixed top-0 left-0 right-0 z-1000 bg-white shadow-sm transition-transform duration-300 ease-in-out print:static" id="main-navigation"> <div class="border-t-19 border-primary"> <div class="flex items-center justify-between h-[60px] px-2 md:px-4 self-center w-full max-w-[min(100%,1200px)] mx-auto"> <div class="pl-4 mr-4 md:hidden"> <astro-island uid="2JdlT" prefix="s19" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/MobileNavigation.BSE-g9T5.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;mode&quot;:[0,&quot;push&quot;],&quot;hasDrawerTop&quot;:[0,false],&quot;hasSubmenus&quot;:[0,true],&quot;class&quot;:[0],&quot;data-mobile-navigation&quot;:[0,true]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;MobileNavigationVue&quot;,&quot;value&quot;:true}" await-children=""><div data-mobile-navigation="true" data-v-0c8284e0=""><button class="nav-icon aspect-square h-full flex" aria-label="Open navigation menu" aria-expanded="false" data-v-0c8284e0=""><!----><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu h-[30px] w-[30px]" aria-hidden="true" data-v-0c8284e0=""><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg><!--]--></button><div class="nav-drawer absolute left-0 z-100 w-screen overflow-y-auto overscroll-contain pb-[100px]" style="display:none;" data-v-0c8284e0=""><!----><ul class="nav-drawer-list flex flex-col justify-center gap-4 p-[20px]" data-v-0c8284e0=""><!--[--><astro-slot name="navigation-items"><li class="nav-drawer-divider w-full" data-nav-slot="0"> <button class="nav-drawer-item" data-nav-item="0" aria-expanded="false"> Feel Good <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-5 w-5" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </button> </li><li class="nav-drawer-divider w-full" data-nav-slot="1"> <button class="nav-drawer-item" data-nav-item="1" aria-expanded="false"> Eat Well <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-5 w-5" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </button> </li><li class="nav-drawer-divider w-full" data-nav-slot="2"> <button class="nav-drawer-item" data-nav-item="2" aria-expanded="false"> Dress Up <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-5 w-5" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </button> </li></astro-slot><!--]--></ul><!----></div><div class="nav-drawer shadow-l group absolute left-0 z-100 w-screen overflow-y-auto overscroll-contain p-[20px]" style="display:none;" data-v-0c8284e0=""><button class="text-primary flex items-center gap-2 font-semibold" data-v-0c8284e0=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left h-5 w-5" aria-hidden="true" data-v-0c8284e0=""><path d="m15 18-6-6 6-6" /></svg> Back to Menu </button><!--[--><astro-slot name="submenu-content"><div class="h-full w-full" data-nav-submenu="0"> <div class="wrap mx-auto"> <div class="flex flex-col gap-6 py-5"> <div class="flex flex-col gap-6"><div class="flex flex-col gap-4"><div class="flex flex-col gap-2"><div class="nav-panel-label">Related Topics</div><div class="flex flex-col gap-1"><a class="nav-panel-link" href="/feel-good/life-hacks/"> Life Hacks </a><a class="nav-panel-link" href="/feel-good/mindfulness/"> Mindfulness </a><a class="nav-panel-link" href="/feel-good/wellness/"> Wellness </a></div></div></div><div class="flex-1"><div class="flex items-center justify-between"><div class="nav-panel-label">Articles</div><a class="flex items-center gap-1 text-[14px]/[20px] hover:underline" href="/feel-good/"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-4 w-4" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </a></div><astro-island uid="Z1CLdjq" prefix="s3" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Feel Good&quot;],&quot;categoryId&quot;:[0,18790],&quot;href&quot;:[0,&quot;/feel-good/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Life Hacks&quot;],&quot;href&quot;:[0,&quot;/feel-good/life-hacks/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Mindfulness&quot;],&quot;href&quot;:[0,&quot;/feel-good/mindfulness/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Wellness&quot;],&quot;href&quot;:[0,&quot;/feel-good/wellness/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18790],&quot;slug&quot;:[0,&quot;feel-good&quot;],&quot;name&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/feel-good/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Feel Good&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;mobile&quot;],&quot;locale&quot;:[0,&quot;en&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island></div></div> </div> </div> </div><div class="h-full w-full" data-nav-submenu="1"> <div class="wrap mx-auto"> <div class="flex flex-col gap-6 py-5"> <div class="flex flex-col gap-6"><div class="flex flex-col gap-4"><div class="flex flex-col gap-2"><div class="nav-panel-label">Related Topics</div><div class="flex flex-col gap-1"><a class="nav-panel-link" href="/eat-well/breakfast/"> Breakfast </a><a class="nav-panel-link" href="/eat-well/cocktails/"> Cocktails </a><a class="nav-panel-link" href="/eat-well/cooking-skills/"> Cooking Skills </a><a class="nav-panel-link" href="/eat-well/dessert/"> Dessert </a><a class="nav-panel-link" href="/eat-well/dinner/"> Dinner </a><a class="nav-panel-link" href="/eat-well/nutrition/"> Nutrition </a><a class="nav-panel-link" href="/eat-well/small-bites/"> Small Bites </a></div></div></div><div class="flex-1"><div class="flex items-center justify-between"><div class="nav-panel-label">Articles</div><a class="flex items-center gap-1 text-[14px]/[20px] hover:underline" href="/eat-well/"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-4 w-4" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </a></div><astro-island uid="b1nka" prefix="s4" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Eat Well&quot;],&quot;categoryId&quot;:[0,18809],&quot;href&quot;:[0,&quot;/eat-well/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Breakfast&quot;],&quot;href&quot;:[0,&quot;/eat-well/breakfast/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cocktails&quot;],&quot;href&quot;:[0,&quot;/eat-well/cocktails/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cooking Skills&quot;],&quot;href&quot;:[0,&quot;/eat-well/cooking-skills/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dessert&quot;],&quot;href&quot;:[0,&quot;/eat-well/dessert/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dinner&quot;],&quot;href&quot;:[0,&quot;/eat-well/dinner/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Nutrition&quot;],&quot;href&quot;:[0,&quot;/eat-well/nutrition/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Small Bites&quot;],&quot;href&quot;:[0,&quot;/eat-well/small-bites/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18809],&quot;slug&quot;:[0,&quot;eat-well&quot;],&quot;name&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/eat-well/&quot;],&quot;parent&quot;:[0,18818],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Eat Well&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;mobile&quot;],&quot;locale&quot;:[0,&quot;en&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island></div></div> </div> </div> </div><div class="h-full w-full" data-nav-submenu="2"> <div class="wrap mx-auto"> <div class="flex flex-col gap-6 py-5"> <div class="flex flex-col gap-6"><div class="flex flex-col gap-4"><div class="flex flex-col gap-2"><div class="nav-panel-label">Related Topics</div><div class="flex flex-col gap-1"><a class="nav-panel-link" href="/dress-up/diy-beauty/"> DIY Beauty </a><a class="nav-panel-link" href="/dress-up/fashion/"> Fashion </a><a class="nav-panel-link" href="/dress-up/tutorials/"> Tutorials </a></div></div></div><div class="flex-1"><div class="flex items-center justify-between"><div class="nav-panel-label">Articles</div><a class="flex items-center gap-1 text-[14px]/[20px] hover:underline" href="/dress-up/"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right h-4 w-4" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg> </a></div><astro-island uid="Zd41LV" prefix="s5" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Dress Up&quot;],&quot;categoryId&quot;:[0,18801],&quot;href&quot;:[0,&quot;/dress-up/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;DIY Beauty&quot;],&quot;href&quot;:[0,&quot;/dress-up/diy-beauty/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Fashion&quot;],&quot;href&quot;:[0,&quot;/dress-up/fashion/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Tutorials&quot;],&quot;href&quot;:[0,&quot;/dress-up/tutorials/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18801],&quot;slug&quot;:[0,&quot;dress-up&quot;],&quot;name&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/dress-up/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Dress Up&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;mobile&quot;],&quot;locale&quot;:[0,&quot;en&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island></div></div> </div> </div> </div></astro-slot><!--]--></div></div><template data-astro-template="drawer-top"></template><!--astro:end--></astro-island> </div> <a class="block max-h-[90px] px-4" href="/">  <div class="max-h-[35px] w-auto self-start shrink relative">  <img src="https://www.leaf.tv/astrostatic/f062e407/_image/?href=%2F_astro%2Fleaftv-nav._E359bVF.png&w=113&h=108&f=webp" alt="LEAFtv Logo" loading="eager" fetchpriority="high" showPlaceholder="false" data-image="true" style="opacity:1" decoding="async" width="113" height="108" class="max-h-[35px] w-auto self-start shrink transition-opacity duration-300"> </div>   </a> <div class="flex items-center gap-4">  <div class="flex items-center gap-5 px-4"> <div class="h-[23px] md:flex hidden"> <div class="flex items-center"> <div class="flex items-center h-full"> <a href="https://www.facebook.com/LEAFtv-202292389783837/" target="_blank" rel="noopener noreferrer" class="text-primary h-full w-auto rounded-full transition-all ease-in-out hover:text-primary/80 ml-3 aspect-square" aria-label="facebook"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="24" height="100%" aria-hidden="true"><title>Facebook</title><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" /></svg> <div class="sr-only">facebook</div> </a> </div><div class="flex items-center h-full"> <a href="https://x.com/leaftv" target="_blank" rel="noopener noreferrer" class="text-primary h-full w-auto rounded-full transition-all ease-in-out hover:text-primary/80 ml-3 aspect-square" aria-label="x"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="24" height="100%" aria-hidden="true"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" /></svg> <div class="sr-only">x</div> </a> </div><div class="flex items-center h-full"> <a href="https://www.pinterest.com/leaftv/" target="_blank" rel="noopener noreferrer" class="text-primary h-full w-auto rounded-full transition-all ease-in-out hover:text-primary/80 ml-3 aspect-square" aria-label="pinterest"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="24" height="100%" aria-hidden="true"><title>Pinterest</title><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" /></svg> <div class="sr-only">pinterest</div> </a> </div><div class="flex items-center h-full"> <a href="https://www.youtube.com/user/leaftv" target="_blank" rel="noopener noreferrer" class="text-primary h-full w-auto rounded-full transition-all ease-in-out hover:text-primary/80 ml-3 aspect-square" aria-label="youtube"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="24" height="100%" aria-hidden="true"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg> <div class="sr-only">youtube</div> </a> </div> </div> </div>   <div> <astro-island uid="2lpQ5D" prefix="s2" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/ButtonNavigationSearch.B76gV6Dy.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;domain&quot;:[0,&quot;leaf.tv&quot;]}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;ButtonNavigationSearch&quot;,&quot;value&quot;:true}" await-children=""><div class="nav-search-root z-50 shrink-0" data-search-open="false" data-v-14b806f0=""><button class="nav-icon" aria-label="Toggle search" data-v-14b806f0=""><!----><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search w-6 h-6" aria-hidden="true" data-v-14b806f0=""><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg><!--]--></button><!----></div><!--astro:end--></astro-island> </div>  </div> </div> </div> </div> <div class="hidden md:block"> <div class="z-50"> <div class="border-primary/25 flex w-full items-center justify-center border-y bg-white"> <ul class="container mx-auto flex w-full max-w-[min(100%,1200px)] justify-center" id="site-navigation"> <li class="group [&_.more-dropdown-link]:hidden" data-nav-href="/feel-good/" data-nav-type="category-posts"><astro-island uid="Z3u2zE" prefix="s20" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicNavigationDropdown.MliM6M0A.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Feel Good&quot;],&quot;categoryId&quot;:[0,18790],&quot;href&quot;:[0,&quot;/feel-good/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Life Hacks&quot;],&quot;href&quot;:[0,&quot;/feel-good/life-hacks/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Mindfulness&quot;],&quot;href&quot;:[0,&quot;/feel-good/mindfulness/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Wellness&quot;],&quot;href&quot;:[0,&quot;/feel-good/wellness/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18790],&quot;slug&quot;:[0,&quot;feel-good&quot;],&quot;name&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/feel-good/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Feel Good&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;domain&quot;:[0,&quot;leaf.tv&quot;],&quot;href&quot;:[0,&quot;/feel-good/&quot;],&quot;translatedLabel&quot;:[0,&quot;Feel Good&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicNavigationDropdown&quot;,&quot;value&quot;:true}" await-children=""><!--[--><a href="/feel-good/" class="more-dropdown-link nav-more-link">Feel Good</a><div data-dropdown-open="false"><button class="nav-item group" data-open="false"><!--[-->Feel Good <!--]--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down nav-item-chevron w-5 transition-transform duration-200" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button><div class="w-screen left-0 nav-panel absolute" style="display:none;"><!--[--><div class="nav-panel-body wrapper"><div><!--[--><astro-slot><div class="flex gap-6"> <div class="flex max-w-[250px] flex-col gap-4"> <div class="flex flex-col gap-2"> <div class="nav-panel-label">Related Topics</div> <div class="flex flex-col gap-1"> <a class="nav-panel-link" href="/feel-good/life-hacks/"> Life Hacks </a><a class="nav-panel-link" href="/feel-good/mindfulness/"> Mindfulness </a><a class="nav-panel-link" href="/feel-good/wellness/"> Wellness </a> </div> </div> </div> <div class="flex-1"> <div class="flex items-center justify-between"> <div class="nav-panel-label">Top Articles</div> <a href="/feel-good/">  <button class="button cursor-pointer tracking-[1.2px] font-semibold font-mono rounded-full flex items-center transition uppercase gap-[10px] min-h-[30px] px-4 py-1 text-[12px]/[16px] text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground w-fit"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right h-4 w-4" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>  </button>  </a> </div> <div class="@container max-h-[60vh] overflow-y-auto"> <astro-island uid="Z1zqmLL" prefix="s6" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Feel Good&quot;],&quot;categoryId&quot;:[0,18790],&quot;href&quot;:[0,&quot;/feel-good/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Life Hacks&quot;],&quot;href&quot;:[0,&quot;/feel-good/life-hacks/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Mindfulness&quot;],&quot;href&quot;:[0,&quot;/feel-good/mindfulness/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Wellness&quot;],&quot;href&quot;:[0,&quot;/feel-good/wellness/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18790],&quot;slug&quot;:[0,&quot;feel-good&quot;],&quot;name&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/feel-good/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/feel-good/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Feel Good&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/feel-good/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Feel Good&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;desktop&quot;],&quot;locale&quot;:[0,&quot;en&quot;],&quot;featureKicker&quot;:[0],&quot;featureCta&quot;:[0],&quot;featureImage&quot;:[0],&quot;featureOnly&quot;:[0]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island> </div> </div> </div></astro-slot><!--]--></div></div><!--]--></div></div><!--]--><!--astro:end--></astro-island></li><li class="group [&_.more-dropdown-link]:hidden" data-nav-href="/eat-well/" data-nav-type="category-posts"><astro-island uid="ZmeWqq" prefix="s21" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicNavigationDropdown.MliM6M0A.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Eat Well&quot;],&quot;categoryId&quot;:[0,18809],&quot;href&quot;:[0,&quot;/eat-well/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Breakfast&quot;],&quot;href&quot;:[0,&quot;/eat-well/breakfast/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cocktails&quot;],&quot;href&quot;:[0,&quot;/eat-well/cocktails/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cooking Skills&quot;],&quot;href&quot;:[0,&quot;/eat-well/cooking-skills/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dessert&quot;],&quot;href&quot;:[0,&quot;/eat-well/dessert/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dinner&quot;],&quot;href&quot;:[0,&quot;/eat-well/dinner/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Nutrition&quot;],&quot;href&quot;:[0,&quot;/eat-well/nutrition/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Small Bites&quot;],&quot;href&quot;:[0,&quot;/eat-well/small-bites/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18809],&quot;slug&quot;:[0,&quot;eat-well&quot;],&quot;name&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/eat-well/&quot;],&quot;parent&quot;:[0,18818],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Eat Well&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;domain&quot;:[0,&quot;leaf.tv&quot;],&quot;href&quot;:[0,&quot;/eat-well/&quot;],&quot;translatedLabel&quot;:[0,&quot;Eat Well&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicNavigationDropdown&quot;,&quot;value&quot;:true}" await-children=""><!--[--><a href="/eat-well/" class="more-dropdown-link nav-more-link">Eat Well</a><div data-dropdown-open="false"><button class="nav-item group" data-open="false"><!--[-->Eat Well <!--]--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down nav-item-chevron w-5 transition-transform duration-200" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button><div class="w-screen left-0 nav-panel absolute" style="display:none;"><!--[--><div class="nav-panel-body wrapper"><div><!--[--><astro-slot><div class="flex gap-6"> <div class="flex max-w-[250px] flex-col gap-4"> <div class="flex flex-col gap-2"> <div class="nav-panel-label">Related Topics</div> <div class="flex flex-col gap-1"> <a class="nav-panel-link" href="/eat-well/breakfast/"> Breakfast </a><a class="nav-panel-link" href="/eat-well/cocktails/"> Cocktails </a><a class="nav-panel-link" href="/eat-well/cooking-skills/"> Cooking Skills </a><a class="nav-panel-link" href="/eat-well/dessert/"> Dessert </a><a class="nav-panel-link" href="/eat-well/dinner/"> Dinner </a><a class="nav-panel-link" href="/eat-well/nutrition/"> Nutrition </a><a class="nav-panel-link" href="/eat-well/small-bites/"> Small Bites </a> </div> </div> </div> <div class="flex-1"> <div class="flex items-center justify-between"> <div class="nav-panel-label">Top Articles</div> <a href="/eat-well/">  <button class="button cursor-pointer tracking-[1.2px] font-semibold font-mono rounded-full flex items-center transition uppercase gap-[10px] min-h-[30px] px-4 py-1 text-[12px]/[16px] text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground w-fit"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right h-4 w-4" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>  </button>  </a> </div> <div class="@container max-h-[60vh] overflow-y-auto"> <astro-island uid="53nwO" prefix="s7" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Eat Well&quot;],&quot;categoryId&quot;:[0,18809],&quot;href&quot;:[0,&quot;/eat-well/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Breakfast&quot;],&quot;href&quot;:[0,&quot;/eat-well/breakfast/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cocktails&quot;],&quot;href&quot;:[0,&quot;/eat-well/cocktails/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Cooking Skills&quot;],&quot;href&quot;:[0,&quot;/eat-well/cooking-skills/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dessert&quot;],&quot;href&quot;:[0,&quot;/eat-well/dessert/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dinner&quot;],&quot;href&quot;:[0,&quot;/eat-well/dinner/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Nutrition&quot;],&quot;href&quot;:[0,&quot;/eat-well/nutrition/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Small Bites&quot;],&quot;href&quot;:[0,&quot;/eat-well/small-bites/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18809],&quot;slug&quot;:[0,&quot;eat-well&quot;],&quot;name&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/eat-well/&quot;],&quot;parent&quot;:[0,18818],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/eat-well/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Eat Well&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/eat-well/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Eat Well&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;desktop&quot;],&quot;locale&quot;:[0,&quot;en&quot;],&quot;featureKicker&quot;:[0],&quot;featureCta&quot;:[0],&quot;featureImage&quot;:[0],&quot;featureOnly&quot;:[0]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island> </div> </div> </div></astro-slot><!--]--></div></div><!--]--></div></div><!--]--><!--astro:end--></astro-island></li><li> <astro-island uid="1FARGE" prefix="s18" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/ButtonNavigationDropdown.Vmq4slJs.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;width&quot;:[0,&quot;auto&quot;],&quot;data-nav-more-button&quot;:[0,true]}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;ButtonNavigationDropdown&quot;,&quot;value&quot;:true}" await-children=""><div class="relative" data-dropdown-open="false" data-nav-more-button="true"><button class="nav-item group" data-open="false"><!--[--><astro-slot>More </astro-slot><!--]--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down nav-item-chevron w-5 transition-transform duration-200" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button><div class="nav-panel-more w-[300px] border-x left-1/2 transform -translate-x-1/2 nav-panel absolute" style="display:none;"><!--[--><astro-slot name="content"> <div class="nav-panel-surface w-full"> <div class="wrap mx-auto"> <div class="flex flex-col py-5" id="hidden-nav-items"></div> </div> </div> </astro-slot><!--]--></div></div><!--astro:end--></astro-island> </li><li class="group [&_.more-dropdown-link]:hidden" data-nav-href="/dress-up/" data-nav-type="category-posts"><astro-island uid="1xl3bH" prefix="s22" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicNavigationDropdown.MliM6M0A.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Dress Up&quot;],&quot;categoryId&quot;:[0,18801],&quot;href&quot;:[0,&quot;/dress-up/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;DIY Beauty&quot;],&quot;href&quot;:[0,&quot;/dress-up/diy-beauty/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Fashion&quot;],&quot;href&quot;:[0,&quot;/dress-up/fashion/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Tutorials&quot;],&quot;href&quot;:[0,&quot;/dress-up/tutorials/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18801],&quot;slug&quot;:[0,&quot;dress-up&quot;],&quot;name&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/dress-up/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Dress Up&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;domain&quot;:[0,&quot;leaf.tv&quot;],&quot;href&quot;:[0,&quot;/dress-up/&quot;],&quot;translatedLabel&quot;:[0,&quot;Dress Up&quot;]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicNavigationDropdown&quot;,&quot;value&quot;:true}" await-children=""><!--[--><a href="/dress-up/" class="more-dropdown-link nav-more-link">Dress Up</a><div data-dropdown-open="false"><button class="nav-item group" data-open="false"><!--[-->Dress Up <!--]--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down nav-item-chevron w-5 transition-transform duration-200" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button><div class="w-screen left-0 nav-panel absolute" style="display:none;"><!--[--><div class="nav-panel-body wrapper"><div><!--[--><astro-slot><div class="flex gap-6"> <div class="flex max-w-[250px] flex-col gap-4"> <div class="flex flex-col gap-2"> <div class="nav-panel-label">Related Topics</div> <div class="flex flex-col gap-1"> <a class="nav-panel-link" href="/dress-up/diy-beauty/"> DIY Beauty </a><a class="nav-panel-link" href="/dress-up/fashion/"> Fashion </a><a class="nav-panel-link" href="/dress-up/tutorials/"> Tutorials </a> </div> </div> </div> <div class="flex-1"> <div class="flex items-center justify-between"> <div class="nav-panel-label">Top Articles</div> <a href="/dress-up/">  <button class="button cursor-pointer tracking-[1.2px] font-semibold font-mono rounded-full flex items-center transition uppercase gap-[10px] min-h-[30px] px-4 py-1 text-[12px]/[16px] text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground w-fit"> View All<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-icon lucide-arrow-right h-4 w-4" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>  </button>  </a> </div> <div class="@container max-h-[60vh] overflow-y-auto"> <astro-island uid="ZbIYb6" prefix="s8" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/DynamicCategoryPosts.gYU1WV_x.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{&quot;navitem&quot;:[0,{&quot;type&quot;:[0,&quot;category-posts&quot;],&quot;label&quot;:[0,&quot;Dress Up&quot;],&quot;categoryId&quot;:[0,18801],&quot;href&quot;:[0,&quot;/dress-up/&quot;],&quot;subcategories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;DIY Beauty&quot;],&quot;href&quot;:[0,&quot;/dress-up/diy-beauty/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Fashion&quot;],&quot;href&quot;:[0,&quot;/dress-up/fashion/&quot;]}],[0,{&quot;name&quot;:[0,&quot;Tutorials&quot;],&quot;href&quot;:[0,&quot;/dress-up/tutorials/&quot;]}]]],&quot;category&quot;:[0,{&quot;id&quot;:[0,18801],&quot;slug&quot;:[0,&quot;dress-up&quot;],&quot;name&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;link&quot;:[0,&quot;/dress-up/&quot;],&quot;parent&quot;:[0,0],&quot;taxonomy&quot;:[0,&quot;category&quot;],&quot;_links&quot;:[0,{&quot;self&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;]}]]],&quot;wp:post_type&quot;:[1,[[0,{&quot;href&quot;:[0,&quot;https://www.leaf.tv/dress-up/posts/&quot;]}]]]}],&quot;meta&quot;:[0,{&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;indexable&quot;:[0,true],&quot;yoast_head_json&quot;:[0,{&quot;title&quot;:[0,&quot;Dress Up&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;robots&quot;:[0,{}],&quot;canonical&quot;:[0,&quot;https://www.leaf.tv/dress-up/&quot;],&quot;og_locale&quot;:[0,&quot;en_US&quot;],&quot;og_type&quot;:[0,&quot;object&quot;],&quot;og_title&quot;:[0,&quot;Dress Up&quot;],&quot;og_description&quot;:[0,&quot;&quot;],&quot;og_image&quot;:[1,[[0,{&quot;url&quot;:[0,&quot;https://www.leaf.tv/_astro/leaftv.Cp4ajmdI.png&quot;],&quot;width&quot;:[0,300],&quot;height&quot;:[0,200],&quot;type&quot;:[0,&quot;image/png&quot;]}]]],&quot;schema&quot;:[0,{}]}]}]}],&quot;posts&quot;:[1,[]]}],&quot;variant&quot;:[0,&quot;desktop&quot;],&quot;locale&quot;:[0,&quot;en&quot;],&quot;featureKicker&quot;:[0],&quot;featureCta&quot;:[0],&quot;featureImage&quot;:[0],&quot;featureOnly&quot;:[0]}" ssr="" client="visible" opts="{&quot;name&quot;:&quot;DynamicCategoryPosts&quot;,&quot;value&quot;:true}" await-children=""><div data-dynamic-posts="" class="nav-panel-articles"><div class="flex items-center justify-center py-8"><div class="text-gray-400">Hover to load posts</div></div></div><!--astro:end--></astro-island> </div> </div> </div></astro-slot><!--]--></div></div><!--]--></div></div><!--]--><!--astro:end--></astro-island></li> </ul> </div> </div>   </div> <div class="absolute top-0 left-0 w-full h-full bg-primary/5 -z-1"></div> </div> <!-- Spacer to prevent content jump when navigation becomes fixed --> <div id="nav-spacer" class="h-[80px] md:h-[120px]"></div>   <div class="wrapper flex flex-col b leaf-tv pt-5">    <div class="container px-0 md-px-[75px] pb-20"> <div class="w-[966px] max-w-full mx-auto px-6"> <div class="md:w-[33%] text-center md:text-left"> <h1 class="h1 mb-8 text-primary">404</h1> <h2 class="h2">Page Not Found</h2> <p class="mt-4 text-l">
+Sorry, this page does not exist. Return to the home page to
+                    find what you're looking for.
+</p> <div class="pt-8 flex justify-center md:justify-start"> <a href="/">  <button class="button cursor-pointer tracking-[1.2px] font-semibold font-mono rounded-full flex items-center transition uppercase gap-[10px] min-h-[30px] px-4 py-1 text-[12px]/[16px] text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-left-icon lucide-move-left w-4 h-4" aria-hidden="true"><path d="M6 8L2 12L6 16" /><path d="M2 12H22" /></svg>
+Go Back
+ </button>  </a> </div> </div> </div> </div>   </div> <div class="wrapper relative bg-primary text-primary-foreground pt-[44px] pb-[9px] z-999"> <div class="flex flex-col lg:grid lg:grid-cols-5 gap-x-[64px] space-y-[24px] lg:space-y-[16px]"> <div class="space-y-[24px] lg:space-y-[16px] lg:col-span-3"> <a class="inline-block" href="/">  <div class="max-w-[200px] self-start md:ml-[unset] invert brightness-0 contrast-200 relative">  <img src="https://www.leaf.tv/astrostatic/f062e407/_image/?href=%2F_astro%2Fleaftv-nav._E359bVF.png&w=113&h=108&f=webp" alt="LEAFtv Logo" data-image="true" style="opacity:1" loading="lazy" decoding="async" fetchpriority="auto" width="113" height="108" class="max-w-[200px] self-start md:ml-[unset] invert brightness-0 contrast-200 transition-opacity duration-300"> </div>   </a> <p class="leading-6"> LEAFtv is your destination for food, beauty, style and feel-good living, with how-tos and inspiration for everyday life. </p> <div class="flex gap-6 justify-center lg:justify-normal h-fit"> <div class="flex items-center gap-3 gap-4"> <div class="flex items-center"> <a href="https://www.facebook.com/LEAFtv-202292389783837/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-foreground text-primary transition-all ease-in-out hover:opacity-80 aspect-square" aria-label="facebook"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="20" height="20" aria-hidden="true"><title>Facebook</title><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" /></svg> <div class="sr-only">facebook</div> </a> </div><div class="flex items-center"> <a href="https://x.com/leaftv" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-foreground text-primary transition-all ease-in-out hover:opacity-80 aspect-square" aria-label="x"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="20" height="20" aria-hidden="true"><title>X</title><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" /></svg> <div class="sr-only">x</div> </a> </div><div class="flex items-center"> <a href="https://www.pinterest.com/leaftv/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-foreground text-primary transition-all ease-in-out hover:opacity-80 aspect-square" aria-label="pinterest"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="20" height="20" aria-hidden="true"><title>Pinterest</title><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" /></svg> <div class="sr-only">pinterest</div> </a> </div><div class="flex items-center"> <a href="https://www.youtube.com/user/leaftv" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-foreground text-primary transition-all ease-in-out hover:opacity-80 aspect-square" aria-label="youtube"> <svg role="img" viewBox="0 0 24 24" class="fill-current" width="20" height="20" aria-hidden="true"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg> <div class="sr-only">youtube</div> </a> </div> </div> </div> </div> <div class="flex gap-x-[64px] lg:col-span-2 justify-center lg:justify-start"> <div class="space-y-[24px] lg:space-y-[16px]"> <h3 class="h3 uppercase font-bold text-[16px]/[16px] text-white">Company</h3> <div class="grid space-y-[12px]"> <a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[16px] text-nowrap" href="/about/"> About us </a> <a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[16px] text-nowrap" href="https://technologyadvice.com/contact-us/" target="_blank" rel="nofollow"> Contact us </a> <a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[16px] text-nowrap" href="https://technologyadvice.com/contact-us/?utm_medium=portfolio_footer&utm_campaign=advertise_contact-us&utm-source=leaftv" target="_blank" rel="nofollow"> Advertise with us </a>  </div> </div> <div class="space-y-[24px] lg:space-y-[16px]">  <h3 class="h3 uppercase font-bold text-[16px]/[16px] text-white">Categories</h3> <div class="grid space-y-[12px]"> <a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[20px] text-ellipsis line-clamp-1" href="/feel-good/"> Feel Good </a><a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[20px] text-ellipsis line-clamp-1" href="/eat-well/"> Eat Well </a><a class="text-primary-foreground hover:text-primary-foreground/80 text-[16px]/[20px] text-ellipsis line-clamp-1" href="/dress-up/"> Dress Up </a> </div>  </div> </div> </div> </div> <div class="wrapper relative bg-white pt-[9px] pb-[100px] z-999"> <div class="flex flex-col items-center lg:grid lg:grid-cols-2 gap-x-[64px] space-y-[24px] lg:space-y-[16px]"> <div class="flex flex-col gap-4 col-span-full text-[12px]/[21px] text-secondary"> <div class="space-y-2"> <p class="font-bold"> Property of TechnologyAdvice. ©  2026 TechnologyAdvice. All Rights Reserved </p> <p> Advertiser Disclosure: Some of the products that appear on this site are from companies from which TechnologyAdvice receives compensation. This compensation may impact how and where products appear on this site including, for example, the order in which they appear. TechnologyAdvice does not include all companies or all types of products available in the marketplace. </p> </div> <div class="flex gap-4 items-center font-bold uppercase"> <a class="text-secondary hover:text-primary" href="/terms-conditions/"> Terms of Service </a> <a class="text-secondary hover:text-primary" href="/privacy-policy/"> Privacy Policy </a> <a class="text-secondary hover:text-primary" href="https://technologyadvice.com/privacy-policy/ccpa-opt-out-form/" target="_blank" rel="nofollow"> California - Do Not Sell My Information </a> </div> <div id="choice-footer-msg" class="text-[12px]/[21px]"></div> </div> </div> </div><astro-island uid="Z11ETh1" prefix="s1" component-url="https://www.leaf.tv/astrostatic/f062e407/_astro/BackToTop.s_hNQXQ6.js" component-export="default" renderer-url="https://www.leaf.tv/astrostatic/f062e407/_astro/client.B5RjyhEY.js" props="{}" ssr="" client="idle" opts="{&quot;name&quot;:&quot;BackToTop&quot;,&quot;value&quot;:true}" await-children=""><button id="back-to-top" class="fixed right-4 z-1001 cursor-pointer transition-all duration-500 ease-in-out rounded-full hover:shadow-[0px_0px_3px_#71717a] hover:scale-105 bg-primary text-primary-foreground border-none p-0 opacity-0 translate-y-[70px]" style="bottom:calc(
+                var(--sticky-ad-height, 0px) + var(--floating-bar-height, 0px) +
+                    16px
+            );" aria-label="Back to top"><svg width="48" height="48" viewBox="0 0 48 48" class="block" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3" opacity="0.2" /><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="131.94689145077132" stroke-dashoffset="131.94689145077132" transform="rotate(-90 24 24)" style="transition:stroke-dashoffset 150ms ease;" /></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true"><path d="m18 15-6-6-6 6" /></svg></button><!--astro:end--></astro-island>  </body></html>

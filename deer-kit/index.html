@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>🦌 Renifer 1.1 m — podgląd części 3D</title>
+<style>
+  :root{--bg:#0b0e14;--panel:#12161fdd;--acc:#e5b455;--txt:#cfd6e4}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  #c{position:fixed;inset:0;touch-action:none}
+  #panel{position:fixed;top:10px;left:10px;width:230px;max-height:calc(100vh-20px);background:var(--panel);backdrop-filter:blur(8px);border:1px solid #ffffff22;border-radius:12px;display:flex;flex-direction:column;overflow:hidden;z-index:5}
+  #panel h1{font-size:13px;padding:10px 12px 6px;color:var(--acc);letter-spacing:.3px}
+  #modes{display:flex;gap:6px;padding:0 10px 8px}
+  #modes button{flex:1;padding:6px 4px;border-radius:8px;border:1px solid #ffffff22;background:#ffffff10;color:var(--txt);cursor:pointer;font-size:12px}
+  #modes button.on{background:var(--acc);color:#000;font-weight:700;border-color:transparent}
+  #list{overflow-y:auto;flex:1;padding:4px 6px 8px}
+  #list .grp{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#8a93a6;margin:8px 6px 2px}
+  #list button{display:block;width:100%;text-align:left;padding:6px 8px;margin:2px 0;border:none;border-radius:8px;background:transparent;color:var(--txt);cursor:pointer;font-size:12.5px}
+  #list button:hover{background:#ffffff14}
+  #list button.sel{background:var(--acc);color:#000;font-weight:600}
+  #list .kg{float:right;color:#8a93a6;font-size:11px}
+  #list button.sel .kg{color:#00000099}
+  #hud{position:fixed;left:250px;top:10px;right:10px;max-width:420px;background:var(--panel);border:1px solid #ffffff22;border-radius:12px;padding:8px 12px;font-size:12px;z-index:4}
+  #hud b{color:var(--acc)}
+  #ctrl{position:fixed;right:10px;bottom:10px;background:var(--panel);border:1px solid #ffffff22;border-radius:12px;padding:10px 12px;z-index:5;display:flex;flex-direction:column;gap:8px;min-width:210px}
+  #ctrl label{font-size:12px;display:flex;align-items:center;gap:8px;justify-content:space-between}
+  #ctrl input[type=range]{width:120px;accent-color:var(--acc)}
+  #prog{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0b0e14cc;z-index:20;font-size:15px;color:var(--acc)}
+  @media(max-width:700px){
+    #panel{width:180px}
+    #hud{left:196px;font-size:11px}
+    #list button{font-size:11.5px}
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="panel">
+  <h1>🦌 Renifer 1.1 m — KIT</h1>
+  <div id="modes">
+    <button id="mParts" class="on">🔧 Części</button>
+    <button id="mAsm">🦌 Montaż</button>
+  </div>
+  <div id="list"></div>
+</div>
+<div id="hud">Wybierz część z listy 👈</div>
+<div id="ctrl">
+  <label>Rozsuwaj <input id="explode" type="range" min="0" max="100" value="35" disabled></label>
+  <label>Siatka <input id="wire" type="checkbox"></label>
+  <label>Obrót <input id="spin" type="checkbox" checked></label>
+  <label><span style="cursor:pointer" onclick="resetCam()">Reset kamery</span></label>
+</div>
+<div id="prog">ładowanie…</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {STLLoader} from 'three/addons/loaders/STLLoader.js';
+
+const NAMES={
+ "00_test_joint":"TEST złącza (czop+gniazdo)",
+ "01_torso_rear":"tors — tylna połówka","02_torso_front":"tors — przednia połówka",
+ "19_neck":"szyja (stożek)","20_head":"głowa + gniazda poroża",
+ "21_antler_L":"poroże lewe","22_antler_R":"poroże prawe",
+ "23_earL":"ucho lewe","24_earR":"ucho prawe","25_tail":"ogon"};
+const GROUPS=[
+ ["Tors",["01_torso_rear","02_torso_front"]],
+ ["Szyja i głowa",["19_neck","20_head"]],
+ ["Poroże",["21_antler_L","22_antler_R"]],
+ ["Nogi — przednia L",["03_leg_FL_s1","04_leg_FL_s2","05_leg_FL_s3","06_leg_FL_s4"]],
+ ["Nogi — przednia P",["07_leg_FR_s1","08_leg_FR_s2","09_leg_FR_s3","10_leg_FR_s4"]],
+ ["Nogi — tylna L",["11_leg_HL_s1","12_leg_HL_s2","13_leg_HL_s3","14_leg_HL_s4"]],
+ ["Nogi — tylna P",["15_leg_HR_s1","16_leg_HR_s2","17_leg_HR_s3","18_leg_HR_s4"]],
+ ["Detale",["23_earL","24_earR","25_tail"]],
+ ["Narzędzia",["00_test_joint"]]];
+
+let LAYOUT={};
+const list=document.getElementById('list'), hud=document.getElementById('hud');
+const prog=document.getElementById('prog');
+
+// --- three ---
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x0b0e14);
+const camera=new THREE.PerspectiveCamera(45,1,1,20000);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+function size(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+
+scene.add(new THREE.HemisphereLight(0xbfd0ff,0x30281a,1.1));
+const d1=new THREE.DirectionalLight(0xffffff,1.6);d1.position.set(600,-800,1200);scene.add(d1);
+const d2=new THREE.DirectionalLight(0xffd9a0,0.7);d2.position.set(-700,600,300);scene.add(d2);
+const grid=new THREE.GridHelper(2400,24,0x33405c,0x1c2434);grid.position.z=0;scene.add(grid);
+
+let spin=true,wire=false;
+const meshes=new Map(); // name -> THREE.Mesh (assembly world frame)
+let mode='parts', current=null;
+
+function mat(color){return new THREE.MeshStandardMaterial({color,metalness:.55,roughness:.42,wireframe:wire})}
+function fit(obj){
+  const box=new THREE.Box3().setFromObject(obj);
+  const c=box.getCenter(new THREE.Vector3()), s=box.getSize(new THREE.Vector3());
+  const r=Math.max(s.x,s.y,s.z);
+  controls.target.copy(c);
+  camera.position.set(c.x+r*1.1,c.y-r*1.4,c.z+r*0.9);
+  controls.update();
+}
+function loadSTL(name){
+  return fetch(`stl/${name}.stl`).then(r=>r.arrayBuffer()).then(buf=>new STLLoader().parse(buf));
+}
+function show(name){
+  current=name;
+  document.querySelectorAll('#list button').forEach(b=>b.classList.toggle('sel',b.dataset.n===name));
+  // wyczyść scenę z części
+  meshes.forEach(m=>{m.visible=false});
+  let m=meshes.get(name);
+  if(!m){
+    hud.innerHTML=`⏳ ${NAMES[name]||name} — ładuję…`;
+    loadSTL(name).then(g=>{
+      g.computeVertexNormals();
+      m=new THREE.Mesh(g,mat(0x14171d));
+      m.userData.name=name;
+      applyAssembly(m,name);
+      scene.add(m);meshes.set(name,m);
+      setMode(mode,true);
+      hud.innerHTML=`<b>${NAMES[name]||name}</b> — obracaj myszką/palcem. Tryb Montaż = całość.`;
+      fitSolo(m);
+    });
+  }else{
+    if(mode==='assembly')m.visible=true;
+    hud.innerHTML=`<b>${NAMES[name]||name}</b>`;
+  }
+  if(m&&mode==='parts')fitSolo(m);
+}
+function fitSolo(m){
+  m.visible=true;
+  const box=new THREE.Box3().setFromObject(m);
+  const c=box.getCenter(new THREE.Vector3()), s=box.getSize(new THREE.Vector3());
+  const r=Math.max(s.x,s.y,s.z);
+  controls.target.copy(c);
+  camera.position.set(c.x+r*0.8,c.y-r*1.2,c.z+r*0.8);
+  controls.update();
+}
+
+// ---- layout (montaż) ----
+let asmLoaded=false, asmCenter=new THREE.Vector3(0,0,540);
+function applyAssembly(m,name){
+  const L=LAYOUT[name];
+  if(!L){m.position.set(0,0,0);return}
+  // local->world: world = R^T @ local + t
+  const R=new THREE.Matrix3().fromArray(L.R.flat());
+  const Rt=new THREE.Matrix3().copy(R).transpose();
+  const mx=new THREE.Matrix4().set(
+    Rt.elements[0],Rt.elements[3],Rt.elements[6],L.t[0],
+    Rt.elements[1],Rt.elements[4],Rt.elements[7],L.t[1],
+    Rt.elements[2],Rt.elements[5],Rt.elements[8],L.t[2],
+    0,0,0,1);
+  m.applyMatrix4(mx);
+  m.userData.center=new THREE.Vector3().setFromMatrixPosition(mx);
+}
+function setExplode(f){
+  meshes.forEach(m=>{
+    if(!m.userData.center)return;
+    const d=m.userData.center.clone().sub(asmCenter);
+    m.position.copy(d.multiplyScalar(f*0.7));
+  });
+}
+async function loadAll(){
+  prog.style.display='flex';
+  const names=Object.keys(LAYOUT);
+  let done=0;
+  await Promise.all(names.map(async n=>{
+    if(meshes.has(n))return;
+    const g=new STLLoader().parse(await (await fetch(`stl/${n}.stl`)).arrayBuffer());
+    g.computeVertexNormals();
+    const grpColor={ "01":0x4d7cff,"02":0x4dd0ff };
+    let col=0x9aa4b8;
+    if(n.startsWith("0"))col=n==="01_torso_rear"?0x5b8cff:n==="02_torso_front"?0x51c8ff:col;
+    if(n.startsWith("19"))col=0xffd166; if(n.startsWith("20"))col=0xff8fa3;
+    if(n.startsWith("21")||n.startsWith("22"))col=0xb28dff;
+    if(n.startsWith("03")||n.startsWith("04"))col=0x7fd88f;
+    if(n.startsWith("05")||n.startsWith("06"))col=0x9fe0a9;
+    if(n.startsWith("07")||n.startsWith("08"))col=0x8fd3ff;
+    if(n.startsWith("09")||n.startsWith("10"))col=0xb2e3ff;
+    if(n.startsWith("11")||n.startsWith("12"))col=0xffb27f;
+    if(n.startsWith("13")||n.startsWith("14"))col=0xffcf9f;
+    if(n.startsWith("15")||n.startsWith("16"))col=0xff7f9f;
+    if(n.startsWith("17")||n.startsWith("18"))col=0xffa5bd;
+    if(n.startsWith("23")||n.startsWith("24"))col=0xfff2a0;
+    if(n.startsWith("25"))col=0xd0ffa0;
+    const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:col,metalness:.35,roughness:.5,wireframe:wire}));
+    m.userData.name=n;
+    applyAssembly(m,n);
+    m.userData.baseMat=m.material;
+    scene.add(m);meshes.set(n,m);
+    done++;prog.textContent=`montaż: ${done}/${names.length}`;
+  }));
+  meshes.forEach(m=>{m.visible=mode==='assembly'&&m.userData.name!=="00_test_joint"});
+  prog.style.display='none';asmLoaded=true;
+}
+
+// ---- UI ----
+const listEl=document.getElementById('list');
+for(const [grp,names] of GROUPS){
+  const g=document.createElement('div');g.className='grp';g.textContent=grp;listEl.appendChild(g);
+  for(const n of names){
+    const b=document.createElement('button');b.dataset.n=n;
+    const kg=LAYOUT[n]?`<span class="kg">${(LAYOUT[n].vol_cm3*1.27/1000).toFixed(2)}kg</span>`:"";
+    b.innerHTML=`${NAMES[n]||n}${kg}`;
+    b.onclick=()=>{setMode('parts');show(n)};
+    listEl.appendChild(b);
+  }
+}
+const mP=document.getElementById('mParts'), mA=document.getElementById('mAsm');
+function setMode(m,keep){
+  mode=m;
+  mP.classList.toggle('on',m==='parts');mA.classList.toggle('on',m==='assembly');
+  document.getElementById('explode').disabled=m!=='assembly';
+  if(m==='assembly'){
+    (asmLoaded?Promise.resolve():loadAll()).then(()=>{
+      meshes.forEach(mm=>mm.visible=mm.userData.name!=="00_test_joint");
+      setExplode(+document.getElementById('explode').value/100);
+      hud.innerHTML='<b>Montaż</b> — suwak "Rozsuwaj" rozdziela części. Kliknij tryb Części, żeby obejrzeć pojedynczo.';
+      const box=new THREE.Box3().setFromObject(new THREE.Object3D());
+      controls.target.set(0,0,540);
+      camera.position.set(1000,-1100,950);controls.update();
+    });
+  }else{
+    meshes.forEach(mm=>{if(mm.userData.name!==current)mm.visible=false});
+    if(current&&meshes.has(current)){meshes.get(current).visible=true;fitSolo(meshes.get(current))}
+  }
+}
+mP.onclick=()=>setMode('parts');
+mA.onclick=()=>setMode('assembly');
+document.getElementById('explode').oninput=e=>setExplode(+e.target.value/100);
+document.getElementById('wire').onchange=e=>{wire=e.target.checked;meshes.forEach(m=>m.material.wireframe=wire)};
+document.getElementById('spin').onchange=e=>spin=e.target.checked;
+window.resetCam=()=>{
+  if(mode==='assembly'){controls.target.set(0,0,540);camera.position.set(1000,-1100,950)}
+  else if(current&&meshes.has(current))fitSolo(meshes.get(current));
+  controls.update();
+};
+
+// ---- init ----
+fetch('layout.json').then(r=>r.json()).then(j=>{LAYOUT=j;
+  // odśwież kg na liście
+  listEl.querySelectorAll('button').forEach(b=>{const n=b.dataset.n;if(LAYOUT[n]&&!b.querySelector('.kg'))b.innerHTML+=`<span class="kg">${(LAYOUT[n].vol_cm3*1.27/1000).toFixed(2)}kg</span>`});
+});
+setMode('parts');
+show("21_antler_L");
+
+(function loop(){
+  requestAnimationFrame(loop);
+  if(spin)controls.autoRotate=true,controls.autoRotateSpeed=1.2;else controls.autoRotate=false;
+  controls.update();
+  renderer.render(scene,camera);
+})();
+prog.style.display='none';
+</script>
+</body>
+</html>

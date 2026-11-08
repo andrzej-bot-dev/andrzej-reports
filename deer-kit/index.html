@@ -154,13 +154,18 @@ let asmLoaded=false, asmCenter=new THREE.Vector3(0,0,540);
 function applyAssembly(m,name){
   const L=LAYOUT[name];
   if(!L){m.position.set(0,0,0);return}
-  // local->world: world = R^T @ local + t
-  const R=new THREE.Matrix3().fromArray(L.R.flat());
-  const Rt=new THREE.Matrix3().copy(R).transpose();
+  // STL są przesunięte do z=0/center XY o offset L.off.
+  // world = R^T @ (local_export + off) + t
+  const e=L.R.flat();                    // row-major
+  const RT=[e[0],e[3],e[6], e[1],e[4],e[7], e[2],e[5],e[8]]; // transpozycja
+  const off=L.off||[0,0,0];
+  const tx=L.t[0]-RT[0]*off[0]-RT[1]*off[1]-RT[2]*off[2];
+  const ty=L.t[1]-RT[3]*off[0]-RT[4]*off[1]-RT[5]*off[2];
+  const tz=L.t[2]-RT[6]*off[0]-RT[7]*off[1]-RT[8]*off[2];
   const mx=new THREE.Matrix4().set(
-    Rt.elements[0],Rt.elements[3],Rt.elements[6],L.t[0],
-    Rt.elements[1],Rt.elements[4],Rt.elements[7],L.t[1],
-    Rt.elements[2],Rt.elements[5],Rt.elements[8],L.t[2],
+    RT[0],RT[1],RT[2],tx,
+    RT[3],RT[4],RT[5],ty,
+    RT[6],RT[7],RT[8],tz,
     0,0,0,1);
   m.applyMatrix4(mx);
   m.userData.center=new THREE.Vector3().setFromMatrixPosition(mx);

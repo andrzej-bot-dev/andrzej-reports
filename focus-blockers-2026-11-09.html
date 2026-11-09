@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anti-doomscrolling & focus tools 2026 — deep research</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#241d3d;--ink:#ece8f7;--mut:#a89fc4;--acc:#ff9d4d;--acc2:#9d7bff;--ok:#5dd39e;--bad:#ff6b6b;--line:#322a52}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px 80px}
+header{padding:34px 0 10px}
+h1{font-size:1.9em;margin:.2em 0;line-height:1.2}
+.badge-top{display:inline-block;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#131020;font-weight:700;padding:4px 14px;border-radius:20px;font-size:.8em}
+.meta-top{color:var(--mut);font-size:.95em;margin-top:8px}
+nav.sticky{position:sticky;top:0;z-index:50;background:rgba(19,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 0;margin-top:14px;height:auto;max-height:60px;overflow-x:auto;white-space:nowrap}
+nav.sticky a{color:var(--acc2);margin-right:14px;font-size:.88em;font-weight:600}
+h2{font-size:1.45em;margin:1.6em 0 .6em;border-bottom:2px solid var(--line);padding-bottom:.25em}
+h2 .cnt{color:var(--mut);font-weight:400;font-size:.75em}
+table{border-collapse:collapse;width:100%;font-size:.92em}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--card2);color:var(--acc)}
+td.ok{color:var(--ok);font-weight:600} td.fail{color:var(--bad);font-weight:600}
+.tldr{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+.tldr h2{border:none;margin:.1em 0 .5em}
+.tldr .combo{background:rgba(0,0,0,.25);border-radius:10px;padding:12px 16px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card-img img{width:100%;height:170px;object-fit:cover;display:block;background:#0d0b18}
+.card-img .noimg{height:170px;display:flex;align-items:center;justify-content:center;font-size:3em;background:#0d0b18}
+.card-body{padding:14px 16px 16px}
+.card h3{margin:0 0 4px;font-size:1.08em}
+.card h3 a{color:var(--ink)}
+.sub{color:var(--mut);font-size:.85em;margin-bottom:8px}
+.badge{display:inline-block;font-size:.68em;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.b-ch{background:#2b3a67;color:#9ec1ff} .b-ff{background:#4a2b67;color:#d9a9ff} .b-ed{background:#54432b;color:#ffd9a9}
+.b-and{background:#1d4a2b;color:#9effc1} .b-hot{background:#672b2b;color:#ffb9b9}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 8px;font-size:.85em}
+.price{background:rgba(93,211,158,.12);color:var(--ok);padding:2px 10px;border-radius:8px;font-weight:600}
+.oss-y{background:rgba(157,123,255,.15);color:var(--acc2);padding:2px 10px;border-radius:8px;font-weight:600}
+.oss-n{background:rgba(255,107,107,.12);color:#ff9d9d;padding:2px 10px;border-radius:8px}
+.oss-p{background:rgba(255,157,77,.12);color:var(--acc);padding:2px 10px;border-radius:8px}
+.conf-h{color:var(--ok)} .conf-m{color:var(--acc)} .conf-l{color:var(--bad)}
+.card ul{margin:6px 0;padding-left:18px;font-size:.9em}
+.card ul li{margin:3px 0}
+.links{font-size:.82em;margin-top:8px;color:var(--mut)}
+table.quick td{font-size:.88em}
+.note{background:var(--card2);border-left:3px solid var(--acc);border-radius:8px;padding:10px 14px;font-size:.92em;margin:12px 0}
+#top-btn{position:fixed;bottom:22px;right:22px;background:var(--acc);color:#131020;border:none;border-radius:50%;width:46px;height:46px;font-size:1.3em;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+footer{margin-top:50px;color:var(--mut);font-size:.85em;border-top:1px solid var(--line);padding-top:18px}
+@media(max-width:700px){.grid{grid-template-columns:1fr} .card-img img{height:150px}}
+</style>
+</head>
+<body>
+<nav class="sticky"><div class="wrap"><a href="#chrome-oss">Chrome OSS</a><a href="#chrome-freemium">Chrome freemium</a><a href="#android-oss">Android OSS</a><a href="#fdroid">F-Droid</a><a href="#android-freemium">Android freemium</a><a href="#macos">macOS</a><a href="#hardware">Hardware</a><a href="#community">Społeczność</a><a href="#metodologia">Metodologia</a></div></nav>
+<div class="wrap">
+<header>
+  <span class="badge-top">📚 KNOWLEDGE DEEP RESEARCH</span>
+  <h1>Anti-doomscrolling & focus tools 2026</h1>
+  <div class="meta-top">
+    Data: 2026-11-09 · Scope: <b>Chrome (MacBook) + Android</b>, open source & free first · iOS/Windows tylko kontekstowo<br>
+    Zebrane: <b>~110 pozycji źródłowych</b> (62 z miniaturami) · Źródła: GitHub API, Chrome Web Store (live), Google Play, F-Droid, HN, 10 porównań + 11 oficjalnych pricing pages
+  </div>
+</header>
+
+<h2 id="coverage">📊 Coverage table</h2>
+<table><thead><tr><th>Źródło</th><th>Status</th><th>Szczeble / metoda</th><th>Wynik</th></tr></thead><tbody><tr><td>GitHub REST API (repo + README)</td><td class="ok">✅ COVERED</td><td>curl API ×13 queries + README top 24</td><td>24 projekty OSS</td></tr><tr><td>Chrome Web Store</td><td class="ok">✅ COVERED</td><td>Lightpanda CDP + cookie bypass (curl 0 wyników — CSR)</td><td>20 listingów live 2026-11-09</td></tr><tr><td>Google Play</td><td class="ok">✅ COVERED</td><td>Lightpanda CDP + SSR meta</td><td>20 apek</td></tr><tr><td>F-Droid</td><td class="ok">✅ COVERED</td><td>index-v1.json + strony pakietów</td><td>13 apek (pełny OSS)</td></tr><tr><td>Hacker News (Algolia API)</td><td class="ok">✅ COVERED</td><td>curl API ×9 queries</td><td>60+ threadów, 8 kluczowych</td></tr><tr><td>Reddit (r/nosurf, r/digitalminimalism)</td><td class="fail">❌ FAILED</td><td>curl ×3 UA/domeny → HTML shell/empty; Lightpanda same-origin fetch → parse fail; egress Pi zablokowany</td><td>Zastąpione: HN + Play ratings (175-250K ocen) + 10 artykułów z cytatami</td></tr><tr><td>Product Hunt</td><td class="fail">❌ FAILED</td><td>CF + auth-wall na search; brief dopuszczał skip</td><td>Launches pokryte przez HN Show HN</td></tr><tr><td>Artykuły porównawcze</td><td class="ok">✅ COVERED</td><td>web_fetch ×10</td><td>AppRift, Blok, PauseGadget, HTS, Time Blocker, FocusMe, Venture Harbour, Cisdem, Worldmetrics, Psalmo</td></tr><tr><td>Oficjalne strony + pricing</td><td class="ok">✅ COVERED</td><td>web_fetch ×11</td><td>one sec, Opal, ScreenZen, Cold Turkey, Freedom, SelfControl, Unhook, AppBlock, StayFree, Jomo, Brick</td></tr><tr><td>macOS OSS (GitHub)</td><td class="ok">✅ COVERED</td><td>GitHub API ×6 topic queries</td><td>15 pozycji</td></tr><tr><td>Uwagi jakości</td><td class="fail">⚠️</td><td>screenzen.com nie istnieje (→ .co); Cold Turkey Pro $39 = dynamiczny Paddle (med); mindfulsuite 429; cybernews 403</td><td>—</td></tr></tbody></table>
+
+<div class="tldr">
+<h2>⚡ TL;DR — rekomendowane combo</h2>
+<div class="combo">💻 <b>MacBook (Chrome):</b> <a href="#chrome-oss">Unhook</a> (YT, 1M users, OSS) + <a href="#chrome-oss">FocusTube</a> (FB Reels + YT Shorts + TikTok + IG + LinkedIn + Reddit, OSS, nowość 2026) + <a href="#chrome-oss">LeechBlock NG</a> (limity czasowe + blokada wieczorna po 21:00, OSS)</div>
+<div class="combo">📱 <b>Android:</b> <a href="#android-oss">Scrolless</a> (blokuje Reels/Shorts WEWNĄTRZ apek, 4.8★, OSS, Brain Rot Timer 😄) + opcjonalnie <a href="#android-oss">Nudge</a> (delay-to-open, zero internet permission) albo <a href="#android-oss">Zenith</a> (najbogatszy OSS: 527⭐). Wszystko z F-Droid bez Google: <a href="#fdroid">DetoxDroid, Curbox, AwayDoomscrollin'</a></div>
+<div class="combo">🖥️ <b>Desktop Mac:</b> <a href="#macos">SelfControl</a> (OSS, hard-block nie do obejścia) — albo <a href="#macos">Cold Turkey Pro $39 jednorazowo</a> gdy chcesz "Frozen Turkey" (lock całego komputera)</div>
+<div class="combo">🛡️ <b>Gdy OSS za mało:</b> ScreenZen (free, donation — "best free" wg 4/10 porównań) · one sec (~$20/rok, naukowo zweryfikowany, blokuje Shorts/Reels w apkach) · Freedom ($39.99/rok — jedyny z sensownym synciem telefon+laptop)</div>
+<div class="combo">🔥 <b>Najciekawsze znalezisko:</b> kategoria eksplodowała w 2025-2026 — od Xposed module przez accessibility-blockery, DNS allowlisty (sinkzone), NFC friction (TapBlok/nfcGuard/Brick), po webcam detection ("Doomscrolling Blocker" rzucarickroll gdy patrzysz w telefon). HN: touching-grass blocker = 1203 pts.</div>
+</div>
+
+<h2 id="chrome-oss">🧩 Chrome — open source <span class="cnt">(8 pozycji)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid" target="_blank"><img src="img/focus-blockers/unhook.jpg" loading="lazy" alt="Unhook"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid" target="_blank">Unhook</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">Firefox</span><span class="badge b-ed">Edge</span><span class="badge b-hot">1M users</span></h3>
+    <div class="sub">⭐4.9 (4.6K ocen) · 1 000 000+ users · updated III.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MPL-2.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Usuwa Shorts, sugestie, komentarze, ścianę rekomendacji i trending z YouTube — toggle per element</li><li>Najpopularniejszy blocker YT na świecie (1M users, 5000+ recenzji)</li><li>Thread na HN: 181 pts / 122 komentarze (2021), Show HN ponownie w 2026</li><li>⚠️ Nie blokuje FB Reels/TikTok — to YT-only specjalista</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid" target="_blank">Store (CWS)</a> · <a href="https://github.com/lawrencehook/remove-youtube-suggestions" target="_blank">GitHub: lawrencehook/remove-youtube-suggestions</a> · <a href="https://unhook.app/" target="_blank">unhook.app</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/focustube-distraction-blo/ppdjgkniggbikifojmkindmbhppmoell" target="_blank"><img src="img/focus-blockers/gh-focustube.jpg" loading="lazy" alt="FocusTube"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/focustube-distraction-blo/ppdjgkniggbikifojmkindmbhppmoell" target="_blank">FocusTube</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">Firefox</span><span class="badge b-ed">Edge</span><span class="badge b-hot">NEW</span><span class="badge b-hot">multi-platform</span></h3>
+    <div class="sub">⭐5.0 (414 ocen) · ~1K users · updated XI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>JEDNO rozszerzenie ucina: YouTube Shorts, Instagram Reels, TikTok, Facebook Reels, LinkedIn feed i Reddit feed</li><li>Privacy-first, zero telemetrii; CI + OpenSSF Best Practices L1; MV3</li><li>Focus/break timer wbudowany; import/export konfiguracji</li><li>Uwaga: w CWS są DWA różne "FocusTube" — ten (malekwael229) blokuje wszystko; drugi (pablomariaarranzpou, 4.8★/33, 1K users) to YT-only</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/focustube-distraction-blo/ppdjgkniggbikifojmkindmbhppmoell" target="_blank">Store (CWS)</a> · <a href="https://github.com/malekwael229/FocusTube" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/leechblock-ng/blaaajhemilngeeffpbfkdjjoefldkok" target="_blank"><img src="img/focus-blockers/leechblock.jpg" loading="lazy" alt="LeechBlock NG"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/leechblock-ng/blaaajhemilngeeffpbfkdjjoefldkok" target="_blank">LeechBlock NG</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">Firefox</span><span class="badge b-ed">Edge</span></h3>
+    <div class="sub">⭐4.9 (1.6K ocen) · 100 000 users · updated X.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MPL-2.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Reguły per strona: limity dzienne, harmonogramy (np. FB zablokowane po 21:00), wildcardy (facebook.com/reel/*)</li><li>Delay mode: 15 s pauzy z licznikiem przed załadowaniem strony — moment zawahania ratuje wieczory</li><li>Najstarszy i najbardziej konfigurowalny site-blocker (repo ~1.1K ⭐, aktywny)</li><li>100% darmowy, zero kont, zero upselli</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/leechblock-ng/blaaajhemilngeeffpbfkdjjoefldkok" target="_blank">Store (CWS)</a> · <a href="https://github.com/proginosko/LeechBlockNG" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/news-feed-eradicator/fjcldmjmjhkklehbacihaiopjklihlgg" target="_blank"><img src="img/focus-blockers/nfe.jpg" loading="lazy" alt="News Feed Eradicator"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/news-feed-eradicator/fjcldmjmjhkklehbacihaiopjklihlgg" target="_blank">News Feed Eradicator</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">Firefox</span></h3>
+    <div class="sub">⭐4.5 (2.4K ocen) · 200 000 users · updated VII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — AGPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Zamienia newsfeed (FB, X, YT, LinkedIn) w losowy cytat — feed FIZYCZNIE znika, reszta strony działa</li><li>Idealne na "weszłem sprawdzić konkret" — Messenger, grupy i wydarzenia zostają</li><li>Klasyk (~1.5K ⭐ na GitHub), utrzymywany</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/news-feed-eradicator/fjcldmjmjhkklehbacihaiopjklihlgg" target="_blank">Store (CWS)</a> · <a href="https://github.com/jordwest/news-feed-eradicator" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/antigram-explore-reels-bl/igbheapdmolhhmmklmkfjjjncmhihfjh" target="_blank"><img src="img/focus-blockers/antigram.jpg" loading="lazy" alt="Antigram"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/antigram-explore-reels-bl/igbheapdmolhhmmklmkfjjjncmhihfjh" target="_blank">Antigram</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">IG-focused</span></h3>
+    <div class="sub">⭐4.7 (297 ocen) · 40 000 users</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-p">Source-available (repo bez licencji)</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Blokuje Explore i Reels na Instagramie; feed i DM zostają</li><li>Koncentruje się tylko na IG — nie rusza YT/TikTok</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/antigram-explore-reels-bl/igbheapdmolhhmmklmkfjjjncmhihfjh" target="_blank">Store (CWS)</a> · <a href="https://github.com/aymyo/antigram-extension" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/umutseven92/shorts-blocker" target="_blank"><img src="img/focus-blockers/gh-shortsblocker-umut.jpg" loading="lazy" alt="Shorts Blocker"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/umutseven92/shorts-blocker" target="_blank">Shorts Blocker</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">minimal</span></h3>
+    <div class="sub">~25 ⭐ · push VII.2025</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Usuwa YT Shorts z home, subscriptions i wyników wyszukiwania</li><li>Czysty CSS (selector :has), zero JS — najlżejsza opcja</li></ul>
+    <div class="links"><a href="https://github.com/umutseven92/shorts-blocker" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/ozankenangungor/ClearScroll" target="_blank"><img src="img/focus-blockers/gh-clearscroll.jpg" loading="lazy" alt="ClearScroll"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/ozankenangungor/ClearScroll" target="_blank">ClearScroll</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">MV3</span><span class="badge b-ff">Rust/WASM</span></h3>
+    <div class="sub">~97 ⭐ · push X.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-p">Source-available (brak LICENSE)</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Semantycznie rozmywa (blur) dopamine-treść w przeglądarce — model ML w Web Workerze, zero cloud</li><li>Tryby precision/balanced/aggressive; własne cele i protected selectors</li><li>Ciekawostka techniczna: cały inference in-browser</li></ul>
+    <div class="links"><a href="https://github.com/ozankenangungor/ClearScroll" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/df-tube-new-distraction-f/kchgllkpfcggmdaoopkhlkbcokngahlg" target="_blank"><img src="img/focus-blockers/dftube.jpg" loading="lazy" alt="DF Tube New"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/df-tube-new-distraction-f/kchgllkpfcggmdaoopkhlkbcokngahlg" target="_blank">DF Tube New</a> <span class="badge b-ch">Chrome</span></h3>
+    <div class="sub">⭐4.5 (251 ocen) · 20 000 users · updated V.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-p">Częściowo OSS (Zen-Youtube, MIT)</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Ukrywa dystrakcje na YouTube (rekomendacje, autoplay) — praca/nauka mode</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/df-tube-new-distraction-f/kchgllkpfcggmdaoopkhlkbcokngahlg" target="_blank">Store (CWS)</a></div>
+  </div>
+</div></div>
+
+<h2 id="chrome-freemium">🧩 Chrome — freemium (kontekst) <span class="cnt">(5 pełnych + quick)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/one-sec-website-blocker-s/femnahohginddofgekknfmaklcbpinkn" target="_blank"><img src="img/focus-blockers/onesec.jpg" loading="lazy" alt="one sec (ext)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/one-sec-website-blocker-s/femnahohginddofgekknfmaklcbpinkn" target="_blank">one sec (ext)</a> <span class="badge b-ch">Chrome</span><span class="badge b-ff">Firefox</span><span class="badge b-ed">Safari</span><span class="badge b-hot">ADHD-friendly</span></h3>
+    <div class="sub">⭐4.9 (1.2K ocen) · 30 000 users · updated IX.2026</div>
+    <div class="meta"><span class="price">Free tier (1 strona) · Pro ~$20/rok lub $100 lifetime</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Wymusza pauzę z ćwiczeniem oddechu PRZED otwarciem uzależniającej strony</li><li>Naukowo zweryfikowane: PNAS 2023 + Max Planck/Heidelberg; deklarowane -57% otwarć apek</li><li>Doomscroll emergency brake, journaling, harmonogramy; działa też jako apka (Android/iOS)</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/one-sec-website-blocker-s/femnahohginddofgekknfmaklcbpinkn" target="_blank">Store (CWS)</a> · <a href="https://one-sec.app/" target="_blank">one-sec.app</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/screenzen-minimal-social/ndnekhmaaopaliodekcfemgjflfjmkok" target="_blank"><img src="img/focus-blockers/screenzen-ext.jpg" loading="lazy" alt="ScreenZen (ext)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/screenzen-minimal-social/ndnekhmaaopaliodekcfemgjflfjmkok" target="_blank">ScreenZen (ext)</a> <span class="badge b-ch">Chrome</span><span class="badge b-ed">iOS</span><span class="badge b-and">Android</span><span class="badge b-ff">Mac</span><span class="badge b-ff">Win</span></h3>
+    <div class="sub">⭐5.0 (3 ocen) · 556 users · updated VIII.2026</div>
+    <div class="meta"><span class="price">Free (donation, tips $5-40)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Minimal mode: IG/YouTube/TikTok BEZ Reels/Shorts/endless feeds — wyszukiwanie i DM zostają</li><li>4 źródła z 10 artykułów wybrały ScreenZen "best free option" (apka 4.8★/30K+ ocen, 500K+ monthly users)</li><li>Delay rosnący z użyciem, daily open caps, lock na własnych ustawieniach (anti-uninstall)</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/screenzen-minimal-social/ndnekhmaaopaliodekcfemgjflfjmkok" target="_blank">Store (CWS)</a> · <a href="https://screenzen.co/" target="_blank">screenzen.co</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/stayfree-website-blocker/elfaihghhjjoknimpccccmkioofjjfkf" target="_blank"><img src="img/focus-blockers/stayfree-ext.jpg" loading="lazy" alt="StayFree (ext)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/stayfree-website-blocker/elfaihghhjjoknimpccccmkioofjjfkf" target="_blank">StayFree (ext)</a> <span class="badge b-ch">Chrome</span></h3>
+    <div class="sub">⭐4.5 (2.8K ocen) · 200 000 users · updated XI.2026</div>
+    <div class="meta"><span class="price">Freemium</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Analityka użycia + limity + blokada Shorts; aktywny rozwój (update 5.11)</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/stayfree-website-blocker/elfaihghhjjoknimpccccmkioofjjfkf" target="_blank">Store (CWS)</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/blocksite-block-websites/eiimnmioipafcokbfikbljfdeojpcgbh" target="_blank"><img src="img/focus-blockers/blocksite.jpg" loading="lazy" alt="BlockSite"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/blocksite-block-websites/eiimnmioipafcokbfikbljfdeojpcgbh" target="_blank">BlockSite</a> <span class="badge b-ch">Chrome</span></h3>
+    <div class="sub">⭐4.5 (32.5K ocen) · 1 000 000 users · updated XI.2026</div>
+    <div class="meta"><span class="price">Freemium (Premium płatny)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Największy userbase po Unhook, ALE: cytat z porównań — "you may be paying with both money and data… its privacy policy permits collecting browsing-activity data"</li><li>Free cap: 3 blokowane strony; harmonogramy w Premium</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/blocksite-block-websites/eiimnmioipafcokbfikbljfdeojpcgbh" target="_blank">Store (CWS)</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://chromewebstore.google.com/detail/stayfocusd/laankejkbhbdhmipfmgcngdelahlfoji" target="_blank"><img src="img/focus-blockers/stayfocusd.jpg" loading="lazy" alt="StayFocusd"></a></div>
+  <div class="card-body">
+    <h3><a href="https://chromewebstore.google.com/detail/stayfocusd/laankejkbhbdhmipfmgcngdelahlfoji" target="_blank">StayFocusd</a> <span class="badge b-ch">Chrome</span></h3>
+    <div class="sub">⭐4.4 (8.8K ocen) · 700 000 users</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-n">Closed</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Klasyk od 2010: dzienny limit czasu na dystrakcyjnych stronach, tryb "Nuclear" (blokada wszystkiego na N godzin)</li><li>Od 2026 opis rozszerzony o Shorts blocker</li></ul>
+    <div class="links"><a href="https://chromewebstore.google.com/detail/stayfocusd/laankejkbhbdhmipfmgcngdelahlfoji" target="_blank">Store (CWS)</a></div>
+  </div>
+</div></div>
+<div class="note"><b>Inne w CWS (live 2026-11-09):</b></div>
+<table class="quick"><thead><tr><th>Narzędzie</th><th>Co robi / ocena</th><th>Cena</th><th>Uwagi</th></tr></thead><tbody><tr><td>Hide — Social Media Distraction Blocker</td><td>⭐4.6 (119), 8K users — ukrywa Shorts/Reels/Stories na YT/FB/IG/X/Reddit, 100+ kontrolek</td><td>Free</td><td>waafaa.com</td></tr><tr><td>ShortsBlocker (YouTube)</td><td>⭐4.2 (929), 100K users — usuwa Shorts z YT</td><td>Free</td><td>OSS niepotwierdzone</td></tr><tr><td>Intention</td><td>⭐4.8 (1K), 7K users — pyta o intencję przed wejściem na dystrakcję</td><td>Freemium</td><td>bazuje na mindfulbrowsing.org</td></tr><tr><td>SocialFocus</td><td>⭐4.3 (209), 30K users — 115+ opcji ukrywania, password protection</td><td>Freemium</td><td>7 serwisów</td></tr><tr><td>Facebook Reels Blocker</td><td>⭐3.2 (66) — dedykowany FB Reels</td><td>Free</td><td>❌ słaby (rating + stary update)</td></tr><tr><td>Screen Time Tracker</td><td>⭐5.0 (8), 488 users — świeży, aktywny</td><td>Free + Pro</td><td>mały userbase</td></tr><tr><td>DF Tube oryginał</td><td>usunięty z CWS; live jest "DF Tube New"</td><td>—</td><td>—</td></tr></tbody></table>
+
+<h2 id="android-oss">🤖 Android — open source <span class="cnt">(9 pozycji)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=com.scrolless.app" target="_blank"><img src="img/focus-blockers/scrolless.jpg" loading="lazy" alt="Scrolless"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=com.scrolless.app" target="_blank">Scrolless</a> <span class="badge b-and">Android</span><span class="badge b-ff">Google Play</span><span class="badge b-hot">anti-brain-rot</span></h3>
+    <div class="sub">⭐4.8 (272 ocen) · 5K+ pobrań</div>
+    <div class="meta"><span class="price">Free (bez IAP, bez reklam)</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>BLOKUJE short-video WEWNĄTRZ apek: TikTok, IG Reels, YT Shorts, FB Reels, FB Lite, Snapchat — reszta apki działa</li><li>Live Brain Rot Timer (overlay w czasie oglądania), Daily Limit, Interval Timer, Pause 5 min</li><li>Przepuszcza filmy z DM; statystyki per apka; zero konta/reklam/trackingu</li><li>Accessibility Service — dlatego w 100% open source (sketchy permission, audytowalny kod)</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=com.scrolless.app" target="_blank">Google Play</a> · <a href="https://github.com/DuarteBarbosaDev/Scrolless" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/1372Slash/Zenith" target="_blank"><img src="img/focus-blockers/gh-zenith.jpg" loading="lazy" alt="Zenith"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/1372Slash/Zenith" target="_blank">Zenith</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid/Izzy</span><span class="badge b-ff">Material 3</span></h3>
+    <div class="sub">527 ⭐ · push VI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Najbogatszy OSS blocker na Androida: Shield Mode (pauzy mindfulness + limity), Pause Point (zadanie przed otwarciem: oddech/QR/matma), Bedtime, Focus Sessions, Pomodoro, Lockdown</li><li>Goal Pursuit + Delay App; heatmapy, streaki, XP/achievements; eye care 20-20-20</li><li>Na Trendshift; bardzo aktywny rozwój</li></ul>
+    <div class="links"><a href="https://github.com/1372Slash/Zenith" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=dev.astraedus.nudge" target="_blank"><img src="img/focus-blockers/nudge.jpg" loading="lazy" alt="Nudge"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=dev.astraedus.nudge" target="_blank">Nudge</a> <span class="badge b-and">Android</span><span class="badge b-ff">Google Play</span><span class="badge b-hot">ADHD</span><span class="badge b-hot">zero internet</span></h3>
+    <div class="sub">1K+ pobrań · Android 8+</div>
+    <div class="meta"><span class="price">Free (bez IAP/reklam)</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Delay-to-open: oddech/odliczanie przed otwarciem apki; Mirror mode (widać własną twarz podczas czekania)</li><li>Blokada Reels/Shorts WEWNĄTRZ apek bez blokowania całych apek; dzienne budżety; harmonogramy</li><li>ZERO internet permission — fizycznie nie wyśle danych ("product of disdain for subscription services… and 2 doses of ritalin")</li><li>Uwaga: detekcja Explore/Reels na części nowych urządzeń ograniczona (issue #18)</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=dev.astraedus.nudge" target="_blank">Google Play</a> · <a href="https://github.com/astraedus/nudge" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=com.mindful.android" target="_blank"><img src="img/focus-blockers/mindful.jpg" loading="lazy" alt="Mindful"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=com.mindful.android" target="_blank">Mindful</a> <span class="badge b-and">Android</span><span class="badge b-hot">offline</span></h3>
+    <div class="sub">⭐4.3 (851 ocen) · 100K+ pobrań</div>
+    <div class="meta"><span class="price">Free (bez reklam)</span><span class="oss oss-p">Open source (self-declared, repo niepotwierdzone)</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Blokada reels/shorts/infinite feeds + treści dla dorosłych; limity per-apka</li><li>"Fully Offline — nothing leaves your device"; historia screen time do roku, lokalnie</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=com.mindful.android" target="_blank">Google Play</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/app.plugbrain.android/" target="_blank"><img src="img/focus-blockers/gh-plugbrain.jpg" loading="lazy" alt="PlugBrain"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/app.plugbrain.android/" target="_blank">PlugBrain</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span><span class="badge b-ff">IzzyOnDroid</span></h3>
+    <div class="sub">101 ⭐ · push XI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Zadanie MATEMATYCZNE między Tobą a rozpraszającą apką — im więcej scrollujesz, tym trudniejsze</li><li>Bez reklam, bez trackingu, działa offline (no internet permission); r/PlugBrain</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/app.plugbrain.android/" target="_blank">F-Droid</a> · <a href="https://github.com/msbelaid/PlugBrain" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/cajdata/TapBlok" target="_blank"><img src="img/focus-blockers/gh-tapblok.jpg" loading="lazy" alt="TapBlok"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/cajdata/TapBlok" target="_blank">TapBlok</a> <span class="badge b-and">Android</span><span class="badge b-hot">NFC</span></h3>
+    <div class="sub">53 ⭐ · push VII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — Apache-2.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Odblokowanie apki wymaga przyłożenia NFC tagu ($1) lub zeskanowania QR ukrytego "niewygodnie"</li><li>Strict Mode — sesję można przerwać TYLKO skanem; Smart Breaks (5 min limitowane)</li></ul>
+    <div class="links"><a href="https://github.com/cajdata/TapBlok" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/Kalbra/NoReel" target="_blank"><img src="img/focus-blockers/gh-noreel.jpg" loading="lazy" alt="NoReel"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/Kalbra/NoReel" target="_blank">NoReel</a> <span class="badge b-and">Android</span><span class="badge b-ff">sideload APK</span></h3>
+    <div class="sub">117 ⭐ · push VII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Webview Instagrama bez Reels feedu (reels z DM zostają), bez Explore i sugerowanych</li><li>Nieoficjalne; wymaga ręcznej instalacji APK</li></ul>
+    <div class="links"><a href="https://github.com/Kalbra/NoReel" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=dev.atick.shorts" target="_blank"><img src="img/focus-blockers/gh-shortsblocker-atick.jpg" loading="lazy" alt="Shorts-Blocker (atick-faisal)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=dev.atick.shorts" target="_blank">Shorts-Blocker (atick-faisal)</a> <span class="badge b-and">Android</span><span class="badge b-ff">Google Play</span></h3>
+    <div class="sub">22 ⭐ · push XI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — Apache-2.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Auto-blokada YT Shorts i IG Reels przez Accessibility Service — detekcja po wzorcach UI + auto-back z cooldownem</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=dev.atick.shorts" target="_blank">Google Play</a> · <a href="https://github.com/atick-faisal/Shorts-Blocker" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/QuestPhone/questphone" target="_blank"><img src="img/focus-blockers/gh-questphone.jpg" loading="lazy" alt="QuestPhone"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/QuestPhone/questphone" target="_blank">QuestPhone</a> <span class="badge b-and">Android</span><span class="badge b-ff">gamified</span></h3>
+    <div class="sub">134 ⭐ · push VIII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Blokuje rozpraszające apki; odblokowanie po wykonaniu "questów" (level up, streaki, nagrody); strict checking</li><li>⚠️ README ostrzega: experimental, nie production-ready</li></ul>
+    <div class="links"><a href="https://github.com/QuestPhone/questphone" target="_blank">GitHub</a></div>
+  </div>
+</div></div>
+
+<h2 id="fdroid">🦊 F-Droid — pełny OSS bez Google <span class="cnt">(11 pozycji, wszystkie free)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.flx_apps.digitaldetox/" target="_blank"><img src="img/focus-blockers/detoxdroid.jpg" loading="lazy" alt="DetoxDroid"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.flx_apps.digitaldetox/" target="_blank">DetoxDroid</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Odwrócona filozofia: "boring phone by default" — grayscale domyślnie, usuwa attention-grabbing tricks</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.flx_apps.digitaldetox/" target="_blank">F-Droid</a> · <a href="https://github.com/flxapps/DetoxDroid" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank"><img src="img/focus-blockers/curbox.jpg" loading="lazy" alt="Curbox"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank">Curbox</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid (dawniej Digipauwse)</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blocker apek i stron; blokuje reels i shorts; URL path blocking; screen-time tracker</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/neth.iecal.curbox/" target="_blank">F-Droid</a> · <a href="https://github.com/nethical6/curbox" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.resolvecommunity.awaydoomscrollin/" target="_blank"><img src="img/focus-blockers/awaydoomscrollin.jpg" loading="lazy" alt="AwayDoomscrollin'"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.resolvecommunity.awaydoomscrollin/" target="_blank">AwayDoomscrollin'</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Accessibility-based: limituje feedy i short-video na IG/TikTok/YT zostawiając DM i wyszukiwanie</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.resolvecommunity.awaydoomscrollin/" target="_blank">F-Droid</a> · <a href="https://github.com/resolvecommunity/AwayDoomscrollin" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.sarangem.zenwell/" target="_blank"><img src="img/focus-blockers/zenwell.jpg" loading="lazy" alt="Zenwell"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.sarangem.zenwell/" target="_blank">Zenwell</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Odblokowanie apek dopiero po trudnym zadaniu z matmy albo ćwiczeniu oddechu; harmonogramy</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.sarangem.zenwell/" target="_blank">F-Droid</a> · <a href="https://github.com/sarangem/zenwell" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.andebugulin.nfcguard/" target="_blank"><img src="img/focus-blockers/nfcguard.jpg" loading="lazy" alt="nfcGuard"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.andebugulin.nfcguard/" target="_blank">nfcGuard</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span><span class="badge b-hot">NFC</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Odblokowanie apki wymaga NFC tagu umieszczonego w niedogodnym miejscu (inny pokój/szuflada) — trzeba WSTAĆ</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.andebugulin.nfcguard/" target="_blank">F-Droid</a> · <a href="https://github.com/Andebugulin/nfcguard" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/cz.kutner.why/" target="_blank"><img src="img/focus-blockers/why.jpg" loading="lazy" alt="Why?"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/cz.kutner.why/" target="_blank">Why?</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Pyta "po co tu jesteś?" przy każdym odblokowaniu telefonu; "słoik dnia" z kamykami; zero internetu</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/cz.kutner.why/" target="_blank">F-Droid</a> · <a href="https://github.com/tukak/why" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.defang.launcher/" target="_blank"><img src="img/focus-blockers/defang.jpg" loading="lazy" alt="Defang launcher"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.defang.launcher/" target="_blank">Defang launcher</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span><span class="badge b-ff">launcher</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Launcher z warstwą anti-dark-pattern: intent gate z countdownem przed "Open anyway"; speed bump, nie mur</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.defang.launcher/" target="_blank">F-Droid</a> · <a href="https://github.com/Scandiking/Defang" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.focus.launcher/" target="_blank"><img src="img/focus-blockers/focuslauncher.jpg" loading="lazy" alt="Focus Launcher"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.focus.launcher/" target="_blank">Focus Launcher</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span><span class="badge b-ff">minimal</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Tekstowy, czarno-biały launcher: bez ikon, koloru i feedu; zegar + timery apek + tygodniowy review</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.focus.launcher/" target="_blank">F-Droid</a> · <a href="https://github.com/patelchaitany/focus-launcher" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.dtsykunov.pause/" target="_blank"><img src="img/focus-blockers/pause.jpg" loading="lazy" alt="Pause"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.dtsykunov.pause/" target="_blank">Pause</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Krótka odliczana pauza przed otwarciem wybranych apek + ile razy otwierałeś apkę w 24h</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.dtsykunov.pause/" target="_blank">F-Droid</a> · <a href="https://github.com/dtsykunov/pause-app" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.procrastilearn.app/" target="_blank"><img src="img/focus-blockers/procrastilearn.jpg" loading="lazy" alt="ProcrastiLearn"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.procrastilearn.app/" target="_blank">ProcrastiLearn</a> <span class="badge b-and">Android</span><span class="badge b-ff">F-Droid</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — Apache-2.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blokuje rozpraszające apki dopóki nie powtórzysz fiszki (spaced repetition) — scrollowanie zamienia w naukę</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.procrastilearn.app/" target="_blank">F-Droid</a> · <a href="https://github.com/Vladyslav-Soldatenko/ProcrastiLearn" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://f-droid.org/en/packages/com.mushotoku.app/" target="_blank"><img src="img/focus-blockers/gh-mushotoku.jpg" loading="lazy" alt="Mushotoku"></a></div>
+  <div class="card-body">
+    <h3><a href="https://f-droid.org/en/packages/com.mushotoku.app/" target="_blank">Mushotoku</a> <span class="badge b-and">Android</span><span class="badge b-hot">offline</span></h3>
+    <div class="sub">F-Droid</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>ZERO INTERNET permission — fizycznie nie wyśle danych; bez kont/chmury/reklam; celowo ANTY-gamifikacja (bez kar za zerwane streaki)</li></ul>
+    <div class="links"><a href="https://f-droid.org/en/packages/com.mushotoku.app/" target="_blank">F-Droid</a> · <a href="https://github.com/tomfrischmuth/mushotoku" target="_blank">GitHub</a></div>
+  </div>
+</div></div>
+
+<h2 id="android-freemium">🤖 Android — freemium <span class="cnt">(8 pełnych + quick)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=wtf.riedel.onesec" target="_blank"><img src="img/focus-blockers/onesec-android.jpg" loading="lazy" alt="one sec (Android)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=wtf.riedel.onesec" target="_blank">one sec (Android)</a> <span class="badge b-and">Android</span><span class="badge b-ed">iOS</span></h3>
+    <div class="sub">⭐4.8 (46.5K ocen) · 1M+ pobrań</div>
+    <div class="meta"><span class="price">Free tier (1 apka) · Pro ~$20/rok, $7/mies lub $100 lifetime</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Pauza-oddech przed otwarciem apki; blokuje YT Shorts i IG Reels zostawiając resztę apki</li><li>Doomscroll emergency brake; 100K+ 5-star reviews; nauka: PNAS + Max Planck</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=wtf.riedel.onesec" target="_blank">Google Play</a> · <a href="https://one-sec.app/" target="_blank">one-sec.app</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=com.screenzen" target="_blank"><img src="img/focus-blockers/screenzen-android.jpg" loading="lazy" alt="ScreenZen (Android)"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=com.screenzen" target="_blank">ScreenZen (Android)</a> <span class="badge b-and">Android</span><span class="badge b-ed">iOS</span><span class="badge b-ff">Mac/Win</span></h3>
+    <div class="sub">⭐4.8 (35.9K ocen) · 1M+ pobrań</div>
+    <div class="meta"><span class="price">Free (donation)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Delay przed otwarciem apki (5-30 s+, rośnie z użyciem); "Is this important?" prompt; strict blocks po czasie/otwarciach</li><li>Najlepiej oceniany free blocker wg 4/10 porównań 2026</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=com.screenzen" target="_blank">Google Play</a> · <a href="https://screenzen.co/" target="_blank">screenzen.co</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=com.stayfocused" target="_blank"><img src="img/focus-blockers/stayfocused-app.jpg" loading="lazy" alt="Stay Focused"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=com.stayfocused" target="_blank">Stay Focused</a> <span class="badge b-and">Android</span></h3>
+    <div class="sub">⭐4.4 (175K ocen) · 5M+ pobrań</div>
+    <div class="meta"><span class="price">Freemium (IAP + ads)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Shorts Blocker + Reels Blocker (IG+FB) + keyword/adult blocker + Strict Mode + location blocking</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=com.stayfocused" target="_blank">Google Play</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=cz.mobilesoft.appblock" target="_blank"><img src="img/focus-blockers/appblock.jpg" loading="lazy" alt="AppBlock"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=cz.mobilesoft.appblock" target="_blank">AppBlock</a> <span class="badge b-and">Android</span><span class="badge b-ed">iOS</span><span class="badge b-ff">Chrome/Edge/Brave</span></h3>
+    <div class="sub">⭐4.7 (250K ocen) · 10M+ pobrań</div>
+    <div class="meta"><span class="price">Freemium — Android: 3 harmonogramy × 5 apek + Strict Mode do 24h ZA FREE</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Strict Mode trudny do ominięcia (Cooldown + approval osoby trzeciej); profiles Work/Study/Sleep/Detox wg czasu/miejsca/Wi-Fi</li><li>Deklaruje -63% screen time w 1. miesiącu ze Strict Mode</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=cz.mobilesoft.appblock" target="_blank">Google Play</a> · <a href="https://appblock.app/" target="_blank">appblock.app</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=com.withopal.opal" target="_blank"><img src="img/focus-blockers/opal.jpg" loading="lazy" alt="Opal"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=com.withopal.opal" target="_blank">Opal</a> <span class="badge b-and">Android (ograniczony)</span><span class="badge b-ed">iOS (full)</span></h3>
+    <div class="sub">⭐4.6 (11.9K ocen) · 500K+ pobrań</div>
+    <div class="meta"><span class="price">Free (1 reguła) · Pro $99.99/rok lub $399 lifetime · student -50%</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Hard Mode: "No way out" — nie wyłączysz sesji; VPN-based blocking (łatwy do ominięcia togglingiem VPN wg recenzji)</li><li>Design premium; Editor's Choice Apple</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=com.withopal.opal" target="_blank">Google Play</a> · <a href="https://www.opal.so/pricing" target="_blank">opal.so/pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=ai.regainapp" target="_blank"><img src="img/focus-blockers/regain.jpg" loading="lazy" alt="Regain"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=ai.regainapp" target="_blank">Regain</a> <span class="badge b-and">Android</span></h3>
+    <div class="sub">⭐4.5 (228K ocen) · 5M+ pobrań</div>
+    <div class="meta"><span class="price">Freemium (sub)</span><span class="oss oss-n">Closed</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Study timer z wykrywaniem odejścia od nauki + blokada apek</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=ai.regainapp" target="_blank">Google Play</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://play.google.com/store/apps/details?id=app.forfeit.forfeit" target="_blank"><img src="img/focus-blockers/forfeit.jpg" loading="lazy" alt="Forfeit"></a></div>
+  <div class="card-body">
+    <h3><a href="https://play.google.com/store/apps/details?id=app.forfeit.forfeit" target="_blank">Forfeit</a> <span class="badge b-and">Android</span><span class="badge b-ed">iOS</span></h3>
+    <div class="sub">⭐4.5 (419 ocen) · 10K+ pobrań</div>
+    <div class="meta"><span class="price">Freemium (sub)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Habit contracts z REALNYMI konsekwencjami finansowymi gdy nie zrealizujesz celu; 20K+ users</li></ul>
+    <div class="links"><a href="https://play.google.com/store/apps/details?id=app.forfeit.forfeit" target="_blank">Google Play</a></div>
+  </div>
+</div></div>
+<div class="note"><b>Inne na Play (live 2026-11-09):</b></div>
+<table class="quick"><thead><tr><th>Narzędzie</th><th>Co robi / ocena</th><th>Cena</th><th>Uwagi</th></tr></thead><tbody><tr><td>Ditch: Dopamine Detox</td><td>Gentle popup z policzonym czasem ("YouTube, round 8?"), bez twardych blokad</td><td>Free</td><td>500+ pobrań; nowa</td></tr><tr><td>Untap</td><td>Pause shield 5-60s + wyzwania math/puzzle</td><td>Freemium</td><td>⭐4.4 (762), 10K+</td></tr><tr><td>Ascent</td><td>Screen time + offtime + grywalizacja</td><td>Freemium</td><td>⭐4.7 (9.13K), 500K+</td></tr><tr><td>ScrollToll</td><td>"Gym" dla screen time</td><td>Freemium</td><td>⭐4.5 (510), 10K+</td></tr><tr><td>YourHour</td><td>Phone addiction tracker</td><td>Freemium</td><td>⭐4.2 (77K), 1M+</td></tr><tr><td>BlockSite (Android)</td><td>Znany blocker; krytyka za ads/UX</td><td>Freemium + ads</td><td>⭐3.7 (57K), 10M+</td></tr><tr><td>Digital Wellbeing (Google)</td><td>Wbudowane: limity apek, Focus mode</td><td>Free</td><td>⭐3.6 — "one-tap Ignore Limit" łatwo ominąć</td></tr><tr><td>Unreel</td><td>Specjalizowany reels/shorts blocker</td><td>Freemium</td><td>1K+; nowe</td></tr></tbody></table>
+
+<h2 id="macos">🖥️ macOS desktop <span class="cnt">(6 pełnych + timery)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://selfcontrolapp.com/" target="_blank"><img src="img/focus-blockers/gh-selfcontrol.jpg" loading="lazy" alt="SelfControl"></a></div>
+  <div class="card-body">
+    <h3><a href="https://selfcontrolapp.com/" target="_blank">SelfControl</a> <span class="badge b-ff">macOS</span><span class="badge b-hot">klasyk</span></h3>
+    <div class="sub">⭐4.4K · v4.0.2 · push VI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Hard-block listy stron/serwerów na czas — NIE DA SIĘ obejść restartem ani usunięciem apki, trzeba doczekać timera</li><li>Ikoniczny projekt (od 2014), HTTPS/internet-layer block od v2.0</li><li>TL;DR dla Maca: gdy chcesz TWARDEGO bloku</li></ul>
+    <div class="links"><a href="https://selfcontrolapp.com/" target="_blank">selfcontrolapp.com</a> · <a href="https://github.com/SelfControlApp/selfcontrol" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://getcoldturkey.com/" target="_blank"><img src="img/focus-blockers/coldturkey.jpg" loading="lazy" alt="Cold Turkey Blocker"></a></div>
+  <div class="card-body">
+    <h3><a href="https://getcoldturkey.com/" target="_blank">Cold Turkey Blocker</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Windows</span></h3>
+    <div class="sub">v4.9(2) · III.2026</div>
+    <div class="meta"><span class="price">Free tier · Pro $39 JEDNORAZOWO (lifetime, brak subskrypcji)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blokuje strony + APLIKACJE + cały internet; scheduled blocks, keyword/YouTube channels, "Frozen Turkey" (lock całego komputera)</li><li>Locking: timer/time-range/random-text/delay do 40 dni/restart/hasło; CLI; stats lokalne</li><li>"Notorious" — recenzje zgodne: hard to kill; jedna licencja na wszystkie prywatne komputery</li></ul>
+    <div class="links"><a href="https://getcoldturkey.com/" target="_blank">getcoldturkey.com</a> · <a href="https://getcoldturkey.com/pricing/" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://freedom.to/" target="_blank"><img src="img/focus-blockers/freedom.jpg" loading="lazy" alt="Freedom"></a></div>
+  <div class="card-body">
+    <h3><a href="https://freedom.to/" target="_blank">Freedom</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Windows</span><span class="badge b-ed">iOS</span><span class="badge b-and">Android</span><span class="badge b-ff">Chromebook</span></h3>
+    <div class="sub">4M+ users</div>
+    <div class="meta"><span class="price">Free (sesje do 2h, unlimited devices) · Premium $39.99/rok lub $8.99/mies · Lifetime $99.50</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>JEDYNY z realnym cross-device sync sesji (telefon+laptop jednocześnie)</li><li>Locked Mode: nie wyjdziesz z sesji; scheduling recurring; focus music (Brain.fm)</li><li>Uwaga z recenzji: mobile blocking przez VPN = łatwy do ominięcia</li></ul>
+    <div class="links"><a href="https://freedom.to/" target="_blank">freedom.to</a> · <a href="https://freedom.to/premium" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://jomo.so/" target="_blank"><img src="img/focus-blockers/jomo.jpg" loading="lazy" alt="Jomo"></a></div>
+  <div class="card-body">
+    <h3><a href="https://jomo.so/" target="_blank">Jomo</a> <span class="badge b-ff">macOS</span><span class="badge b-ed">iPhone/iPad</span></h3>
+    <div class="sub">300K+ users</div>
+    <div class="meta"><span class="price">Free (1 sesja) · Annual $29.99 · Lifetime $99.99 · Student $14.99</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blokada wg czasu/limitu/akcji; wybór siły blokady (gentle vs Strict Mode bez wyjścia); Screen Time Journaling; Apple Health</li><li>"Crafted in Europe", bootstrapped, no investors</li></ul>
+    <div class="links"><a href="https://jomo.so/" target="_blank">jomo.so</a> · <a href="https://jomo.so/pricing" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/berbyte/sinkzone" target="_blank"><img src="img/focus-blockers/gh-sinkzone.jpg" loading="lazy" alt="sinkzone"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/berbyte/sinkzone" target="_blank">sinkzone</a> <span class="badge b-ff">macOS/Linux/Win</span><span class="badge b-ff">Go</span><span class="badge b-hot">DNS-level</span></h3>
+    <div class="sub">345 ⭐ · push VIII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Lokalny DNS resolver block-by-default: WSZYSTKO zablokowane, chyba że jawnie dopuścisz (allowlist-only)</li><li>"The internet is infinite. Your focus isn't." — zabija feedy/social/newsy na poziomie DNS</li><li>Dla devów: TUI + CLI, wildcard patterns</li></ul>
+    <div class="links"><a href="https://github.com/berbyte/sinkzone" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/aadeshrao123/Focuser" target="_blank"><img src="img/focus-blockers/gh-focuser.jpg" loading="lazy" alt="Focuser"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/aadeshrao123/Focuser" target="_blank">Focuser</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Rust</span></h3>
+    <div class="sub">74 ⭐ · push XI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Blocker stron i apek w Rust + Pomodoro sessions; świeży aktywny projekt</li></ul>
+    <div class="links"><a href="https://github.com/aadeshrao123/Focuser" target="_blank">GitHub</a></div>
+  </div>
+</div></div>
+<div class="note"><b>Pomodoro/menu-bar timery (OSS, komplementarne do blockerów):</b></div>
+<table class="quick"><thead><tr><th>Narzędzie</th><th>Co robi / ocena</th><th>Cena</th><th>Uwagi</th></tr></thead><tbody><tr><td>TomatoBar</td><td>3.6K ⭐ MIT Swift — "world's neatest" Pomodoro w menu barze</td><td>Free</td><td>OSS</td></tr><tr><td>Mater</td><td>600 ⭐ MIT Swift — prosty menubar Pomodoro</td><td>Free</td><td>OSS</td></tr><tr><td>wnr (Work'n'Rest)</td><td>1.1K ⭐ MPL-2.0 — work/rest cycles, blokada ekranu w przerwie</td><td>Free</td><td>OSS, cross-plat</td></tr><tr><td>Pomodoro (G07cha)</td><td>474 ⭐ MIT Rust/Tauri — menubar timer</td><td>Free</td><td>OSS</td></tr><tr><td>amine</td><td>176 ⭐ MIT — Pomodoro + STRICT blocking (blokuje Alt+Tab i Windows key!)</td><td>Free</td><td>Windows</td></tr><tr><td>Blok</td><td>NFC karta + apka</td><td>od $59.99/rok</td><td>iOS/Android; vendor blog poleca własny produkt</td></tr><tr><td>ScreenZen halo</td><td>Fizyczne urządzenie na sypnię (Bluetooth, US only)</td><td>$49</td><td>dodatek do ScreenZen</td></tr></tbody></table>
+
+<h2 id="hardware">🔑 Hardware <span class="cnt">(najtrudniejsze do ominięcia)</span></h2>
+<div class="grid"><div class="card">
+  <div class="card-img"><a href="https://selfcontrolapp.com/" target="_blank"><img src="img/focus-blockers/gh-selfcontrol.jpg" loading="lazy" alt="SelfControl"></a></div>
+  <div class="card-body">
+    <h3><a href="https://selfcontrolapp.com/" target="_blank">SelfControl</a> <span class="badge b-ff">macOS</span><span class="badge b-hot">klasyk</span></h3>
+    <div class="sub">⭐4.4K · v4.0.2 · push VI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — GPL-3.0</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Hard-block listy stron/serwerów na czas — NIE DA SIĘ obejść restartem ani usunięciem apki, trzeba doczekać timera</li><li>Ikoniczny projekt (od 2014), HTTPS/internet-layer block od v2.0</li><li>TL;DR dla Maca: gdy chcesz TWARDEGO bloku</li></ul>
+    <div class="links"><a href="https://selfcontrolapp.com/" target="_blank">selfcontrolapp.com</a> · <a href="https://github.com/SelfControlApp/selfcontrol" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://getcoldturkey.com/" target="_blank"><img src="img/focus-blockers/coldturkey.jpg" loading="lazy" alt="Cold Turkey Blocker"></a></div>
+  <div class="card-body">
+    <h3><a href="https://getcoldturkey.com/" target="_blank">Cold Turkey Blocker</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Windows</span></h3>
+    <div class="sub">v4.9(2) · III.2026</div>
+    <div class="meta"><span class="price">Free tier · Pro $39 JEDNORAZOWO (lifetime, brak subskrypcji)</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blokuje strony + APLIKACJE + cały internet; scheduled blocks, keyword/YouTube channels, "Frozen Turkey" (lock całego komputera)</li><li>Locking: timer/time-range/random-text/delay do 40 dni/restart/hasło; CLI; stats lokalne</li><li>"Notorious" — recenzje zgodne: hard to kill; jedna licencja na wszystkie prywatne komputery</li></ul>
+    <div class="links"><a href="https://getcoldturkey.com/" target="_blank">getcoldturkey.com</a> · <a href="https://getcoldturkey.com/pricing/" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://freedom.to/" target="_blank"><img src="img/focus-blockers/freedom.jpg" loading="lazy" alt="Freedom"></a></div>
+  <div class="card-body">
+    <h3><a href="https://freedom.to/" target="_blank">Freedom</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Windows</span><span class="badge b-ed">iOS</span><span class="badge b-and">Android</span><span class="badge b-ff">Chromebook</span></h3>
+    <div class="sub">4M+ users</div>
+    <div class="meta"><span class="price">Free (sesje do 2h, unlimited devices) · Premium $39.99/rok lub $8.99/mies · Lifetime $99.50</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>JEDYNY z realnym cross-device sync sesji (telefon+laptop jednocześnie)</li><li>Locked Mode: nie wyjdziesz z sesji; scheduling recurring; focus music (Brain.fm)</li><li>Uwaga z recenzji: mobile blocking przez VPN = łatwy do ominięcia</li></ul>
+    <div class="links"><a href="https://freedom.to/" target="_blank">freedom.to</a> · <a href="https://freedom.to/premium" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://jomo.so/" target="_blank"><img src="img/focus-blockers/jomo.jpg" loading="lazy" alt="Jomo"></a></div>
+  <div class="card-body">
+    <h3><a href="https://jomo.so/" target="_blank">Jomo</a> <span class="badge b-ff">macOS</span><span class="badge b-ed">iPhone/iPad</span></h3>
+    <div class="sub">300K+ users</div>
+    <div class="meta"><span class="price">Free (1 sesja) · Annual $29.99 · Lifetime $99.99 · Student $14.99</span><span class="oss oss-n">Closed</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Blokada wg czasu/limitu/akcji; wybór siły blokady (gentle vs Strict Mode bez wyjścia); Screen Time Journaling; Apple Health</li><li>"Crafted in Europe", bootstrapped, no investors</li></ul>
+    <div class="links"><a href="https://jomo.so/" target="_blank">jomo.so</a> · <a href="https://jomo.so/pricing" target="_blank">Pricing</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/berbyte/sinkzone" target="_blank"><img src="img/focus-blockers/gh-sinkzone.jpg" loading="lazy" alt="sinkzone"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/berbyte/sinkzone" target="_blank">sinkzone</a> <span class="badge b-ff">macOS/Linux/Win</span><span class="badge b-ff">Go</span><span class="badge b-hot">DNS-level</span></h3>
+    <div class="sub">345 ⭐ · push VIII.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-h">pewność: high</span></div>
+    <ul><li>Lokalny DNS resolver block-by-default: WSZYSTKO zablokowane, chyba że jawnie dopuścisz (allowlist-only)</li><li>"The internet is infinite. Your focus isn't." — zabija feedy/social/newsy na poziomie DNS</li><li>Dla devów: TUI + CLI, wildcard patterns</li></ul>
+    <div class="links"><a href="https://github.com/berbyte/sinkzone" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/aadeshrao123/Focuser" target="_blank"><img src="img/focus-blockers/gh-focuser.jpg" loading="lazy" alt="Focuser"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/aadeshrao123/Focuser" target="_blank">Focuser</a> <span class="badge b-ff">macOS</span><span class="badge b-ff">Rust</span></h3>
+    <div class="sub">74 ⭐ · push XI.2026</div>
+    <div class="meta"><span class="price">Free</span><span class="oss oss-y">Open source — MIT</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Blocker stron i apek w Rust + Pomodoro sessions; świeży aktywny projekt</li></ul>
+    <div class="links"><a href="https://github.com/aadeshrao123/Focuser" target="_blank">GitHub</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://getbrick.com/" target="_blank"><img src="img/focus-blockers/brick.jpg" loading="lazy" alt="Brick"></a></div>
+  <div class="card-body">
+    <h3><a href="https://getbrick.com/" target="_blank">Brick</a> <span class="badge b-hot">Hardware</span><span class="badge b-hot">NFC</span></h3>
+    <div class="sub">iOS + Android</div>
+    <div class="meta"><span class="price">$59-99 jednorazowo, BEZ subskrypcji</span><span class="oss oss-n">Closed</span><span class="conf-m">pewność: med</span></div>
+    <ul><li>Fizyczny magnetyczny NFC kwadrat — telefon zablokujesz/odblokujesz dotknięciem; najtrudniejszy do ominięcia wg recenzji (8.6/10 HTS "most bypass-proof")</li></ul>
+    <div class="links"><a href="https://getbrick.com/" target="_blank">getbrick.com</a></div>
+  </div>
+</div><div class="card">
+  <div class="card-img"><a href="https://github.com/sb-ocr/focus-dial" target="_blank"><img src="img/focus-blockers/gh-focusdial.jpg" loading="lazy" alt="Focus Dial"></a></div>
+  <div class="card-body">
+    <h3><a href="https://github.com/sb-ocr/focus-dial" target="_blank">Focus Dial</a> <span class="badge b-hot">Hardware</span><span class="badge b-ff">DIY</span></h3>
+    <div class="sub">350 ⭐ · DIY ESP32</div>
+    <div class="meta"><span class="price">DIY (lutowanie)</span><span class="oss oss-y">Open hardware (CC BY-NC-SA)</span><span class="conf-l">pewność: low</span></div>
+    <ul><li>Fizyczna tarcza Do-Not-Disturb; integracja Home Assistant (sceny światła + blokada apek w sieci)</li><li>⚠️ push XII.2024 — projekt w stagnacji; alternatywa komercyjna: TimeChi</li></ul>
+    <div class="links"><a href="https://github.com/sb-ocr/focus-dial" target="_blank">GitHub</a></div>
+  </div>
+</div></div>
+
+<h2 id="community">💬 Społeczność — HN 2025-2026 <span class="cnt">(Reddit ❌ — patrz coverage)</span></h2>
+<table><thead><tr><th>Thread</th><th>Score</th><th>Data</th></tr></thead><tbody><tr><td><a href="https://news.ycombinator.com/item?id=43158660" target="_blank">Show HN: I built an app to stop me doomscrolling by touching grass</a></td><td>1203 pts / 268c</td><td>2025-02</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=46517458" target="_blank">Stop Doom Scrolling, Start Doom Coding (build via terminal from phone)</a></td><td>577 pts / 405c</td><td>2026-01</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=49585627" target="_blank">Doomscrolling ourselves to death</a></td><td>429 pts / 338c</td><td>2026-09</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=45205232" target="_blank">DOOMscrolling: The Game</a></td><td>428 pts / 101c</td><td>2025-09</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=28698979" target="_blank">Unhook: Hide YouTube Recommendations</a></td><td>181 pts / 122c</td><td>2021-09</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=46988635" target="_blank">Show HN: ShortGuard — Apple rejected my app for blocking Shorts</a></td><td>10 pts / 3c</td><td>2026-02</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=48030779" target="_blank">Show HN: I vibe coded a free site blocker</a></td><td>3 pts / 6c</td><td>2026-05</td></tr><tr><td><a href="https://news.ycombinator.com/item?id=42791428" target="_blank">My Struggle with Doom Scrolling</a></td><td>343 pts / 320c</td><td>2025-01</td></tr></tbody></table>
+<div class="note"><b>Konsensus z 10 porównań (VII-XI.2026):</b> Freedom = best overall cross-platform · ScreenZen = best free (×4 źródła) · Cold Turkey = desktop lockdown (×4) · Opal = iPhone hard block ($99.99/rok — "steep") · one sec = mindful friction z nauką w tle · Brick = most bypass-proof (fizyczny NFC) · wspólny wniosek recenzentów: <i>"most free plans cap the hard lock — that's what you pay for"</i> i <i>"friction you barely notice is friction you'll leave on"</i>.</div>
+
+<h2 id="metodologia">🔬 Metodologia</h2>
+<ul>
+<li><b>Architektura:</b> 6 scraper-subagentów (DeepSeek V4.1 Flash) + warstwa syntezy (main). Surowe HTML nigdy nie trafiło do drogiego modelu.</li>
+<li><b>Narzędzia:</b> curl + GitHub REST API + HN Algolia + Lightpanda CDP (ws://127.0.0.1:9333, cookie bypass SOCS dla Google) + web_fetch. Browser tool był wyłączony w trakcie researchu.</li>
+<li><b>Pułapki:</b> Chrome Web Store = pełny CSR (curl 0 wyników → CDP z consent-bypass); GitHub OG cards rate-limit przy burstu (fallback na avatary); Reddit twardo blokuje egress Pi (3 szczeble eskalacji wyczerpane → ❌); produkty kolizyjne nazewniczo: DWA różne "FocusTube" i DWA różne "Nudge" w sklepach.</li>
+<li><b>Ceny:</b> z oficjalnych pricing pages 2026-11-09 (USD; Cold Turkey Pro = dynamiczny Paddle, historycznie ~$39 — confidence med).</li>
+<li><b>Destylaty:</b> <code>memory/research/focus-blockers-2026/raw/</code> (6 plików, ~105 KB): github-os.md, cws.md, android.md, macos.md, reviews.md, trends.md.</li>
+<li><b>Miniatury:</b> lokalne, ≤640px, lazy-loading; 59/62 pozycji z logo (intention/socialfocus/unreel bez dostępnych logo — quick mentions).</li>
+</ul>
+
+<footer>
+Deep research zRealizowany 2026-11-09 przez Andrzeja 🤖 · R1 broad sweep: 6 agentów równolegle · R2: synteza + uzupełnienia (HN self-fetch + Lightpanda eskalacje) · Raport: focus-blockers-2026-11-09 · Wszystkie claimy mają klikalne URL-e. Coverage table na górze — ❌ źródła wyłączone z wniosków.
+</footer>
+</div>
+<button id="top-btn" onclick="scrollTo(0,0)">↑</button>
+</body>
+</html>

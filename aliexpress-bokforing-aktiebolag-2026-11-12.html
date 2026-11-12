@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AliExpress w aktiebolag — bokföring, moms, tull [Research 2026-11-12]</title>
+<style>
+  :root{
+    --bg:#131020; --card:#1d1832; --card2:#241e3f; --ink:#ece8f7; --dim:#a99fc9;
+    --acc:#ff9a3c; --acc2:#8b5cf6; --ok:#3ddc84; --warn:#ff5c7a; --link:#7aa7ff;
+    --border:#332a55; --code:#191430;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;font-size:15.5px}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px 90px}
+  header{padding:34px 0 18px;border-bottom:1px solid var(--border);margin-bottom:22px}
+  .badge{display:inline-block;background:linear-gradient(135deg,var(--acc2),#5b21b6);color:#fff;border-radius:20px;padding:3px 14px;font-size:12.5px;font-weight:600;letter-spacing:.4px}
+  .badge.gold{background:linear-gradient(135deg,var(--acc),#c2410c)}
+  h1{font-size:1.9rem;margin:14px 0 6px;line-height:1.25}
+  .meta{color:var(--dim);font-size:.92rem}
+  .meta b{color:var(--ink)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(19,16,32,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 0;max-height:60px}
+  nav .wrap{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:0}
+  nav a{background:var(--card2);border:1px solid var(--border);color:var(--dim);border-radius:16px;padding:3px 13px;font-size:.82rem;white-space:nowrap}
+  nav a:hover{color:var(--ink);border-color:var(--acc2);text-decoration:none}
+  h2{font-size:1.45rem;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--acc2)}
+  h2 .n{color:var(--acc2);font-weight:700;margin-right:8px}
+  h3{font-size:1.12rem;margin:26px 0 10px;color:var(--acc)}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0}
+  .card.hl{border-color:var(--acc2);box-shadow:0 0 22px rgba(139,92,246,.14)}
+  .card.warn{border-left:4px solid var(--warn)}
+  .card.ok{border-left:4px solid var(--ok)}
+  .card.gold{border-left:4px solid var(--acc)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+  th{background:var(--card2);color:var(--acc);text-align:left;padding:9px 12px;border:1px solid var(--border);font-size:.86rem;letter-spacing:.3px}
+  td{padding:8px 12px;border:1px solid var(--border);vertical-align:top}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+  .mono{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;background:var(--code);border-radius:6px;padding:1px 7px;color:#ffd9a8}
+  .q{background:var(--card);border-left:3px solid var(--acc2);border-radius:0 12px 12px 0;padding:12px 16px;margin:12px 0;font-size:.95rem}
+  .q .sv{color:#ffd9a8;font-style:italic}
+  .q .who{color:var(--dim);font-size:.8rem;margin-top:6px}
+  .q .who b{color:var(--acc)}
+  .pill{display:inline-block;border-radius:12px;padding:1px 10px;font-size:.75rem;font-weight:600;margin-left:6px;vertical-align:middle}
+  .pill.ok{background:rgba(61,220,132,.15);color:var(--ok)}
+  .pill.no{background:rgba(255,92,122,.15);color:var(--warn)}
+  .pill.med{background:rgba(255,154,60,.15);color:var(--acc)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+  .tldr{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--acc2);border-radius:16px;padding:22px 24px;margin:18px 0}
+  .tldr li{margin:9px 0}
+  .num{display:inline-block;background:var(--acc2);color:#fff;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;font-size:.8rem;font-weight:700;margin-right:8px}
+  .verdict{font-size:1.05rem;font-weight:700}
+  .v-yes{color:var(--ok)} .v-no{color:var(--warn)}
+  .src{color:var(--dim);font-size:.8rem}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem}
+  .backtop{position:fixed;right:18px;bottom:18px;background:var(--acc2);color:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 18px rgba(0,0,0,.5);z-index:60}
+  .backtop:hover{filter:brightness(1.15)}
+  ul{padding-left:22px} li{margin:6px 0}
+  .kbd{background:var(--code);border:1px solid var(--border);border-radius:8px;padding:2px 8px;font-size:.85rem}
+  .srcok{color:var(--ok)} .srcpart{color:var(--acc)} .srcfail{color:var(--warn)}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a href="#tldr">TL;DR</a>
+  <a href="#coverage">Pokrycie</a>
+  <a href="#mechanika">Importmoms — mechanika</a>
+  <a href="#ioss">Scenariusz A: IOSS</a>
+  <a href="#klasyczny">Scenariusz B: klasyczny import</a>
+  <a href="#konta">Tabela kont</a>
+  <a href="#tull">Tull 2026</a>
+  <a href="#dok">Dokumentacja</a>
+  <a href="#praktyka">Praktyka forum</a>
+  <a href="#dropship">Dropshipping</a>
+  <a href="#zmiany2026">Zmiany 2026</a>
+  <a href="#programy">Programy</a>
+  <a href="#faq">FAQ</a>
+  <a href="#metodologia">Metodologia</a>
+  <a href="#zrodla">Źródła</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <span class="badge gold">⚖️ LEGAL</span> <span class="badge">📚 KNOWLEDGE</span>
+  <h1>AliExpress w aktiebolag: bokföring, moms (IOSS vs importmoms), tull</h1>
+  <div class="meta">
+    <b>Data:</b> 12.11.2026 · <b>Języki:</b> szwedzki (główny) · <b>Źródła:</b> 130+ wpisów z 40+ stron (fora: Flashback ×24, ehandel.se ×24, Spiris-forum ×6, Företagande.se ×4, SweClockers, Reddit, RikaTillsammans; blogi księgowe ×21; oficjalne: Skatteverket/Tullverket/BFN/EU ×15) · <b>Typ:</b> research po szwedzkich forach + weryfikacja w oficjalnych źródłach
+  </div>
+</header>
+
+<!-- ============ TL;DR ============ -->
+<section id="tldr">
+<div class="tldr">
+  <h2 style="margin-top:0;border:none">🎯 TL;DR — jak ludzie to księgują (i jak naprawdę jest)</h2>
+  <ol>
+    <li><b>AliExpress kupiony do AB = 2 scenariusze:</b>
+      <br><b>A) IOSS (≤150 EUR, AliExpress pobiera moms w kasie)</b> → <span class="verdict"><span class="v-no">ZERO importmoms</span></span> po stronie AB, ale <span class="verdict"><span class="v-no">NIE odliczysz</span></span> pobranej moms — platforma jest „deemed supplier", a AB traktowane jak konsument. Prawidłowo: <b>cała kwota z momsem = koszt</b> (bez żadnych linii momsa). ⚠️ Skatteverket sam nie ma jasnego stanowiska (2 niezależne źródła) — przy większych kwotach: pisemne svar od SKV.</li>
+    <li><b>B) Klasyczny import (zakup B2B z VAT-nr, >150 EUR, sprzedawca bez IOSS)</b> → importmoms rozliczasz <b>sam</b> w deklaracji VAT: <span class="mono">ruta 50</span> (underlag) → <span class="mono">ruta 60</span> (utgående) → <span class="mono">ruta 48</span> (avdrag) — <b>w tym samym okresie, netto = zero</b> przy pełnym prawie do odliczenia (nie wykładasz gotówki, reform ze 2015).</li>
+    <li><b>Konta (BAS 2026, oficjalna kontoplan):</b> <span class="mono">4010</span> = TYLKO inrikes! Import handelsvaror = <span class="mono">4085</span>, import råvaror = <span class="mono">4545</span>. Importmoms = <span class="mono">2615</span> + <span class="mono">2645</span> (2640 = błąd, to konto inrikes). Tull = <span class="mono">5721</span>, spedition = <span class="mono">5722</span>, szwedzka moms na fakturze spedytora = <span class="mono">2641</span>.</li>
+    <li><b>Tull od 1.07.2026:</b> tullfrihet ≤150 EUR zniesiona → <b>3 EUR na każdą varupost</b> (tymczasowo, do 1.7.2028, potem stawka procentowa) + osobne opłaty typu deklarationsavgift ~100 kr. IOSS <b>nie obejmuje</b> tullu.</li>
+    <li><b>Dokumentacja:</b> potwierdzenie z AliExpress <b>wystarcza jako underlag kosztu</b> (BFNAR 2013:2), ale nie daje odliczenia moms. Od 1.07.2024 skany OK (oryginały papierowe można wyrzucić), przechowywanie <b>7 lat</b>. Brak kvitta → kontoutdrag + screenshot (uznawane na forum).</li>
+    <li><b>Największe ryzyko:</b> AliExpress nie ma företagskonto → kvitto wystawiane na privatperson, a pieniądze lecą z AB. Koszt i tak przysługuje, ale <b>odliczenie moms z takiego zakupu = realna skatteskuld</b>. Drugie ryzyko: undervärderad faktura (chińscy sprzedawcy mają to „w systemie") — odpowiedzialność wali na importera (AB).</li>
+  </ol>
+</div>
+</section>
+
+<!-- ============ COVERAGE ============ -->
+<section id="coverage">
+<h2><span class="n">📊</span>Pokrycie źródeł (coverage)</h2>
+<div class="card">
+<table>
+<tr><th style="width:26%">Źródło</th><th style="width:12%">Status</th><th style="width:20%">Wpisów</th><th>Uwagi</th></tr>
+<tr><td>Flashback (forum.flashback.org)</td><td class="srcok">✅ COVERED</td><td>24 wątki</td><td>Przez Brave Search + Lightpanda CDP (DDG/Google/Mojeek/Startpage zablokowane). Forum praktycznie nie podaje numerów kont — daje praktykę (DDP vs IOSS, progi, nowe opłaty 2026)</td></tr>
+<tr><td>ehandel.se (forum + artykuły)</td><td class="srcok">✅ COVERED</td><td>24 wpisy</td><td>Najlepsze źródło praktyki e-handel; ekspert „VATadviser" (momskonsult) w długiej multithreadzie; wątki głównie 2014–2021 (przed IOSS — oznaczone)</td></tr>
+<tr><td>Spiris-forum (Visma Spcs)</td><td class="srcok">✅ COVERED</td><td>6 wątków</td><td>GOLD: odpowiedzi moderatorów (księgowości Visma) z konkretnymi konterinami — w tym wątek o AliExpress-IOSS (2023) i zakupach z EU-lageru (2025)</td></tr>
+<tr><td>Företagande.se</td><td class="srcok">✅ COVERED</td><td>4 wątki</td><td>W tym wątek „Bokför inköp aliexpress" z cytatem rozmowy z Skatteverket (problem podwójnego VAT)</td></tr>
+<tr><td>Bokio / Fortnox / Spiris-Visma / Expowera / DrivaEget (blogi)</td><td class="srcok">✅ COVERED</td><td>21 guidów</td><td>Konsensus kont + jedyny solidny opis IOSS (Expowera) i zmian 2026</td></tr>
+<tr><td>Skatteverket</td><td class="srcok">✅ / ⚠️</td><td>6 stron</td><td>Strony główne ✅; Rättslig vägledning (RV 323933) — WAF, cytaty z SERP ⚠️</td></tr>
+<tr><td>Tullverket</td><td class="srcok">✅ COVERED</td><td>6 stron</td><td>curl/web_fetch blokują JS → Lightpanda; strona o zmianach 2026 (akt. 22.10.2026)</td></tr>
+<tr><td>BFN / BFNAR 2013:2 · Verksamt.se · EU Kommission · EUR-Lex (Dir 2017/2455)</td><td class="srcok">✅ COVERED</td><td>5 stron</td><td>BFN PDF 403 → lagen.nu; EUR-Lex = źródło prawne „deemed supplier" (art. 14a) i zwolnienia importowego (recital 10)</td></tr>
+<tr><td>Statskontoret (forum wytycznych)</td><td class="srcok">✅ COVERED</td><td>1 strona</td><td>Oficjalne wytyczne konterienia importmoms (sektor publiczny, reguły identyczne)</td></tr>
+<tr><td>SweClockers</td><td class="srcpart">⚠️ CZĘŚCIOWO</td><td>2 wątki</td><td>Natywna wyszukiwarka 403 (Cloudflare); konkretne wątki przez Lightpanda. Treść głównie konsumencka</td></tr>
+<tr><td>Reddit (r/sweden, r/sverige)</td><td class="srcpart">⚠️ CZĘŚCIOWO</td><td>1 wątek</td><td>Search 403 (RSS padła) — tylko Lightpanda na konkretny URL. Zero wątków o AB-księgowości</td></tr>
+<tr><td>RikaTillsammans-forum</td><td class="srcok">✅</td><td>1 wątek</td><td>Utlagg Banggood/AliExpress — zasada „moms nie specyfikowany = brak odliczenia"</td></tr>
+<tr><td>iFragasatt.se</td><td class="srcfail">❌ FAILED</td><td>0</td><td>Serwis przestał być Q&A (jest platformą komentarzy) — brak treści o imporcie (2 metody)</td></tr>
+<tr><td>Lawline.se</td><td class="srcfail">❌ FAILED</td><td>0</td><td>Q&A istnieją, ale bez publicznego indeksu/wyszukiwarki; site: w DDG-przez-proxy ignorowany (2 metody)</td></tr>
+<tr><td>Familjeliv · Placera/Avanza</td><td class="srcfail">❌ FAILED</td><td>0</td><td>Brak treści o temacie (familjeliv = parenting; placera = SPA + brak trafień)</td></tr>
+<tr><td>Björn Lundén — artykuł „import"</td><td class="srcfail">❌ FAILED</td><td>0</td><td>Za logowaniem</td></tr>
+</table>
+<p class="src">⚠️ Infra: <b>wszystkie globalne wyszukiwarki z Pi zablokowane</b> (DDG captcha, Bing decoy, Google consent, Brave/Ecosia 429/403, Mojeek 403, searx captcha, Startpage JS, Yandex captcha) + browser tool disabled. Działające obejścia: <span class="mono">r.jina.ai</span> (także nad <span class="mono">lite.duckduckgo.com</span>) i <b>Lightpanda CDP</b> (127.0.0.1:9333) dla stron CF-walled (spiris, sweclockers, reddit, tullverket).</p>
+</div>
+</section>
+
+<!-- ============ MECHANIKA ============ -->
+<section id="mechanika">
+<h2><span class="n">1</span>Importmoms — mechanika (fundament)</h2>
+<div class="card">
+<p><b>Kto płaci:</b> od 1.01.2015 <b>momsregistrerat företag</b> rozlicza importmoms w swojej momsdeklaracji do <b>Skatteverket</b> (wcześniej: Tullverket). Niezarejestrowani/privatperson płacą Tullverket (zwykle przez fraktbolag). <span class="pill ok">high</span></p>
+<p class="src">Skatteverket: <i>„Om du är momsregistrerad och importerar varor till din verksamhet i Sverige ska du i regel redovisa svensk moms på importen i din momsdeklaration."</i> — <a href="https://www.skatteverket.se/foretag/moms/kopavarorochtjanster/inkopfranlanderutanforeu/kopavarorfranlanderutanforeuimport.4.361dc8c15312eff6fd37208.html">link</a></p>
+<ul>
+  <li><b>Stawka:</b> 25% (12% — konstverk/antyki, 6% — livsmedel/böcker). <span class="pill ok">high</span></li>
+  <li><b>Podstawa (beskattningsunderlag) =</b> tullvärde + tull + inne statlige skatter (poza momsem) + bikostnady (transport/emballage/försäkring) do bestemmelsetowarzystwa w EU. <span class="pill ok">high</span></li>
+  <li><b>Okres:</b> decyduje data wystawienia <b>tullräkningen</b> (Tullverket). Ingående odliczasz <b>w tym samym okresie</b> co utgående — niezależnie od bokslutsmetod. <span class="pill ok">high</span></li>
+  <li><b>Deklaracja:</b> <span class="mono">ruta 50</span> (beskattningsunderlag import) → <span class="mono">ruta 60–62</span> (utgående) → <span class="mono">ruta 48</span> (ingående/avdrag). Przy pełnym avdragsrätt netto = <b>0 kr</b> — „wykładasz zero gotówki". <span class="pill ok">high</span></li>
+  <li><b>EORI + tullkredit:</b> firma z EORI i tullkredit dostaje od Tullverket fakturę <b>0:- za momsa</b> (kwoty i tak trafiają do deklaracji) — klasyczny trick z forum ehandel.se, „slipper ligga ute med momspengarna". <span class="pill med">med</span></li>
+</ul>
+</div>
+</section>
+
+<!-- ============ SCENARIUSZ A: IOSS ============ -->
+<section id="ioss">
+<h2><span class="n">2</span>Scenariusz A: AliExpress pobiera moms w kasie (IOSS ≤150 EUR) 🔥</h2>
+<div class="card gold">
+<p><b>To jest najgorętsza rozbieżność całego researchu — i została rozstrzygnięta.</b> AliExpress jest zarejestrowane w IOSS (import one-stop-shop): dla zamówień ≤150 EUR (≈ <b>1 655,30 kr</b>) pobiera szwedzki VAT już przy checkout i samodzielnie odprowadza do Skatteverket. Co to znaczy dla AB?</p>
+<h3>Werdykt (4 pytania):</h3>
+<table>
+<tr><th>Pytanie</th><th>Werdykt</th><th>Podstawa</th></tr>
+<tr><td>Czy AB płaci importmoms przy takim zakupie?</td><td class="v-yes verdict">NIE</td><td>Zwolnienie VAT przy imporcie, gdy sprzedaż zgłoszona w IOSS — celowo, „in order to avoid double taxation" (recital 10, Dyrektywa <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017L2455">2017/2455</a>). Tullverket: <i>„Några avgifter ska normalt inte deklareras när en registrerad e-handelsplattform har debiterat momsen vid inköpstillfället."</i> (kod FR5/F48 w deklaracji celnej, limit 150 EUR). <span class="pill ok">high</span></td></tr>
+<tr><td>Czy AB odliczy (avdrag) momsa pobraną przez AliExpress?</td><td class="v-no verdict">NIE</td><td>Przy IOSS platforma = „deemed supplier" (art. 14a) — to <b>ona</b> jest skattskyldig za import, a AB jest traktowane jak konsument. RV 8 kap. 3 § ML: <i>„Vid import kan som regel bara den som själv är skattskyldig för importen ha avdragsrätt"</i> (Skatteverket <a href="https://www4.skatteverket.se/rattsligvagledning/edition/2023.16/323933.html">Rättslig vägledning 323933</a>). Do tego: obca/felaktigt debiterad moms <b>nigdy</b> na 2641 (FAR, Asstio). <span class="pill ok">high</span></td></tr>
+<tr><td>Jak zaksięgować?</td><td colspan="2"><b>Cała kwota (z momsem) = koszt / inköpspris — bez żadnej linii momsa</b> (bez 2615/2645/2641). Konto wg charakteru: handelsvaror <span class="mono">4085</span>, förbrukningsinventarier <span class="mono">5410</span>, ogólnie <span class="mono">4500/4511</span>. Workaround Bokio z forum (4500 + 4598 „justering omvänd moms" zerujące netto) = obejście, nie metoda. <span class="pill med">med-high</span></td></tr>
+<tr><td>Czy kvitto z AliExpress wystarczy jako underlag?</td><td colspan="2"><b>Pod koszt — TAK</b> (BFNAR 2013:2: verifikation musi identyfikować affärshändelse i motpart; elektronisk kvitto OK). <b>Do odliczenia moms — NIE</b> (i tak nie ma prawa). <span class="pill med">med-high</span></td></tr>
+</table>
+<h3>Cytaty z forów (praktyka):</h3>
+<div class="q"><span class="sv">„Problemet är att du blir hanterad som en icke beskattningsbar person och köpet hanteras genom IOSS. Så den momsen är en felaktig debiterad moms och är inte avdragsgill för dig… det bör rimligtvis bli ett inköp utan moms dvs hela beloppet blir en kostnad för dig."</span>
+<div class="who"><b>Josefine Johansson — moderator/księgowa Visma Spiris</b>, odpowiedź w wątku „Inköp från AliExpress m.m. där moms betalas direkt" (2023) — <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Inkop-fran-AliExpress-m-m-dar-moms-betalas-direkt/m-p/216669">forum.spiris.se</a></div></div>
+<div class="q"><span class="sv">„IOM att momsen redan betalats via AliExpress filial i Holland måste du i princip lägga på moms på hela inköpsbeloppet INK moms betalad via IOSS, så blir tekniskt sätt dubbel beskattning. Så lät det när jag pratade med skatteverket om frågan."</span>
+<div class="who"><b>użytkownik Företagande.se</b> cytujący rozmowę z Skatteverket — wątek <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/74288-bokfor-inkop-aliexpress">„Bokför inköp aliexpress"</a>. ⚠️ UWAGA: ten cytat opisuje (błędne!) dodanie importmoms OBOK momsa z IOSS — to właśnie ten „podwójny VAT". Poprawnie: NIE doliczaj importmoms, gdy IOSS ją już pobrał.</div></div>
+<div class="q"><span class="sv">„Utländsk moms är inte avdragsgill i den svenska momsdeklarationen och får aldrig bokföras på 2641… Bokförs den på 2641 begär företaget avdrag för pengar som aldrig gått till Skatteverket, och felet ger en faktisk skatteskuld."</span>
+<div class="who"><b>Asstio kunskapsbank</b> (granskad przez redovisningsexpert, 2026-11-05) — <a href="https://www.asstio.com/kunskap/utlandsk-moms-pa-fakturan">link</a></div></div>
+<div class="card warn">
+<p><b>⚠️ Zastrzeżenie:</b> dwa niezależne źródła wskazują, że <b>Skatteverket sam nie ma jasnego stanowiska</b> dla B2B-podanego-jak-konsument (Spiris-moderator: brak wytycznych, gdy „du som företag blir behandlad som en privatperson"; Företagande: doradztwo SKV prowadzące do podwójnego opodatkowania). Praktyczne rekomendacje: (1) przy zamówieniu <b>podaj VAT-nummer firmy</b> → zakup idzie B2B → scenariusz B (import wg huvudregler); (2) przy większych kwotach — <b>pisemne svar od Skatteverket</b> (kostnadsfri, wiążąca przy granskning).</p>
+</div>
+</div>
+</section>
+
+<!-- ============ SCENARIUSZ B ============ -->
+<section id="klasyczny">
+<h2><span class="n">3</span>Scenariusz B: klasyczny import z importmomsem (B2B / >150 EUR / bez IOSS)</h2>
+<div class="card hl">
+<p>Pełny przykład konterienia (Asstio, granskad 2026-11-05, „Gäller inkomstår 2026 K2/K3 AB"): zakup handelsvaror z Chin na firmę — varor <b>30 000 kr</b>, speditörsfaktura: tull <b>1 200</b> + avgift spedytora <b>800</b> (z szwedzką momsem 200). Monetärt tullvärde = 31 200 → <b>importmoms 7 800</b>:</p>
+<table>
+<tr><th>Konto</th><th>Benämning (BAS 2026)</th><th>Debet</th><th>Kredit</th></tr>
+<tr><td><span class="mono">4085</span></td><td>Import av handelsvaror, 25 % moms</td><td>30 000</td><td></td></tr>
+<tr><td><span class="mono">5721</span></td><td>Tullkostnader</td><td>1 200</td><td></td></tr>
+<tr><td><span class="mono">5722</span></td><td>Speditionskostnader</td><td>800</td><td></td></tr>
+<tr><td><span class="mono">2641</span></td><td>Debiterad ingående moms (szwedzka, na avgift spedytora)</td><td>200</td><td></td></tr>
+<tr><td><span class="mono">2645</span></td><td>Beräknad ingående moms på förvärv från utlandet</td><td>7 800</td><td></td></tr>
+<tr><td><span class="mono">2440</span></td><td>Leverantörsskulder</td><td></td><td>32 200</td></tr>
+<tr><td><span class="mono">2615</span></td><td>Utgående moms import av varor, 25 %</td><td></td><td>7 800</td></tr>
+</table>
+<p class="src">Źródło: <a href="https://www.asstio.com/kunskap/importmoms-och-tull">asstio.com/kunskap/importmoms-och-tull</a> · analogiczny schemat (z wariantami kont): <a href="https://astrid.so/blogg/bokfora-importmoms">astrid.so</a>, <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-varuinkop-fran-Kina/m-p/212082">Spiris-forum (kontering z momskodami 50/60/48)</a>, <a href="https://bokforingskoll.se/bokfora-import-utanfor-eu-tull-moms-frakt/">bokforingskoll.se</a></p>
+<p><b>Deklaracja:</b> <span class="mono">ruta 50</span> = 31 200 → <span class="mono">ruta 60</span> = 7 800 → <span class="mono">ruta 48</span> = 7 800. Netto momsa = 0 (przy pełnym avdragsrätt).</p>
+<div class="q"><span class="sv">„Tull är ingen moms och ska aldrig ligga på ett momskonto. 5721 är tullkostnad, 5722 speditionskostnad. Speditörens egen avgift är en svensk tjänst med vanlig svensk moms på 2641 — den ska inte blandas med importmomsen på 2645."</span>
+<div class="who"><b>Asstio</b> — <a href="https://www.asstio.com/kunskap/importmoms-och-tull">link</a> <span class="pill ok">high</span></div></div>
+<div class="card warn">
+<p><b>Pułapka nr 1 (najczęstszy błąd wg Asstio):</b> importmoms pobrana przez spedytora (DHL/PostNord na fakturze) zaksięgowana na 2641 → <b>podwójne odliczenie</b> (raz z faktury, raz w deklaracji ruta 48). Poprawnie: momsa z importu TYLKO przez 2645/2615 w deklaracji; jeśli spedytor ją naliczył — deklaracja była zrobiona błędnie, żądaj korekty (KvittoFlow).</p>
+<p><b>Pułapka nr 2:</b> mieszanie 2641 (svensk ingående, np. na avgift/förskottsavgift spedytora) z 2645 (importmoms) — to różne konta, różne ruty.</p>
+</div>
+</div>
+</section>
+
+<!-- ============ KONTA ============ -->
+<section id="konta">
+<h2><span class="n">4</span>Tabela kont (BAS-kontoplanen 2026, oficjalna) + pułapki</h2>
+<div class="card">
+<table>
+<tr><th style="width:12%">Konto</th><th style="width:38%">Nazwa wg BAS 2026 (verbatim)</th><th>Kiedy używać przy AliExpress</th></tr>
+<tr><td><span class="mono">4010</span></td><td>Inköp av handelsvaror <b>i Sverige</b></td><td>❌ <b>NIGDY dla importu</b> — to konto wyłącznie inrikes (najczęstszy błąd wg MrPotato)</td></tr>
+<tr><td><span class="mono">4085</span></td><td><b>Import av handelsvaror</b>, 25 % moms (12%: 4086, 6%: 4087)</td><td>✅ zakup towarów handlowych (do odsprzedaży) z Chin — IOSS-wersja: cała kwota z momsem</td></tr>
+<tr><td><span class="mono">4545</span></td><td><b>Import av råvaror och material</b>, 25 %</td><td>✅ tylko surowce/materiały produkcyjne (nie handelsvaror!). Fortnox i wiele programów używa 4545 „generycznie" jako „Import av varor" — formalnie BAS mówi: to råvaror</td></tr>
+<tr><td><span class="mono">4500/4511</span></td><td>Inköp utanför Sverige / varor från utlandet</td><td>✅ wariant w niektórych programach/forumach (Bokio: 4500; Spiris: 4000/4511). Jeśli program nie ma 4085 — użyj dedykowanego konta programu i sprawdź momskod</td></tr>
+<tr><td><span class="mono">2615</span></td><td>Utgående moms <b>import av varor</b>, 25 % (12%: 2625, 6%: 2635)</td><td>✅ kredit — importmoms wyliczona samodzielnie (scenariusz B). NIE 2610/2611 (to inrikes utgående)</td></tr>
+<tr><td><span class="mono">2645</span></td><td>Beräknad ingående moms på förvärv <b>från utlandet</b></td><td>✅ debet — avdrag tej samej momsy. <b>2640 = BŁĄD</b> (gruppkonto inrikes ingående)</td></tr>
+<tr><td><span class="mono">2641</span></td><td>Debiterad ingående moms</td><td>✅ tylko szwedzka ingående (np. moms na avgift spedytora / fakturach inrikes). NIGDY obca/importmoms</td></tr>
+<tr><td><span class="mono">5721</span></td><td><b>Tullkostnader</b></td><td>✅ tull z tullräkning (przy kosztowym liczeniu)</td></tr>
+<tr><td><span class="mono">5722</span></td><td><b>Speditionskostnader</b></td><td>✅ avgift spedytora za förtullning/handel (bez jego utlägg-moms)</td></tr>
+<tr><td><span class="mono">5711</span></td><td>Fraktkostnader (in)</td><td>✅ frakt przy zakupie — UWAGA: K2 zaleca włączenie w anskaffningsvärde (z varą), nie osobno; patrz rozbieżność niżej</td></tr>
+<tr><td><span class="mono">1460</span> / <span class="mono">4960</span></td><td>Lager av handelsvaror / Förändring av lager</td><td>✅ przy lagerföring: varukostnada + tull + spedition + frakt razem (anskaffningsvärde)</td></tr>
+<tr><td><span class="mono">2440</span></td><td>Leverantörsskulder</td><td>✅ skulda wobec dostawcy/Tullverket (tullkredit: faktura 0:-)</td></tr>
+<tr><td><span class="mono">5410</span></td><td>Förbrukningsinventarier</td><td>✅ drobny sprzęt/materiały do firmy (nie na sprzedaż)</td></tr>
+</table>
+<h3>Rozbieżność rozstrzygnięta: tull na 4545/4085 czy 5720/5721?</h3>
+<p><b>Obie szkoły są „poprawne", ale rządzi K2 + cel:</b></p>
+<ul>
+<li><b>Warory lagerförs</b> (typowe AB-handel): K2-anskaffningsvärde → hemtagningskostnader (tull, spedition, frakt in) <b>wchodzą w wartość varą</b> → 4085/4545 lub wprost 1460 (tak robi bokforingstips, Fortnox, Asstio-frakt-article). Wtedy tull = <b>nie</b> 5721.</li>
+<li><b>Warory kosztowo</b> / chcesz widzieć tull osobno w raportach: dedykowane konta <span class="mono">5721</span>/<span class="mono">5722</span> (tak robią Asstio i Astrid 2026; BAS je wprost w tym celu stworzył). <span class="pill med">med-high</span></li>
+<li><b>Praktyczna rekomendacja dla AB (K2, AliExpress, handelsvaror):</b> varuvärde → <span class="mono">4085</span>; tull → <span class="mono">5721</span>; spedition → <span class="mono">5722</span>; przy löpande inventering → wszystko w <span class="mono">1460</span>.</li>
+</ul>
+<p class="src">BAS-kontoplan 2026 (oficjalny PDF): <a href="https://www.bas.se/wp-content/uploads/2026/04/BAS_kontoplan_2026_v2.pdf">bas.se</a> · konto wiki: <a href="https://bokforingenonline.se/5720_Tull-_och_speditionskostnader_m.m.">bokforingenonline</a></p>
+</div>
+</section>
+
+<!-- ============ TULL 2026 ============ -->
+<section id="tull">
+<h2><span class="n">5</span>Tull przy AliExpress (stan: 12.11.2026)</h2>
+<div class="card">
+<ul>
+<li><b>Od 1.07.2026 tullfrihet dla ≤150 EUR ZNIESIONA.</b> Firmy płacą tull niezależnie od wartości. Dla przesyłek ≤150 EUR sprzedanych konsumentowi w UE przed przybyciem (czyli dokładnie model AliExpress-IOSS): zasadniczo <b>3 EUR na varupost</b> (≈33 kr). <span class="pill ok">high</span></li>
+<li><b>3 EUR/varupost jest tymczasowa</b> — od 1.07.2028 zastąpiona stawką procentową (Tullverket). <span class="pill ok">high</span></li>
+<li><b>Varupost ≠ paket:</b> różne towary w jednej paczce = różne varuposter (etui + tröja = 2×3 = 6 EUR); identyczne sztuki zwykle = 1 varupost. <span class="pill ok">high</span></li>
+<li><b>IOSS nie obejmuje tullu</b> — momsa pobrana w kasie, ale tull (i opłaty za deklarację) i tak przyjdzie z przesyłką/dostawcą. <span class="pill med">med-high</span> (<a href="https://pc-concept.nu/aliexpress-tull/">pc-concept</a>: <i>„AliExpress tar oftast ut momsen redan i kassan via EU:s system IOSS, och då ska du inte betala igen vid leverans. Tullen kan däremot inte betalas via IOSS."</i>)</li>
+<li><b>Opłaty operatorów:</b> deklarationsavgift ~100 kr + tullavgift + importmoms-hantering (przykład z Flashback po 1.07.2026: 100 + 33 + 55 kr — Moranco, przesyłka z Szanghaju; <a href="https://www.flashback.org/t3604807">wątek</a>). PostNord klasycznie: 75–125 kr/paket.</li>
+<li><b>Tull = koszta, nie podatek kwitowany:</b> „<i>Tull är bara extra kostnad för varan, inget som hanteras speciellt</i>" (nmn, ehandel.se) → konto 5721 (lub w anskaffningsvärde). Brak momsa na tullu.</li>
+<li><b>Dokument:</b> tullräkning/tullkvitto z Tullverket = <b>formellt underlag</b> kwot. Data wystawienia → okres deklaracji. <span class="pill ok">high</span></li>
+</ul>
+<p class="src">Tullverket „Förändringar för lågvärdeförsändelser" (akt. 22.10.2026): <a href="https://www.tullverket.se/foretag/ifokus/paganginomtullomradet/forandringarforlagvardeforsandelser.4.389ee53119d71f234982a20e.html">link</a> · Expowera „Räkna ut tull": <a href="https://www.expowera.se/import-export/rakna-ut-tull-och-avgifter">link</a></p>
+</div>
+</section>
+
+<!-- ============ DOKUMENTACJA ============ -->
+<section id="dok">
+<h2><span class="n">6</span>Dokumentacja: co wystarcza jako underlag</h2>
+<div class="card">
+<ul>
+<li><b>Bokföringslagen (1999:1078):</b> każda affärshändelse = verifikation; räkenskapsinformation <b>7 lat</b> (od końca roku kalendarzowego, w którym zamknięto räkenskapsår).</li>
+<li><b>Od 1.07.2024:</b> zniesiono wymóg przechowywania papierowych oryginałów — <b>zeskanowane kvitton/faktury wystarczą</b> (pod warunkiem, że dane są niezmienne/trwałe). <span class="pill ok">high</span> (<a href="https://verksamt.se/driva/ekonomi-och-bokforing/bokforing">verksamt.se</a>)</li>
+<li><b>BFNAR 2013:2 (kap. 5/7):</b> verifikation musi pozwalać na identyfikację affärshändelse + motpart; dane varaktiga; informacje z cudzej strony internetowej można przechowywać w formie prezentacji (7.3). Elektroniczna faktura/kvitto = pełnoprawny underlag. <span class="pill ok">high</span></li>
+<li><b>Kvitto z AliExpress:</b> wystarcza jako underlag <b>kosztu</b>. Do odliczenia momsa potrzebna faktura z VAT-numerem kupującego — przy IOSS-B2C w praktyce nieosiągalne (i niepotrzebne — nie masz prawa odliczać).</li>
+<li><b>Brak kvitta (klasyczny problem Ali — „man får ju inget kvitto på mailen"):</b> własna verifikation (datum, belopp, motpart, syfte) + <b>kontoutdrag + screenshot</b> — „<i>Kontoutdrag + skärmdump ihop duger utmärkt, bara det finns något att matcha pengarna mot</i>" (Kottie, <a href="https://www.flashback.org/t2940990">Flashback t2940990</a>). Uwaga: bez specyfikowanego momsa na fakturze <b>brak avdragsrätt</b> — „<i>om moms inte finns specificerad på fakturan finns heller ingen avdragsrätt för moms</i>" (RikaTillsammans).</li>
+<li><b>AliExpress nie ma företagskonto</b> → kvitto wystawiane na privatperson (thread ehandel.se 2019, „Handla som företag på Aliexpress"). Przy granskning: koszt zwykle niekwestionowany (jeśli w verksamheten), ale próba odliczenia momsa = skatteskuld. Rozwiązanie: VAT-nummer przy zamówieniu (B2B).</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ PRAKTYKA ============ -->
+<section id="praktyka">
+<h2><span class="n">7</span>Praktyka ludzi z forów (rzeczy, których nie ma w guide'ach)</h2>
+<div class="q"><span class="sv">„Det som kan förenkla är att göra alla beställningar på ett kreditkort och lägga alla kvitton i en hög. Sedan bokför du alla inköp i en klump när räkningen kommer."</span>
+<div class="who"><b>crizzo, Flashback</b> — wątek <a href="https://www.flashback.org/t2821991">„Aliexpress bokföring"</a>: klump-bokföring raz w miesiącu z wyciągu karty (OP: „bokföringen tar i princip lika lång tid för varje beställning som att beställa varan"). Praktyka, nie prawo — ale działa przy dropshippingu.</div></div>
+<div class="q"><span class="sv">„Ansök om EORI nummer och tullkredit hos tullen så slipper du momsfakturor från DHL."</span>
+<div class="who"><b>nmn/Stefan72, ehandel.se</b> — <a href="https://www.ehandel.se/forum/amne/bokfora-moms-tull-separat-fortnox/">„Bokföra Moms/tull separat Fortnox"</a>: z EORI+tullkredit dostajesz fakturę 0:- za momsa od Tullverket i rozliczasz wszystko w deklaracji (nie wykładasz gotówki, spedytor nie dolicza momsy do faktury).</div></div>
+<div class="q"><span class="sv">„Köp inte med DDP från Kina. Dom fuskar, smugglar över gränsen till EU, undervärderar försändelsen."</span>
+<div class="who"><b>pulzion, ehandel.se</b> — <a href="https://www.ehandel.se/forum/amne/importfragor-fran-en-nyborjare/">„Importfrågor från en nybörjare"</a>: kupuj <b>DAP</b> (spedytor klaruje förtullning na Twoje dane), nie DDP od chińczyków. DDP = „ktoś inny płaci momsa" → <b>felaktigt debiterad moms, nie avdragsgill</b> (potwierdza Spiris-moderator). Plus ryzyko: „<i>Tyvärr har många kinesiska säljare satt i system att skicka med en undervärderad faktura</i>" (HarryHotter, Flashback) — a <b>„Det är den som importerar varorna (dvs köparen) som är ansvarig för att tulldeklarationen upprättats korrekt"</b>.</div></div>
+<div class="q"><span class="sv">„Inn- och utgående moms kvittas så summan blir 0… Om du beställer till ett bolag i Sverige som är registrerad för moms så spelar det inget roll för Statens inkomst om det deklareras fel moms för ett paket. Det blir bara fel i statistiken till tullverket."</span>
+<div class="who"><b>Nordmann2, Flashback</b> — <a href="https://www.flashback.org/t2378994">t2378994</a>: mechanika „netto zero" przy momsie importowym; ale błąd w deklaracji celnej = problem statystyczny/prawny, nie podatkowy.</div></div>
+<div class="q"><span class="sv">„Några avgifter ska normalt inte deklareras när en registrerad e-handelsplattform har debiterat momsen vid inköpstillfället."</span>
+<div class="who"><b>Skatteverket (cytowane w wątku Flashback „Moms kina efter 1 juli 2021")</b> — <a href="https://www.flashback.org/t3340083">t3340083</a>: przy poprawnym IOSS nie ma dodatkowych opłat przy dostawie; jeśli sprzedawca źle zadeklarował → to kupujący musi wysłać kvitton.</div></div>
+<div class="q"><span class="sv">„Om varan faktiskt redan finns i fri omsättning inom EU ser köpet ofta mer ut som ett EU-köp än en vanlig import från tredjeland."</span>
+<div class="who"><b>Tullklar.se</b> — wariant coraz częstszy na AliExpress: wysyłka z <b>EU-lager</b>. Wtedy: inköp inom EU z omvänd skattskyldighet (4515/4070 + 2614/2645 wg faktury — „Det är fakturan som avgör", Stefan72, ehandel.se). Skatteverket w wątku Spiris (2025) doradziło dokładnie tak + notis w upplysningsrutan: <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-inkop-fran-AliExpress-Alibaba-som-skickas-fran-EU/m-p/260156">link</a>. <span class="pill med">med</span></div></div>
+</section>
+
+<!-- ============ DROPSHIPPING ============ -->
+<section id="dropship">
+<h2><span class="n">8</span>Dropshipping (Ali → klient) — osobny reżim</h2>
+<div class="card">
+<ul>
+<li><b>Towar nigdy nie wjeżdża do SE</b> (direct from China to customer) → to nie Ty jesteś importorem: „<i>du slipper ju tullförfarandet om du skickar produkten från Kina direkt till din kund. Det blir denne som får ta det genom tullen</i>" (Zigzag/knofan, ehandel.se). Koszt zakupu = koszt (bez importmoms w Twojej deklaracji), klient zapłaci import charges przy dostawie.</li>
+<li><b>Informationsplikt:</b> Konsumentverket ukarało sklepy dropshippingowe za brak info o dodatkowych kosztach: „<i>utebliven information om tillkommande kostnader, som importmoms och tullavgifter</i>" (<a href="https://www.ehandel.se/konsumentverket-slar-mot-dropshipping-hittade-stora-brister">ehandel.se 2022</a>) + 3 lata reklamationsansvar za ursprungliga fel.</li>
+<li><b>Zmiana 2026 (klubowana 18.09.2026):</b> platformy e-handlowe staną się <b>ansvariga importörer</b> (muszą zapewniać zgodność + tull), kary <b>1–6% wartości importu</b> (12 mies.), ew. blokady. Nowa EU-hanteringsavgift per artikel do 1.11.2026.</li>
+<li>Alibaba (B2B, hurt) ≠ AliExpress (B2C/IOSS) — przy Alibaba liczy się faktura i incoterms (DAP zalecane, nie DDP).</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ ZMIANY 2026 ============ -->
+<section id="zmiany2026">
+<h2><span class="n">9</span>Zmiany 2026 — co się właśnie zmieniło</h2>
+<div class="card warn">
+<table>
+<tr><th>Zmiana</th><th>Od kiedy</th><th>Skutek dla AB kupującego z Ali</th></tr>
+<tr><td><b>Zniesienie tullfrihet ≤150 EUR</b></td><td>1.07.2026</td><td>Tull płatny zawsze; dla ≤150 EUR: 3 EUR/varupost (do 1.7.2028, potem procentowo)</td></tr>
+<tr><td><b>3 EUR/varupost</b></td><td>1.07.2026</td><td>Doliczana przy klasyfikacji; IOSS jej nie pokrywa</td></tr>
+<tr><td><b>Platformy = ansvariga importörer</b> (EU-reforma tullowa)</td><td>klubowana 18.09.2026</td><td>AliExpress odpowiada za tull/zgodność; kary 1–6% wartości importu; EU-hanteringsavgift per artikel do 1.11.2026</td></tr>
+<tr><td><b>Skan zamiast papieru</b></td><td>1.07.2024</td><td>Papierowe oryginały do wyrzucenia; skany wystarczą (7 lat)</td></tr>
+<tr><td><b>Importmoms do Skatteverket</b></td><td>1.01.2015</td><td>(dla porządku) firma rozlicza w deklaracji, nie płaci Tullverket</td></tr>
+</table>
+<p class="src">Źródła: <a href="https://www.tullverket.se/foretag/ifokus/paganginomtullomradet/forandringarforlagvardeforsandelser.4.389ee53119d71f234982a20e.html">Tullverket</a> · <a href="https://www.ehandel.se/nya-tullreformen-klubbad-boter-for-fuskande-plattformar-och-nya-avgifter">ehandel.se 18.09.2026</a> · <a href="https://www.ehandel.se/nya-tullreglerna-hon-fick-betala-dubbelt-trots-kop-via-svensk-butik">ehandel.se 3.07.2026</a></p>
+</div>
+</section>
+
+<!-- ============ PROGRAMY ============ -->
+<section id="programy">
+<h2><span class="n">10</span>W programach księgowych</h2>
+<div class="grid2">
+<div class="card">
+<h3 style="margin-top:0">Bokio</h3>
+<p>Mall „Import moms och tull vid inköp varor utanför EU 25%": pola „Tull- och speditionskostnader" + „Ingående fiktiv moms" + „Övriga skatter". Fiktiv moms zawsze na <b>całym fakturabeloppet w SEK</b> (nawet gdy faktura zawiera obcy VAT). Dla IOSS-AliExpress na forum proponowano obejście 4500+4598 (zeruje netto) — to workaround, nie metoda; przy IOSS całość jako koszt bez momsa.</p>
+<p class="src"><a href="https://www.bokio.se/hjalp/bokforing/bokforingshjalp/inkop-av-varor-och-tjanster-fran-utlandet/">guide</a> · <a href="https://www.bokio.se/hjalp/moms-skatt/moms/hur-hanteras-moms-pa-fakturor-fran-utlandet/">fakturor från utlandet</a> · <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/74288-bokfor-inkop-aliexpress">forum-case</a></p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Fortnox</h3>
+<p>Pełny przykład konterienia importu: <span class="mono">2440</span> / <span class="mono">4011</span> (Varuinköp) / <span class="mono">4545</span> Import av varor 25% / <span class="mono">4599</span> Justering omvänd moms / <span class="mono">2615</span> / <span class="mono">2645</span> / <span class="mono">7960</span> valutakursförlust / <span class="mono">6570</span> bankavgifter. Tull+avgifter z tullfaktury → 2440+4011, momsa liczona na całość. Wersja Fortnox używa 4545 „generycznie" — pamiętaj: formalnie 4545 = råvaror.</p>
+<p class="src"><a href="https://www.fortnox.se/fortnox-foretagsguide/bokforingstips/importmoms">importmoms</a> · <a href="https://www.fortnox.se/fortnox-foretagsguide/bokforingstips/bokfora-inkop-varor-utanfor-eu">inköp utanför EU</a></p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Spiris / Visma eEkonomi</h3>
+<p>Metoda lager: całość (varukostnada + tull + spedition + frakt) w <span class="mono">1460</span>, förskott w <span class="mono">1680</span>. Kontering z forum Spiris: <span class="mono">4545</span> momskod 50 (underlag) + <span class="mono">4549</span> (motkonto, bez momskod) + <span class="mono">2615</span> kod 60 + <span class="mono">2645</span> kod 48. „Själva inköpet skall bokföras helt utan moms" (moderator).</p>
+<p class="src"><a href="https://www.spiris.se/blogg/import-export-lager/bokfora-import">bokföra import</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-varuinkop-fran-Kina/m-p/212082">kontering z Kina</a></p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Asstio / Astrid / inne</h3>
+<p>Asstio (granskad przez redovisningsexpert) — najbardziej kompletne wytyczne 2026 z tabelami konterień (używane powyżej). Astrid: schemat 4085+5711+5721+2645/2615. Wspólny mianownik: importmoms 2615/2645, tull nie na momskonto, szwedzka ingående zawsze 2641.</p>
+<p class="src"><a href="https://www.asstio.com/kunskap/importmoms-och-tull">asstio</a> · <a href="https://astrid.so/blogg/bokfora-importmoms">astrid.so</a></p>
+</div>
+</div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+<h2><span class="n">11</span>FAQ — szybkie odpowiedzi</h2>
+<div class="card">
+<p><b>Kupiłem sprzęt na AliExpress do AB (≤150 EUR), AliExpress doliczył momsa w koszyku. Odliczam momsa?</b><br>Nie. IOSS → platforma jest podatnikiem, Ty traktowany jak konsument. Cała kwota z momsem = koszt. Odliczenie = skatteskuld przy granskning.</p>
+<p><b>Ale przecież zapłaciłem momsa — to nie jest podwójne opodatkowanie po mojej stronie?</b><br>Nie — zapłaciłeś momsa w CENIE i to koniec. Podwójność pojawiłaby się tylko, gdybyś dodatkowo doliczył importmoms w deklaracji (błąd, opisywany na Företagande). Tull (3 EUR/varupost od 2026) i tak doliczy dostawca — to osobny koszt, nie momsa.</p>
+<p><b>Jaki konto dla zakupu z AliExpress?</b><br>Handelsvaror na odsprzedaż → <span class="mono">4085</span> (lub konto programu: Fortnox 4545/4545-wariant, Bokio 4500). Råvaror → <span class="mono">4545</span>. Drobny sprzęt do użytku → <span class="mono">5410</span>. <span class="mono">4010</span> tylko dla zakupów w Szwecji.</p>
+<p><b>Jak księgować tullfakturę od PostNord/DHL?</b><br>Tull → <span class="mono">5721</span> (lub w anskaffningsvärde), speditörens avgift → <span class="mono">5722</span>, szwedzka momsa na tej avgift → <span class="mono">2641</span>, importmoms (jeśli jest na fakturze) → NIE odliczaj z faktury — tylko przez deklarację 2615/2645 (ruta 50/60/48). Data tullräkning → okres.</p>
+<p><b>Czy muszę mieć EORI?</b><br>Do tullverksamhet — tak (darmowy, <a href="https://www.tullverket.se">tullverket.se/eori</a>). + tullkredit = faktury 0:- za momsa i brak wykładania gotówki.</p>
+<p><b>Kvitto jest na moją osobę prywatną (Ali nie ma företagskonto) — czy zakup w ogóle może być kosztem AB?</b><br>Koszt tak (jeśli zakup w verksamheten; możesz dokonać utlägg i wnieść do firmy), ale nie odliczysz momsa. Bezpieczniej: podać VAT-nr firmy przy zamówieniu.</p>
+<p><b>Dostawa z EU-lager („ships from Poland") — to wciąż import?</b><br>Nie — traktuj jak zakup wewnątrzwspólnotowy (omvänd skattskyldighet), wg kraju wysyłki na fakturze. Skatteverket doradziło tak wprost w wątku Spiris (2025).</p>
+<p><b>Czy mogę księgować raz w miesiącu klumpą?</b><br>Praktyka dropshiperów z Flashback: tak — wszystkie zakupy na jednej karcie, klump-bokföring z wyciągu. Formalnie każda affärshändelse potrzebuje verifikation — klumpą można, jeśli potrafisz powiązać transakcje (kontoutdrag + kvitton w tle).</p>
+</div>
+</section>
+
+<!-- ============ METODOLOGIA ============ -->
+<section id="metodologia">
+<h2><span class="n">12</span>Metodologia</h2>
+<div class="card">
+<ul>
+<li><b>Architektura:</b> 9 agentów-scraperów (DeepSeek V4.1 Flash) w 2 falach: R1 = 6 agentów (Flashback, fora+Q&A, blogi księgowe, oficjalne, ehandel+dropshipping, edge cases), R2 = 3 agentów (rozstrzygnięcie IOSS-B2B, rozstrzygnięcie kont-tull, gap-fill forów). Każdy otwierał strony i destylował do plików raw/ (zakres: 130+ wpisów, ~175 KB destylatów); surowy HTML nie opuszczał warstwy 1.</li>
+<li><b>Weryfikacja:</b> każda teza forów skrzyżowana z oficjalnymi źródłami (Skatteverket/Tullverket/BFN/verksamt/EUR-Lex); rozbieżności między źródłami oznaczone i rozstrzygnięte osobnymi agentami R2 (konta — na bazie oficjalnej BAS-kontoplan 2026; IOSS — na bazie EUR-Lex + RV ML + FAR + moderatora Visma).</li>
+<li><b>Klasyfikacja zaufania:</b> high = oficjalne/kontoplan/granskad kunskapsbank; med-high = zbieżne blogi ekspertów + fora z odpowiedzią eksperta; med = pojedyncze źródło eksperckie; low = losowi użytkownicy bez weryfikacji.</li>
+<li><b>Ograniczenia:</b> (1) Skatteverket nie ma wiążącego stanowiska dla AB-kupującego-przez-IOSS — wniosek „cała kwota = koszt" opiera się na dyrektywie UE + RV + opiniach ekspertów, nie na dedykowanym SKV-guidzie; (2) wątki ehandel.se głównie 2014–2021 (przed IOSS) — mechanika importmoms nadal aktualna, kontekst IOSS dodany z oficjalnych źródeł; (3) Reddit/search zablokowane z Pi — pokrycie forów ograniczone do tego, co dostępne bez globalnych wyszukiwarek.</li>
+<li><b>Data badania:</b> 12.11.2026. Przepisy IOSS/tull aktualne na ten dzień (w tym reforma tullowa klubowana 18.09.2026).</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ ŹRÓDŁA ============ -->
+<section id="zrodla">
+<h2><span class="n">13</span>Źródła (wszystkie klikalne)</h2>
+<div class="card" style="font-size:.88rem">
+<h3>Oficjalne</h3>
+<ul>
+<li>Skatteverket — <a href="https://www.skatteverket.se/foretag/moms/kopavarorochtjanster/inkopfranlanderutanforeu/kopavarorfranlanderutanforeuimport.4.361dc8c15312eff6fd37208.html">Köpa varor från länder utanför EU – import</a></li>
+<li>Skatteverket — <a href="https://www4.skatteverket.se/rattsligvagledning/edition/2023.16/323933.html">Rättslig vägledning 323933: Avdragsrätt för importmoms</a> ⚠️(WAF)</li>
+<li>Skatteverket — <a href="https://www.skatteverket.se/foretag/moms/deklareramoms/ansokomattredovisadistansforsaljningionestopshoposs.4.5b35a6251761e691420b58e.html">OSS (inkl. IOSS/importordningen)</a> · <a href="https://www.skatteverket.se/foretag/moms/deklareramoms/ansokomattredovisadistansforsaljningionestopshoposs/deklareraochbetalamomsionestopshop.4.40cab8f8197edf03e644dee.html">Deklarera i OSS</a></li>
+<li>Skatteverket — <a href="https://www.skatteverket.se/foretag/moms/kopavarorochtjanster/kopavarorellertjanstertillforetaget.4.7459477810df5bccdd480005156.html">Avdragsrätt ingående moms</a> · <a href="https://www.skatteverket.se/foretag/moms/sarskildamomsregler/handelmedandralander/aterbetalningavutlandskmoms.4.58d555751259e4d661680001107.html">Återbetalning utländsk moms</a></li>
+<li>Tullverket — <a href="https://www.tullverket.se/foretag/internationellhandel/importeravaror/omtullarochavgifternarduimporterar/importmoms.4.7df61c5915510cfe9e7ec44.html">Importmoms</a> · <a href="https://www.tullverket.se/foretag/internationellhandel/importeravaror/deklareravarorvidimport/mervardesskattvidiossregistrering.4.1595e959179a7cfd5c711fd.html">Moms vid IOSS</a> · <a href="https://www.tullverket.se/foretag/ifokus/paganginomtullomradet/forandringarforlagvardeforsandelser.4.389ee53119d71f234982a20e.html">Förändringar lågvärdeförsändelser 2026</a> · <a href="https://www.tullverket.se/foretag/internationellhandel/importeravaror/omtullarochavgifternarduimporterar/tullvarde.4.7df61c5915510cfe9e7f56f.html">Tullvärde</a> · <a href="https://www.tullverket.se/foretag/internationellhandel/importeravaror/deklareravarorvidimport/olikatyperavtulldeklarationerforimport/tulldeklarationvidforsandelsermedettvardepa150euroellermindre.4.3e6caad21870dc6781c379c.html">Tulldeklaration ≤150 euro</a></li>
+<li>BFN — <a href="https://lagen.nu/bfnar/2013:2">BFNAR 2013:2 Bokföring (via lagen.nu)</a> · Verksamt — <a href="https://verksamt.se/driva/ekonomi-och-bokforing/bokforing">Bokföring</a> · Statskontoret — <a href="https://forum.statskontoret.se/redovisning-och-finansiering/moms/omvand-betalningsskyldighet/handel-med-utlandet/inkop-av-varor-fran-tredje-land/">Inköp från tredje land</a></li>
+<li>EU — <a href="https://vat-one-stop-shop.ec.europa.eu/index_en">VAT One Stop Shop (Kommissionen)</a> · <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017L2455">Direktiv 2017/2455 (art. 14a, recital 10, art. 369j)</a> · <a href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/">Bokföringslagen 1999:1078</a></li>
+</ul>
+<h3>Kontoplan / blogi księgowe</h3>
+<ul>
+<li><a href="https://www.bas.se/wp-content/uploads/2026/04/BAS_kontoplan_2026_v2.pdf">BAS-kontoplanen 2026 (PDF, oficjalny)</a> · <a href="https://bokforingenonline.se/5720_Tull-_och_speditionskostnader_m.m.">bokforingenonline — 5720</a> · <a href="https://www.mrpotato.se/bokfora-konton/4545">mrpotato — 4545</a> · <a href="https://www.mrpotato.se/bokfora-konton/2615">mrpotato — 2615</a></li>
+<li><a href="https://www.asstio.com/kunskap/importmoms-och-tull">Asstio — Importmoms och tull (K2/K3, granskad 2026)</a> · <a href="https://www.asstio.com/kunskap/utlandsk-moms-pa-fakturan">Asstio — Utländsk moms</a> · <a href="https://www.asstio.com/kunskap/fraktkostnad-i-lagervardet">Asstio — Frakt i lagervärdet</a> · <a href="https://www.asstio.com/kunskap/ioss">Asstio — IOSS</a></li>
+<li><a href="https://astrid.so/blogg/bokfora-importmoms">Astrid — Bokföra importmoms</a> · <a href="https://www.bokforingstips.se/artikel/bokforing/inkop-varor-import.aspx">bokforingstips — inköp vid import</a> · <a href="https://bokforingskoll.se/bokfora-import-utanfor-eu-tull-moms-frakt/">bokföringskoll — import utanför EU</a> · <a href="https://bokforingskoll.se/bokfora-inkop-utan-kvitto-vad-galler/">bokföringskoll — inköp utan kvitto</a> · <a href="https://eredovisning.se/bokfora-importmoms/">E Redovisning — importmoms</a> · <a href="https://kvittoflow.se/guide/bokfora-tullavgift">KvittoFlow — tullavgift</a> · <a href="https://kvittoflow.se/guide/bokfora-importmoms">KvittoFlow — importmoms</a></li>
+<li><a href="https://www.fortnox.se/fortnox-foretagsguide/bokforingstips/importmoms">Fortnox — importmoms</a> · <a href="https://www.fortnox.se/fortnox-foretagsguide/bokforingstips/bokfora-inkop-varor-utanfor-eu">Fortnox — inköp utanför EU</a> · <a href="https://www.fortnox.se/fortnox-foretagsguide/driva-foretag/import-och-export/kina">Fortnox — import/export Kina</a> · <a href="https://www.bokio.se/hjalp/bokforing/bokforingshjalp/inkop-av-varor-och-tjanster-fran-utlandet/">Bokio — inköp från utlandet</a> · <a href="https://www.bokio.se/hjalp/moms-skatt/moms/hur-hanteras-moms-pa-fakturor-fran-utlandet/">Bokio — moms på fakturor från utlandet</a> · <a href="https://www.bokio.se/hjalp/bokforing/tillgangar-och-inventarier/inkop-av-inventarier-tillgangar-fran-utlandet/">Bokio — inventarier från utlandet</a> · <a href="https://www.spiris.se/blogg/import-export-lager/bokfora-import">Spiris — bokföra import</a> · <a href="https://www.spiris.se/blogg/import-export-lager/importera-fran-kina">Spiris — importera från Kina</a> · <a href="https://www.spiris.se/blogg/import-export-lager/vad-ar-tull">Spiris — vad är tull</a> · <a href="https://www.spiris.se/blogg/skatter/eu-moms">Spiris — EU-moms</a> · <a href="https://www.expowera.se/import-export/importmoms">Expowera — importmoms</a> · <a href="https://www.expowera.se/import-export/rakna-ut-tull-och-avgifter">Expowera — räkna ut tull</a> · <a href="https://www.expowera.se/import-export/tullvarde">Expowera — tullvärde</a> · <a href="https://driva-eget.se/artiklar/export-och-import-sa-fungerar-moms-tull-och-regler">DrivaEget — export/import</a> · <a href="https://driva-eget.se/artiklar/nu-tar-skatteverket-over-importmoms">DrivaEget — SKV över importmoms</a> · <a href="https://www.bjornlunden.se/blastart/kontoplan__7942">Björn Lundén — kontoplan</a> · <a href="https://fakturabanken.se/kunskapsbank/bokforingslagen-fakturakrav">FakturaBanken — fakturakrav</a> · <a href="https://tullklar.se/blog/aliexpress-fran-1-juli-i-eu-det-har-galler-for-moms-tull-och-avgifter">Tullklar — AliExpress od 1.07</a> · <a href="https://pc-concept.nu/aliexpress-tull/">PC-Concept — AliExpress tull 2026</a> · <a href="https://momsfokus.se/avdrag-for-importmoms-i-sverige-nar-har-foretag-ratt-till-avdrag/">MomsFokus — avdrag importmoms</a></li>
+</ul>
+<h3>Fora i Q&A</h3>
+<ul>
+<li>Spiris-forum: <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Inkop-fran-AliExpress-m-m-dar-moms-betalas-direkt/m-p/216669">AliExpress z momsem w kasie (IOSS)</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-Aliexpress-sedan-dom-betalar-in-moms/m-p/214054">Bokföra AliExpress sedan dom betalar in moms</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-varuinkop-fran-Kina/m-p/212082">Varuinköp från Kina (DHL tullfaktura)</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Import-fran-Kina/m-p/256620">Import från Kina (Tullverket-faktura)</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokforing-av-varor-utanfor-EU/m-p/243928">Varor utanför EU (vidareförsäljning)</a> · <a href="https://forum.spiris.se/t5/Fragor-om-bokforing/Bokfora-inkop-fran-AliExpress-Alibaba-som-skickas-fran-EU/m-p/260156">AliExpress/Alibaba från EU-lager (2025)</a></li>
+<li>Företagande.se: <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/74288-bokfor-inkop-aliexpress">Bokför inköp aliexpress</a> · <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/58459-bokfora-inkop-av-varor-fran-kina">Inköp av varor från Kina</a> · <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/17548-bokfora-tull-moms-frakt-mm-vid-import">Tull, moms, frakt vid import</a> · <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/5156-bokforing-av-i-import-tullfraga">Import + tullfråga</a> · <a href="https://foretagande.se/forum/bokforing-skatter-och-foretagsformer/41298-dropshipping-fran-kina-moms">Dropshipping från Kina — moms</a></li>
+<li>Flashback: <a href="https://www.flashback.org/t2821991">Aliexpress bokföring</a> · <a href="https://www.flashback.org/t3487136">Import Kina DDP (moms-säljaren betalar)</a> · <a href="https://www.flashback.org/t3340083">Moms kina efter 1 juli 2021</a> · <a href="https://www.flashback.org/t2378994">Tull och moms vid Aliexpress</a> · <a href="https://www.flashback.org/t3604807">Importera från Kina (opłaty 2026)</a> · <a href="https://www.flashback.org/t3735359">Ny tullavgift 1 juli 2026</a> · <a href="https://www.flashback.org/t2940990">bokföra köp från aliexpress (brak kvitta)</a> · <a href="https://www.flashback.org/t3506830">Dropshipping — bokföring</a> · <a href="https://www.flashback.org/t1474950">Redovisningsakuten</a> · <a href="https://www.flashback.org/t1637150">Import varor från Kina — tull</a> · <a href="https://www.flashback.org/t3501137">Kinapaket/Aliexpress och postnord</a></li>
+<li>ehandel.se: <a href="https://www.ehandel.se/forum/amne/moms-och-tull-pa-importerade-varor/">moms och tull på importerade varor</a> · <a href="https://www.ehandel.se/forum/amne/import-av-varor-utanfor-eu/">Import av varor utanför EU</a> · <a href="https://www.ehandel.se/forum/amne/dropshipping-importavgifter-och-moms-fran-kina-till-sverige-2/">dropshipping importavgifter</a> · <a href="https://www.ehandel.se/forum/amne/importfragor-fran-en-nyborjare/">Importfrågor nybörjare</a> · <a href="https://www.ehandel.se/forum/amne/bokfora-moms-tull-separat-fortnox/">Bokföra moms/tull separat Fortnox</a> · <a href="https://www.ehandel.se/forum/amne/importmoms-exempel/">Importmoms, exempel</a> · <a href="https://www.ehandel.se/forum/amne/hur-importera-fran-kina-pa-ratt-satt/">Hur importera från Kina</a> · <a href="https://www.ehandel.se/forum/amne/import-och-moms-2/">import och moms</a> · <a href="https://www.ehandel.se/forum/amne/handla-som-foretag-pa-aliexpress/">Handla som företag på Aliexpress</a> · <a href="https://www.ehandel.se/forum/amne/kinesiskt-foretag-som-skickar-ifran-europa/">Kinesiskt företag från Europa (4500/4515)</a> · <a href="https://www.ehandel.se/forum/amne/bokfora-import-och-tull-kontantmetoden/">kontantmetoden</a> · <a href="https://www.ehandel.se/forum/amne/moms-vat-vid-internationell-handel/">Moms/VAT internationell handel</a></li>
+<li>Inne fora: <a href="https://rikatillsammans.se/forum/t/hur-bokfora-utlagg-banggood-aliexpress/93327">RikaTillsammans — utlägg Banggood/AliExpress</a> · <a href="https://www.sweclockers.com/forum/trad/1388459-moms-vid-kop-fran-kina">SweClockers — moms vid köp från Kina</a> · <a href="https://www.sweclockers.com/forum/trad/1546528-finns-det-nagot-satt-att-undvika-tull-moms-nar-man-bestaller-fran-ali-express">SweClockers — undvika tull/moms</a> · <a href="https://www.reddit.com/r/sweden/comments/skje23/erfarenheter_med_aliexpress/">r/sweden — Erfarenheter med AliExpress</a></li>
+</ul>
+</div>
+</section>
+
+<footer>
+<p><b>AliExpress w aktiebolag — bokföring/moms/tull</b> · Research 12.11.2026 · Andrzej 🤖</p>
+<p>130+ wpisów z 40+ źródeł (fora szwedzkie + blogi księgowe + oficjalne: Skatteverket, Tullverket, BFN, EUR-Lex). Ten raport ma charakter informacyjny — nie stanowi porady podatkowej; przy większych kwotach: pisemne svar od Skatteverket.</p>
+<p>Pliki źródłowe researchu: <span class="mono">~/.openclaw/workspace/memory/research/aliexpress-bokforing-2026-11-12/raw/</span> (9 destylatów)</p>
+</footer>
+</div>
+<a class="backtop" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">⬆</a>
+</body>
+</html>

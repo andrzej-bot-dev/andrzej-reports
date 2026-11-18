@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nordic Wellness — karnet dla Oli (2026-11-18)</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#251d3e;--ink:#ece8f7;--dim:#a99cc9;--acc:#ff9d3c;--acc2:#9d6bff;--ok:#4ad07e;--warn:#ffb454;--bad:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+a{color:var(--acc)}
+h1{font-size:1.7em;margin:.3em 0}
+h2{color:var(--acc);border-bottom:2px solid var(--acc2);padding-bottom:6px;margin-top:1.8em}
+h3{color:var(--acc2)}
+.badge{display:inline-block;background:var(--acc2);color:#fff;border-radius:12px;padding:2px 12px;font-size:.8em;font-weight:600}
+.meta{color:var(--dim);font-size:.9em}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em}
+th{background:var(--card2);color:var(--acc);text-align:left;padding:8px 10px;border:1px solid #38305e}
+td{padding:8px 10px;border:1px solid #322a55;vertical-align:top}
+tr:nth-child(even) td{background:#181331}
+.tldr{background:linear-gradient(135deg,#2a1f4d,#1d1832);border:2px solid var(--acc);border-radius:14px;padding:18px 22px;margin:18px 0}
+.tldr li{margin:10px 0}
+.imgcard{background:var(--card);border-radius:12px;overflow:hidden;margin:14px 0;border:1px solid #38305e}
+.imgcard img{width:100%;display:block}
+.imgcard .cap{padding:8px 14px;font-size:.85em;color:var(--dim)}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.gal .imgcard{margin:0}
+.tag{display:inline-block;border-radius:8px;padding:1px 8px;font-size:.78em;font-weight:600}
+.t-ok{background:#1d3b2a;color:var(--ok)}.t-warn{background:#3d2f14;color:var(--warn)}.t-bad{background:#3d1d1d;color:var(--bad)}
+nav{position:sticky;top:0;background:rgba(19,16,32,.95);z-index:9;padding:8px 0;border-bottom:1px solid #38305e;max-height:56px;overflow:auto}
+nav a{margin-right:6px;font-size:.82em;white-space:nowrap}
+.top{position:fixed;bottom:18px;right:18px;background:var(--acc);color:#131020;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700;box-shadow:0 2px 10px #000}
+.note{background:var(--card);border-left:4px solid var(--acc2);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:.9em}
+@media(max-width:700px){table{font-size:.82em}td,th{padding:5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="#tldr">TL;DR</a><a href="#porownanie">Porównanie</a><a href="#kalendarz">Kalendarz kampanii</a><a href="#znizki">Kanały zniżek</a><a href="#pu lapki">Pułapki</a><a href="#zrodla">Źródła</a></nav>
+
+<h1>🏋️ Nordic Wellness — karnet dla Oli: czekać na Black Friday czy brać teraz?</h1>
+<span class="badge">🛒 Product</span> <span class="meta">2026-11-18 · 5 subagentów · ~45 snapshotów Wayback (2023→2026) · 6 domen źródłowych + oficjalna strona/FAQ · PL/SE</span>
+
+<h2>Coverage</h2>
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Szczeble</th><th>Uwagi</th></tr>
+<tr><td>nordicwellness.se (ceny, kluby, kampanie)</td><td><span class="tag t-ok">✅ COVERED</span></td><td>curl → parse HTML</td><td>78+ faktów; checkout (podział binding vs bez) renderowany JS — jako caveat</td></tr>
+<tr><td>faq.nordicwellness.se / villkor</td><td><span class="tag t-ok">✅ COVERED</span></td><td>web_fetch</td><td>uppsägning, frysning, medlemsavgift</td></tr>
+<tr><td>Agregatory kodów (8+)</td><td><span class="tag t-warn">⚠️ zbadane</span></td><td>web_fetch → jina</td><td>większość martwa (DNS); jedyny żywy: se.hotdeals.com — kody nieoficjalne, prawdopodobnie nie działają na medlemskap</td></tr>
+<tr><td>Wayback Machine (historia cen)</td><td><span class="tag t-ok">✅ COVERED</span></td><td>CDX + 45 snapshytów</td><td>pełne kalendarium kampanii 2023–2026</td></tr>
+<tr><td>Fora/opinie (Flashback, Reddit, Trustpilot, blogi)</td><td><span class="tag t-warn">⚠️ partial</span></td><td>curl → jina → DDG snippety</td><td>Reddit tylko snippety (blokady); Trustpilot 1.5/5 (537 rec.) — głównie o windykacji/obsłudze, nie o cenie</td></tr>
+<tr><td>Benefity (Skatteverket, Mecenat, Edenred, Epassi, związki, ubezpieczyciele)</td><td><span class="tag t-ok">✅ COVERED</span></td><td>web_fetch</td><td>związki/ubezpieczyciele: brak oferty NW = wynik negatywny policzony</td></tr>
+</table>
+<p class="meta">Legenda: ✅ = dane zdestylowane i zweryfikowane URL-em; ⚠️ = pokryte częściowo (opisane luki). Wnioski opierają się tylko na ✅.</p>
+
+<h2 id="tldr">🎯 TL;DR — Rekomendacja</h2>
+<div class="tldr">
+<ol>
+<li><b>Nie czekaj na Black Friday — nic tam nie będzie.</b> Nordic Wellness oficjalnie: <i>„Vi kör varken black week eller black friday”</i> (własny reel NW + FAQ + 45 snapshotów Wayback 2023–2026 = zero oferty BF). To, co jest TERAZ, to <b>Julkampanj 2026</b> (trwa do 24.12) — i to jest ich „wyprzedaż BF”. 27.11 cena nie zmieni się na Twoją korzyść.</li>
+<li><b>Dla „całego Sztokholmu” najlepsza opcja nie istnieje jako Guld, tylko jako Julkampanj:</b> <b>Sverige 12 mies = 4 999 kr (~417 kr/mies.)</b> zamiast 7 188 kr — obejmuje <b>wszystkie 85 klubów w regionie sztokholmskim + całą Szwecję</b>, jest o <b>172 kr/mies. tańsza niż Guld Stockholm (589)</b>. Aktywacja: od razu albo automatycznie 25.12.</li>
+<li><b>Jeśli ma być jeden klub:</b> Silver Väsby Centrum = <b>349 kr/mies.</b> (jeden z najtańszych klubów w regionie; Barkarby/Danderyd 579!). Ale uwaga — julkampanjowa Silver nie obejmuje Sztokholmu. Różnica vs Sverige-rok to tylko ~68 kr/mies. — za ~800 kr/rok Oli daje dostęp do wszystkich klubów, do których jeździ do pracy. <b>Szczerze: bierz Sverige 12 mies z Julkampanj.</b></li>
+<li><b>Sprawdź u pracodawcy Oli platformę benefitową:</b> friskvårdsbidrag to do <b>5 000 kr/rok</b> (Skatteverket) — NW współpracuje z <b>Epassi, Edenred, Benifex, Wellnet, Söderberg &amp; Partners</b>. Edenred ma osobno <b>−25% na rok</b> (do 31.12.2026). Jeśli Ola ma dostęp do Edenred, rok może wyjść ~5 400 kr z góry. NW sam przyjmie też fakturę od firmy (rekvisition).</li>
+<li><b>Absolutne minimum cenowe w roku jest inne:</b> <b>Let's Deal w sierpniu</b> — roczny karnet ~3 499 kr (−51%, okno 23–31.08, powtarza się 3 lata z rzędu) oraz Wielkanoc (6 mies. 1 995–2 695 kr). Jeśli Ola nie spieszy się — czekanie do sierpnia to realnie najtaniej. Jeśli chce zacząć teraz — Julkampanj i punkt wyżej.</li>
+<li><b>Kody z internetu ignoruj:</b> jedyne „kody” (Apex20 −20% itp.) pochodzą z agregatorów SEO; NW nie łączy kampanii z rabatkodami, a oficjalna strona nie ma żadnego pola promocyjnego na medlemskap. Traktuj jak clickbait (część stron to wręcz klony typu „nordicwellness.seblackweek.com”).</li>
+</ol>
+</div>
+
+<h2 id="porownanie">⚖️ Porównanie konfiguracji (ceny 2026-11-18, SEK)</h2>
+<table>
+<tr><th>Opcja</th><th>Cena</th><th>Zakres</th><th>Rok (×12)</th><th>Komentarz</th></tr>
+<tr><td><b>Silver — Väsby Centrum</b></td><td><b>349 kr/mies.</b></td><td>1 klub (Väsby) + grupy + Wellness Online</td><td>~4 188</td><td>gästträning w innych klubach 40 kr/wizyta; najtańszy klub w regionie</td></tr>
+<tr><td><b>Guld Stockholm</b></td><td>589 kr/mies.</td><td>85 klubów regionu Sztokholm</td><td>~7 068</td><td>droga; prawie jak cała Szwecja</td></tr>
+<tr><td><b>Sverige 12 mies (Julkampanj!)</b></td><td><b>4 999 kr z góry</b> (~417/mies., ord. 7 188)</td><td><b>wszystkie kluby w Szwecji</b> (w tym 85 sztokholmskich)</td><td><b>4 999</b></td><td>🏆 najlepszy stosunek zakres/cena dla osoby jeżdżącej po mieście; aktywacja od 25.12 lub wcześniej; reformer pilates i mobil inpassering w cenie</td></tr>
+<tr><td>Sverige 6 mies (Julkampanj)</td><td>2 999 kr (~500/mies.)</td><td>cała Szwecja</td><td>—</td><td>opcja „sprawdźmy pół roku”</td></tr>
+<tr><td>10-kort (Julkampanj)</td><td>599 kr (ord. 1 190)</td><td>10 wejść, ważność 6 mies.</td><td>—</td><td>opcja testowa bez zobowiązań</td></tr>
+</table>
+<p class="meta">Ceny Silver/Guld różnią się per klub („fr.” = od): Väsby 349 · Kista/Jakobsberg/Vällingby 399 · Märsta 549 · Barkarby/Danderyd 579; Guld wszędzie 589, Sverige 599. Źródła: <a href="https://nordicwellness.se/klubbar/gym-i-stockholm/vasby-centrum/">klub Väsby</a>, <a href="https://nordicwellness.se/kampanjer/julkampanj/">julkampanj</a>.</p>
+
+<div class="gal">
+<div class="imgcard"><a href="https://nordicwellness.se/kampanjer/julkampanj/"><img loading="lazy" src="nw-2026-11/s_hero-jul2025.jpg" alt="Julkampanj"></a><div class="cap">Julkampanj — „Världens bästa julklapp” (hero kampanii, NW)</div></div>
+<div class="imgcard"><a href="https://nordicwellness.se/klubbar/gym-i-stockholm/vasby-centrum/"><img loading="lazy" src="nw-2026-11/s_vasby-klubb.jpg" alt="Klub NW"></a><div class="cap">Klub NW (heron klubowych stron) — Väsby Centrum, po przebudowie 1 450 kvm</div></div>
+<div class="imgcard"><a href="https://letsdeal.se/"><img loading="lazy" src="nw-2026-11/s_hero-aaretut.jpg" alt="Träna året ut"></a><div class="cap">„Träna året ut” — letnia kampania roczna (2026: 2 795–2 999 kr)</div></div>
+</div>
+
+<h2 id="kalendarz">📅 Kalendarz kampanii NW 2023–2026 (Wayback, 45 snapshytów)</h2>
+<table>
+<tr><th>Okres</th><th>Kampania</th><th>Co dawała</th></tr>
+<tr><td>Styczeń</td><td>nyårslöften / Januarikampanj</td><td>bonus przy rocznym: 2024 darmowy tydz. · 2025 pakiet 4 061 kr · 2026 pakiet 2 000 kr</td></tr>
+<tr><td>Marzec–kwiecień</td><td>Påsk / Flash Sale</td><td>2024: Sverige 6 mies <b>1 995 kr</b> + 10-kort −50% · 2026: Flash Sale 48h (10-kort −50%), Sverige 6 mies <b>2 695 kr</b></td></tr>
+<tr><td>Czerwiec–sierpień</td><td>☀️ NAJLEPSZE OKNO</td><td>Sommarkortet <b>999 kr</b>/3 mies. (co rok) · „Träna året ut” 2 795–2 999 · <b>Let's Deal: rok 3 499 kr (−51%)</b>, okno 23–31.08, powtarzane 2023/2024/2025 · „lato gratis” przy 12-mies. binding (płać od sierpnia)</td></tr>
+<tr><td>Wrzesień</td><td>back-to-school</td><td>2026: „Vi bjuder på 2 månader” — 2 mies. gratis przy 14-mies. binding</td></tr>
+<tr><td>Październik</td><td>Rosa Bandet (charity) + „Värva en vän”</td><td>polecenie = darmowy miesiąc dla obu (2025: 17.10–14.11)</td></tr>
+<tr><td><b>Listopad–grudzień</b></td><td><b>Julkampanj</b> (≈20–25.11 → 24.12)</td><td>Sverige 12 mies <b>4 499–4 999</b> (ord. 7 188) · 6 mies 2 999 · 10-kort 499–599 (−50%) · presentkort. <b>W oknie Black Friday działa DOKŁADNIE TA SAMA kampania — nic się 27.11 nie zmienia</b></td></tr>
+</table>
+<div class="imgcard"><a href="https://nordicwellness.se/kampanjer/sommarkortet/"><img loading="lazy" src="nw-2026-11/s_hero-sommarkort.jpg" alt="Sommarkortet"></a><div class="cap">Sommarkortet 999 kr — lato (czerwiec–sierpień), dostęp do 400+ klubów</div></div>
+
+<h2 id="znizki">🎁 Kanały zniżek — co realnie obniża cenę</h2>
+<table>
+<tr><th>Kanał</th><th>Ile daje</th><th>Uwagi</th></tr>
+<tr><td><b>Friskvårdsbidrag (pracodawca)</b></td><td>do <b>5 000 kr/rok</b> skattefritt</td><td>NW współpracuje z <a href="https://nordicwellness.se/om-nordic-wellness/friskvardsbidrag/">Epassi, Edenred, Benifex, Wellnet, S&amp;P</a>; też faktura od firmy (rekvisition). Przy Julkampanj 4 999 kr — <b>bidrag pokrywa praktycznie cały rok</b>!</td></tr>
+<tr><td><b>Edenred</b></td><td><b>−25% na årskort</b></td><td><a href="https://www.edenred.se/erbjudanden/nordic-wellness/">do 31.12.2026</a>; nie łączy się z innymi ofertami; płatność na klubie</td></tr>
+<tr><td>Hyresgästföreningen</td><td>do −30% na årskort + 1 mies. gratis</td><td>jeśli Ola jest członkinią (największe stowarzyszenie najemców)</td></tr>
+<tr><td>Akademikerförbundet SSR / Frilans Finans</td><td>−25% (Sverige/Guld) / do −20%</td><td>tylko jeśli członkini / praca przez egenanställning</td></tr>
+<tr><td>Mecenat (student)</td><td>399 kr/mies. ×12, bez klubbavgift</td><td>dotyczy tylko studentów</td></tr>
+<tr><td>Triggz (app, lojalność)</td><td>do −20% na produkty</td><td>nie na medlemskap</td></tr>
+<tr><td>Związki (Unionen, LO Mervärde…) i ubezpieczyciele</td><td>— brak NW</td><td>standard u nich = −20% Actic; policzone jako wynik negatywny</td></tr>
+<tr><td>„Värva en vän”</td><td>darmowy miesiąc dla obu</td><td>bywa aktywny w paź–lis; sprawdź w apce, gdy już będzie członkinią</td></tr>
+</table>
+<div class="note">💡 <b>Najmocniejsza kombinacja:</b> jeśli pracodawca Oli ma Epassi/Edenred/benifex → kup <b>Julkampanj Sverige 12 mies (4 999 kr)</b> i rozlicz z friskvårdsbidrag (5 000 kr) → <b>roczny karnet w całej Szwecji ≈ 0 kr z jej kieszeni</b>. To nie teoria — bidrag można użyć do karnetu kupionego w portalu albo na recepcji (FAQ NW).</div>
+
+<h2 id="pulapki">⚠️ Pułapki przed zakupem</h2>
+<ul>
+<li><b>2 miesiące uppsägningstid</b> na wszystkich autogiro + ew. bindningstid przy cenach promocyjnych (Redditowicze liczą efektywnie 14 mies.). Kontantkort (jak Julkampanj rok) kończy się automatycznie — <b>zero zobowiązań, najbezpieczniejsza forma</b>.</li>
+<li><b>medlemsavgift 150 kr/rok</b> przy płatności löpande (po pierwszych 12 mies.) — przy kontant roku nie dotyczy.</li>
+<li><b>Nieudane autogiro → od razu Collectia (windykacja) + 60 kr</b>, bez przypomnienia — najczęstsza skarga na Trustpilot (ocena ogólna 1.5/5, ale to głównie procesy płatności/obsługa, nie produkt).</li>
+<li><b>Kampanie NIE łączą się</b> z innymi rabatami/kodami; mając już karnet, kampania = podwójne obciążenie przez okres wypowiedzenia („Vi gör inga undantag”).</li>
+<li>Zamrożenie (frysning): 1×/rok, 1–2 mies., zgłoszenie do 20. dnia miesiąca.</li>
+<li>Zakup online = <b>14 dni ångerrätt</b> (nawet po 1 treningu) — kupuj przez stronę, nie „over disk”.</li>
+<li>Auto-podwyżka po wygaśnięciu statusu (np. student) — przy kontant roku niegroźne.</li>
+</ul>
+
+<h2 id="zrodla">🔗 Główne źródła</h2>
+<ul class="meta">
+<li><a href="https://nordicwellness.se/kampanjer/julkampanj/">nordicwellness.se/kampanjer/julkampanj</a> (oferta i villkor, do 24.12)</li>
+<li><a href="https://nordicwellness.se/klubbar/gym-i-stockholm/vasby-centrum/">Väsby Centrum — ceny klubu</a> · <a href="https://nordicwellness.se/medlemskap/guld/guld/">Guld</a> · <a href="https://nordicwellness.se/policy/medlemsvillkor/">Medlemsvillkor</a> · <a href="https://faq.nordicwellness.se/">FAQ</a></li>
+<li><a href="https://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/personalvardmotionochfriskvard.4.7459477810df5bccdd4800014540.html">Skatteverket — friskvårdsbidrag 5 000 kr</a> · <a href="https://www.edenred.se/erbjudanden/nordic-wellness/">Edenred −25%</a> · <a href="https://mecenat.com/se/nordic-wellness">Mecenat</a> · <a href="https://www.hyresgastforeningen.se/formaner/nationella/nordic-wellness/">Hyresgästföreningen</a></li>
+<li><a href="https://ikapp.nu/lokalt/nordic-wellness-lets-deal-priser-rabatter/">ikapp.nu — Let's Deal &amp; „ingen BF”</a> · <a href="https://emilsjogren.se/varlden/lets-deal-nordic-wellness-2026/">emilsjogren.se — Let's Deal</a> · <a href="https://letsdeal.se/deal/dbv0n2rsgw18/traningskort-sverige-i-1-3-eller-12-manader">Let's Deal (archiwum)</a></li>
+<li><a href="https://www.trustpilot.com/review/nordicwellness.se">Trustpilot NW (1.5/5)</a> · Flashback: <a href="https://www.flashback.org/t2783511">t2783511</a>, <a href="https://www.flashback.org/t3319143">t3319143</a></li>
+<li>Wayback: 45 snapshytów nordicwellness.se 2023-06→2026-11 (CDX API) — pełne kalendarium w destylacie badania</li>
+</ul>
+<p class="meta">Metodologia: 5 równoległych agentów (strona oficjalna / kody / Wayback / fora / benefity), destylaty w <code>memory/research/nordic-wellness-2026-11/raw/</code>, każdy fakt z URL. Luki: podział cen binding vs bez (JS checkout) i pełne wątki Reddita (bot-blocks) — oznaczone jako caveats, nie wpływają na rekomendację. Linki zweryfikowane przy publikacji.</p>
+</div>
+<a class="top" href="#tldr">↑</a>
+</body>
+</html>

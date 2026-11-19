@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polskie IP za granicą — VPN/proxy/satelita (bank SE + TV PL) — deep research 2026-11-19</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#241d3d;--ink:#ece8f7;--muted:#a89fc7;--accent:#ff9e3d;--accent2:#9b6dff;--ok:#4ade80;--warn:#facc15;--bad:#f87171;--border:#37304f;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.55;padding-top:52px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1400px;margin:0 auto;padding:16px}
+h1{font-size:1.55rem;margin:14px 0 6px}
+h2{font-size:1.3rem;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--accent2)}
+h3{font-size:1.08rem;margin:18px 0 8px;color:var(--accent)}
+.meta{color:var(--muted);font-size:.85rem;margin-bottom:12px}
+.badges span{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:2px 10px;font-size:.78rem;margin-right:6px;color:var(--muted)}
+nav{position:fixed;top:0;left:0;right:0;background:#0d0a18;border-bottom:1px solid var(--border);z-index:99;display:flex;gap:6px;padding:8px 12px;overflow-x:auto;height:auto;max-height:60px;align-items:center}
+nav a{white-space:nowrap;font-size:.8rem;padding:4px 9px;border-radius:8px;background:var(--card);color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin:12px 0}
+.tldr{background:linear-gradient(135deg,var(--card),#2a1f45);border:1px solid var(--accent2)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden}
+th{background:var(--card2);text-align:left;padding:8px;color:var(--accent);border-bottom:2px solid var(--border)}
+td{padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+img.thumb{max-width:200px;max-height:72px;border-radius:6px;display:block}
+td.imgcol{width:210px}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.75rem;font-weight:600}
+.ok{background:#14432a;color:var(--ok)}.warn{background:#4a3a10;color:var(--warn)}.bad{background:#4a1a1a;color:var(--bad)}
+blockquote{border-left:3px solid var(--accent2);padding:6px 12px;margin:8px 0;color:var(--muted);font-style:italic;font-size:.9rem}
+.small{font-size:.8rem;color:var(--muted)}
+.rank{font-size:1.6rem;margin-right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+#top{position:fixed;bottom:18px;right:18px;background:var(--accent);color:#131020;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:700;z-index:98;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+code{background:#0d0a18;padding:1px 5px;border-radius:4px;font-size:.85em;color:#ffd9a8}
+</style>
+</head>
+<body>
+<nav>
+<a href="#tldr">⚡ TL;DR</a><a href="#bank">🏦 Bank SE</a><a href="#rank">🏆 PL TV ranking</a><a href="#vpn">🔐 VPN-y</a><a href="#proxy">🛒 Proxy residential</a><a href="#pakiety">📦 Pakiety oficialne</a><a href="#sat">📡 Satelita</a><a href="#darmowe">🆓 Darmowe</a><a href="#prawo">⚖️ Legalność</a><a href="#detekcja">🕵️ Detekcja</a><a href="#coverage">📊 Coverage</a>
+</nav>
+<div class="wrap">
+<h1>🇵🇱➡️🇸🇪 Polskie IP za granicą — bank szwedzki z Tajlandii + polska TV bez Polonia-tax</h1>
+<div class="meta">Deep research 2026-11-19 · ~90 źródeł (PL/EN/SE) · 9 destylatów · testy geo wykonane z prawdziwego IP Sztokholm (Telia) · confidence: ✅ zweryfikowane / ⚠️ pojedyncze źródło / 🔴 claim niepotwierdzony</div>
+<div class="badges"><span>📚 Knowledge + 🔧 Technical</span><span>9 agenci (R1: 6 + R2: 3)</span><span>~90 źródeł</span><span>PL · EN · SE</span><span>live geo-testy z IP SE</span></div>
+
+<h2 id="tldr">⚡ TL;DR — Rekomendacje</h2>
+<div class="card tldr">
+<p><b>Use case 1 — Szwedzki bank + praca z Tajlandii:</b> ✅ <b>vanilla WireGuard hub na Twoim Pi 5 (publiczne IPv4 Telia)</b>. Domowy IP residential = <i>nieodróżnialny</i> od logowania z domu (żadnych flag w MaxMind/IP2Proxy — cytat w sekcji 🏦). BankID <b>nie sprawdza GPS przy logowaniu</b> (oficjalnie: GPS tylko przy wydawaniu/przenoszeniu BankID). Warunki: DNS przez tunel, pełny tunel z IPv6, WebRTC w przeglądarce wyłączony/limitowany. Fallback na hotel Wi-Fi: wstunnel (WG przez TCP 443).</p>
+<p style="margin-top:8px"><b>Use case 2 — Polsat Box Go / Player / TVP:</b> 🥇 <b>node u rodziny/znajomych w PL</b> (ten sam wg-hub pattern; prawdziwy residential IP — nieodróżnialny, 0 zł/mies). 🥈 komercyjny VPN z PL (od $1.75/mies; działa 2026-11 wg streamfix dla 4/7 testowanych; krucho — detekcja zmienna). 🥉 kupione residential proxy PL ($1.80–4.20/IP — ale flagowane w bazach RES; Bright Data i Oxylabs odpadają przez ToS). 📦 legalny baseline: pakiet <b>Polonia 10 €/30 dni</b> (okrojony — 18 kanałów, bez TVN/TVP/sportu) lub portability UE dla czasowych pobytów.</p>
+<p style="margin-top:8px"><b>„Społeczność użyczania łącza” NIE istnieje</b> — żadnej platformy wymiany IP nie znaleziono (3 niezależne query; jedyna realna forma: prywatny barter z zaufanymi — WireGuard/Tailscale exit share). VPN Gate: <b>0 polskich relayów</b> w live feed (zmierzone API 2026-11-19).</p>
+</div>
+
+<h2 id="bank">🏦 Use case 1: Bank SE + praca z Tajlandii przez hub w domu</h2>
+<div class="grid">
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/bankid.jpg" alt="BankID za granicą" loading="lazy"><h3 style="margin-top:8px">BankID — oficjalne stanowisko</h3>
+<p>GPS <b>tylko</b> przy wydawaniu nowego BankID / przenoszeniu między urządzeniami („location services is only mandatory when you get a new BankID…”). Przy logowaniu i podpisywaniu — <b>zero wymogu lokalizacji</b>. BankID wpisany do EU Official Journal (eIDAS) — użycie z zagranicy to wspierany scenariusz.</p>
+<p class="small">✅ <a href="https://www.bankid.com/en/individuals/consider-security/location-services">bankid.com — location services</a> · <a href="https://www.bankid.com/om-oss/nyheter/bankid-godkant-for-identifiering-i-offentliga-e-tjanster-inom-eu">eIDAS/EU</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/tailscale-ico.ico" alt="Tailscale" loading="lazy"><h3 style="margin-top:8px">Detekcja IP — dlaczego domowy exit wygrywa</h3>
+<p>MaxMind (silniki fraudowe banków): hosting provider = „<i>the end-user is probably using a VPN, even if we have not otherwise identified it as such</i>”. Residential ISP = „<i>harder to detect… appear to be associated with legitimate residential ISPs</i>”. Twoje Telia: connection type <b>Cable/DSL</b>, ISP <b>Telia Sverige AB</b>, brak flag DCH/VPN/RES → czysty konsument. <b>VPS w Szwecji jest GORSZY</b> (DCH flaga automatycznie).</p>
+<p class="small">✅ <a href="https://support.maxmind.com/knowledge-base/articles/anonymizer-and-proxy-data-maxmind">MaxMind anonymizer data</a> · <a href="https://dev.maxmind.com/geoip/docs/databases/connection-type/">connection types</a></p></div>
+</div>
+<div class="card">
+<h3>Ryzyka realne (nie IP!):</h3>
+<table>
+<tr><th>Ryzyko</th><th>Fakty</th><th>Fix</th></tr>
+<tr><td><b>DNS leak</b></td><td>WireGuard „takes zero stance on DNS” — system może pytać tajlandzki resolver; serwis widzi kraj resolvera</td><td><code>DNS =</code> w wg-quick + test dnsleaktest.com; Tailscale exit node robi DNS przez exit domyślnie</td></tr>
+<tr><td><b>IPv6 leak</b></td><td>full tunnel <code>0.0.0.0/0</code> bez <code>::/0</code> = ruch IPv6 poza tunelem</td><td>dodaj <code>::/0</code> do AllowedIPs (Telia ma IPv6 — hub też)</td></tr>
+<tr><td><b>WebRTC leak</b></td><td>STUN ujawnia realny IP stronie JS-owej mimo tunelu</td><td>disable WebRTC / uBlock «prevent WebRTC from leaking local IP»</td></tr>
+<tr><td><b>Blokada komercyjnego VPN</b></td><td>r/TillSverige: ProtonVPN (NL) — problem przy <i>autoryzacji płatności kartą</i>, nie przy samym BankID; Swedbank+VPN działa u innych</td><td>własny hub omija ten problem całkowicie</td></tr>
+<tr><td><b>Fraud engine banku</b></td><td>nowe urządzenie/sieć → dodatkowa weryfikacja (nie blokada); Swedbank/SEB/Handelsbanken: <b>zero</b> publikowanych polityk „blokujemy zagranicę” (przejrzane sitemapy — 0 trafień)</td><td>jenmó indeks: static IP score — Twoje stałe domowe IP = wysoki score = „ten sam użytkownik”</td></tr>
+<tr><td><b>Hotel Wi-Fi Tajlandia</b></td><td>captive portal + często blokada UDP/nietypowych portów (WG 51820 może nie wstać)</td><td>fallback: WG na porcie 53/4500 → wstunnel TCP 443; albo router podróżny (GL.iNet) który sam przechodzi portal</td></tr>
+</table>
+<p class="small">✅ <a href="https://www.vpnsmith.com/en/blog/wireguard-dns-leak-prevention-2026">VPNSmith DNS leaks</a> · <a href="https://www.vpnsmith.com/en/blog/webrtc-leak-test">WebRTC leak</a> · <a href="https://pulsevpn.dev/blog/hotel-wifi-blocking-wireguard">hotel Wi-Fi vs WireGuard</a> · <a href="https://docs.gl-inet.com/router/en/4/faq/connect_to_a_hotspot_with_captive_portal/">GL.iNet captive portal</a> · <a href="https://www.safeexpatvpn.com/is-vpn-legal-in-thailand/">VPN w Tajlandii legalny</a> · <a href="https://www.reddit.com/r/TillSverige/comments/185eijb/bankid_block_because_vpn/">r/TillSverige case</a> · <a href="https://tailscale.com/docs/features/exit-nodes">Tailscale exit nodes (banking = oficjalny use case)</a></p>
+</div>
+
+<h2 id="rank">🏆 Use case 2: Opcje polskiej TV z zagranicy — ranking</h2>
+<div class="card">
+<table>
+<tr><th></th><th>Opcja</th><th>Koszt/mies</th><th>Jakość IP</th><th>Ryzyko</th><th>Werdykt</th></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/tvp-ico.ico" alt="PL node" loading="lazy"></td><td><b>1. Node u rodziny/znajomych w PL</b> (vanilla wg na ich routerze — ten sam wzorzec co hub SE)</td><td><b>0 zł</b></td><td>Prawdziwy residential — nieodróżnialny</td><td>zero ToS-proxy; wymaga zaufanej osoby + router z publicznym IP (Orange/Play zwykle OK; CGNAT → outbound pattern jak zawsze)</td><td><span class="pill ok">BEST</span> tańsze i pewniejsze niż wszystko poniżej</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/nordvpn.png" alt="NordVPN" loading="lazy"></td><td><b>2. Komercyjny VPN z PL serwerem</b> (Nord/Surfshark/Express/PIA)</td><td>$1.75–3.59</td><td>Datacenter M247 itp. — anti-VPN wykrywa, vendorzy odświeżają pool</td><td>krucho: „results may change”; Player/PBG detekcja agresywna (Canal+/PBG strictest); ToS PL TV zakazuje</td><td><span class="pill warn">OK tymczasowo</span> streamfix 2026-11: 4/7 działa z Player.pl</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/iproyal-ico.ico" alt="IPRoyal" loading="lazy"></td><td><b>3. Kupione residential proxy PL</b> (IPRoyal ISP / Surflare / Rayobyte)</td><td>$1.80–4.20/IP</td><td>Residential (Orange/Play/Plus/T-Mobile ranges) — ALE flagowane w bazach RES z nazwą vendora</td><td>wykrywalne (IP2Proxy PX10 RES, IPinfo „service”: vendor); Bright Data/Oxylabs ToS zakazują streaming</td><td><span class="pill warn">gry wideo</span> tylko jeśli VPN-y przestaną działać</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/polsatboxgo.jpg" alt="Polsat Box Go" loading="lazy"></td><td><b>4. Pakiet Polonia (legalny)</b></td><td><b>10 €</b> / 45 zł / $10 (region-dependent — zmierzone z IP SE: 10,00 €)</td><td>—</td><td>okrojony: 18 kanałów (Polsat 1, News, Disco Polo…), bez TVN/TVP/Eurosport/większości sportu</td><td><span class="pill ok">legalny baseline</span> + portability UE dla czasowych pobytów</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/tvppolonia.jpg" alt="Satelita" loading="lazy"></td><td><b>5. Satelita Hot Bird w Sztokholmie</b></td><td>dish ~400–800 zł jednorazowo</td><td>— broadcast, zero geo-blokady IP</td><td>FTA legalne (TVP Polonia/World/Info, 4Fun, Kanał Zero…); Polsat Box DTH = regulamin <b>wprost zabrania</b> poza PL</td><td><span class="pill warn">dla FTA</span> dobra komplementarna droga</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/vpngate-ico.ico" alt="VPN Gate" loading="lazy"></td><td><b>6. VPN Gate / społeczności wolontariackie</b></td><td>0 zł</td><td>anonimowe relays volunteerów</td><td><b>0 PL relays</b> w live feed (zmierzone 2026-11-19: 95 relays, JP 50/KR 30); logi ≥3 mies; TCP/25 blocked; rotują</td><td><span class="pill bad">ODPADA</span></td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/honeygain-ico.ico" alt="Bandwidth markets" loading="lazy"></td><td><b>7. Grass/Honeygain/Pawns/PacketStream</b></td><td>—</td><td>supply-side: TY sprzedajesz bandwidth; nie kupisz konkretnego PL IP</td><td>brak retail „pick Poland exit”</td><td><span class="pill bad">ODPADA</span> (to rynek dla firm, nie dla widza)</td></tr>
+</table>
+<p><b>„Kazik z Poznania użycza łącza”?</b> Platformy wymiany IP między obcymi <b>nie ma</b> (potwierdzone 3 query + analiza rynku). Powody: trust (ktoś robi fraude z Twojego IP = Ty odpowiadasz), DMCA-liability, brak monetizacji. Istnieje tylko <b>prywatny barter między zaufanymi</b> (Ty: exit SE ↔ Kazik: exit PL — wireguard peer swap; idealnie pasuje do huba który i tak budujesz na Pi 5). Znajdź 1 Polaka w Szwecji z rodziną w PL i zróbcie sobie nawzajem peery — 15 minut konfiguracji dla każdego.</p>
+</div>
+
+<h2 id="vpn">🔐 Komercyjne VPN-y z PL — stan 2026-11 (streamfix co tydzień testuje)</h2>
+<div class="grid">
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/nordvpn.png" alt="NordVPN" loading="lazy"><h3 style="margin-top:8px">NordVPN — ✓ Works (Player.pl)</h3>
+<p>50–70+ serwerów Warszawa. „<i>consistently unblocked TVP VOD, Polsat Box Go, and Player</i>” — cybernews 2026-05. Od 2,99 €/mies (BF) / 10,99 zł; 30 dni zwrotu. Reddit 2022: „definitely works with player”.</p>
+<p class="small">⚠️ <a href="https://www.nordvpn.com/vpn-servers/poland/">nordvpn.com PL</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/surfshark.jpg" alt="Surfshark" loading="lazy"><h3 style="margin-top:8px">Surfshark — ✓ Works (Player.pl)</h3>
+<p>Warszawa + Gdańsk. streamfix 2026-11-15: Player.pl ✓. Od $1.78/mies; unlimited devices; 7-dni trial + 30 dni zwrotu.</p>
+<p class="small">⚠️ <a href="https://surfshark.com/servers">surfshark.com</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/expressvpn-ico.ico" alt="ExpressVPN" loading="lazy"><h3 style="margin-top:8px">ExpressVPN — ✓ Works (BEST wg streamfix)</h3>
+<p>Warszawa, RAM-only, obfuskacja. streamfix 2026-11-15: ✓ „BEST”. Od $2.79/mies; 30 dni zwrotu. Najdroższy premium.</p>
+<p class="small">⚠️ <a href="https://www.expressvpn.com/vpn-server">expressvpn.com</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/cyberghost-ico.ico" alt="CyberGhost" loading="lazy"><h3 style="margin-top:8px">CyberGhost — ~ Partial</h3>
+<p>Największa flota Warszawa (10 Gbps M247), dedykowana strona „Player.pl abroad”. streamfix 2026-11-14: tylko Partial. Od $1.75/mies; <b>45 dni zwrotu</b> (najdłuższy trial-refund).</p>
+<p class="small">⚠️ <a href="https://www.cyberghostvpn.com/pl/unblock-streaming/player-pl-abroad">cyberghost Player.pl page</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/mullvad-ico.ico" alt="Mullvad" loading="lazy"><h3 style="margin-top:8px">Mullvad — ✗ nie do streamingu</h3>
+<p>5 relayów wg w Warszawie (API potwierdzone 2026-11-19). Oficjalnie nie wspiera streamingu: „<i>if streaming works it’s accidental</i>” (r/mullvadvpn). 5 € flat — idealny do prywatności, nie do TV.</p>
+<p class="small">✅ <a href="https://api.mullvad.net/www/relays/all/">Mullvad API</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/protonvpn-ico.ico" alt="Proton VPN" loading="lazy"><h3 style="margin-top:8px">Proton VPN — ~ Partial</h3>
+<p>PL tylko premium (free bez PL). streamfix 2026-11-11: Player.pl ~ Partial. Od $3.59/mies. Privacy-first, ale nie streaming-first.</p>
+<p class="small">⚠️ <a href="https://protonvpn.com/vpn-servers/poland">protonvpn.com PL</a></p></div>
+</div>
+<div class="card"><p class="small">✅ PIA: od $1.79, streamfix 2026-11-16 ✓ Works · ⚠️ PureVPN: marketing „flawless 4K unblocking” (bias afiliacyjny) · ⚠️ PrivateVPN: Comparitech rekomenduje do TVP · 🔴 Windscribe: brak live-potwierdzenia w tym runie</p>
+<p><b>Jak wykrywają:</b> IP-only + listy datacenter subnetów („<i>high-traffic datacenter subnets… blacklisted within minutes</i>” — natchecker); PBG/Canal+ stricter niż TVP; apka Player potrafi <b>zerwać tunel</b> („<i>disrupt your VPN connection</i>” — r/poland 2024) → <b>VPN na routerze</b> (poziom sieci) zamiast apki; cookies/cache pamięta kraj — czyść przed switchem.</p></div>
+
+<h2 id="proxy">🛒 Residential proxy PL — kupno IP na sztuki</h2>
+<div class="card">
+<table>
+<tr><th>Vendor</th><th>PL pool</th><th>Cena static PL IP</th><th>Streaming w ToS</th><th>RES-flag risk</th></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/surflare-ico.ico" alt="Surflare" loading="lazy"><b>Surflare</b> <span class="pill ok">streaming ✓ wprost</span></td><td>tak — ISP z Orange/Play/Plus/T-Mobile</td><td>ISP $4.2/IP/mies dedicated; VPN shared $3.8; DC $2.9</td><td>wprost sprzedaje „for Player.pl and TVP VOD logins”</td><td>pula może być w bazach RES</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/iproyal-ico.ico" alt="IPRoyal" loading="lazy"><b>IPRoyal</b></td><td>tak — 15,002 ISP PL (lista), 1.5M residential PL</td><td>ISP $1.80/IP/24h → $2.40–2.70/mies; rotating $1.75/GB</td><td>brak zakazu streamingu (AUP: tylko piractwo/DRM)</td><td>w bazach RES (44.1% puli shared)</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/rayobyte-ico.ico" alt="Rayobyte" loading="lazy"><b>Rayobyte</b></td><td>tak — „Polish Proxy IPs: Residential and Static”</td><td>Static ISP $0.95/IP/mies</td><td>niezweryfikowane ⚠️</td><td>—</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/pontproxy-ico.ico" alt="PontProxy" loading="lazy"><b>PontProxy / QuanticData / proxies.vision</b> <span class="pill warn">nisze ⚠️</span></td><td>tak — exits na Orange/Play/T-Mobile</td><td>$0.50–1.00/GB rotating; krypto bez KYC</td><td>niezweryfikowane 🔴</td><td>—</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/brightdata.png" alt="Bright Data" loading="lazy"><b>Bright Data</b> <span class="pill bad">ToS ✗</span></td><td>tak (195 krajów)</td><td>ISP from $1.3/IP; residential $4/GB</td><td><b>ZAKAZ</b>: „Use of streaming related domains” (AUP dosłownie)</td><td>tak (sami sprzedają detekcję)</td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/oxylabs.png" alt="Oxylabs" loading="lazy"><b>Oxylabs</b> <span class="pill bad">restricted ✗</span></td><td>tak (175M+ globalnie)</td><td>ISP from $2.10/IP</td><td><b>Restricted targets</b>: „Entertainment & streaming — Netflix, Spotify, Twitch, Disney” (zgoda per-target na życzenie)</td><td>tak („Oxy Labs” w bazach, confidence 99)</td></tr>
+</table>
+<p><b>Kluczowy insight — wykrywalność kupionego IP:</b> IP2Proxy PX10+ ma flagę <b>RES (residential proxy)</b>, PX11 dodaje <b>nazwę vendora</b>, PX12 fraud score. IPinfo utrzymuje dataset 23M residential-proxy IP z polem <code>service</code> (np. „711Proxy”) + last_seen. ipgeolocation: „<i>44.1% of IPs across these providers are shared</i>”, przykład: <code>{"is_residential_proxy": true, "proxy_provider_names": ["Oxy Labs"], "confidence": 99}</code>. CZYLI: kupione residential ≠ nieodróżnialne od domowego IP — Player może to sprawdzić. Cloudflare łagodzi: „4/5 requestów z takich IP to legalny ruch domowy” → częściej challenge niż ban. <b>Dlatego node u zaufanej osoby bije proxy na głowę.</b></p>
+<p class="small">✅ <a href="https://www.ip2location.com/database/ip2proxy">IP2Proxy PX</a> · <a href="https://blog.ip2location.com/knowledge-base/what-is-a-residential-proxy-server/">IP2Location blog (wprost o streamingu i PX10)</a> · <a href="https://ipinfo.io/data/residential-proxy">IPinfo RES dataset</a> · <a href="https://ipgeolocation.io/blog/how-residential-proxy-detection-works">ipgeolocation metodyka</a> · <a href="https://ipqualityscore.com/documentation/proxy-detection-api/overview">IPQS</a> · <a href="https://www.brightdata.com/acceptable-use-policy">BD AUP</a> · <a href="https://developers.oxylabs.io/help-center/products-and-features/restricted-targets">Oxylabs restricted</a> · <a href="https://iproyal.com/acceptable-use-policy/">IPRoyal AUP</a> · <a href="https://www.surflare.com/locations/poland">Surflare PL</a></p></div>
+
+<h2 id="pakiety">📦 Oficjalne pakiety (legalna droga bez VPN)</h2>
+<div class="grid">
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/polsatboxgo.jpg" alt="Polsat Box Go" loading="lazy"><h3 style="margin-top:8px">Polsat Box Go</h3>
+<table><tr><th>Pakiet</th><th>Cena/30 dni</th></tr>
+<tr><td>Polsat Lovers (~77 kan.)</td><td>20 zł</td></tr>
+<tr><td>Premium (~195 kan., TVP+TVN)</td><td>35 zł</td></tr>
+<tr><td>Premium Sport (+Polsat Sport, TVP Sport, LEK, UFC)</td><td>55 zł</td></tr>
+<tr><td><b>Polonia (diaspora)</b></td><td><b>10 € (SE)</b> / 45 zł / $10 (US)</td></tr></table>
+<p class="small">Polonia: 18 kanałów (Polsat 1*, News HD, News Polityka, Disco Polo, FilmBox Festival…), siatkówka TAURON Liga, PGE Basket. *Polsat 1 tylko POZA PL. <b>Brak</b>: TVN, TVP, Eurosport, większość sportu. „Treści mogą się różnić zależnie od kraju”. Portability UE: pakiety PL działają w UE dla czasowego pobytu („po potwierdzeniu stałego miejsca zamieszkania w Polsce”); UK/Szwajcaria: wymaga PL IP.</p>
+<p class="small">✅ <a href="https://polsatboxgo.pl/pakiety/world">oficjalna strona Polonia</a> · <a href="https://pomoc.polsatboxgo.pl/pytanie/czy-ipla-jest-dostepna-za-granica/">FAQ za granicą</a> · <a href="https://jakogladac.pl/platforma/polsat-box-go/">jakogladac</a></p></div>
+<div class="card"><img class="thumb" src="img/geo-vpn-pl-se-2026/player.png" alt="Player" loading="lazy"><h3 style="margin-top:8px">Player (TVN)</h3>
+<table><tr><th>Pakiet</th><th>Cena/30 dni</th></tr>
+<tr><td>Player z reklamami (26 kan.)</td><td>0 zł</td></tr>
+<tr><td>Player bez reklam (4K, offline)</td><td>25 zł (225 zł/rok)</td></tr>
+<tr><td>Kanały TV</td><td>25 zł</td></tr>
+<tr><td>Player bez reklam + Kanały TV</td><td>40 zł</td></tr>
+<tr><td><b>Player International</b></td><td><b>50 zł</b></td></tr></table>
+<p class="small">International: iTVN + iTVN Extra + TVN24 live + okrojone VOD. <b>Dostępny w Szwecji ✅</b> (lista 28 krajów). 7 dni trial. Poza UE/EOG: pakiety PL wymagają PL IP. Portability UE: pakiet zakupiony w PL działa w UE/Norwegii/Islandii/Liecht. dla czasowego pobytu (weryfikacja automatyczna: PL karta/BLIK).</p>
+<p class="small">✅ <a href="https://promocja.player.pl/player-international-pakiety">Player International</a> · <a href="https://pomoc.player.pl/article/player-dostep-w-UE">FAQ UE</a> · <a href="https://jakogladac.pl/platforma/player/">jakogladac</a></p></div>
+</div>
+
+<h2 id="sat">📡 Satelita — Hot Bird w Sztokholmie</h2>
+<div class="card">
+<img class="thumb" src="img/geo-vpn-pl-se-2026/tvppolonia.jpg" alt="TVP Polonia" loading="lazy" style="float:right;margin-left:12px">
+<p><b>FTA (legalne, darmowe, bez żadnego VPN):</b> od 21.02.2026 TVP Polonia niekodowana na Hot Bird 13G (10,930 GHz H, SR 30000, DVB-S2/8PSK HD), TVP World FTA od 1.06.2026. Plus: TVP Info HD, 4Fun (3 kanały), Kanał Zero, Polonia 1, Tele 5, STARS.TV, Newsmax PL.</p>
+<p><b>Dish w Sztokholmie:</b> footprint Wide beam EIRP ~47–49 dBW → <b>60 cm wystarczy, 80 cm bezpiecznie</b> (śnieg/deszcz). Fora sat potwierdzają.</p>
+<p><b>Polsat Box DTH:</b> regulamin (RSUKE-DTH od 13.11.2026, §8 i §11): „<i>Korzystanie z Usług dozwolone jest wyłącznie na terytorium RP</i>” + obowiązek „nie korzystania z Usług poza granicami RP”. Naruszenie → zawieszenie/rozwiązanie umowy. Praktyka (elektroda): technicznie działa, „nie słyszałem by kogoś namierzyli” — ale formalnie naruszenie. <b>FTA = w pełni legalne</b>, płatne pakiety sat = szare.</p>
+<p class="small">✅ <a href="https://satkurier.pl/news/235554/wykaz-kanalow-fta-satelity-hot-bird-13e.html">SatKurier FTA lista</a> · <a href="https://www.lyngsat.com/maps/footprints/Hotbird-13E-Wide.html">LyngSat footprint</a> · <a href="https://www.satellites.co.uk/forums/threads/can-i-have-a-60cm-dish-in-sweden-to-get-hotbird-13-0e.46889/">forum: dish w SE</a> · <a href="https://www.polsatbox.pl/binaries/content/assets/polsatbox/regulaminy-i-cenniki/telewizja/regulamin-swiadczenia-uslug/rsuke-dth_od13.11.2026.pdf">regulamin Polsat Box DTH (PDF)</a> · <a href="https://www.elektroda.pl/rtvforum/topic3598298.html">elektroda praktyka</a></p>
+</div>
+
+<h2 id="darmowe">🆓 Darmowe i legalne bez VPN (zmierzone z IP Sztokholm!)</h2>
+<div class="card">
+<table>
+<tr><th>Usługa</th><th>Status z SE (live test)</th><th>Link</th></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/tvpvod.jpg" alt="TVP VOD" loading="lazy"><b>TVP VOD live TV</b></td><td><b>3/45 kanałów działa</b>: TVP Info ✅, TVP Polonia ✅, TVP World ✅. 42 × <code>403 GEOIP_FILTER_FAILED</code> (TVP1/2, Sport, wszystkie regionalne…)</td><td><a href="https://vod.tvp.pl">vod.tvp.pl</a></td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/tvpvod.jpg" alt="TVP VOD" loading="lazy"><b>TVP VOD na żądanie</b></td><td>próbka 100 pozycji: <b>28 dostępnych</b> (dokumenty, reportaże, produkcje TVP), 58 geo-zablokowanych (filmy/seriale licencjonowane)</td><td><a href="https://vod.tvp.pl">vod.tvp.pl</a></td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/tvppolonia.jpg" alt="TVP Polonia" loading="lazy"><b>TVP Polonia / World / Info</b></td><td>✅ worldwide (live + YT: <code>@TVPInfo/live</code>, <code>@TVPWorld/live</code> 24/7)</td><td><a href="https://polonia.tvp.pl">polonia.tvp.pl</a></td></tr>
+<tr><td class="imgcol"><img class="thumb" src="img/geo-vpn-pl-se-2026/ninateka.png" alt="Ninateka" loading="lazy"><b>Ninateka</b></td><td>✅ ~7000 darmowych: Polska Szkoła Dokumentu, spektakle Teatru TV, koncerty</td><td><a href="https://ninateka.pl">ninateka.pl</a></td></tr>
+<tr><td><b>📻 Radio</b></td><td>✅ RMF FM, RMF24, Radio ZET, Trójka — <b>zero geo-blokady</b> (zmierzone streamy 200 OK z SE)</td><td><a href="https://www.rmfon.pl">rmfon.pl</a></td></tr>
+</table>
+<p class="small">Apki TVP/Player dostępne w szwedzkim Google Play (gl=SE) — instalacja OK, playback zgodnie z powyższym.</p></div>
+
+<h2 id="prawo">⚖️ Legalność (PL / SE / EU / Tajlandia)</h2>
+<div class="card">
+<p>🏛️ <b>TSUE C-788/24 (9.07.2026)</b>: VPN = „zgodne z prawem narzędzie techniczne”; obejście geo-blokady <b>nie jest piractwem</b>; geo-block jest skuteczny mimo technicznej możliwości obejścia; <b>nie przenosi odpowiedzialności na użytkownika ani dostawcę VPN</b>. (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A62024CJ0788">EUR-Lex</a>)</p>
+<p>🇵🇱🇸🇪 <b>VPN legalny</b> w PL i SE (UE: brak ograniczeń). „Sam VPN to narzędzie, a nie czynność prawna”. Ale: <b>Player.pl i Polsat Box Go mają w regulaminach zapisy zakazujące obchodzenia ograniczeń geograficznych</b> → ryzyko czysto cywilne (blokada konta), nie karne. Płatni abonenci rzadko dostają permanentne bany.</p>
+<p>🇹🇭 <b>Tajlandia</b>: VPN legalny (bez licencji, apki w App Store). Computer Crime Act reguluje treści, nie narzędzia. §26: retencja danych 90 dni przez ISP i public Wi-Fi — kolejny argument za własnym tunelem.</p>
+<p class="small">✅ <a href="https://www.dobryvpn.pl/artykuly/czy-vpn-jest-legalny/">dobryvpn PL legalność</a> · <a href="https://www.bezpieczny-internet.pl/poradniki/vpn-do-polskiej-telewizji-za-granica/">bezpieczny-internet.pl (ToS Player/PBG)</a> · <a href="https://safeexpatvpn.com/is-vpn-legal-in-thailand/">Tajlandia</a></p></div>
+
+<h2 id="detekcja">🕵️ Jak Cię wykrywają (mechanika)</h2>
+<div class="card">
+<table>
+<tr><th>Warstwa</th><th>Co widzą</th><th>Twoje IP (hub PL/SE)</th></tr>
+<tr><td>GeoIP (MaxMind/IP2Location)</td><td>kraj + connection type (Cable/DSL vs Cellular vs hosting)</td><td>✅ Cable/DSL, brak flag</td></tr>
+<tr><td>Proxy DB (IP2Proxy PX10+, IPinfo, IPQS)</td><td>flagi VPN/DCH/RES/CPN + nazwa vendora proxy</td><td>✅ czysto (domowy ISP nie ląduje w bazach)</td></tr>
+<tr><td>ASN / DNS / VPN-traffic analysis</td><td>ASN hostingu, resolver kraju, wzorce szyfrowania</td><td>✅ ASN Telia; DNS musi iść przez tunel</td></tr>
+<tr><td>GPS w apkach TV</td><td>PBG: <b>nie zbiera lokalizacji wcale</b> (Google Play data safety); Player: opcjonalnie (marketing)</td><td>✅ geoblokada = <b>IP-only</b> — tunel na routerze wystarczy</td></tr>
+<tr><td>WebRTC (przeglądarka)</td><td>STUN ujawnia realny IP</td><td>⚠️ wyłącz/ogranicz WebRTC</td></tr>
+</table>
+<p class="small">Praktyka emigrantów (elektroda 2024–2025): komercyjne VPN-y wykrywane (Play TV Go, Max, Canal+, SkyShow), własny node domowy = „<i>sam stosuję i polecam</i>” (katze750, Tailscale); „jak od 10 lat mam VPN do siebie do domu” (misiek1111 o TVP Sport przez domowy router).</p></div>
+
+<h2 id="coverage">📊 Coverage table</h2>
+<div class="card">
+<table>
+<tr><th>Źródło</th><th>Status</th><th>Uwagi</th></tr>
+<tr><td>polsatboxgo.pl + pomoc (oficjalne)</td><td>✅ COVERED</td><td>Polonia, pakiety, FAQ; ceny z renderu SE = 10,00 € (własny test)</td></tr>
+<tr><td>player.pl + promocja + pomoc</td><td>✅ COVERED</td><td>International 50 zł, UE portability; geo-redirect z IP US potwierdzony</td></tr>
+<tr><td>jakogladac.pl / promptowy / satkurier / polskivpn / dobryvpn / tuinwestuje / vpn-portal / bezpiecznyvpn</td><td>✅ COVERED</td><td>ceny, pakiety, VPN-ki, regulaminy</td></tr>
+<tr><td>cybernews / streamfix / avisvpn / natchecker / comparitech</td><td>✅ COVERED</td><td>VPN-vs-Player testy (streamfix co tydzień: 2026-11-14/15/16)</td></tr>
+<tr><td>9 vendorów VPN (Nord/Surfshark/Proton/CyberGhost/Mullvad/PIA/Express/PrivateVPN/Windscribe/Pure)</td><td>✅ COVERED</td><td>oficjalne strony częściowo CF-walled → 3rd-party + Mullvad API live</td></tr>
+<tr><td>IPRoyal / SOAX / Bright Data / Oxylabs / Decodo / Rayobyte / PacketStream / Honeygain / Pawns / Surflare</td><td>✅ COVERED</td><td>ceny + AUP/ToS cytaty dosłowne; Decodo AUP URL = 404 (próby: /terms, /legal → 🔴)</td></tr>
+<tr><td>Nisze proxy (PontProxy/QuanticData/proxies.vision/FlashProxy/SimplyNode/PingNetwork)</td><td>⚠️ PARTIAL</td><td>marketing potwierdzony; ToS nisz niezweryfikowane (flagowane w raporcie)</td></tr>
+<tr><td>IP2Location / IPinfo / IPQS / ipgeolocation / MaxMind</td><td>✅ COVERED</td><td>detekcja RES/Provider — cytaty dosłowne</td></tr>
+<tr><td>bankid.com + support (oficjalne)</td><td>✅ COVERED</td><td>GPS tylko przy wydaniu/przenoszeniu</td></tr>
+<tr><td>Swedbank / SEB / Handelsbanken sitemapy</td><td>✅ COVERED (negatywny dowód)</td><td>zero polityk geo/VPN w treściach login/bezpieczeństwo</td></tr>
+<tr><td>Reddit (r/TillSverige, r/Polska, r/poland, r/VPNAdvice, r/mullvadvpn)</td><td>⚠️ PARTIAL</td><td>old.reddit 403 z Pi → snippety DDG + arctic-shift; świeże 2025-26 wątki niedostępne (zapisane jako ograniczenie)</td></tr>
+<tr><td>Wykop</td><td>⚠️ PARTIAL</td><td>trafienia 2017-2021; brak świeżych (2024-26) wpisów #polsat VPN</td></tr>
+<tr><td>elektroda.pl (2024-2025, 4 wątki)</td><td>✅ COVERED</td><td>praktyka własnych node'ów domowych — świeża warstwa społecznościowa</td></tr>
+<tr><td>VPN Gate API (live)</td><td>✅ COVERED</td><td>zmierzone: 95 relays, 0 PL; rozbieżność www („4322 serwery”) vs feed — odnotowana</td></tr>
+<tr><td>LyngSat / satellites.co.uk / sat-charts / forum sat + regulamin Polsat Box DTH (PDF)</td><td>✅ COVERED</td><td>footprint/dish + cytaty regulaminu dosłowne</td></tr>
+<tr><td>TVP (vod.tvp.pl API live geo-test)</td><td>✅ COVERED</td><td>3/45 live + 28/100 VOD zmierzone z IP SE</td></tr>
+<tr><td>Tailscale / WireGuard / VPNSmith / PulseVPN / GL.iNet / IronWiFi docs</td><td>✅ COVERED</td><td>leaks, captive portal, exit nodes</td></tr>
+<tr><td>TSUE C-788/24 + EUR-Lex + PL legal-orientowane portale</td><td>✅ COVERED</td><td>legalność — case number zweryfikowany</td></tr>
+</table>
+<p class="small">Metodologia: R1 broad sweep (6 agentów) → R2 gap-fill (3 agenty: sat-TV, ToS/detekcja, fresh evidence) + własne live testy geo z IP Sztokholm (TVP VOD API, polsatboxgo cennik, Mullvad API, VPN Gate API). Wszystkie claims z URL w destylatach: <code>memory/research/geo-vpn-pl-se-2026/raw/</code> (9 plików).</p></div>
+
+<p class="meta" style="margin-top:24px">Wygenerowano 2026-11-19 · Andrzej (OpenClaw) · peer-destylaty: DeepSeek V4.1 Flash × 9 · synteza + live testy: main session · ⚠️ ceny/streaming-compat zmienne w czasie — streamfix aktualizuje co tydzień</p>
+</div>
+<a href="#tldr" id="top">↑</a>
+</body></html>

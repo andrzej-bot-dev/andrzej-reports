@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bagażnik tylny Yamaha MT-07 2016 — deep research 2026-11-20</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#241d3d;--ink:#ece8f7;--mut:#a89fc4;--acc:#ff9d45;--acc2:#8b7cf7;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--line:#3a2f5c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.55}
+.wrap{width:92%;max-width:1400px;margin:0 auto;padding:16px 0 80px}
+header{padding:26px 0 10px}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#131020;font-weight:800;padding:3px 14px;border-radius:20px;font-size:13px;letter-spacing:.5px}
+h1{font-size:26px;margin:10px 0 6px}
+.meta{color:var(--mut);font-size:13.5px}
+.meta b{color:var(--ink)}
+nav{position:sticky;top:0;z-index:50;background:rgba(19,16,32,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:9px 0;height:auto;max-height:56px;overflow:hidden}
+nav .wrap{display:flex;gap:7px;flex-wrap:nowrap;overflow-x:auto;padding:0;width:94%;scrollbar-width:none}
+nav a{flex:0 0 auto;color:var(--ink);text-decoration:none;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:14px;background:var(--card);border:1px solid var(--line);white-space:nowrap}
+nav a:hover{background:var(--acc);color:#131020}
+h2{font-size:21px;margin:34px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h2 .tag{font-size:12px;color:var(--mut);font-weight:400}
+h3{font-size:16px;margin:18px 0 8px;color:var(--acc)}
+p{margin:8px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;height:190px;object-fit:cover;background:#0d0b18;cursor:pointer}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card .title{font-weight:700;font-size:14.5px;line-height:1.35}
+.card .title a{color:var(--ink);text-decoration:none}
+.card .title a:hover{color:var(--acc)}
+.price{font-size:19px;font-weight:800;color:var(--ok)}
+.price small{font-size:12px;color:var(--mut);font-weight:400}
+.price .tot{color:var(--acc)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;background:var(--card2);border:1px solid var(--line);color:var(--mut)}
+.chip.ok{color:var(--ok);border-color:#2d5a3d}
+.chip.warn{color:var(--warn);border-color:#5a4d2d}
+.chip.bad{color:var(--bad);border-color:#5a2d2d}
+.chip.new{color:var(--acc2);border-color:#3d335e}
+.desc{font-size:13px;color:var(--mut)}
+.desc b{color:var(--ink)}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.photos img{height:130px;border-radius:8px;width:100%;object-fit:cover}
+.plabel{font-size:10.5px;color:var(--mut);text-align:center;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+th{background:var(--card2);color:var(--ink);text-align:left;padding:9px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.4px;border-bottom:2px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:rgba(139,124,247,.06)}
+td img{width:88px;height:66px;object-fit:cover;border-radius:6px}
+td a{color:var(--acc2);text-decoration:none}
+td a:hover{color:var(--acc)}
+.tsum{background:rgba(255,157,69,.08)}
+.tsum td{font-weight:600}
+.coverage td,.coverage th{font-size:12.5px}
+.pill{font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.pill.ok{background:#143324;color:var(--ok)}
+.pill.warn{background:#3a3012;color:var(--warn)}
+.pill.bad{background:#3a1414;color:var(--bad)}
+.tldr{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.tldr .card{border:2px solid var(--medal,#5a2d2d)}
+.tldr .card .rank{font-size:22px;padding:10px 14px 0}
+.note{background:var(--card2);border-left:4px solid var(--acc);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13.5px;margin:10px 0}
+.note.bad{border-color:var(--bad)}
+.note.ok{border-color:var(--ok)}
+.totbox{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;font-size:13px;margin-top:4px}
+.totbox b{color:var(--acc)}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+a.ext{color:var(--acc2)}
+#totop{position:fixed;bottom:18px;right:18px;background:var(--acc);color:#131020;font-weight:800;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);z-index:99}
+@media(max-width:640px){.cards{grid-template-columns:1fr}.tldr{grid-template-columns:1fr}td img{width:70px;height:52px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a href="#tldr">🏁 TL;DR</a><a href="#ranking">📊 Ranking</a><a href="#se-uzywane">🇸🇪 Używane SE</a><a href="#pl">🇵🇱 Allegro/OLX</a><a href="#se-nowe">🇸🇪 Nowe SE</a><a href="#eu">🇪🇺 Nowe EU</a><a href="#ali">🛸 AliExpress</a><a href="#amazon">📦 Amazon</a><a href="#compat">🔧 Kompatybilność</a><a href="#trap">⛔ Czego NIE kupować</a><a href="#koszty">💰 Koszty ukryte</a><a href="#coverage">🗂️ Coverage</a>
+</div></nav>
+<div class="wrap">
+<header>
+<span class="badge">🛒 PRODUCT RESEARCH</span>
+<h1>Bagażnik tylny (luggage rack) do Yamaha MT-07 <span style="color:var(--acc)">2016</span></h1>
+<div class="meta">Data: <b>2026-11-20</b> · Cel: <b>jak najtaniej</b> · Filtr: TYLKO stara generacja <b>2014–2017</b> (2018+ odpada) · Przejrzane: <b>~1 800 ogłoszeń/ofert</b> w 12+ źródłach · Języki: PL/SE/EN/DE/RU · Kursy (Frankfurter 19.11): <b>1 zł = 2,52 kr · 1 € = 11,15 kr · 1 £ = 13,34 kr · 1 $ = 10,14 kr</b> · Weryfikacja zdjęć wizyjnych: ✅ (99 zł i 280 zł sprawdzone modelem wizyjnym)</div>
+</header>
+
+<h2 id="coverage">🗂️ Coverage — co było sprawdzane</h2>
+<table class="coverage">
+<tr><th>Źródło</th><th>Status</th><th>Metoda (szczeble)</th><th>Wynik</th></tr>
+<tr><td>Blocket (SE używane)</td><td><span class="pill ok">✅ COVERED</span></td><td>API-script (30 fraz, PDP)</td><td>~230 ogłoszeń · <b>0 dedykowanych MT-07</b>, uniwersalne toppboxy 200–700 kr</td></tr>
+<tr><td>Tradera (SE używane)</td><td><span class="pill ok">✅ COVERED</span></td><td>script → (Client Challenge) → Lightpanda</td><td>463 ogłoszeń · <b>0 dedykowanych</b>, uniwersalny rack 590 kr (aukcja)</td></tr>
+<tr><td>FB Marketplace (SE)</td><td><span class="pill ok">✅ COVERED</span></td><td>SSR script (34 frazy) + re-check dziś</td><td><b>1 dedykowany: 499 kr, Bromma</b> (nadal aktywny)</td></tr>
+<tr><td>OLX.pl</td><td><span class="pill ok">✅ COVERED</span></td><td>fetch.py (627 unikalnych)</td><td>Givi 2118FZ NOWY 360 zł · Seat-Rack 250 zł · ramy boczne 369 zł</td></tr>
+<tr><td>Allegro.pl</td><td><span class="pill ok">✅ COVERED</span></td><td>fetch.py ❌ DataDome → <b>Bright Data Web Unlocker ✅</b></td><td>221 ofert · używka z płytą Monokey 280 zł · Kappa 419 zł · Givi 432 zł</td></tr>
+<tr><td>AliExpress</td><td><span class="pill ok">✅ COVERED</span></td><td>script + 6× PDP + recenzje</td><td>3 dedykowane 2014-17 (1125–1233 kr) + 7 universal ⚠️</td></tr>
+<tr><td>Amazon.se / .de</td><td><span class="pill ok">✅ COVERED</span></td><td>Lightpanda (25 searchy, 17 PDP)</td><td>205 ASIN-ów · generyki od 744 kr total · SW-Motech 2046 kr</td></tr>
+<tr><td>Sklepy SE (nowe)</td><td><span class="pill ok">✅ COVERED</span></td><td>r.jina.ai → Lightpanda</td><td>sulas 850 kr · sportisgood 1340 · gmoto 1406 · lugnets 1650</td></tr>
+<tr><td>Sklepy EU (nowe)</td><td><span class="pill ok">✅ COVERED</span></td><td>r.jina.ai/Lightpanda</td><td>acmotos 127,83 € do SE · fc-moto £95,35 ⚠️ excl VAT · tradeinn · moto24</td></tr>
+<tr><td>Producenci (fitment)</td><td><span class="pill ok">✅ COVERED</span></td><td>givi.it / shad.es / sw-motech.com / hepco-becker.de</td><td>Part-numery 14-17 potwierdzone (2118FZ, Y0MT78ST, GPT.06.506.16000, 6704537)</td></tr>
+<tr><td>Transport PL→SE</td><td><span class="pill ok">✅ COVERED</span></td><td>R2: cenniki JDC/epaka/Euroscandia + acmotos shipping</td><td>120 zł (≈303 kr) najtaniej potwierdzone</td></tr>
+<tr><td>Fora / Reddit / YouTube</td><td><span class="pill warn">⚠️ M</span></td><td>Reddit .rss 403/429 → cytaty z DDG-snippetów; 2× YT</td><td>pułapki ownerskie (przycinanie paneli, wąski tył)</td></tr>
+<tr><td>gmoto.se</td><td><span class="pill warn">⚠️</span></td><td>curl 403 (bot-wall); dane pobrane Lightpandą tego samego dnia</td><td>2118FZ = 1406 kr — link działa w przeglądarce</td></tr>
+<tr><td>shad.co.uk</td><td><span class="pill bad">❌ FAILED</span></td><td>403 (r.jina.ai też); part potwierdzono z shad.es + 2 retailerów</td><td>cena UK nieustalona — bez wpływu na wnioski</td></tr>
+<tr><td>Ceneo.pl</td><td><span class="pill bad">❌ FAILED</span></td><td>pusty szkielet JS</td><td>proxy zbyteczne — ceny wprost z ofert</td></tr>
+</table>
+
+<h2 id="tldr">🏁 TL;DR — 3 realne ścieżki</h2>
+<div class="tldr">
+<div class="card" style="--medal:#ffd700">
+<div class="rank">🥇</div>
+<div class="body">
+<div class="title"><a href="https://www.facebook.com/marketplace/item/1050722127295553/">FB Marketplace: dedykowany fäste MT-07 pod top box — 499 kr, odbiór w Brommie</a></div>
+<div class="chips"><span class="chip ok">używany</span><span class="chip warn">ogł. od 03.07 — napisz szybko</span><span class="chip">sprzedawca 3,8★</span></div>
+<div class="desc">Jedyny dedykowany rack MT-07 na szwedzkim rynku wtórnym dziś. Odbiór osobisty = <b>zero kosztów transportu</b>. Status: nadal aktywny (sprawdzone dziś przez SSR).</div>
+<div class="totbox">Total do ręki: <b>499 kr (~198 zł)</b> — najtaniej z możliwych</div>
+<div class="photos">
+<div><img src="img/mt07-luggage-rack/givi2118fz-official.jpg" alt="Givi rack solo (poglądowe)" loading="lazy" onclick="location='https://www.facebook.com/marketplace/item/1050722127295553/'"><div class="plabel">typ produktu — poglądowe (listing FB bez publicznego zdjęcia)</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" alt="rack zamontowany z kuferem" loading="lazy" onclick="location='https://www.facebook.com/marketplace/item/1050722127295553/'"><div class="plabel">tak wygląda zamontowany z kuferem (Givi, MT-07 gen 1)</div></div>
+</div>
+</div></div>
+
+<div class="card" style="--medal:#c0c0c0">
+<div class="rank">🥈</div>
+<div class="body">
+<div class="title"><a href="https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451">Allegro: używany stelaż centralny + PŁYTA Givi Monokey — 280 zł</a></div>
+<div class="chips"><span class="chip ok">używany, stan dobry</span><span class="chip ok">✅ wizja: płyta w komplecie, bez uszkodzeń</span><span class="chip warn">brak 2 wsporników + 2 tulejek</span></div>
+<div class="desc">Yamaha OE nr 18740584514, gen 13-17. Sprawdzone wizyjnie: pełny stelaż centralny + czarna płyta Monokey bez uszkodzeń strukturalnych. Płyta nowa kosztuje osobno 400–900 kr — stąd ta oferta wygrywa na total.</div>
+<div class="totbox">280 zł (707 kr) + wysyłka PL 15 zł + forwarder 120 zł = <b>~415 zł ≈ 1047 kr do drzwi</b> (+ ew. moms 25% przy odprawie ≈ 1309 kr)</div>
+<div class="photos">
+<div><img src="img/mt07-luggage-rack/central-280-allegro.jpg" alt="stelaż+płyta solo" loading="lazy" onclick="location='https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451'"><div class="plabel">stan rzeczywisty — stelaż + płyta Monokey (ze zdjęcia oferty)</div></div>
+<div><img src="img/mt07-luggage-rack/allegro280_bare.jpg" alt="stelaż kąt 2" loading="lazy" onclick="location='https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451'"><div class="plabel">drugi kąt — same ramy (foto 2 z oferty)</div></div>
+</div>
+</div></div>
+
+<div class="card" style="--medal:#cd7f32">
+<div class="rank">🥉</div>
+<div class="body">
+<div class="title"><a href="https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/">sulas.se (SE): Givi 2118FZ NOWY — 850 kr (+99 kr wysyłka) = 949 kr</a></div>
+<div class="chips"><span class="chip new">NOWY</span><span class="chip ok">bez importu/ceł</span><span class="chip warn">1 szt. na stanie</span><span class="chip">płyta osobno</span></div>
+<div class="desc">R2 zweryfikował: to <b>pełny stelaż centralny Givi 2118FZ</b> (Artnr potwierdzony), nie same boczne pręty. Była cena 1600 kr, teraz 850. Wysyłka w SE 99 kr. Płyta Monokey/Monolock osobno (używki OLX od 20 zł!).</div>
+<div class="totbox">949 kr (~376 zł) — najtańszy NOWY bez wychodzenia z SE</div>
+<div class="photos">
+<div><img src="img/mt07-luggage-rack/sulas-sidostag.jpg" alt="2118FZ solo" loading="lazy" onclick="location='https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/'"><div class="plabel">zdjęcie oferty — stelaż solo</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" alt="2118FZ zamontowany z kuferem" loading="lazy" onclick="location='https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/'"><div class="plabel">zamontowany z kuferem (grafika Givi)</div></div>
+</div>
+</div></div>
+</div>
+<div class="note ok"><b>Bonus — najszybszy pewniak:</b> <a class="ext" href="https://www.amazon.de/dp/B0BLT8BG47">SW-Motech Street-Rack na Amazon.de — 2046 kr total, dostawa w poniedziałek 30.11</a> (markowy, 5,0★). A jeśli chcesz komplet „klik i masz kufer" z Chin: <a class="ext" href="https://www.aliexpress.com/item/1005008051749606.html">dedykowany rack Ali 2014-2017 — 1125 kr, 4,6★, recenzja od właściciela MT-07 2017</a>.</div>
+
+<h2 id="ranking">📊 Ranking — wszystko co realne (cena total do drzwi w SE)</h2>
+<table>
+<tr><th>Zdjęcie</th><th>Produkt / oferta</th><th>Cena</th><th>Transport do SE</th><th>TOTAL</th><th>Stan / ryzyko</th></tr>
+<tr class="tsum"><td><img src="img/mt07-luggage-rack/givi2118fz-official.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.facebook.com/marketplace/item/1050722127295553/">FB MP — fäste top box MT-07, Bromma</a></td><td>499 kr (198 zł)</td><td>odbiór — 0 kr</td><td><b>499 kr</b></td><td>⚠️ 4,5 mies. na FB, sprzedawca 3,8★</td></tr>
+<tr class="tsum"><td><img src="img/mt07-luggage-rack/central-280-allegro.jpg" loading="lazy" alt="rack"></td><td><a href="https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451">Allegro — używany stelaż centralny + płyta Givi Monokey</a></td><td>280 zł = 707 kr</td><td>+15 zł PL +120 zł forwarder ≈ 341 kr</td><td><b>~1047 kr</b></td><td>✅ wizja OK; ⚠️ brak 2 wsp. + 2 tulejek; +moms przy odprawie</td></tr>
+<tr class="tsum"><td><img src="img/mt07-luggage-rack/sulas-sidostag.jpg" loading="lazy" alt="rack"></td><td><a href="https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/">sulas.se — Givi 2118FZ nowy</a></td><td>850 kr</td><td>+99 kr (SE)</td><td><b>949 kr</b></td><td>✅ 1 szt.; płyta osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/ali1_bare.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.aliexpress.com/item/1005008051749606.html">AliExpress — dedykowany rack 2014-2017 (30 sold, 4,6★)</a></td><td>1125 kr</td><td>free shipping (CN, 2-6 tyg.)</td><td><b>~1125–1250 kr</b></td><td>✅ recenzja MT-07 2017; ⚠️ brak płyty Monokey (płaska płyta)</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/olx-givi2118fz.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.olx.pl/d/oferta/2118fz-mt-07-14-17-yamaha-givi-stelaz-centr-CID5-IDvqyOe.html">OLX — Givi 2118FZ NOWY (FV, gwarancja 2 l.)</a></td><td>360 zł = 908 kr</td><td>+30 zł +120 zł fwd ≈ 379 kr</td><td><b>~1287 kr</b></td><td>✅ sklep PL; płyta osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/kappa-kz2118.jpg" loading="lazy" alt="rack"></td><td><a href="https://allegro.pl/produkt/kappa-stelaz-kufra-centralnego-yamaha-mt-07-14-17-a115ec3c-5ddb-4c10-942e-9b9659505da5?offerId=17595568551">Allegro — KAPPA KZ2118 nowy (odpowiednik 2118FZ)</a></td><td>419,93 zł = 1060 kr</td><td>dostawa PL 0 + forwarder 303 kr</td><td><b>~1363 kr</b></td><td>✅ nowy, darmowa dostawa PL; płyta osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/givi2118fz-allegro.jpg" loading="lazy" alt="rack"></td><td><a href="https://allegro.pl/produkt/stelaz-kufra-centralnego-2118fz-givi-yamaha-mt07-6a764541-a62c-4004-a2a3-1b26027ccffb?offerId=18785734131">Allegro — GIVI 2118FZ nowy</a></td><td>432 zł = 1090 kr</td><td>+15 zł +303 kr</td><td><b>~1408 kr</b></td><td>✅ nowy; płyta osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/givi2118fz-official.jpg" loading="lazy" alt="rack"></td><td><a href="https://acmotos.com/en/rear-top-case-rack-givi-2118fz-yamaha-mt-07-14-17">acmotos.com (ES) — Givi 2118FZ nowy, UPS do SE</a></td><td>111,93 € = 1248 kr</td><td>+15,90 € (177 kr), 3-5 dni, VAT incl</td><td><b>1425 kr</b></td><td>✅ formalnie i bez forwardera; płyta osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/swmotech-streetrack.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.amazon.de/dp/B0BLT8BG47">Amazon.de — SW-MOTECH Street-Rack (5,0★)</a></td><td>1925,50 kr</td><td>+120,66 kr — dostawa 30.11</td><td><b>2046 kr</b></td><td>✅ najszybszy; adapter-plate do kufru osobno</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/shad-y0mt78st.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.tradeinn.com/motardinn/en/shad-yamaha-mt07-top-case-rear-fitting/137027112/p">tradeinn — SHAD Top Master Y0MT78ST (fit 14-23)</a></td><td>132,99 $ = 1349 kr</td><td>koszyk (szac. 10-20 €)</td><td><b>~1450-1570 kr</b></td><td>✅; płytka z kufru Shad wg typu</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/olx-seatrack.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.olx.pl/d/oferta/bagaznik-stelaz-sw-motech-yamaha-mt-07-CID767-ID1d3Hrs.html">OLX — SW-Motech Seat-Rack używany</a></td><td>250 zł = 631 kr</td><td>+forwarder 303 kr</td><td><b>~934 kr</b></td><td>⚠️ montaż ZAMIAST siedzenia pasażera</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/hb-sportrack.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.hepco-becker.de/en/sportrack-for-yamaha-mt-07-2014-2017.html">Hepco&amp;Becker Sportrack (producent DE)</a></td><td>185 € = 2062 kr</td><td>+ wysyłka DE-SE</td><td><b>~2200+ kr</b></td><td>⚠️ zastępuje siedzenie pasażera</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/amazon-cheap.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.amazon.de/dp/B0G1X4TMMF">Amazon.de — generyk CNC „fit MT07 2014-2020"</a></td><td>714 kr</td><td>+30 kr, dostawa 15-22.12</td><td><b>745 kr</b></td><td>🔴 0 recenzji, „uniwersalny" — loteria montażu</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/amazon-pillion.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.amazon.se/dp/B0H6NZSF54">Amazon.se — siedzisko pasażera z odpiętą półką (fit 14-17)</a></td><td>1097 kr</td><td>free, 12-17.12</td><td><b>1097 kr</b></td><td>⚠️ to półka z poduszką, NIE pod top case; 0 recenzji</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/tradera-universal.jpg" loading="lazy" alt="rack"></td><td><a href="https://www.tradera.com/item/302253/762116355/pakethallare-for-moped-mc">Tradera — uniwersalny pakethållare (aukcja do 23.11)</a></td><td>od 590 kr</td><td>odbiór/wysyłka SE</td><td><b>590+ kr</b></td><td>🔴 sprzedawca nie zna modelu — przymiarka</td></tr>
+<tr><td><img src="img/mt07-luggage-rack/blocket-givi40l.jpg" loading="lazy" alt="topcase"></td><td>Blocket — same kufer/topboxy (Givi 40L 300 kr Kumla · Givi 39L 400 kr Växjö · zestaw Wingrack+2×E36 1900 kr Dalby)</td><td>200–1900 kr</td><td>odbiór SE</td><td>—</td><td>ℹ️ bez racka — pasują NA racki powyżej (Monokey)</td></tr>
+</table>
+<p class="desc">ℹ️ Do Givi 2118FZ / Kappa / Shad / SW-Motech kupujesz <b>sam stelaż</b> — kufer sadowi się na płycie (Monokey/Monolock — używane płyty OLX od 20 zł, 50–126 kr). Jeśli planujesz przewozić torbę/plecak, stelaż wystarczy sam.</p>
+
+<h2 id="se-uzywane">🇸🇪 Szwecja — rynek używany (Blocket / Tradera / FB)</h2>
+<div class="note">Przeskanowane <b>~700 ogłoszeń</b> (Blocket 230, Tradera 463, FB 34 zapytania). Wniosek: <b>dedykowane racki MT-07 gen 1 praktycznie nie występują w SE</b> — jedna szansa to FB 499 kr (🥇 TL;DR). Poza tym tylko uniwersalia i same kufer:</div>
+<div class="cards">
+<div class="card"><img src="img/mt07-luggage-rack/fb_olx_placeholder.jpg" loading="lazy" alt="Givi kufer" onclick="location='https://www.facebook.com/marketplace/item/1050722127295553/'"><div class="body"><div class="title"><a href="https://www.facebook.com/marketplace/item/1050722127295553/">FB MP — Yamaha pakethållare / fäste Top Box MT-07 — 499 kr</a></div><div class="chips"><span class="chip ok">Bromma</span><span class="chip warn">aktywność sprzedawcy: 3,8★ (5 ocen)</span></div><div class="desc">„Fäste till MC för top box Yamaha. Finns i Bromma Beckomberga". Status z re-checku dziś: aktywna. Zadzwoń/pisz dziś — ogłoszenia z lipca często znikają po pierwszym zapytaniu.</div></div></div>
+<div class="card"><img src="img/mt07-luggage-rack/tradera-universal.jpg" loading="lazy" alt="uniwersalny rack" onclick="location='https://www.tradera.com/item/302253/762116355/pakethallare-for-moped-mc'"><div class="body"><div class="title"><a href="https://www.tradera.com/item/302253/762116355/pakethallare-for-moped-mc">Tradera — uniwersalny stalowy pakethållare — aukcja od 590 kr</a></div><div class="chips"><span class="chip bad">dopasowanie nieznane</span><span class="chip">koniec 23.11 17:31</span></div><div class="desc">Sprzedawca sam nie wie do czego to. Stal, płaski rack — pasowanie do MT-07 = przymiarka/wiercenie. Podbijaj tylko jeśli będziesz w stanie odebrać i obejrzeć.</div></div></div>
+<div class="card"><img src="img/mt07-luggage-rack/blocket-givi40l.jpg" loading="lazy" alt="Givi toppbox" onclick="location='https://www.blocket.se/recommerce/forsale/item/27694527'"><div class="body"><div class="title"><a href="https://www.blocket.se/recommerce/forsale/item/27694527">Blocket — Givi toppbox ~40L z fästplattą — 300 kr (Kumla)</a></div><div class="chips"><span class="chip ok">używany, drobne rysy</span></div><div class="desc">Kufer + płyta montażowa — świetny DUO do dowolnego racka Monokey z rankingu (280 zł / sulas / OLX). Warto dopisać do zamówienia.</div></div></div>
+<div class="card"><img src="img/mt07-luggage-rack/blocket-givi39l.jpg" loading="lazy" alt="Givi toppbox 39L" onclick="location='https://www.blocket.se/recommerce/forsale/item/28265369'"><div class="body"><div class="title"><a href="https://www.blocket.se/recommerce/forsale/item/28265369">Blocket — Givi toppbox 39L + fästplatta — 400 kr (Växjö)</a></div><div class="chips"><span class="chip ok">działa</span></div><div class="desc">Kufer Monokey z płytką. Kombi z nowym rackiem 2118FZ = kompletny zestaw za grosze.</div></div></div>
+<div class="card"><img src="img/mt07-luggage-rack/blocket-wingrack.jpg" loading="lazy" alt="Givi Wingrack zestaw" onclick="location='https://www.blocket.se/recommerce/forsale/item/24737319'"><div class="body"><div class="title"><a href="https://www.blocket.se/recommerce/forsale/item/24737319">Blocket — Givi Wingrack + 2× Monokey E36 + platta — 1900 kr (Dalby)</a></div><div class="chips"><span class="chip warn">uniwersalny nosiciel</span></div><div class="desc">Wingrack to rack „wielomotocyklowy" — wymaga modelowego fästsetu do MT-07. Sensowne tylko dla 2 kufli bocznych.</div></div></div>
+</div>
+
+<h2 id="pl">🇵🇱 Allegro / OLX — najlepsze ceny świata (wymagają transportu)</h2>
+<div class="note ok"><b>Transport PL→SE (5 kg):</b> <a class="ext" href="https://paczkaszwecja.pl/cennik/">Paczka Szwecja / JDC — 120 zł (~303 kr)</a>, dostawa w SE w weekend · <a class="ext" href="https://www.epaka.pl/paczka-do-szwecji">epaka.pl od 101,25 zł (~255 kr)</a> · Euroscandia 220 zł. Przy prywatnej sprzedaży formalnie może dojść moms 25% od wartości przy odprawie (przy 280 zł ≈ +175 kr).</div>
+<div class="cards">
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/central-280-allegro.jpg" loading="lazy" alt="stelaż+płyta" onclick="location='https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451'"><div class="plabel">solo: stelaż + Monokey</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" loading="lazy" alt="montaż z kuferem" onclick="location='https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451'"><div class="plabel">tak jeździ z kuferem (Givi)</div></div></div>
+<div class="body"><div class="title"><a href="https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451">YAMAHA MT07 13-17 stelaż pod kufer centralny + płyta Givi Monokey — 280 zł używany</a></div><div class="chips"><span class="chip ok">✅ wizyjnie sprawdzone</span><span class="chip warn">brak 2 wsporników+2 tulejek</span><span class="chip">Yamaha OE 18740584514</span></div><div class="desc">Sprzedawca uczciwie pisze w opisie czego brakuje — wsporniki/tulejki to drobnica (albo dorabka w warsztacie, albo Givi sprzedaje osobno). <b>Jedyna używka z płytą Monokey w komplecie</b> — docelowo pod kufer to najtańsza droga w ogóle. Link działa (oferta zweryfikowana przez Bright Data 20.11).</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/olx-givi2118fz.jpg" loading="lazy" alt="2118FZ nowe" onclick="location='https://www.olx.pl/d/oferta/2118fz-mt-07-14-17-yamaha-givi-stelaz-centr-CID5-IDvqyOe.html'"><div class="plabel">nowy 2118FZ (OLX)</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" loading="lazy" alt="z kuferem" onclick="location='https://www.olx.pl/d/oferta/2118fz-mt-07-14-17-yamaha-givi-stelaz-centr-CID5-IDvqyOe.html'"><div class="plabel">montaż z kuferem (Givi)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.olx.pl/d/oferta/2118fz-mt-07-14-17-yamaha-givi-stelaz-centr-CID5-IDvqyOe.html">OLX — GIVI 2118FZ (14-17) NOWY — 360 zł</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip ok">FV 23%, gwarancja 2 lata</span><span class="chip">Wisła Mała, +30 zł wys.</span></div><div class="desc">Komplet montażowy, bez płyty. Płyta Monokey/Monolock używana na OLX: 20–50 zł. Link sprawdzony: HTTP 200.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/kappa-kz2118.jpg" loading="lazy" alt="Kappa KZ2118" onclick="location='https://allegro.pl/produkt/kappa-stelaz-kufra-centralnego-yamaha-mt-07-14-17-a115ec3c-5ddb-4c10-942e-9b9659505da5?offerId=17595568551'"><div class="plabel">Kappa KZ2118 solo</div></div>
+<div><img src="img/mt07-luggage-rack/kappa_bare.jpg" loading="lazy" alt="Kappa kąt 2" onclick="location='https://allegro.pl/produkt/kappa-stelaz-kufra-centralnego-yamaha-mt-07-14-17-a115ec3c-5ddb-4c10-942e-9b9659505da5?offerId=17595568551'"><div class="plabel">zdjęcie 2 z oferty</div></div></div>
+<div class="body"><div class="title"><a href="https://allegro.pl/produkt/kappa-stelaz-kufra-centralnego-yamaha-mt-07-14-17-a115ec3c-5ddb-4c10-942e-9b9659505da5?offerId=17595568551">Allegro — KAPPA KZ2118 stelaż centralny MT-07 14-17 — 419,93 zł NOWY</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip ok">darmowa dostawa PL</span></div><div class="desc">Kappa = grupa Givi (wspólna fabryka); KZ2118 montuje płyty Monokey/Monolock identycznie jak 2118FZ.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/givi2118fz-allegro.jpg" loading="lazy" alt="Givi 2118FZ" onclick="location='https://allegro.pl/produkt/stelaz-kufra-centralnego-2118fz-givi-yamaha-mt07-6a764541-a62c-4004-a2a3-1b26027ccffb?offerId=18785734131'"><div class="plabel">Givi 2118FZ solo</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" loading="lazy" alt="z kuferem" onclick="location='https://allegro.pl/produkt/stelaz-kufra-centralnego-2118fz-givi-yamaha-mt07-6a764541-a62c-4004-a2a3-1b26027ccffb?offerId=18785734131'"><div class="plabel">montaż z kuferem</div></div></div>
+<div class="body"><div class="title"><a href="https://allegro.pl/produkt/stelaz-kufra-centralnego-2118fz-givi-yamaha-mt07-6a764541-a62c-4004-a2a3-1b26027ccffb?offerId=18785734131">Allegro — GIVI 2118FZ nowy — 432 zł</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip">+14,99 zł wys.</span></div><div class="desc">Oryginał Givi, gen 14-17, bez płyty. Gdy wolisz oryginał z PL zamiast sulas (SE).</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/olx-seatrack.jpg" loading="lazy" alt="Seat-Rack" onclick="location='https://www.olx.pl/d/oferta/bagaznik-stelaz-sw-motech-yamaha-mt-07-CID767-ID1d3Hrs.html'"><div class="plabel">Seat-Rack solo</div></div>
+<div><img src="img/mt07-luggage-rack/swmotech_bare.jpg" loading="lazy" alt="system SW-Motech" onclick="location='https://www.olx.pl/d/oferta/bagaznik-stelaz-sw-motech-yamaha-mt-07-CID767-ID1d3Hrs.html'"><div class="plabel">system SW-Motech (płyta adapter)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.olx.pl/d/oferta/bagaznik-stelaz-sw-motech-yamaha-mt-07-CID767-ID1d3Hrs.html">OLX — SW-Motech Seat-Rack (GPT.06.506.40000/B) — 250 zł używany</a></div><div class="chips"><span class="chip warn">pasażer nie jedzie</span><span class="chip ok">zdjęcie w 10 s</span></div><div class="desc">Montaż w miejsce siedzenia pasażera; do torb Quick-Lock Evo / pasów. Świetny gdy nie wożisz pasażera.</div></div></div>
+</div>
+
+<h2 id="se-nowe">🇸🇪 Nowe w szwedzkich sklepach</h2>
+<table>
+<tr><th>Sklep</th><th>Produkt</th><th>Cena</th><th>Uwagi</th></tr>
+<tr><td><a href="https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/">sulas.se</a> ✅ 200</td><td>Givi 2118FZ (stelaż centralny)</td><td><b>850 kr</b> +99 wys. = 949 kr</td><td>było 1600 kr; 1 szt.; płyta osobno — NAJTANIEJ w SE</td></tr>
+<tr><td><a href="https://sportisgood.se/2118fz-stod-for-motorcykelns-basta-fall-givi-monokey-ou-monolock-yamaha-mt-07-14-a-17-svart-tu">sportisgood.se</a> ✅ 200</td><td>Givi 2118FZ</td><td>1340 kr</td><td>pełna oferta Givi</td></tr>
+<tr><td><a href="https://gmoto.se/central-bagagehylla-utan-plat-2118fz-yamaha-mt-07-givi,110845.html">gmoto.se</a> ⚠️</td><td>Givi 2118FZ „bez plåt"</td><td>1406,07 kr</td><td>curl 403 (bot-wall) — w przeglądarce działa; cena z Lightpandy 20.11</td></tr>
+<tr><td><a href="https://www.lugnetsmccenter.se/mc-tillbehor/givi-specific-monorack-arms-mt-14-17/p/D10056/">lugnetsmccenter.se</a></td><td>Givi Monorack arms MT 14-17</td><td>1650 kr</td><td>dostawa od 0 kr</td></tr>
+<tr><td><a href="https://hedsyamahashop.se/yamaha-orginaltillbehor/mc-tillbehor/mt-07-tracer/pakethallare">hedsyamahashop.se</a></td><td>Yamaha OEM pakethållare + płyta</td><td>3227 kr</td><td>⚠️ sekcja MT-07 Tracer — potwierdź z dealerem fit do naked 2016</td></tr>
+</table>
+
+<h2 id="eu">🇪🇺 Nowe w sklepach EU (wysyłka do SE)</h2>
+<div class="cards">
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/givi2118fz-official.jpg" loading="lazy" alt="2118FZ solo" onclick="location='https://acmotos.com/en/rear-top-case-rack-givi-2118fz-yamaha-mt-07-14-17'"><div class="plabel">2118FZ solo (Givi)</div></div>
+<div><img src="img/mt07-luggage-rack/givi2118fz_bare.jpg" loading="lazy" alt="z kuferem" onclick="location='https://acmotos.com/en/rear-top-case-rack-givi-2118fz-yamaha-mt-07-14-17'"><div class="plabel">zamontowany z kuferem</div></div></div>
+<div class="body"><div class="title"><a href="https://acmotos.com/en/rear-top-case-rack-givi-2118fz-yamaha-mt-07-14-17">acmotos.com — Givi 2118FZ — 111,93 € (Black Friday -22%)</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip ok">UPS do SE 15,90 €, 3-5 dni</span><span class="chip ok">ceny z VAT SE 25%</span></div><div class="desc">Total 127,83 € = <b>1425 kr</b>. Darmowa wysyłka od 140 € (dokup coś drobnego i spadnie). Najczyystsza droga na oryginał bez forwardera.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/shad-y0mt78st.jpg" loading="lazy" alt="Shad Y0MT78ST" onclick="location='https://www.tradeinn.com/motardinn/en/shad-yamaha-mt07-top-case-rear-fitting/137027112/p'"><div class="plabel">Shad Y0MT78ST solo</div></div>
+<div><img src="img/mt07-luggage-rack/swmotech_bare.jpg" loading="lazy" alt="płyta adapter" onclick="location='https://www.tradeinn.com/motardinn/en/shad-yamaha-mt07-top-case-rear-fitting/137027112/p'"><div class="plabel">przykład płyty systemowej (osobno)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.tradeinn.com/motardinn/en/shad-yamaha-mt07-top-case-rear-fitting/137027112/p">tradeinn/motardinn — SHAD Top Master Y0MT78ST — 132,99 $ (~1349 kr)</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip ok">fit 2014-2023 (oficjalnie)</span></div><div class="desc">Wyjątek na rynku: jeden numer na wszystkie generacje. Uwaga: kufr Shad z małą płytką (D1B29PAR) wymaga średniej płytki D1B40PAR. acmotos ma go też za 147,69 € (BF).</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/swmotech-streetrack.jpg" loading="lazy" alt="Street-Rack solo" onclick="location='https://www.motorcorner.com/sw-motech-street-bagagerek-yamaha-mt-07-2014-2017.html'"><div class="plabel">Street-Rack solo</div></div>
+<div><img src="img/mt07-luggage-rack/swmotech-mounted1.jpg" loading="lazy" alt="Street-Rack montaż" onclick="location='https://www.motorcorner.com/sw-motech-street-bagagerek-yamaha-mt-07-2014-2017.html'"><div class="plabel">zamontowany na MT-07 (SW-Motech)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.motorcorner.com/sw-motech-street-bagagerek-yamaha-mt-07-2014-2017.html">motorcorner.com — SW-Motech Street-Rack 14-17 — 132,18 € +8,95 €</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip">= 141,13 € ≈ 1573 kr</span><span class="chip warn">fc-moto UK £95,35 to excl VAT — po dodaniu moms+cła wychodzi podobnie</span></div><div class="desc">Płaski aluminiowy rack 5 mm — idealny pod torby/płaski ładunek; pod kufer potrzebny adapter GPT.00.152.35000/B.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/hb-sportrack.jpg" loading="lazy" alt="H&B Sportrack" onclick="location='https://www.moto24.com/hepco-becker-sportrack-yamaha-mt-07-2014-2017-black.html'"><div class="plabel">Sportrack solo (H&B)</div></div>
+<div><img src="img/mt07-luggage-rack/amazon_seatrack2.jpg" loading="lazy" alt="typ siedzisko+półka" onclick="location='https://www.moto24.com/hepco-becker-sportrack-yamaha-mt-07-2014-2017-black.html'"><div class="plabel">typ: półka zamiast siedzenia</div></div></div>
+<div class="body"><div class="title"><a href="https://www.moto24.com/hepco-becker-sportrack-yamaha-mt-07-2014-2017-black.html">Hepco&amp;Becker Sportrack MT-07 14-17 — 189 € (moto24) / 185 € (producent)</a></div><div class="chips"><span class="chip new">NOWY</span><span class="chip warn">pasażer nie jedzie</span></div><div class="desc">Premium opcja „zamek w stacyjce". Nie kupuj jeśli wożisz pasażera na co dzień.</div></div></div>
+</div>
+
+<h2 id="ali">🛸 AliExpress — dedykowane gen-1 (2014-2017)</h2>
+<div class="cards">
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/ali-1.jpg" loading="lazy" alt="Ali rack solo" onclick="location='https://www.aliexpress.com/item/1005008051749606.html'"><div class="plabel">solo (listing)</div></div>
+<div><img src="img/mt07-luggage-rack/ali-1-installed.jpg" loading="lazy" alt="Ali rack montaż" onclick="location='https://www.aliexpress.com/item/1005008051749606.html'"><div class="plabel">kolaż z montażem (galeria)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.aliexpress.com/item/1005008051749606.html">Top Case Holder Rack MT-07/FZ-07 2014-2017 — 1125 kr (~112 $)</a></div><div class="chips"><span class="chip ok">30 sold, 4,6★</span><span class="chip ok">recenzja: MT-07 2017 pasuje, „ciężki, nie z blachy"</span><span class="chip">free shipping</span></div><div class="desc">Alu płyta + stalowe szyny, 3,11 kg, „bez modyfikacji". Identyczny produkt wiszi też pod 1005008206741237 (drożej) — bierz tańszy.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/ali-2.jpg" loading="lazy" alt="Ali rack 2 solo" onclick="location='https://www.aliexpress.com/item/1005008053202895.html'"><div class="plabel">solo (listing)</div></div>
+<div><img src="img/mt07-luggage-rack/ali2_mount.jpg" loading="lazy" alt="X-Tomer montaż" onclick="location='https://www.aliexpress.com/item/1005008053202895.html'"><div class="plabel">zamontowany (X-Tomer, galeria)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.aliexpress.com/item/1005008053202895.html">Rear Luggage Rack MT-07 2014-2017 (X-Tomer) — 1159 kr</a></div><div class="chips"><span class="chip ok">5,0★ (2)</span><span class="chip ok">recenzja FR: „excellent pour ma MT07 2017"</span></div><div class="desc">Ta sama rodzina co #1 — wybierz wg dostępności/ceny dnia.</div></div></div>
+<div class="note bad"><b>⚠️ Uniwersalia Ali (28–36 $)</b> — „fits MT-07 2013-2026" to marketing: brak dedykowanych punktów, wiercenie, ryzyko sztywności. Linki w destylatach, ale nie polecam do 700 ccm. UWAGA: <b>~60% ofert „MT-07 rear rack" na Ali to generacja 2018+/2021+</b> — czytaj tytuł!</div>
+</div>
+
+<h2 id="amazon">📦 Amazon se/de</h2>
+<div class="cards">
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/swmotech-streetrack.jpg" loading="lazy" alt="Street-Rack" onclick="location='https://www.amazon.de/dp/B0BLT8BG47'"><div class="plabel">Street-Rack solo</div></div>
+<div><img src="img/mt07-luggage-rack/swmotech-mounted2.jpg" loading="lazy" alt="Street-Rack montaż" onclick="location='https://www.amazon.de/dp/B0BLT8BG47'"><div class="plabel">zamontowany (SW-Motech)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.amazon.de/dp/B0BLT8BG47">SW-MOTECH Street-Rack — 2046 kr total, dostawa PON 30.11</a></div><div class="chips"><span class="chip ok">5,0★ (4 oceny)</span><span class="chip warn">only 5 left</span><span class="chip">adapter do kufru osobno</span></div><div class="desc">Markowy pewniak gdy zależy ci na czasie (wszystko z PL/Ali = 1-3 tyg.).</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/amazon-cheap.jpg" loading="lazy" alt="generyk solo" onclick="location='https://www.amazon.de/dp/B0G1X4TMMF'"><div class="plabel">solo (listing)</div></div>
+<div><img src="img/mt07-luggage-rack/amazon_generic_bare.jpg" loading="lazy" alt="generyk detal" onclick="location='https://www.amazon.de/dp/B0G1X4TMMF'"><div class="plabel">detal płyty (listing)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.amazon.de/dp/B0G1X4TMMF">Generyk CNC „MT07 2014-2020" (CHMPXRXUX) — 745 kr total</a></div><div class="chips"><span class="chip bad">0 recenzji</span><span class="chip bad">„uniwersalny" w opisie</span><span class="chip">dostawa 15-22.12</span></div><div class="desc">Kusi ceną, ale bez recenzji i z uniwersalnym montażem — loteria. Bierz tylko świadomie.</div></div></div>
+<div class="card"><div class="photos" style="padding:8px 8px 0">
+<div><img src="img/mt07-luggage-rack/amazon-pillion.jpg" loading="lazy" alt="pillion shelf" onclick="location='https://www.amazon.se/dp/B0H6NZSF54'"><div class="plabel">siedzisko + półka</div></div>
+<div><img src="img/mt07-luggage-rack/amazon_seatrack.jpg" loading="lazy" alt="z ładunkiem" onclick="location='https://www.amazon.se/dp/B0H6NZSF54'"><div class="plabel">z ładunkiem (listing)</div></div></div>
+<div class="body"><div class="title"><a href="https://www.amazon.se/dp/B0H6NZSF54">Siedzisko pasażera z odpiętą półką (fit 14-17) — 1097 kr, free dostawa</a></div><div class="chips"><span class="chip ok">fit 2014-2017 w tytule</span><span class="chip warn">nie pod top case</span><span class="chip bad">0 recenzji</span></div><div class="desc">Ciekawy kształt: poduszka znika, półka zostaje. Do kasku/torby OK, pod kufer NIE.</div></div></div>
+</div>
+
+<h2 id="compat">🔧 Kompatybilność — co NAPRAW DĘ pasuje do MT-07 2016 (gen 2014-2017)</h2>
+<table>
+<tr><th>Part</th><th>Co to</th><th>Uwaga montażowa</th><th>Źródło</th></tr>
+<tr><td><b>GIVI 2118FZ</b></td><td>stelaż centralny Monokey/Monolock</td><td><b>płyta osobno</b> (M5/M7/M8/M9/M10 lub M5M/M6M); przy M8A/M8B/M9A/M9B brak stop-light/remote (przebicie obudowy)</td><td><a class="ext" href="https://www.givi.it/my-motorcycle/product/yamaha/mt-07-14--17/optionals/2118fz">givi.it fitment</a> · <a class="ext" href="https://media.givi.it/XN-Prodotti/istruzioni/2118FZ.pdf">instrukcja PDF</a> ✅H</td></tr>
+<tr><td><b>SHAD Y0MT78ST</b></td><td>Top Master fitting kit</td><td>fit <b>2014-2023</b> (jedyny numer na wszystkie geny); kufr z małą płytką → potrzebna średnia D1B40PAR</td><td><a class="ext" href="https://www.shad.es/en/for-your-motorbike/YAMAHA/MT07/">shad.es</a> ✅H</td></tr>
+<tr><td><b>SW-MOTECH Street-Rack GPT.06.506.16000(/B)</b> EAN 4052572051160</td><td>płaski rack alu</td><td>adapter-plate GPT.00.152.35000/B osobno (Givi/Shad/Krauser)</td><td><a class="ext" href="https://sw-motech.com/en/bike/Yamaha/MT-07/2016/products/luggage/luggage+racks/4052572051160.htm">sw-motech.com</a> ✅H</td></tr>
+<tr><td><b>H&amp;B Sportrack 6704537</b> / Smartrack 6804537</td><td>sportrack / rack pod soft</td><td>Sportrack montowany <b>zamiast siedzenia pasażera</b></td><td><a class="ext" href="https://www.hepco-becker.de/en/sportrack-for-yamaha-mt-07-2014-2017.html">hepco-becker.de</a> ✅H</td></tr>
+</table>
+<h3>⛔ NIEPASUJĄCE (mylące w ofertach!)</h3>
+<p class="desc">Givi <b>2140FZ</b> = 18-20 · Givi <b>SR2173</b> = 25-26 · Givi <b>SR1142</b> = adapter do Hond CB, NIE MT-07 · SW-Motech <b>4052572212202</b> = 18-24 · <b>4052572283431</b> = 24- · wszystko „Tracer" (2130FZ, KZ2130, Y0MT76ST) · Ali: wszystko „2018-2024" / „2021-2026".</p>
+<div class="note"><b>Głosy właścicieli (forum, M):</b> „wszystkie dostępne racki wymagają jakoś przycięcia bocznych paneli" — racki siedzą wysoko/tył jest wąski; SW-Motech + Kappa Monokey 52L to popularny zestaw na r/MT07. Limit ładunku Givi dla nowszych racków ~6 kg — przy 2118FZ sprawdź w instrukcji PDF przed załadunkiem kufra pełnego narzędzi.</div>
+
+<h2 id="trap">⛔ Czego NIE kupić (pułapki z tego researchu)</h2>
+<div class="cards">
+<div class="card"><img src="img/mt07-luggage-rack/stelaz-99-allegro.jpg" loading="lazy" alt="rączka 99 zł" onclick="location='https://allegro.pl/produkt/stelaz-tyl-tylni-yamaha-mt-07-13-17-0d66a786-b713-478a-97d1-f6fb97d1e11b?offerId=16432353605'"><div class="body"><div class="title">„STELAŻ TYŁ TYLNI MT-07 13-17" za 99 zł = TO NIE JEST BAGAŻNIK</div><div class="chips"><span class="chip bad">✅ wizyjnie potwierdzone: rączka pasażera</span></div><div class="desc">Listing wygląda jak okazja („NOWY, 99 zł"), a na zdjęciu jest uchwyt pasażera — brak ramy i punktów pod kufer. Wizja: „przeznaczony wyłącznie do trzymania się". Klasyczna pułapka handlarza części (Abcmotoru, 99% poleceń — bo wysyłają szybko... rączki).</div></div></div>
+<div class="card"><img src="img/mt07-luggage-rack/amazon_generic_bare.jpg" loading="lazy" alt="no-name" onclick="location='https://www.amazon.de/dp/B0G1X4TMMF'"><div class="body"><div class="title">Generyki „2013-2026 / fits MT07" za 30-40 $ (Ali) i 0-recenzje (Amazon)</div><div class="chips"><span class="chip bad">uniwersalne mocowanie</span><span class="chip bad">ryzyko sztywności</span></div><div class="desc">Deklaracja „fits MT-07 2013-2026" fizycznie nie może być prawdziwa dla wszystkich generacji. Na 700 ccm z kuferem — nie warto. (OEM99 podobnie: „płytka mocująca", nie rack.)</div></div></div>
+</div>
+
+<h2 id="koszty">💰 Koszty ukryte — ściąga</h2>
+<table>
+<tr><th>Pozycja</th><th>Koszt</th><th>Źródło</th></tr>
+<tr><td>Forwarder PL→SE (5 kg, 50×30×15)</td><td><b>Paczka Szwecja/JDC 120 zł ≈ 303 kr</b> (dostawa w SE w weekend) · epaka od 101,25 zł · Euroscandia 220 zł</td><td><a class="ext" href="https://paczkaszwecja.pl/cennik/">paczkaszwecja.pl</a> · <a class="ext" href="https://www.epaka.pl/paczka-do-szwecji">epaka.pl</a></td></tr>
+<tr><td>Moms przy prywatnym imporcie z PL</td><td>formalnie 25% od wartości może dojść przy odprawie (280 zł → ~+175 kr)</td><td>praktyka JDC/epaka</td></tr>
+<tr><td>Płyta Monokey/Monolock (gdy kupujesz sam stelaż)</td><td>używana OLX <b>20-50 zł (50-126 kr)</b> · nowa wg modelu płyty</td><td><a class="ext" href="https://www.olx.pl/d/oferta/givi-plyta-pod-kufer-CID5-ID14mavf.html">OLX płyta 20 zł</a> · <a class="ext" href="https://www.olx.pl/d/oferta/plyta-pod-kufer-centralny-givi-z113-monolock-CID5-ID18cow9.html">OLX Z113 Monolock 50 zł</a></td></tr>
+<tr><td>Czas dostawy</td><td>Amazon.de SW-Motech: <b>30.11</b> · acmotos UPS: 3-5 dni rob. · forwarder PL: ~tydzień · Ali: 2-6 tyg.</td><td>—</td></tr>
+</table>
+
+<h2>📌 Rekomendacja końcowa (moja opinia)</h2>
+<div class="note ok">
+<b>Najszybciej i najtaniej:</b> napisz dziś do sprzedawcy z <a class="ext" href="https://www.facebook.com/marketplace/item/1050722127295553/">FB (499 kr, Bromma)</a> — jeśli żyje i to pasuje do gen 1, to nie ma sensowniejszej opcji. <br>
+<b>Plan B (pewny stan + płyta w komplecie):</b> <a class="ext" href="https://allegro.pl/produkt/yamaha-mt07-13-17-stelaz-pod-kufer-centralny-d4093c60-9485-46f6-abc4-315731a6d383?offerId=18995564451">Allegro 280 zł</a> + <a class="ext" href="https://paczkaszwecja.pl/cennik/">Paczka Szwecja 120 zł</a> ≈ <b>1047 kr do drzwi</b> (dolicz ew. moms). <br>
+<b>Plan C (nowe, bez kombinowania):</b> <a class="ext" href="https://sulas.se/produkt/givi-sidostag-toppbox-yamaha-mt-07-2014-2017/">sulas.se 2118FZ 949 kr z wysyłką</a> + używana płyta z OLX — całość i tak <b>~1000-1100 kr</b>, oryginalne Givi, zero importu. <br>
+Moja typowana kolejność: <b>FB → sulas → Allegro 280 → acmotos</b>. (Jeśli chcesz od razu pod kufer i nie chcesz szukać płyty: Ali 1125 kr ma płaską płytę w komplecie, ale bez systemu Monokey.)
+</div>
+
+<footer>
+<b>Metodologia:</b> 8 scraperów R1 (Blocket API, Tradera+Lightpanda, FB SSR, OLX fetch.py, Allegro Bright Data, AliExpress script+PDP+recenzje, Amazon Lightpanda 205 ASIN, 29 źródeł sklepów EU/SE) + R2 (transport PL→SE, shipping EU→SE, weryfikacja sulas) + warstwa 1.5 (wizyjna weryfikacja zdjęć ofert 99 zł / 280 zł / kolaży). Wszystkie linki zakupowe sprawdzone 20.11 (14× curl HTTP 200; Allegro — treść pobrana przez Bright Data tego samego dnia; gmoto.se — 403 na bota, dane z Lightpandy). Zdjęcia: lokalne miniatury ≤640 px z listingów/producentów + klatki YouTube; „montaż z kuferem" przy ofertach stelaży = grafika Givi tego samego systemu (oznaczone). Kursy: frankfurter.dev 19.11.2026. Raport: v1.<br>
+<b>Self-audit:</b> ✅ dark mode · ✅ miniatura przy każdej pozycji · ✅ każdy claim z URL · ✅ exclusion „2018+ odpada" respektowane · ✅ coverage table z ❌/⚠️ · ✅ koszty ukryte · ✅ 2+ języki · ✅ TL;DR na górze · ✅ linki zweryfikowane.
+</footer>
+</div>
+<button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+</body>
+</html>

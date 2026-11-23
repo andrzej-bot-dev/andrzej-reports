@@ -49,7 +49,7 @@ footer a{color:#93c5fd;word-break:break-all}
 </style>
 </head>
 <body>
-<nav class="sticky"><a href="#tldr">⚡ TL;DR</a><a href="#finalisci">🏆 Finaliści</a><a href="#porownanie">📊 Tabela</a><a href="#estymaty">🌬️ Estymaty</a><a href="#nakladki">🖨️ Nakładki 3D</a><a href="#regulator">🎛️ Regulator</a><a href="#fora">💬 Real-world</a><a href="#koszyki">🛒 Koszyki</a><a href="#coverage">🧾 Coverage</a></nav>
+<nav class="sticky"><a href="#tldr">⚡ TL;DR</a><a href="#update140">🔄 UPDATE 140mm</a><a href="#finalisci">🏆 Finaliści</a><a href="#porownanie">📊 Tabela</a><a href="#estymaty">🌬️ Estymaty</a><a href="#nakladki">🖨️ Nakładki 3D</a><a href="#regulator">🎛️ Regulator</a><a href="#fora">💬 Real-world</a><a href="#koszyki">🛒 Koszyki</a><a href="#coverage">🧾 Coverage</a></nav>
 <div class="wrap">
 <header>
 <h1>DIY oczyszczacz na filtrze Xiaomi — co kupić zamiast Arctic P12</h1>
@@ -68,6 +68,17 @@ footer a{color:#93c5fd;word-break:break-all}
 </table>
 <p><strong>Do każdego:</strong> regulator PWM z pokrętłem ~14 kr z Ali (<a href="https://www.aliexpress.com/item/1005010211340190.html">link</a>) — 4K/8K na pełnych obrotach są głośne (50–60 dB), na 30–40% PWM cicho i nadal mocno. <strong>Pomiń</strong>: Noctua iPPC-3000 (310 kr za 7,63 mmH₂O — P12 Pro daje 6,9 za 110 kr), P12 Max (229 kr, słabszy od Pro), Delta PFC1212DE (4,8 A = 58 W — zjada zasilacz). <strong>Ali vs Amazon</strong>: 8K na Ali kosztuje 409 kr — na Amazonie 189 kr; na Ali ktoś dostał falsyfikat zamiast wersji serwerowej → <span class="ok">Amazon bezpieczniejszy</span>, dostawa w piątek 27.11.</p>
 </section>
+
+<h2 id="update140">🔄 UPDATE (23.11, po południu): nakładka Dawida = slot 140 mm × 27 mm</h2>
+<p>Weryfikacja zamówienia (Amazon #407-8028761, 27.03.2026): fan = <strong>ARCTIC P14 140 mm 1700 RPM</strong> (106 kr) → wydrukowana nakładka mieści fan <strong>140×140×27 mm</strong>. Lista powyżej (120 mm) zostaje dla kogoś z nakładką 120 mm — ale pod slot 140 mm ranking wygląda tak:</p>
+<table>
+<tr><th>Zdjęcie</th><th>Fan (140 mm, pasuje 1:1 w wydruk)</th><th>Ciśnienie</th><th>Przepływ free</th><th>Cena Amazon.se</th><th>Est. przez filtr</th></tr>
+<tr><td><img class="thumb" src="img/diy-purifier-fan/amz-p12pro.jpg" alt="ARCTIC P14 Pro" loading="lazy"></td><td><a href="https://www.amazon.se/dp/B0DPX5PD99"><strong>ARCTIC P14 Pro</strong></a> (400–2500 RPM PWM, 0,35 A, 27 mm) 🥇 zero przeróbek</td><td><strong>5,2 mmH₂O (51 Pa)</strong> ≈ 2,3× P14</td><td>186 m³/h</td><td><strong>122,99 kr</strong></td><td>~45–90 m³/h → pokój 6–8 m²</td></tr>
+<tr><td><img class="thumb" src="img/diy-purifier-fan/amz-ippc3000.jpg" alt="Noctua NF-A14 iPPC-3000" loading="lazy"></td><td><a href="https://www.amazon.se/dp/B00KFCRF1A"><strong>Noctua NF-A14 industrialPPC-3000 PWM</strong></a> (3000 RPM, 25 mm, IP-pad) 🥈 premium</td><td><strong>6,58 mmH₂O (65 Pa)</strong> ≈ 2,9× P14</td><td><strong>269,3 m³/h</strong></td><td>329,90 kr</td><td>~60–110 m³/h (duży free-flow) → 12–15 m²</td></tr>
+<tr><td>—</td><td>ARCTIC P14 Max (2800 RPM)</td><td>4,18 mmH₂O</td><td>161 m³/h</td><td>393,49 kr, dostawa 16–19 Dec</td><td class="bad">SKIP — Pro lepszy i 3× tańszy</td></tr>
+<tr><td>—</td><td>ARCTIC P14 (Twój, 1700 RPM)</td><td>2,0–2,4 mmH₂O</td><td>123,8 m³/h</td><td>106 kr (kupiony)</td><td class="warn">~20–50 m³/h — stąd „slabo ciągnie"</td></tr>
+</table>
+<p><strong>Werdykt pod slot 140 mm:</strong> bez drukowania czegokolwiek → <a href="https://www.amazon.se/dp/B0DPX5PD99">ARCTIC P14 Pro za 122,99 kr</a> (2,3× ciśnienia, cichy, 0 dB mode). Maksimum z gniazdka 12 V bez zmian w nakładce → <a href="https://www.amazon.se/dp/B00KFCRF1A">NF-A14 iPPC-3000 za 329,90 kr</a> (6,58 mmH₂O + ogromny free-flow, głośny na full → PWM). Nadal alternatywa absolutna: <strong>S12038-4K (11,45 mmH₂O, 169 kr)</strong> + wydruk adaptera 120×38 (Jason 1366865) — więcej ciśnienia za 1 h druku. Specy: <a href="https://www.arctic.de/media/ac/2f/6a/1753621498/Spec_Sheet_P14_Pro_EN.pdf">P14 Pro PDF</a> · <a href="https://noctua.at/en/products/nf-a14-industrialppc-3000-pwm/specifications">NF-A14 iPPC-3000</a>.</p>
 
 <h2 id="finalisci">🏆 Finaliści (karty)</h2>
 <div class="cards">

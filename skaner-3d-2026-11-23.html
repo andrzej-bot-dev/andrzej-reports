@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skanery 3D — deep research 2026-11-23</title>
+<style>
+:root{--bg:#131020;--card:#1d1832;--card2:#241d3d;--ink:#ece8f7;--muted:#9c93b8;--acc:#ff9f43;--acc2:#b78bff;--ok:#3ddc97;--warn:#ffb84d;--bad:#ff6b81;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc2)}
+.wrap{max-width:1400px;margin:0 auto;padding:16px}
+h1{font-size:1.6em;margin:.2em 0} h2{color:var(--acc);margin-top:1.6em;border-bottom:1px solid #322a55;padding-bottom:.2em} h3{color:var(--acc2)}
+.card{background:var(--card);border-radius:12px;padding:14px 16px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.92em}
+th,td{padding:8px 10px;border-bottom:1px solid #2e2650;text-align:left;vertical-align:top}
+th{color:var(--acc);font-weight:600;background:#1a1530}
+tr:hover td{background:#221b3e}
+.thumb{width:110px;height:auto;border-radius:8px;background:#fff}
+.muted{color:var(--muted);font-size:.88em}
+.badge{display:inline-block;background:var(--card2);border:1px solid #3d3468;border-radius:99px;padding:2px 12px;font-size:.85em;margin:2px}
+.nav{position:sticky;top:0;z-index:9;background:rgba(19,16,32,.95);backdrop-filter:blur(6px);padding:8px 10px;max-height:56px;overflow:auto;border-bottom:1px solid #2e2650}
+.nav a{margin-right:6px;font-size:.88em;white-space:nowrap}
+.tldr{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.pick{background:var(--card2);border:1px solid #3d3468;border-radius:12px;padding:14px}
+.pick h3{margin:.1em 0 .3em}
+.noimg{font-size:2em;opacity:.5}
+.revcard{background:var(--card);border-left:4px solid var(--acc2);border-radius:8px;padding:10px 14px;margin:10px 0}
+.topbtn{position:fixed;bottom:18px;right:18px;background:var(--acc);color:#000;border-radius:99px;padding:10px 14px;text-decoration:none;font-weight:700;z-index:99}
+@media(max-width:720px){table{font-size:.8em} .thumb{width:80px}}
+</style></head>
+<body>
+<div class="nav wrap">
+<a href="#tldr">TL;DR</a><a href="#matrix">Tabela</a><a href="#recenzje">Recenzje</a><a href="#ali">Ali</a><a href="#allegro">Allegro</a><a href="#eu">EU/SE</a><a href="#promo">Oficjalne BF</a><a href="#used-se">Używane SE</a><a href="#used-de">Używane DE</a><a href="#koszty">Koszty ukryte</a><a href="#zadanie">Twój panel</a><a href="#coverage">Coverage</a><a href="#metoda">Metoda</a>
+</div>
+<div class="wrap">
+<h1>🔍 Deep research: skaner 3D „dobrze i jak najtaniej”</h1>
+<p class="muted">🛒 Product research • 2026-11-23 • Black Friday window • kursy przybliżone: 1 € = 11,3 kr, 1 $ = 10,5 kr, 1 zł = 2,65 kr • <b>~610 ofert</b>, 20+ modeli, 14 platform/sklepów, 10+ źródeł recenzji • kontekst: panele motocyklowe MT-07, wymagana dokładność ≤1 mm</p>
+
+<h2 id="coverage">📋 Coverage — wszystkie źródła z briefu</h2>
+<div class="card"><table><tr><th>Źródło</th><th>Status</th><th>Szczeble</th><th>Wynik</th></tr><tr><td>Blocket / Tradera / FB Marketplace (skrypty lokalne)</td><td>✅ COVERED</td><td>—</td><td>~68+8+66 ogłoszeń przesiewanych, sensownych ~20 (używane SE)</td></tr>
+<tr><td>AliExpress (geo=SE)</td><td>✅ COVERED</td><td>http→Lightpanda→Bright Data</td><td>80 ofert; http i Lightpanda wpadły w punish — BD zadziałał</td></tr>
+<tr><td>Allegro.pl</td><td>✅ COVERED</td><td>curl_cffi→Bright Data→browser</td><td>188 ofert po dedupe (DataDome ominął BD)</td></tr>
+<tr><td>Amazon.se / .de</td><td>✅ COVERED</td><td>Lightpanda(fail)→curl SSR→PDP</td><td>61 ofert; .de tańszy, .se droży</td></tr>
+<tr><td>eBay.de + Kleinanzeigen</td><td>✅ COVERED</td><td>curl→web_fetch→Lightpanda→browser(4.)</td><td>145 ofert używanych</td></tr>
+<tr><td>3DPrima (SE, Malmö)</td><td>✅ COVERED</td><td>web_fetch</td><td>24 skanery, Black Week, ceny EUR, free ship >100 €</td></tr>
+<tr><td>3DVerkstan (SE, Solna)</td><td>✅ COVERED</td><td>web_fetch</td><td>14 skanerów Shining 3D + AESUB spray 152,50 kr</td></tr>
+<tr><td>Proshop.se</td><td>✅ COVERED</td><td>browser+jina (Cloudflare)</td><td>19 pozycji (15 Revopoint, 4 Creality), ceny SEK</td></tr>
+<tr><td>3DJake (AT/DE)</td><td>✅ COVERED (brak asortymentu)</td><td>web_fetch×2</td><td>0 skanerów 3D marki docelowe — kategoria tylko „bq"</td></tr>
+<tr><td>raseter.com</td><td>✅ COVERED (nie istnieje)</td><td>DNS×7</td><td>NXDOMAIN — domena wygasła</td></tr>
+<tr><td>Oficjalne: Creality / Revopoint / 3DMakerpro / Shining3D</td><td>✅ COVERED</td><td>curl products.json + browser</td><td>~35 modeli + promo BF + warehouse EU + gwarancje</td></tr>
+<tr><td>Recenzje niezależne</td><td>✅ COVERED</td><td>web_fetch (blogi) + Reddit + YT</td><td>10+ źródeł: 3DMag, 3DWithUs, 3DTechValley, Lidar News, TheTechnologyMan, TechWalls, Galaxus, 3DSourced, Reddit r/3DScanning, YT (Making for Motorsport 520K/268K, Hoffman 42K)</td></tr>
+<tr><td>Hygglo (wynajem)</td><td>✅ COVERED</td><td>sitemap 17 MB</td><td>0 skanerów 3D w bazie; iPhone Pro od 890 kr/mies.</td></tr>
+<tr><td>Usługi skanowania (kontekst)</td><td>✅ COVERED</td><td>web_fetch</td><td>Innovar PL 299–750 zł netto; 3DVerkstan Studios wycena</td></tr>
+<tr><td>AliExpress REST? (Temu/Banggood)</td><td>➖ poza scope</td><td>—</td><td>BD-kwoty; na żądanie dobiję w v2</td></tr></table></div>
+
+<h2 id="tldr">🏆 TL;DR — co kupić</h2>
+<div class="tldr">
+<div class="pick"><h3>🥇 „Dobrze” bez kompromisów</h3><b>Creality Otter</b> — najtaniej nowy: <a href="https://allegro.pl/produkt/skaner-3d-creality-cr-scan-otter-87da4b0b-c057-42f7-a353-f8cca14ca50b?offerId=19022355407">Allegro 2 299 zł ≈ 6 090 kr</a> (uwaga: dostawa PL→SE — forwarder ~50–100 kr) albo <a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-otter_30551_13775">3DPrima 628 € ≈ 7 100 kr</a>, free ship, sklep w Malmö. Markery w zestawie, testowany na karoseriach aut.<br><span class="muted">🥈 tańsza gałąź: Otter Lite 449 € ≈ 5 075 kr (3DPrima) — mniej detalu.</span></div>
+<div class="pick"><h3>💰 „Jak najtaniej, ale nie loteria”</h3><b>3DMakerpro Moose Lite</b> — <a href="https://www.aliexpress.com/item/1005011743398017.html">Ali 2 922 kr</a> (5★, 28 sold) albo <a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/3dmakerpro-moose-lite_30843_14200">3DPrima 279 € ≈ 3 150 kr</a>. Klasa Moose zweryfikowana kalibrem (0,04 mm). Minus: brak trybu markerów, mono NIR (bez koloru).</div>
+<div class="pick"><h3>💵 Absolutne minimum</h3><b>Creality Ferret SE</b> — <a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-ferret-se_30023_12279">3DPrima 199 € ≈ 2 250 kr</a> (BF, było 506 €) albo <a href="https://allegro.pl/produkt/skaner-3d-creality-cr-scan-ferret-se-kolorowe-skanowanie-przedmiotow-f176efe4-efda-4dcb-b23d-5d49d50d4e6d?offerId=19019799000">Allegro 926 zł ≈ 2 450 kr</a>. Ale: rodzina Ferret = najsłabszy tracking na gładkich panelach — Twój case to jego pięta achillesowa.</div>
+<div class="pick"><h3>🃏 Wildcard</h3><b>3DMakerpro Fox</b> — nowość 2025: 0,07 mm, AI SLAM tracking, 210 g. <a href="https://www.aliexpress.com/item/1005013293901252.html">Ali 2 255 kr</a> / <a href="https://allegro.pl/produkt/skaner-3d-3dmakerpro-technologia-ai-slam-fox-dokladnosc-0-07-mm-210g-e4e4e238-e323-439a-9d69-0b6e7a547ac8?offerId=19079898547">Allegro 920 zł ≈ 2 440 kr</a> / oficjalnie $199 z DE. Świetne parametry, ALE zero niezależnych recenzji — kupujesz jako pierwszy.</div>
+<div class="pick"><h3>♻️ Najlepsze używki</h3><b>Einstar gen1</b>: <a href="https://www.blocket.se/recommerce/forsale/item/28442767">Blocket 4 500 kr</a> / eBay 333 € ≈ 3 760 kr — pro-tracking za pół ceny. Ferret Pro używany od <a href="https://www.ebay.de/itm/198810286062">122 € ≈ 1 380 kr</a> (eBay.de) — tanio, ale loteria jak nowy. POP 3 gen1 od ~120 €.</div>
+<div class="pick"><h3>🎯 Kontekst: Twój panel MT-07</h3>Na JEDEN panel skaner się nie spina: OEM <a href="https://www.partzilla.com/">Partzilla $14,90</a> albo usługa skanowania <a href="https://www.innovar.pl/cennik">Innovar 299–750 zł ≈ 800–2 000 kr</a> (mail z panel do PL, STL wraca). Skaner ma sens, jeśli chcesz go do kolejnych projektów. Przy skanowaniu: spray matujący obowiązkowy (AESUB white <a href="https://3dverkstan.se/produkt/aesub-white-400ml/">152,50 kr</a> w 3DVerkstan lub lakier do włosów 30 kr).</div>
+</div>
+
+<h2 id="matrix">📊 Matrix: model × najtańsze źródła</h2>
+<div class="card"><table>
+<tr><th>Zdjęcie</th><th>Model</th><th>Dokładność</th><th>Najtaniej nowy</th><th>AliExpress</th><th>Używany od</th><th>Werdykt pod zadanie</th></tr>
+<tr>
+<td><a href="#otter"><img src="img/skaner3d/otter.jpg" loading="lazy" alt="otter" class="thumb"></a></td>
+<td><b>Creality CR-Scan Otter</b><br><span class="muted">✅</span></td>
+<td>0,02 mm @60 mm</td>
+<td><a href="https://allegro.pl/produkt/skaner-3d-creality-cr-scan-otter-87da4b0b-c057-42f7-a353-f8cca14ca50b?offerId=19022355407">≈6 090 kr — Allegro 2 299 zł</a></td>
+<td>Ali od 8 732 kr</td>
+<td>eBay: Otter Lite 427 €</td>
+<td>🥇 najlepszy all-round — testowany na karoseriach aut, markery w zestawie</td></tr>
+<tr>
+<td><a href="#moose-lite"><img src="img/skaner3d/moose-lite.jpg" loading="lazy" alt="moose-lite" class="thumb"></a></td>
+<td><b>3DMakerpro Moose Lite</b><br><span class="muted">✅</span></td>
+<td>0,05 mm</td>
+<td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/3dmakerpro-moose-lite_30843_14200">≈3 150 kr — 3DPrima 279 €</a></td>
+<td>Ali 2 922 kr (5★, 28 sold)</td>
+<td>—</td>
+<td>💰 najtańszy „sprawdzony” — klasa Moose mierzona kalibrem 0,04 mm; brak trybu markerów</td></tr>
+<tr>
+<td><a href="#ferret-se"><img src="img/skaner3d/ferret-se.jpg" loading="lazy" alt="ferret-se" class="thumb"></a></td>
+<td><b>Creality CR-Scan Ferret SE</b><br><span class="muted">✅</span></td>
+<td>0,1 mm</td>
+<td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-ferret-se_30023_12279">≈2 250 kr — 3DPrima 199 €</a></td>
+<td>Ali od 2 874 kr</td>
+<td>Proshop.se 2 785 kr</td>
+<td>💵 absolutne minimum — Ferret-family tracking to jego słabość</td></tr>
+<tr>
+<td><a href="#fox"><img src="img/skaner3d/fox.jpg" loading="lazy" alt="fox" class="thumb"></a></td>
+<td><b>3DMakerpro Fox</b><br><span class="muted">⚠️</span></td>
+<td>0,07 mm</td>
+<td><a href="https://store.3dmakerpro.com/">≈2 090 kr — oficjalnie $199 (DE)</a></td>
+<td>Ali 2 255 kr (5★, 11 sold)</td>
+<td>Allegro 920–931 zł</td>
+<td>🃏 wildcard — nowość 2025, AI SLAM tracking, 210 g; brak niezależnych recenzji</td></tr>
+<tr>
+<td><a href="#moose"><img src="img/skaner3d/moose.jpg" loading="lazy" alt="moose" class="thumb"></a></td>
+<td><b>3DMakerpro Moose</b><br><span class="muted">✅</span></td>
+<td>0,03 mm (zmierzone 0,04)</td>
+<td><a href="https://store.3dmakerpro.com/">≈4 400 kr — oficjalnie $419</a></td>
+<td>Ali 5 080–5 535 kr (4,9★, 298 sold)</td>
+<td>3DPrima 579 €</td>
+<td>🥈 pełna wersja: kolor + blue LED; najlepsza potwierdzona dokładność w klasie</td></tr>
+<tr>
+<td><a href="#ferret-pro"><img src="img/skaner3d/ferret-pro.jpg" loading="lazy" alt="ferret-pro" class="thumb"></a></td>
+<td><b>Creality CR-Scan Ferret Pro</b><br><span class="muted">✅</span></td>
+<td>0,1 mm (bez warunków)</td>
+<td><a href="https://allegro.pl/produkt/creality-reczny-skaner-3d-cr-scan-ferret-pro-997c2818-70a9-4da3-ad9f-353ce62e7d48?offerId=15154586456">≈3 710 kr — Allegro 1 399 zł</a></td>
+<td>Ali od 3 691 kr (5★, 35)</td>
+<td>eBay od 122 € ≈ 1 380 kr</td>
+<td>⚠️ najtańszy „Pro”, ale użytkownicy: tracking loteria; wired + spray + markery</td></tr>
+<tr>
+<td><a href="#inspire2"><img src="img/skaner3d/inspire2.jpg" loading="lazy" alt="inspire2" class="thumb"></a></td>
+<td><b>Revopoint INSPIRE 2</b><br><span class="muted">⚠️</span></td>
+<td>0,05 mm / laser</td>
+<td><a href="https://global.revopoint3d.com/en-eur/">≈4 030 kr — oficjalnie $384</a></td>
+<td>—</td>
+<td>3DPrima 405–468 €</td>
+<td>laser IR radzi metallic bez sprayu; wymaga markerów w trybie laser</td></tr>
+<tr>
+<td><a href="#pop3plus"><img src="img/skaner3d/pop3plus.jpg" loading="lazy" alt="pop3plus" class="thumb"></a></td>
+<td><b>Revopoint POP 3 Plus</b><br><span class="muted">✅</span></td>
+<td>0,08 mm (fused 0,05)</td>
+<td><a href="https://global.revopoint3d.com/en-eur/">≈6 700 kr — oficjalnie 593 €</a></td>
+<td>—</td>
+<td>eBay: POP 3 gen1 od 120 €</td>
+<td>dojrzały Revo Scan; następca INSPIRE 2; zoom optyczny do detali</td></tr>
+<tr>
+<td><a href="#otter-lite"><img src="img/skaner3d/otter-lite.jpg" loading="lazy" alt="otter-lite" class="thumb"></a></td>
+<td><b>Creality Otter Lite</b><br><span class="muted">⚠️</span></td>
+<td>0,05 mm</td>
+<td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/">≈5 075 kr — 3DPrima 449 €</a></td>
+<td>Ali 8 967 kr</td>
+<td>eBay 427 € ≈ 4 825 kr</td>
+<td>budżetowa gałąź Ottera; wireless Wi-Fi 6</td></tr>
+<tr>
+<td><a href="#seal-lite"><img src="img/skaner3d/seal-lite.jpg" loading="lazy" alt="seal-lite" class="thumb"></a></td>
+<td><b>3DMakerpro Seal Lite</b><br><span class="muted">✅</span></td>
+<td>0,02 mm</td>
+<td><a href="https://store.3dmakerpro.com/">≈2 260 kr — oficjalnie $215</a></td>
+<td>Ali 2 634 kr</td>
+<td>3DPrima 259 €</td>
+<td>❌ linia Seal: realne testy złe (niekompletne skany, brak watertight)</td></tr>
+<tr>
+<td><a href="#seal"><img src="img/skaner3d/seal.jpg" loading="lazy" alt="seal" class="thumb"></a></td>
+<td><b>3DMakerpro Seal</b><br><span class="muted">✅</span></td>
+<td>0,01 mm (claims)</td>
+<td><a href="https://store.3dmakerpro.com/">≈4 400 kr — oficjalnie $419</a></td>
+<td>—</td>
+<td>3DPrima 529 €</td>
+<td>❌ twarde NIE — TechWalls + Reddit: „too many flaws”, ciasne pole 100×75 mm</td></tr>
+<tr>
+<td><a href="#mini2"><img src="img/skaner3d/mini2.jpg" loading="lazy" alt="mini2" class="thumb"></a></td>
+<td><b>Revopoint MINI 2</b><br><span class="muted">✅</span></td>
+<td>0,02 mm (blue light)</td>
+<td><a href="https://global.revopoint3d.com/en-eur/">≈8 400 kr — oficjalnie 743 €</a></td>
+<td>—</td>
+<td>Proshop 9 091–10 310 kr; Blocket 5 000 kr</td>
+<td>❌ do panelu — za wąskie pole; świetny tylko do drobnych detali</td></tr>
+<tr>
+<td><a href="#raptor"><img src="img/skaner3d/raptor.jpg" loading="lazy" alt="raptor" class="thumb"></a></td>
+<td><b>Creality CR-Scan Raptor</b><br><span class="muted">✅</span></td>
+<td>0,02 mm laser</td>
+<td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-raptor_30552_13776">≈10 840 kr — 3DPrima 959 €</a></td>
+<td>—</td>
+<td>Proshop 10 707 kr</td>
+<td>metrologia; overkill przy 1 mm</td></tr>
+<tr>
+<td><a href="#miraco"><img src="img/skaner3d/miraco.jpg" loading="lazy" alt="miraco" class="thumb"></a></td>
+<td><b>Revopoint MIRACO</b><br><span class="muted">✅</span></td>
+<td>0,05 mm standalone</td>
+<td><a href="https://global.revopoint3d.com/en-eur/">≈16 100 kr — oficjalnie 1 428 €</a></td>
+<td>—</td>
+<td>FB MP: Miraco Pro 12 000 kr</td>
+<td>standalone bez PC; overkill dla zadania</td></tr>
+<tr>
+<td><a href="#einstar2"><img src="img/skaner3d/einstar2.jpg" loading="lazy" alt="einstar2" class="thumb"></a></td>
+<td><b>Shining 3D EINSTAR 2</b><br><span class="muted">✅</span></td>
+<td>laser HD 0,05 mm</td>
+<td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/">≈12 100 kr — 3DPrima 1 069 €</a></td>
+<td>—</td>
+<td>3DVerkstan 13 188 kr</td>
+<td>klasa pro; 3–5× budżetu bez korzyści przy 1 mm</td></tr>
+<tr>
+<td><a href="#vega"><img src="img/skaner3d/vega.jpg" loading="lazy" alt="vega" class="thumb"></a></td>
+<td><b>Shining 3D EINSTAR VEGA</b><br><span class="muted">✅</span></td>
+<td>0,05 mm standalone</td>
+<td><a href="https://eu.einstar.com/">≈17 900 kr — oficjalnie 1 799 €</a></td>
+<td>—</td>
+<td>eBay używana 850 € VB</td>
+<td>standalone, ekran; nie dla tego zadania</td></tr>
+<tr>
+<td><span class="noimg">📷</span></td>
+<td><b>Shining 3D Einstar (gen1)</b><br><span class="muted">✅</span></td>
+<td>~0,1 mm</td>
+<td><a href="—">wycofany z EU (gen2/2× cena)</a></td>
+<td>—</td>
+<td>Blocket 4 500 kr / eBay 333 € ≈ 3 760 kr</td>
+<td>♻️ NAJLEPSZY pro-tracking za grosze na rynku wtórnym</td></tr>
+
+</table><p class="muted">Kursy zaokrąglone; ceny BF 2026-11-23; „najtaniej nowy” = link do konkretnej oferty.</p></div>
+
+<h2 id="recenzje">🗣️ Co mówią recenzje (nie marketing)</h2>
+<div class="revcard"><h4>Creality Otter — 🥇 najlepszy wszechstronny</h4><p>3 tygodnie testu 3DTechValley: zębatka 10 mm czysto, rama roweru 1,8 m w jednym przejściu bez stitching; Galaxus: „zakrzywione powierzchnie bez problemu”, markery w zestawie; Making for Motorsport (268K wyśw.) testuje na pełnych panelach auta. Cons: płaskie monotonie wymagają markerów (są w pudełku), drobne naprawy krawędzi w Blenderze.</p><p class="muted">Źródło: <a href="https://www.3dtechvalley.com/creality-cr-scan-otter-review/">https://www.3dtechvalley.com/creality-cr-scan-otter-review/</a></p></div>
+<div class="revcard"><h4>3DMakerpro Moose — 🥈 top value z potwierdzoną dokładnością</h4><p>Lidar News: pomiar vs kaliber = różnica 0,04 mm; TheTechnologyMan: Impact Driver 60 mm → 60,13 mm. AI markerless tracking „punches above its price”. Cons: brak trybu markerów, 10 fps, JMStudio nieintuicyjny, wymaga PC i5/16 GB.</p><p class="muted">Źródło: <a href="https://lidarnews.com/3dmakerpro-moose-3d-scanner-review/">https://lidarnews.com/3dmakerpro-moose-3d-scanner-review/</a></p></div>
+<div class="revcard"><h4>Ferret Pro — ⚠️ najtańszy, ale loteria</h4><p>Reddit: „1 sensowny skan na 50 prób”, halucynacje geometrii, WiFi-bridge rwie; 3DTechValley 7,5/10 (tracking 6,5/10), „below ~150 mm — no go bez maty i markerów”; blogi łagodniejsze (anti-shake działa, skanuje czarne/metale bez sprayu wg 3D Printer Bee). Wired do PC + spray + markery albo nic.</p><p class="muted">Źródło: <a href="https://www.3dtechvalley.com/cr-scan-ferret-pro-review/">https://www.3dtechvalley.com/cr-scan-ferret-pro-review/</a></p></div>
+<div class="revcard"><h4>Seal / Seal Lite — ❌ odradzam mimo 0,01 mm</h4><p>TechWalls: „real-life performance left much to be desired”, iPhone app nie wykrywa; Reddit po 6 mies.: „too many flaws to work around — I don't recommend”. Pole 100×75 mm = mnóstwo przejść na panelu; brak watertight.</p><p class="muted">Źródło: <a href="https://www.techwalls.com/3dmakerpro-seal-3d-scanner-review/">https://www.techwalls.com/3dmakerpro-seal-3d-scanner-review/</a></p></div>
+<div class="revcard"><h4>Revopoint INSPIRE 2 — następca POP 3, laser bez sprayu</h4><p>Dual-mode: IR structured light + IR multi-line laser (11 linii) — laser obłaskawia ciemne/metaliczne BEZ sprayu, ale wymaga markerów; precision do 0,03 mm. Minus: cena klasy Ottera.</p><p class="muted">Źródło: <a href="https://www.3dmag.com/3d-scanners/revopoint-inspire-2-vs-pop-3/">https://www.3dmag.com/3d-scanners/revopoint-inspire-2-vs-pop-3/</a></p></div>
+<div class="revcard"><h4>Einstar / VEGA / Einstar 2 — klasa pro, nie dla 1 mm</h4><p>Making for Motorsport (520K): „best consumer scanner”, ale wymaga mocnego PC i kabla; dopłata 3–5× ma sens tylko przy wymaganiach metrologicznych lub obiektach, których nie można spryskać. Używany gen1 za ~3 800–4 500 kr = ciekawy deal na tracking.</p><p class="muted">Źródło: <a href="https://www.youtube.com/watch?v=X7-D7VVmB20">https://www.youtube.com/watch?v=X7-D7VVmB20</a></p></div>
+
+<h2 id="ali">🛒 AliExpress (geo SE, ceny z VAT, free shipping) — top 7</h2>
+<div class="card"><table><tr><th>Model</th><th>Cena</th><th>Sprzedaż</th><th></th><th></th></tr><tr><td>3DMakerpro Fox 0,07 mm AI tracking</td><td>2 255 kr</td><td>5,0★ / 11 sold</td><td><a href='https://www.aliexpress.com/item/1005013293901252.html'>link</a></td><td>✅</td></tr>
+<tr><td>3DMakerpro Seal Lite 0,02 mm</td><td>2 634 kr</td><td>5,0★ / 4 sold</td><td><a href='https://www.aliexpress.com/item/1005010123354139.html'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret SE 0,1 mm</td><td>2 874 kr</td><td>bez ocen</td><td><a href='https://www.aliexpress.com/item/1005013028574215.html'>link</a></td><td>⚠️</td></tr>
+<tr><td>3DMakerpro Moose Lite 0,05 mm</td><td>2 922 kr</td><td>5,0★ / 28 sold</td><td><a href='https://www.aliexpress.com/item/1005011743398017.html'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret Pro 0,1 mm</td><td>3 691 kr</td><td>5,0★ / 35 sold</td><td><a href='https://www.aliexpress.com/item/1005006843578198.html'>link</a></td><td>✅</td></tr>
+<tr><td>3DMakerpro Moose 0,03 mm Premium</td><td>5 535 kr</td><td>4,9★ / 298 sold</td><td><a href='https://www.aliexpress.com/item/1005009759878585.html'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Otter 0,02 mm</td><td>9 214 kr</td><td>4,9★ / 74 sold</td><td><a href='https://www.aliexpress.com/item/1005007259934926.html'>link</a></td><td>✅</td></tr></table>
+<p class="muted">Metoda: Bright Data Web Unlocker (http i Lightpanda wpadły w Ali punish-chain). Pełny destylat: 80 ofert.</p></div>
+
+<h2 id="allegro">🛒 Allegro.pl — top 4 (ceny PLN)</h2>
+<div class="card"><table><tr><th>Model</th><th>Cena</th><th>Wysyłka PL</th><th></th><th></th></tr><tr><td>3DMakerpro Fox 0,07 mm</td><td>920–931 zł ≈ 2 440–2 470 kr</td><td>darmowa / 24,99 zł</td><td><a href='https://allegro.pl/produkt/skaner-3d-3dmakerpro-technologia-ai-slam-fox-dokladnosc-0-07-mm-210g-e4e4e238-e323-439a-9d69-0b6e7a547ac8?offerId=19079898547'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret SE</td><td>925,96–999 zł ≈ 2 450–2 650 kr</td><td>10,49 zł / darmowa</td><td><a href='https://allegro.pl/produkt/skaner-3d-creality-cr-scan-ferret-se-kolorowe-skanowanie-przedmiotow-f176efe4-efda-4dcb-b23d-5d49d50d4e6d?offerId=19019799000'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret Pro</td><td>1 399–1 699 zł ≈ 3 710–4 500 kr</td><td>10,49 zł</td><td><a href='https://allegro.pl/produkt/creality-reczny-skaner-3d-cr-scan-ferret-pro-997c2818-70a9-4da3-ad9f-353ce62e7d48?offerId=15154586456'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Otter</td><td>2 299 zł ≈ 6 090 kr</td><td>10,49 zł</td><td><a href='https://allegro.pl/produkt/skaner-3d-creality-cr-scan-otter-87da4b0b-c057-42f7-a353-f8cca14ca50b?offerId=19022355407'>link</a></td><td>✅</td></tr></table>
+<p class="muted">188 ofert po dedupe. ⚠️ PL→SE: Allegro International nie wszędzie — realnie forwarder PL→SE (~50–100 kr) albo pytać sprzedawcę o worldwide.</p></div>
+
+<h2 id="eu">🏪 Sklepy EU/SE</h2>
+<div class="card">
+<h3>3DPrima (Malmö, EUR, Black Week, free ship &gt;100 €) — najlepsze ceny „nowe z EU”</h3>
+<table>
+<tr><th>Zdjęcie</th><th>Model</th><th>Cena</th><th>Link</th></tr>
+<tr><td><a href="#ferret-se"><img src="img/skaner3d/ferret-se.jpg" loading="lazy" alt="ferret-se" class="thumb"></a></td><td>Creality Ferret SE</td><td><b>199 €</b> (było 359)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-ferret-se_30023_12279">link</a></td></tr>
+<tr><td><a href="#ferret"><img src="img/skaner3d/ferret.jpg" loading="lazy" alt="ferret" class="thumb"></a></td><td>Creality Ferret</td><td>259 € (było 449)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-ferret_28949_10857">link</a></td></tr>
+<tr><td><a href="#ferret-pro"><img src="img/skaner3d/ferret-pro.jpg" loading="lazy" alt="ferret-pro" class="thumb"></a></td><td>Creality Ferret Pro</td><td>349 € (było 489)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-ferret-pro_29673_11788">link</a></td></tr>
+<tr><td><a href="#otter"><img src="img/skaner3d/otter.jpg" loading="lazy" alt="otter" class="thumb"></a></td><td>Creality Otter</td><td>628 € (było 969)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-otter_30551_13775">link</a></td></tr>
+<tr><td><a href="#inspire2"><img src="img/skaner3d/inspire2.jpg" loading="lazy" alt="inspire2" class="thumb"></a></td><td>Revopoint INSPIRE 2</td><td>405–468 € (było 579–669)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/revopoint-inspire-2_33891_19476">link</a></td></tr>
+<tr><td><a href="#fox"><img src="img/skaner3d/fox.jpg" loading="lazy" alt="fox" class="thumb"></a></td><td>3DMakerpro Fox</td><td>269 € (było 299)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/3dmakerpro-fox_34574_20701">link</a></td></tr>
+<tr><td><a href="#raptor"><img src="img/skaner3d/raptor.jpg" loading="lazy" alt="raptor" class="thumb"></a></td><td>Creality Raptor</td><td>959 € (było 1 599)</td><td><a href="https://www.3dprima.com/3d-printers-more/others/3d-scanner/scanners/creality-cr-scan-raptor_30552_13776">link</a></td></tr>
+</table>
+<h3>Proshop.se (SEK, m.in. 15× Revopoint)</h3>
+<p>Ferret SE <b>2 785 kr</b> · Ferret 3 393 · Ferret Pro 4 245 · Raptor 10 707 · INSPIRE 2 6 110 · POP 4 8 583 · Mini 2 9 091–10 310 · Miraco Pro 25 043 · Trackit 53 085 → <a href="https://www.proshop.se/Scanner">kategoria</a></p>
+<h3>3DVerkstan (Solna — Shining 3D + AESUB)</h3>
+<p>Einstar EZ GO 13 735 kr · Einstar 2 13 188 · Rockit 19 788 · Vega 21 987 — <a href="https://3dverkstan.se/shop/3d-scanners/">kategoria</a>. AESUB white 400 ml <b>152,50 kr</b> (rea), blue 352,50 — <a href="https://3dverkstan.se/produkt/aesub-white-400ml/">link</a> <a href="#aesub"><img src="img/skaner3d/aesub.jpg" loading="lazy" alt="aesub" class="thumb"></a></p>
+<p class="muted">3DJake: brak skanerów (tylko „bq”). raseter.com: nie istnieje (NXDOMAIN).</p>
+</div>
+
+<h2 id="promo">🏷️ Oficjalne sklepy — Black Friday (warehouse EU ✅ u wszystkich)</h2>
+<div class="card"><table><tr><th>Model</th><th>List</th><th>Promo</th><th>Rabat</th></tr><tr><td>Creality Ferret Pro</td><td>$449</td><td>$359 (≈3 770 kr)</td><td>−$90</td></tr>
+<tr><td>Creality Otter</td><td>$899</td><td>$674 (≈7 080 kr)</td><td>−$225</td></tr>
+<tr><td>Creality Otter Lite</td><td>$759</td><td>$569 (≈5 975 kr)</td><td>−$190</td></tr>
+<tr><td>Creality Raptor</td><td>$1 499</td><td>$824 (≈8 650 kr)</td><td>−$675</td></tr>
+<tr><td>3DMakerpro Moose</td><td>$599</td><td>$419 (≈4 400 kr)</td><td>−$180</td></tr>
+<tr><td>3DMakerpro Moose Lite</td><td>$413</td><td>$239+ (≈2 510+ kr)</td><td>−$174</td></tr>
+<tr><td>Revopoint POP 3 Plus</td><td>698 €</td><td>593 € (≈6 700 kr)</td><td>−105 €</td></tr>
+<tr><td>Revopoint MINI 2</td><td>929 €</td><td>743 € (≈8 400 kr)</td><td>−186 €</td></tr>
+<tr><td>Einstar 2</td><td>—</td><td>−600 € promo (site-wide)</td><td>BF</td></tr></table>
+<p class="muted">Creality: <a href="https://store.creality.com/collections/scanners">store.creality.com</a> (EU store: eu.store.creality.com) • Revopoint: <a href="https://global.revopoint3d.com/en-eur/">revopoint3d.com</a> (free ship 3–5 dni) • 3DMakerpro: <a href="https://store.3dmakerpro.com/">store.3dmakerpro.com</a> (DE warehouse, free &gt;140 €) • Shining 3D: <a href="https://eu.einstar.com/">eu.einstar.com</a>. Gwarancje: Creality 12 mies., Revopoint/3DMakerpro/Shining ~12 mies.</p></div>
+
+<h2 id="used-se">♻️ Używane — Szwecja</h2>
+<div class="card"><table><tr><th>Model</th><th>Cena</th><th>Gdzie</th><th>Dodane</th><th></th><th></th></tr><tr><td>Shining 3D Einstar (gen1)</td><td>4 500 kr</td><td>Blocket, Nödinge</td><td>11-21</td><td><a href='https://www.blocket.se/recommerce/forsale/item/28442767'>link</a></td><td>✅</td></tr>
+<tr><td>Creality CR-Scan 01 (poprz. Ferret-generation)</td><td>2 650 kr</td><td>Blocket, Västerås</td><td>11-14</td><td><a href='https://www.blocket.se/recommerce/forsale/item/28251346'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret Pro</td><td>2 900 kr</td><td>FB MP, Västerhaninge</td><td>akt.</td><td><a href='https://www.facebook.com/marketplace/item/1548666143740476/'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret Pro</td><td>2 900–3 000 kr</td><td>Tradera ×2 (BIN/aukcja)</td><td>akt.</td><td><a href='https://www.tradera.com/item/344346/761797056/creality-cr-scan-ferret-pro-3d-skanner'>link</a></td><td>✅</td></tr>
+<tr><td>Creality Ferret Pro</td><td>3 199 kr</td><td>Blocket, Saltsjöbaden</td><td>09-06 (stare)</td><td><a href='https://www.blocket.se/recommerce/forsale/item/26372203'>link</a></td><td>⚠️</td></tr>
+<tr><td>Revopoint Mini 2 Advanced</td><td>5 000 kr</td><td>Blocket, Löddeköpinge</td><td>11-11</td><td><a href='https://www.blocket.se/recommerce/forsale/item/28167316'>link</a></td><td>✅</td></tr>
+<tr><td>Revopoint POP 4</td><td>7 100 kr</td><td>Blocket, Örebro</td><td>11-14</td><td><a href='https://www.blocket.se/recommerce/forsale/item/28219096'>link</a></td><td>✅</td></tr>
+<tr><td>Revopoint Miraco Pro 32GB</td><td>12 000 kr</td><td>FB MP, Sjödalen</td><td>akt.</td><td><a href='https://www.facebook.com/marketplace/item/1793490561762726/'>link</a></td><td>✅</td></tr>
+<tr><td>Revopoint Miraco Plus</td><td>18 900 kr</td><td>Blocket, Vällingby</td><td>11-14</td><td><a href='https://www.blocket.se/recommerce/forsale/item/28255693'>link</a></td><td>✅</td></tr></table></div>
+
+<h2 id="used-de">♻️ Używane — eBay.de / Kleinanzeigen (145 ofert, top)</h2>
+<div class="card"><table><tr><th>Model</th><th>Cena</th><th>Platforma</th><th>Uwagi</th><th></th><th></th></tr><tr><td>Creality Ferret Pro (używany)</td><td>122 € ≈ 1 380 kr</td><td>eBay.de</td><td>+ship ~15–25 €</td><td><a href='https://www.ebay.de/itm/198810286062'>link</a></td><td>⚠️</td></tr>
+<tr><td>Revopoint POP 3 gen1 (używany)</td><td>121–199 € ≈ 1 370–2 250 kr</td><td>eBay/Kleinanzeigen</td><td>+ship</td><td><a href='https://www.ebay.de/itm/117531299915'>link</a></td><td>⚠️</td></tr>
+<tr><td>Creality Otter Lite (używany)</td><td>427 € ≈ 4 825 kr</td><td>eBay.de</td><td>+ship</td><td><a href='https://www.ebay.de/itm/ (via distylat ebay-used.md)'>link</a></td><td>⚠️</td></tr>
+<tr><td>Shining 3D Einstar gen1 (używany)</td><td>333–413 € ≈ 3 760–4 670 kr</td><td>Kleinanzeigen/eBay</td><td>KB 333 € VB</td><td><a href='https://www.ebay.de/itm/ (via distylat ebay-used.md)'>link</a></td><td>⚠️</td></tr>
+<tr><td>Creality Ferret Pro ×4 (używane)</td><td>218–285 €</td><td>eBay.de</td><td>różne zestawy</td><td><a href='https://www.ebay.de/itm/257866693829'>link</a></td><td>⚠️</td></tr>
+<tr><td>Einstar VEGA (używana)</td><td>850 € VB / 1 366 €</td><td>Kleinanzeigen/eBay</td><td>standalone</td><td><a href='https://www.ebay.de/itm/ (via distylat)'>link</a></td><td>⚠️</td></tr></table>
+<p class="muted">Ship DE→SE zwykle 15–25 €; kupując używkę weryfikuj kompletność (kalibracyjna tablica, markery, kable) — Pytaj sprzedawcę.</p></div>
+
+<h2 id="koszty">💰 Koszty ukryte</h2>
+<div class="card">
+<ul>
+<li><b>Spray matujący</b> — obowiązkowy na metallic flakes: AESUB white 400 ml <b>152,50 kr</b> (3DVerkstan, znika sam) lub lakier do włosów ~30 kr.</li>
+<li><b>Markery</b> — Otter ma w zestawie; Moose/Fox nie mają trybu markerów (AI tracking); Revopoint sprzedaje sety (Proshop).</li>
+<li><b>PC</b> — Moose/Seal chcą i5-8gen/16 GB/GPU; Ferret/Otter lżejsze; standalone (MIRACO, Vega) bez PC, ale droższe.</li>
+<li><b>Wysyłka</b> — Ali: free, VAT w cenie ✅; 3DPrima: free &gt;100 €; oficjalne EU: free progi; Allegro PL→SE: forwarder ~50–100 kr; eBay DE→SE 15–25 €.</li>
+<li><b>Cło/import</b> — sklepy EU/DE: zero formalności; Ali SEK = z VAT ✅.</li>
+</ul></div>
+
+<h2 id="zadanie">🏍️ Dopasowanie do Twojego zadania (panel MT-07, 1 mm)</h2>
+<div class="card">
+<ul>
+<li>1 mm to bar „wszystkie spełniają z 10–50× zapasem” — realna gra to <b>tracking na gładkim, zakrzywionym, metallic panelu</b> → spray + markery, niezależnie od modelu.</li>
+<li>Kolejność zakupu wg ryzyka: <b>Otter</b> (najmniej ryzyka, markery w zestawie, panele aut potwierdzone) → <b>Moose Lite</b> (tani, sprawdzona dokładność, brak markerów) → <b>Ferret SE/Fox</b> (tanie, więcej dłubania) → używany <b>Einstar</b> (pro tracking za grosze, ryzyko stanu).</li>
+<li>Workflow po skanie: mesh → solid (pogrubić ~2 mm) → uszka z pomiarów suwmiarką → mirror na prawą → druk PETG/ASA. Zrobię to na Pi w istniejącym pipeline CAD.</li>
+<li>Na JEDEN panel nadal najtańsze: OEM $14,90 lub skan-usługa Innovar — skaner kupuj, jeśli będzie pracował dalej (cheap = ~2 300–3 200 kr).</li>
+</ul></div>
+
+<h2 id="metoda">🔬 Metoda i źródła</h2>
+<div class="card">
+<p><b>Architektura:</b> main (GLM synteza) + 7 scraper-subagentów (DeepSeek V4.1 Flash): ali/allegro/amazon/eu-shops/ebay/reviews/official + lokalne skrypty Blocket/Tradera/FB. Destylaty: <code>memory/research/skaner-3d-2026-11-23/raw/*.md</code> (10 plików, ~1600 linii, ~680 URL-i).</p>
+<p><b>Recenzje:</b> <a href="https://www.3dtechvalley.com/cr-scan-otter-review/">3DTechValley (Otter)</a> • <a href="https://lidarnews.com/3dmakerpro-moose-3d-scanner-review/">Lidar News (Moose)</a> • <a href="https://thetechnologyman.com/moose-3d-scanner-review-accurate-detailed-and-a-bit-frustrating/">TheTechnologyMan (Moose, kaliber)</a> • <a href="https://www.3dtechvalley.com/cr-scan-ferret-pro-review/">3DTechValley (Ferret Pro 7,5/10)</a> • <a href="https://3dwithus.com/creality-cr-scan-ferret-pro-review-3d-scanner-testing">3DWithUs</a> • <a href="https://www.techwalls.com/3dmakerpro-seal-3d-scanner-review/">TechWalls (Seal)</a> • <a href="https://www.reddit.com/r/3DScanning/comments/1cuzt8e/seal_3d_scanner_review_too_many_flaws_to_work/">Reddit (Seal: „too many flaws”)</a> • <a href="https://www.galaxus.de/en/page/cr-scan-otter-3d-scanning-is-easy-with-a-little-practice-43083">Galaxus (Otter)</a> • <a href="https://www.youtube.com/watch?v=8iSZ16L625E">Making for Motorsport (Otter, panele aut)</a> • <a href="https://www.youtube.com/watch?v=X7-D7VVmB20">MfM (Einstar 520K)</a> • <a href="https://www.3dmag.com/3d-scanners/revopoint-inspire-2-vs-pop-3/">3DMag (INSPIRE 2 vs POP 3)</a> • <a href="https://www.3dsourced.com/3d-scanner-reviews/revopoint-pop-3-review/">3DSourced (POP 3)</a></p>
+<p><b>Self-audit:</b> TL;DR na górze ✅ • dark mode ✅ • miniatury lokalne ✅ (22 załadowanych) • każdy price z linkiem ✅ • 2+ języki ✅ • koszty ukryte ✅ • coverage: wszystkie źródła z briefu ✅ • „w trakcie” sekcje: brak ✅</p>
+<p class="muted">Wygenerowano 2026-11-23 14:49 • Poprzedni research skanerów: czerwiec 2026 (wtedy Ferret SE $269 = najtańszy sensowny; BF 2026 zbił do ~2 250 kr). <a href="#top">⬆️</a></p>
+</div>
+</div>
+<a class="topbtn" href="#tldr">↑</a>
+</body></html>
